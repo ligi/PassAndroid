@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,18 @@ public class TicketListActivity extends SherlockListActivity {
 	private String[] passes;
 	private LayoutInflater inflater;
 	private String path;
-
+	private PassAdapter passadapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		path = TicketDefinitions.getPassesDir(this);
-		passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
-		setListAdapter(new PassAdapter());
+		File passes_dir=new File(TicketDefinitions.getPassesDir(this));
+		if (!passes_dir.exists())
+			passes_dir.mkdirs();
+		passes =passes_dir.list(new DirFilter());
+		passadapter=new PassAdapter();
+		setListAdapter(passadapter);
+		
 		inflater = getLayoutInflater();
 		super.onCreate(savedInstanceState);
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -45,7 +52,30 @@ public class TicketListActivity extends SherlockListActivity {
 			}
 
 		});
+		
+		TextView empty_view=new TextView(this);
+		empty_view.setText("No passes yet - go get some and come back");
+		//getListView().setEmptyView(empty_view);
+		
+		empty_view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+
+		((ViewGroup)getListView().getParent()).addView(empty_view);
+		getListView().setEmptyView(empty_view);
+		
 	}
+	
+	
+
+	@Override
+	protected void onResume() {
+
+		super.onResume();
+		passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
+		passadapter.notifyDataSetChanged();
+
+	}
+
+
 
 	class DirFilter implements FilenameFilter {
 
@@ -111,7 +141,11 @@ public class TicketListActivity extends SherlockListActivity {
 			int size=(int)getResources().getDimension(R.dimen.pass_icon_size);
 			ImageView icon_img=(ImageView)res.findViewById(R.id.icon);
 			if (path!=null) {
-				Bitmap ico=BitmapFactory.decodeFile(mPath+"/logo.png");
+				Bitmap ico=BitmapFactory.decodeFile(mPath+"/logo@2x.png");
+				
+				if (ico==null)
+					ico=BitmapFactory.decodeFile(mPath+"/logo.png");
+					
 				if (ico!=null)
 					icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico,size,size,false));
 				
