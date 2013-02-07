@@ -9,6 +9,7 @@ import com.actionbarsherlock.view.Menu;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.concurrent.Callable;
 
 public class TicketImportActivity extends SherlockActivity {
 
@@ -33,7 +34,12 @@ public class TicketImportActivity extends SherlockActivity {
 
                 i.putExtra("path", path);
                 (new File(path)).mkdirs();
-                UnzipPasscodeDialog.show(result, path, ticketImportActivity, i);
+                UnzipPasscodeDialog.show(result, path, ticketImportActivity, new Callable<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+                        return null;  //To change body of implemented methods use File | Settings | File Templates.
+                    }
+                });
             }
             super.onPostExecute(result);
         }
