@@ -1,89 +1,100 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ligi.ticketviewer"
-    android:installLocation="auto"
-    android:versionCode="3"
-    android:versionName="0.3" xmlns:tools="http://schemas.android.com/tools">
+          package="org.ligi.ticketviewer"
+          android:installLocation="auto"
+          android:versionCode="3"
+          android:versionName="0.3" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
-        android:minSdkVersion="5"
-        android:targetSdkVersion="17" />
+            android:minSdkVersion="5"
+            android:targetSdkVersion="17"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         <activity
-            android:name="org.ligi.ticketviewer.TicketListActivity"
-            android:label="@string/app_name" >
+                android:name="org.ligi.ticketviewer.TicketListActivity"
+                android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name="org.ligi.ticketviewer.TicketImportActivity" tools:ignore="ExportedActivity">
-        
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                    android:host="*"
-                    android:pathPattern=".*\\.pkpass"
-                    android:scheme="http" />
+                        android:host="*"
+                        android:pathPattern=".*\\.pkpass"
+                        android:scheme="http"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                    android:host="*"
-                    android:pathPattern=".*\\.pkpass"
-                    android:scheme="https" />
+                        android:host="*"
+                        android:pathPattern=".*\\.pkpass"
+                        android:scheme="https"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                    android:host="*"
-                    android:pathPattern=".*\\.pkpass"
-                    android:scheme="file" />
+                        android:host="*"
+                        android:pathPattern=".*\\.pkpass"
+                        android:scheme="file"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/vnd.apple.pkpass" />
+                <data
+                        android:host="*"
+                        android:pathPattern=".*\\.pkpass"
+                        android:scheme="content"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/vnd-com.apple.pkpass" />
+                <data android:mimeType="application/vnd.apple.pkpass"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:mimeType="application/vnd-com.apple.pkpass"/>
             </intent-filter>
         </activity>
         <activity
-            android:name="org.ligi.ticketviewer.TicketViewActivity"
-            android:label="@string/app_name" >
+                android:name="org.ligi.ticketviewer.TicketViewActivity"
+                android:label="@string/app_name">
         </activity>
         <activity
-            android:name="org.ligi.ticketviewer.FullscreenImageActivity"
-            android:label="@string/app_name" >
+                android:name="org.ligi.ticketviewer.FullscreenImageActivity"
+                android:label="@string/app_name">
         </activity>
     </application>
 
