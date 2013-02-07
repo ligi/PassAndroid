@@ -1,11 +1,13 @@
 package org.ligi.ticketviewer;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -17,7 +19,7 @@ import java.net.URL;
 class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
 
     private Uri intent_uri;
-    private Activity ticketImportActivity;
+    protected Activity ticketImportActivity;
 
     public ImportAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
         this.ticketImportActivity = ticketImportActivity;
@@ -49,17 +51,5 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(InputStream result) {
-        if (result != null) {
-            String path = TicketDefinitions.getTmpDir(ticketImportActivity);
-            Intent i = new Intent(ticketImportActivity, TicketViewActivity.class);
-
-            i.putExtra("path", path);
-            (new File(path)).mkdirs();
-            UnzipPasscodeDialog.show(result, path, ticketImportActivity, i);
-        }
-        super.onPostExecute(result);
-    }
 
 }
