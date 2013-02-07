@@ -16,12 +16,12 @@ public class TicketImportActivity extends SherlockActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_view);
-        new ImportAndWhowAsyncTask(this, getIntent().getData()).execute();
+        new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
     }
 
-    class ImportAndWhowAsyncTask extends ImportAsyncTask {
+    class ImportAndShowAsyncTask extends ImportAsyncTask {
 
-        public ImportAndWhowAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
+        public ImportAndShowAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
             super(ticketImportActivity, intent_uri);
         }
 
