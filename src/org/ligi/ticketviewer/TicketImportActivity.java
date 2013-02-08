@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 
-import java.io.File;
 import java.io.InputStream;
-import java.util.concurrent.Callable;
 
 public class TicketImportActivity extends SherlockActivity {
 
@@ -29,14 +28,17 @@ public class TicketImportActivity extends SherlockActivity {
         @Override
         protected void onPostExecute(InputStream result) {
             if (result != null) {
-                String path = TicketDefinitions.getTmpDir(ticketImportActivity);
-                Intent i = new Intent(ticketImportActivity, TicketViewActivity.class);
 
-                i.putExtra("path", path);
-                (new File(path)).mkdirs();
-                UnzipPasscodeDialog.show(result, ticketImportActivity, new Callable<Void>() {
+                UnzipPasscodeDialog.show(result, ticketImportActivity, new UnzipPasscodeDialog.FinishCallback() {
                     @Override
-                    public Void call() throws Exception {
+                    public Void call(String path) {
+
+                        Log.i("", "ready callback path " + path);
+
+                        Intent i = new Intent(ticketImportActivity, TicketViewActivity.class);
+                        i.putExtra("path", path);
+
+                        TicketImportActivity.this.startActivity(i);
                         return null;  //To change body of implemented methods use File | Settings | File Templates.
                     }
                 });

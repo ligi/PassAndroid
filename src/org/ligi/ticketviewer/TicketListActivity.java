@@ -28,7 +28,6 @@ import org.ligi.ticketviewer.helper.FileHelper;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
-import java.util.concurrent.Callable;
 
 public class TicketListActivity extends SherlockListActivity {
 
@@ -94,10 +93,10 @@ public class TicketListActivity extends SherlockListActivity {
         protected void onPostExecute(InputStream result) {
             if (result != null) {
 
-                UnzipPasscodeDialog.show(result, ticketImportActivity, new Callable<Void>() {
+                UnzipPasscodeDialog.show(result, ticketImportActivity, new UnzipPasscodeDialog.FinishCallback() {
 
                     @Override
-                    public Void call() throws Exception {
+                    public Void call(String path) {
                         Log.i("", "refreshing");
                         runOnUiThread(new Runnable() {
 

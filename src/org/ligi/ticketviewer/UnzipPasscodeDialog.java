@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -38,20 +37,25 @@ public class UnzipPasscodeDialog {
         });
     }
 
+    public interface FinishCallback {
+
+        public Void call(String path);
+    }
+
     /**
      * @param activity - if the alert should close when connection is established
      */
-    public static void show(final InputStream ins, final Activity activity, Callable<Void> intent_after_finish) {
+    public static void show(final InputStream ins, final Activity activity, FinishCallback call_after_finish) {
 
         ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
 
         class AlertDialogUpdater implements Runnable {
 
             private ProgressDialog myProgress;
-            private Callable intent_after_finish;
+            private FinishCallback call_after_finish;
 
-            public AlertDialogUpdater(Activity activity, ProgressDialog progress, Callable intent_after_finish) {
-                this.intent_after_finish = intent_after_finish;
+            public AlertDialogUpdater(Activity activity, ProgressDialog progress, FinishCallback call_after_finish) {
+                this.call_after_finish = call_after_finish;
                 myProgress = progress;
             }
 
@@ -97,7 +101,7 @@ public class UnzipPasscodeDialog {
                 myProgress.dismiss();
 
                 try {
-                    intent_after_finish.call();
+                    call_after_finish.call(path);
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -107,7 +111,7 @@ public class UnzipPasscodeDialog {
 
             }
         }
-        new Thread(new AlertDialogUpdater(activity, dialog, intent_after_finish)).start();
+        new Thread(new AlertDialogUpdater(activity, dialog, call_after_finish)).start();
 
     }
 
