@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,7 +38,8 @@ public class TicketListActivity extends SherlockListActivity {
     private LayoutInflater inflater;
     private String path;
     private PassAdapter passadapter;
-
+    private boolean scanning = false;
+    private TextView empty_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +65,13 @@ public class TicketListActivity extends SherlockListActivity {
 
         });
 
-        TextView empty_view = new TextView(this);
-        empty_view.setText("No passes yet - searching for passes");
-        //getListView().setEmptyView(empty_view);
-
+        empty_view = new TextView(this);
         empty_view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-
         ((ViewGroup) getListView().getParent()).addView(empty_view);
         getListView().setEmptyView(empty_view);
 
-        setSupportProgressBarIndeterminateVisibility(true);
-
-        new ScanForPassesTask().execute();
+        if (passes == null || passes.length == 0)
+            new ScanForPassesTask().execute();
     }
 
     private void refresh_passes_list() {
@@ -81,6 +80,46 @@ public class TicketListActivity extends SherlockListActivity {
         if (!passes_dir.exists())
             passes_dir.mkdirs();
         passes = passes_dir.list(new DirFilter());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_refresh:
+                new ScanForPassesTask().execute();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
+        passadapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        if (!scanning)
+            getSupportMenuInflater().inflate(R.menu.activity_ticket_list_view, menu);
+        return true;
+    }
+
+    public void updateUIToScanningState() {
+        setSupportProgressBarIndeterminateVisibility(scanning);
+        supportInvalidateOptionsMenu();
+
+
+        if (scanning)
+            empty_view.setText("No passes yet - searching for passes");
+        else
+            empty_view.setText("No passes yet - try to get some - then click on them or hit refresh");
+
+
     }
 
     class ImportAndShowAsyncTask extends ImportAsyncTask {
@@ -107,7 +146,7 @@ public class TicketListActivity extends SherlockListActivity {
 
                             }
                         });
-                        return null;  //To change body of implemented methods use File | Settings | File Templates.
+                        return null;
                     }
                 });
             }
@@ -135,27 +174,26 @@ public class TicketListActivity extends SherlockListActivity {
 
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            scanning = true;
+            updateUIToScanningState();
+        }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);    //To change body of overridden methods use File | Settings | File Templates.
-            setSupportProgressBarIndeterminateVisibility(false);
+            super.onPostExecute(aVoid);
+            scanning = false;
+
+            updateUIToScanningState();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            search_in("/sdcard");
+            search_in(Environment.getExternalStorageDirectory().toString());
             return null;
         }
-    }
-
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-        passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
-        passadapter.notifyDataSetChanged();
-
     }
 
     class SearchForFilesDialog extends Dialog {
