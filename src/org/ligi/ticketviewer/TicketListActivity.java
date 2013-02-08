@@ -24,6 +24,7 @@ import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.androidquery.service.MarketService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ligi.ticketviewer.helper.FileHelper;
@@ -69,6 +70,9 @@ public class TicketListActivity extends SherlockListActivity {
         empty_view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         ((ViewGroup) getListView().getParent()).addView(empty_view);
         getListView().setEmptyView(empty_view);
+
+        MarketService ms = new MarketService(this);
+        ms.level(MarketService.MINOR).checkVersion();
 
         if (passes == null || passes.length == 0)
             new ScanForPassesTask().execute();
