@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +24,12 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
+import com.google.analytics.tracking.android.EasyTracker;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ligi.ticketviewer.helper.FileHelper;
+import org.ligi.tracedroid.logging.Log;
+import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -71,8 +73,18 @@ public class TicketListActivity extends SherlockListActivity {
         ((ViewGroup) getListView().getParent()).addView(empty_view);
         getListView().setEmptyView(empty_view);
 
-        MarketService ms = new MarketService(this);
-        ms.level(MarketService.MINOR).checkVersion();
+
+        // don't want too many windows in worst case
+        switch ((int) (System.currentTimeMillis() % 2)) {
+            case 0:
+                TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
+                break;
+            case 1:
+
+                MarketService ms = new MarketService(this);
+                ms.level(MarketService.MINOR).checkVersion();
+                break;
+        }
 
         if (passes == null || passes.length == 0)
             new ScanForPassesTask().execute();
@@ -126,6 +138,18 @@ public class TicketListActivity extends SherlockListActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance().activityStop(this);
+    }
+
     class ImportAndShowAsyncTask extends ImportAsyncTask {
 
         public ImportAndShowAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
@@ -140,7 +164,7 @@ public class TicketListActivity extends SherlockListActivity {
 
                     @Override
                     public Void call(String path) {
-                        Log.i("", "refreshing");
+                        Log.i("refreshing");
                         runOnUiThread(new Runnable() {
 
                             @Override
@@ -160,18 +184,27 @@ public class TicketListActivity extends SherlockListActivity {
 
     class ScanForPassesTask extends AsyncTask<Void, Void, Void> {
 
-        private void search_in(String path) {
-            Log.i("", "search in" + path);
 
+        /**
+         * recursive traversion from path on to find files named .pkpass
+         *
+         * @param path
+         */
+        private void search_in(String path) {
+
+            if (path == null) {
+                Log.w("trying to search in null path");
+                return;
+            }
 
             File dir = new File(path);
             File[] files = dir.listFiles();
 
-            for (File file : files) {
+            if (files != null) for (File file : files) {
                 if (file.isDirectory())
                     search_in(file.toString());
                 else if (file.getName().endsWith(".pkpass")) {
-                    Log.i("TicketViewer", "found" + file.getAbsolutePath());
+                    Log.i("found" + file.getAbsolutePath());
                     new ImportAndShowAsyncTask(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
                 }
             }
@@ -195,7 +228,18 @@ public class TicketListActivity extends SherlockListActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+
+            // note to future_me: yea one thinks we only need to search root here, but root was /system for me and so
+            // did not contain "/SDCARD" #dontoptimize
+            // on my phone:
+            // search in /system
+            // (26110): search in /mnt/sdcard
+            // (26110): search in /cache
+            // (26110): search in /data
+            search_in(Environment.getRootDirectory().toString());
             search_in(Environment.getExternalStorageDirectory().toString());
+            search_in(Environment.getDownloadCacheDirectory().toString());
+            search_in(Environment.getDataDirectory().toString());
             return null;
         }
     }

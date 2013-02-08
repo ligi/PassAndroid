@@ -12,6 +12,7 @@ import android.view.Display;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 import org.json.JSONObject;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
 import org.ligi.ticketviewer.helper.FileHelper;
@@ -121,4 +122,15 @@ public class TicketViewActivityBase extends SherlockActivity {
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance().activityStop(this);
+    }
 }
