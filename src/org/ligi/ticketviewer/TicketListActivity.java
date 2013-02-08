@@ -93,10 +93,8 @@ public class TicketListActivity extends SherlockListActivity {
         @Override
         protected void onPostExecute(InputStream result) {
             if (result != null) {
-                String path = TicketDefinitions.getTmpDir(ticketImportActivity);
 
-                (new File(path)).mkdirs();
-                UnzipPasscodeDialog.show(result, path, ticketImportActivity, new Callable<Void>() {
+                UnzipPasscodeDialog.show(result, ticketImportActivity, new Callable<Void>() {
 
                     @Override
                     public Void call() throws Exception {

@@ -1,12 +1,18 @@
 package org.ligi.ticketviewer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.ligi.ticketviewer.helper.FileHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -14,6 +20,96 @@ import java.util.zip.ZipInputStream;
 public class UnzipPasscodeDialog {
 
     public final static String TAG = "TicketViewer";
+
+    public static void DisplayError(final Activity ctx, final String title, final String err) {
+
+        ctx.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(ctx).setTitle(title).setMessage(err)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ctx.finish();
+                            }
+
+                        }).show();
+            }
+        });
+    }
+
+    /**
+     * @param activity - if the alert should close when connection is established
+     */
+    public static void show(final InputStream ins, final Activity activity, Callable<Void> intent_after_finish) {
+
+        ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
+
+        class AlertDialogUpdater implements Runnable {
+
+            private ProgressDialog myProgress;
+            private Callable intent_after_finish;
+
+            public AlertDialogUpdater(Activity activity, ProgressDialog progress, Callable intent_after_finish) {
+                this.intent_after_finish = intent_after_finish;
+                myProgress = progress;
+            }
+
+            public void run() {
+                String path = activity.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
+
+                File dir_file = new File(path);
+                dir_file.mkdirs();
+
+                if (!dir_file.exists()) {
+                    DisplayError(activity, "Problem", "Problem creating the temp dir: " + path);
+
+                    return;
+                }
+
+                new Decompress(ins, path).unzip();
+
+                Log.i("TicketView", "is temp");
+                JSONObject manifest_json = null;
+                try {
+                    manifest_json = new JSONObject(FileHelper.file2String(new File(path + "/manifest.json")));
+                } catch (Exception e) {
+                    DisplayError(activity, "Invalid Passbook", "Problem with manifest.json: " + e);
+                    //return false;
+                    return;
+                }
+
+                try {
+                    String rename_str = TicketDefinitions.getPassesDir(activity) + "/" + manifest_json.getString("pass.json");
+                    File rename_file = new File(rename_str);
+                    Log.i("TicketView", "Renaming to " + rename_str + " " + rename_file);
+
+                    if (rename_file.exists())
+                        FileHelper.DeleteRecursive(rename_file);
+
+                    new File(path + "/").renameTo(rename_file);
+                    path = rename_str;
+                } catch (JSONException e) {
+                    DisplayError(activity, "Invalid Passbook", "Problem with pass.json: " + e);
+                    return;
+                }
+
+                myProgress.dismiss();
+
+                try {
+                    intent_after_finish.call();
+                } catch (Exception e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+
+                //   activity.startActivity(intent_after_finish);
+                //	activity.finish();
+
+            }
+        }
+        new Thread(new AlertDialogUpdater(activity, dialog, intent_after_finish)).start();
+
+    }
 
     public static class Decompress {
         private InputStream _zipFile;
@@ -65,42 +161,5 @@ public class UnzipPasscodeDialog {
                 f.mkdirs();
             }
         }
-    }
-
-    /**
-     * @param activity - if the alert should close when connection is established
-     */
-    public static void show(final InputStream ins, final String path, Activity activity, Callable<Void> intent_after_finish) {
-
-        ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
-
-        class AlertDialogUpdater implements Runnable {
-
-            private ProgressDialog myProgress;
-            private Callable intent_after_finish;
-
-            public AlertDialogUpdater(Activity activity, ProgressDialog progress, Callable intent_after_finish) {
-                this.intent_after_finish = intent_after_finish;
-                myProgress = progress;
-            }
-
-            public void run() {
-                new Decompress(ins, path).unzip();
-
-                myProgress.dismiss();
-
-                try {
-                    intent_after_finish.call();
-                } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-
-                //   activity.startActivity(intent_after_finish);
-                //	activity.finish();
-
-            }
-        }
-        new Thread(new AlertDialogUpdater(activity, dialog, intent_after_finish)).start();
-
     }
 }

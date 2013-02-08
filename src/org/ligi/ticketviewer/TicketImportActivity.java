@@ -34,7 +34,7 @@ public class TicketImportActivity extends SherlockActivity {
 
                 i.putExtra("path", path);
                 (new File(path)).mkdirs();
-                UnzipPasscodeDialog.show(result, path, ticketImportActivity, new Callable<Void>() {
+                UnzipPasscodeDialog.show(result, ticketImportActivity, new Callable<Void>() {
                     @Override
                     public Void call() throws Exception {
                         return null;  //To change body of implemented methods use File | Settings | File Templates.

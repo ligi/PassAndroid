@@ -12,7 +12,6 @@ import android.view.Display;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
 import org.ligi.ticketviewer.helper.FileHelper;
@@ -37,32 +36,7 @@ public class TicketViewActivityBase extends SherlockActivity {
 
         Display display = getWindowManager().getDefaultDisplay();
         Log.i("TicketView", "is temp" + TicketDefinitions.getTmpDir(this) + " " + path);
-        if (path.equals(TicketDefinitions.getTmpDir(this))) {
-            Log.i("TicketView", "is temp");
-            JSONObject manifest_json = null;
-            try {
-                manifest_json = new JSONObject(FileHelper.file2String(new File(path + "/manifest.json")));
-            } catch (Exception e) {
-                DisplayError("Invalid Passbook", "Problem with manifest.json: " + e);
-                //return false;
-                return;
-            }
 
-            try {
-                String rename_str = TicketDefinitions.getPassesDir(this) + "/" + manifest_json.getString("pass.json");
-                File rename_file = new File(rename_str);
-                Log.i("TicketView", "Renaming to " + rename_str + " " + rename_file);
-
-                if (rename_file.exists())
-                    FileHelper.DeleteRecursive(rename_file);
-
-                new File(path + "/").renameTo(rename_file);
-                path = rename_str;
-            } catch (JSONException e) {
-                DisplayError("Invalid Passbook", "Problem with pass.json: " + e);
-                return;
-            }
-        }
         JSONObject pass_json;
 
         try {
@@ -75,7 +49,7 @@ public class TicketViewActivityBase extends SherlockActivity {
             barcode_bitmap = BarcodeHelper.generateBarCode(barcode_json.getString("message"), format);
 
         } catch (Exception e) {
-            DisplayError("Invalid Passbook", "Problem with pass.json: " + e);
+            UnzipPasscodeDialog.DisplayError(this, "thInvalid Passbook", "Problem with pass.json: " + e);
             //return false;
             return;
         }
@@ -102,16 +76,6 @@ public class TicketViewActivityBase extends SherlockActivity {
         Log.i("", "loading " + path);
     }
 
-    public void DisplayError(String title, String err) {
-        new AlertDialog.Builder(this).setTitle(title).setMessage(err)
-                .setPositiveButton("OK", new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-
-                }).show();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
