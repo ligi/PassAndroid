@@ -36,7 +36,6 @@ public class TicketViewActivityBase extends SherlockActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Display display = getWindowManager().getDefaultDisplay();
-        Log.i("TicketView", "is temp" + TicketDefinitions.getTmpDir(this) + " " + path);
 
         JSONObject pass_json;
 

@@ -8,8 +8,4 @@ public class TicketDefinitions {
         return ctx.getFilesDir().getAbsolutePath() + "/passes";
     }
 
-
-    public static String getTmpDir(Context ctx) {
-        return ctx.getFilesDir().getAbsolutePath() + "/tmp/passes";
-    }
 }
