@@ -9,6 +9,8 @@ import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * User: ligi
@@ -18,15 +20,13 @@ import java.io.File;
 public class PassbookParser {
 
     private String path;
-
     private String problem_str = "";
     private boolean passbook_valid = true; // be positive
     private String barcode_msg;
-
     private Bitmap barcodeBitmap = null;
     private com.google.zxing.BarcodeFormat barcodeFormat;
-
     private Bitmap icon_bitmap;
+    private int bgcolor;
 
     public PassbookParser(String path) {
 
@@ -56,11 +56,24 @@ public class PassbookParser {
 
         if (pass_json != null)
             try {
-                String color_str = pass_json.getString("backgroundColor");
+                bgcolor = parseColor(pass_json.getString("backgroundColor"));
 
-                Log.i("parsed color:" + color_str);
             } catch (JSONException e) {
             }
+    }
+
+    private Integer parseColor(String color_str) {
+        Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
+        Matcher matcher = pattern.matcher(color_str);
+
+        if (matcher.matches()) {
+            return (255 << 24 |
+                    Integer.valueOf(matcher.group(1)) << 16 |  // r
+                    Integer.valueOf(matcher.group(2)) << 24 |  // g
+                    Integer.valueOf(matcher.group(3))); // b
+        }
+
+        return null;
     }
 
     public boolean isValid() {
@@ -69,7 +82,10 @@ public class PassbookParser {
 
     public Bitmap getBarcodeBitmap() {
         if (barcodeBitmap == null) {
-            barcodeBitmap = BarcodeHelper.generateBarCode(barcode_msg, barcodeFormat);
+            if (barcode_msg != null && barcodeFormat != null)
+                barcodeBitmap = BarcodeHelper.generateBarCode(barcode_msg, barcodeFormat);
+            else
+                Log.w("Barcode msg or format is null");
         }
         return barcodeBitmap;
     }
@@ -90,6 +106,10 @@ public class PassbookParser {
 
         }
         return icon_bitmap;
+    }
+
+    public int getBgcolor() {
+        return bgcolor;
     }
 
 }

@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -280,6 +279,8 @@ public class TicketListActivity extends SherlockListActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             String mPath = path + "/" + passes[position];
+            PassbookParser passbookParser = new PassbookParser(mPath);
+
             View res = inflater.inflate(R.layout.pass_list_item, null);
             TextView tv = (TextView) res.findViewById(R.id.label);
             TextView more_tv = (TextView) res.findViewById(R.id.descr);
@@ -315,16 +316,14 @@ public class TicketListActivity extends SherlockListActivity {
             int size = (int) getResources().getDimension(R.dimen.pass_icon_size);
             ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
             if (path != null) {
-                Bitmap ico = BitmapFactory.decodeFile(mPath + "/logo@2x.png");
-
-                if (ico == null)
-                    ico = BitmapFactory.decodeFile(mPath + "/logo.png");
+                Bitmap ico = passbookParser.getIconBitmap();
 
                 if (ico != null)
                     icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
 
             }
 
+            icon_img.setBackgroundColor(passbookParser.getBgcolor());
 
             return res;
         }
