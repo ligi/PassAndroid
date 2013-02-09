@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -13,8 +12,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
-import org.json.JSONObject;
-import org.ligi.ticketviewer.helper.BarcodeHelper;
 import org.ligi.ticketviewer.helper.FileHelper;
 
 import java.io.File;
@@ -23,8 +20,8 @@ public class TicketViewActivityBase extends SherlockActivity {
 
 
     protected Bitmap icon_bitmap;
-    protected Bitmap barcode_bitmap;
     protected String path;
+    protected PassbookParser passbookParser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,41 +34,16 @@ public class TicketViewActivityBase extends SherlockActivity {
 
         Display display = getWindowManager().getDefaultDisplay();
 
-        JSONObject pass_json;
 
-        try {
-            pass_json = new JSONObject(FileHelper.file2String(new File(path + "/pass.json")));
-            JSONObject barcode_json = pass_json.getJSONObject("barcode");
-            com.google.zxing.BarcodeFormat format = com.google.zxing.BarcodeFormat.QR_CODE;
-            if (barcode_json.getString("format").contains("417"))
-                format = com.google.zxing.BarcodeFormat.PDF_417;
-
-            barcode_bitmap = BarcodeHelper.generateBarCode(barcode_json.getString("message"), format);
-
-        } catch (Exception e) {
-            UnzipPasscodeDialog.DisplayError(this, "thInvalid Passbook", "Problem with pass.json: " + e);
-            //return false;
-            return;
-        }
+        passbookParser = new PassbookParser(path);
 
         int size = (int) (2.0f * Math.min((int) display
                 .getHeight(), (int) display.getWidth()) / 3.0f);
 
-        if (path != null) {
-            icon_bitmap = BitmapFactory.decodeFile(path + "/logo@2x.png");
+        icon_bitmap = passbookParser.getIconBitmap();
 
-            if (icon_bitmap == null)
-                icon_bitmap = BitmapFactory.decodeFile(path + "/logo.png");
-
-            if (icon_bitmap == null)
-                icon_bitmap = BitmapFactory.decodeFile(path + "/icon@2x.png");
-
-            if (icon_bitmap == null)
-                icon_bitmap = BitmapFactory.decodeFile(path + "/icon.png");
-
-            if (icon_bitmap != null)
-                icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
-        }
+        if (icon_bitmap != null)
+            icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
 
         Log.i("", "loading " + path);
     }
