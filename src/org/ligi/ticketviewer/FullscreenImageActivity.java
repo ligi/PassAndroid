@@ -16,7 +16,7 @@ public class FullscreenImageActivity extends TicketViewActivityBase {
         ImageView iv = (ImageView) findViewById(R.id.fullscreen_image);
 
 
-        iv.setImageBitmap(barcode_bitmap);
+        iv.setImageBitmap(passbookParser.getBarcodeBitmap());
 
     }
 
