@@ -17,6 +17,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
         ImageView barcode_img = (ImageView) findViewById(R.id.barcode_img);
 
         logo_img.setImageBitmap(icon_bitmap);
+        logo_img.setBackgroundColor(passbookParser.getBgcolor());
         barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap());
         barcode_img.setOnClickListener(new View.OnClickListener() {
 
