@@ -288,8 +288,19 @@ public class TicketListActivity extends SherlockListActivity {
                 JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(mPath + "/pass.json")));
                 tv.setText(pass_json.getString("description"));
                 String more_str = "";
-                if (pass_json.has("eventTicket")) {
-                    JSONObject eventTicket = pass_json.getJSONObject("eventTicket");
+
+                String ticket_kind = null;
+
+                String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+
+                for (String type : types) {
+                    if (pass_json.has(type))
+                        ticket_kind = type;
+
+                }
+
+                if (ticket_kind != null) {
+                    JSONObject eventTicket = pass_json.getJSONObject(ticket_kind);
 
                     if (eventTicket.has("primaryFields")) {
                         JSONArray pri_arr = eventTicket.getJSONArray("primaryFields");
