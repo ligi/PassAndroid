@@ -11,6 +11,7 @@ import android.view.Display;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.androidquery.AQuery;
 import com.google.analytics.tracking.android.EasyTracker;
 import org.ligi.ticketviewer.helper.FileHelper;
 
@@ -102,5 +103,14 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
     public void onStop() {
         super.onStop();
         EasyTracker.getInstance().activityStop(this);
+    }
+
+    private AQuery aQuery;
+
+    public AQuery getAQ() {
+        if (aQuery == null) {
+            aQuery = new AQuery(this);
+        }
+        return aQuery;
     }
 }
