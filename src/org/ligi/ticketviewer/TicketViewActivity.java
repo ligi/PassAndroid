@@ -2,6 +2,7 @@ package org.ligi.ticketviewer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -28,10 +29,18 @@ public class TicketViewActivity extends TicketViewActivityBase {
                 TicketViewActivity.this.startActivity(i);
             }
 
-
         });
 
-        // for the header_data
+        if (passbookParser.getLocations().size() > 0) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
+            locationsMapFragment.click_to_fullscreen = true;
+            ft.replace(R.id.map_container, locationsMapFragment);
+            ft.commit();
+        } else {
+            getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
+        }
+
         TicketListActivity.visualizePassbookData(passbookParser, v);
     }
 
