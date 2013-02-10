@@ -19,6 +19,8 @@ public class TicketViewActivity extends TicketViewActivityBase {
         logo_img.setImageBitmap(icon_bitmap);
         logo_img.setBackgroundColor(passbookParser.getBgcolor());
         barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap());
+
+        // when clicking on the barcode we want to go to the activity showing the barcode fullscreen
         barcode_img.setOnClickListener(new View.OnClickListener() {
 
             @Override
