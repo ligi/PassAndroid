@@ -22,12 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
                 class="org.ligi.ticketviewer.LocationsMapFragment"/>
-        <TextView
-                android:text="foo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
 
     </LinearLayout>
 </ScrollView>
