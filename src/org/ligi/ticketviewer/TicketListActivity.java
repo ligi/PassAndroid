@@ -85,8 +85,11 @@ public class TicketListActivity extends SherlockListActivity {
                 break;
         }
 
-        if (passes == null || passes.length == 0)
+        if (passes == null || passes.length == 0) {
             new ScanForPassesTask().execute();
+        }
+
+        updateUIToScanningState();
     }
 
     private void refresh_passes_list() {
