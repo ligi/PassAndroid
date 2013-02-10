@@ -301,6 +301,22 @@ public class TicketListActivity extends SherlockListActivity {
 
         try {
             JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(passbookParser.getPath() + "/pass.json")));
+
+            int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
+            ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
+
+            if (passbookParser.getPath() != null) {
+                Bitmap ico = passbookParser.getIconBitmap();
+
+                if (ico != null)
+                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
+                else
+                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
+            }
+
+            icon_img.setBackgroundColor(passbookParser.getBgcolor());
+
+
             tv.setText(pass_json.getString("description"));
             String more_str = "";
 
@@ -321,32 +337,19 @@ public class TicketListActivity extends SherlockListActivity {
                     JSONArray pri_arr = eventTicket.getJSONArray("primaryFields");
                     for (int i = 0; i < pri_arr.length(); i++) {
                         JSONObject sec_obj = pri_arr.getJSONObject(i);
-                        more_str += "<b>" + sec_obj.getString("label") + "</b>:" + sec_obj.getString("value") + "\n";
+                        more_str += "<b>" + sec_obj.getString("label") + "</b>:" + sec_obj.getString("value") + "<br/>";
                     }
                 }
                 if (eventTicket.has("secondaryFields")) {
                     JSONArray sec_arr = eventTicket.getJSONArray("secondaryFields");
                     for (int i = 0; i < sec_arr.length(); i++) {
                         JSONObject sec_obj = sec_arr.getJSONObject(i);
-                        more_str += "<b>" + sec_obj.getString("label") + "</b>: " + sec_obj.getString("value") + "\n";
+                        more_str += "<b>" + sec_obj.getString("label") + "</b>: " + sec_obj.getString("value") + "<br/>";
                     }
                 }
             }
 
             more_tv.setText(Html.fromHtml(more_str));
-
-
-            int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
-            ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
-            if (passbookParser.getPath() != null) {
-                Bitmap ico = passbookParser.getIconBitmap();
-
-                if (ico != null)
-                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
-
-            }
-
-            icon_img.setBackgroundColor(passbookParser.getBgcolor());
 
 
         } catch (Exception e) {
