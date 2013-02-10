@@ -11,13 +11,11 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_view);
+        View v = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
+        setContentView(v);
 
-        ImageView logo_img = (ImageView) findViewById(R.id.logo_img);
         ImageView barcode_img = (ImageView) findViewById(R.id.barcode_img);
 
-        logo_img.setImageBitmap(icon_bitmap);
-        logo_img.setBackgroundColor(passbookParser.getBgcolor());
         barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap());
 
         // when clicking on the barcode we want to go to the activity showing the barcode fullscreen
@@ -33,6 +31,8 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         });
 
+        // for the header_data
+        TicketListActivity.visualizePassbookData(passbookParser, v);
     }
 
 

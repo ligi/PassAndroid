@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -285,51 +286,59 @@ public class TicketListActivity extends SherlockListActivity {
             PassbookParser passbookParser = new PassbookParser(mPath);
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
-            TextView tv = (TextView) res.findViewById(R.id.label);
-            TextView more_tv = (TextView) res.findViewById(R.id.descr);
-            try {
-                JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(mPath + "/pass.json")));
-                tv.setText(pass_json.getString("description"));
-                String more_str = "";
 
-                String ticket_kind = null;
 
-                String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+            visualizePassbookData(passbookParser, res);
 
-                for (String type : types) {
-                    if (pass_json.has(type))
-                        ticket_kind = type;
+            return res;
+        }
 
-                }
+    }
 
-                if (ticket_kind != null) {
-                    JSONObject eventTicket = pass_json.getJSONObject(ticket_kind);
+    public static void visualizePassbookData(PassbookParser passbookParser, View res) {
+        TextView tv = (TextView) res.findViewById(R.id.label);
+        TextView more_tv = (TextView) res.findViewById(R.id.descr);
 
-                    if (eventTicket.has("primaryFields")) {
-                        JSONArray pri_arr = eventTicket.getJSONArray("primaryFields");
-                        for (int i = 0; i < pri_arr.length(); i++) {
-                            JSONObject sec_obj = pri_arr.getJSONObject(i);
-                            more_str += sec_obj.getString("label") + ":" + sec_obj.getString("value") + "\n";
-                        }
-                    }
-                    if (eventTicket.has("secondaryFields")) {
-                        JSONArray sec_arr = eventTicket.getJSONArray("secondaryFields");
-                        for (int i = 0; i < sec_arr.length(); i++) {
-                            JSONObject sec_obj = sec_arr.getJSONObject(i);
-                            more_str += sec_obj.getString("label") + ":" + sec_obj.getString("value") + "\n";
-                        }
-                    }
-                }
+        try {
+            JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(passbookParser.getPath() + "/pass.json")));
+            tv.setText(pass_json.getString("description"));
+            String more_str = "";
 
-                more_tv.setText(more_str);
+            String ticket_kind = null;
 
-            } catch (Exception e) {
+            String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+
+            for (String type : types) {
+                if (pass_json.has(type))
+                    ticket_kind = type;
 
             }
 
-            int size = (int) getResources().getDimension(R.dimen.pass_icon_size);
+            if (ticket_kind != null) {
+                JSONObject eventTicket = pass_json.getJSONObject(ticket_kind);
+
+                if (eventTicket.has("primaryFields")) {
+                    JSONArray pri_arr = eventTicket.getJSONArray("primaryFields");
+                    for (int i = 0; i < pri_arr.length(); i++) {
+                        JSONObject sec_obj = pri_arr.getJSONObject(i);
+                        more_str += "<b>" + sec_obj.getString("label") + "</b>:" + sec_obj.getString("value") + "\n";
+                    }
+                }
+                if (eventTicket.has("secondaryFields")) {
+                    JSONArray sec_arr = eventTicket.getJSONArray("secondaryFields");
+                    for (int i = 0; i < sec_arr.length(); i++) {
+                        JSONObject sec_obj = sec_arr.getJSONObject(i);
+                        more_str += "<b>" + sec_obj.getString("label") + "</b>: " + sec_obj.getString("value") + "\n";
+                    }
+                }
+            }
+
+            more_tv.setText(Html.fromHtml(more_str));
+
+
+            int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
             ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
-            if (path != null) {
+            if (passbookParser.getPath() != null) {
                 Bitmap ico = passbookParser.getIconBitmap();
 
                 if (ico != null)
@@ -339,8 +348,9 @@ public class TicketListActivity extends SherlockListActivity {
 
             icon_img.setBackgroundColor(passbookParser.getBgcolor());
 
-            return res;
-        }
 
+        } catch (Exception e) {
+
+        }
     }
 }

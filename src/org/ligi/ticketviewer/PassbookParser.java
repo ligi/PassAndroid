@@ -2,6 +2,8 @@ package org.ligi.ticketviewer;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.google.android.gms.maps.model.LatLng;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
@@ -9,6 +11,8 @@ import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +31,17 @@ public class PassbookParser {
     private com.google.zxing.BarcodeFormat barcodeFormat;
     private Bitmap icon_bitmap;
     private int bgcolor;
+
+    public class PassLocation {
+        public LatLng latlng;
+        public String description = "";
+    }
+
+    private List<PassLocation> locations = new ArrayList<PassLocation>();
+
+    public List<PassLocation> getLocations() {
+        return locations;
+    }
 
     public PassbookParser(String path) {
 
@@ -54,12 +69,30 @@ public class PassbookParser {
             return;
         }
 
-        if (pass_json != null)
+        if (pass_json != null) {
+
+
+            try {
+                JSONArray locations_json = pass_json.getJSONArray("locations");
+                for (int i = 0; i < locations_json.length(); i++) {
+                    JSONObject obj = locations_json.getJSONObject(i);
+
+                    PassLocation location = new PassLocation();
+                    location.latlng = new LatLng(obj.getDouble("latitude"), obj.getDouble("longitude"));
+                    location.description = obj.getString("relevantText");
+                    locations.add(location);
+                }
+
+
+            } catch (JSONException e) {
+            }
+
             try {
                 bgcolor = parseColor(pass_json.getString("backgroundColor"));
 
             } catch (JSONException e) {
             }
+        }
     }
 
     private Integer parseColor(String color_str) {
@@ -110,6 +143,10 @@ public class PassbookParser {
 
     public int getBgcolor() {
         return bgcolor;
+    }
+
+    public String getPath() {
+        return path;
     }
 
 }
