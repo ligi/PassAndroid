@@ -125,11 +125,12 @@ public class PassbookParser {
 
     public Bitmap getIconBitmap() {
         if (icon_bitmap == null && path != null) {
+            /*
             icon_bitmap = BitmapFactory.decodeFile(path + "/logo@2x.png");
 
             if (icon_bitmap == null)
                 icon_bitmap = BitmapFactory.decodeFile(path + "/logo.png");
-
+                                                 */
             if (icon_bitmap == null)
                 icon_bitmap = BitmapFactory.decodeFile(path + "/icon@2x.png");
 
