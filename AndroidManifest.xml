@@ -10,11 +10,19 @@
             android:minSdkVersion="8"
             android:targetSdkVersion="17"/>
 
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+
+
+    <permission
+            android:name="org.ligi.ticketviewer.permission.MAPS_RECEIVE"
+            android:protectionLevel="signature"/>
+    <uses-permission android:name="org.ligi.ticketviewer.permission.MAPS_RECEIVE"/>
 
     <application
             android:allowBackup="true"
@@ -22,6 +30,8 @@
             android:label="@string/app_name"
             android:name="org.ligi.ticketviewer.helper.ApplicationContext"
             android:theme="@style/AppTheme">
+
+
         <activity
                 android:name="org.ligi.ticketviewer.TicketListActivity"
                 android:label="@string/app_name">
@@ -111,6 +121,15 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
         </receiver>
+
+
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+                   android:value="AIzaSyAAASj2rSvumqO1mZLMVWmZxUnzOjxLGlE"/>
     </application>
+
+
+    <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true"/>
 
 </manifest>

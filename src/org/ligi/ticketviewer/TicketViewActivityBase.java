@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -16,7 +16,7 @@ import org.ligi.ticketviewer.helper.FileHelper;
 
 import java.io.File;
 
-public class TicketViewActivityBase extends SherlockActivity {
+public class TicketViewActivityBase extends SherlockFragmentActivity {
 
 
     protected Bitmap icon_bitmap;
@@ -33,7 +33,6 @@ public class TicketViewActivityBase extends SherlockActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Display display = getWindowManager().getDefaultDisplay();
-
 
         passbookParser = new PassbookParser(path);
 
