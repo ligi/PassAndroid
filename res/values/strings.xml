@@ -6,5 +6,6 @@
     <string name="logo">logo</string>
     <string name="menu_delete">delete</string>
     <string name="menu_refresh">refresh</string>
+    <string name="barcode">barcode</string>
 
 </resources>
