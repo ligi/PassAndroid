@@ -42,7 +42,7 @@ public class TicketImportActivity extends SherlockActivity {
 
                         finish();
 
-                        return null;  //To change body of implemented methods use File | Settings | File Templates.
+                        return null;
                     }
                 });
             }
