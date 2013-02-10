@@ -39,6 +39,9 @@ public class TicketImportActivity extends SherlockActivity {
                         i.putExtra("path", path);
 
                         TicketImportActivity.this.startActivity(i);
+
+                        finish();
+
                         return null;  //To change body of implemented methods use File | Settings | File Templates.
                     }
                 });
