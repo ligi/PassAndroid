@@ -15,13 +15,15 @@
                 android:id="@+id/barcode_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/logo"/>
+                android:contentDescription="@string/logo"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                />
 
-        <fragment
-                android:id="@+id/map"
+        <LinearLayout
+                android:id="@+id/map_container"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
-                class="org.ligi.ticketviewer.LocationsMapFragment"/>
+                android:layout_height="256dp"/>
 
     </LinearLayout>
 </ScrollView>
