@@ -1,9 +1,17 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <item
-        android:id="@+id/menu_delete"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom"
-        android:title="@string/menu_delete" android:icon="@android:drawable/ic_menu_delete"/>
+            android:id="@+id/menu_map"
+            android:orderInCategory="99"
+            android:showAsAction="ifRoom"
+            android:title="@string/menu_delete" android:icon="@android:drawable/ic_menu_mapmode"/>
+
+
+    <item
+            android:id="@+id/menu_delete"
+            android:orderInCategory="100"
+            android:showAsAction="ifRoom"
+            android:title="@string/menu_delete" android:icon="@android:drawable/ic_menu_delete"/>
 
 </menu>
