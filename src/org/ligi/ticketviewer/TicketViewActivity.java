@@ -41,7 +41,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
             getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
         }
 
-        TicketListActivity.visualizePassbookData(passbookParser, v);
+        PassbookVisualisationHelper.visualizePassbookData(passbookParser, v);
     }
 
 

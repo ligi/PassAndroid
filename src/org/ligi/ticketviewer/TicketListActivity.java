@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -25,9 +22,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
 import com.google.analytics.tracking.android.EasyTracker;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.ligi.ticketviewer.helper.FileHelper;
+import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
@@ -43,6 +38,7 @@ public class TicketListActivity extends SherlockListActivity {
     private PassAdapter passadapter;
     private boolean scanning = false;
     private TextView empty_view;
+    private ScanForPassesTask scan_task = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +82,6 @@ public class TicketListActivity extends SherlockListActivity {
                 break;
         }
 
-        if (passes == null || passes.length == 0) {
-            new ScanForPassesTask().execute();
-        }
-
-        updateUIToScanningState();
     }
 
     private void refresh_passes_list() {
@@ -117,6 +108,13 @@ public class TicketListActivity extends SherlockListActivity {
         super.onResume();
         passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
         passadapter.notifyDataSetChanged();
+
+        if (passes == null || passes.length == 0) {
+            scan_task = new ScanForPassesTask();
+            scan_task.execute();
+        }
+
+        updateUIToScanningState();
 
     }
 
@@ -145,6 +143,15 @@ public class TicketListActivity extends SherlockListActivity {
     public void onStart() {
         super.onStart();
         EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    protected void onPause() {
+        if (scan_task != null) {
+            scan_task.cancel(true);
+        }
+        scanning = false;
+        super.onPause();
     }
 
     @Override
@@ -288,72 +295,11 @@ public class TicketListActivity extends SherlockListActivity {
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
 
-            visualizePassbookData(passbookParser, res);
+            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res);
 
             return res;
         }
 
     }
 
-    public static void visualizePassbookData(PassbookParser passbookParser, View res) {
-        TextView tv = (TextView) res.findViewById(R.id.label);
-        TextView more_tv = (TextView) res.findViewById(R.id.descr);
-
-        try {
-            JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(passbookParser.getPath() + "/pass.json")));
-
-            int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
-            ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
-
-            if (passbookParser.getPath() != null) {
-                Bitmap ico = passbookParser.getIconBitmap();
-
-                if (ico != null)
-                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
-                else
-                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
-            }
-
-            icon_img.setBackgroundColor(passbookParser.getBgcolor());
-
-
-            tv.setText(pass_json.getString("description"));
-            String more_str = "";
-
-            String ticket_kind = null;
-
-            String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
-
-            for (String type : types) {
-                if (pass_json.has(type))
-                    ticket_kind = type;
-
-            }
-
-            if (ticket_kind != null) {
-                JSONObject eventTicket = pass_json.getJSONObject(ticket_kind);
-
-                if (eventTicket.has("primaryFields")) {
-                    JSONArray pri_arr = eventTicket.getJSONArray("primaryFields");
-                    for (int i = 0; i < pri_arr.length(); i++) {
-                        JSONObject sec_obj = pri_arr.getJSONObject(i);
-                        more_str += "<b>" + sec_obj.getString("label") + "</b>:" + sec_obj.getString("value") + "<br/>";
-                    }
-                }
-                if (eventTicket.has("secondaryFields")) {
-                    JSONArray sec_arr = eventTicket.getJSONArray("secondaryFields");
-                    for (int i = 0; i < sec_arr.length(); i++) {
-                        JSONObject sec_obj = sec_arr.getJSONObject(i);
-                        more_str += "<b>" + sec_obj.getString("label") + "</b>: " + sec_obj.getString("value") + "<br/>";
-                    }
-                }
-            }
-
-            more_tv.setText(Html.fromHtml(more_str));
-
-
-        } catch (Exception e) {
-
-        }
-    }
 }
