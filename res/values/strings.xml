@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Passbook-Viewer for Android Alpha</string>
+    <string name="app_name">Passbook-Viewer for Android</string>
     <string name="menu_settings">Settings</string>
     <string name="logo">logo</string>
     <string name="menu_delete">delete</string>
     <string name="menu_refresh">refresh</string>
     <string name="barcode">barcode</string>
-
+    <string name="menu_help">help</string>
 </resources>
