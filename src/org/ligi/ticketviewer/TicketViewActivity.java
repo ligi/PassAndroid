@@ -3,8 +3,11 @@ package org.ligi.ticketviewer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 
 public class TicketViewActivity extends TicketViewActivityBase {
@@ -42,6 +45,16 @@ public class TicketViewActivity extends TicketViewActivityBase {
             getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
         }
 
+        String back_str = "";
+        for (PassbookParser.Field f : passbookParser.getAuxiliaryFields())
+            back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+        for (PassbookParser.Field f : passbookParser.getBackFields())
+            back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+
+        TextView back_tv = getAQ().find(R.id.back_fields).getTextView();
+        back_tv.setText(Html.fromHtml(back_str));
+
+        Linkify.addLinks(back_tv, Linkify.ALL);
         PassbookVisualisationHelper.visualizePassbookData(passbookParser, v);
     }
 

@@ -102,10 +102,10 @@ public class PassbookParser {
 
             try {
                 JSONObject eventTicket = pass_json.getJSONObject(type);
-                primaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("primaryFields"));
-                secondaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("secondaryFields"));
-                auxiliaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("auxiliaryFields"));
-                backFields = getFieldListFromJsonArr(eventTicket.getJSONArray("backFields"));
+                primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
+                secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
+                auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
+                backFields = getFieldListFromJsonArr(eventTicket, "backFields");
             } catch (JSONException e) {
             }
 
@@ -140,17 +140,30 @@ public class PassbookParser {
         return locations;
     }
 
-    public List<Field> getFieldListFromJsonArr(JSONArray arr) {
+    /**
+     * returns a list of Fields for the key - empty list when no elements - not nul
+     *
+     * @param obj
+     * @param key
+     * @return
+     */
+    public List<Field> getFieldListFromJsonArr(JSONObject obj, String key) {
         ArrayList<Field> res = new ArrayList<Field>();
-        for (int i = 0; i < arr.length(); i++) {
-            Field f = new Field();
-            try {
-                f.label = arr.getJSONObject(i).getString("label");
-                f.value = arr.getJSONObject(i).getString("value");
-                res.add(f);
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+        JSONArray arr = null;
+        try {
+            arr = obj.getJSONArray(key);
+            for (int i = 0; i < arr.length(); i++) {
+                Field f = new Field();
+                try {
+                    f.label = arr.getJSONObject(i).getString("label");
+                    f.value = arr.getJSONObject(i).getString("value");
+                    res.add(f);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
         }
         return res;
     }
