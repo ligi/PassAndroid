@@ -98,6 +98,9 @@ public class TicketListActivity extends SherlockListActivity {
             case R.id.menu_refresh:
                 new ScanForPassesTask().execute();
                 return true;
+            case R.id.menu_help:
+                HelpDialog.show(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
     }
