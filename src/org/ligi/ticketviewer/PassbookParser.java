@@ -45,6 +45,13 @@ public class PassbookParser {
 
         try {
             pass_json = new JSONObject(FileHelper.file2String(new File(path + "/pass.json")));
+        } catch (Exception e) {
+            problem_str += "Problem with pass.json";
+            passbook_valid = false;
+            return;
+        }
+
+        try {
             JSONObject barcode_json = pass_json.getJSONObject("barcode");
 
             barcodeFormat = com.google.zxing.BarcodeFormat.QR_CODE; // DEFAULT
@@ -56,11 +63,8 @@ public class PassbookParser {
 
             // TODO should check a bit more with barcode here - this can be dangerous
 
-
         } catch (Exception e) {
             problem_str += "Problem with pass.json";
-            passbook_valid = false;
-            return;
         }
 
         if (pass_json != null) {
@@ -97,17 +101,29 @@ public class PassbookParser {
             for (String atype : types) {
                 if (pass_json.has(atype))
                     type = atype;
-
             }
 
-            try {
-                JSONObject eventTicket = pass_json.getJSONObject(type);
-                primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
-                secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
-                auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
-                backFields = getFieldListFromJsonArr(eventTicket, "backFields");
-            } catch (JSONException e) {
-            }
+            Log.i("got typee" + type);
+            if (type == null) {
+                try {
+                    Log.i("" + pass_json.toString(2));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else
+                try {
+                    JSONObject eventTicket = pass_json.getJSONObject(type);
+                    Log.i("got typee prime");
+                    primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
+                    Log.i("got typee Sec");
+                    secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
+                    Log.i("got typee aux");
+                    auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
+                    Log.i("got typee back");
+                    backFields = getFieldListFromJsonArr(eventTicket, "backFields");
+                    Log.i("got typee OK");
+                } catch (JSONException e) {
+                }
 
         }
     }
