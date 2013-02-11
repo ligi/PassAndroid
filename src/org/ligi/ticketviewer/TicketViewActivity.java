@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
+import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 
 public class TicketViewActivity extends TicketViewActivityBase {
 

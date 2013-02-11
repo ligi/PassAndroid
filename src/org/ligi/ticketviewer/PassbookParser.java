@@ -31,17 +31,11 @@ public class PassbookParser {
     private com.google.zxing.BarcodeFormat barcodeFormat;
     private Bitmap icon_bitmap;
     private int bgcolor;
-
-    public class PassLocation {
-        public LatLng latlng;
-        public String description = "";
-    }
-
+    private String description;
+    private String type;
+    private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
 
-    public List<PassLocation> getLocations() {
-        return locations;
-    }
 
     public PassbookParser(String path) {
 
@@ -89,10 +83,76 @@ public class PassbookParser {
 
             try {
                 bgcolor = parseColor(pass_json.getString("backgroundColor"));
-
             } catch (JSONException e) {
             }
+
+            try {
+                description = pass_json.getString("description");
+            } catch (JSONException e) {
+            }
+
+
+            String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+
+            for (String atype : types) {
+                if (pass_json.has(atype))
+                    type = atype;
+
+            }
+
+            try {
+                JSONObject eventTicket = pass_json.getJSONObject(type);
+                primaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("primaryFields"));
+                secondaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("secondaryFields"));
+                auxiliaryFields = getFieldListFromJsonArr(eventTicket.getJSONArray("auxiliaryFields"));
+                backFields = getFieldListFromJsonArr(eventTicket.getJSONArray("backFields"));
+            } catch (JSONException e) {
+            }
+
         }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public List<Field> getPrimaryFields() {
+        return primaryFields;
+    }
+
+    public List<Field> getSecondaryFields() {
+        return secondaryFields;
+    }
+
+    public List<Field> getBackFields() {
+        return backFields;
+    }
+
+    public List<Field> getAuxiliaryFields() {
+        return auxiliaryFields;
+    }
+
+    public List<PassLocation> getLocations() {
+        return locations;
+    }
+
+    public List<Field> getFieldListFromJsonArr(JSONArray arr) {
+        ArrayList<Field> res = new ArrayList<Field>();
+        for (int i = 0; i < arr.length(); i++) {
+            Field f = new Field();
+            try {
+                f.label = arr.getJSONObject(i).getString("label");
+                f.value = arr.getJSONObject(i).getString("value");
+                res.add(f);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return res;
     }
 
     private Integer parseColor(String color_str) {
@@ -148,6 +208,16 @@ public class PassbookParser {
 
     public String getPath() {
         return path;
+    }
+
+    public class PassLocation {
+        public LatLng latlng;
+        public String description = "";
+    }
+
+    public class Field {
+        public String label;
+        public String value;
     }
 
 }
