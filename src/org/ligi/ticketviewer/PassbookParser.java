@@ -35,6 +35,7 @@ public class PassbookParser {
     private String type;
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
+    private int fgcolor;
 
 
     public PassbookParser(String path) {
@@ -87,6 +88,11 @@ public class PassbookParser {
 
             try {
                 bgcolor = parseColor(pass_json.getString("backgroundColor"));
+            } catch (JSONException e) {
+            }
+
+            try {
+                fgcolor = parseColor(pass_json.getString("foregroundColor"));
             } catch (JSONException e) {
             }
 
@@ -191,8 +197,9 @@ public class PassbookParser {
         if (matcher.matches()) {
             return (255 << 24 |
                     Integer.valueOf(matcher.group(1)) << 16 |  // r
-                    Integer.valueOf(matcher.group(2)) << 24 |  // g
+                    Integer.valueOf(matcher.group(2)) << 8 |  // g
                     Integer.valueOf(matcher.group(3))); // b
+
         }
 
         return null;
@@ -237,6 +244,10 @@ public class PassbookParser {
 
     public String getPath() {
         return path;
+    }
+
+    public int getFGcolor() {
+        return fgcolor;
     }
 
     public class PassLocation {
