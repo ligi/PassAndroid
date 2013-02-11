@@ -36,10 +36,12 @@ public class PassbookVisualisationHelper {
             icon_img.setBackgroundColor(passbookParser.getBgcolor());
 
 
+            tv.setTextColor(passbookParser.getFGcolor());
+            more_tv.setTextColor(passbookParser.getFGcolor());
+
             tv.setText(passbookParser.getDescription());
 
             String more_str = "";
-
 
             if (passbookParser.getType() != null) {
                 for (PassbookParser.Field f : passbookParser.getPrimaryFields())
