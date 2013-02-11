@@ -59,7 +59,8 @@ public class LocationsMapFragment extends SupportMapFragment {
                                 mMap.addMarker(new MarkerOptions()
                                         .position(l.latlng)
                                         .title(l.description)
-                                        .icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbookParser.getIconBitmap())));
+                                        //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbookParser.getIconBitmap())));
+                                );
 
                                 boundser = boundser.include(l.latlng);
                                 Log.i("added marker");
