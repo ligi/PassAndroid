@@ -23,6 +23,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
     protected Bitmap icon_bitmap;
     protected String path;
     protected PassbookParser passbookParser;
+    private AQuery aQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
         Log.i("", "loading " + path);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,11 +87,16 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
                 break;
 
+            case R.id.menu_map:
+                Intent i = new Intent(this, FullscreenMapActivity.class);
+                i.putExtra("path", passbookParser.getPath());
+                startActivity(i);
+
+                break;
 
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onStart() {
@@ -104,8 +109,6 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
         super.onStop();
         EasyTracker.getInstance().activityStop(this);
     }
-
-    private AQuery aQuery;
 
     public AQuery getAQ() {
         if (aQuery == null) {

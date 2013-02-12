@@ -8,6 +8,7 @@ import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.actionbarsherlock.view.Menu;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 
 public class TicketViewActivity extends TicketViewActivityBase {
@@ -35,14 +36,17 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         });
 
-        if (passbookParser.getLocations().size() > 0) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
-            locationsMapFragment.click_to_fullscreen = true;
-            ft.replace(R.id.map_container, locationsMapFragment);
-            ft.commit();
-        } else {
-            getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
+        if (getAQ().find(R.id.map_container).isExist()) {
+
+            if (passbookParser.getLocations().size() > 0) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
+                locationsMapFragment.click_to_fullscreen = true;
+                ft.replace(R.id.map_container, locationsMapFragment);
+                ft.commit();
+            } else {
+                getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
+            }
         }
 
         String back_str = "";
@@ -56,7 +60,20 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassbookVisualisationHelper.visualizePassbookData(passbookParser, v);
+
+        getAQ().find(R.id.colorable_top).getView().setBackgroundColor(passbookParser.getBgcolor());
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean res = super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.menu_map).setVisible((passbookParser.getLocations().size() > 0));
+        return res;
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.map_item, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }

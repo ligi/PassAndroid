@@ -9,21 +9,24 @@
 
             android:orientation="vertical"
             >
-        <include layout="@layout/pass_list_item"/>
-
-        <ImageView
-                android:id="@+id/barcode_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/logo"
-                android:paddingBottom="10dp"
-                android:layout_gravity="center_horizontal"
-                />
-
         <LinearLayout
-                android:id="@+id/map_container"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/colorable_top"
+                android:orientation="vertical">
+
+            <include layout="@layout/pass_list_item"/>
+
+            <ImageView
+                    android:id="@+id/barcode_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/logo"
+                    android:paddingBottom="10dp"
+                    android:layout_gravity="center_horizontal"
+                    />
+        </LinearLayout>
+
 
         <TextView android:id="@+id/back_fields"
                   android:layout_width="match_parent"
