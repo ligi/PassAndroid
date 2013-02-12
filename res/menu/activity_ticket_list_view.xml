@@ -10,6 +10,6 @@
             android:id="@+id/menu_help"
             android:orderInCategory="100"
             android:showAsAction="ifRoom|withText"
-            android:title="@string/menu_help" android:icon="@android:drawable/ic_menu_help"/>
+            android:title="@string/help_label" android:icon="@android:drawable/ic_menu_help"/>
 
 </menu>
