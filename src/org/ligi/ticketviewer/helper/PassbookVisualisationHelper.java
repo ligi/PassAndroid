@@ -14,7 +14,7 @@ import org.ligi.ticketviewer.R;
  * Time: 7:02 PM
  */
 public class PassbookVisualisationHelper {
-    public static void visualizePassbookData(PassbookParser passbookParser, View res) {
+    public static void visualizePassbookData(PassbookParser passbookParser, View res, boolean verbose) {
         TextView tv = (TextView) res.findViewById(R.id.label);
         TextView more_tv = (TextView) res.findViewById(R.id.descr);
 
@@ -48,6 +48,10 @@ public class PassbookVisualisationHelper {
                     more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
                 for (PassbookParser.Field f : passbookParser.getSecondaryFields())
                     more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+                if (verbose)
+                    for (PassbookParser.Field f : passbookParser.getAuxiliaryFields())
+                        more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+
             }
 
             more_tv.setText(Html.fromHtml(more_str));

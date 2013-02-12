@@ -4,7 +4,7 @@
               android:orientation="horizontal"
         >
 
-    <include layout="@layout/activity_ticket_view_list"
+    <include layout="@layout/activity_ticket_view_base"
 
              android:layout_width="0dip"
              android:layout_weight="1"

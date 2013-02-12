@@ -298,7 +298,7 @@ public class TicketListActivity extends SherlockListActivity {
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
             res.setBackgroundColor(passbookParser.getBgcolor());
-            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res);
+            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res, false);
 
             return res;
         }

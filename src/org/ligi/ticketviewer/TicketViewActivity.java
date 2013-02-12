@@ -50,8 +50,6 @@ public class TicketViewActivity extends TicketViewActivityBase {
         }
 
         String back_str = "";
-        for (PassbookParser.Field f : passbookParser.getAuxiliaryFields())
-            back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
         for (PassbookParser.Field f : passbookParser.getBackFields())
             back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
 
@@ -59,7 +57,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
         back_tv.setText(Html.fromHtml(back_str));
 
         Linkify.addLinks(back_tv, Linkify.ALL);
-        PassbookVisualisationHelper.visualizePassbookData(passbookParser, v);
+        PassbookVisualisationHelper.visualizePassbookData(passbookParser, v, true);
 
         getAQ().find(R.id.colorable_top).getView().setBackgroundColor(passbookParser.getBgcolor());
     }
