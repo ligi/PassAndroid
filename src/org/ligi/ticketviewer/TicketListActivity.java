@@ -46,7 +46,6 @@ public class TicketListActivity extends SherlockListActivity {
 
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
-
         refresh_passes_list();
 
         passadapter = new PassAdapter();
@@ -73,10 +72,11 @@ public class TicketListActivity extends SherlockListActivity {
         // don't want too many windows in worst case
         switch ((int) (System.currentTimeMillis() % 2)) {
             case 0:
+                EasyTracker.getTracker().trackEvent("ui_event", "send", "stacktraces", null);
                 TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
                 break;
             case 1:
-
+                EasyTracker.getTracker().trackEvent("ui_event", "show", "updatenotice", null);
                 MarketService ms = new MarketService(this);
                 ms.level(MarketService.MINOR).checkVersion();
                 break;
@@ -96,6 +96,7 @@ public class TicketListActivity extends SherlockListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
+                EasyTracker.getTracker().trackEvent("ui_event", "refresh", "from_list", null);
                 new ScanForPassesTask().execute();
                 return true;
             case R.id.menu_help:
@@ -119,6 +120,7 @@ public class TicketListActivity extends SherlockListActivity {
 
         updateUIToScanningState();
 
+        EasyTracker.getTracker().trackEvent("ui_event", "resume", "passes", (long) passes.length);
     }
 
     @Override
@@ -197,6 +199,7 @@ public class TicketListActivity extends SherlockListActivity {
 
     class ScanForPassesTask extends AsyncTask<Void, Void, Void> {
 
+        long start_time;
 
         /**
          * recursive traversion from path on to find files named .pkpass
@@ -228,6 +231,11 @@ public class TicketListActivity extends SherlockListActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             scanning = true;
+
+            start_time = System.currentTimeMillis();
+
+            EasyTracker.getTracker().trackEvent("ui_event", "scan", "started", null);
+
             updateUIToScanningState();
         }
 
@@ -236,7 +244,14 @@ public class TicketListActivity extends SherlockListActivity {
             super.onPostExecute(aVoid);
             scanning = false;
 
+            EasyTracker.getTracker().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
             updateUIToScanningState();
+        }
+
+        @Override
+        protected void onCancelled() {
+            EasyTracker.getTracker().trackEvent("ui_event", "scan", "cancelled", null);
+            super.onCancelled();
         }
 
         @Override

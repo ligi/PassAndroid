@@ -3,6 +3,7 @@ package org.ligi.ticketviewer;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
+import com.google.analytics.tracking.android.EasyTracker;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -29,25 +30,24 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
     @Override
     protected InputStream doInBackground(Void... params) {
 
+        long start_time = System.currentTimeMillis();
 
         if (intent_uri.toString().startsWith("content://")) {
             try {
                 return ticketImportActivity.getContentResolver().openInputStream(intent_uri);
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } else
             try {
                 return new BufferedInputStream(new URL("" + intent_uri).openStream(), 4096);
             } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
+        EasyTracker.getTracker().trackTiming("load_time", System.currentTimeMillis() - start_time, "import", "" + intent_uri);
         return null;
     }
 
