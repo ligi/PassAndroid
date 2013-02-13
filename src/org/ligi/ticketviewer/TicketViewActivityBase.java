@@ -65,6 +65,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
                 break;
 
             case R.id.menu_delete:
+                EasyTracker.getTracker().trackEvent("ui_action", "delete", "delete", null);
                 new AlertDialog.Builder(this).setMessage("Do you really want to delete this passbook?").setTitle("Sure?")
                         .setPositiveButton("Yes", new OnClickListener() {
 
@@ -92,6 +93,12 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
                 i.putExtra("path", passbookParser.getPath());
                 startActivity(i);
 
+                break;
+
+
+            case R.id.menu_share:
+                EasyTracker.getTracker().trackEvent("ui_action", "share", "shared", null);
+                new PassExportTask(this, passbookParser.getPath(), TicketDefinitions.getShareDir(this), "share.pkpass", true).execute();
                 break;
 
         }

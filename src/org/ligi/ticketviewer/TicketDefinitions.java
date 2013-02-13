@@ -1,6 +1,7 @@
 package org.ligi.ticketviewer;
 
 import android.content.Context;
+import android.os.Environment;
 
 public class TicketDefinitions {
 
@@ -8,4 +9,7 @@ public class TicketDefinitions {
         return ctx.getFilesDir().getAbsolutePath() + "/passes";
     }
 
+    public static String getShareDir(Context ctx) {
+        return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
+    }
 }
