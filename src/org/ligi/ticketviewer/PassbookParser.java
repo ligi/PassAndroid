@@ -2,6 +2,7 @@ package org.ligi.ticketviewer;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,6 +116,7 @@ public class PassbookParser {
 
             if (type == null) {
                 try {
+                    EasyTracker.getTracker().trackEvent("problem_event", "pass", "without_type", null);
                     Log.i("pass without type " + pass_json.toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
