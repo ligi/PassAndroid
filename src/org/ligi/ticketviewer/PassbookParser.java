@@ -110,26 +110,24 @@ public class PassbookParser {
             }
 
             Log.i("got typee" + type);
+            JSONObject eventTicket = null;
+
+
             if (type == null) {
                 try {
-                    Log.i("" + pass_json.toString(2));
+                    Log.i("pass without type " + pass_json.toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            } else
-                try {
-                    JSONObject eventTicket = pass_json.getJSONObject(type);
-                    Log.i("got typee prime");
-                    primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
-                    Log.i("got typee Sec");
-                    secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
-                    Log.i("got typee aux");
-                    auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
-                    Log.i("got typee back");
-                    backFields = getFieldListFromJsonArr(eventTicket, "backFields");
-                    Log.i("got typee OK");
-                } catch (JSONException e) {
-                }
+            } else try {
+                eventTicket = pass_json.getJSONObject(type);
+            } catch (JSONException e) {
+            }
+
+            primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
+            secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
+            auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
+            backFields = getFieldListFromJsonArr(eventTicket, "backFields");
 
         }
     }
@@ -172,8 +170,10 @@ public class PassbookParser {
     public List<Field> getFieldListFromJsonArr(JSONObject obj, String key) {
         ArrayList<Field> res = new ArrayList<Field>();
 
+
         JSONArray arr = null;
-        try {
+
+        if (obj != null) try {
             arr = obj.getJSONArray(key);
             for (int i = 0; i < arr.length(); i++) {
                 Field f = new Field();
