@@ -86,6 +86,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="google-play-services_lib" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/google-api-services-drive-v2-rev5-1.7.2-beta.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
