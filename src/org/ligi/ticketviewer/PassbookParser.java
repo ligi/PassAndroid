@@ -37,7 +37,7 @@ public class PassbookParser {
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
     private int fgcolor;
-
+    private JSONObject eventTicket = null;
 
     public PassbookParser(String path) {
 
@@ -111,7 +111,6 @@ public class PassbookParser {
             }
 
             Log.i("got typee" + type);
-            JSONObject eventTicket = null;
 
 
             if (type == null) {
@@ -126,12 +125,12 @@ public class PassbookParser {
             } catch (JSONException e) {
             }
 
-            primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
-            secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
-            auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
-            backFields = getFieldListFromJsonArr(eventTicket, "backFields");
-
         }
+
+        primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
+        secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
+        auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
+        backFields = getFieldListFromJsonArr(eventTicket, "backFields");
     }
 
     public String getDescription() {
