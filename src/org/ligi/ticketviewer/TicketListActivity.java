@@ -70,7 +70,7 @@ public class TicketListActivity extends SherlockListActivity {
 
 
         // don't want too many windows in worst case
-        switch ((int) (System.currentTimeMillis() % 2)) {
+        switch ((int) (System.currentTimeMillis() % 2)) { // kind of random - should be enough for this case
             case 0:
                 EasyTracker.getTracker().trackEvent("ui_event", "send", "stacktraces", null);
                 TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
@@ -101,6 +101,10 @@ public class TicketListActivity extends SherlockListActivity {
                 return true;
             case R.id.menu_help:
                 HelpDialog.show(this);
+                return true;
+
+            case R.id.menu_settings:
+                startActivity(new Intent(this, PreferenceActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
@@ -179,7 +183,6 @@ public class TicketListActivity extends SherlockListActivity {
 
                     @Override
                     public Void call(String path) {
-                        Log.i("refreshing");
                         runOnUiThread(new Runnable() {
 
                             @Override
