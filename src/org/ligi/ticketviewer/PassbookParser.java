@@ -13,6 +13,7 @@ import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +39,36 @@ public class PassbookParser {
     private List<PassLocation> locations = new ArrayList<PassLocation>();
     private int fgcolor;
     private JSONObject eventTicket = null;
+
+
+    public String findType(JSONObject obj) {
+
+        Iterator keys = obj.keys();
+        for (String key = ""; keys.hasNext(); key = (String) (keys.next())) {
+            try {
+                JSONObject pass_obj = obj.getJSONObject(key);
+                JSONArray arr = null;
+                try {
+                    arr = pass_obj.getJSONArray("primaryFields");
+                } catch (JSONException e) {
+                }
+
+                try {
+                    arr = pass_obj.getJSONArray("backFields");
+                } catch (JSONException e) {
+                }
+
+                if (arr != null) {
+                    Log.i("foundtype " + key);
+                    return key;
+                }
+            } catch (JSONException e) {
+            }
+        }
+
+        return null;
+
+    }
 
     public PassbookParser(String path) {
 
@@ -103,6 +134,7 @@ public class PassbookParser {
             }
 
 
+            // try to find in a predefined set of tickets
             String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
             for (String atype : types) {
@@ -110,8 +142,13 @@ public class PassbookParser {
                     type = atype;
             }
 
-            Log.i("got typee" + type);
+            // try to rescue the situation and find types
+            if (type == null) {
+                type = findType(pass_json);
+                EasyTracker.getTracker().trackEvent("problem_event", "strange_type", type, null);
+            }
 
+            Log.i("got typee" + type);
 
             if (type == null) {
                 try {
