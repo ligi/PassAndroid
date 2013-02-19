@@ -79,7 +79,9 @@ public class PassbookParser {
         try {
             pass_json = new JSONObject(FileHelper.file2String(new File(path + "/pass.json")));
         } catch (Exception e) {
-            problem_str += "Problem with pass.json";
+            Log.w("could not load pass.json from passcode " + e);
+            EasyTracker.getTracker().trackEvent("problem_event", "pass", "without_pass_json", null);
+            problem_str += "Problem with pass.json " + e;
             passbook_valid = false;
             return;
         }
