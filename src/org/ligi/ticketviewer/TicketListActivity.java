@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
 import com.google.analytics.tracking.android.EasyTracker;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
+import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
@@ -68,18 +69,14 @@ public class TicketListActivity extends SherlockListActivity {
         ((ViewGroup) getListView().getParent()).addView(empty_view);
         getListView().setEmptyView(empty_view);
 
-
-        // don't want too many windows in worst case
-        switch ((int) (System.currentTimeMillis() % 2)) { // kind of random - should be enough for this case
-            case 0:
-                EasyTracker.getTracker().trackEvent("ui_event", "send", "stacktraces", null);
-                TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
-                break;
-            case 1:
-                EasyTracker.getTracker().trackEvent("ui_event", "show", "updatenotice", null);
-                MarketService ms = new MarketService(this);
-                ms.level(MarketService.MINOR).checkVersion();
-                break;
+        // don't want too many windows in worst case - so check for errors first
+        if (TraceDroid.getStackTraceFiles().length > 0) {
+            EasyTracker.getTracker().trackEvent("ui_event", "send", "stacktraces", null);
+            TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
+        } else { // if no error - check if there is a new version of the app
+            EasyTracker.getTracker().trackEvent("ui_event", "show", "updatenotice", null);
+            MarketService ms = new MarketService(this);
+            ms.level(MarketService.MINOR).checkVersion();
         }
 
     }
