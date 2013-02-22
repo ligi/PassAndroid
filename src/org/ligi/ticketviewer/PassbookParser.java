@@ -1,5 +1,6 @@
 package org.ligi.ticketviewer;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -12,6 +13,7 @@ import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,48 +42,62 @@ public class PassbookParser {
     private int fgcolor;
     private JSONObject eventTicket = null;
 
-
-    public String findType(JSONObject obj) {
-
-        Iterator keys = obj.keys();
-        for (String key = ""; keys.hasNext(); key = (String) (keys.next())) {
-            try {
-                JSONObject pass_obj = obj.getJSONObject(key);
-                JSONArray arr = null;
-                try {
-                    arr = pass_obj.getJSONArray("primaryFields");
-                } catch (JSONException e) {
-                }
-
-                try {
-                    arr = pass_obj.getJSONArray("backFields");
-                } catch (JSONException e) {
-                }
-
-                if (arr != null) {
-                    Log.i("foundtype " + key);
-                    return key;
-                }
-            } catch (JSONException e) {
+    private JSONObject getJSONObjectWithFixing(String str) throws JSONException {
+        /**
+         * I got a really broken pass with invalid json from a user. The source was Virgin Australia
+         * the bad part looked like this:
+         *
+         * "value": "NTL",}
+         *
+         * this code fixes this problem
+         */
+        try {
+            return new JSONObject(str);
+        } catch (JSONException e) {
+            // I got a pass with invalid json
+            if (e.getMessage().startsWith("Expected")) {
+                return new JSONObject(str.replaceAll(",[\n\r ]*\\}", "}"));
+            } else {
+                throw e;
             }
         }
-
-        return null;
-
     }
 
-    public PassbookParser(String path) {
+    public PassbookParser(String path, Context ctx) {
 
         this.path = path;
 
         JSONObject pass_json = null;
 
         try {
-            pass_json = new JSONObject(FileHelper.file2String(new File(path + "/pass.json")));
+            pass_json = getJSONObjectWithFixing(FileHelper.file2String(new File(path + "/pass.json")));
         } catch (Exception e) {
-            Log.w("could not load pass.json from passcode " + e);
+            Log.i("PassParse Exception " + e);
+        }
+
+        if (pass_json == null) {
+            // I had got a strange passbook with UCS-2 which could not be parsed before
+            // was searching for a auto-detection, but could not find one with support for this encoding
+            // and the right license
+
+            String[] encodings = {"UTF-8", "UTF-16", "UCS-2", "UTF-8", "UTF-16BE", "UTF-16LE"};
+
+            for (String encoding : encodings) {
+                try {
+                    pass_json = getJSONObjectWithFixing(FileHelper.file2String(new File(path + "/pass.json"), Charset.forName(encoding)));
+                } catch (Exception e) {
+                }
+
+                if (pass_json != null)
+                    break;
+            }
+            ;
+        }
+
+        if (pass_json == null) {
+            Log.w("could not load pass.json from passcode ");
             EasyTracker.getTracker().trackEvent("problem_event", "pass", "without_pass_json", null);
-            problem_str += "Problem with pass.json " + e;
+            problem_str += "Problem with pass.json ";
             passbook_valid = false;
             return;
         }
@@ -170,6 +186,35 @@ public class PassbookParser {
         secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
         auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
         backFields = getFieldListFromJsonArr(eventTicket, "backFields");
+    }
+
+    public String findType(JSONObject obj) {
+
+        Iterator keys = obj.keys();
+        for (String key = ""; keys.hasNext(); key = (String) (keys.next())) {
+            try {
+                JSONObject pass_obj = obj.getJSONObject(key);
+                JSONArray arr = null;
+                try {
+                    arr = pass_obj.getJSONArray("primaryFields");
+                } catch (JSONException e) {
+                }
+
+                try {
+                    arr = pass_obj.getJSONArray("backFields");
+                } catch (JSONException e) {
+                }
+
+                if (arr != null) {
+                    Log.i("foundtype " + key);
+                    return key;
+                }
+            } catch (JSONException e) {
+            }
+        }
+
+        return null;
+
     }
 
     public String getDescription() {
