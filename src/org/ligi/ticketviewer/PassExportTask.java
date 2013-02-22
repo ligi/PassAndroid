@@ -21,9 +21,9 @@ import java.util.zip.ZipOutputStream;
 public class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog progress_dialog;
-    private Context ctx;
+    protected Context ctx;
     private String path;
-    private String zip_fname, zip_path;
+    protected String zip_fname, zip_path;
     private boolean share_after_export;
 
     public PassExportTask(Context ctx, String path, String zip_path, String zip_fname, boolean share_after_export) {

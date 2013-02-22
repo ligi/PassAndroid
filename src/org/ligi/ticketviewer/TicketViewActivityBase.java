@@ -36,7 +36,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
         Display display = getWindowManager().getDefaultDisplay();
 
-        passbookParser = new PassbookParser(path);
+        passbookParser = new PassbookParser(path,this);
 
         int size = (int) (2.0f * Math.min((int) display
                 .getHeight(), (int) display.getWidth()) / 3.0f);

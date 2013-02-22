@@ -1,6 +1,10 @@
 package org.ligi.ticketviewer;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
@@ -17,6 +21,28 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if (!passbookParser.isValid()) { // don't deal with invalid passes
+            new AlertDialog.Builder(this)
+                    .setMessage("Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software.")
+                    .setTitle("Problem")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNeutralButton("Send", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new PassExportToLigi(TicketViewActivity.this, passbookParser.getPath(), TicketDefinitions.getShareDir(TicketViewActivity.this), "share.pkpass").execute();
+                        }
+                    })
+                    .show();
+            return;
+        }
+
         View v = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
         setContentView(v);
 
@@ -73,5 +99,30 @@ public class TicketViewActivity extends TicketViewActivityBase {
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.map_item, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    class PassExportToLigi extends PassExportTask {
+
+        public PassExportToLigi(Context ctx, String path, String zip_path, String zip_fname) {
+            super(ctx, path, zip_path, zip_fname, false);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Intent it = new Intent(Intent.ACTION_SEND);
+            it.putExtra(Intent.EXTRA_SUBJECT, "a Passbook with a problem");
+            it.putExtra(Intent.EXTRA_EMAIL, new String[] { "ligi@ligi.de" });
+            it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zip_path + zip_fname));
+            //it.setType("application/vnd.apple.pkpass");
+            it.setType("plain/text");
+            it.putExtra(android.content.Intent.EXTRA_TEXT, "");
+
+            ctx.startActivity(Intent.createChooser(it, "How to send Pass?"));
+
+            finish();
+
+        }
     }
 }
