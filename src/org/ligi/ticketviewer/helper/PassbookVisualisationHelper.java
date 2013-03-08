@@ -48,6 +48,8 @@ public class PassbookVisualisationHelper {
                     more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
                 for (PassbookParser.Field f : passbookParser.getSecondaryFields())
                     more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+                for (PassbookParser.Field f : passbookParser.getHeaderFields())
+                    more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
                 if (verbose)
                     for (PassbookParser.Field f : passbookParser.getAuxiliaryFields())
                         more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
