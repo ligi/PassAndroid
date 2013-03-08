@@ -3,6 +3,7 @@ package org.ligi.ticketviewer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class PassbookParser {
     private int bgcolor;
     private String description;
     private String type;
-    private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields;
+    private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
     private int fgcolor;
     private JSONObject eventTicket = null;
@@ -137,12 +138,14 @@ public class PassbookParser {
             }
 
             try {
-                bgcolor = parseColor(pass_json.getString("backgroundColor"));
+                String backgroundColor = pass_json.getString("backgroundColor");
+                bgcolor = parseColor(backgroundColor, 0);
             } catch (JSONException e) {
             }
 
             try {
-                fgcolor = parseColor(pass_json.getString("foregroundColor"));
+                String foregroundColor = pass_json.getString("foregroundColor");
+                fgcolor = parseColor(foregroundColor, 0xffffffff);
             } catch (JSONException e) {
             }
 
@@ -186,6 +189,8 @@ public class PassbookParser {
         secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
         auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
         backFields = getFieldListFromJsonArr(eventTicket, "backFields");
+        headerFields = getFieldListFromJsonArr(eventTicket, "headerFields");
+
     }
 
     public String findType(JSONObject obj) {
@@ -241,6 +246,10 @@ public class PassbookParser {
         return auxiliaryFields;
     }
 
+    public List<Field> getHeaderFields() {
+        return headerFields;
+    }
+
     public List<PassLocation> getLocations() {
         return locations;
     }
@@ -275,7 +284,27 @@ public class PassbookParser {
         return res;
     }
 
-    private Integer parseColor(String color_str) {
+    private int parseColor(String color_str, int defaultValue) {
+        if (color_str == null) {
+            return defaultValue;
+        }
+
+        if (color_str.startsWith("rgb")) {
+            return parseColorRGBStyle(color_str, defaultValue);
+        }
+
+        if (color_str.startsWith("#")) {
+            return parseColorPoundStyle(color_str, defaultValue);
+        }
+
+        return defaultValue;
+    }
+
+    private int parseColorPoundStyle(String color_str, int defaultValue) {
+        return Color.parseColor(color_str);
+    }
+
+    private int parseColorRGBStyle(String color_str, int defaultValue) {
         Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
         Matcher matcher = pattern.matcher(color_str);
 
@@ -287,7 +316,7 @@ public class PassbookParser {
 
         }
 
-        return null;
+        return defaultValue;
     }
 
     public boolean isValid() {
