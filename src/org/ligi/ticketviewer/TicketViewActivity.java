@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 
 public class TicketViewActivity extends TicketViewActivityBase {
@@ -64,7 +66,8 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         if (getAQ().find(R.id.map_container).isExist()) {
 
-            if (passbookParser.getLocations().size() > 0) {
+            boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+            if (isGooglePlayServicesAvailable && passbookParser.getLocations().size() > 0) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
                 locationsMapFragment.click_to_fullscreen = true;
@@ -113,7 +116,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
             Intent it = new Intent(Intent.ACTION_SEND);
             it.putExtra(Intent.EXTRA_SUBJECT, "a Passbook with a problem");
-            it.putExtra(Intent.EXTRA_EMAIL, new String[] { "ligi@ligi.de" });
+            it.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
             it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zip_path + zip_fname));
             //it.setType("application/vnd.apple.pkpass");
             it.setType("plain/text");

@@ -10,7 +10,10 @@ import android.view.ViewTreeObserver;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.*;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import org.ligi.tracedroid.logging.Log;
 
 import java.util.List;
@@ -28,21 +31,16 @@ public class LocationsMapFragment extends SupportMapFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
-        mMap = getMap();
-        base_activity = (TicketViewActivityBase) getActivity();
 
+        base_activity = (TicketViewActivityBase) getActivity();
 
         if (!(getActivity() instanceof TicketViewActivityBase)) {
             throw new IllegalArgumentException("LocationsMapFragment must be used inside a TicketViewActivityBase");
         }
 
-        getMap().setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+        mMap = getMap();
 
-            @Override
-            public void onCameraChange(CameraPosition arg0) {
 
-            }
-        });
         root.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     public void onGlobalLayout() {
