@@ -1,3 +1,5 @@
+[![Build Status](https://ligi.ci.cloudbees.com/job/AndroidTicketViewer/badge/icon)](https://ligi.ci.cloudbees.com/job/AndroidTicketViewer/)
+
 AndroidTicketViewer
 ===================
 
