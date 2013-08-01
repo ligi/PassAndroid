@@ -11,11 +11,11 @@
             android:orderInCategory="100"
             android:showAsAction="ifRoom|withText"
             android:title="@string/help_label" android:icon="@android:drawable/ic_menu_help"/>
-
+    <!--
     <item
             android:id="@+id/menu_settings"
             android:orderInCategory="100"
             android:showAsAction="ifRoom|withText"
             android:title="settings" android:icon="@android:drawable/ic_menu_preferences"/>
-
+        -->
 </menu>

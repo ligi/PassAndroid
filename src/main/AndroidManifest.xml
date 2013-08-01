@@ -3,8 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="org.ligi.ticketviewer"
           android:installLocation="auto"
-          android:versionCode="17"
-          android:versionName="1.7">
+          android:versionCode="18"
+          android:versionName="1.8">
 
     <uses-sdk
             android:minSdkVersion="8"
@@ -138,6 +138,7 @@
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
                    android:value="AIzaSyAAASj2rSvumqO1mZLMVWmZxUnzOjxLGlE"/>
     </application>
+
 
 
     <uses-feature

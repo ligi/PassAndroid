@@ -1,3 +1,6 @@
+.gradle
+build
+.idea
 assets
 bin
 gen

@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17.0.0"
+
+
+    dependencies {
+        compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+        compile fileTree(dir: 'libs', include: '*.jar')
+    }
+}
+
+
