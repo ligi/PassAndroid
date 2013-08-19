@@ -9,11 +9,6 @@ import android.text.util.Linkify;
 import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 
-/**
- * User: ligi
- * Date: 2/11/13
- * Time: 10:25 PM
- */
 public class HelpDialog {
 
     public static void show(Context c) {

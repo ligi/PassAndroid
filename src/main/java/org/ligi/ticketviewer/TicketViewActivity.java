@@ -6,16 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
+import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 
 public class TicketViewActivity extends TicketViewActivityBase {
 
@@ -65,22 +63,15 @@ public class TicketViewActivity extends TicketViewActivityBase {
         });
 
         if (getAQ().find(R.id.map_container).isExist()) {
-
-            boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
-            if (isGooglePlayServicesAvailable && passbookParser.getLocations().size() > 0) {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
-                locationsMapFragment.click_to_fullscreen = true;
-                ft.replace(R.id.map_container, locationsMapFragment);
-                ft.commit();
-            } else {
-                getAQ().find(R.id.map_container).getView().setVisibility(View.GONE);
+            if (!(passbookParser.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {
+                findViewById(R.id.map_container).setVisibility(View.GONE);
             }
         }
 
         String back_str = "";
-        for (PassbookParser.Field f : passbookParser.getBackFields())
+        for (PassbookParser.Field f : passbookParser.getBackFields()) {
             back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+        }
 
         TextView back_tv = getAQ().find(R.id.back_fields).getTextView();
         back_tv.setText(Html.fromHtml(back_str));

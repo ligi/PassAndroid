@@ -18,11 +18,6 @@ import org.ligi.tracedroid.logging.Log;
 
 import java.util.List;
 
-/**
- * User: ligi
- * Date: 2/10/13
- * Time: 4:08 PM
- */
 public class LocationsMapFragment extends SupportMapFragment {
     private GoogleMap mMap;
     private TicketViewActivityBase base_activity;
@@ -54,13 +49,16 @@ public class LocationsMapFragment extends SupportMapFragment {
                         if (locations.size() > 0) {
                             for (PassbookParser.PassLocation l : locations) {
                                 Log.i("adding marker" + l.latlng);
+
+                                // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
+                                LatLng latLng=new LatLng(l.latlng.lat,l.latlng.lon);
                                 mMap.addMarker(new MarkerOptions()
-                                        .position(l.latlng)
+                                        .position(latLng)
                                         .title(l.description)
                                         //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbookParser.getIconBitmap())));
                                 );
 
-                                boundser = boundser.include(l.latlng);
+                                boundser = boundser.include(latLng);
                                 Log.i("added marker");
                             }
 

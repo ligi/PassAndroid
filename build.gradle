@@ -13,8 +13,34 @@ repositories {
 }
 
 android {
-    compileSdkVersion 17
+    compileSdkVersion 18
     buildToolsVersion "17.0.0"
+
+    flavorGroups "maps","analytics"
+    productFlavors {
+        
+        withMaps {
+            flavorGroup "maps"
+
+            dependencies {
+                    compile 'com.google.android.gms:play-services:3.1.36'
+            }
+        }
+
+        noMaps {
+            flavorGroup "maps"
+        }
+
+        withAnalytics {
+            flavorGroup "analytics"
+        }
+
+        noAnalytics {
+            flavorGroup "analytics"
+
+        }
+
+    }
 
 
     dependencies {

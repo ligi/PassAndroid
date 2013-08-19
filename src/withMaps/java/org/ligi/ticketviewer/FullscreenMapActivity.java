@@ -6,19 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-/**
- * User: ligi
- * Date: 2/10/13
- * Time: 10:25 PM
- */
 public class FullscreenMapActivity extends TicketViewActivityBase {
 
     @Override
@@ -71,14 +67,14 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
             // OK - no descripion
         }
 
-        LatLng latlng = location.latlng;
-        String latAndLonStr = latlng.latitude + "," + latlng.longitude;
+        PassbookParser.PassLocation.LatLng latlng = location.latlng;
+        String latAndLonStr = latlng.lat + "," + latlng.lon;
         i.setData(Uri.parse("geo:" + latAndLonStr + "?q=" + latAndLonStr + "(" + description + ")"));
         try {
             startActivity(i);
         } catch (ActivityNotFoundException e) {
 
-            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + latlng.latitude + "," + latlng.longitude));
+            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + latlng.lat + "," + latlng.lon));
             startActivity(i);
             // TODO also the browser could not be found -> handle
         }

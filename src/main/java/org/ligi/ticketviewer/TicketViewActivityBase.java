@@ -14,6 +14,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
 import com.google.analytics.tracking.android.EasyTracker;
 import org.ligi.ticketviewer.helper.FileHelper;
+import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 
 import java.io.File;
 
@@ -89,12 +90,8 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
                 break;
 
             case R.id.menu_map:
-                Intent i = new Intent(this, FullscreenMapActivity.class);
-                i.putExtra("path", passbookParser.getPath());
-                startActivity(i);
-
+                PassbookMapsFacade.startFullscreenMap(this, passbookParser);
                 break;
-
 
             case R.id.menu_share:
                 EasyTracker.getTracker().trackEvent("ui_action", "share", "shared", null);

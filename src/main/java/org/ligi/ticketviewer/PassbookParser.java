@@ -4,8 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +22,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * User: ligi
- * Date: 2/9/13
- * Time: 10:48 PM
- */
 public class PassbookParser {
 
     private String path;
@@ -128,7 +124,8 @@ public class PassbookParser {
                     JSONObject obj = locations_json.getJSONObject(i);
 
                     PassLocation location = new PassLocation();
-                    location.latlng = new LatLng(obj.getDouble("latitude"), obj.getDouble("longitude"));
+                    location.latlng.lat = obj.getDouble("latitude");
+                    location.latlng.lon = obj.getDouble("longitude");
                     location.description = obj.getString("relevantText");
                     locations.add(location);
                 }
@@ -365,7 +362,13 @@ public class PassbookParser {
     }
 
     public class PassLocation {
-        public LatLng latlng;
+
+        public class LatLng {
+            double lat;
+            double lon;
+        }
+
+        LatLng latlng = new LatLng();
         public String description = "";
     }
 
