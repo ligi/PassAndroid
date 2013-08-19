@@ -21,7 +21,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
-import com.google.analytics.tracking.android.EasyTracker;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -71,10 +70,10 @@ public class TicketListActivity extends SherlockListActivity {
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
-            EasyTracker.getTracker().trackEvent("ui_event", "send", "stacktraces", null);
+            Tracker.get().trackEvent("ui_event", "send", "stacktraces", null);
             TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
         } else { // if no error - check if there is a new version of the app
-            EasyTracker.getTracker().trackEvent("ui_event", "show", "updatenotice", null);
+            Tracker.get().trackEvent("ui_event", "show", "updatenotice", null);
             MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
         }
@@ -84,8 +83,9 @@ public class TicketListActivity extends SherlockListActivity {
     private void refresh_passes_list() {
         path = TicketDefinitions.getPassesDir(this);
         File passes_dir = new File(TicketDefinitions.getPassesDir(this));
-        if (!passes_dir.exists())
+        if (!passes_dir.exists()) {
             passes_dir.mkdirs();
+        }
         passes = passes_dir.list(new DirFilter());
     }
 
@@ -93,7 +93,7 @@ public class TicketListActivity extends SherlockListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
-                EasyTracker.getTracker().trackEvent("ui_event", "refresh", "from_list", null);
+                Tracker.get().trackEvent("ui_event", "refresh", "from_list", null);
                 new ScanForPassesTask().execute();
                 return true;
             case R.id.menu_help:
@@ -123,7 +123,7 @@ public class TicketListActivity extends SherlockListActivity {
 
         updateUIToScanningState();
 
-        EasyTracker.getTracker().trackEvent("ui_event", "resume", "passes", (long) passes.length);
+        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) passes.length);
     }
 
     @Override
@@ -147,11 +147,6 @@ public class TicketListActivity extends SherlockListActivity {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EasyTracker.getInstance().activityStart(this);
-    }
 
     @Override
     protected void onPause() {
@@ -160,12 +155,6 @@ public class TicketListActivity extends SherlockListActivity {
         }
         scanning = false;
         super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EasyTracker.getInstance().activityStop(this);
     }
 
     class ImportAndShowAsyncTask extends ImportAsyncTask {
@@ -236,7 +225,7 @@ public class TicketListActivity extends SherlockListActivity {
 
             start_time = System.currentTimeMillis();
 
-            EasyTracker.getTracker().trackEvent("ui_event", "scan", "started", null);
+            Tracker.get().trackEvent("ui_event", "scan", "started", null);
 
             updateUIToScanningState();
         }
@@ -246,13 +235,13 @@ public class TicketListActivity extends SherlockListActivity {
             super.onPostExecute(aVoid);
             scanning = false;
 
-            EasyTracker.getTracker().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
+            // TODO bring back Tracker.get().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
             updateUIToScanningState();
         }
 
         @Override
         protected void onCancelled() {
-            EasyTracker.getTracker().trackEvent("ui_event", "scan", "cancelled", null);
+            Tracker.get().trackEvent("ui_event", "scan", "cancelled", null);
             super.onCancelled();
         }
 

@@ -12,7 +12,6 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
-import com.google.analytics.tracking.android.EasyTracker;
 import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 
@@ -66,7 +65,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
                 break;
 
             case R.id.menu_delete:
-                EasyTracker.getTracker().trackEvent("ui_action", "delete", "delete", null);
+                Tracker.get().trackEvent("ui_action", "delete", "delete", null);
                 new AlertDialog.Builder(this).setMessage("Do you really want to delete this passbook?").setTitle("Sure?")
                         .setPositiveButton("Yes", new OnClickListener() {
 
@@ -94,7 +93,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
                 break;
 
             case R.id.menu_share:
-                EasyTracker.getTracker().trackEvent("ui_action", "share", "shared", null);
+                Tracker.get().trackEvent("ui_action", "share", "shared", null);
                 new PassExportTask(this, passbookParser.getPath(), TicketDefinitions.getShareDir(this), "share.pkpass", true).execute();
                 break;
 
@@ -105,13 +104,13 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
     @Override
     public void onStart() {
         super.onStart();
-        EasyTracker.getInstance().activityStart(this);
+        Tracker.get().activityStart(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EasyTracker.getInstance().activityStop(this);
+        Tracker.get().activityStop(this);
     }
 
     public AQuery getAQ() {

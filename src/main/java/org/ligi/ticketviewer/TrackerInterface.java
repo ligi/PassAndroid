@@ -1,7 +1,7 @@
 package org.ligi.ticketviewer;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 
 public interface TrackerInterface {
 
@@ -13,7 +13,7 @@ public interface TrackerInterface {
 
     void trackEvent(String category, String action, String label, Long val);
 
-    void activityStart(Activity activity);
+    void activityStart(FragmentActivity activity);
 
-    void activityStop(Activity activity);
+    void activityStop(FragmentActivity activity);
 }

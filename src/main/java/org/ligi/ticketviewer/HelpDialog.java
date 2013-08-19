@@ -7,13 +7,12 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.widget.TextView;
-import com.google.analytics.tracking.android.EasyTracker;
 
 public class HelpDialog {
 
     public static void show(Context c) {
 
-        EasyTracker.getTracker().trackEvent("ui_action", "help", "open", null);
+        Tracker.get().trackEvent("ui_action", "help", "open", null);
 
         TextView tv = new TextView(c);
         tv.setPadding(10, 10, 10, 10);

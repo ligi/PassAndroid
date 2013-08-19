@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,7 +91,7 @@ public class PassbookParser {
 
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ");
-            EasyTracker.getTracker().trackEvent("problem_event", "pass", "without_pass_json", null);
+            Tracker.get().trackEvent("problem_event", "pass", "without_pass_json", null);
             problem_str += "Problem with pass.json ";
             passbook_valid = false;
             return;
@@ -163,14 +161,14 @@ public class PassbookParser {
             // try to rescue the situation and find types
             if (type == null) {
                 type = findType(pass_json);
-                EasyTracker.getTracker().trackEvent("problem_event", "strange_type", type, null);
+                Tracker.get().trackEvent("problem_event", "strange_type", type, null);
             }
 
             Log.i("got typee" + type);
 
             if (type == null) {
                 try {
-                    EasyTracker.getTracker().trackEvent("problem_event", "pass", "without_type", null);
+                    Tracker.get().trackEvent("problem_event", "pass", "without_type", null);
                     Log.i("pass without type " + pass_json.toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
