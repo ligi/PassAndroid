@@ -164,8 +164,6 @@ public class PassbookParser {
                 Tracker.get().trackEvent("problem_event", "strange_type", type, null);
             }
 
-            Log.i("got typee" + type);
-
             if (type == null) {
                 try {
                     Tracker.get().trackEvent("problem_event", "pass", "without_type", null);

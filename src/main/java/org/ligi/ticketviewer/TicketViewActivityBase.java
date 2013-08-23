@@ -8,11 +8,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
-import org.ligi.ticketviewer.helper.FileHelper;
+
+import org.ligi.androidhelper.AndroidHelper;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 
 import java.io.File;
@@ -71,7 +73,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                FileHelper.DeleteRecursive(new File(path));
+                                AndroidHelper.at(new File(path)).deleteRecursive();
                                 finish();
                             }
 

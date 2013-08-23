@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.ligi.androidhelper.AndroidHelper;
 import org.ligi.ticketviewer.helper.FileHelper;
+import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,8 +19,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class UnzipPasscodeDialog {
-
-    public final static String TAG = "TicketViewer";
 
     public static void DisplayError(final Activity ctx, final String title, final String err) {
 
@@ -38,7 +38,6 @@ public class UnzipPasscodeDialog {
     }
 
     public interface FinishCallback {
-
         public Void call(String path);
     }
 
@@ -67,7 +66,6 @@ public class UnzipPasscodeDialog {
 
                 if (!dir_file.exists()) {
                     DisplayError(activity, "Problem", "Problem creating the temp dir: " + path);
-
                     return;
                 }
 
@@ -86,10 +84,11 @@ public class UnzipPasscodeDialog {
                 try {
                     String rename_str = TicketDefinitions.getPassesDir(activity) + "/" + manifest_json.getString("pass.json");
                     File rename_file = new File(rename_str);
-                    Log.i("TicketView", "Renaming to " + rename_str + " " + rename_file);
+                    Log.i("Renaming to " + rename_str + " " + rename_file);
 
-                    if (rename_file.exists())
-                        FileHelper.DeleteRecursive(rename_file);
+                    if (rename_file.exists()) {
+                        AndroidHelper.at(rename_file).deleteRecursive();
+                    }
 
                     new File(path + "/").renameTo(rename_file);
                     path = rename_str;
@@ -105,9 +104,6 @@ public class UnzipPasscodeDialog {
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
-
-                //   activity.startActivity(intent_after_finish);
-                //	activity.finish();
 
             }
         }
@@ -133,7 +129,7 @@ public class UnzipPasscodeDialog {
                 ZipEntry ze = null;
                 byte[] readData = new byte[1024];
                 while ((ze = zin.getNextEntry()) != null) {
-                    Log.i(TAG, "Decompress" + "unzip" + _location + ze.getName());
+                    Log.i("Decompress" + "unzip" + _location + ze.getName());
                     if (ze.isDirectory()) {
                         _dirChecker(ze.getName());
                     } else {
@@ -153,7 +149,7 @@ public class UnzipPasscodeDialog {
                 }
                 zin.close();
             } catch (Exception e) {
-                Log.e("Decompress", "unzip", e);
+                Log.e("unzip", e);
             }
 
         }

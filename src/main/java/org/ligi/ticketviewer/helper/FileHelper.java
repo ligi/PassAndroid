@@ -1,7 +1,5 @@
 package org.ligi.ticketviewer.helper;
 
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -55,25 +53,4 @@ public class FileHelper {
 
     }
 
-    public static void DeleteRecursive(File dir) {
-        Log.d("DeleteRecursive", "DELETEPREVIOUS TOP" + dir.getPath());
-        if (dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                File temp = new File(dir, children[i]);
-                if (temp.isDirectory()) {
-                    Log.d("DeleteRecursive", "Recursive Call" + temp.getPath());
-                    DeleteRecursive(temp);
-                } else {
-                    Log.d("DeleteRecursive", "Delete File" + temp.getPath());
-                    boolean b = temp.delete();
-                    if (b == false) {
-                        Log.d("DeleteRecursive", "DELETE FAIL");
-                    }
-                }
-            }
-
-            dir.delete();
-        }
-    }
 }
