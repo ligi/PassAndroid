@@ -14,11 +14,12 @@ import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
 
 import org.ligi.axt.AXT;
+import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 import org.ligi.ticketviewer.model.PassbookParser;
-import org.ligi.ticketviewer.R;
+
 import java.io.File;
 
 public class TicketViewActivityBase extends SherlockFragmentActivity {
@@ -37,7 +38,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        passbookParser = new PassbookParser(path, this);
+        passbookParser = new PassbookParser(path);
 
         loadIcon();
     }

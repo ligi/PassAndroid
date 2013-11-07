@@ -1,6 +1,5 @@
 package org.ligi.ticketviewer.model;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -59,7 +58,7 @@ public class PassbookParser {
         }
     }
 
-    public PassbookParser(String path, Context ctx) {
+    public PassbookParser(String path) {
 
         this.path = path;
 
