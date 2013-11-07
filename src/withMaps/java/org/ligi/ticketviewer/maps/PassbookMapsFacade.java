@@ -11,8 +11,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.ligi.ticketviewer.FullscreenMapActivity;
 import org.ligi.ticketviewer.LocationsMapFragment;
-import org.ligi.ticketviewer.PassbookParser;
 import org.ligi.ticketviewer.R;
+import org.ligi.ticketviewer.model.PassbookParser;
 
 public class PassbookMapsFacade {
 

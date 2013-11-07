@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +8,7 @@ import android.graphics.Color;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
 import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
@@ -360,11 +361,11 @@ public class PassbookParser {
     public class PassLocation {
 
         public class LatLng {
-            double lat;
-            double lon;
+            public double lat;
+            public double lon;
         }
 
-        LatLng latlng = new LatLng();
+        public LatLng latlng = new LatLng();
         public String description = "";
     }
 

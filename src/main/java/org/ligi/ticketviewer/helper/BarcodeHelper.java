@@ -2,6 +2,7 @@ package org.ligi.ticketviewer.helper;
 
 import android.graphics.Bitmap;
 import android.util.Log;
+
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.pdf417.encoder.PDF417Writer;
 import com.google.zxing.qrcode.QRCodeWriter;

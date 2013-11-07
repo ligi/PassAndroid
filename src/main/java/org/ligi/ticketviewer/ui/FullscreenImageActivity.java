@@ -1,7 +1,9 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import org.ligi.ticketviewer.R;
 
 public class FullscreenImageActivity extends TicketViewActivityBase {
 

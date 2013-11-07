@@ -1,14 +1,16 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 
 import java.io.InputStream;
+import org.ligi.ticketviewer.R;
 
 public class TicketImportActivity extends SherlockActivity {
 

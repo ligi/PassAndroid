@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
+import org.ligi.ticketviewer.Tracker;
+
+import org.ligi.ticketviewer.R;
 public class HelpDialog {
 
     public static void show(Context c) {

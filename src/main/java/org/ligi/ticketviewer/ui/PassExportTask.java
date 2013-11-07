@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,11 +13,6 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * User: ligi
- * Date: 2/13/13
- * Time: 10:08 PM
- */
 public class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog progress_dialog;

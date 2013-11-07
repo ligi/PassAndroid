@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -15,16 +14,18 @@ import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
 
 import org.ligi.androidhelper.AndroidHelper;
+import org.ligi.ticketviewer.TicketDefinitions;
+import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
-
+import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.ticketviewer.R;
 import java.io.File;
 
 public class TicketViewActivityBase extends SherlockFragmentActivity {
 
-
     protected Bitmap icon_bitmap;
     protected String path;
-    protected PassbookParser passbookParser;
+    public PassbookParser passbookParser;
     private AQuery aQuery;
 
     @Override
@@ -36,19 +37,21 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        passbookParser = new PassbookParser(path, this);
+
+        loadIcon();
+    }
+
+    private void loadIcon() {
         Display display = getWindowManager().getDefaultDisplay();
-
-        passbookParser = new PassbookParser(path,this);
-
-        int size = (int) (2.0f * Math.min((int) display
-                .getHeight(), (int) display.getWidth()) / 3.0f);
+        int smallestSide = Math.min( display.getHeight(), display.getWidth());
+        int size = (int) (2.0f * smallestSide / 3.0f);
 
         icon_bitmap = passbookParser.getIconBitmap();
 
-        if (icon_bitmap != null)
+        if (icon_bitmap != null) {
             icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
-
-        Log.i("", "loading " + path);
+        }
     }
 
     @Override

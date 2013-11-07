@@ -11,6 +11,9 @@ import android.os.Bundle;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.ticketviewer.ui.TicketViewActivityBase;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;

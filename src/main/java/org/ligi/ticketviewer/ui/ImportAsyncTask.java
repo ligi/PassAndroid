@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
 import android.net.Uri;

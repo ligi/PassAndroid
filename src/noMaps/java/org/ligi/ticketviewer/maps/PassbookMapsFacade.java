@@ -2,7 +2,7 @@ package org.ligi.ticketviewer.maps;
 
 import android.content.Context;
 
-import org.ligi.ticketviewer.PassbookParser;
+import org.ligi.ticketviewer.model.PassbookParser;
 
 public class PassbookMapsFacade {
 

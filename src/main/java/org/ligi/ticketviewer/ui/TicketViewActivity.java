@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,9 +11,15 @@ import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.actionbarsherlock.view.Menu;
+
+import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
+import org.ligi.ticketviewer.model.PassbookParser;
+
+import org.ligi.ticketviewer.R;
 
 public class TicketViewActivity extends TicketViewActivityBase {
 

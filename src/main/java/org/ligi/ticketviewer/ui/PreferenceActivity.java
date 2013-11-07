@@ -1,16 +1,12 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 
 import android.preference.Preference;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
 import java.io.IOException;
 
-/**
- * User: ligi
- * Date: 2/16/13
- * Time: 6:31 PM
- */
 public class PreferenceActivity extends SherlockPreferenceActivity implements Preference.OnPreferenceChangeListener {
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {

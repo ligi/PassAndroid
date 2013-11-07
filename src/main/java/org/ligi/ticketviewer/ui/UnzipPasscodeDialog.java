@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.androidhelper.AndroidHelper;
+import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 

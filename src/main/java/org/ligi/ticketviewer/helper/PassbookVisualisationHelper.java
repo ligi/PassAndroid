@@ -5,14 +5,9 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.ligi.ticketviewer.PassbookParser;
+import org.ligi.ticketviewer.model.PassbookParser;
 import org.ligi.ticketviewer.R;
 
-/**
- * User: ligi
- * Date: 2/11/13
- * Time: 7:02 PM
- */
 public class PassbookVisualisationHelper {
     public static void visualizePassbookData(PassbookParser passbookParser, View res, boolean verbose) {
         TextView tv = (TextView) res.findViewById(R.id.label);

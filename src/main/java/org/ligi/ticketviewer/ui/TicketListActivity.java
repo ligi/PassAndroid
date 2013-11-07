@@ -1,4 +1,4 @@
-package org.ligi.ticketviewer;
+package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,12 +16,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
+
+import org.ligi.ticketviewer.TicketDefinitions;
+import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
+import org.ligi.ticketviewer.model.PassbookParser;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -29,6 +34,7 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
+import org.ligi.ticketviewer.R;
 
 public class TicketListActivity extends SherlockListActivity {
 
@@ -299,7 +305,7 @@ public class TicketListActivity extends SherlockListActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             String mPath = path + "/" + passes[position];
-            PassbookParser passbookParser = new PassbookParser(mPath,parent.getContext());
+            PassbookParser passbookParser = new PassbookParser(mPath, parent.getContext());
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
