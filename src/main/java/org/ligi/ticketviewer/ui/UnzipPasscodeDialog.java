@@ -7,9 +7,8 @@ import android.content.DialogInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.ligi.androidhelper.AndroidHelper;
+import org.ligi.axt.AXT;
 import org.ligi.ticketviewer.TicketDefinitions;
-import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
@@ -75,7 +74,7 @@ public class UnzipPasscodeDialog {
                 Log.i("TicketView", "is temp");
                 JSONObject manifest_json = null;
                 try {
-                    manifest_json = new JSONObject(FileHelper.file2String(new File(path + "/manifest.json")));
+                    manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).loadToString());
                 } catch (Exception e) {
                     DisplayError(activity, "Invalid Passbook", "Problem with manifest.json: " + e);
                     //return false;
@@ -88,7 +87,7 @@ public class UnzipPasscodeDialog {
                     Log.i("Renaming to " + rename_str + " " + rename_file);
 
                     if (rename_file.exists()) {
-                        AndroidHelper.at(rename_file).deleteRecursive();
+                        AXT.at(rename_file).deleteRecursive();
                     }
 
                     new File(path + "/").renameTo(rename_file);

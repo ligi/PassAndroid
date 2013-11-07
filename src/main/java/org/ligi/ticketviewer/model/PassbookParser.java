@@ -8,9 +8,9 @@ import android.graphics.Color;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.ligi.axt.AXT;
 import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
-import org.ligi.ticketviewer.helper.FileHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public class PassbookParser {
         JSONObject pass_json = null;
 
         try {
-            pass_json = getJSONObjectWithFixing(FileHelper.file2String(new File(path + "/pass.json")));
+            pass_json = getJSONObjectWithFixing(AXT.at(new File(path + "/pass.json")).loadToString());
         } catch (Exception e) {
             Log.i("PassParse Exception " + e);
         }
@@ -80,12 +80,13 @@ public class PassbookParser {
 
             for (String encoding : encodings) {
                 try {
-                    pass_json = getJSONObjectWithFixing(FileHelper.file2String(new File(path + "/pass.json"), Charset.forName(encoding)));
+                    pass_json = getJSONObjectWithFixing(AXT.at(new File(path + "/pass.json")).loadToString(Charset.forName(encoding)));
                 } catch (Exception e) {
                 }
 
-                if (pass_json != null)
+                if (pass_json != null) {
                     break;
+                }
             }
             ;
         }
