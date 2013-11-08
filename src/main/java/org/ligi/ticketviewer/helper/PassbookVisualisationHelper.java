@@ -5,8 +5,11 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.ligi.ticketviewer.model.PassbookParser;
+
 import org.ligi.ticketviewer.R;
+import org.ligi.ticketviewer.model.PassbookParser;
+
+import java.util.List;
 
 public class PassbookVisualisationHelper {
     public static void visualizePassbookData(PassbookParser passbookParser, View res, boolean verbose) {
@@ -39,23 +42,26 @@ public class PassbookVisualisationHelper {
             String more_str = "";
 
             if (passbookParser.getType() != null) {
-                for (PassbookParser.Field f : passbookParser.getPrimaryFields())
-                    more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
-                for (PassbookParser.Field f : passbookParser.getSecondaryFields())
-                    more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
-                for (PassbookParser.Field f : passbookParser.getHeaderFields())
-                    more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
-                if (verbose)
-                    for (PassbookParser.Field f : passbookParser.getAuxiliaryFields())
-                        more_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+                more_str += getFieldListAsString(passbookParser.getPrimaryFields());
+                more_str += getFieldListAsString(passbookParser.getSecondaryFields());
+                more_str += getFieldListAsString(passbookParser.getHeaderFields());
 
+                if (verbose) {
+                    more_str += getFieldListAsString(passbookParser.getAuxiliaryFields());
+                }
             }
 
             more_tv.setText(Html.fromHtml(more_str));
 
-
         } catch (Exception e) {
-
         }
+    }
+
+    public static String getFieldListAsString(List<PassbookParser.Field> fieldList) {
+        String result = "";
+        for (PassbookParser.Field f : fieldList) {
+            result += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+        }
+        return result;
     }
 }
