@@ -8,7 +8,7 @@
 
     <uses-sdk
             android:minSdkVersion="8"
-            android:targetSdkVersion="17"/>
+            android:targetSdkVersion="18"/>
 
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -34,19 +34,19 @@
             android:allowBackup="true"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
-            android:name=".helper.App"
+            android:name=".App"
             android:theme="@style/AppTheme">
 
 
         <activity
-                android:name="org.ligi.ticketviewer.TicketListActivity"
+                android:name="org.ligi.ticketviewer.ui.TicketListActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="org.ligi.ticketviewer.TicketImportActivity" tools:ignore="ExportedActivity">
+        <activity android:name="org.ligi.ticketviewer.ui.TicketImportActivity" tools:ignore="ExportedActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -110,16 +110,16 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="org.ligi.ticketviewer.TicketViewActivity"
+                android:name="org.ligi.ticketviewer.ui.TicketViewActivity"
                 android:label="@string/app_name">
         </activity>
         <activity
-                android:name="org.ligi.ticketviewer.FullscreenImageActivity"
+                android:name="org.ligi.ticketviewer.ui.FullscreenImageActivity"
                 android:label="@string/app_name">
         </activity>
 
         <activity
-                android:name="org.ligi.ticketviewer.PreferenceActivity">
+                android:name="org.ligi.ticketviewer.ui.PreferenceActivity">
         </activity>
 
         <activity
@@ -138,8 +138,6 @@
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
                    android:value="AIzaSyAAASj2rSvumqO1mZLMVWmZxUnzOjxLGlE"/>
     </application>
-
-
 
     <uses-feature
             android:glEsVersion="0x00020000"
