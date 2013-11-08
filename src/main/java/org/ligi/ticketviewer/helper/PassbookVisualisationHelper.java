@@ -25,14 +25,14 @@ public class PassbookVisualisationHelper {
             if (passbookParser.getPath() != null) {
                 Bitmap ico = passbookParser.getIconBitmap();
 
-                if (ico != null)
+                if (ico != null) {
                     icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
-                else
+                } else {
                     icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
+                }
             }
 
             icon_img.setBackgroundColor(passbookParser.getBgcolor());
-
 
             tv.setTextColor(passbookParser.getFGcolor());
             more_tv.setTextColor(passbookParser.getFGcolor());
