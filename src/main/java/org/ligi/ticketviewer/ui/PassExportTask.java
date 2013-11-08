@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class PassExportTask extends AsyncTask<Void, Void, Void> {
+class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog progress_dialog;
     protected Context ctx;

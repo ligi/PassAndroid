@@ -24,8 +24,6 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
     @Override
     protected InputStream doInBackground(Void... params) {
 
-        long start_time = System.currentTimeMillis();
-
         if (intent_uri.toString().startsWith("content://")) {
             try {
                 return ticketImportActivity.getContentResolver().openInputStream(intent_uri);

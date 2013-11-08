@@ -335,12 +335,13 @@ public class PassbookParser {
             if (icon_bitmap == null)
                 icon_bitmap = BitmapFactory.decodeFile(path + "/logo.png");
                                                  */
-            if (icon_bitmap == null)
+            if (icon_bitmap == null) {
                 icon_bitmap = BitmapFactory.decodeFile(path + "/icon@2x.png");
+            }
 
-            if (icon_bitmap == null)
+            if (icon_bitmap == null) {
                 icon_bitmap = BitmapFactory.decodeFile(path + "/icon.png");
-
+            }
 
         }
         return icon_bitmap;
