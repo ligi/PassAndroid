@@ -1,8 +1,6 @@
 package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +24,7 @@ import com.androidquery.service.MarketService;
 import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.Tracker;
+import org.ligi.ticketviewer.helper.DirectoryFileFilter;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.ticketviewer.model.PassbookParser;
 import org.ligi.tracedroid.TraceDroid;
@@ -33,7 +32,6 @@ import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.InputStream;
 
 import static org.ligi.ticketviewer.ui.UnzipPassController.SilentFail;
@@ -95,7 +93,7 @@ public class TicketListActivity extends SherlockListActivity {
         if (!passes_dir.exists()) {
             passes_dir.mkdirs();
         }
-        passes = passes_dir.list(new DirFilter());
+        passes = passes_dir.list(new DirectoryFileFilter());
     }
 
     @Override
@@ -117,7 +115,7 @@ public class TicketListActivity extends SherlockListActivity {
     protected void onResume() {
 
         super.onResume();
-        passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirFilter());
+        passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirectoryFileFilter());
         passadapter.notifyDataSetChanged();
 
         if (passes == null || passes.length == 0) {
@@ -144,11 +142,11 @@ public class TicketListActivity extends SherlockListActivity {
         supportInvalidateOptionsMenu();
 
 
-        if (scanning)
+        if (scanning) {
             empty_view.setText("No passes yet - searching for passes");
-        else
+        } else {
             empty_view.setText("No passes yet - try to get some - then click on them or hit refresh");
-
+        }
 
     }
 
@@ -256,22 +254,6 @@ public class TicketListActivity extends SherlockListActivity {
             search_in(Environment.getDataDirectory().toString());
             return null;
         }
-    }
-
-    class SearchForFilesDialog extends Dialog {
-
-        public SearchForFilesDialog(Context context) {
-            super(context);
-        }
-    }
-
-    class DirFilter implements FilenameFilter {
-
-        @Override
-        public boolean accept(File dir, String filename) {
-            return dir.isDirectory();
-        }
-
     }
 
     class PassAdapter extends BaseAdapter {
