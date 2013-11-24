@@ -11,7 +11,7 @@ import android.os.Bundle;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.ticketviewer.model.PassLocation;
 import org.ligi.ticketviewer.ui.TicketViewActivityBase;
 
 import java.io.UnsupportedEncodingException;
@@ -26,7 +26,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
 
 
         if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) { // no google play services
-            final List<PassbookParser.PassLocation> locations = passbookParser.getLocations();
+            final List<PassLocation> locations = passbookParser.getLocations();
 
             if (locations.size() == 0) {
                 finish();
@@ -37,7 +37,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
                 String[] cs = new String[locations.size()];
 
                 int i = 0;
-                for (PassbookParser.PassLocation loc : locations) {
+                for (PassLocation loc : locations) {
                     cs[i++] = loc.description;
                 }
                 new AlertDialog.Builder(this).setTitle("Choose Location").setItems(cs, new DialogInterface.OnClickListener() {
@@ -59,7 +59,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
 
     }
 
-    private void startIntentForLocation(PassbookParser.PassLocation location) {
+    private void startIntentForLocation(PassLocation location) {
         Intent i = new Intent();
         i.setAction(Intent.ACTION_VIEW);
 
@@ -70,7 +70,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
             // OK - no descripion
         }
 
-        PassbookParser.PassLocation.LatLng latlng = location.latlng;
+        PassLocation.LatLng latlng = location.latlng;
         String latAndLonStr = latlng.lat + "," + latlng.lon;
         i.setData(Uri.parse("geo:" + latAndLonStr + "?q=" + latAndLonStr + "(" + description + ")"));
         try {

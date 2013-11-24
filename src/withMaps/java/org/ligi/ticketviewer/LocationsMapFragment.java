@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.ticketviewer.model.PassLocation;
 import org.ligi.ticketviewer.ui.TicketViewActivityBase;
 import org.ligi.tracedroid.logging.Log;
 
@@ -46,11 +46,11 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                         LatLngBounds.Builder boundser = new LatLngBounds.Builder();
 
-                        List<PassbookParser.PassLocation> locations = base_activity.passbookParser.getLocations();
+                        List<PassLocation> locations = base_activity.passbookParser.getLocations();
 
 
                         if (locations.size() > 0) {
-                            for (PassbookParser.PassLocation l : locations) {
+                            for (PassLocation l : locations) {
                                 Log.i("adding marker" + l.latlng);
 
                                 // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
