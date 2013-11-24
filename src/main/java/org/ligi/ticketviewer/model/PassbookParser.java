@@ -24,20 +24,19 @@ import java.util.regex.Pattern;
 public class PassbookParser {
 
     private String path;
-    private String problem_str = "";
     private boolean passbook_valid = true; // be positive
     private String barcode_msg;
     private Bitmap barcodeBitmap = null;
     private com.google.zxing.BarcodeFormat barcodeFormat;
     private Bitmap icon_bitmap;
-    private int bgcolor;
+    private int backGroundColor;
+    private int foregroundColor;
     private String description;
     private String type;
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
-    private int fgcolor;
-    private JSONObject eventTicket = null;
 
+    private JSONObject eventTicket = null;
 
     public PassbookParser(String path) {
 
@@ -69,13 +68,11 @@ public class PassbookParser {
                     break;
                 }
             }
-            ;
         }
 
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ");
             Tracker.get().trackEvent("problem_event", "pass", "without_pass_json", null);
-            problem_str += "Problem with pass.json ";
             passbook_valid = false;
             return;
         }
@@ -93,7 +90,6 @@ public class PassbookParser {
             // TODO should check a bit more with barcode here - this can be dangerous
 
         } catch (Exception e) {
-            problem_str += "Problem with pass.json";
         }
 
         if (pass_json != null) {
@@ -113,13 +109,13 @@ public class PassbookParser {
 
             try {
                 String backgroundColor = pass_json.getString("backgroundColor");
-                bgcolor = parseColor(backgroundColor, 0);
+                backGroundColor = parseColor(backgroundColor, 0);
             } catch (JSONException e) {
             }
 
             try {
                 String foregroundColor = pass_json.getString("foregroundColor");
-                fgcolor = parseColor(foregroundColor, 0xffffffff);
+                this.foregroundColor = parseColor(foregroundColor, 0xffffffff);
             } catch (JSONException e) {
             }
 
@@ -133,8 +129,9 @@ public class PassbookParser {
             String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
             for (String atype : types) {
-                if (pass_json.has(atype))
+                if (pass_json.has(atype)) {
                     type = atype;
+                }
             }
 
             // try to rescue the situation and find types
@@ -325,8 +322,8 @@ public class PassbookParser {
         return icon_bitmap;
     }
 
-    public int getBgcolor() {
-        return bgcolor;
+    public int getBackGroundColor() {
+        return backGroundColor;
     }
 
     public String getPath() {
@@ -334,7 +331,7 @@ public class PassbookParser {
     }
 
     public int getFGcolor() {
-        return fgcolor;
+        return foregroundColor;
     }
 
     public class PassLocation {

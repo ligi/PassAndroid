@@ -14,12 +14,11 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 
+import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 import org.ligi.ticketviewer.model.PassbookParser;
-
-import org.ligi.ticketviewer.R;
 
 public class TicketViewActivity extends TicketViewActivityBase {
 
@@ -85,7 +84,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassbookVisualisationHelper.visualizePassbookData(passbookParser, v, true);
 
-        getAQ().find(R.id.colorable_top).getView().setBackgroundColor(passbookParser.getBgcolor());
+        getAQ().find(R.id.colorable_top).getView().setBackgroundColor(passbookParser.getBackGroundColor());
     }
 
     @Override

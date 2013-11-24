@@ -32,7 +32,7 @@ public class PassbookVisualisationHelper {
                 }
             }
 
-            icon_img.setBackgroundColor(passbookParser.getBgcolor());
+            icon_img.setBackgroundColor(passbookParser.getBackGroundColor());
 
             tv.setTextColor(passbookParser.getFGcolor());
             more_tv.setTextColor(passbookParser.getFGcolor());
