@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.ticketviewer.Tracker;
 import org.ligi.ticketviewer.helper.BarcodeHelper;
+import org.ligi.ticketviewer.helper.SafeJSONReader;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
@@ -37,26 +38,6 @@ public class PassbookParser {
     private int fgcolor;
     private JSONObject eventTicket = null;
 
-    private JSONObject getJSONObjectWithFixing(String str) throws JSONException {
-        /**
-         * I got a really broken pass with invalid json from a user. The source was Virgin Australia
-         * the bad part looked like this:
-         *
-         * "value": "NTL",}
-         *
-         * this code fixes this problem
-         */
-        try {
-            return new JSONObject(str);
-        } catch (JSONException e) {
-            // I got a pass with invalid json
-            if (e.getMessage().startsWith("Expected")) {
-                return new JSONObject(str.replaceAll(",[\n\r ]*\\}", "}"));
-            } else {
-                throw e;
-            }
-        }
-    }
 
     public PassbookParser(String path) {
 
@@ -65,7 +46,7 @@ public class PassbookParser {
         JSONObject pass_json = null;
 
         try {
-            pass_json = getJSONObjectWithFixing(AXT.at(new File(path + "/pass.json")).loadToString());
+            pass_json = SafeJSONReader.readJSONSafely(AXT.at(new File(path + "/pass.json")).loadToString());
         } catch (Exception e) {
             Log.i("PassParse Exception " + e);
         }
@@ -79,7 +60,7 @@ public class PassbookParser {
 
             for (String encoding : encodings) {
                 try {
-                    pass_json = getJSONObjectWithFixing(AXT.at(new File(path + "/pass.json")).loadToString(Charset.forName(encoding)));
+                    pass_json = SafeJSONReader.readJSONSafely(AXT.at(new File(path + "/pass.json")).loadToString(Charset.forName(encoding)));
                 } catch (Exception e) {
                 }
 
@@ -115,8 +96,6 @@ public class PassbookParser {
         }
 
         if (pass_json != null) {
-
-
             try {
                 JSONArray locations_json = pass_json.getJSONArray("locations");
                 for (int i = 0; i < locations_json.length(); i++) {
@@ -128,8 +107,6 @@ public class PassbookParser {
                     location.description = obj.getString("relevantText");
                     locations.add(location);
                 }
-
-
             } catch (JSONException e) {
             }
 
