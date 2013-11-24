@@ -2,7 +2,6 @@ package org.ligi.ticketviewer;
 
 import android.app.Application;
 
-import org.ligi.ticketviewer.Tracker;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 
@@ -14,6 +13,10 @@ public class App extends Application {
 
         Tracker.get().init(this);
 
+        initTraceDroid();
+    }
+
+    private void initTraceDroid() {
         TraceDroid.init(this);
         Log.setTAG("TicketViewer");
     }
