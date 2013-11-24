@@ -40,7 +40,7 @@ public class SafeJSONReader {
 
         ],
         */
-        put(",[\n\r ]*\\]", "]");
+        put(",[\n\r\t ]*\\]", "]");
 
         /*
         forgotten value aka ( also Entradas.com):
@@ -51,7 +51,19 @@ public class SafeJSONReader {
             "relevantText": "Bienvenido a yelmo cines espacio coruña"
         }
         */
-        put(":[ ]*,[\n\r ]*\"", ":\"\",");
+        put(":[ ]*,[\n\r\t ]*\"", ":\"\",");
+
+        /*
+        from RENFE OPERADORA Billete de tren
+
+        ],
+        "transitType": "PKTransitTypeTrain"
+        },
+        ,
+        "relevantDate": "2013-08-10T19:15+02:00"
+         */
+
+        put(",[\n\r\t ]*,", ",");
 
     }};
 
