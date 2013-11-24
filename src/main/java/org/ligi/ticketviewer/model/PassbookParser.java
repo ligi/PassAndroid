@@ -44,9 +44,10 @@ public class PassbookParser {
         this.path = path;
 
         JSONObject pass_json = null;
+        final File file = new File(path + "/pass.json");
 
         try {
-            pass_json = SafeJSONReader.readJSONSafely(AXT.at(new File(path + "/pass.json")).loadToString());
+            pass_json = SafeJSONReader.readJSONSafely(AXT.at(file).loadToString());
         } catch (Exception e) {
             Log.i("PassParse Exception " + e);
         }
@@ -56,11 +57,11 @@ public class PassbookParser {
             // was searching for a auto-detection, but could not find one with support for this encoding
             // and the right license
 
-            String[] encodings = {"UTF-8", "UTF-16", "UCS-2", "UTF-8", "UTF-16BE", "UTF-16LE"};
-
-            for (String encoding : encodings) {
+            for (Charset charset : Charset.availableCharsets().values()) {
                 try {
-                    pass_json = SafeJSONReader.readJSONSafely(AXT.at(new File(path + "/pass.json")).loadToString(Charset.forName(encoding)));
+
+                    String json_str = AXT.at(file).loadToString(charset);
+                    pass_json = SafeJSONReader.readJSONSafely(json_str);
                 } catch (Exception e) {
                 }
 
