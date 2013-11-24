@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 
-import java.io.InputStream;
 import org.ligi.ticketviewer.R;
+
+import java.io.InputStream;
 
 public class TicketImportActivity extends SherlockActivity {
 
@@ -31,17 +31,13 @@ public class TicketImportActivity extends SherlockActivity {
         protected void onPostExecute(InputStream result) {
             if (result != null) {
 
-                UnzipPasscodeDialog.show(result, ticketImportActivity, new UnzipPasscodeDialog.FinishCallback() {
+                UnzipPassDialog.show(result, ticketImportActivity, new UnzipPassDialog.FinishCallback() {
                     @Override
                     public Void call(String path) {
 
-                        Log.i("", "ready callback path " + path);
-
                         Intent i = new Intent(ticketImportActivity, TicketViewActivity.class);
                         i.putExtra("path", path);
-
                         TicketImportActivity.this.startActivity(i);
-
                         finish();
 
                         return null;

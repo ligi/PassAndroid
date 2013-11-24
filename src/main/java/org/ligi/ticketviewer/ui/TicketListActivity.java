@@ -36,6 +36,9 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
 
+import static org.ligi.ticketviewer.ui.UnzipPassController.SilentFail;
+import static org.ligi.ticketviewer.ui.UnzipPassController.SilentWin;
+
 public class TicketListActivity extends SherlockListActivity {
 
     private String[] passes;
@@ -79,7 +82,7 @@ public class TicketListActivity extends SherlockListActivity {
             Tracker.get().trackEvent("ui_event", "send", "stacktraces", null);
             TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
         } else { // if no error - check if there is a new version of the app
-            Tracker.get().trackEvent("ui_event", "show", "updatenotice", null);
+            Tracker.get().trackEvent("ui_event", "processInputStream", "updatenotice", null);
             MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
         }
@@ -164,33 +167,23 @@ public class TicketListActivity extends SherlockListActivity {
         super.onPause();
     }
 
-    class ImportAndShowAsyncTask extends ImportAsyncTask {
+    class ImportAndRefreshListAsync extends ImportAsyncTask {
 
-        public ImportAndShowAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
+        public ImportAndRefreshListAsync(Activity ticketImportActivity, Uri intent_uri) {
             super(ticketImportActivity, intent_uri);
         }
 
         @Override
+        protected InputStream doInBackground(Void... params) {
+            InputStream ins = super.doInBackground(params);
+            UnzipPassController.processInputStream(ins, ticketImportActivity, new SilentWin(), new SilentFail());
+            return ins;
+        }
+
+        @Override
         protected void onPostExecute(InputStream result) {
-            if (result != null) {
-
-                UnzipPasscodeDialog.show(result, ticketImportActivity, new UnzipPasscodeDialog.FinishCallback() {
-
-                    @Override
-                    public Void call(String path) {
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                refresh_passes_list();
-                                passadapter.notifyDataSetChanged();
-
-                            }
-                        });
-                        return null;
-                    }
-                });
-            }
+            refresh_passes_list();
+            passadapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }
@@ -219,7 +212,7 @@ public class TicketListActivity extends SherlockListActivity {
                     search_in(file.toString());
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
-                    new ImportAndShowAsyncTask(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
+                    new ImportAndRefreshListAsync(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
                 }
             }
 
