@@ -109,13 +109,8 @@ public class TicketListActivity extends SherlockListActivity {
                 HelpDialog.show(this);
                 return true;
 
-            /*
-            case R.id.menu_settings:
-                startActivity(new Intent(this, PreferenceActivity.class));
-                return true;
-                */
         }
-        return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
