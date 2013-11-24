@@ -135,8 +135,9 @@ public class TicketListActivity extends SherlockListActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        if (!scanning)
+        if (!scanning) {
             getSupportMenuInflater().inflate(R.menu.activity_ticket_list_view, menu);
+        }
         return true;
     }
 
@@ -214,9 +215,9 @@ public class TicketListActivity extends SherlockListActivity {
             File[] files = dir.listFiles();
 
             if (files != null) for (File file : files) {
-                if (file.isDirectory())
+                if (file.isDirectory()) {
                     search_in(file.toString());
-                else if (file.getName().endsWith(".pkpass")) {
+                } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
                     new ImportAndShowAsyncTask(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
                 }
