@@ -18,15 +18,15 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
     private ProgressDialog progress_dialog;
     protected Context ctx;
     private String path;
-    protected String zip_fname, zip_path;
+    protected String zipFileName, zipPath;
     private boolean share_after_export;
 
     public PassExportTask(Context ctx, String path, String zip_path, String zip_fname, boolean share_after_export) {
         super();
         this.ctx = ctx;
         this.path = path;
-        this.zip_fname = zip_fname;
-        this.zip_path = zip_path;
+        this.zipFileName = zip_fname;
+        this.zipPath = zip_path;
 
         this.share_after_export = share_after_export;
     }
@@ -48,7 +48,7 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
         if (share_after_export) {
             Intent it = new Intent(Intent.ACTION_SEND);
             it.putExtra(Intent.EXTRA_SUBJECT, "a Passbook is shared with you");
-            it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zip_path + zip_fname));
+            it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zipPath + zipFileName));
             it.setType("application/vnd.apple.pkpass");
             ctx.startActivity(Intent.createChooser(it, "How to send Pass?"));
         }
@@ -59,13 +59,11 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
         byte[] buf = new byte[1024];
 
         try {
-            // VER SI HAY QUE CREAR EL ROOT PATH
-
-            String destinationDir = zip_path;
+            String destinationDir = zipPath;
 
             boolean result = (new File(destinationDir)).mkdirs();
 
-            String zipFullFilename = destinationDir + "/" + zip_fname;
+            String zipFullFilename = destinationDir + "/" + zipFileName;
 
             System.out.println(result);
 
