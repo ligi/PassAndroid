@@ -26,14 +26,24 @@ public class SafeJSONReader {
         // "value": "NTL",}
         // a comma should never be before a closing curly brace like this ,}
 
-        put(",[\n\r ]*\\}", "}");
+        // note the \t are greetings to Empire Theatres Tickets - without it their passes do not work
 
+        put(",[\n\r\t ]*\\}", "}");
 
-        // Entrada cine Entradas.com
+        /*
+        Entrada cine Entradas.com
+             {
+                "key": "passSourceUpdate",
+                "label": "Actualiza tu entrada",
+                "value": "http://www.entradas.com/entradas/passbook.do?cutout
+            },
+
+        ],
+        */
         put(",[\n\r ]*\\]", "]");
 
-        // forgotten value aka:
         /*
+        forgotten value aka ( also Entradas.com):
         "locations": [
         {
             "latitude": ,
