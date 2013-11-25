@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import com.google.zxing.BarcodeFormat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +27,7 @@ public class PassbookParser {
 
     private String path;
     private boolean passbook_valid = true; // be positive
-    private String barcode_msg;
+    private String barcodeMessage;
     private Bitmap barcodeBitmap = null;
     private com.google.zxing.BarcodeFormat barcodeFormat;
     private Bitmap icon_bitmap;
@@ -80,12 +82,17 @@ public class PassbookParser {
         try {
             JSONObject barcode_json = pass_json.getJSONObject("barcode");
 
-            barcodeFormat = com.google.zxing.BarcodeFormat.QR_CODE; // DEFAULT
+            barcodeFormat = BarcodeFormat.QR_CODE; // DEFAULT
 
-            barcode_msg = barcode_json.getString("message");
+            barcodeMessage = barcode_json.getString("message");
 
-            if (barcode_json.getString("format").contains("417"))
-                barcodeFormat = com.google.zxing.BarcodeFormat.PDF_417;
+            if (barcode_json.getString("format").contains("417")) {
+                barcodeFormat = BarcodeFormat.PDF_417;
+            }
+
+            if (barcode_json.getString("format").toUpperCase().contains("AZTEC")) {
+                barcodeFormat = BarcodeFormat.AZTEC;
+            }
 
             // TODO should check a bit more with barcode here - this can be dangerous
 
@@ -292,14 +299,23 @@ public class PassbookParser {
         return passbook_valid;
     }
 
-    public Bitmap getBarcodeBitmap() {
-        if (barcodeBitmap == null) {
-            if (barcode_msg != null && barcodeFormat != null)
-                barcodeBitmap = BarcodeHelper.generateBarCode(barcode_msg, barcodeFormat);
-            else
-                Log.w("Barcode msg or format is null");
+    /**
+     * @return
+     */
+    public Bitmap getBarcodeBitmap(final int size) {
+        if (barcodeMessage == null) {
+            // no message -> no barcode
+            Tracker.get().trackException("No Barcode in pass - strange", false);
         }
-        return barcodeBitmap;
+
+        if (barcodeFormat == null) {
+            Log.w("Barcode format is null - fallback to QR");
+            Tracker.get().trackException("Barcode format is null - fallback to QR", false);
+            BarcodeHelper.generateBarCodeBitmap(barcodeMessage, BarcodeFormat.QR_CODE, size);
+        }
+
+        return BarcodeHelper.generateBarCodeBitmap(barcodeMessage, barcodeFormat, size);
+
     }
 
     public Bitmap getIconBitmap() {
@@ -330,7 +346,7 @@ public class PassbookParser {
         return path;
     }
 
-    public int getFGcolor() {
+    public int getForegroundColor() {
         return foregroundColor;
     }
 

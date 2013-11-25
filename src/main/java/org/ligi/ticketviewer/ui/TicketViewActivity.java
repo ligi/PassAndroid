@@ -53,7 +53,9 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         ImageView barcode_img = (ImageView) findViewById(R.id.barcode_img);
 
-        barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap());
+        int smallestSize = Math.min(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getWidth());
+
+        barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap(smallestSize / 3));
 
         // when clicking on the barcode we want to go to the activity showing the barcode fullscreen
         barcode_img.setOnClickListener(new View.OnClickListener() {

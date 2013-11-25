@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.ligi.ticketviewer">
+
+    <application>
+
+        <!-- Used for install referrer tracking -->
+        <receiver
+            android:name="com.google.analytics.tracking.android.AnalyticsReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+
+</manifest>
