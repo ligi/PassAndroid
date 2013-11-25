@@ -15,10 +15,6 @@ repositories {
     maven {
         url project.hasProperty('ligisMavenUrl') ? ligisMavenUrl : "https://raw.github.com/ligi/ligis-mvn-repo/master";
     }
-    maven {
-        url "http://oss.sonatype.org/content/repositories/snapshots/"
-    }
-
 }
 
 android {
@@ -65,9 +61,8 @@ dependencies {
     compile 'org.ligi:AXT:0.22'
     compile 'com.android.support:support-v4:19.0.0'
 
-
     testCompile 'junit:junit:4.10'
-    testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+    testCompile 'org.robolectric:robolectric:2.2'
     testCompile 'com.squareup:fest-android:1.0.7'
 
     testCompile fileTree(dir: 'libs', include: 'core-2.3.0-SNAPSHOT.jar')
