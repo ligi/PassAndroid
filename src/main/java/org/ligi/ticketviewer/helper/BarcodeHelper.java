@@ -5,15 +5,15 @@ import android.graphics.Bitmap;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Writer;
+import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 public class BarcodeHelper {
 
     public static Bitmap generateBarCodeBitmap(String data, BarcodeFormat type, int size) {
-        final Writer writer = new MultiFormatWriter();
 
         try {
-            final BitMatrix matrix = writer.encode(data, type, size, size);
+            final BitMatrix matrix = getBitMatrix(data, type, size);
 
             // generate an image from the byte matrix
             int width = matrix.getWidth();
@@ -36,5 +36,10 @@ public class BarcodeHelper {
             return null;
         }
 
+    }
+
+    public static BitMatrix getBitMatrix(String data, BarcodeFormat type, int size) throws WriterException {
+        final Writer writer = new MultiFormatWriter();
+        return writer.encode(data, type, size, size);
     }
 }
