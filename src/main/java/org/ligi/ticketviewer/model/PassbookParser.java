@@ -299,9 +299,10 @@ public class PassbookParser {
         return passbook_valid;
     }
 
-    /**
-     * @return
-     */
+    public BarcodeFormat getBarcodeFormat() {
+        return barcodeFormat;
+    }
+
     public Bitmap getBarcodeBitmap(final int size) {
         if (barcodeMessage == null) {
             // no message -> no barcode
