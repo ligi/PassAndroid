@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import org.ligi.ticketviewer.Tracker;
+
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,15 +30,15 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
             try {
                 return ticketImportActivity.getContentResolver().openInputStream(intent_uri);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                Tracker.get().trackException("ticketImportActivity in ImportAsyncTask", e, false);
             }
         } else
             try {
                 return new BufferedInputStream(new URL("" + intent_uri).openStream(), 4096);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
             } catch (IOException e) {
-                e.printStackTrace();
+                Tracker.get().trackException("IOException in ImportAsyncTask", e, false);
             }
 
         // TODO bring back Tracker.get().trackTiming("load_time", System.currentTimeMillis() - start_time, "import", "" + intent_uri);
