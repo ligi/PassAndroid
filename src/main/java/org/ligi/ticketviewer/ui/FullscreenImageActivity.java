@@ -1,9 +1,11 @@
 package org.ligi.ticketviewer.ui;
 
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.actionbarsherlock.view.Menu;
 import com.google.zxing.BarcodeFormat;
 
 import org.ligi.axt.AXT;
@@ -25,11 +27,46 @@ public class FullscreenImageActivity extends TicketViewActivityBase {
         iv.setImageBitmap(passbookParser.getBarcodeBitmap(smallestSize));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * QR and AZTEC are best fit in Portrait
+     * PDF417 is best viewed in Landscape
+     * <p/>
+     * main work is to avoid changing if we are already optimal
+     * ( reverse orientation / sensor is the problem here ..)
+     */
     private void setBestFittingOrientationForBarCode() {
+
         if (passbookParser.getBarcodeFormat() == BarcodeFormat.PDF_417) {
-            AXT.at(this).lockOrientation(Configuration.ORIENTATION_LANDSCAPE);
+            switch (getRequestedOrientation()) {
+
+                case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE:
+                    return; // do nothing
+
+                default:
+                    AXT.at(this).lockOrientation(Configuration.ORIENTATION_LANDSCAPE);
+            }
+
         } else { // QR and AZTEC are square -> best fit is portrait
-            AXT.at(this).lockOrientation(Configuration.ORIENTATION_PORTRAIT);
+            switch (getRequestedOrientation()) {
+
+                case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                case ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT:
+                case ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT:
+                case ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT:
+                    return; // do nothing
+
+                default:
+                    AXT.at(this).lockOrientation(Configuration.ORIENTATION_PORTRAIT);
+            }
+
         }
     }
 
