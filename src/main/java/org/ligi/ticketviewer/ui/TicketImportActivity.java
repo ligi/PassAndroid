@@ -17,7 +17,6 @@ public class TicketImportActivity extends SherlockActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_view);
         new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
     }
 
