@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -48,7 +49,6 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                         List<PassLocation> locations = base_activity.passbookParser.getLocations();
 
-
                         if (locations.size() > 0) {
                             for (PassLocation l : locations) {
                                 Log.i("adding marker" + l.latlng);
@@ -70,7 +70,8 @@ public class LocationsMapFragment extends SupportMapFragment {
                                 public void onInfoWindowClick(Marker marker) {
                                     Intent i = new Intent();
                                     i.setAction(Intent.ACTION_VIEW);
-                                    i.setData(Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude));
+
+                                    i.setData(Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?q=" + marker.getTitle()));
                                     getActivity().startActivity(i);
                                 }
                             });
