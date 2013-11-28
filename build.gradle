@@ -18,8 +18,15 @@ repositories {
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "18.0.1"
+    compileSdkVersion 19
+    buildToolsVersion "19"
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile 'proguard-project.txt'
+        }
+    }
 
     flavorGroups "maps", "analytics"
     productFlavors {
@@ -70,9 +77,11 @@ dependencies {
     testCompile 'com.googlecode.android-query:android-query:0.25.+'
     testCompile 'com.google.code.gson:gson:2.2.4'
     testCompile 'org.ligi:tracedroid:1.1'
-    testCompile 'org.ligi:AXT:0.22'
+    testCompile 'org.ligi:AXT:0.23'
     testCompile 'com.android.support:support-v4:19.0.0'
-    testWithMapsCompile 'com.google.android.gms:play-services:4.0.30'
+
+
+    compile 'com.google.android.gms:play-services:4.0.30'
 
     withAnalyticsCompile fileTree(dir: 'libs', include: 'libGoogleAnalyticsV2.jar')
     withMapsCompile 'com.google.android.gms:play-services:4.0.30'

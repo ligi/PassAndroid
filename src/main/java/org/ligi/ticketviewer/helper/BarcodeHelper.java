@@ -10,10 +10,17 @@ import com.google.zxing.common.BitMatrix;
 
 public class BarcodeHelper {
 
-    public static Bitmap generateBarCodeBitmap(String data, BarcodeFormat type, int size) {
+    public static Bitmap generateBarCodeBitmap(String dataNotNull, BarcodeFormat typeNotNull, int size) {
 
+        if (dataNotNull == null) {
+            throw new IllegalArgumentException("date must not be null");
+        }
+
+        if (typeNotNull == null) {
+            throw new IllegalArgumentException("type must not be null");
+        }
         try {
-            final BitMatrix matrix = getBitMatrix(data, type, size);
+            final BitMatrix matrix = getBitMatrix(dataNotNull, typeNotNull, size);
 
             // generate an image from the byte matrix
             int width = matrix.getWidth();
