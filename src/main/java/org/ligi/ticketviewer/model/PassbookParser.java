@@ -307,6 +307,7 @@ public class PassbookParser {
         if (barcodeMessage == null) {
             // no message -> no barcode
             Tracker.get().trackException("No Barcode in pass - strange", false);
+            return null;
         }
 
         if (barcodeFormat == null) {
