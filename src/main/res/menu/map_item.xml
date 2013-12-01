@@ -1,11 +1,8 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/menu_map"
-            android:orderInCategory="99"
-            android:showAsAction="ifRoom"
-            android:title="@string/menu_delete" android:icon="@android:drawable/ic_menu_mapmode"/>
-
-
+        android:id="@+id/menu_map"
+        yourapp:showAsAction="ifRoom"
+        android:title="@string/menu_delete"
+        android:icon="@android:drawable/ic_menu_mapmode" />
 </menu>

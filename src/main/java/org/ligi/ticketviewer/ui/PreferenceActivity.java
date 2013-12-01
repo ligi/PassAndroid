@@ -3,11 +3,7 @@ package org.ligi.ticketviewer.ui;
 
 import android.preference.Preference;
 
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-
-import java.io.IOException;
-
-public class PreferenceActivity extends SherlockPreferenceActivity implements Preference.OnPreferenceChangeListener {
+public class PreferenceActivity extends android.preference.PreferenceActivity implements Preference.OnPreferenceChangeListener {
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.

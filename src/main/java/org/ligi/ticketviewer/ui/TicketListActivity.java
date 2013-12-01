@@ -6,19 +6,20 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import com.androidquery.service.MarketService;
 
 import org.ligi.ticketviewer.R;
@@ -34,10 +35,13 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import java.io.File;
 import java.io.InputStream;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import static org.ligi.ticketviewer.ui.UnzipPassController.SilentFail;
 import static org.ligi.ticketviewer.ui.UnzipPassController.SilentWin;
 
-public class TicketListActivity extends SherlockListActivity {
+public class TicketListActivity extends ActionBarActivity {
 
     private String[] passes;
     private LayoutInflater inflater;
@@ -47,19 +51,23 @@ public class TicketListActivity extends SherlockListActivity {
     private TextView empty_view;
     private ScanForPassesTask scan_task = null;
 
+    @InjectView(R.id.list)
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setContentView(R.layout.ticket_list);
+        ButterKnife.inject(this);
 
         refresh_passes_list();
 
         passadapter = new PassAdapter();
-        setListAdapter(passadapter);
+        listView.setAdapter(passadapter);
 
         inflater = getLayoutInflater();
-        getListView().setOnItemClickListener(new OnItemClickListener() {
+        listView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
@@ -72,8 +80,8 @@ public class TicketListActivity extends SherlockListActivity {
 
         empty_view = new TextView(this);
         empty_view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        ((ViewGroup) getListView().getParent()).addView(empty_view);
-        getListView().setEmptyView(empty_view);
+        ((ViewGroup) listView.getParent()).addView(empty_view);
+        listView.setEmptyView(empty_view);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -132,7 +140,7 @@ public class TicketListActivity extends SherlockListActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
         if (!scanning) {
-            getSupportMenuInflater().inflate(R.menu.activity_ticket_list_view, menu);
+            getMenuInflater().inflate(R.menu.activity_ticket_list_view, menu);
         }
         return true;
     }
@@ -280,7 +288,6 @@ public class TicketListActivity extends SherlockListActivity {
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
-            res.setBackgroundColor(passbookParser.getBackGroundColor());
             PassbookVisualisationHelper.visualizePassbookData(passbookParser, res, false);
 
             return res;

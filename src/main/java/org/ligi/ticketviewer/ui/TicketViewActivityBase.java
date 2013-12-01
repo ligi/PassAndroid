@@ -6,11 +6,11 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.androidquery.AQuery;
 
 import org.ligi.axt.AXT;
@@ -22,7 +22,7 @@ import org.ligi.ticketviewer.model.PassbookParser;
 
 import java.io.File;
 
-public class TicketViewActivityBase extends SherlockFragmentActivity {
+public class TicketViewActivityBase extends ActionBarActivity {
 
     protected Bitmap icon_bitmap;
     protected String path;
@@ -45,7 +45,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
     private void loadIcon() {
         Display display = getWindowManager().getDefaultDisplay();
-        int smallestSide = Math.min( display.getHeight(), display.getWidth());
+        int smallestSide = Math.min(display.getHeight(), display.getWidth());
         int size = (int) (2.0f * smallestSide / 3.0f);
 
         icon_bitmap = passbookParser.getIconBitmap();
@@ -57,7 +57,7 @@ public class TicketViewActivityBase extends SherlockFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.activity_ticket_view, menu);
+        getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
         return true;
     }
 

@@ -15,6 +15,7 @@ public class PassbookVisualisationHelper {
     public static void visualizePassbookData(PassbookParser passbookParser, View res, boolean verbose) {
         TextView tv = (TextView) res.findViewById(R.id.label);
         TextView more_tv = (TextView) res.findViewById(R.id.descr);
+        View colorIndicator = res.findViewById(R.id.colorIndicator);
 
         try {
             //JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(passbookParser.getPath() + "/pass.json")));
@@ -32,11 +33,13 @@ public class PassbookVisualisationHelper {
                 }
             }
 
-            icon_img.setBackgroundColor(passbookParser.getBackGroundColor());
+            //res.setBackgroundResource(R.drawable.pkbox);
+            //icon_img.setBackgroundColor(passbookParser.getBackGroundColor());
 
-            tv.setTextColor(passbookParser.getForegroundColor());
-            more_tv.setTextColor(passbookParser.getForegroundColor());
+            //tv.setTextColor(passbookParser.getForegroundColor());
+            //more_tv.setTextColor(passbookParser.getForegroundColor());
 
+            colorIndicator.setBackgroundColor(passbookParser.getBackGroundColor());
             tv.setText(passbookParser.getDescription());
 
             String more_str = "";

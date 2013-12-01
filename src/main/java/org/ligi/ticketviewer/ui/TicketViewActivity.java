@@ -8,11 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.util.Linkify;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.actionbarsherlock.view.Menu;
 
 import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.TicketDefinitions;
@@ -86,7 +85,6 @@ public class TicketViewActivity extends TicketViewActivityBase {
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassbookVisualisationHelper.visualizePassbookData(passbookParser, v, true);
 
-        getAQ().find(R.id.colorable_top).getView().setBackgroundColor(passbookParser.getBackGroundColor());
     }
 
     @Override
@@ -98,7 +96,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.map_item, menu);
+        getMenuInflater().inflate(R.menu.map_item, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

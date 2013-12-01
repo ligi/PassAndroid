@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ligi.ticketviewer">
+    package="org.ligi.passandroid">
 
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <permission
-        android:name="org.ligi.ticketviewer.permission.MAPS_RECEIVE"
+        android:name="org.ligi.passandroid.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="org.ligi.ticketviewer.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="org.ligi.passandroid.permission.MAPS_RECEIVE" />
 
     <application>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAAASj2rSvumqO1mZLMVWmZxUnzOjxLGlE" />
+            android:value="AIzaSyBzfj-2jYRg4aak86F3YTOZ2cRB6igrjZs" />
+
+        <!-- AIzaSyAAASj2rSvumqO1mZLMVWmZxUnzOjxLGlE -->
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".FullscreenMapActivity"></activity>
+        <activity android:name="org.ligi.ticketviewer.FullscreenMapActivity"></activity>
 
     </application>
 

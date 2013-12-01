@@ -21,6 +21,14 @@ android {
     compileSdkVersion 19
     buildToolsVersion "19"
 
+    defaultConfig {
+        versionCode 200
+        versionName "2.0.0"
+        minSdkVersion 8
+        targetSdkVersion 19
+        packageName "org.ligi.passandroid"
+    }
+
     buildTypes {
         release {
             runProguard false
@@ -61,24 +69,25 @@ dependencies {
     // snapshot works - but switch back to official when available
     //  compile 'com.google.zxing:core:2.3'
     compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.ligi:tracedroid:1.1'
     compile 'org.ligi:AXT:0.23'
     compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.android.support:appcompat-v7:19.0.0'
+    compile 'com.jakewharton:butterknife:4.0.1'
 
     testCompile 'junit:junit:4.10'
     testCompile 'org.robolectric:robolectric:2.2'
     testCompile 'com.squareup:fest-android:1.0.7'
 
     testCompile fileTree(dir: 'libs', include: 'core-2.3.0-SNAPSHOT.jar')
-    testCompile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     testCompile 'com.googlecode.android-query:android-query:0.25.+'
     testCompile 'com.google.code.gson:gson:2.2.4'
     testCompile 'org.ligi:tracedroid:1.1'
     testCompile 'org.ligi:AXT:0.23'
     testCompile 'com.android.support:support-v4:19.0.0'
+    testCompile 'com.android.support:appcompat-v7:19.0.0'
 
 
     compile 'com.google.android.gms:play-services:4.0.30'
