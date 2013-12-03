@@ -21,4 +21,8 @@ public class App extends Application {
         Log.setTAG("TicketViewer");
     }
 
+    public static boolean isDeveloperMode() {
+        return true;
+    }
+
 }

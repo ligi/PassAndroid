@@ -68,6 +68,9 @@ public class SafeJSONReader {
     }};
 
     public static JSONObject readJSONSafely(String str) throws JSONException {
+        if (str == null) {
+            return null;
+        }
         String allReplaced = str;
 
         // first try with single fixes

@@ -288,7 +288,7 @@ public class TicketListActivity extends ActionBarActivity {
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
-            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res, false);
+            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res);
 
             return res;
         }

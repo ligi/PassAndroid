@@ -13,11 +13,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.ligi.axt.AXT;
+import org.ligi.ticketviewer.App;
 import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
 import org.ligi.ticketviewer.maps.PassbookMapsFacade;
 import org.ligi.ticketviewer.model.PassbookParser;
+
+import java.io.File;
 
 public class TicketViewActivity extends TicketViewActivityBase {
 
@@ -25,7 +29,6 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         if (!passbookParser.isValid()) { // don't deal with invalid passes
             new AlertDialog.Builder(this)
@@ -47,14 +50,16 @@ public class TicketViewActivity extends TicketViewActivityBase {
             return;
         }
 
-        View v = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
-        setContentView(v);
+        View contentView = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
+        setContentView(contentView);
 
         ImageView barcode_img = (ImageView) findViewById(R.id.barcode_img);
+        ImageView logo_img = (ImageView) findViewById(R.id.logo_img);
+        ImageView thumbnail_img = (ImageView) findViewById(R.id.thumbnail_img);
 
-        int smallestSize = Math.min(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getWidth());
-
-        barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap(smallestSize / 3));
+        barcode_img.setImageBitmap(passbookParser.getBarcodeBitmap(AXT.at(getWindowManager()).getSmallestSide() / 3));
+        logo_img.setImageBitmap(passbookParser.getLogoBitmap());
+        thumbnail_img.setImageBitmap(passbookParser.getThumbnailImage());
 
         // when clicking on the barcode we want to go to the activity showing the barcode fullscreen
         barcode_img.setOnClickListener(new View.OnClickListener() {
@@ -74,17 +79,40 @@ public class TicketViewActivity extends TicketViewActivityBase {
             }
         }
 
-        String back_str = "";
-        for (PassbookParser.Field f : passbookParser.getBackFields()) {
-            back_str += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+        if (passbookParser.getType() != null) {
+            TextView front_tv = getAQ().find(R.id.main_fields).getTextView();
+            String front_str = "";
+            front_str += PassbookVisualisationHelper.getFieldListAsString(passbookParser.getPrimaryFields());
+            front_str += PassbookVisualisationHelper.getFieldListAsString(passbookParser.getSecondaryFields());
+            front_str += PassbookVisualisationHelper.getFieldListAsString(passbookParser.getHeaderFields());
+            front_str += PassbookVisualisationHelper.getFieldListAsString(passbookParser.getAuxiliaryFields());
+
+            front_tv.setText(Html.fromHtml(front_str));
         }
+        String back_str = "";
+
+        if (App.isDeveloperMode()) {
+            back_str += getPassDebugInfo(passbookParser);
+        }
+
+        back_str += PassbookVisualisationHelper.getFieldListAsString(passbookParser.getBackFields());
 
         TextView back_tv = getAQ().find(R.id.back_fields).getTextView();
         back_tv.setText(Html.fromHtml(back_str));
 
         Linkify.addLinks(back_tv, Linkify.ALL);
-        PassbookVisualisationHelper.visualizePassbookData(passbookParser, v, true);
+        PassbookVisualisationHelper.visualizePassbookData(passbookParser, contentView);
+    }
 
+    public String getPassDebugInfo(PassbookParser passbook) {
+
+        String result = passbook.plainJsonString;
+
+        for (File f : new File(passbookParser.getPath()).listFiles()) {
+            result += f.getName() + "<br/>";
+        }
+
+        return result;
     }
 
     @Override

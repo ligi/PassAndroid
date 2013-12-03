@@ -1,7 +1,6 @@
 package org.ligi.ticketviewer.helper;
 
 import android.graphics.Bitmap;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import org.ligi.ticketviewer.model.PassbookParser;
 import java.util.List;
 
 public class PassbookVisualisationHelper {
-    public static void visualizePassbookData(PassbookParser passbookParser, View res, boolean verbose) {
+    public static void visualizePassbookData(PassbookParser passbookParser, View res) {
         TextView tv = (TextView) res.findViewById(R.id.label);
         TextView more_tv = (TextView) res.findViewById(R.id.descr);
         View colorIndicator = res.findViewById(R.id.colorIndicator);
@@ -29,7 +28,7 @@ public class PassbookVisualisationHelper {
                 if (ico != null) {
                     icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
                 } else {
-                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
+                    icon_img.setImageResource(R.drawable.ic_launcher);
                 }
             }
 
@@ -40,21 +39,16 @@ public class PassbookVisualisationHelper {
             //more_tv.setTextColor(passbookParser.getForegroundColor());
 
             colorIndicator.setBackgroundColor(passbookParser.getBackGroundColor());
-            tv.setText(passbookParser.getDescription());
+            tv.setText(passbookParser.getType());
 
             String more_str = "";
 
-            if (passbookParser.getType() != null) {
-                more_str += getFieldListAsString(passbookParser.getPrimaryFields());
-                more_str += getFieldListAsString(passbookParser.getSecondaryFields());
-                more_str += getFieldListAsString(passbookParser.getHeaderFields());
+            /*
 
-                if (verbose) {
-                    more_str += getFieldListAsString(passbookParser.getAuxiliaryFields());
-                }
-            }
+*/
 
-            more_tv.setText(Html.fromHtml(more_str));
+            more_tv.setText(passbookParser.getDescription());
+
 
         } catch (Exception e) {
         }

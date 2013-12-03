@@ -28,17 +28,15 @@ public class PassbookParser {
     private String path;
     private boolean passbook_valid = true; // be positive
     private String barcodeMessage;
-    private Bitmap barcodeBitmap = null;
     private com.google.zxing.BarcodeFormat barcodeFormat;
-    private Bitmap icon_bitmap;
     private int backGroundColor;
     private int foregroundColor;
     private String description;
     private String type;
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
-
     private JSONObject eventTicket = null;
+    public String plainJsonString;
 
     public PassbookParser(String path) {
 
@@ -47,31 +45,33 @@ public class PassbookParser {
         JSONObject pass_json = null;
         final File file = new File(path + "/pass.json");
 
-        try {
-            pass_json = SafeJSONReader.readJSONSafely(AXT.at(file).loadToString());
-        } catch (Exception e) {
-            Log.i("PassParse Exception " + e);
-        }
+        if (file.exists()) {
+            try {
+                plainJsonString = AXT.at(file).loadToString();
+                pass_json = SafeJSONReader.readJSONSafely(plainJsonString);
+            } catch (Exception e) {
+                Log.i("PassParse Exception " + e);
+            }
 
-        if (pass_json == null) {
-            // I had got a strange passbook with UCS-2 which could not be parsed before
-            // was searching for a auto-detection, but could not find one with support for this encoding
-            // and the right license
+            if (pass_json == null) {
+                // I had got a strange passbook with UCS-2 which could not be parsed before
+                // was searching for a auto-detection, but could not find one with support for this encoding
+                // and the right license
 
-            for (Charset charset : Charset.availableCharsets().values()) {
-                try {
+                for (Charset charset : Charset.availableCharsets().values()) {
+                    try {
 
-                    String json_str = AXT.at(file).loadToString(charset);
-                    pass_json = SafeJSONReader.readJSONSafely(json_str);
-                } catch (Exception e) {
-                }
+                        String json_str = AXT.at(file).loadToString(charset);
+                        pass_json = SafeJSONReader.readJSONSafely(json_str);
+                    } catch (Exception e) {
+                    }
 
-                if (pass_json != null) {
-                    break;
+                    if (pass_json != null) {
+                        break;
+                    }
                 }
             }
         }
-
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ");
             Tracker.get().trackEvent("problem_event", "pass", "without_pass_json", null);
@@ -321,23 +321,53 @@ public class PassbookParser {
     }
 
     public Bitmap getIconBitmap() {
-        if (icon_bitmap == null && path != null) {
-            /*
-            icon_bitmap = BitmapFactory.decodeFile(path + "/logo@2x.png");
+        Bitmap result = null;
 
-            if (icon_bitmap == null)
-                icon_bitmap = BitmapFactory.decodeFile(path + "/logo.png");
-                                                 */
-            if (icon_bitmap == null) {
-                icon_bitmap = BitmapFactory.decodeFile(path + "/icon@2x.png");
+        if (path != null) {
+
+            // first we try to fetch the small icon
+            result = BitmapFactory.decodeFile(path + "/icon@2x.png");
+
+            // if that failed we use the small one
+            if (result == null) {
+                result = BitmapFactory.decodeFile(path + "/icon.png");
             }
 
-            if (icon_bitmap == null) {
-                icon_bitmap = BitmapFactory.decodeFile(path + "/icon.png");
+
+        }
+        return result;
+    }
+
+    public Bitmap getThumbnailImage() {
+        Bitmap result = null;
+
+        if (path != null) {
+
+            // first we try to fetch the small icon
+            result = BitmapFactory.decodeFile(path + "/thumbnail@2x.png");
+
+            // if that failed we use the small one
+            if (result == null) {
+                result = BitmapFactory.decodeFile(path + "/thumbnail.png");
+            }
+
+
+        }
+        return result;
+    }
+
+    public Bitmap getLogoBitmap() {
+        Bitmap result = null;
+
+        if (path != null) {
+            result = BitmapFactory.decodeFile(path + "/logo@2x.png");
+
+            if (result == null) {
+                result = BitmapFactory.decodeFile(path + "/logo.png");
             }
 
         }
-        return icon_bitmap;
+        return result;
     }
 
     public int getBackGroundColor() {
