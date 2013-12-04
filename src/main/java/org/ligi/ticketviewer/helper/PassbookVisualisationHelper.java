@@ -1,57 +1,49 @@
 package org.ligi.ticketviewer.helper;
 
 import android.graphics.Bitmap;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
 import org.ligi.ticketviewer.R;
 import org.ligi.ticketviewer.model.PassbookParser;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 public class PassbookVisualisationHelper {
     public static void visualizePassbookData(PassbookParser passbookParser, View res) {
-        TextView tv = (TextView) res.findViewById(R.id.label);
-        TextView more_tv = (TextView) res.findViewById(R.id.descr);
-        View colorIndicator = res.findViewById(R.id.colorIndicator);
+        TextView tv = ButterKnife.findById(res, R.id.label);
+        TextView more_tv = ButterKnife.findById(res, R.id.descr);
+        TextView date_tv = ButterKnife.findById(res, R.id.date);
+        View colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
 
-        try {
-            //JSONObject pass_json = new JSONObject(FileHelper.file2String(new File(passbookParser.getPath() + "/pass.json")));
 
-            int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
-            ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
+        int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
+        ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
 
-            if (passbookParser.getPath() != null) {
-                Bitmap ico = passbookParser.getIconBitmap();
+        if (passbookParser.getPath() != null) {
+            Bitmap ico = passbookParser.getIconBitmap();
 
-                if (ico != null) {
-                    icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
-                } else {
-                    icon_img.setImageResource(R.drawable.ic_launcher);
-                }
+            if (ico != null) {
+                icon_img.setImageBitmap(Bitmap.createScaledBitmap(ico, size, size, false));
+            } else {
+                icon_img.setImageResource(R.drawable.ic_launcher);
             }
-
-            //res.setBackgroundResource(R.drawable.pkbox);
-            //icon_img.setBackgroundColor(passbookParser.getBackGroundColor());
-
-            //tv.setTextColor(passbookParser.getForegroundColor());
-            //more_tv.setTextColor(passbookParser.getForegroundColor());
-
-            colorIndicator.setBackgroundColor(passbookParser.getBackGroundColor());
-            tv.setText(passbookParser.getType());
-
-            String more_str = "";
-
-            /*
-
-*/
-
-            more_tv.setText(passbookParser.getDescription());
-
-
-        } catch (Exception e) {
         }
+
+        colorIndicator.setBackgroundColor(passbookParser.getBackGroundColor());
+        tv.setText(passbookParser.getType());
+
+        if (passbookParser.getRelevantDate() != null) {
+            date_tv.setText(DateUtils.getRelativeDateTimeString(res.getContext(), new DateTime(passbookParser.getRelevantDate()).getMillis(), DateUtils.HOUR_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+        }
+        more_tv.setText(passbookParser.getDescription());
+
+
     }
 
     public static String getFieldListAsString(List<PassbookParser.Field> fieldList) {

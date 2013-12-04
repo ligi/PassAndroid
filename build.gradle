@@ -76,6 +76,7 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
+    compile 'joda-time:joda-time:2.3'
 
     testCompile 'junit:junit:4.10'
     testCompile 'org.robolectric:robolectric:2.2'

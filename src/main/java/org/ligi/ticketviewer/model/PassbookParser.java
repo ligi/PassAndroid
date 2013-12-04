@@ -33,6 +33,7 @@ public class PassbookParser {
     private int foregroundColor;
     private String description;
     private String type;
+    private String relevantDate;
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
     private JSONObject eventTicket = null;
@@ -100,6 +101,11 @@ public class PassbookParser {
         }
 
         if (pass_json != null) {
+            try {
+                relevantDate = pass_json.getString("relevantDate");
+            } catch (JSONException e) {
+            }
+
             try {
                 JSONArray locations_json = pass_json.getJSONArray("locations");
                 for (int i = 0; i < locations_json.length(); i++) {
@@ -387,4 +393,7 @@ public class PassbookParser {
         public String value;
     }
 
+    public String getRelevantDate() {
+        return relevantDate;
+    }
 }

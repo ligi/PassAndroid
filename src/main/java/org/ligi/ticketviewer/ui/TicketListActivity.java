@@ -2,10 +2,13 @@ package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -50,9 +53,13 @@ public class TicketListActivity extends ActionBarActivity {
     private boolean scanning = false;
     private TextView empty_view;
     private ScanForPassesTask scan_task = null;
+    private ActionBarDrawerToggle drawerToggle;
 
-    @InjectView(R.id.list)
+    @InjectView(R.id.content_list)
     ListView listView;
+
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +100,20 @@ public class TicketListActivity extends ActionBarActivity {
             ms.level(MarketService.MINOR).checkVersion();
         }
 
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawer,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        );
+
+        drawer.setDrawerListener(drawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
     }
 
     private void refresh_passes_list() {
@@ -106,6 +127,11 @@ public class TicketListActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         switch (item.getItemId()) {
             case R.id.menu_refresh:
                 Tracker.get().trackEvent("ui_event", "refresh", "from_list", null);
@@ -156,6 +182,19 @@ public class TicketListActivity extends ActionBarActivity {
             empty_view.setText("No passes yet - try to get some - then click on them or hit refresh");
         }
 
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -28,16 +29,39 @@
             android:orientation="vertical"
             android:layout_gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/label"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/label"
+                    tools:text="Topic"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/date"
+                    tools:text="12.10.2013 17:00"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/descr"
+                tools:text="Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="3dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
