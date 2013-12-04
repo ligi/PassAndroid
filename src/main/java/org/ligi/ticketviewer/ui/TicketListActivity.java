@@ -111,8 +111,8 @@ public class TicketListActivity extends ActionBarActivity {
 
         drawer.setDrawerListener(drawerToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 
