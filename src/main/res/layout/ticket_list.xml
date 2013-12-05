@@ -4,13 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content_list"
-        android:divider="@null">
 
-    </ListView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:padding="7dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/emptyView" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content_list"
+            android:divider="@null"></ListView>
+    </FrameLayout>
+
 
     <LinearLayout
         android:id="@+id/left_drawer"
@@ -27,18 +41,73 @@
             android:padding="7dp" />
 
         <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup">
 
             <RadioButton
-                android:layout_width="wrap_content"
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Category" />
+                android:text="Category"
+                android:checked="true" />
 
             <RadioButton
-                android:layout_width="wrap_content"
+                android:id="@+id/radioGroup2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date" />
         </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:paddingTop="3dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:id="@+id/rate">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="5dp"
+                android:src="@drawable/play_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="32sp"
+                android:text="Rate" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:id="@+id/community">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="5dp"
+                android:src="@drawable/community_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="32sp"
+                android:text="Community" />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </android.support.v4.widget.DrawerLayout>

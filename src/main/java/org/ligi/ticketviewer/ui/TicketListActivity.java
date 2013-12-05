@@ -10,7 +10,6 @@ import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +50,7 @@ public class TicketListActivity extends ActionBarActivity {
     private String path;
     private PassAdapter passadapter;
     private boolean scanning = false;
-    private TextView empty_view;
+
     private ScanForPassesTask scan_task = null;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -60,6 +59,9 @@ public class TicketListActivity extends ActionBarActivity {
 
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
+
+    @InjectView(R.id.emptyView)
+    TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +87,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         });
 
-        empty_view = new TextView(this);
-        empty_view.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        ((ViewGroup) listView.getParent()).addView(empty_view);
-        listView.setEmptyView(empty_view);
+        listView.setEmptyView(emptyView);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -175,13 +174,11 @@ public class TicketListActivity extends ActionBarActivity {
         setSupportProgressBarIndeterminateVisibility(scanning);
         supportInvalidateOptionsMenu();
 
-
         if (scanning) {
-            empty_view.setText("No passes yet - searching for passes");
+            emptyView.setText("No passes yet - searching for passes");
         } else {
-            empty_view.setText("No passes yet - try to get some - then click on them or hit refresh");
+            emptyView.setText("No passes yet - try to get some - then click on them or hit refresh");
         }
-
     }
 
     @Override
