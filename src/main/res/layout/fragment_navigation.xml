@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort Order:"
+            android:padding="7dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/categoryRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/dateRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+        </RadioGroup>
+
+        <View style="@style/seperator_view" />
+
+        <LinearLayout
+            android:id="@+id/rate"
+            style="@style/nav_btn">
+
+            <ImageView
+                android:src="@drawable/play_icon"
+                style="@style/nav_icon" />
+
+            <TextView
+                style="@style/nav_text"
+                android:text="Play" />
+        </LinearLayout>
+
+        <View style="@style/seperator_view" />
+
+        <LinearLayout
+            style="@style/nav_btn"
+
+            android:id="@+id/community">
+
+            <ImageView
+                style="@style/nav_icon"
+                android:src="@drawable/community_icon" />
+
+            <TextView
+                android:text="Community"
+                style="@style/nav_text" />
+        </LinearLayout>
+
+        <View style="@style/seperator_view" />
+
+    </LinearLayout>
+
+
+</FrameLayout>
