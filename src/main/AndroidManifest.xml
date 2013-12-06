@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.ligi.ticketviewer"
+    package="org.ligi.passandroid"
     android:installLocation="auto"
     android:versionCode="191"
+
     android:versionName="1.9.1">
 
-<uses-sdk
+    <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
@@ -26,10 +27,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:name=".App"
+        android:debuggable="true"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="org.ligi.ticketviewer.ui.TicketListActivity"
+            android:name=".ui.TicketListActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +39,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="org.ligi.ticketviewer.ui.HelpActivity" />
+        <activity android:name=".ui.HelpActivity" />
         <activity
-            android:name="org.ligi.ticketviewer.ui.TicketImportActivity"
+            android:name=".ui.TicketImportActivity"
             tools:ignore="ExportedActivity">
 
             <intent-filter>
@@ -104,13 +106,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.ligi.ticketviewer.ui.TicketViewActivity"
+            android:name=".ui.TicketViewActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="org.ligi.ticketviewer.ui.FullscreenImageActivity"
+            android:name=".ui.FullscreenImageActivity"
             android:label="@string/app_name" />
 
-        <activity android:name="org.ligi.ticketviewer.ui.PreferenceActivity" />
+        <activity android:name=".ui.PreferenceActivity" />
 
     </application>
 

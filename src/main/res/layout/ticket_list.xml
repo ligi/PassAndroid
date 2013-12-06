@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/left_drawer"
-        android:name="org.ligi.ticketviewer.ui.NavigationFragment"
+        android:name="org.ligi.passandroid.ui.NavigationFragment"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"

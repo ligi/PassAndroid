@@ -68,7 +68,7 @@ dependencies {
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.ligi:tracedroid:1.1'
-    compile 'org.ligi:AXT:0.23'
+    compile 'org.ligi:AXT:0.24'
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
@@ -92,7 +92,7 @@ dependencies {
     testCompile 'com.googlecode.android-query:android-query:0.25.+'
     testCompile 'com.google.code.gson:gson:2.2.4'
     testCompile 'org.ligi:tracedroid:1.1'
-    testCompile 'org.ligi:AXT:0.23'
+    testCompile 'org.ligi:AXT:0.24'
     testCompile 'com.android.support:support-v4:19.0.0'
     testCompile 'com.android.support:appcompat-v7:19.0.0'
 

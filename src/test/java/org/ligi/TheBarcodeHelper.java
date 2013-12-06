@@ -1,25 +1,15 @@
 package org.ligi;
 
-import android.graphics.Bitmap;
-
 import org.junit.Test;
-import org.ligi.axt.helpers.BitmapHelper;
-import org.ligi.ticketviewer.helper.BarcodeHelper;
+import org.ligi.passandroid.helper.BarcodeHelper;
 import org.junit.runner.RunWith;
 
 import static junit.framework.Assert.fail;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.Writer;
-import com.google.zxing.WriterException;
-import com.google.zxing.aztec.AztecWriter;
 import com.google.zxing.common.BitMatrix;
 
 import java.lang.Exception;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

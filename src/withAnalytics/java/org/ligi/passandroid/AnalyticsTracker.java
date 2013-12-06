@@ -3,44 +3,37 @@ package org.ligi.passandroid;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
-import org.ligi.tracedroid.logging.Log;
+import com.google.analytics.tracking.android.EasyTracker;
 
-public class NotTracker implements TrackerInterface {
+
+public class AnalyticsTracker implements TrackerInterface {
     @Override
     public void init(Context ctx) {
-
+        EasyTracker.getInstance().setContext(ctx);
     }
 
     @Override
     public void trackException(String s, Exception e, boolean fatal) {
-        if (fatal) {
-            Log.w("Fatal Exception " + s + " " + e);
-        } else {
-            Log.w("Not Fatal Exception " + s + " " + e);
-        }
+        EasyTracker.getTracker().trackException(s, e, fatal);
     }
 
     @Override
     public void trackException(String s, boolean fatal) {
-        if (fatal) {
-            Log.w("Fatal Exception " + s);
-        } else {
-            Log.w("Not Fatal Exception " + s);
-        }
+        EasyTracker.getTracker().trackException(s, fatal);
     }
 
     @Override
     public void trackEvent(String category, String action, String label, Long val) {
-
+        EasyTracker.getTracker().trackEvent(category, action, label, val);
     }
 
     @Override
     public void activityStart(FragmentActivity activity) {
-
+        EasyTracker.getInstance().activityStart(activity);
     }
 
     @Override
     public void activityStop(FragmentActivity activity) {
-
+        EasyTracker.getInstance().activityStop(activity);
     }
 }

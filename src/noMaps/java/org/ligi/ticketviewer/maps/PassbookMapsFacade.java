@@ -1,8 +1,8 @@
-package org.ligi.ticketviewer.maps;
+package org.ligi.passandroid.maps;
 
 import android.content.Context;
 
-import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.passandroid.model.Passbook;
 
 public class PassbookMapsFacade {
 
@@ -10,6 +10,6 @@ public class PassbookMapsFacade {
         return false;
     }
 
-    public static void startFullscreenMap(Context context,PassbookParser passbookParser) {
+    public static void startFullscreenMap(Context context,Passbook passbook) {
     }
 }
