@@ -1,6 +1,8 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light" />
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />
 </resources>
