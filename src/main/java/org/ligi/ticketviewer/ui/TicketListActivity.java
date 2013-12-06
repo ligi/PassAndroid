@@ -25,11 +25,9 @@ import android.widget.TextView;
 import com.androidquery.service.MarketService;
 
 import org.ligi.ticketviewer.R;
-import org.ligi.ticketviewer.TicketDefinitions;
 import org.ligi.ticketviewer.Tracker;
-import org.ligi.ticketviewer.helper.DirectoryFileFilter;
-import org.ligi.ticketviewer.helper.PassbookVisualisationHelper;
-import org.ligi.ticketviewer.model.PassbookParser;
+import org.ligi.ticketviewer.helper.PassVisualizer;
+import org.ligi.ticketviewer.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -45,9 +43,9 @@ import static org.ligi.ticketviewer.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends ActionBarActivity {
 
-    private String[] passes;
+    private PassStore passStore;
+
     private LayoutInflater inflater;
-    private String path;
     private PassAdapter passadapter;
     private boolean scanning = false;
 
@@ -63,6 +61,7 @@ public class TicketListActivity extends ActionBarActivity {
     @InjectView(R.id.emptyView)
     TextView emptyView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,7 @@ public class TicketListActivity extends ActionBarActivity {
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
 
-        refresh_passes_list();
+        passStore = new PassStore(this);
 
         passadapter = new PassAdapter();
         listView.setAdapter(passadapter);
@@ -81,7 +80,7 @@ public class TicketListActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
                 Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
-                intent.putExtra("path", path + "/" + passes[pos] + "/");
+                intent.putExtra("path", passStore.getPassbookAt(pos).getPath());
                 startActivity(intent);
             }
 
@@ -115,14 +114,6 @@ public class TicketListActivity extends ActionBarActivity {
 
     }
 
-    private void refresh_passes_list() {
-        path = TicketDefinitions.getPassesDir(this);
-        File passes_dir = new File(TicketDefinitions.getPassesDir(this));
-        if (!passes_dir.exists()) {
-            passes_dir.mkdirs();
-        }
-        passes = passes_dir.list(new DirectoryFileFilter());
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -148,17 +139,17 @@ public class TicketListActivity extends ActionBarActivity {
     protected void onResume() {
 
         super.onResume();
-        passes = new File(TicketDefinitions.getPassesDir(this)).list(new DirectoryFileFilter());
+        passStore.refreshPassesList();
         passadapter.notifyDataSetChanged();
 
-        if (passes == null || passes.length == 0) {
+        if (passStore.isEmpty()) {
             scan_task = new ScanForPassesTask();
             scan_task.execute();
         }
 
         updateUIToScanningState();
 
-        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) passes.length);
+        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) passStore.passCount());
     }
 
     @Override
@@ -219,7 +210,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(InputStream result) {
-            refresh_passes_list();
+            passStore.refreshPassesList();
             passadapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
@@ -304,7 +295,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            return passes.length;
+            return passStore.passCount();
         }
 
         @Override
@@ -319,12 +310,10 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            String mPath = path + "/" + passes[position];
-            PassbookParser passbookParser = new PassbookParser(mPath);
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
-            PassbookVisualisationHelper.visualizePassbookData(passbookParser, res);
+            PassVisualizer.visualize(passStore.getPassbookAt(position), res);
 
             return res;
         }

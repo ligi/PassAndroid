@@ -18,10 +18,16 @@ public class NavigationFragment extends Fragment {
 
     @OnClick(R.id.rate)
     void rateClick() {
+        openURL("https://play.google.com/store/apps/details?id=org.ligi.passandroid");
+    }
 
-        String url = "https://play.google.com/store/apps/details?id=org.ligi.passandroid";
+    @OnClick(R.id.community)
+    void community() {
+        openURL("https://plus.google.com/communities/116353894782342292067");
+    }
+
+    private void openURL(String url) {
         Intent i = new Intent(Intent.ACTION_VIEW);
-
         i.setData(Uri.parse(url));
         startActivity(i);
     }

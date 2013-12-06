@@ -77,6 +77,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'joda-time:joda-time:2.3'
+    compile 'com.google.android.gms:play-services:4.0.30'
+    // TODO watch progress at zxing - last official had problems with aztec format
+    // snapshot works - but switch back to official when available
+    //  
+    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
     testCompile 'junit:junit:4.10'
     testCompile 'org.robolectric:robolectric:2.2'
@@ -91,7 +96,7 @@ dependencies {
     testCompile 'com.android.support:appcompat-v7:19.0.0'
 
 
-    compile 'com.google.android.gms:play-services:4.0.30'
+
 
     withAnalyticsCompile fileTree(dir: 'libs', include: 'libGoogleAnalyticsV2.jar')
     withMapsCompile 'com.google.android.gms:play-services:4.0.30'

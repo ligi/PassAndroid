@@ -14,8 +14,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class PassbookVisualisationHelper {
-    public static void visualizePassbookData(PassbookParser passbookParser, View res) {
+public class PassVisualizer {
+    public static void visualize(PassbookParser passbookParser, View res) {
         TextView tv = ButterKnife.findById(res, R.id.label);
         TextView more_tv = ButterKnife.findById(res, R.id.descr);
         TextView date_tv = ButterKnife.findById(res, R.id.date);

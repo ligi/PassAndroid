@@ -119,10 +119,4 @@ public class TicketViewActivityBase extends ActionBarActivity {
         Tracker.get().activityStop(this);
     }
 
-    public AQuery getAQ() {
-        if (aQuery == null) {
-            aQuery = new AQuery(this);
-        }
-        return aQuery;
-    }
 }
