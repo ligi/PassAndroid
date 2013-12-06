@@ -23,9 +23,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidquery.service.MarketService;
+import com.squareup.otto.Subscribe;
 
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
@@ -61,10 +64,22 @@ public class TicketListActivity extends ActionBarActivity {
     @InjectView(R.id.emptyView)
     TextView emptyView;
 
+    @Subscribe
+    public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
+        refreshPasses();
+    }
+
+    private void refreshPasses() {
+        passStore.refreshPassesList();
+        passStore.sort(App.getSettings().getSortOrder());
+        passadapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
@@ -140,8 +155,6 @@ public class TicketListActivity extends ActionBarActivity {
     protected void onResume() {
 
         super.onResume();
-        passStore.refreshPassesList();
-        passadapter.notifyDataSetChanged();
 
         if (passStore.isEmpty()) {
             scan_task = new ScanForPassesTask();
@@ -151,7 +164,12 @@ public class TicketListActivity extends ActionBarActivity {
         updateUIToScanningState();
 
         Tracker.get().trackEvent("ui_event", "resume", "passes", (long) passStore.passCount());
+
+        App.getBus().register(this);
+
+        refreshPasses();
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -189,6 +207,8 @@ public class TicketListActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
+        App.getBus().unregister(this);
+
         if (scan_task != null) {
             scan_task.cancel(true);
         }
@@ -211,8 +231,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(InputStream result) {
-            passStore.refreshPassesList();
-            passadapter.notifyDataSetChanged();
+            refreshPasses();
             super.onPostExecute(result);
         }
     }

@@ -8,12 +8,32 @@ import org.ligi.passandroid.helper.DirectoryFileFilter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PassStore {
 
     public final Context context;
     private String path;
+
+    public enum SortOrder {
+        DATE(0),
+        TYPE(1);
+
+        private final int i;
+
+        SortOrder(int i) {
+            this.i = i;
+        }
+
+        public int getInt() {
+            return i;
+        }
+
+    }
+
+    private SortOrder sortOrder;
 
     private List<ReducedPassInformation> reducedPassInformations;
 
@@ -70,5 +90,27 @@ public class PassStore {
         return reducedPassInformations.get(pos);
     }
 
+    public void sort(SortOrder order) {
+        switch (order) {
+            case TYPE:
+                Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
+                    @Override
+                    public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        return lhs.type.compareTo(rhs.type);
+                    }
+                });
+                break;
+
+            case DATE:
+                Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
+                    @Override
+                    public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        return lhs.relevantDate.compareTo(rhs.relevantDate);
+                    }
+                });
+                break;
+        }
+
+    }
 
 }

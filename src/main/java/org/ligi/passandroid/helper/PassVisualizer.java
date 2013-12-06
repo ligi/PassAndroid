@@ -41,6 +41,7 @@ public class PassVisualizer {
 
         if (passbook.relevantDate != null) {
             date_tv.setText(DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.HOUR_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+            //date_tv.setText(passbook.relevantDate.to);
         }
         more_tv.setText(passbook.name);
 
