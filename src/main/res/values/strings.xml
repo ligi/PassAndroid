@@ -33,5 +33,8 @@
     </string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="pass_problem">Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software.</string>
+    <string name="problem">Problem</string>
+    <string name="send">Send</string>
 
 </resources>

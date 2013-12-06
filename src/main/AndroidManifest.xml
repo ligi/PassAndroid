@@ -36,6 +36,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="org.ligi.ticketviewer.ui.HelpActivity" />
         <activity
             android:name="org.ligi.ticketviewer.ui.TicketImportActivity"
             tools:ignore="ExportedActivity">

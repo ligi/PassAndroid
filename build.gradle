@@ -65,10 +65,6 @@ apply plugin: 'android-unit-test'
 
 
 dependencies {
-    // TODO watch progress at zxing - last official had problems with aztec format
-    // snapshot works - but switch back to official when available
-    //  compile 'com.google.zxing:core:2.3'
-    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.ligi:tracedroid:1.1'
@@ -78,6 +74,11 @@ dependencies {
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'joda-time:joda-time:2.3'
     compile 'com.google.android.gms:play-services:4.0.30'
+    // TODO watch progress at zxing - last official had problems with aztec format
+    // snapshot works - but switch back to official when available
+    //  
+    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
+
     // TODO watch progress at zxing - last official had problems with aztec format
     // snapshot works - but switch back to official when available
     //  
@@ -94,9 +95,6 @@ dependencies {
     testCompile 'org.ligi:AXT:0.23'
     testCompile 'com.android.support:support-v4:19.0.0'
     testCompile 'com.android.support:appcompat-v7:19.0.0'
-
-
-
 
     withAnalyticsCompile fileTree(dir: 'libs', include: 'libGoogleAnalyticsV2.jar')
     withMapsCompile 'com.google.android.gms:play-services:4.0.30'

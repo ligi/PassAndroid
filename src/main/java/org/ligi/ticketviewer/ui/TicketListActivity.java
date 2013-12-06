@@ -128,7 +128,8 @@ public class TicketListActivity extends ActionBarActivity {
                 new ScanForPassesTask().execute();
                 return true;
             case R.id.menu_help:
-                HelpDialog.show(this);
+                Intent intent = new Intent(this, HelpActivity.class);
+                startActivity(intent);
                 return true;
 
         }

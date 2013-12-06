@@ -56,15 +56,15 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         if (!passbookParser.isValid()) { // don't deal with invalid passes
             new AlertDialog.Builder(this)
-                    .setMessage("Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software.")
-                    .setTitle("Problem")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setMessage(getString(R.string.pass_problem))
+                    .setTitle(getString(R.string.problem))
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setNeutralButton("Send", new DialogInterface.OnClickListener() {
+                    .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbookParser.getPath(), TicketDefinitions.getShareDir(TicketViewActivity.this), "share.pkpass").execute();
