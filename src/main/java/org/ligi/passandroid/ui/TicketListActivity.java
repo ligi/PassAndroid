@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +41,6 @@ import java.io.InputStream;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-import butterknife.OnItemLongClick;
 
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
@@ -71,42 +71,13 @@ public class TicketListActivity extends ActionBarActivity {
         refreshPasses();
     }
 
-    @OnItemLongClick(R.id.content_list)
-    boolean listItemLongClick(final int position) {
+    /*
+        @OnItemLongClick(R.id.content_list)
+        boolean listItemLongClick(final int position) {
 
-        actionMode = new ActionMode.Callback() {
-            @Override
-            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-                getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
-                return true;
-            }
 
-            @Override
-            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                if (new PassMenuOptions(TicketListActivity.this, passStore.getPassbookAt(position)).process(menuItem)) {
-                    actionMode.finish();
-                    return true;
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode actionMode) {
-                actionMode = null;
-            }
-        };
-
-        startSupportActionMode(actionMode);
-
-        return true;
-    }
-
+        }
+    */
     @OnItemClick(R.id.content_list)
     void lisItemCick(int position) {
         Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
@@ -151,6 +122,51 @@ public class TicketListActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, long id) {
+                listView.setItemChecked(position, true);
+                parent.setSelection(position);
+                view.refreshDrawableState();
+
+                actionMode = new ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+
+                        getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                        if (new PassMenuOptions(TicketListActivity.this, passStore.getPassbookAt(position)).process(menuItem)) {
+                            actionMode.finish();
+                            return true;
+                        }
+
+                        return false;
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode actionMode) {
+                        listView.setItemChecked(position, false);
+
+                        actionMode = null;
+                    }
+                };
+
+                startSupportActionMode(actionMode);
+
+                return true;
+
+            }
+        });
     }
 
 
