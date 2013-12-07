@@ -19,7 +19,7 @@ public class PassVisualizer {
     public static void visualize(ReducedPassInformation passbook, View res) {
         TextView titleTextView = ButterKnife.findById(res, R.id.title);
         TextView dateTextView = ButterKnife.findById(res, R.id.date);
-        View colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
+        TextView colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
         ImageView categoryIndicator = ButterKnife.findById(res,R.id.categoryImage);
 
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
@@ -39,18 +39,24 @@ public class PassVisualizer {
             String typeLowerCase = passbook.type.toLowerCase();
             if (typeLowerCase.contains("oarding")) {
                 categoryIndicator.setImageResource(R.drawable.cat_boarding_top);
+                colorIndicator.setText("BP");
             } else if (typeLowerCase.contains("event")) {
                 categoryIndicator.setImageResource(R.drawable.cat_event_crop);
+                colorIndicator.setText("T");
             } else if (typeLowerCase.contains("coupon")) {
+                colorIndicator.setText("%");
                 categoryIndicator.setImageResource(R.drawable.cat_coupon_crop);
             }else if (typeLowerCase.contains("generic")) {
+                colorIndicator.setText("G");
                 categoryIndicator.setImageResource(R.drawable.cat_generic_crop);
             }else if (typeLowerCase.contains("store")) {
+                colorIndicator.setText("SC");
                 categoryIndicator.setImageResource(R.drawable.cat_store_crop);
             }
         }
 
         colorIndicator.setBackgroundColor(passbook.backgroundColor);
+        colorIndicator.setTextColor(passbook.foregroundColor);
         titleTextView.setText(passbook.name);
 
         if (passbook.relevantDate != null) {

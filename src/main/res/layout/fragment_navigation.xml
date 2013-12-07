@@ -12,10 +12,12 @@
         android:background="@android:color/white">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sort Order:"
+            android:background="#ffe3e3e3"
+            android:text="SORT"
             android:padding="7dp" />
+
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -36,7 +38,13 @@
                 android:text="Date" />
         </RadioGroup>
 
-        <View style="@style/seperator_view" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffe3e3e3"
+            android:text="MORE"
+            android:padding="7dp" />
+
 
         <LinearLayout
             android:id="@+id/rate"

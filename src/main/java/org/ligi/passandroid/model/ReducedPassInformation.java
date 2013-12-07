@@ -12,6 +12,7 @@ public class ReducedPassInformation implements Serializable {
             relevantDate = pass.getRelevantDate();
         }
         backgroundColor = pass.getBackGroundColor();
+        foregroundColor = pass.getForegroundColor();
         name = pass.getDescription();
         iconPath = pass.getIconPath();
         id = pass.getId();
@@ -21,6 +22,7 @@ public class ReducedPassInformation implements Serializable {
     public String type;
     public String name;
     public int backgroundColor;
+    public int foregroundColor;
     public String iconPath;
     public DateTime relevantDate;
 }
