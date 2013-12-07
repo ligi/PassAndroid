@@ -10,14 +10,13 @@ import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +39,8 @@ import java.io.InputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
@@ -63,13 +64,57 @@ public class TicketListActivity extends ActionBarActivity {
 
     @InjectView(R.id.emptyView)
     TextView emptyView;
+    private ActionMode.Callback actionMode;
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
         refreshPasses();
     }
 
-    private void refreshPasses() {
+    @OnItemLongClick(R.id.content_list)
+    boolean listItemLongClick(final int position) {
+
+        actionMode = new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                if (new PassMenuOptions(TicketListActivity.this, passStore.getPassbookAt(position)).process(menuItem)) {
+                    actionMode.finish();
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+                actionMode = null;
+            }
+        };
+
+        startSupportActionMode(actionMode);
+
+        return true;
+    }
+
+    @OnItemClick(R.id.content_list)
+    void lisItemCick(int position) {
+        Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
+        intent.putExtra("path", passStore.getPassbookAt(position).getPath());
+        startActivity(intent);
+    }
+
+    public void refreshPasses() {
         passStore.refreshPassesList();
         passStore.sort(App.getSettings().getSortOrder());
         passadapter.notifyDataSetChanged();
@@ -78,8 +123,6 @@ public class TicketListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
@@ -90,16 +133,6 @@ public class TicketListActivity extends ActionBarActivity {
         listView.setAdapter(passadapter);
 
         inflater = getLayoutInflater();
-        listView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
-                Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
-                intent.putExtra("path", passStore.getPassbookAt(pos).getPath());
-                startActivity(intent);
-            }
-
-        });
 
         listView.setEmptyView(emptyView);
 
@@ -113,20 +146,11 @@ public class TicketListActivity extends ActionBarActivity {
             ms.level(MarketService.MINOR).checkVersion();
         }
 
-
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawer,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
-        );
-
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
         drawer.setDrawerListener(drawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
     }
 
 
