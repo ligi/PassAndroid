@@ -3,6 +3,7 @@ package org.ligi.passandroid.ui;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class HelpActivity extends ActionBarActivity {
 
         Linkify.addLinks(helpTextView, Linkify.ALL);
 
+        helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
