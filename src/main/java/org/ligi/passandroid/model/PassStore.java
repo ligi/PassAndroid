@@ -96,6 +96,12 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        if (lhs.type==null) {
+                            return 1;
+                        }
+                        if (rhs.type==null) {
+                            return -1;
+                        }
                         return lhs.type.compareTo(rhs.type);
                     }
                 });
@@ -105,6 +111,12 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        if (lhs.relevantDate==null) {
+                            return 1;
+                        }
+                        if (rhs.relevantDate==null) {
+                            return -1;
+                        }
                         return lhs.relevantDate.compareTo(rhs.relevantDate);
                     }
                 });

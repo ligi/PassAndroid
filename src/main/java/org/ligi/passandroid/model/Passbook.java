@@ -412,6 +412,9 @@ public class Passbook {
         public String value;
     }
 
+    public boolean hasRelevantDate() {
+        return relevantDate!=null;
+    }
     public DateTime getRelevantDate() {
         return new DateTime(relevantDate);
     }

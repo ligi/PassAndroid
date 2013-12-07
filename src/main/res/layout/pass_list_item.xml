@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:background="@drawable/clickable_bg">
 
-<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -30,35 +30,18 @@
             android:orientation="vertical"
             android:layout_gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/date"
+                tools:text="12.10.2013 17:00"
+                android:layout_width="wrap_content"
 
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/label"
-                    tools:text="Topic"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <TextView
-                    android:id="@+id/date"
-                    tools:text="12.10.2013 17:00"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:textColorSecondary"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
+                android:textColor="?android:textColorSecondary"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingRight="3dp" />
 
             <TextView
-                android:id="@+id/descr"
+                android:id="@+id/title"
                 tools:text="Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,10 +50,31 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="10dip"
-            android:layout_height="match_parent"
-            android:id="@+id/colorIndicator" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/categoryImage"
+                android:src="@drawable/cat_boarding_top" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="foo"
+                android:gravity="center"
+                android:layout_height="16dp"
+                android:background="@color/abc_search_url_text_normal"
+                android:id="@+id/colorIndicator" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cat_btm" />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

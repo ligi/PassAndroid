@@ -8,7 +8,9 @@ public class ReducedPassInformation implements Serializable {
 
     public ReducedPassInformation(Passbook pass) {
         type = pass.getType();
-        relevantDate = pass.getRelevantDate();
+        if (pass.hasRelevantDate()) {
+            relevantDate = pass.getRelevantDate();
+        }
         backgroundColor = pass.getBackGroundColor();
         name = pass.getDescription();
         iconPath = pass.getIconPath();

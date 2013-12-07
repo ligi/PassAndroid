@@ -17,11 +17,10 @@ import butterknife.ButterKnife;
 
 public class PassVisualizer {
     public static void visualize(ReducedPassInformation passbook, View res) {
-        TextView tv = ButterKnife.findById(res, R.id.label);
-        TextView more_tv = ButterKnife.findById(res, R.id.descr);
-        TextView date_tv = ButterKnife.findById(res, R.id.date);
+        TextView titleTextView = ButterKnife.findById(res, R.id.title);
+        TextView dateTextView = ButterKnife.findById(res, R.id.date);
         View colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
-
+        ImageView categoryIndicator = ButterKnife.findById(res,R.id.categoryImage);
 
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
         ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
@@ -36,14 +35,27 @@ public class PassVisualizer {
             }
         }
 
+        if (passbook.type!=null) {
+            String typeLowerCase = passbook.type.toLowerCase();
+            if (typeLowerCase.contains("oarding")) {
+                categoryIndicator.setImageResource(R.drawable.cat_boarding_top);
+            } else if (typeLowerCase.contains("event")) {
+                categoryIndicator.setImageResource(R.drawable.cat_event_crop);
+            } else if (typeLowerCase.contains("coupon")) {
+                categoryIndicator.setImageResource(R.drawable.cat_coupon_crop);
+            }else if (typeLowerCase.contains("generic")) {
+                categoryIndicator.setImageResource(R.drawable.cat_generic_crop);
+            }else if (typeLowerCase.contains("store")) {
+                categoryIndicator.setImageResource(R.drawable.cat_store_crop);
+            }
+        }
+
         colorIndicator.setBackgroundColor(passbook.backgroundColor);
-        tv.setText(passbook.type);
+        titleTextView.setText(passbook.name);
 
         if (passbook.relevantDate != null) {
-            date_tv.setText(DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.HOUR_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
-            //date_tv.setText(passbook.relevantDate.to);
+            dateTextView.setText(DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.HOUR_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
         }
-        more_tv.setText(passbook.name);
 
     }
 
