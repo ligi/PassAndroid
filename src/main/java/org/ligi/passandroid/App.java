@@ -31,7 +31,7 @@ public class App extends Application {
     }
 
     public static boolean isDeveloperMode() {
-        return true;
+        return false;
     }
 
     public static Bus getBus() {
