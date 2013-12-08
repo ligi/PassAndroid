@@ -1,5 +1,7 @@
 package org.ligi.passandroid.helper;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.format.DateUtils;
@@ -7,20 +9,54 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.Passbook;
 import org.ligi.passandroid.model.ReducedPassInformation;
+import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 
 public class PassVisualizer {
-    public static void visualize(ReducedPassInformation passbook, View res) {
+    public static void visualize(final Activity activity, final ReducedPassInformation passbook, View res) {
         TextView titleTextView = ButterKnife.findById(res, R.id.title);
         TextView dateTextView = ButterKnife.findById(res, R.id.date);
         TextView colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
-        ImageView categoryIndicator = ButterKnife.findById(res,R.id.categoryImage);
+        ImageView categoryIndicator = ButterKnife.findById(res, R.id.categoryImage);
+
+
+        if (passbook.hasLocation) {
+            ButterKnife.findById(res, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(passbook.id), false);
+                }
+            });
+        } else {
+            ButterKnife.findById(res, R.id.navigateTo).setVisibility(View.GONE);
+        }
+
+        if (passbook.relevantDate != null) {
+            ButterKnife.findById(res, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                    intent.setType("vnd.android.cursor.item/event");
+                    intent.putExtra("beginTime", passbook.relevantDate.getMillis());
+                    intent.putExtra("endTime", passbook.relevantDate.getMillis() + 60 * 60 * 1000);
+                    intent.putExtra("title", passbook.name);
+                    activity.startActivity(intent);
+                }
+            });
+        } else {
+            ButterKnife.findById(res, R.id.addCalendar).setVisibility(View.GONE);
+        }
+
+        if (passbook.relevantDate == null && !passbook.hasLocation) {
+            ButterKnife.findById(res, R.id.actionsContainer).setVisibility(View.GONE);
+        }
 
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
         ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
@@ -35,7 +71,7 @@ public class PassVisualizer {
             }
         }
 
-        if (passbook.type!=null) {
+        if (passbook.type != null) {
             String typeLowerCase = passbook.type.toLowerCase();
             if (typeLowerCase.contains("oarding")) {
                 categoryIndicator.setImageResource(R.drawable.cat_boarding_top);
@@ -46,10 +82,10 @@ public class PassVisualizer {
             } else if (typeLowerCase.contains("coupon")) {
                 colorIndicator.setText("%");
                 categoryIndicator.setImageResource(R.drawable.cat_coupon_crop);
-            }else if (typeLowerCase.contains("generic")) {
+            } else if (typeLowerCase.contains("generic")) {
                 colorIndicator.setText("G");
                 categoryIndicator.setImageResource(R.drawable.cat_generic_crop);
-            }else if (typeLowerCase.contains("store")) {
+            } else if (typeLowerCase.contains("store")) {
                 colorIndicator.setText("SC");
                 categoryIndicator.setImageResource(R.drawable.cat_store_crop);
             }

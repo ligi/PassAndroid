@@ -82,7 +82,11 @@ public class PassStore {
     }
 
     public Passbook getPassbookAt(int pos) {
-        String mPath = path + "/" + reducedPassInformations.get(pos).id;
+        return getPassbookForId(reducedPassInformations.get(pos).id);
+    }
+
+    public Passbook getPassbookForId(String id) {
+        String mPath = path + "/" + id;
         return new Passbook(mPath);
     }
 

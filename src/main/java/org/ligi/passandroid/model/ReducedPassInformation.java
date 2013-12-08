@@ -16,6 +16,7 @@ public class ReducedPassInformation implements Serializable {
         name = pass.getDescription();
         iconPath = pass.getIconPath();
         id = pass.getId();
+        hasLocation = !pass.getLocations().isEmpty();
     }
 
     public String id;
@@ -25,4 +26,5 @@ public class ReducedPassInformation implements Serializable {
     public int foregroundColor;
     public String iconPath;
     public DateTime relevantDate;
+    public boolean hasLocation;
 }

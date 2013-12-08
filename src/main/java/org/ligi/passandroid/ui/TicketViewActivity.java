@@ -110,7 +110,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
         back_tv.setText(Html.fromHtml(back_str));
 
         Linkify.addLinks(back_tv, Linkify.ALL);
-        PassVisualizer.visualize(new ReducedPassInformation(passbook), contentView);
+        PassVisualizer.visualize(this, new ReducedPassInformation(passbook), contentView);
     }
 
     public String getPassDebugInfo(Passbook passbook) {

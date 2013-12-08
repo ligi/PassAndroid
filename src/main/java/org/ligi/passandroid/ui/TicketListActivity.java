@@ -30,7 +30,6 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.helper.PassVisualizer;
-import org.ligi.passandroid.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -49,8 +48,6 @@ import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends ActionBarActivity {
-
-    private PassStore passStore;
 
     private LayoutInflater inflater;
     private PassAdapter passadapter;
@@ -77,23 +74,16 @@ public class TicketListActivity extends ActionBarActivity {
         refreshPasses();
     }
 
-    /*
-        @OnItemLongClick(R.id.content_list)
-        boolean listItemLongClick(final int position) {
-
-
-        }
-    */
     @OnItemClick(R.id.content_list)
     void lisItemCick(int position) {
         Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
-        intent.putExtra("path", passStore.getPassbookAt(position).getPath());
+        intent.putExtra("path", App.getPassStore().getPassbookAt(position).getPath());
         startActivity(intent);
     }
 
     public void refreshPasses() {
-        passStore.refreshPassesList();
-        passStore.sort(App.getSettings().getSortOrder());
+        App.getPassStore().refreshPassesList();
+        App.getPassStore().sort(App.getSettings().getSortOrder());
         passadapter.notifyDataSetChanged();
     }
 
@@ -103,8 +93,6 @@ public class TicketListActivity extends ActionBarActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
-
-        passStore = new PassStore(this);
 
         passadapter = new PassAdapter();
         listView.setAdapter(passadapter);
@@ -151,7 +139,7 @@ public class TicketListActivity extends ActionBarActivity {
 
                     @Override
                     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        if (new PassMenuOptions(TicketListActivity.this, passStore.getPassbookAt(position)).process(menuItem)) {
+                        if (new PassMenuOptions(TicketListActivity.this, App.getPassStore().getPassbookAt(position)).process(menuItem)) {
                             actionMode.finish();
                             return true;
                         }
@@ -214,14 +202,14 @@ public class TicketListActivity extends ActionBarActivity {
 
         super.onResume();
 
-        if (passStore.isEmpty()) {
+        if (App.getPassStore().isEmpty()) {
             scan_task = new ScanForPassesTask();
             scan_task.execute();
         }
 
         updateUIToScanningState();
 
-        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) passStore.passCount());
+        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
 
         App.getBus().register(this);
 
@@ -375,7 +363,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            return passStore.passCount();
+            return App.getPassStore().passCount();
         }
 
         @Override
@@ -393,7 +381,7 @@ public class TicketListActivity extends ActionBarActivity {
 
             View res = inflater.inflate(R.layout.pass_list_item, null);
 
-            PassVisualizer.visualize(passStore.getReducedPassbookAt(position), res);
+            PassVisualizer.visualize(TicketListActivity.this, App.getPassStore().getReducedPassbookAt(position), res);
 
             return res;
         }
