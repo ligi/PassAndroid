@@ -11,6 +11,8 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -231,11 +233,16 @@ public class TicketListActivity extends ActionBarActivity {
 
         supportInvalidateOptionsMenu();
 
+        String html;
         if (scanning) {
-            emptyView.setText("No passes yet - searching for passes");
+            html = "No passes yet - searching for passes - you can <a href='http://ligi.de/passandroid_samples/index.html'>download example passes from here</a> ";
         } else {
-            emptyView.setText("No passes yet - try to get some - then click on them or hit refresh");
+            html = "No passes yet - you can <a href='http://ligi.de/passandroid_samples/index.html'>download example passes from here</a>";
         }
+
+        emptyView.setText(Html.fromHtml(html));
+
+        emptyView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
