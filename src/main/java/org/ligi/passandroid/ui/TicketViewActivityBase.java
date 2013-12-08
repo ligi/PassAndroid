@@ -8,8 +8,6 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.androidquery.AQuery;
-
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.Passbook;
@@ -19,7 +17,6 @@ public class TicketViewActivityBase extends ActionBarActivity {
     protected Bitmap icon_bitmap;
     protected String path;
     public Passbook passbook;
-    private AQuery aQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
