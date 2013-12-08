@@ -235,9 +235,9 @@ public class TicketListActivity extends ActionBarActivity {
 
         String html;
         if (scanning) {
-            html = "No passes yet - searching for passes - you can <a href='http://ligi.de/passandroid_samples/index.html'>download example passes from here</a> ";
+            html = getString(R.string.scan_empty_text);
         } else {
-            html = "No passes yet - you can <a href='http://ligi.de/passandroid_samples/index.html'>download example passes from here</a>";
+            html = getString(R.string.no_passes_empty_text);
         }
 
         emptyView.setText(Html.fromHtml(html));
