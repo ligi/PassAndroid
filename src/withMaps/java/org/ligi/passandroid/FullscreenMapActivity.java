@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.passandroid.ui.TicketViewActivityBase;
 
@@ -22,7 +23,6 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) { // no google play services
             final List<PassLocation> locations = passbook.getLocations();
@@ -39,7 +39,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
                 for (PassLocation loc : locations) {
                     cs[i++] = loc.description;
                 }
-                new AlertDialog.Builder(this).setTitle("Choose Location").setItems(cs, new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(this).setTitle(getString(R.string.choose_location)).setItems(cs, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -53,9 +53,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
 
         }
 
-
         setContentView(R.layout.fullscreen_map);
-
     }
 
     private void startIntentForLocation(PassLocation location) {
