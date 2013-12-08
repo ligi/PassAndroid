@@ -82,6 +82,8 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         barcode_img.setImageBitmap(passbook.getBarcodeBitmap(AXT.at(getWindowManager()).getSmallestSide() / 3));
         logo_img.setImageBitmap(passbook.getLogoBitmap());
+
+        logo_img.setBackgroundColor(passbook.getBackGroundColor());
         thumbnail_img.setImageBitmap(passbook.getThumbnailImage());
 
         if (findViewById(R.id.map_container) != null) {
