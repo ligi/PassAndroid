@@ -99,6 +99,8 @@ public class PassVisualizer {
 
         if (passbook.relevantDate != null) {
             dateTextView.setText(DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.HOUR_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+        } else {
+            dateTextView.setVisibility(View.GONE);
         }
 
     }
