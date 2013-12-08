@@ -61,6 +61,8 @@ public class PassVisualizer {
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
         ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
 
+        icon_img.setBackgroundColor(passbook.backgroundColor);
+
         if (passbook.iconPath != null) {
             Bitmap ico = BitmapFactory.decodeFile(passbook.iconPath);
 
