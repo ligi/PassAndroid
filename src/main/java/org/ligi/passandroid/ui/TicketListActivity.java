@@ -41,6 +41,9 @@ import java.io.InputStream;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
+import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
@@ -65,6 +68,9 @@ public class TicketListActivity extends ActionBarActivity {
     @InjectView(R.id.emptyView)
     TextView emptyView;
     private ActionMode.Callback actionMode;
+
+    @InjectView(R.id.ptr_layout)
+    PullToRefreshLayout mPullToRefreshLayout;
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
@@ -167,6 +173,18 @@ public class TicketListActivity extends ActionBarActivity {
 
             }
         });
+
+        ActionBarPullToRefresh.from(this)
+                .allChildrenArePullable()
+                .listener(new OnRefreshListener() {
+                    @Override
+                    public void onRefreshStarted(View view) {
+                        new ScanForPassesTask().execute();
+                    }
+                })
+
+                .setup(mPullToRefreshLayout);
+
     }
 
 
@@ -221,7 +239,9 @@ public class TicketListActivity extends ActionBarActivity {
     }
 
     public void updateUIToScanningState() {
-        setSupportProgressBarIndeterminateVisibility(scanning);
+
+        mPullToRefreshLayout.setRefreshing(scanning);
+
         supportInvalidateOptionsMenu();
 
         if (scanning) {

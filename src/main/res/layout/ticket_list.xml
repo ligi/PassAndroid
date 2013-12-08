@@ -18,12 +18,20 @@
             android:gravity="center"
             android:id="@+id/emptyView" />
 
-        <ListView
+        <uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout
+            android:id="@+id/ptr_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/content_list"
-            android:choiceMode="singleChoice"
-            android:divider="@null"></ListView>
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/content_list"
+                android:choiceMode="singleChoice"
+                android:divider="@null"></ListView>
+
+        </uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout>
+
     </FrameLayout>
 
     <fragment

@@ -3,9 +3,8 @@
 
     <item
         android:id="@+id/menu_refresh"
-        yourapp:showAsAction="ifRoom|withText"
-        android:title="@string/menu_refresh"
-        android:icon="@drawable/ic_menu_refresh" />
+        yourapp:showAsAction="never|withText"
+        android:title="@string/menu_refresh" />
 
     <item
         android:id="@+id/menu_help"
