@@ -121,7 +121,6 @@ public class TicketListActivity extends ActionBarActivity {
             @Override
             public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, long id) {
                 listView.setItemChecked(position, true);
-                parent.setSelection(position);
                 view.refreshDrawableState();
 
                 actionMode = new ActionMode.Callback() {
