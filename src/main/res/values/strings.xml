@@ -11,8 +11,11 @@
     <string name="help_label">Help</string>
     <string name="help_content">
         <![CDATA[
+        <H1>Try the new Version!</H1>
+        There is a<a href=\'https://plus.google.com/communities/117029145995882022575\'> new version</a> in the making which is much nicer looking, but still FREE and Open-Source - please try it out!
+
         <H1>Answers</H1>
-        Click on the barcode to get it fullscreen and show to the one who needs to see/scan it. If you have no passbook yet - but want to test the app anyway - you could <a href=\'http://www.passsource.com/\'>get some from here</<a> If you have no idea what this is all about you can have a look <a href=\'http://en.wikipedia.org/wiki/Passbook_(application)\'>at Wikipedia.</a> <br/>
+        Click on the barcode to get it fullscreen and show to the one who needs to see/scan it. If you have no passbook yet - but want to test the app anyway - you could <a href=\'http://ligi.de/passandroid_samples/index.html\'>get some from here</<a> If you have no idea what this is all about you can have a look <a href=\'http://en.wikipedia.org/wiki/Passbook_(application)\'>at Wikipedia.</a> <br/>
 
         <H1>Questions</H1>Give <b>feedback</b> in the <a href=\'https://plus.google.com/communities/113359783015991036195\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
 
