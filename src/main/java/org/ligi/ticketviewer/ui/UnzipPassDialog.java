@@ -23,6 +23,9 @@ public class UnzipPassDialog {
     }
 
     public static void show(final InputStream ins, final Activity activity, final FinishCallback callAfterFinishOnUIThread) {
+        if (activity.isFinishing()) {
+            return;
+        }
 
         ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
 
