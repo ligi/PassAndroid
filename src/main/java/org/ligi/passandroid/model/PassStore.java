@@ -121,7 +121,7 @@ public class PassStore {
                         if (rhs.relevantDate==null) {
                             return -1;
                         }
-                        return lhs.relevantDate.compareTo(rhs.relevantDate);
+                        return rhs.relevantDate.compareTo(lhs.relevantDate);
                     }
                 });
                 break;
