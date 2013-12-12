@@ -75,7 +75,22 @@
                 style="@style/nav_text" />
         </LinearLayout>
 
+
         <View style="@style/seperator_view" />
+
+        <LinearLayout
+            style="@style/nav_btn"
+
+            android:id="@+id/share">
+
+            <ImageView
+                style="@style/nav_icon"
+                android:src="@android:drawable/ic_menu_share" />
+
+            <TextView
+                android:text="Share"
+                style="@style/nav_text" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -21,9 +21,11 @@ import butterknife.OnClick;
 
 public class NavigationFragment extends Fragment {
 
+    private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=org.ligi.passandroid";
+
     @OnClick(R.id.rate)
     void rateClick() {
-        openURL("https://play.google.com/store/apps/details?id=org.ligi.passandroid");
+        openURL(PLAY_STORE_URL);
     }
 
     @OnClick(R.id.community)
@@ -31,10 +33,19 @@ public class NavigationFragment extends Fragment {
         openURL("https://plus.google.com/communities/116353894782342292067");
     }
 
+    @OnClick(R.id.share)
+    void share() {
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, PLAY_STORE_URL);
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
+
     private void openURL(String url) {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+        new Intent();
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 
     @InjectView(R.id.radioGroup)
