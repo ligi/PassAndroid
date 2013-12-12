@@ -33,8 +33,6 @@ public class PassStore {
 
     }
 
-    private SortOrder sortOrder;
-
     private List<ReducedPassInformation> reducedPassInformations;
 
 
@@ -100,10 +98,10 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
-                        if (lhs.type==null) {
+                        if (lhs.type == null) {
                             return 1;
                         }
-                        if (rhs.type==null) {
+                        if (rhs.type == null) {
                             return -1;
                         }
                         return lhs.type.compareTo(rhs.type);
@@ -115,10 +113,10 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
-                        if (lhs.relevantDate==null) {
+                        if (lhs.relevantDate == null) {
                             return 1;
                         }
-                        if (rhs.relevantDate==null) {
+                        if (rhs.relevantDate == null) {
                             return -1;
                         }
                         return rhs.relevantDate.compareTo(lhs.relevantDate);
