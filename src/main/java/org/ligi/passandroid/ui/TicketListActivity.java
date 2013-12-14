@@ -30,6 +30,7 @@ import com.squareup.otto.Subscribe;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.tracedroid.TraceDroid;
@@ -113,7 +114,12 @@ public class TicketListActivity extends ActionBarActivity {
             ms.level(MarketService.MINOR).checkVersion();
         }
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                App.getBus().post(new NavigationOpenedEvent());
+            }
+        };
         drawer.setDrawerListener(drawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

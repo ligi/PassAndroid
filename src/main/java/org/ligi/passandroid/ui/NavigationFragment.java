@@ -12,12 +12,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,6 +31,7 @@ import butterknife.OnClick;
 public class NavigationFragment extends Fragment {
 
     private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=org.ligi.passandroid";
+    private List<PassStore.CountedType> countedTypes;
 
     @OnClick(R.id.rate)
     void rateClick() {
@@ -64,6 +70,9 @@ public class NavigationFragment extends Fragment {
     @InjectView(R.id.navCategoriesInner)
     ViewGroup categoriesContainer;
 
+    @InjectView(R.id.navCategoriesOuter)
+    ViewGroup categoriesContainerOuter;
+
     public NavigationFragment() {
 
     }
@@ -99,9 +108,44 @@ public class NavigationFragment extends Fragment {
                 break;
         }
 
+        createCategoryJumpMarks(inflater);
+
+        App.getBus().register(this);
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        App.getBus().unregister(this);
+    }
+
+    @Subscribe
+    public void onNavigationOpened(NavigationOpenedEvent event) {
+        createCategoryJumpMarks(LayoutInflater.from(getActivity()));
+    }
+
+    private void createCategoryJumpMarks(LayoutInflater inflater) {
+
+        List<PassStore.CountedType> newCountedTypes = App.getPassStore().getCountedTypes();
+
+        if (countedTypes != null && countedTypes.size() == newCountedTypes.size()) {
+            return;
+        }
+
+        if (newCountedTypes.size() > 1) {
+            categoriesContainerOuter.setVisibility(View.VISIBLE);
+        } else {
+            categoriesContainerOuter.setVisibility(View.GONE);
+            return;
+        }
+
         categoriesContainer.removeAllViews();
 
-        for (PassStore.CountedType countedType : App.getPassStore().getCountedTypes()) {
+        countedTypes = newCountedTypes;
+
+        for (PassStore.CountedType countedType : countedTypes) {
             final String type = countedType.type;
 
             View item = inflater.inflate(R.layout.item_nav_pass_category, null);
@@ -130,7 +174,6 @@ public class NavigationFragment extends Fragment {
 
             categoriesContainer.addView(item);
         }
-        return view;
     }
 
 }
