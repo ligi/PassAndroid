@@ -14,6 +14,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.Passbook;
 import org.ligi.passandroid.model.ReducedPassInformation;
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
+import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class PassVisualizer {
     public static void visualize(final Activity activity, final ReducedPassInformation passbook, View res) {
         TextView titleTextView = ButterKnife.findById(res, R.id.title);
         TextView dateTextView = ButterKnife.findById(res, R.id.date);
-        TextView colorIndicator = ButterKnife.findById(res, R.id.colorIndicator);
-        ImageView categoryIndicator = ButterKnife.findById(res, R.id.categoryImage);
+
+        CategoryIndicatorView categoryIndicator = ButterKnife.findById(res, R.id.categoryView);
 
 
         if (passbook.hasLocation) {
@@ -74,27 +75,13 @@ public class PassVisualizer {
         }
 
         if (passbook.type != null) {
-            String typeLowerCase = passbook.type.toLowerCase();
-            if (typeLowerCase.contains("oarding")) {
-                categoryIndicator.setImageResource(R.drawable.cat_boarding_top);
-                colorIndicator.setText("BP");
-            } else if (typeLowerCase.contains("event")) {
-                categoryIndicator.setImageResource(R.drawable.cat_event_crop);
-                colorIndicator.setText("T");
-            } else if (typeLowerCase.contains("coupon")) {
-                colorIndicator.setText("%");
-                categoryIndicator.setImageResource(R.drawable.cat_coupon_crop);
-            } else if (typeLowerCase.contains("generic")) {
-                colorIndicator.setText("G");
-                categoryIndicator.setImageResource(R.drawable.cat_generic_crop);
-            } else if (typeLowerCase.contains("store")) {
-                colorIndicator.setText("SC");
-                categoryIndicator.setImageResource(R.drawable.cat_store_crop);
-            }
+            categoryIndicator.setImageByCategory(passbook.type);
+            categoryIndicator.setExtraTextToCatShortString(passbook.type);
         }
 
-        colorIndicator.setBackgroundColor(passbook.backgroundColor);
-        colorIndicator.setTextColor(passbook.foregroundColor);
+        categoryIndicator.setTextBackgroundColor(passbook.backgroundColor);
+        categoryIndicator.setTextColor(passbook.foregroundColor);
+
         titleTextView.setText(passbook.name);
 
         if (passbook.relevantDate != null) {

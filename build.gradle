@@ -36,6 +36,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
     flavorGroups "maps", "analytics"
     productFlavors {
 
@@ -89,6 +94,7 @@ dependencies {
 
     testCompile 'junit:junit:4.10'
     testCompile 'org.robolectric:robolectric:2.2'
+    testCompile 'org.easytesting:fest:1.0.15'
     testCompile 'com.squareup:fest-android:1.0.7'
 
     testCompile fileTree(dir: 'libs', include: 'core-2.3.0-SNAPSHOT.jar')

@@ -40,5 +40,11 @@
     <string name="choose_location">Choose Location</string>
     <string name="scan_empty_text"><![CDATA[searching for passes - you can also <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a> ]]></string>
     <string name="no_passes_empty_text"><![CDATA[No passes yet - you can <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a>]]></string>
+    <string name="boarding_pass">Boarding Pass</string>
+    <string name="category_event">Event</string>
+    <string name="category_coupon">Coupon</string>
+    <string name="category_storecard">Store Card</string>
+    <string name="category_generic">generic</string>
+    <string name="category_none">no Category</string>
 
 </resources>

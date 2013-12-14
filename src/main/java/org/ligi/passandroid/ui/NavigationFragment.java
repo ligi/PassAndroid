@@ -4,16 +4,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
+import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -57,6 +61,9 @@ public class NavigationFragment extends Fragment {
     @InjectView(R.id.dateRadioButton)
     RadioButton dateRadioButton;
 
+    @InjectView(R.id.navCategoriesInner)
+    ViewGroup categoriesContainer;
+
     public NavigationFragment() {
 
     }
@@ -90,6 +97,38 @@ public class NavigationFragment extends Fragment {
             case TYPE:
                 categoryRadioButton.setChecked(true);
                 break;
+        }
+
+        categoriesContainer.removeAllViews();
+
+        for (PassStore.CountedType countedType : App.getPassStore().getCountedTypes()) {
+            final String type = countedType.type;
+
+            View item = inflater.inflate(R.layout.item_nav_pass_category, null);
+
+            // gather views
+            CategoryIndicatorView categoryIndicatorView = ButterKnife.findById(item, R.id.categoryView);
+            TextView labelText = ButterKnife.findById(item, R.id.navCategoryLabel);
+
+            categoryIndicatorView.setExtraText(String.valueOf(countedType.count));
+            categoryIndicatorView.setTextBackgroundColor(CategoryHelper.getCategoryDefaultBG(type));
+            categoryIndicatorView.setTextColor(CategoryHelper.getCategoryDefaultFG(type));
+            categoryIndicatorView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+
+            categoryIndicatorView.setImageByCategory(type);
+
+            labelText.setText(CategoryHelper.getHumanCategoryString(type));
+
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), TicketListActivity.class);
+                    i.putExtra("typeFocus", type);
+                    startActivity(i);
+                }
+            });
+
+            categoriesContainer.addView(item);
         }
         return view;
     }

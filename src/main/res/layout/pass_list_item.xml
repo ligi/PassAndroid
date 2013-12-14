@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:background="@drawable/click_and_check_able_bg">
 
-<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -57,31 +57,12 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <org.ligi.passandroid.ui.views.CategoryIndicatorView
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/categoryImage"
-                    android:src="@drawable/cat_boarding_top" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:text="foo"
-                    android:gravity="center"
-                    android:layout_height="16dp"
-                    android:background="@color/abc_search_url_text_normal"
-                    android:id="@+id/colorIndicator" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cat_btm" />
-            </LinearLayout>
+                android:id="@+id/categoryView" />
+            <!-- <include layout="@layout/category_indicator" /> -->
         </LinearLayout>
 
 

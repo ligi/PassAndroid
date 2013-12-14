@@ -10,7 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PassStore {
 
@@ -34,7 +36,6 @@ public class PassStore {
     }
 
     private List<ReducedPassInformation> reducedPassInformations;
-
 
     public PassStore(Context context) {
         this.context = context;
@@ -125,6 +126,44 @@ public class PassStore {
                 break;
         }
 
+    }
+
+    public class CountedType implements Comparable<CountedType> {
+        public final String type;
+        public final Integer count;
+
+        public CountedType(String type, Integer count) {
+            this.type = type;
+            this.count = count;
+        }
+
+        @Override
+        public int compareTo(CountedType another) {
+            return another.count - count;
+        }
+    }
+
+    public List<CountedType> getCountedTypes() {
+        Map<String, Integer> tempMap = new HashMap<String, Integer>();
+
+        for (ReducedPassInformation info : reducedPassInformations) {
+            if (tempMap.containsKey(info.getTypeNotNull())) {
+                Integer i = tempMap.get(info.getTypeNotNull());
+                tempMap.put(info.getTypeNotNull(), i + 1);
+            } else {
+                tempMap.put(info.getTypeNotNull(), 1);
+            }
+        }
+
+        List<CountedType> result = new ArrayList<CountedType>();
+
+        for (String type : tempMap.keySet()) {
+            result.add(new CountedType(type, tempMap.get(type)));
+        }
+
+        Collections.sort(result);
+
+        return result;
     }
 
 }

@@ -41,6 +41,8 @@ public class Passbook {
     private JSONObject eventTicket = null;
     public String plainJsonString;
 
+    public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+
 
     public Passbook(String path) {
         this.path = path;
@@ -147,9 +149,8 @@ public class Passbook {
 
 
             // try to find in a predefined set of tickets
-            String[] types = {"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
-            for (String atype : types) {
+            for (String atype : TYPES) {
                 if (pass_json.has(atype)) {
                     type = atype;
                 }
@@ -413,8 +414,9 @@ public class Passbook {
     }
 
     public boolean hasRelevantDate() {
-        return relevantDate!=null;
+        return relevantDate != null;
     }
+
     public DateTime getRelevantDate() {
         return new DateTime(relevantDate);
     }

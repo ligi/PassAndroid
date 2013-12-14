@@ -33,12 +33,26 @@
             android:text="Date" />
     </RadioGroup>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffe3e3e3"
+        android:orientation="vertical"
+        android:id="@+id/navCategoriesOuter">
+
+        <TextView
+            android:text="CATEGORIES"
+            style="@style/nav_topic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navCategoriesInner"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <TextView
         android:text="MORE"
-        android:padding="7dp" />
+        style="@style/nav_topic" />
 
 
     <LinearLayout
@@ -54,8 +68,6 @@
             android:text="Play" />
     </LinearLayout>
 
-    <View style="@style/seperator_view" />
-
     <LinearLayout
         style="@style/nav_btn"
 
@@ -69,9 +81,6 @@
             android:text="Community"
             style="@style/nav_text" />
     </LinearLayout>
-
-
-    <View style="@style/seperator_view" />
 
     <LinearLayout
         style="@style/nav_btn"

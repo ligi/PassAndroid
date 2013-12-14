@@ -27,4 +27,12 @@ public class ReducedPassInformation implements Serializable {
     public String iconPath;
     public DateTime relevantDate;
     public boolean hasLocation;
+
+    public String getTypeNotNull() {
+        if (type == null) {
+            return "none";
+        } else {
+            return type;
+        }
+    }
 }

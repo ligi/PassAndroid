@@ -174,6 +174,21 @@ public class TicketListActivity extends ActionBarActivity {
 
                 .setup(mPullToRefreshLayout);
 
+        scrollToTypeIfWanted();
+    }
+
+    private void scrollToTypeIfWanted() {
+        if (!getIntent().hasExtra("typeFocus")) {
+            return;
+        }
+
+        final String typeFocus = getIntent().getStringExtra("typeFocus");
+        for (int i = 0; i < passadapter.getCount(); i++) {
+            if (App.getPassStore().getReducedPassbookAt(i).getTypeNotNull().equals(typeFocus)) {
+                listView.setSelection(i);
+                return; // we are done
+            }
+        }
     }
 
 
