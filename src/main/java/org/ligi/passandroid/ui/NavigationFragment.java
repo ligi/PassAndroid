@@ -31,7 +31,7 @@ import butterknife.OnClick;
 public class NavigationFragment extends Fragment {
 
     private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=org.ligi.passandroid";
-    private List<PassStore.CountedType> countedTypes;
+    private int lastDisplayedStoreCount = -1;
 
     @OnClick(R.id.rate)
     void rateClick() {
@@ -128,13 +128,13 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        List<PassStore.CountedType> newCountedTypes = App.getPassStore().getCountedTypes();
+        List<PassStore.CountedType> countedTypes = App.getPassStore().getCountedTypes();
 
-        if (countedTypes != null && countedTypes.size() == newCountedTypes.size()) {
-            return;
+        if (lastDisplayedStoreCount == App.getPassStore().passCount()) {
+            return; // nothing new - all displayed
         }
 
-        if (newCountedTypes.size() > 1) {
+        if (countedTypes.size() > 1) {
             categoriesContainerOuter.setVisibility(View.VISIBLE);
         } else {
             categoriesContainerOuter.setVisibility(View.GONE);
@@ -142,8 +142,6 @@ public class NavigationFragment extends Fragment {
         }
 
         categoriesContainer.removeAllViews();
-
-        countedTypes = newCountedTypes;
 
         for (PassStore.CountedType countedType : countedTypes) {
             final String type = countedType.type;
