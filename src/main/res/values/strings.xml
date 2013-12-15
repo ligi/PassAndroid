@@ -75,5 +75,15 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="category_storecard">Store Card</string>
     <string name="category_generic">generic</string>
     <string name="category_none">no Category</string>
+    <string name="nav_more">MORE</string>
+    <string name="nav_sort">SORT</string>
+    <string name="nav_sort_category">Category</string>
+    <string name="nav_sort_date">Date</string>
+    <string name="nav_categories">CATEGORIES</string>
+    <string name="nav_play">Play</string>
+    <string name="nav_comunity">Community</string>
+    <string name="nav_share">Share</string>
+    <string name="pass_directions">Navigate</string>
+    <string name="pass_to_calendar">to Calendar</string>
 
 </resources>

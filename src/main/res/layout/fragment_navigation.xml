@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffe3e3e3"
-        android:text="SORT"
-        android:padding="7dp" />
+    android:text="@string/nav_sort"
+    android:padding="7dp" />
 
 
     <RadioGroup
@@ -24,14 +24,14 @@
             android:id="@+id/categoryRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/nav_sort_category"
             android:checked="true" />
 
         <RadioButton
             android:id="@+id/dateRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date" />
+            android:text="@string/nav_sort_date" />
     </RadioGroup>
 
     <LinearLayout
@@ -41,7 +41,7 @@
         android:id="@+id/navCategoriesOuter">
 
         <TextView
-            android:text="CATEGORIES"
+            android:text="@string/nav_categories"
             style="@style/nav_topic" />
 
         <LinearLayout
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="MORE"
+        android:text="@string/nav_more"
         style="@style/nav_topic" />
 
 
@@ -66,7 +66,7 @@
 
         <TextView
             style="@style/nav_text"
-            android:text="Play" />
+            android:text="@string/nav_play" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,7 +79,7 @@
             android:src="@drawable/community_icon" />
 
         <TextView
-            android:text="Community"
+            android:text="@string/nav_comunity"
             style="@style/nav_text" />
     </LinearLayout>
 
@@ -93,7 +93,7 @@
             android:src="@android:drawable/ic_menu_share" />
 
         <TextView
-            android:text="Share"
+            android:text="@string/nav_share"
             style="@style/nav_text" />
     </LinearLayout>
 
