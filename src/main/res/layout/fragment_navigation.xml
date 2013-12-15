@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:animateLayoutChanges="true">
 
-    <TextView
+<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffe3e3e3"

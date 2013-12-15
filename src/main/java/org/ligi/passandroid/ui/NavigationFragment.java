@@ -84,7 +84,7 @@ public class NavigationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_navigation, container, false);
+        final View view = inflater.inflate(R.layout.fragment_navigation, container, false);
         ButterKnife.inject(this, view);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -95,6 +95,7 @@ public class NavigationFragment extends Fragment {
                 } else if (categoryRadioButton.isChecked()) {
                     App.getSettings().setSortOrder(PassStore.SortOrder.TYPE);
                 }
+                setCategoryNavVisibilityByCurrentConditions();
                 App.getBus().post(new SortOrderChangeEvent());
             }
         });
@@ -126,6 +127,26 @@ public class NavigationFragment extends Fragment {
         createCategoryJumpMarks(LayoutInflater.from(getActivity()));
     }
 
+    private boolean shouldDisplaCategoryNav() {
+        if (App.getPassStore().getCountedTypes().size() < 2) { // navigation only makes sense with >=2 Elements
+            return false;
+        }
+
+        if (App.getSettings().getSortOrder() != PassStore.SortOrder.TYPE) { // nav only makes sense if we order by category
+            return false;
+        }
+
+        return true; // we are good to give this user this feature
+    }
+
+    private void setCategoryNavVisibilityByCurrentConditions() {
+        if (shouldDisplaCategoryNav()) {
+            categoriesContainerOuter.setVisibility(View.VISIBLE);
+        } else {
+            categoriesContainerOuter.setVisibility(View.GONE);
+        }
+    }
+
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
         List<PassStore.CountedType> countedTypes = App.getPassStore().getCountedTypes();
@@ -134,12 +155,7 @@ public class NavigationFragment extends Fragment {
             return; // nothing new - all displayed
         }
 
-        if (countedTypes.size() > 1) {
-            categoriesContainerOuter.setVisibility(View.VISIBLE);
-        } else {
-            categoriesContainerOuter.setVisibility(View.GONE);
-            return;
-        }
+        setCategoryNavVisibilityByCurrentConditions();
 
         categoriesContainer.removeAllViews();
 

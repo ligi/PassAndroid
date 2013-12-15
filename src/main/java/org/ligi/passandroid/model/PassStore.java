@@ -144,6 +144,7 @@ public class PassStore {
     }
 
     public List<CountedType> getCountedTypes() {
+        // TODO - some sort of caching
         Map<String, Integer> tempMap = new HashMap<String, Integer>();
 
         for (ReducedPassInformation info : reducedPassInformations) {
