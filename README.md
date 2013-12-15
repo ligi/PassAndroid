@@ -1,11 +1,11 @@
-[![Build Status](https://ligi.ci.cloudbees.com/job/AndroidTicketViewer/badge/icon)](https://ligi.ci.cloudbees.com/job/AndroidTicketViewer/)
+[![Build Status](https://ligi.ci.cloudbees.com/job/PassAndroid/badge/icon)](https://ligi.ci.cloudbees.com/job/PassAndroid/)
 
-AndroidTicketViewer
-===================
+PassAndroid
+===========
 
 Android App to view Passbook files
 
-<img src="https://raw.github.com/ligi/AndroidTicketViewer/master/promo/1024x500.png"/>
+<img src="https://raw.github.com/ligi/PassAndroid/master/promo/1024x500.png"/>
 
 Displays Passbook ( *.pkpass ) files & shows the Barcode ( QR or PDF417 format ). Offline usable.
 when preparing for the Chaos Communication Congress 2012 ( #29c3 ) I stumbled upon a passbook file for the first time. As I really like the idea of paperless tickets as it saves time and trees which both are very valuable to me. The problem was that I found no app with which I could use the downloaded passbook file. I found 2 apps which promised to do it, but both failed and judging by the comments: not only for me. Badly written intent-filters where one of the problems, but as both apps where closed source there was no option to submit a fix. After reading a bit I realized that this app can be written within one hour. the passbook format is just a zip container with some Json encoded data and some images. the essential thing is the Barcode message which is included in the json.
