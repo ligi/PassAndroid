@@ -99,6 +99,10 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        if (lhs.type == rhs.type) { // that looks bad but makes sense for both being null
+                            return 0;
+                        }
+
                         if (lhs.type == null) {
                             return 1;
                         }
@@ -114,6 +118,10 @@ public class PassStore {
                 Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
+                        if (lhs.relevantDate == rhs.relevantDate) { // that looks bad but makes sense for both being null
+                            return 0;
+                        }
+
                         if (lhs.relevantDate == null) {
                             return 1;
                         }
