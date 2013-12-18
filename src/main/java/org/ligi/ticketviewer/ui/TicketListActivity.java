@@ -1,11 +1,15 @@
 package org.ligi.ticketviewer.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +43,7 @@ import static org.ligi.ticketviewer.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends SherlockListActivity {
 
+    public static final String KEY_UPDATEBLOCK = "updateblock";
     private String[] passes;
     private LayoutInflater inflater;
     private String path;
@@ -85,6 +90,32 @@ public class TicketListActivity extends SherlockListActivity {
             ms.level(MarketService.MINOR).checkVersion();
         }
 
+        informUserAboutUpdate();
+    }
+
+    private void informUserAboutUpdate() {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (!sharedPreferences.getBoolean(KEY_UPDATEBLOCK, false)) {
+            new AlertDialog.Builder(this).setTitle("New Version!")
+                    .setView(getLayoutInflater().inflate(R.layout.update_notice, null))
+                    .setPositiveButton("Show me!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=org.ligi.passandroid"));
+                            startActivity(intent);
+                        }
+                    })
+                    .setNeutralButton("never", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            sharedPreferences.edit().putBoolean(KEY_UPDATEBLOCK, true).commit();
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton("later", null).show();
+        }
     }
 
     private void refresh_passes_list() {
