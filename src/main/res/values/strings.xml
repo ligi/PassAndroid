@@ -26,14 +26,14 @@ There are so called pkpass files - you can open them with this app - e.g. when y
 The app is offline usable once you downloaded the pass!
 
 <H1>Credits</H1>
-Big tanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design!
+Big thanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design!
 
 <H1>Feedback</H1>
 Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
 
 <h1>History</h1>
 
-I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea (even though this is from apple which I am not a big fan of normally - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
+I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
 One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
  - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
  - I got a mail from a nice designer who did a nice redesign
