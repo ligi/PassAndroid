@@ -1,6 +1,5 @@
 package org.ligi.passandroid.ui;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -55,13 +54,12 @@ public class TicketViewActivityBase extends ActionBarActivity {
         if (new PassMenuOptions(this, passbook).process(item)) {
             return true;
         }
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(TicketViewActivityBase.this, TicketListActivity.class);
-                startActivity(intent);
-                finish();
-                break;
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
