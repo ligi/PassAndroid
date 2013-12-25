@@ -101,9 +101,16 @@
                 <data android:mimeType="application/vnd-com.apple.pkpass" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.TicketViewActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:parentActivityName="org.ligi.passandroid.ui.TicketListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ligi.passandroid.ui.TicketListActivity" />
+        </activity>
+
         <activity
             android:name=".ui.FullscreenImageActivity"
             android:label="@string/app_name" />

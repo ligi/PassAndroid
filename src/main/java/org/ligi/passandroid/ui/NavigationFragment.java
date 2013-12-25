@@ -18,6 +18,7 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
+import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
@@ -55,6 +56,7 @@ public class NavigationFragment extends Fragment {
         new Intent();
         final Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -180,9 +182,7 @@ public class NavigationFragment extends Fragment {
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getActivity(), TicketListActivity.class);
-                    i.putExtra("typeFocus", type);
-                    startActivity(i);
+                    App.getBus().post(new TypeFocusEvent(type));
                 }
             });
 

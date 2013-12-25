@@ -32,6 +32,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
+import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -75,6 +76,12 @@ public class TicketListActivity extends ActionBarActivity {
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
         refreshPasses();
+    }
+
+    @Subscribe
+    public void typeFocus(TypeFocusEvent typeFocusEvent) {
+        scrollToType(typeFocusEvent.type);
+        drawer.closeDrawers();
     }
 
     @OnItemClick(R.id.content_list)
@@ -179,18 +186,11 @@ public class TicketListActivity extends ActionBarActivity {
                 })
 
                 .setup(mPullToRefreshLayout);
-
-        scrollToTypeIfWanted();
     }
 
-    private void scrollToTypeIfWanted() {
-        if (!getIntent().hasExtra("typeFocus")) {
-            return;
-        }
-
-        final String typeFocus = getIntent().getStringExtra("typeFocus");
+    private void scrollToType(String type) {
         for (int i = 0; i < passadapter.getCount(); i++) {
-            if (App.getPassStore().getReducedPassbookAt(i).getTypeNotNull().equals(typeFocus)) {
+            if (App.getPassStore().getReducedPassbookAt(i).getTypeNotNull().equals(type)) {
                 listView.setSelection(i);
                 return; // we are done
             }

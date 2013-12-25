@@ -3,6 +3,8 @@ package org.ligi.passandroid.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 import org.ligi.axt.AXT;
@@ -35,7 +37,8 @@ public class PassMenuOptions {
                             public void onClick(DialogInterface dialog, int which) {
                                 AXT.at(new File(passbook.getPath())).deleteRecursive();
                                 if (activity instanceof TicketViewActivityBase) {
-                                    activity.finish();
+                                    Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
+                                    NavUtils.navigateUpTo(activity, ticketListIntent);
                                 } else if (activity instanceof TicketListActivity) {
                                     ((TicketListActivity) activity).refreshPasses();
                                 }
