@@ -3,7 +3,7 @@ package org.ligi.passandroid.ui.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +19,7 @@ public class CategoryIndicatorView extends LinearLayout {
     TextView extraText;
 
     @InjectView(R.id.categoryTopImage)
-    ImageView topImage;
+    ViewGroup topImage;
 
     public CategoryIndicatorView(Context context) {
         super(context);
@@ -34,9 +34,11 @@ public class CategoryIndicatorView extends LinearLayout {
 
     public void setImageByCategory(String category) {
         if (category == null) {
-            topImage.setImageResource(R.drawable.category_none);
+            topImage.setBackgroundResource(R.drawable.category_boarding);
+            //topImage.setBackgroundResource(R.drawable.category_none);
         } else {
-            topImage.setImageResource(CategoryHelper.getCategoryTopImageRes(category));
+            topImage.setBackgroundResource(R.drawable.category_boarding);
+            //topImage.setImageResource(CategoryHelper.getCategoryTopImageRes(category));
         }
     }
 
