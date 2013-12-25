@@ -12,7 +12,7 @@
     <item
         android:id="@+id/menu_share"
         yourapp:showAsAction="ifRoom"
-        android:title="@string/menu_delete"
+        android:title="@string/menu_share"
         android:icon="@android:drawable/ic_menu_share" />
 
 </menu>
