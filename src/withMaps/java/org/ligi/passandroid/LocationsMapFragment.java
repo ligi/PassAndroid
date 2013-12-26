@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.passandroid.ui.TicketViewActivityBase;
-import org.ligi.tracedroid.logging.Log;
 
 import java.util.List;
 
@@ -57,18 +56,16 @@ public class LocationsMapFragment extends SupportMapFragment {
 
             if (locations.size() > 0) {
                 for (PassLocation l : locations) {
-                    Log.i("adding marker" + l.latlng);
 
                     // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
                     LatLng latLng = new LatLng(l.latlng.lat, l.latlng.lon);
                     mMap.addMarker(new MarkerOptions()
                             .position(latLng)
-                            .title(l.description)
+                            .title(l.getDescription())
                             //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
                     );
 
                     boundser = boundser.include(latLng);
-                    Log.i("added marker");
                 }
 
                 mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

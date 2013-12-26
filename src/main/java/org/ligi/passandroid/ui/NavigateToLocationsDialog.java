@@ -30,7 +30,7 @@ public class NavigateToLocationsDialog {
 
             int i = 0;
             for (PassLocation loc : locations) {
-                locationDescriptions[i++] = loc.description;
+                locationDescriptions[i++] = loc.getDescription();
             }
             new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.choose_location)).setItems(locationDescriptions, new DialogInterface.OnClickListener() {
                 @Override
@@ -58,7 +58,7 @@ public class NavigateToLocationsDialog {
 
         String description = "";
         try {
-            description = URLEncoder.encode(location.description, "UTF-8");
+            description = URLEncoder.encode(location.getDescription(), "UTF-8");
         } catch (UnsupportedEncodingException e1) {
             // OK - no descripion
         }

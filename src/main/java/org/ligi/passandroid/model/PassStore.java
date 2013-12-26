@@ -42,13 +42,19 @@ public class PassStore {
         refreshPassesList();
     }
 
+    public void deleteCache() {
+
+        String[] passIdents = getPassesDirSafely().list(new DirectoryFileFilter());
+
+        for (String id : passIdents) {
+            new File(path + "/" + id + "/base_cache.obj").delete();
+        }
+    }
+
     public void refreshPassesList() {
         path = TicketDefinitions.getPassesDir(context);
-        File passes_dir = new File(TicketDefinitions.getPassesDir(context));
 
-        if (!passes_dir.exists()) {
-            passes_dir.mkdirs();
-        }
+        File passes_dir = getPassesDirSafely();
 
         String[] passIdents = passes_dir.list(new DirectoryFileFilter());
         reducedPassInformations = new ArrayList<ReducedPassInformation>();
@@ -70,6 +76,15 @@ public class PassStore {
             reducedPassInformations.add(reducedPass);
         }
 
+    }
+
+    private File getPassesDirSafely() {
+        File passes_dir = new File(TicketDefinitions.getPassesDir(context));
+
+        if (!passes_dir.exists()) {
+            passes_dir.mkdirs();
+        }
+        return passes_dir;
     }
 
     public int passCount() {

@@ -121,10 +121,14 @@ public class Passbook {
                 for (int i = 0; i < locations_json.length(); i++) {
                     JSONObject obj = locations_json.getJSONObject(i);
 
-                    PassLocation location = new PassLocation();
+                    PassLocation location = new PassLocation(this);
                     location.latlng.lat = obj.getDouble("latitude");
                     location.latlng.lon = obj.getDouble("longitude");
-                    location.description = obj.getString("relevantText");
+
+                    if (obj.has("relevantText")) {
+                        location.setDescription(obj.getString("relevantText"));
+                    }
+
                     locations.add(location);
                 }
             } catch (JSONException e) {
@@ -182,6 +186,30 @@ public class Passbook {
         backFields = getFieldListFromJsonArr(eventTicket, "backFields");
         headerFields = getFieldListFromJsonArr(eventTicket, "headerFields");
 
+
+        // for airberlin
+        if (description.equals("boardcard")) {
+            final String flight_regex = "\\b\\w{1,3}\\d{3,4}\\b";
+            final String seat_regex = "\\b\\d\\d?\\w\\b ";
+
+            for (Field f : headerFields) {
+                if (f.label.matches(flight_regex)) {
+                    description = f.label + " " + f.value;
+                }
+            }
+            for (Field f : auxiliaryFields) {
+                if (f.key != null && f.key.equals("seat")) {
+                    description += " | " + f.label + " " + f.value;
+                }
+            }
+            for (Field f : secondaryFields) {
+                if (f.key != null && f.key.equals("boardingGroup")) {
+                    description += " | " + f.label + " " + f.value;
+                }
+
+
+            }
+        }
 
     }
 
@@ -264,8 +292,12 @@ public class Passbook {
             for (int i = 0; i < arr.length(); i++) {
                 Field f = new Field();
                 try {
-                    f.label = arr.getJSONObject(i).getString("label");
-                    f.value = arr.getJSONObject(i).getString("value");
+                    final JSONObject jsonObject = arr.getJSONObject(i);
+                    f.label = jsonObject.getString("label");
+                    f.value = jsonObject.getString("value");
+                    if (jsonObject.has("key")) {
+                        f.key = jsonObject.getString("key");
+                    }
                     res.add(f);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -409,6 +441,7 @@ public class Passbook {
     }
 
     public class Field {
+        public String key;
         public String label;
         public String value;
     }

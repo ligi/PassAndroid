@@ -181,6 +181,7 @@ public class TicketListActivity extends ActionBarActivity {
                 .listener(new OnRefreshListener() {
                     @Override
                     public void onRefreshStarted(View view) {
+                        App.getPassStore().deleteCache();
                         new ScanForPassesTask().execute();
                     }
                 })
