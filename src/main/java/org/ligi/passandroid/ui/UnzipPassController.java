@@ -38,9 +38,6 @@ public class UnzipPassController {
         }
     }
 
-    ;
-
-
     public static void processInputStream(final InputStream ins, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
 
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
@@ -111,8 +108,7 @@ public class UnzipPassController {
 
                 System.out.println("file unzip : " + newFile.getAbsoluteFile());
 
-                //create all non exists folders
-                //else you will hit FileNotFoundException for compressed folder
+                // fix FileNotFoundException for compressed folders
                 new File(newFile.getParent()).mkdirs();
 
                 FileOutputStream fos = new FileOutputStream(newFile);
@@ -128,7 +124,6 @@ public class UnzipPassController {
 
             zin.closeEntry();
             zin.close();
-
 
         }
 
