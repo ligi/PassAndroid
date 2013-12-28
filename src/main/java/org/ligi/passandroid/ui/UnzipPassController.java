@@ -6,10 +6,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.TicketDefinitions;
-import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
@@ -53,7 +53,11 @@ public class UnzipPassController {
             return;
         }
 
-        new Decompress(ins, path).unzip();
+        try {
+            new Decompress(ins, path).unzip();
+        } catch (IOException e) {
+            failCallback.fail("Problem decompressing " + e);
+        }
 
         JSONObject manifest_json;
         try {
@@ -90,47 +94,44 @@ public class UnzipPassController {
             _zipFile = zipFile;
             _location = location;
 
-            _dirChecker("");
+            new File(_location).mkdirs();
         }
 
-        public void unzip() {
-            try {
-                InputStream fin = _zipFile;
-                ZipInputStream zin = new ZipInputStream(fin);
-                ZipEntry ze;
-                byte[] readData = new byte[1024];
-                while ((ze = zin.getNextEntry()) != null) {
-                    Log.i("Decompress" + "unzip" + _location + ze.getName());
-                    if (ze.isDirectory()) {
-                        _dirChecker(ze.getName());
-                    } else {
-                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+        public void unzip() throws IOException {
+            InputStream fin = _zipFile;
+            ZipInputStream zin = new ZipInputStream(fin);
+            ZipEntry ze = zin.getNextEntry();
 
-                        int i2 = zin.read(readData);
+            byte[] buffer = new byte[1024];
 
-                        while (i2 != -1) {
-                            fout.write(readData, 0, i2);
-                            i2 = zin.read(readData);
-                        }
+            while (ze != null) {
 
-                        zin.closeEntry();
-                        fout.close();
-                    }
+                String fileName = ze.getName();
+                File newFile = new File(_location + File.separator + fileName);
 
+                System.out.println("file unzip : " + newFile.getAbsoluteFile());
+
+                //create all non exists folders
+                //else you will hit FileNotFoundException for compressed folder
+                new File(newFile.getParent()).mkdirs();
+
+                FileOutputStream fos = new FileOutputStream(newFile);
+
+                int len;
+                while ((len = zin.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
                 }
-                zin.close();
-            } catch (Exception e) {
-                Log.e("unzip", e);
+
+                fos.close();
+                ze = zin.getNextEntry();
             }
+
+            zin.closeEntry();
+            zin.close();
+
 
         }
 
-        private void _dirChecker(String dir) {
-            File f = new File(_location + dir);
-
-            if (!f.isDirectory()) {
-                f.mkdirs();
-            }
-        }
     }
+
 }
