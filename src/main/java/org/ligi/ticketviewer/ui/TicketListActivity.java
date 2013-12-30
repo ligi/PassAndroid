@@ -43,7 +43,7 @@ import static org.ligi.ticketviewer.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends SherlockListActivity {
 
-    public static final String KEY_UPDATEBLOCK = "updateblock";
+    public static final String KEY_UPDATEBLOCK = "updateblock2";
     private String[] passes;
     private LayoutInflater inflater;
     private String path;
@@ -99,7 +99,7 @@ public class TicketListActivity extends SherlockListActivity {
         if (!sharedPreferences.getBoolean(KEY_UPDATEBLOCK, false)) {
             new AlertDialog.Builder(this).setTitle("New Version!")
                     .setView(getLayoutInflater().inflate(R.layout.update_notice, null))
-                    .setPositiveButton("Show me!", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Get it!", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final Intent intent = new Intent(Intent.ACTION_VIEW);

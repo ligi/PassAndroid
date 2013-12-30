@@ -10,7 +10,8 @@
         android:layout_gravity="center_horizontal"
         android:padding="7dp"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="There is a nice looking new version available! " />
+        android:gravity="center"
+        android:text="There is a nice looking new version available - also free &amp; Open-Source!" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="7dp"
+        android:gravity="center"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="Also more functions and supporting more passes - you should really check it out .. " />
 
