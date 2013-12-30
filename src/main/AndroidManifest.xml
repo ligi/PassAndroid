@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.ligi.ticketviewer"
     android:installLocation="auto"
-    android:versionCode="193"
-    android:versionName="1.9.3">
+    android:versionCode="194"
+    android:versionName="1.9.4">
 
 <uses-sdk
         android:minSdkVersion="8"
