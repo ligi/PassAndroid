@@ -2,6 +2,9 @@ package org.ligi.passandroid.ui;
 
 import android.content.Context;
 
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
@@ -38,8 +41,21 @@ public class UnzipPassController {
         }
     }
 
-    public static void processInputStream(final InputStream ins, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    ;
 
+    public static void processInputStream(final InputStream inputStream, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+        try {
+            final File tempFile = File.createTempFile("ins", "pass");
+            AXT.at(inputStream).toFile(tempFile);
+            processInputStream(tempFile.getAbsolutePath(), context, onSuccessCallback, failCallback);
+            tempFile.delete();
+        } catch (IOException e) {
+            failCallback.fail("problem with temp file" + e);
+        }
+    }
+
+    public static void processInputStream(final String zipFileString, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 
         File dir_file = new File(path);
@@ -51,10 +67,12 @@ public class UnzipPassController {
         }
 
         try {
-            new Decompress(ins, path).unzip();
-        } catch (IOException e) {
-            failCallback.fail("Problem decompressing " + e);
+            ZipFile zipFile = new ZipFile(zipFileString);
+            zipFile.extractAll(path);
+        } catch (ZipException e) {
+            e.printStackTrace();
         }
+        //new Decompress(ins, path).unzip();
 
         JSONObject manifest_json;
         try {
