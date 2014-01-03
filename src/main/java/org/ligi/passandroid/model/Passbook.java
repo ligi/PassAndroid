@@ -35,7 +35,7 @@ public class Passbook {
     private int backGroundColor;
     private int foregroundColor;
     private String description;
-    private String relevantDate;
+    private DateTime relevantDate;
     private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
     private JSONObject eventTicket = null;
@@ -112,8 +112,11 @@ public class Passbook {
 
         if (pass_json != null) {
             try {
-                relevantDate = pass_json.getString("relevantDate");
+                relevantDate = new DateTime(pass_json.getString("relevantDate"));
             } catch (JSONException e) {
+            } catch (IllegalArgumentException e) {
+                // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
+                // OK then we just have no date here
             }
 
             try {
@@ -451,7 +454,7 @@ public class Passbook {
     }
 
     public DateTime getRelevantDate() {
-        return new DateTime(relevantDate);
+        return relevantDate;
     }
 
     public String getId() {
