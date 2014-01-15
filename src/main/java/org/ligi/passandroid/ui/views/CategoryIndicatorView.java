@@ -3,7 +3,8 @@ package org.ligi.passandroid.ui.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,11 +16,12 @@ import butterknife.InjectView;
 
 public class CategoryIndicatorView extends LinearLayout {
 
+
     @InjectView(R.id.categoryExtraText)
     TextView extraText;
 
-    @InjectView(R.id.categoryTopImage)
-    ViewGroup topImage;
+    @InjectView(R.id.topImageView)
+    ImageView topImageView;
 
     public CategoryIndicatorView(Context context) {
         super(context);
@@ -34,11 +36,10 @@ public class CategoryIndicatorView extends LinearLayout {
 
     public void setImageByCategory(String category) {
         if (category == null) {
-            topImage.setBackgroundResource(R.drawable.category_boarding);
-            //topImage.setBackgroundResource(R.drawable.category_none);
+            topImageView.setVisibility(View.GONE);
         } else {
-            topImage.setBackgroundResource(R.drawable.category_boarding);
-            //topImage.setImageResource(CategoryHelper.getCategoryTopImageRes(category));
+            topImageView.setVisibility(View.VISIBLE);
+            topImageView.setImageResource(CategoryHelper.getCategoryTopImageRes(category));
         }
     }
 
@@ -51,7 +52,7 @@ public class CategoryIndicatorView extends LinearLayout {
     }
 
     public void setTextBackgroundColor(int color) {
-        extraText.setBackgroundColor(color);
+        setBackgroundColor(color);
     }
 
     public void setTextColor(int color) {

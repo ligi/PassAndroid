@@ -20,6 +20,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/content_list"
                 android:choiceMode="singleChoice"
+                android:listSelector="@android:color/transparent"
                 android:divider="@null"></ListView>
 
         </uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout>

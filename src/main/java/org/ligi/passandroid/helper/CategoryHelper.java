@@ -79,20 +79,20 @@ public class CategoryHelper {
     public final static int getCategoryTopImageRes(String fromPass) {
         switch (fromPass) {
             case "boardingPass":
-                return R.drawable.category_boarding;
+                return R.drawable.cat_bp;
 
             case "eventTicket":
-                return R.drawable.category_event;
+                return R.drawable.cat_et;
 
             case "coupon":
-                return R.drawable.category_coupon;
+                return R.drawable.cat_cp;
 
             case "storeCard":
-                return R.drawable.category_store;
+                return R.drawable.cat_sc;
 
             case "generic":
             default:
-                return R.drawable.category_generic;
+                return R.drawable.cat_ps;
 
         }
     }

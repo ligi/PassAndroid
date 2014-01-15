@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cat_bg"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cat_cp"
+        android:scaleType="fitStart"
+        android:id="@+id/topImageView"
+        android:layout_alignParentTop="true"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="TXT"
+        android:gravity="center"
+        android:id="@+id/categoryExtraText"
+        android:paddingBottom="3dp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
+
+    <!--
 <org.ligi.passandroid.ui.GoldenCutLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/category_boarding"
+
     android:id="@+id/categoryTopImage">
 
     <TextView
@@ -16,3 +45,4 @@
         android:id="@+id/categoryExtraText" />
 
 </org.ligi.passandroid.ui.GoldenCutLinearLayout>
+-->
