@@ -68,10 +68,11 @@ public class TicketListActivity extends ActionBarActivity {
 
     @InjectView(R.id.emptyView)
     TextView emptyView;
-    private ActionMode.Callback actionMode;
 
     @InjectView(R.id.ptr_layout)
     PullToRefreshLayout mPullToRefreshLayout;
+
+    private ActionMode actionMode;
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
@@ -135,10 +136,16 @@ public class TicketListActivity extends ActionBarActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, long id) {
+
                 listView.setItemChecked(position, true);
                 view.refreshDrawableState();
 
-                actionMode = new ActionMode.Callback() {
+                if (actionMode != null) {
+                    // no need to restart -> NTFS restarting is even dangerous as this deselects the item
+                    return true;
+                }
+
+                actionMode = startSupportActionMode(new ActionMode.Callback() {
                     @Override
                     public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 
@@ -162,14 +169,11 @@ public class TicketListActivity extends ActionBarActivity {
                     }
 
                     @Override
-                    public void onDestroyActionMode(ActionMode actionMode) {
+                    public void onDestroyActionMode(ActionMode _actionMode) {
                         listView.setItemChecked(position, false);
-
                         actionMode = null;
                     }
-                };
-
-                startSupportActionMode(actionMode);
+                });
 
                 return true;
 
