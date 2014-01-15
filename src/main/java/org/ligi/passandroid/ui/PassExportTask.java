@@ -43,7 +43,10 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        progress_dialog.dismiss();
+
+        if (progress_dialog.isShowing()) {
+            progress_dialog.dismiss();
+        }
 
         if (share_after_export) {
             Intent it = new Intent(Intent.ACTION_SEND);
