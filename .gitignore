@@ -6,5 +6,6 @@ bin
 gen
 proguard-project.txt
 project.properties
+gradle.properties
 
 
