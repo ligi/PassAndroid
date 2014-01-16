@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="market_url">https://play.google.com/store/apps/details?id=%s</string>
+    <string name="nav_market">Play</string>
+</resources>

@@ -83,7 +83,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="nav_sort_category">Category</string>
     <string name="nav_sort_date">Date</string>
     <string name="nav_categories">CATEGORIES</string>
-    <string name="nav_play">Play</string>
+
     <string name="nav_comunity">Community</string>
     <string name="nav_share">Share</string>
     <string name="pass_directions">Navigate</string>

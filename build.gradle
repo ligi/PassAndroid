@@ -62,19 +62,19 @@ android {
             flavorGroup "analytics"
         }
 
-	forFdroid {
-	    flavorGroup "market"
-	}
+        forFDroid {
+            flavorGroup "distribution"
+        }
 
-	forPlay {
-	    flavorGroup "market"
-	}
+        forPlay {
+            flavorGroup "distribution"
+        }
     }
 
 
-    lintOptions { 
-      abortOnError false 
-    } 
+    lintOptions {
+        abortOnError false
+    }
 
 }
 
