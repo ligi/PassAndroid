@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 import org.ligi.passandroid.R;
 
+import java.util.Arrays;
+
 public class CategoryHelper {
 
     public final static int getHumanCategoryString(String fromPass) {
@@ -32,22 +34,22 @@ public class CategoryHelper {
     public final static int getCategoryDefaultBG(String category) {
         switch (category) {
             case "boardingPass":
-                return Color.BLUE;
+                return 0xFF3d73e9;
 
             case "eventTicket":
-                return Color.YELLOW;
+                return 0xFF9f3dd0;
 
             case "coupon":
-                return Color.GREEN;
+                return 0xFF9ccb05;
 
             case "storeCard":
-                return Color.WHITE;
+                return 0xFFf29b21;
 
             case "generic":
-                return Color.DKGRAY;
+                return 0xFFea3c48;
 
             default:
-                return Color.BLACK;
+                return Color.WHITE;
         }
 
     }
@@ -55,7 +57,7 @@ public class CategoryHelper {
     public final static int getCategoryDefaultFG(String category) {
         switch (category) {
             case "boardingPass":
-                return Color.WHITE;
+                return Color.BLACK;
 
             case "eventTicket":
                 return Color.BLACK;
@@ -67,10 +69,10 @@ public class CategoryHelper {
                 return Color.BLACK;
 
             case "generic":
-                return Color.WHITE;
+                return Color.BLACK;
 
             default:
-                return Color.WHITE;
+                return Color.BLACK;
         }
 
     }
@@ -92,7 +94,7 @@ public class CategoryHelper {
 
             case "generic":
             default:
-                return R.drawable.cat_ps;
+                return R.drawable.cat_none;
 
         }
     }
