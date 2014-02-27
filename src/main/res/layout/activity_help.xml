@@ -5,9 +5,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/help_tv"
-        android:padding="7dp">
-
-    </TextView>
+        android:padding="7dp" />
 </ScrollView>
