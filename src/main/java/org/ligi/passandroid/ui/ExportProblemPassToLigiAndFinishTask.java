@@ -22,7 +22,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
         it.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
         it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zipPath + zipFileName));
         //it.setType("application/vnd.apple.pkpass");
-        it.setType("plain/text");
+        it.setType("text/plain");
         it.putExtra(Intent.EXTRA_TEXT, "");
 
         ctx.startActivity(Intent.createChooser(it, "How to send Pass?"));
