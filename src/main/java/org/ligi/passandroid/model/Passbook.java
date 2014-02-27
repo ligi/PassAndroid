@@ -92,17 +92,19 @@ public class Passbook {
         }
 
         try {
-            JSONObject barcode_json = pass_json.getJSONObject("barcode");
+            final JSONObject barcode_json = pass_json.getJSONObject("barcode");
 
             barcodeFormat = BarcodeFormat.QR_CODE; // DEFAULT
 
             barcodeMessage = barcode_json.getString("message");
 
-            if (barcode_json.getString("format").contains("417")) {
+            final String barcodeFormatString = barcode_json.getString("format");
+
+            if (barcodeFormatString.contains("417")) {
                 barcodeFormat = BarcodeFormat.PDF_417;
             }
 
-            if (barcode_json.getString("format").toUpperCase(Locale.ENGLISH).contains("AZTEC")) {
+            if (barcodeFormatString.toUpperCase(Locale.ENGLISH).contains("AZTEC")) {
                 barcodeFormat = BarcodeFormat.AZTEC;
             }
 
