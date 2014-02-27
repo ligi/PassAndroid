@@ -21,6 +21,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -101,7 +102,7 @@ public class Passbook {
                 barcodeFormat = BarcodeFormat.PDF_417;
             }
 
-            if (barcode_json.getString("format").toUpperCase().contains("AZTEC")) {
+            if (barcode_json.getString("format").toUpperCase(Locale.ENGLISH).contains("AZTEC")) {
                 barcodeFormat = BarcodeFormat.AZTEC;
             }
 
