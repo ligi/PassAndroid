@@ -17,19 +17,17 @@ import org.ligi.passandroid.model.Passbook;
 public class PassbookMapsFacade {
 
     public static boolean init(FragmentActivity context) {
-        boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
+        final boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
 
         if (!isGooglePlayServicesAvailable) {
             return false;
         }
-
 
         FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
         LocationsMapFragment locationsMapFragment = new LocationsMapFragment();
         locationsMapFragment.click_to_fullscreen = true;
         ft.replace(R.id.map_container, locationsMapFragment);
         ft.commit();
-
 
         return true;
     }
