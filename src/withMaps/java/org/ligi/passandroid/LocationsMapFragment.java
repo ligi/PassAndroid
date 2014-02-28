@@ -3,10 +3,10 @@ package org.ligi.passandroid;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,9 +22,9 @@ import org.ligi.passandroid.ui.TicketViewActivityBase;
 import java.util.List;
 
 public class LocationsMapFragment extends SupportMapFragment {
-    private GoogleMap mMap;
     private TicketViewActivityBase base_activity;
     public boolean click_to_fullscreen = false;
+    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class LocationsMapFragment extends SupportMapFragment {
             throw new IllegalArgumentException("LocationsMapFragment must be used inside a TicketViewActivityBase");
         }
 
-        mMap = getMap();
+        final MapInitRunnable mapInitRunnable = new MapInitRunnable();
 
-        root.getViewTreeObserver().addOnGlobalLayoutListener(new MyOnGlobalLayoutListener());
-
+        handler = new Handler();
+        handler.postDelayed(mapInitRunnable, 42);
         return root;
     }
 
@@ -48,8 +48,17 @@ public class LocationsMapFragment extends SupportMapFragment {
         super.onResume();
     }
 
-    private class MyOnGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
-        public void onGlobalLayout() {
+    private class MapInitRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            final GoogleMap map = getMap();
+            if (map == null) {
+                // map not yet initialized - retry http://stackoverflow.com/questions/19219255/supportmapfragment-getmap-returns-null
+                handler.postDelayed(this, 230);
+                return;
+            }
+
             LatLngBounds.Builder boundser = new LatLngBounds.Builder();
 
             List<PassLocation> locations = base_activity.passbook.getLocations();
@@ -59,7 +68,7 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                     // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
                     LatLng latLng = new LatLng(l.latlng.lat, l.latlng.lon);
-                    mMap.addMarker(new MarkerOptions()
+                    map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(l.getDescription())
                             //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
@@ -68,7 +77,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                     boundser = boundser.include(latLng);
                 }
 
-                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
                         Intent i = new Intent();
@@ -78,15 +87,15 @@ public class LocationsMapFragment extends SupportMapFragment {
                         getActivity().startActivity(i);
                     }
                 });
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundser.build(), 100));
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundser.build(), 100));
 
                 // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
-                mMap.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, mMap.getCameraPosition().zoom)));
+                map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.getCameraPosition().zoom)));
 
                 // Remove listener to prevent position reset on camera move.
-                mMap.setOnCameraChangeListener(null);
+                map.setOnCameraChangeListener(null);
                 if (click_to_fullscreen)
-                    mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
                         public void onMapClick(LatLng latLng) {
                             Intent i = new Intent(getActivity(), FullscreenMapActivity.class);
@@ -95,8 +104,6 @@ public class LocationsMapFragment extends SupportMapFragment {
                         }
                     });
             }
-
-            // at this point, the UI is fully displayed
         }
     }
 }
