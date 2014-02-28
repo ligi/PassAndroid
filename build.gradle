@@ -110,8 +110,8 @@ dependencies {
     testCompile 'com.google.code.gson:gson:2.2.4'
     testCompile 'org.ligi:tracedroid:1.1'
     testCompile 'org.ligi:AXT:0.25'
-    testCompile 'com.android.support:support-v4:19.0.0'
-    testCompile 'com.android.support:appcompat-v7:19.0.0'
+    testCompile 'com.android.support:support-v4:19.0.1'
+    testCompile 'com.android.support:appcompat-v7:19.0.1'
 
     withAnalyticsCompile fileTree(dir: 'libs', include: 'libGoogleAnalyticsV2.jar')
     withMapsCompile 'com.google.android.gms:play-services:4.2.42'
