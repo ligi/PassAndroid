@@ -196,7 +196,6 @@ public class Passbook {
         // for airberlin
         if (description.equals("boardcard")) {
             final String flight_regex = "\\b\\w{1,3}\\d{3,4}\\b";
-            final String seat_regex = "\\b\\d\\d?\\w\\b ";
 
             for (Field f : headerFields) {
                 if (f.label.matches(flight_regex)) {
