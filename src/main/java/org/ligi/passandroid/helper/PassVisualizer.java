@@ -11,12 +11,11 @@ import android.widget.TextView;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.PassField;
+import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.ReducedPassInformation;
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -92,9 +91,9 @@ public class PassVisualizer {
 
     }
 
-    public static String getFieldListAsString(List<Passbook.Field> fieldList) {
+    public static String getFieldListAsString(PassFieldList fieldList) {
         String result = "";
-        for (Passbook.Field f : fieldList) {
+        for (PassField f : fieldList) {
             result += "<b>" + f.label + "</b>: " + f.value + "<br/>";
         }
         return result;

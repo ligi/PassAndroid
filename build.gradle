@@ -95,6 +95,7 @@ dependencies {
     compile 'com.github.chrisbanes.actionbarpulltorefresh:extra-abc:0.9.2'
     compile 'org.ligi:AXT:0.25'
     compile 'org.ligi:tracedroid:1.1'
+    compile 'com.google.guava:guava:16.0.1'
 
     // TODO watch progress at zxing - last official had problems with aztec format
     // snapshot works - but switch back to official when available
@@ -106,7 +107,7 @@ dependencies {
     testCompile 'com.squareup:fest-android:1.0.7'
 
     testCompile fileTree(dir: 'libs', include: 'core-2.3.0-SNAPSHOT.jar')
-    testCompile 'com.googlecode.android-query:android-query:0.25.+'
+    //testCompile 'com.googlecode.android-query:android-query:0.25.+'
     testCompile 'com.google.code.gson:gson:2.2.4'
     testCompile 'org.ligi:tracedroid:1.1'
     testCompile 'org.ligi:AXT:0.25'

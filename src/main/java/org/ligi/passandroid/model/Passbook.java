@@ -37,9 +37,9 @@ public class Passbook {
     private int foregroundColor;
     private String description;
     private DateTime relevantDate;
-    private List<Field> primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
+    private PassFieldList primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
     private List<PassLocation> locations = new ArrayList<PassLocation>();
-    private JSONObject eventTicket = null;
+    private JSONObject ticketJSONObject = null;
     public String plainJsonString;
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
@@ -180,40 +180,18 @@ public class Passbook {
                     e.printStackTrace();
                 }
             } else try {
-                eventTicket = pass_json.getJSONObject(type);
+                ticketJSONObject = pass_json.getJSONObject(type);
             } catch (JSONException e) {
             }
 
         }
 
-        primaryFields = getFieldListFromJsonArr(eventTicket, "primaryFields");
-        secondaryFields = getFieldListFromJsonArr(eventTicket, "secondaryFields");
-        auxiliaryFields = getFieldListFromJsonArr(eventTicket, "auxiliaryFields");
-        backFields = getFieldListFromJsonArr(eventTicket, "backFields");
-        headerFields = getFieldListFromJsonArr(eventTicket, "headerFields");
-
-
-        // for airberlin
-        if (description.equals("boardcard")) {
-            final String flight_regex = "\\b\\w{1,3}\\d{3,4}\\b";
-
-            for (Field f : headerFields) {
-                if (f.label.matches(flight_regex)) {
-                    description = f.label + " " + f.value;
-                }
-            }
-            for (Field f : auxiliaryFields) {
-                if (f.key != null && f.key.equals("seat")) {
-                    description += " | " + f.label + " " + f.value;
-                }
-            }
-            for (Field f : secondaryFields) {
-                if (f.key != null && f.key.equals("boardingGroup")) {
-                    description += " | " + f.label + " " + f.value;
-                }
-
-
-            }
+        if (ticketJSONObject != null) {
+            primaryFields = new PassFieldList(ticketJSONObject, "primaryFields");
+            secondaryFields = new PassFieldList(ticketJSONObject, "secondaryFields");
+            auxiliaryFields = new PassFieldList(ticketJSONObject, "auxiliaryFields");
+            backFields = new PassFieldList(ticketJSONObject, "backFields");
+            headerFields = new PassFieldList(ticketJSONObject, "headerFields");
         }
 
     }
@@ -255,62 +233,28 @@ public class Passbook {
         return type;
     }
 
-    public List<Field> getPrimaryFields() {
+    public PassFieldList getPrimaryFields() {
         return primaryFields;
     }
 
-    public List<Field> getSecondaryFields() {
+    public PassFieldList getSecondaryFields() {
         return secondaryFields;
     }
 
-    public List<Field> getBackFields() {
+    public PassFieldList getBackFields() {
         return backFields;
     }
 
-    public List<Field> getAuxiliaryFields() {
+    public PassFieldList getAuxiliaryFields() {
         return auxiliaryFields;
     }
 
-    public List<Field> getHeaderFields() {
+    public PassFieldList getHeaderFields() {
         return headerFields;
     }
 
     public List<PassLocation> getLocations() {
         return locations;
-    }
-
-    /**
-     * returns a list of Fields for the key - empty list when no elements - not nul
-     *
-     * @param obj
-     * @param key
-     * @return
-     */
-    public List<Field> getFieldListFromJsonArr(JSONObject obj, String key) {
-        ArrayList<Field> res = new ArrayList<Field>();
-
-
-        JSONArray arr = null;
-
-        if (obj != null) try {
-            arr = obj.getJSONArray(key);
-            for (int i = 0; i < arr.length(); i++) {
-                Field f = new Field();
-                try {
-                    final JSONObject jsonObject = arr.getJSONObject(i);
-                    f.label = jsonObject.getString("label");
-                    f.value = jsonObject.getString("value");
-                    if (jsonObject.has("key")) {
-                        f.key = jsonObject.getString("key");
-                    }
-                    res.add(f);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (JSONException e) {
-        }
-        return res;
     }
 
     private int parseColor(String color_str, int defaultValue) {
@@ -443,12 +387,6 @@ public class Passbook {
 
     public int getForegroundColor() {
         return foregroundColor;
-    }
-
-    public class Field {
-        public String key;
-        public String label;
-        public String value;
     }
 
     public boolean hasRelevantDate() {
