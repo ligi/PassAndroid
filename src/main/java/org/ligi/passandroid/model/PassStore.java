@@ -57,7 +57,7 @@ public class PassStore {
         File passes_dir = getPassesDirSafely();
 
         String[] passIdents = passes_dir.list(new DirectoryFileFilter());
-        reducedPassInformations = new ArrayList<ReducedPassInformation>();
+        reducedPassInformations = new ArrayList<>();
 
         for (String id : passIdents) {
             final File cachedFile = new File(path + "/" + id + "/base_cache.obj");
