@@ -55,7 +55,7 @@ public class UnzipPassController {
     }
 
     public static void processInputStream(final String zipFileString, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
-    
+
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 
         File dir_file = new File(path);
@@ -72,7 +72,6 @@ public class UnzipPassController {
         } catch (ZipException e) {
             e.printStackTrace();
         }
-        //new Decompress(ins, path).unzip();
 
         JSONObject manifest_json;
         try {
