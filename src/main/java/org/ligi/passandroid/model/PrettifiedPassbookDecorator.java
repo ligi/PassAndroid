@@ -19,13 +19,15 @@ public class PrettifiedPassbookDecorator {
 
     private void careForTUIFlight() {
         if (sourcePassbook.getDescription().equals("TUIfly pass")) {
-            Optional<PassField> flightField = sourcePassbook.getAuxiliaryFields().getPassFieldForKey("Flug");
             Optional<PassField> originField = sourcePassbook.getPrimaryFields().getPassFieldForKey("Origin");
             Optional<PassField> destinationField = sourcePassbook.getPrimaryFields().getPassFieldForKey("Des");
             Optional<PassField> seatField = sourcePassbook.getAuxiliaryFields().getPassFieldForKey("SeatNumber");
 
-            if (flightField.isPresent() && originField.isPresent() && destinationField.isPresent() && seatField.isPresent()) {
-                prettifiedDescription = flightField.get().value + " " + originField.get().value + "->" + destinationField.get().value + " @" + seatField.get().value;
+            if (originField.isPresent() && destinationField.isPresent()) {
+                prettifiedDescription = originField.get().value + "->" + destinationField.get().value;
+                if (seatField.isPresent()) {
+                    prettifiedDescription += " @" + seatField.get().value;
+                }
             }
         }
     }
