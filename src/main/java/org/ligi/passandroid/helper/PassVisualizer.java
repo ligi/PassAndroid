@@ -84,7 +84,8 @@ public class PassVisualizer {
         titleTextView.setText(passbook.name);
 
         if (passbook.relevantDate != null) {
-            dateTextView.setText(DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+            dateTextView.setText(relativeDateTimeString);
         } else {
             dateTextView.setVisibility(View.GONE);
         }
