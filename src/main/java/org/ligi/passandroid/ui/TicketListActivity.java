@@ -40,6 +40,7 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -318,7 +319,12 @@ public class TicketListActivity extends ActionBarActivity {
 
     class ScanForPassesTask extends AsyncTask<Void, Void, Void> {
 
-        long start_time;
+        private long start_time;
+        private HashSet<String> processedAtTopLevelSet;
+
+        public ScanForPassesTask() {
+            processedAtTopLevelSet = new HashSet<>();
+        }
 
         /**
          * recursive traversion from path on to find files named .pkpass
@@ -326,6 +332,7 @@ public class TicketListActivity extends ActionBarActivity {
          * @param path
          */
         private void search_in(String path) {
+
 
             if (path == null) {
                 Log.w("trying to search in null path");
@@ -379,13 +386,24 @@ public class TicketListActivity extends ActionBarActivity {
             // note to future_me: yea one thinks we only need to search root here, but root was /system for me and so
             // did not contain "/SDCARD" #dontoptimize
             // on my phone:
-            // search in /system
-            // (26110): search in /mnt/sdcard
-            // (26110): search in /cache
-            // (26110): search in /data
+
+            // | /mnt/sdcard/Download << this looks kind of stupid as we do /mnt/sdcard later and hence will go here twice
+            // but this helps finding passes in Downloads ( where they are very often ) fast - some users with lots of files on the SDCard gave
+            // up the refreshing of passes as it took so long to traverse all files on the SDCard
+            // one could think about not going there anymore but a short look at this showed that it seems cost more time to check than what it gains
+            // in download there are mostly single files in a flat dir - no huge tree behind this imho
+            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
+
+            // | /system
             search_in(Environment.getRootDirectory().toString());
+
+            // | /mnt/sdcard
             search_in(Environment.getExternalStorageDirectory().toString());
+
+            // | /cache
             search_in(Environment.getDownloadCacheDirectory().toString());
+
+            // | /data
             search_in(Environment.getDataDirectory().toString());
             return null;
         }
