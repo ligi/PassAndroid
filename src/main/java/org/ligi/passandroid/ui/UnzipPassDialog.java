@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
 import org.ligi.axt.helpers.dialog.ActivityFinishingOnClickListener;
+import org.ligi.passandroid.R;
 
 import java.io.InputStream;
 
@@ -60,7 +61,7 @@ public class UnzipPassDialog {
                                     @Override
                                     public void run() {
                                         myProgress.dismiss();
-                                        DisplayError(activity, "Invalid Passbook", reason);
+                                        DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
                                     }
                                 });
                             }

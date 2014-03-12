@@ -88,5 +88,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="nav_share">Share</string>
     <string name="pass_directions">Navigate</string>
     <string name="pass_to_calendar">to Calendar</string>
+    <string name="invalid_passbook_title">Invalid Passbook</string>
 
 </resources>
