@@ -5,8 +5,6 @@ import android.support.v4.app.FragmentActivity;
 
 public interface TrackerInterface {
 
-    public void init(Context ctx);
-
     void trackException(String s, Exception e, boolean fatal);
 
     void trackException(String s, boolean fatal);

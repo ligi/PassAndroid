@@ -78,9 +78,7 @@ android {
 
 }
 
-
 apply plugin: 'android-unit-test'
-
 
 dependencies {
     // The Apache Software License, Version 2.0
@@ -114,8 +112,11 @@ dependencies {
     testCompile 'com.android.support:support-v4:19.0.1'
     testCompile 'com.android.support:appcompat-v7:19.0.1'
 
-    withAnalyticsCompile fileTree(dir: 'libs', include: 'libGoogleAnalyticsV2.jar')
-    withMapsCompile 'com.google.android.gms:play-services:4.2.42'
+
+    def play_services = 'com.google.android.gms:play-services:4.3.23'
+
+    withAnalyticsCompile play_services
+    withMapsCompile play_services
 }
 
 

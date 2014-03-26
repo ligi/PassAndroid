@@ -19,7 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Tracker.get().init(this);
+        Tracker.init(this);
         initTraceDroid();
 
         bus = new Bus();
