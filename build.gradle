@@ -90,7 +90,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'joda-time:joda-time:2.3'
     compile 'com.squareup:otto:1.2.1'
-    compile 'com.github.chrisbanes.actionbarpulltorefresh:extra-abc:0.9.2'
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:extra-abc:0.9.3'
     compile 'org.ligi:AXT:0.25'
     compile 'org.ligi:tracedroid:1.1'
     compile 'com.google.guava:guava:16.0.1'
