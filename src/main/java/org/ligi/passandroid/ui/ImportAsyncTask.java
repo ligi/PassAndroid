@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import org.ligi.passandroid.Tracker;
 
-import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -34,7 +36,11 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
             }
         } else
             try {
-                return new BufferedInputStream(new URL("" + intent_uri).openStream(), 4096);
+                final OkHttpClient client = new OkHttpClient();
+                final URL url = new URL(intent_uri.toString());
+                final HttpURLConnection connection = client.open(url);
+
+                return connection.getInputStream();
             } catch (MalformedURLException e) {
                 Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
             } catch (IOException e) {
