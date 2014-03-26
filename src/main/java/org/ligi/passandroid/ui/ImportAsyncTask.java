@@ -17,8 +17,8 @@ import java.net.URL;
 
 class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
 
-    private Uri intent_uri;
-    protected Activity ticketImportActivity;
+    private final Uri intent_uri;
+    protected final Activity ticketImportActivity;
 
     public ImportAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
         this.ticketImportActivity = ticketImportActivity;
