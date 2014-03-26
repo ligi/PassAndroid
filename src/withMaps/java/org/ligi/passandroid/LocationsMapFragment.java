@@ -59,7 +59,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                 return;
             }
 
-            LatLngBounds.Builder boundser = new LatLngBounds.Builder();
+            LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
             List<PassLocation> locations = base_activity.passbook.getLocations();
 
@@ -74,7 +74,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                             //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
                     );
 
-                    boundser = boundser.include(latLng);
+                    boundBuilder = boundBuilder.include(latLng);
                 }
 
                 map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -87,7 +87,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                         getActivity().startActivity(i);
                     }
                 });
-                map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundser.build(), 100));
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 100));
 
                 // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
                 map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.getCameraPosition().zoom)));
