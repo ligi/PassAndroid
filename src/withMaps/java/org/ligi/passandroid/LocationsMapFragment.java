@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -59,51 +60,65 @@ public class LocationsMapFragment extends SupportMapFragment {
                 return;
             }
 
-            LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
+            map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
 
-            List<PassLocation> locations = base_activity.passbook.getLocations();
+                boolean initDone;
 
-            if (locations.size() > 0) {
-                for (PassLocation l : locations) {
-
-                    // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
-                    LatLng latLng = new LatLng(l.latlng.lat, l.latlng.lon);
-                    map.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(l.getDescription())
-                            //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
-                    );
-
-                    boundBuilder = boundBuilder.include(latLng);
-                }
-
-                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        Intent i = new Intent();
-                        i.setAction(Intent.ACTION_VIEW);
-
-                        i.setData(Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?q=" + marker.getTitle()));
-                        getActivity().startActivity(i);
+                @Override
+                public void onCameraChange(CameraPosition cameraPosition) {
+                    if (initDone) {
+                        return; // all done - not again
                     }
-                });
-                map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 100));
+                    initDone = true;
 
-                // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
-                map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.getCameraPosition().zoom)));
+                    LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
-                // Remove listener to prevent position reset on camera move.
-                map.setOnCameraChangeListener(null);
-                if (click_to_fullscreen)
-                    map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                        @Override
-                        public void onMapClick(LatLng latLng) {
-                            Intent i = new Intent(getActivity(), FullscreenMapActivity.class);
-                            i.putExtra("path", base_activity.passbook.getPath());
-                            getActivity().startActivity(i);
+                    List<PassLocation> locations = base_activity.passbook.getLocations();
+
+                    if (locations.size() > 0) {
+                        for (PassLocation l : locations) {
+
+                            // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
+                            LatLng latLng = new LatLng(l.latlng.lat, l.latlng.lon);
+                            map.addMarker(new MarkerOptions()
+                                            .position(latLng)
+                                            .title(l.getDescription())
+                                    //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
+                            );
+
+                            boundBuilder = boundBuilder.include(latLng);
                         }
-                    });
-            }
+
+                        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker marker) {
+                                Intent i = new Intent();
+                                i.setAction(Intent.ACTION_VIEW);
+
+                                i.setData(Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?q=" + marker.getTitle()));
+                                getActivity().startActivity(i);
+                            }
+                        });
+                        map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 100));
+
+                        // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
+                        map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.getCameraPosition().zoom)));
+
+                        // Remove listener to prevent position reset on camera move.
+                        map.setOnCameraChangeListener(null);
+                        if (click_to_fullscreen)
+                            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                @Override
+                                public void onMapClick(LatLng latLng) {
+                                    Intent i = new Intent(getActivity(), FullscreenMapActivity.class);
+                                    i.putExtra("path", base_activity.passbook.getPath());
+                                    getActivity().startActivity(i);
+                                }
+                            });
+                    }
+                }
+            });
         }
+
     }
 }
