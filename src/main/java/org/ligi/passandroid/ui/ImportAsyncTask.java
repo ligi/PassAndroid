@@ -4,16 +4,9 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import org.ligi.passandroid.Tracker;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
 
@@ -27,29 +20,26 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
 
     @Override
     protected InputStream doInBackground(Void... params) {
+        Tracker.get().trackEvent("protocol", "to_inputstream", intent_uri.getScheme(), null);
 
-        if (intent_uri.toString().startsWith("content://")) {
-            try {
-                return ticketImportActivity.getContentResolver().openInputStream(intent_uri);
-            } catch (FileNotFoundException e) {
-                Tracker.get().trackException("ticketImportActivity in ImportAsyncTask", e, false);
-            }
-        } else
-            try {
-                final OkHttpClient client = new OkHttpClient();
-                final URL url = new URL(intent_uri.toString());
-                final HttpURLConnection connection = client.open(url);
+        switch (intent_uri.getScheme()) {
+            case "content":
 
-                return connection.getInputStream();
-            } catch (MalformedURLException e) {
-                Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
-            } catch (IOException e) {
-                Tracker.get().trackException("IOException in ImportAsyncTask", e, false);
-            }
+                return InputStreamProvider.fromContent(ticketImportActivity, intent_uri);
+
+            case "http":
+            case "https":
+                // TODO check if SPDY should be here
+                return InputStreamProvider.fromOKHttp(intent_uri);
+
+            default:
+                Tracker.get().trackException("unknown scheme in ImportAsyncTask" + intent_uri.getScheme(), false);
+            case "file":
+                return InputStreamProvider.getDefaultHttpInputStreamForUri(intent_uri);
+        }
+
 
         // TODO bring back Tracker.get().trackTiming("load_time", System.currentTimeMillis() - start_time, "import", "" + intent_uri);
-        return null;
     }
-
 
 }
