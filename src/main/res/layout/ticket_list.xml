@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
 
-        <uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout
+        <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/ptr_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -23,7 +23,7 @@
                 android:listSelector="@android:color/transparent"
                 android:divider="@null"></ListView>
 
-        </uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <TextView
             android:layout_width="wrap_content"

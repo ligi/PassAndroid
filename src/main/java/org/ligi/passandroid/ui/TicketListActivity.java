@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.text.Html;
@@ -45,9 +46,6 @@ import java.util.HashSet;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
-import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
@@ -71,7 +69,7 @@ public class TicketListActivity extends ActionBarActivity {
     TextView emptyView;
 
     @InjectView(R.id.ptr_layout)
-    PullToRefreshLayout mPullToRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private ActionMode actionMode;
 
@@ -181,17 +179,14 @@ public class TicketListActivity extends ActionBarActivity {
             }
         });
 
-        ActionBarPullToRefresh.from(this)
-                .allChildrenArePullable()
-                .listener(new OnRefreshListener() {
-                    @Override
-                    public void onRefreshStarted(View view) {
-                        App.getPassStore().deleteCache();
-                        new ScanForPassesTask().execute();
-                    }
-                })
-
-                .setup(mPullToRefreshLayout);
+        swipeRefreshLayout.setColorScheme(R.color.icon_blue, R.color.icon_green, R.color.icon_lila, R.color.icon_orange);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                App.getPassStore().deleteCache();
+                new ScanForPassesTask().execute();
+            }
+        });
     }
 
     private void scrollToType(String type) {
@@ -256,7 +251,7 @@ public class TicketListActivity extends ActionBarActivity {
 
     public void updateUIToScanningState() {
 
-        mPullToRefreshLayout.setRefreshing(scanning);
+        swipeRefreshLayout.setRefreshing(scanning);
 
         supportInvalidateOptionsMenu();
 
@@ -369,6 +364,7 @@ public class TicketListActivity extends ActionBarActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             scanning = false;
+
 
             // TODO bring back Tracker.get().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
             updateUIToScanningState();
