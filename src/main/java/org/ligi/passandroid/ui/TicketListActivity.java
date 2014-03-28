@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -312,13 +313,26 @@ public class TicketListActivity extends ActionBarActivity {
         }
     }
 
-    class ScanForPassesTask extends AsyncTask<Void, Void, Void> {
+    class ScanForPassesTask extends AsyncTask<Void, String, Void> {
 
         private long start_time;
         private HashSet<String> processedAtTopLevelSet;
 
         public ScanForPassesTask() {
             processedAtTopLevelSet = new HashSet<>();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            if (Build.VERSION.SDK_INT > 10) {
+                if (values != null) {
+                    getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0]));
+                } else {
+                    getActionBar().setSubtitle(null);
+                }
+
+            }
         }
 
         /**
@@ -328,6 +342,7 @@ public class TicketListActivity extends ActionBarActivity {
          */
         private void search_in(String path) {
 
+            publishProgress(path);
 
             if (path == null) {
                 Log.w("trying to search in null path");
@@ -401,6 +416,8 @@ public class TicketListActivity extends ActionBarActivity {
 
             // | /data
             search_in(Environment.getDataDirectory().toString());
+
+            publishProgress(null);
             return null;
         }
     }
