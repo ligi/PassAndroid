@@ -23,8 +23,8 @@ android {
     buildToolsVersion "19.0.1"
 
     defaultConfig {
-        versionCode 215
-        versionName "2.1.5"
+        versionCode 216
+        versionName "2.1.6"
         minSdkVersion 9
         targetSdkVersion 19
         packageName "org.ligi.passandroid"
@@ -84,7 +84,7 @@ dependencies {
     // The Apache Software License, Version 2.0
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:support-v4:19.1'
     compile 'net.lingala.zip4j:zip4j:1.2.9'
     compile 'com.android.support:appcompat-v7:19.0.1'
     compile 'com.jakewharton:butterknife:4.0.1'
