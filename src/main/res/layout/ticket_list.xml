@@ -5,36 +5,38 @@
     android:layout_height="match_parent">
 
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/ptr_layout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <ListView
+                android:id="@+id/content_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/content_list"
                 android:choiceMode="singleChoice"
-                android:listSelector="@android:color/transparent"
-                android:divider="@null"></ListView>
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"></ListView>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test"
-            android:padding="7dp"
-            android:layout_gravity="center"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:gravity="center"
-            android:id="@+id/emptyView" />
-    </FrameLayout>
+            <TextView
+                android:id="@+id/emptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="test"
+                android:textAppearance="?android:textAppearanceLarge" />
+
+
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <fragment
         android:id="@+id/left_drawer"
@@ -42,8 +44,8 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:orientation="vertical" />
 
 
 </android.support.v4.widget.DrawerLayout>
