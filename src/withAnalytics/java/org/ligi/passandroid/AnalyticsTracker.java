@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class AnalyticsTracker implements TrackerInterface {
 
+    public static final String PACKAGE_REMOVE_REGEX = ".*\\.";
     private final GoogleAnalytics analytics;
     private final Tracker tracker;
     private final Context ctx;
@@ -67,9 +68,8 @@ public class AnalyticsTracker implements TrackerInterface {
 
         analytics.reportActivityStart(activity);
 
-        final String activityName = activity.getLocalClassName();
+        final String activityName = activity.getLocalClassName().replaceAll(PACKAGE_REMOVE_REGEX, "");
 
-        activityName.replaceAll(".*\\.", ""); // remove package overhead
         tracker.setScreenName(activityName);
 
         tracker.send(new HitBuilders.AppViewBuilder().build());
@@ -77,6 +77,6 @@ public class AnalyticsTracker implements TrackerInterface {
 
     @Override
     public void activityStop(FragmentActivity activity) {
-        analytics.reportActivityStart(activity);
+        analytics.reportActivityStop(activity);
     }
 }
