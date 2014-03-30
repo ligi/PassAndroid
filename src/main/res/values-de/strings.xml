@@ -1,3 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="app_name">"PassAndroid"</string>
+<string name="menu_settings">"Einstellungen"</string>
+<string name="logo">"Logo"</string>
+<string name="menu_map">"zeige auf Karte"</string>
+<string name="menu_delete">"löschen"</string>
+<string name="menu_share">"teilen"</string>
+<string name="menu_refresh">"aktualisieren"</string>
+
+<!-- Strichcode is also an option but bad for QR ones -->
+<string name="barcode">"barcode"</string>
+<string name="help_label">"Hilfe"</string>
+<string name="help_content"><![CDATA[
+<h1>Worum handelt es sich?</h1>
+
+Diese App ist zur Darstellung von PassBooks gedacht. Dies können Eintritskarten für z.B. Kinos oder Konzerte sein. Oder auch Boardingkarten  für bus, zug und flug. Die Möglichkeiten sind reichlich.
+
+
+]]></string>
+<string name="drawer_open">"öffnen"</string>
+<string name="drawer_close">"schliessen"</string>
+<string name="pass_problem">"Es gab da leider ein problem mit dem PassBook. Es währe hilfreich wenn du den pass an ligi schickst damit er schaun kann was das Problem ist."</string>
+<string name="problem">"Problem"</string>
+<string name="send">"senden"</string>
+<string name="delete">"Löschen!"</string>
+<string name="choose_location"></string>
+<string name="scan_empty_text"></string>
+<string name="no_passes_empty_text"></string>
+<string name="boarding_pass">"boardkarte"</string>
+<string name="category_event">"Event"</string>
+<string name="category_coupon">"Gutschein"</string>
+<string name="category_storecard">"Treuekarte"</string>
+<string name="category_generic">"Allgemein"</string>
+<string name="category_none">"Kategorielos"</string>
+<string name="nav_more">"Mehr"</string>
+<string name="nav_sort">"Sortierung"</string>
+<string name="nav_sort_category">"Kategorie"</string>
+<string name="nav_sort_date">"Datum"</string>
+<string name="nav_categories">"Kategorien"</string>
+<string name="nav_comunity">"Community"</string>
+<string name="nav_share">"teilen"</string>
+<string name="pass_directions">"Navigation"</string>
+<string name="pass_to_calendar"></string>
 </resources>
