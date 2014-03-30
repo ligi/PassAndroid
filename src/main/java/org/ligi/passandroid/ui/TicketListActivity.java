@@ -185,7 +185,7 @@ public class TicketListActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "pull2refresh", "pulled", null);
+                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
                 App.getPassStore().deleteCache();
                 new ScanForPassesTask().execute();
             }
@@ -211,7 +211,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_refresh:
-                Tracker.get().trackEvent("ui_event", "refresh", "from_list", null);
+                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_optionsitem", null);
                 new ScanForPassesTask().execute();
                 return true;
             case R.id.menu_help:
