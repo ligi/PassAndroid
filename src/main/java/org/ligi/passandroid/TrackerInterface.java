@@ -1,9 +1,11 @@
 package org.ligi.passandroid;
 
-import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
 public interface TrackerInterface {
+
+    public final static String EVENT_CATEGORY_UI_EVENT = "ui_event";
+    public final static String EVENT_CATEGORY_UI_ACTION = "ui_event";
 
     void trackException(String s, Exception e, boolean fatal);
 

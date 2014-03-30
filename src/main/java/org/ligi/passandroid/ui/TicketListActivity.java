@@ -32,6 +32,7 @@ import com.squareup.otto.Subscribe;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
@@ -184,6 +185,7 @@ public class TicketListActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "pull2refresh", "pulled", null);
                 App.getPassStore().deleteCache();
                 new ScanForPassesTask().execute();
             }
