@@ -186,10 +186,14 @@ public class TicketListActivity extends ActionBarActivity {
             @Override
             public void onRefresh() {
                 Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
-                App.getPassStore().deleteCache();
-                new ScanForPassesTask().execute();
+                scanForPasses();
             }
         });
+    }
+
+    private void scanForPasses() {
+        App.getPassStore().deleteCache();
+        new ScanForPassesTask().execute();
     }
 
     private void scrollToType(String type) {
@@ -212,7 +216,7 @@ public class TicketListActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
                 Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_optionsitem", null);
-                new ScanForPassesTask().execute();
+                scanForPasses();
                 return true;
             case R.id.menu_help:
                 Intent intent = new Intent(this, HelpActivity.class);
