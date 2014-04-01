@@ -5,10 +5,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.9.+'
+	classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
         classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.0.+'
     }
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 
 repositories {
