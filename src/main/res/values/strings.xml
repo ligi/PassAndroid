@@ -90,5 +90,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="pass_to_calendar">to Calendar</string>
     <string name="invalid_passbook_title">Invalid Passbook</string>
     <string name="searching_in">searching in %s</string>
+    <string name="preparing_pass">Preparing Pass</string>
+    <string name="please_wait">please wait - shouldn\'t be long</string>
+    <string name="passbook_is_shared_subject">a Passbook is shared with you</string>
+    <string name="passbook_share_chooser_title">How to send Pass?</string>
 
 </resources>
