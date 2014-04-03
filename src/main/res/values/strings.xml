@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">PassAndroid</string>
-    <string name="menu_settings">Settings</string>
-    <string name="logo">logo</string>
-    <string name="menu_map">show on map</string>
-    <string name="menu_delete">delete</string>
-    <string name="menu_share">share</string>
-    <string name="menu_refresh">refresh</string>
-    <string name="barcode">barcode</string>
-
-    <string name="help_label">Help</string>
-    <string name="help_content">
-         <![CDATA[
+<string name="app_name">"PassAndroid"</string>
+<string name="menu_settings">"Settings"</string>
+<string name="logo">"logo"</string>
+<string name="menu_map">"show on map"</string>
+<string name="menu_delete">"delete"</string>
+<string name="menu_share">"share"</string>
+<string name="menu_refresh">"refresh"</string>
+<string name="barcode">"barcode"</string>
+<string name="help_label">"Help"</string>
+<string name="help_content"><![CDATA[
 <h1>What is it?</h1>
 
 This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight, a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
@@ -61,38 +58,36 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-    ]]>
-    </string>
-    <string name="drawer_open">open</string>
-    <string name="drawer_close">close</string>
-    <string name="pass_problem">Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software.</string>
-    <string name="problem">Problem</string>
-    <string name="send">Send</string>
-    <string name="delete">Delete!</string>
-    <string name="choose_location">Choose Location</string>
-    <string name="scan_empty_text"><![CDATA[searching for passes - you can also <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a> ]]></string>
-    <string name="no_passes_empty_text"><![CDATA[No passes yet - you can <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a>]]></string>
-    <string name="boarding_pass">Boarding Pass</string>
-    <string name="category_event">Event</string>
-    <string name="category_coupon">Coupon</string>
-    <string name="category_storecard">Store Card</string>
-    <string name="category_generic">generic</string>
-    <string name="category_none">no Category</string>
-    <string name="nav_more">MORE</string>
-    <string name="nav_sort">SORT</string>
-    <string name="nav_sort_category">Category</string>
-    <string name="nav_sort_date">Date</string>
-    <string name="nav_categories">CATEGORIES</string>
-
-    <string name="nav_comunity">Community</string>
-    <string name="nav_share">Share</string>
-    <string name="pass_directions">Navigate</string>
-    <string name="pass_to_calendar">to Calendar</string>
-    <string name="invalid_passbook_title">Invalid Passbook</string>
-    <string name="searching_in">searching in %s</string>
-    <string name="preparing_pass">Preparing Pass</string>
-    <string name="please_wait">please wait - shouldn\'t be long</string>
-    <string name="passbook_is_shared_subject">a Passbook is shared with you</string>
-    <string name="passbook_share_chooser_title">How to send Pass?</string>
+    ]]></string>
+<string name="drawer_open">"open"</string>
+<string name="drawer_close">"close"</string>
+<string name="pass_problem">"Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software."</string>
+<string name="problem">"Problem"</string>
+<string name="send">"Send"</string>
+<string name="delete">"Delete!"</string>
+<string name="choose_location">"Choose Location"</string>
+<string name="scan_empty_text"><![CDATA[searching for passes - you can also <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a> ]]></string>
+<string name="no_passes_empty_text"><![CDATA[No passes yet - you can <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a>]]></string>
+<string name="boarding_pass">"Boarding Pass"</string>
+<string name="category_event">"Event"</string>
+<string name="category_coupon">"Coupon"</string>
+<string name="category_storecard">"Store Card"</string>
+<string name="category_generic">"generic"</string>
+<string name="category_none">"no Category"</string>
+<string name="nav_more">"MORE"</string>
+<string name="nav_sort">"SORT"</string>
+<string name="nav_sort_category">"Category"</string>
+<string name="nav_sort_date">"Date"</string>
+<string name="nav_categories">"CATEGORIES"</string>
+<string name="nav_comunity">"Community"</string>
+<string name="nav_share">"Share"</string>
+<string name="pass_directions">"Navigate"</string>
+<string name="pass_to_calendar">"to Calendar"</string>
+<string name="invalid_passbook_title">Invalid Passbook</string>
+<string name="searching_in">searching in %s</string>
+<string name="preparing_pass">Preparing Pass</string>
+<string name="please_wait">please wait - shouldn\'t be long</string>
+<string name="passbook_is_shared_subject">a Passbook is shared with you</string>
+<string name="passbook_share_chooser_title">How to send Pass?</string>
 
 </resources>
