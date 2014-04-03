@@ -199,7 +199,7 @@ public class TicketListActivity extends ActionBarActivity {
         AppRate.with(this)
                 .retryPolicy(RetryPolicy.EXPONENTIAL)
                 .initialLaunchCount(5)
-                .startMonitoring();
+                .checkAndShow();
     }
 
     private void scanForPasses() {
