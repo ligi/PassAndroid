@@ -59,20 +59,6 @@
             android:text="@string/nav_more"
             style="@style/nav_topic" />
 
-
-        <LinearLayout
-            android:id="@+id/rate"
-            style="@style/nav_btn">
-
-            <ImageView
-                android:src="@drawable/market_icon"
-                style="@style/nav_icon" />
-
-            <TextView
-                style="@style/nav_text"
-                android:text="@string/nav_market" />
-        </LinearLayout>
-
         <LinearLayout
             style="@style/nav_btn"
 

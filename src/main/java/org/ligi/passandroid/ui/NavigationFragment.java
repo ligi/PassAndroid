@@ -37,11 +37,6 @@ public class NavigationFragment extends Fragment {
         return getString(R.string.market_url, getActivity().getPackageName());
     }
 
-    @OnClick(R.id.rate)
-    void rateClick() {
-        openURL(getMarketUrl());
-    }
-
     @OnClick(R.id.community)
     void community() {
         openURL("https://plus.google.com/communities/116353894782342292067");
