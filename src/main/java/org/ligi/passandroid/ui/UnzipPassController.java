@@ -41,8 +41,6 @@ public class UnzipPassController {
         }
     }
 
-    ;
-
     public static void processInputStream(final InputStream inputStream, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
         try {
             final File tempFile = File.createTempFile("ins", "pass");
@@ -58,7 +56,7 @@ public class UnzipPassController {
 
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 
-        File dir_file = new File(path);
+        final File dir_file = new File(path);
         dir_file.mkdirs();
 
         if (!dir_file.exists()) {
@@ -67,7 +65,7 @@ public class UnzipPassController {
         }
 
         try {
-            ZipFile zipFile = new ZipFile(zipFileString);
+            final ZipFile zipFile = new ZipFile(zipFileString);
             zipFile.extractAll(path);
         } catch (ZipException e) {
             e.printStackTrace();
@@ -101,18 +99,18 @@ public class UnzipPassController {
     }
 
     public static class Decompress {
-        private InputStream _zipFile;
-        private String _location;
+        private final InputStream zipFile;
+        private final String location;
 
         public Decompress(InputStream zipFile, String location) {
-            _zipFile = zipFile;
-            _location = location;
+            this.zipFile = zipFile;
+            this.location = location;
 
-            new File(_location).mkdirs();
+            new File(location).mkdirs();
         }
 
         public void unzip() throws IOException {
-            InputStream fin = _zipFile;
+            InputStream fin = zipFile;
             ZipInputStream zin = new ZipInputStream(fin);
             ZipEntry ze = zin.getNextEntry();
 
@@ -121,7 +119,7 @@ public class UnzipPassController {
             while (ze != null) {
 
                 String fileName = ze.getName();
-                File newFile = new File(_location + File.separator + fileName);
+                File newFile = new File(location + File.separator + fileName);
 
                 System.out.println("file unzip : " + newFile.getAbsoluteFile());
 
