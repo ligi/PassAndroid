@@ -1,3 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="app_name">"PassAndroid"</string>
+<string name="menu_settings">"Opciones"</string>
+<string name="logo">"logo"</string>
+<string name="menu_map">"mostrar en mapa"</string>
+<string name="menu_delete">"eliminar"</string>
+<string name="menu_share">"compartir"</string>
+<string name="menu_refresh">"actualizar"</string>
+<string name="barcode">"código de barras"</string>
+<string name="help_label">"Ayuda"</string>
+<string name="help_content"><![CDATA[
+<h1>¿Qué es esto?</h1> 
+
+Esta aplicación es un visor de passbook - un passbook puedes ser p. ej. una <b>tarjeta de embarque</b> para tu próximo vuelo, un cupón para una deliciosa bebida en tu próxima visita, una entrada de cine, una tarjeta de socio, hay un motón de posibilidades. Básicamente es el reemplazo de un trozo de papel o plástico que puedes llevar normalmente contigo - salvemos unos cuantos árboles <b>¡reduce desperdicios!</b> 
+
+<h1>Ejemplos de pases</h1>
+
+¿Necesitas algunos pases para probar la aplicación y verla en acción? ¡<a href=\'http://ligi.de/passandroid_samples/index.html\'>Aquí hay algunos</a> para ti!
+
+<h1>¿Cómo funciona?</h1>
+
+Existen unos archivos llamados pkpass - puedes abrirlos con esta aplicación - p. ej. puedes recibirlos vía email o con alguna opción de descarga. El contenido más importante es el código de barras (QR, AZTEC y PDF417) que te dan acceso en la mayoría de ocasiones - pero también cuentan con otra información interesante como su descripción - en ocasiones una fecha (que puedes añadir al calendario) - una localización (para buscar direcciones) - ¡Pruebalo!
+!Puedes utilizarla la aplicación sin conexión una vez hayas descargado tus pases!
+
+<H1>Créditos</H1>
+¡Un enorme agradecimiento a <a href="http://ltorrecilla.com/">Luis Torrecilla</a> por el Diseño y a <a href="https://github.com/cketti">Cketti</a> por sus sugerencias!
+
+<H1>Sugerencias</H1>
+Puedes contribuir en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> o enviar un email al <a href=\'mailto:ligi@ligi.de\'>autor.</a> Si te gusta la aplicación puedes valorarla en <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>, también me gustaría leer algunas de vuestras historias con el uso de esta aplicación.
+
+<h1>Historia</h1>
+
+Me topé con los archivos Passbook cuando recibí por primera vez mi entrada para el 29C3 - me gustó la idea - pero no existía una aplicación para Android que me sirviese. Comprobé que la aplicación era bastante sencilla (únicamente un archivo zip con json e imágenes) - La primera versión fue realizada rápidamente y era funcional para mi (me dio acceso al 29C3) - Durante el siguiente año no trabajé en seguir desarrollando la aplicación ya que no tenia mayor uso práctico, pero los usuarios continuaron descargandola (ahora cerca de 100k) por lo que arreglé el procesado de algunos pases que me reportaron (que mostraban de manera incorrecta los json...)
+Un año después - justo antes del 30C3 - volví al trabajo con esta aplicación - por dos razones:
+-Un amigo, que estaba muy metido en esto de BTLE y las localizaciones, me comentó que podría ser interesante implementarlo en un Passbook - pero nada mas
+-Recibí un email de Luis Torrecilla, un gran diseñador que hizo un bonito y completo rediseño.
+Todo esto fue llevando PassAndroid  - a un completa nueva versión - con un nuevo aspecto y nuevas funciones (ordenar y añadir al calendario, deslizar para actualizar, un menu de navegación y un nuevo menu contextual).
+
+<h1>Pases que funcionan</h1>
+
+* renfe <br/>
+* chaos communication congress<br/>
+* <a href="http://entradas.com">entrada cine</a><br/>
+* Empire Theatres Tickets<br/>
+* Air Berlin
+* Lufthansa
+
+<H1>Mas</H1>
+Esta aplicación se abre mejor con <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> que está disponible gratis y sin hacer uso de ningún permiso!
+
+<H1>Aviso legal</H1>Esta aplicación no esta afiliada con Apple - Passbook puede ser una marca de Apple, pero fue introducido como un estandar, por lo que esto estaría bien.<br/> 
+
+ESTE SOFTWARE SE OFRECE "TAL CUAL" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
+
+]]></string>
+<string name="drawer_open">"abrir"</string>
+<string name="drawer_close">"cerrar"</string>
+<string name="pass_problem">"Lo sentimos, ha ocurrido un problema procesando este Passbook. Si lo deseas puedes enviarnos dicho Passbook para comprobar cual es el problema y mejorar el software"</string>
+<string name="problem">"Problema"</string>
+<string name="send">"Enviar"</string>
+<string name="delete">"¡Eliminar!"</string>
+<string name="choose_location">"Seleccionar ubicación"</string>
+<string name="scan_empty_text"><![CDATA[Buscando pases - también puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a> ]]></string>
+<string name="no_passes_empty_text"><![CDATA[No dispones de pases - puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a>]]></string>
+<string name="boarding_pass">"Tarjeta de embarque"</string>
+<string name="category_event">"Evento"</string>
+<string name="category_coupon">"Cupón"</string>
+<string name="category_storecard">"Tarjeta de compra"</string>
+<string name="category_generic">"Generico"</string>
+<string name="category_none">"sin Categoría"</string>
+<string name="nav_more">"MAS"</string>
+<string name="nav_sort">"ORDENAR"</string>
+<string name="nav_sort_category">"Categoría"</string>
+<string name="nav_sort_date">"Fecha"</string>
+<string name="nav_categories">"CATEGORÍAS"</string>
+<string name="nav_comunity">"Comunidad"</string>
+<string name="nav_share">"Compartir"</string>
+<string name="pass_directions">"Navegar"</string>
+<string name="pass_to_calendar">"al Calendario"</string>
 </resources>
