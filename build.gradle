@@ -97,6 +97,7 @@ dependencies {
     compile 'org.ligi:tracedroid:1.1'
     compile 'com.google.guava:guava:16.0.1'
     compile 'com.squareup.okhttp:okhttp:1.5.2'
+    compile 'fr.nicolaspomepuy:discreetapprate:1.0.+@aar'
 
     // TODO watch progress at zxing - last official had problems with aztec format
     // snapshot works - but switch back to official when available

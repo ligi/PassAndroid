@@ -48,6 +48,8 @@ import java.util.HashSet;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import fr.nicolaspomepuy.discreetapprate.AppRate;
+import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
@@ -97,6 +99,10 @@ public class TicketListActivity extends ActionBarActivity {
         App.getPassStore().refreshPassesList();
         App.getPassStore().sort(App.getSettings().getSortOrder());
         passadapter.notifyDataSetChanged();
+    }
+
+    public TicketListActivity() {
+        super();
     }
 
     @Override
@@ -189,6 +195,11 @@ public class TicketListActivity extends ActionBarActivity {
                 scanForPasses();
             }
         });
+
+        AppRate.with(this)
+                .retryPolicy(RetryPolicy.EXPONENTIAL)
+                .initialLaunchCount(5)
+                .startMonitoring();
     }
 
     private void scanForPasses() {
