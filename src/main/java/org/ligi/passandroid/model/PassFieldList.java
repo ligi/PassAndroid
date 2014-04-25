@@ -43,7 +43,7 @@ public class PassFieldList extends ArrayList<PassField> {
     public Optional<PassField> getPassFieldThatMatchesLabel(String matcher) {
 
         for (PassField field : this) {
-            if (field.label != null && field.key.matches(matcher)) {
+            if (field.label != null && field.label.matches(matcher)) {
                 return Optional.of(field);
             }
         }
