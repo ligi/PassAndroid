@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.TicketDefinitions;
+import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -80,8 +81,8 @@ public class UnzipPassController {
         }
 
         try {
-            String rename_str = TicketDefinitions.getPassesDir(context) + "/" + manifest_json.getString("pass.json");
-            File rename_file = new File(rename_str);
+            final String rename_str = TicketDefinitions.getPassesDir(context) + "/" + manifest_json.getString("pass.json");
+            final File rename_file = new File(rename_str);
 
             if (rename_file.exists()) {
                 AXT.at(rename_file).deleteRecursive();
@@ -110,23 +111,23 @@ public class UnzipPassController {
         }
 
         public void unzip() throws IOException {
-            InputStream fin = zipFile;
-            ZipInputStream zin = new ZipInputStream(fin);
-            ZipEntry ze = zin.getNextEntry();
+            final InputStream fin = zipFile;
+            final ZipInputStream zin = new ZipInputStream(fin);
 
+            ZipEntry ze = zin.getNextEntry();
             byte[] buffer = new byte[1024];
 
             while (ze != null) {
 
-                String fileName = ze.getName();
-                File newFile = new File(location + File.separator + fileName);
+                final String fileName = ze.getName();
+                final File newFile = new File(location + File.separator + fileName);
 
-                System.out.println("file unzip : " + newFile.getAbsoluteFile());
+                Log.i("file unzip : " + newFile.getAbsoluteFile());
 
                 // fix FileNotFoundException for compressed folders
                 new File(newFile.getParent()).mkdirs();
 
-                FileOutputStream fos = new FileOutputStream(newFile);
+                final FileOutputStream fos = new FileOutputStream(newFile);
 
                 int len;
                 while ((len = zin.read(buffer)) > 0) {
