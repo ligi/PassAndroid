@@ -37,13 +37,19 @@ public class PrettifiedPassbookDecorator {
             final String flightRegex = "\\b\\w{1,3}\\d{3,4}\\b";
 
             Optional<PassField> flightField = sourcePassbook.getAuxiliaryFields().getPassFieldThatMatchesLabel(flightRegex);
-            Optional<PassField> seatField = sourcePassbook.getAuxiliaryFields().getPassFieldForKey("seat");
-            Optional<PassField> boardingGroupField = sourcePassbook.getSecondaryFields().getPassFieldForKey("boardingGroup");
+
+
+            if (!flightField.isPresent()) {
+                flightField = sourcePassbook.getHeaderFields().getPassFieldThatMatchesLabel(flightRegex);
+            }
+
+            final Optional<PassField> seatField = sourcePassbook.getAuxiliaryFields().getPassFieldForKey("seat");
+            final Optional<PassField> boardingGroupField = sourcePassbook.getSecondaryFields().getPassFieldForKey("boardingGroup");
 
             if (flightField.isPresent() && seatField.isPresent() && boardingGroupField.isPresent()) {
                 prettifiedDescription = flightField.get().label + " " + flightField.get().value;
-                prettifiedDescription = " | " + seatField.get().label + " " + seatField.get().value;
-                prettifiedDescription = " | " + boardingGroupField.get().label + " " + boardingGroupField.get().value;
+                prettifiedDescription += " | " + seatField.get().label + " " + seatField.get().value;
+                prettifiedDescription += " | " + boardingGroupField.get().label + " " + boardingGroupField.get().value;
             } // otherwise fallback to default - better save than sorry
         }
     }
