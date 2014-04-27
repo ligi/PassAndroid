@@ -21,7 +21,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="org.ligi.passandroid.FullscreenMapActivity"></activity>
+        <activity android:name=".FullscreenMapActivity"></activity>
 
     </application>
 

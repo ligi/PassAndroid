@@ -105,10 +105,10 @@
         <activity
             android:name=".ui.TicketViewActivity"
             android:label="@string/app_name"
-            android:parentActivityName="org.ligi.passandroid.ui.TicketListActivity">
+            android:parentActivityName=".ui.TicketListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.ligi.passandroid.ui.TicketListActivity" />
+                android:value=".ui.TicketListActivity" />
         </activity>
 
         <activity
