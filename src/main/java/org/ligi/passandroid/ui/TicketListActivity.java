@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidquery.service.MarketService;
+import com.google.common.base.Optional;
 import com.squareup.otto.Subscribe;
 
 import org.ligi.passandroid.App;
@@ -330,7 +331,7 @@ public class TicketListActivity extends ActionBarActivity {
         }
     }
 
-    class ScanForPassesTask extends AsyncTask<Void, String, Void> {
+    class ScanForPassesTask extends AsyncTask<Void, Optional<String>, Void> {
 
         private long start_time;
         private HashSet<String> processedAtTopLevelSet;
@@ -340,11 +341,11 @@ public class TicketListActivity extends ActionBarActivity {
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(Optional<String>... values) {
             super.onProgressUpdate(values);
             if (Build.VERSION.SDK_INT > 10) {
-                if (values != null) {
-                    getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0]));
+                if (values[0].isPresent()) {
+                    getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
                 } else {
                     getActionBar().setSubtitle(null);
                 }
@@ -359,7 +360,7 @@ public class TicketListActivity extends ActionBarActivity {
          */
         private void search_in(String path) {
 
-            publishProgress(path);
+            publishProgress(Optional.of(path));
 
             if (path == null) {
                 Log.w("trying to search in null path");
@@ -434,7 +435,7 @@ public class TicketListActivity extends ActionBarActivity {
             // | /data
             search_in(Environment.getDataDirectory().toString());
 
-            publishProgress(null);
+            publishProgress(Optional.<String>absent());
             return null;
         }
     }
