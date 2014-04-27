@@ -44,7 +44,6 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -333,13 +332,6 @@ public class TicketListActivity extends ActionBarActivity {
 
     class ScanForPassesTask extends AsyncTask<Void, Optional<String>, Void> {
 
-        private long start_time;
-        private HashSet<String> processedAtTopLevelSet;
-
-        public ScanForPassesTask() {
-            processedAtTopLevelSet = new HashSet<>();
-        }
-
         @Override
         protected void onProgressUpdate(Optional<String>... values) {
             super.onProgressUpdate(values);
@@ -385,8 +377,6 @@ public class TicketListActivity extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             scanning = true;
-
-            start_time = System.currentTimeMillis();
 
             Tracker.get().trackEvent("ui_event", "scan", "started", null);
 
