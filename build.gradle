@@ -44,7 +44,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    flavorGroups "maps", "analytics", "distribution"
+    flavorDimensions "maps", "analytics", "distribution"
 
     productFlavors {
 
