@@ -195,7 +195,8 @@ public class TicketListActivity extends ActionBarActivity {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topPosition = listView.getChildCount() == 0 ? 0 : listView.getChildAt(0).getTop();
+                View topChild = listView.getChildAt(0);
+                int topPosition = topChild == null ? 0 : topChild.getTop();
                 swipeRefreshLayout.setEnabled(topPosition >= 0);
             }
         });
