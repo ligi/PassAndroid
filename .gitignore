@@ -7,5 +7,5 @@ gen
 proguard-project.txt
 project.properties
 gradle.properties
-
+local.properties
 
