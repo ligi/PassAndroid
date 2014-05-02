@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -184,6 +185,19 @@ public class TicketListActivity extends ActionBarActivity {
 
                 return true;
 
+            }
+        });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // nothing here
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                View topChild = listView.getChildAt(0);
+                int topPosition = topChild == null ? 0 : topChild.getTop();
+                swipeRefreshLayout.setEnabled(topPosition >= 0);
             }
         });
 

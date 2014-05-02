@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="noMapsNoAnalyticsForFDroidDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleNoMapsNoAnalyticsForFDroidDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileNoMapsNoAnalyticsForFDroidDebugJava" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleNoMapsNoAnalyticsForFDroidDebugTest" />
+        <option name="SOURCE_GEN_TASK_NAME" value="generateNoMapsNoAnalyticsForFDroidDebugSources" />
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/forFDroid/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/build/classes/noMapsnoAnalyticsforFDroid/debug" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/build/source/r/noMapsnoAnalyticsforFDroid/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/noMapsnoAnalyticsforFDroid/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/noMapsnoAnalyticsforFDroid/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/noMapsnoAnalyticsforFDroid/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/res/rs/noMapsnoAnalyticsforFDroid/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroidDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMapsNoAnalyticsForFDroid/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/r/test/noMapsnoAnalyticsforFDroid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/test/noMapsnoAnalyticsforFDroid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/test/noMapsnoAnalyticsforFDroid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/test/noMapsnoAnalyticsforFDroid/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/res/rs/test/noMapsnoAnalyticsforFDroid/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noMaps/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoMaps/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/noAnalytics/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNoAnalytics/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/forFDroid/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestForFDroid/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/.git" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/build/apk" />
+      <excludeFolder url="file://$MODULE_DIR$/build/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/build/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/build/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/dependency-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/build/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/libs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/res" />
+      <excludeFolder url="file://$MODULE_DIR$/build/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="appcompat-v7-19.0.1" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
+    <orderEntry type="library" exported="" name="discreetapprate-2.0.1" level="project" />
+    <orderEntry type="library" exported="" name="zip4j-1.3.2" level="project" />
+    <orderEntry type="library" exported="" name="android-query-0.25.9" level="project" />
+    <orderEntry type="library" exported="" name="otto-1.3.4" level="project" />
+    <orderEntry type="library" exported="" name="guava-17.0" level="project" />
+    <orderEntry type="library" exported="" name="zxing-core-2.3.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="joda-time-2.3" level="project" />
+    <orderEntry type="library" exported="" name="tracedroid-1.1" level="project" />
+    <orderEntry type="library" exported="" name="AXT-0.25" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-1.5.4" level="project" />
+    <orderEntry type="library" exported="" name="butterknife-5.0.0" level="project" />
+  </component>
+</module>
+
