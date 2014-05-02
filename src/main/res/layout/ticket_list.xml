@@ -5,17 +5,17 @@
     android:layout_height="match_parent">
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/ptr_layout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/ptr_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <ListView
+        <ListView
                 android:id="@+id/content_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -24,19 +24,21 @@
                 android:listSelector="@android:color/transparent"></ListView>
 
 
-            <TextView
-                android:id="@+id/emptyView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="7dp"
-                android:text="test"
-                android:textAppearance="?android:textAppearanceLarge" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="7dp"
+            android:text="test"
+            android:textAppearance="?android:textAppearanceLarge" />
 
 
-        </FrameLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
+
 
     <fragment
         android:id="@+id/left_drawer"
