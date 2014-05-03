@@ -72,8 +72,11 @@ public class TicketListActivity extends ActionBarActivity {
     @InjectView(R.id.emptyView)
     TextView emptyView;
 
-    @InjectView(R.id.ptr_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @InjectView(R.id.list_swiperefresh_layout)
+    SwipeRefreshLayout listSwipeRefreshLayout;
+
+    @InjectView(R.id.empty_swiperefresh_layout)
+    SwipeRefreshLayout emptySwipeRefreshLayout;
 
     private ActionMode actionMode;
 
@@ -117,7 +120,7 @@ public class TicketListActivity extends ActionBarActivity {
 
         inflater = getLayoutInflater();
 
-        listView.setEmptyView(emptyView);
+        listView.setEmptyView(emptySwipeRefreshLayout);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -187,6 +190,16 @@ public class TicketListActivity extends ActionBarActivity {
             }
         });
 
+        prepareRefreshLayout(listSwipeRefreshLayout);
+        prepareRefreshLayout(emptySwipeRefreshLayout);
+
+        AppRate.with(this)
+                .retryPolicy(RetryPolicy.EXPONENTIAL)
+                .initialLaunchCount(5)
+                .checkAndShow();
+    }
+
+    private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
         swipeRefreshLayout.setColorScheme(R.color.icon_blue, R.color.icon_green, R.color.icon_lila, R.color.icon_orange);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -195,11 +208,6 @@ public class TicketListActivity extends ActionBarActivity {
                 scanForPasses();
             }
         });
-
-        AppRate.with(this)
-                .retryPolicy(RetryPolicy.EXPONENTIAL)
-                .initialLaunchCount(5)
-                .checkAndShow();
     }
 
     private void scanForPasses() {
@@ -269,7 +277,8 @@ public class TicketListActivity extends ActionBarActivity {
 
     public void updateUIToScanningState() {
 
-        swipeRefreshLayout.setRefreshing(scanning);
+        listSwipeRefreshLayout.setRefreshing(scanning);
+        emptySwipeRefreshLayout.setRefreshing(scanning);
 
         supportInvalidateOptionsMenu();
 

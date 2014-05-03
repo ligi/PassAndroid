@@ -11,11 +11,11 @@
 
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/ptr_layout"
+            android:id="@+id/list_swiperefresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ListView
+            <ListView
                 android:id="@+id/content_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -26,15 +26,21 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:id="@+id/emptyView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/empty_swiperefresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="7dp"
-            android:text="test"
-            android:textAppearance="?android:textAppearanceLarge" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/emptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="test"
+                android:textAppearance="?android:textAppearanceLarge" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
 
     </FrameLayout>
