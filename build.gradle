@@ -25,8 +25,8 @@ android {
     buildToolsVersion "19.0.3"
 
     defaultConfig {
-        versionCode 220
-        versionName "2.2.0"
+        versionCode 221
+        versionName "2.2.1"
         minSdkVersion 9
         targetSdkVersion 19
         packageName "org.ligi.passandroid"
@@ -36,6 +36,10 @@ android {
         release {
             runProguard false
             proguardFile 'proguard-project.txt'
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+            }
         }
     }
 
