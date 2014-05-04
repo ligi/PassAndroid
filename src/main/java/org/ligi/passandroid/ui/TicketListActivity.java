@@ -280,16 +280,17 @@ public class TicketListActivity extends ActionBarActivity {
 
         supportInvalidateOptionsMenu();
 
-        String html;
-        if (scanning) {
-            html = getString(R.string.scan_empty_text);
-        } else {
-            html = getString(R.string.no_passes_empty_text);
-        }
-
-        emptyView.setText(Html.fromHtml(html));
+        emptyView.setText(Html.fromHtml(getHtmlForEmptViewDependingOnScaningState()));
 
         emptyView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public String getHtmlForEmptViewDependingOnScaningState() {
+        if (scanning) {
+            return getString(R.string.scan_empty_text);
+        } else {
+            return getString(R.string.no_passes_empty_text);
+        }
     }
 
     @Override
