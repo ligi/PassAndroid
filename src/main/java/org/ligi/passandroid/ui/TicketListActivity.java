@@ -89,7 +89,7 @@ public class TicketListActivity extends ActionBarActivity {
     }
 
     @OnItemClick(R.id.content_list)
-    void lisItemCick(int position) {
+    void listItemClick(int position) {
         Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
         intent.putExtra("path", App.getPassStore().getPassbookAt(position).getPath());
         startActivity(intent);
