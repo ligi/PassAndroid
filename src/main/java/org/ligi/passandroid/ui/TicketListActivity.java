@@ -371,7 +371,13 @@ public class TicketListActivity extends ActionBarActivity {
             final File dir = new File(path);
             final File[] files = dir.listFiles();
 
-            if (files != null) for (File file : files) {
+            if (files == null || files.length == 0) {
+                // no files here
+                return;
+            }
+
+
+            for (File file : files) {
                 if (file.isDirectory()) {
                     search_in(file.toString());
                 } else if (file.getName().endsWith(".pkpass")) {
