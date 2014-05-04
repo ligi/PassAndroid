@@ -19,10 +19,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,7 +35,6 @@ import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
-import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -115,7 +112,7 @@ public class TicketListActivity extends ActionBarActivity {
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
 
-        passadapter = new PassAdapter();
+        passadapter = new PassAdapter(this);
         listView.setAdapter(passadapter);
 
         inflater = getLayoutInflater();
@@ -443,35 +440,6 @@ public class TicketListActivity extends ActionBarActivity {
             publishProgress(Optional.<String>absent());
             return null;
         }
-    }
-
-    class PassAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return App.getPassStore().passCount();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            View res = inflater.inflate(R.layout.pass_list_item, null);
-
-            PassVisualizer.visualize(TicketListActivity.this, App.getPassStore().getReducedPassbookAt(position), res);
-
-            return res;
-        }
-
     }
 
 }
