@@ -368,8 +368,8 @@ public class TicketListActivity extends ActionBarActivity {
                 return;
             }
 
-            File dir = new File(path);
-            File[] files = dir.listFiles();
+            final File dir = new File(path);
+            final File[] files = dir.listFiles();
 
             if (files != null) for (File file : files) {
                 if (file.isDirectory()) {
