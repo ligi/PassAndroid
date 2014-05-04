@@ -127,6 +127,11 @@ public class TicketListActivity extends ActionBarActivity {
             Tracker.get().trackEvent("ui_event", "processInputStream", "updatenotice", null);
             MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
+
+            AppRate.with(this)
+                    .retryPolicy(RetryPolicy.EXPONENTIAL)
+                    .initialLaunchCount(5)
+                    .checkAndShow();
         }
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
@@ -190,10 +195,6 @@ public class TicketListActivity extends ActionBarActivity {
         prepareRefreshLayout(listSwipeRefreshLayout);
         prepareRefreshLayout(emptySwipeRefreshLayout);
 
-        AppRate.with(this)
-                .retryPolicy(RetryPolicy.EXPONENTIAL)
-                .initialLaunchCount(5)
-                .checkAndShow();
     }
 
     private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
