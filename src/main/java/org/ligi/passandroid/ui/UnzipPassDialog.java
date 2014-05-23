@@ -60,8 +60,11 @@ public class UnzipPassDialog {
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        myProgress.dismiss();
-                                        DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
+                                        if (myProgress.isShowing()) {
+                                            myProgress.dismiss();
+                                            // TODO - check if it would be good to inform the user in another way
+                                            DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
+                                        }
                                     }
                                 });
                             }
