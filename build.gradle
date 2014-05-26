@@ -4,14 +4,15 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.10.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
-        classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.0.+'
+        classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.10.+'
     }
 }
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
+apply plugin: 'android-test'
 
 repositories {
     mavenCentral()
@@ -22,7 +23,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1"
 
     defaultConfig {
         versionCode 221
@@ -84,7 +85,7 @@ android {
 
 }
 
-apply plugin: 'android-unit-test'
+
 
 dependencies {
     // The Apache Software License, Version 2.0
