@@ -54,27 +54,27 @@ android {
     productFlavors {
 
         withMaps {
-            flavorGroup "maps"
+            flavorDimension "maps"
         }
 
         noMaps {
-            flavorGroup "maps"
+            flavorDimension "maps"
         }
 
         withAnalytics {
-            flavorGroup "analytics"
+            flavorDimension "analytics"
         }
 
         noAnalytics {
-            flavorGroup "analytics"
+            flavorDimension "analytics"
         }
 
         forFDroid {
-            flavorGroup "distribution"
+            flavorDimension "distribution"
         }
 
         forPlay {
-            flavorGroup "distribution"
+            flavorDimension "distribution"
         }
     }
 
