@@ -71,7 +71,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbook.getPath(), TicketDefinitions.getShareDir(TicketViewActivity.this), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbook.getPath(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();

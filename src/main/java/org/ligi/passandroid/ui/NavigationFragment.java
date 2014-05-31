@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
+import org.ligi.axt.listeners.RepeatedOnClicksListener;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
@@ -22,6 +23,7 @@ import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
+import org.ligi.tracedroid.logging.Log;
 
 import java.util.List;
 
@@ -113,6 +115,15 @@ public class NavigationFragment extends Fragment {
 
         App.getBus().register(this);
 
+        dateRadioButton.setOnClickListener(new RepeatedOnClicksListener(7, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, Log.getCachedLog());
+                intent.setType("text/plain");
+                startActivity(intent);
+            }
+        }));
         return view;
     }
 

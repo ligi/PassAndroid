@@ -56,7 +56,7 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                new PassExportTask(activity, passbook.getPath(), TicketDefinitions.getShareDir(activity), "share.pkpass", true).execute();
+                new PassExportTask(activity, passbook.getPath(), TicketDefinitions.getShareDir(), "share.pkpass", true).execute();
                 return true;
         }
         return false;

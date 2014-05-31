@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
-import org.ligi.axt.helpers.dialog.ActivityFinishingOnClickListener;
+import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.R;
 
 import java.io.InputStream;
