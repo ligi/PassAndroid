@@ -1,7 +1,6 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
+import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.RepeatedOnClicksListener;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -35,29 +35,14 @@ public class NavigationFragment extends Fragment {
 
     private int lastDisplayedStoreCount = -1;
 
-    private String getMarketUrl() {
-        return getString(R.string.market_url, getActivity().getPackageName());
-    }
-
     @OnClick(R.id.community)
     void community() {
-        openURL("https://plus.google.com/communities/116353894782342292067");
+        AXT.at(getActivity()).startCommonIntent().openUrl("https://plus.google.com/communities/116353894782342292067");
     }
 
     @OnClick(R.id.share)
     void share() {
-        final Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_TEXT, getMarketUrl());
-        intent.setType("text/plain");
-        startActivity(intent);
-    }
-
-    private void openURL(String url) {
-        new Intent();
-        final Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        AXT.at(getActivity()).startCommonIntent().shareUrl(getMarketUrl());
     }
 
     @InjectView(R.id.radioGroup)
@@ -74,10 +59,6 @@ public class NavigationFragment extends Fragment {
 
     @InjectView(R.id.navCategoriesOuter)
     ViewGroup categoriesContainerOuter;
-
-    public NavigationFragment() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -197,6 +178,10 @@ public class NavigationFragment extends Fragment {
 
             categoriesContainer.addView(item);
         }
+    }
+
+    private String getMarketUrl() {
+        return getString(R.string.market_url, getActivity().getPackageName());
     }
 
 }
