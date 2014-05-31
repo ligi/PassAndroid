@@ -7,13 +7,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.10.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
-        classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.10.+'
     }
 }
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
-apply plugin: 'android-test'
 
 repositories {
     mavenCentral()
@@ -23,33 +21,6 @@ repositories {
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1"
-
-    defaultConfig {
-        versionCode 221
-        versionName "2.2.1"
-        minSdkVersion 9
-        targetSdkVersion 19
-        packageName "org.ligi.passandroid"
-    }
-
-    buildTypes {
-        release {
-            runProguard false
-            proguardFile 'proguard-project.txt'
-            applicationVariants.all { variant ->
-                def file = variant.outputFile
-                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
-            }
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
     flavorDimensions "maps", "analytics", "distribution"
 
     productFlavors {
@@ -79,15 +50,7 @@ android {
         }
     }
 
-
-    lintOptions {
-        abortOnError false
-        disable "MissingTranslation"
-    }
-
 }
-
-
 
 dependencies {
     // The Apache Software License, Version 2.0
@@ -106,23 +69,18 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:1.5.4'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.1+@aar'
 
-    // TODO watch progress at zxing - last official had problems with aztec format
-    // snapshot works - but switch back to official when available
-    // last tried 3.0.1 -
-    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
+    compile 'com.google.zxing:core:3.1.0'
 
-    testCompile 'junit:junit:4.10'
-    testCompile 'org.robolectric:robolectric:2.2'
-    testCompile 'org.easytesting:fest:1.0.15'
-    testCompile 'com.squareup:fest-android:1.0.7'
+    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.guava'
+    }
 
-    testCompile fileTree(dir: 'libs', include: 'core-2.3.0-SNAPSHOT.jar')
-
-    testCompile 'com.google.code.gson:gson:2.2.4'
-    testCompile 'org.ligi:tracedroid:1.1'
-    testCompile 'org.ligi:AXT:0.27'
-    testCompile 'com.android.support:support-v4:19.0.1'
-    testCompile 'com.android.support:appcompat-v7:19.0.1'
+    androidTestCompile('com.jakewharton.espresso:espresso-support-v4:1.1-r3') {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.guava'
+    }
+    androidTestCompile 'com.squareup:fest-android:1.0.7'
 
     def play_services = 'com.google.android.gms:play-services:4.3.23'
 
@@ -131,8 +89,47 @@ dependencies {
 }
 
 
-tasks.withType(Test) {
-    scanForTestClasses = false
-    include "**/*The*.class" // whatever Ant pattern matches your test class files
-    exclude '**/*$*' //exclude inner classes
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
+
+    defaultConfig {
+        versionCode 221
+        versionName "2.2.1"
+        minSdkVersion 9
+        targetSdkVersion 19
+        packageName "org.ligi.org.ligi.passandroid"
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile 'proguard-project.txt'
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+        disable "MissingTranslation"
+    }
+
+    // hack for instrumentation testing :-(
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
+
 }
+
+
