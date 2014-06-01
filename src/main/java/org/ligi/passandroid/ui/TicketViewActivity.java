@@ -120,7 +120,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
     public String getPassDebugInfo(Passbook passbook) {
 
-        String result = passbook.plainJsonString;
+        String result = passbook.getPlainJsonString();
 
         for (File f : new File(this.passbook.getPath()).listFiles()) {
             result += f.getName() + "<br/>";

@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public class PassFieldList extends ArrayList<PassField> {
 
 
+    public PassFieldList() {
+        super();
+    }
+
     public PassFieldList(JSONObject ticketJSONObject, String fieldsName) {
         try {
             final JSONArray jsonArray = ticketJSONObject.getJSONArray(fieldsName);

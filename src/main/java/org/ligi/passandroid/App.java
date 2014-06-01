@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.squareup.otto.Bus;
 
+import org.ligi.passandroid.model.AndroidfileSystemPassStore;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.tracedroid.TraceDroid;
@@ -24,7 +25,7 @@ public class App extends Application {
 
         bus = new Bus();
         settings = new Settings(this);
-        passStore = new PassStore(this);
+        passStore = new AndroidfileSystemPassStore(this);
     }
 
     private void initTraceDroid() {
@@ -46,5 +47,9 @@ public class App extends Application {
 
     public static PassStore getPassStore() {
         return passStore;
+    }
+
+    public static void replacePassStore(PassStore newPassStore) {
+        passStore = newPassStore;
     }
 }

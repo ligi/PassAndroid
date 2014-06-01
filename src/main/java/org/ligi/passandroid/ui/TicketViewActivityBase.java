@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.model.FilePathPassbook;
 import org.ligi.passandroid.model.Passbook;
 
 public class TicketViewActivityBase extends ActionBarActivity {
@@ -26,7 +27,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        passbook = new Passbook(path);
+        passbook = new FilePathPassbook(path);
 
         loadIcon();
     }
