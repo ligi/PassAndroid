@@ -343,13 +343,12 @@ public class TicketListActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Optional<String>... values) {
             super.onProgressUpdate(values);
-            if (Build.VERSION.SDK_INT > 10) {
+            if (getActionBar() != null && Build.VERSION.SDK_INT > 10) {
                 if (values[0].isPresent()) {
                     getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
                 } else {
                     getActionBar().setSubtitle(null);
                 }
-
             }
         }
 
