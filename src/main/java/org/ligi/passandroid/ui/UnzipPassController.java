@@ -9,22 +9,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.TicketDefinitions;
-import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 public class UnzipPassController {
 
     public interface SuccessCallback {
         public void call(String pathToPassbook);
     }
-
 
     public interface FailCallback {
         public void fail(String reason);
@@ -96,52 +91,6 @@ public class UnzipPassController {
         }
 
         onSuccessCallback.call(path);
-
-    }
-
-    public static class Decompress {
-        private final InputStream zipFile;
-        private final String location;
-
-        public Decompress(InputStream zipFile, String location) {
-            this.zipFile = zipFile;
-            this.location = location;
-
-            new File(location).mkdirs();
-        }
-
-        public void unzip() throws IOException {
-            final InputStream fin = zipFile;
-            final ZipInputStream zin = new ZipInputStream(fin);
-
-            ZipEntry ze = zin.getNextEntry();
-            byte[] buffer = new byte[1024];
-
-            while (ze != null) {
-
-                final String fileName = ze.getName();
-                final File newFile = new File(location + File.separator + fileName);
-
-                Log.i("file unzip : " + newFile.getAbsoluteFile());
-
-                // fix FileNotFoundException for compressed folders
-                new File(newFile.getParent()).mkdirs();
-
-                final FileOutputStream fos = new FileOutputStream(newFile);
-
-                int len;
-                while ((len = zin.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
-                }
-
-                fos.close();
-                ze = zin.getNextEntry();
-            }
-
-            zin.closeEntry();
-            zin.close();
-
-        }
 
     }
 

@@ -7,11 +7,13 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.10.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.10.0'
     }
 }
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
+apply plugin: 'spoon'
 
 repositories {
     mavenCentral()
@@ -80,6 +82,8 @@ dependencies {
         exclude group: 'com.android.support'
         exclude group: 'com.google.guava'
     }
+
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.0'
     androidTestCompile 'com.squareup:fest-android:1.0.7'
 
     def play_services = 'com.google.android.gms:play-services:4.3.23'
