@@ -17,29 +17,29 @@ import org.ligi.passandroid.model.ReducedPassInformation;
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
-import butterknife.ButterKnife;
+import static butterknife.ButterKnife.findById;
 
 public class PassVisualizer {
     public static void visualize(final Activity activity, final ReducedPassInformation passbook, View res) {
-        TextView titleTextView = ButterKnife.findById(res, R.id.title);
-        TextView dateTextView = ButterKnife.findById(res, R.id.date);
+        TextView titleTextView = findById(res, R.id.title);
+        TextView dateTextView = findById(res, R.id.date);
 
-        CategoryIndicatorView categoryIndicator = ButterKnife.findById(res, R.id.categoryView);
+        CategoryIndicatorView categoryIndicator = findById(res, R.id.categoryView);
 
 
         if (passbook.hasLocation) {
-            ButterKnife.findById(res, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
+            findById(res, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(passbook.id), false);
                 }
             });
         } else {
-            ButterKnife.findById(res, R.id.navigateTo).setVisibility(View.GONE);
+            findById(res, R.id.navigateTo).setVisibility(View.GONE);
         }
 
         if (passbook.relevantDate != null) {
-            ButterKnife.findById(res, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
+            findById(res, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_EDIT);
@@ -51,15 +51,15 @@ public class PassVisualizer {
                 }
             });
         } else {
-            ButterKnife.findById(res, R.id.addCalendar).setVisibility(View.GONE);
+            findById(res, R.id.addCalendar).setVisibility(View.GONE);
         }
 
         if (passbook.relevantDate == null && !passbook.hasLocation) {
-            ButterKnife.findById(res, R.id.actionsContainer).setVisibility(View.GONE);
+            findById(res, R.id.actionsContainer).setVisibility(View.GONE);
         }
 
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
-        ImageView icon_img = (ImageView) res.findViewById(R.id.icon);
+        ImageView icon_img = findById(res, R.id.icon);
 
         icon_img.setBackgroundColor(passbook.backgroundColor);
 

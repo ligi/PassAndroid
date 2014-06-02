@@ -11,6 +11,8 @@ import com.google.zxing.BarcodeFormat;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 
+import static butterknife.ButterKnife.findById;
+
 public class FullscreenImageActivity extends TicketViewActivityBase {
 
     @Override
@@ -18,7 +20,7 @@ public class FullscreenImageActivity extends TicketViewActivityBase {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fullscreen_image);
-        ImageView iv = (ImageView) findViewById(R.id.fullscreen_image);
+        final ImageView iv = findById(this, R.id.fullscreen_image);
 
         int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
 
