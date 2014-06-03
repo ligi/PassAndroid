@@ -1,5 +1,7 @@
 package org.ligi.passandroid.model;
 
+import com.google.common.base.Optional;
+
 import java.util.List;
 
 public interface PassStore {
@@ -52,4 +54,12 @@ public interface PassStore {
     public void sort(SortOrder order);
 
     public List<CountedType> getCountedTypes();
+
+    public Optional<Passbook> getCurrentPass();
+
+    public void setCurrentPass(Passbook pass);
+
+    public void setCurrentPass(Optional<Passbook> pass);
+
+    public boolean deletePassWithId(String id);
 }

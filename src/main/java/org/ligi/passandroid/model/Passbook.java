@@ -45,8 +45,6 @@ public interface Passbook {
 
     int getBackGroundColor();
 
-    String getPath();
-
     int getForegroundColor();
 
     boolean hasRelevantDate();

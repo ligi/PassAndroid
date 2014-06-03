@@ -7,9 +7,11 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.common.base.Optional;
+
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
-import org.ligi.passandroid.model.FilePathPassbook;
 import org.ligi.passandroid.model.Passbook;
 
 public class TicketViewActivityBase extends ActionBarActivity {
@@ -22,12 +24,18 @@ public class TicketViewActivityBase extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        path = getIntent().getStringExtra("path");
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        passbook = new FilePathPassbook(path);
+        final Optional<Passbook> optionalPass = App.getPassStore().getCurrentPass();
+
+        if (!optionalPass.isPresent()) {
+            Tracker.get().trackException("pass not present in TicketViewActivityBase", false);
+            finish();
+            return;
+        }
+
+        passbook = optionalPass.get();
 
         loadIcon();
     }

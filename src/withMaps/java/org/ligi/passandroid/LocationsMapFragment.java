@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.passandroid.ui.TicketViewActivityBase;
 
@@ -110,9 +111,8 @@ public class LocationsMapFragment extends SupportMapFragment {
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                                 @Override
                                 public void onMapClick(LatLng latLng) {
-                                    Intent i = new Intent(getActivity(), FullscreenMapActivity.class);
-                                    i.putExtra("path", base_activity.passbook.getPath());
-                                    getActivity().startActivity(i);
+                                    App.getPassStore().setCurrentPass(base_activity.passbook);
+                                    AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
                                 }
                             });
                     }

@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-import org.ligi.axt.AXT;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Passbook;
-
-import java.io.File;
 
 public class PassMenuOptions {
     public final Activity activity;
@@ -35,7 +32,7 @@ public class PassMenuOptions {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                AXT.at(new File(passbook.getPath())).deleteRecursive();
+                                App.getPassStore().deletePassWithId(passbook.getId());
                                 if (activity instanceof TicketViewActivityBase) {
                                     Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
                                     NavUtils.navigateUpTo(activity, ticketListIntent);
@@ -56,7 +53,7 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                new PassExportTask(activity, passbook.getPath(), TicketDefinitions.getShareDir(), "share.pkpass", true).execute();
+                //new PassExportTask(activity, passbook.getPath(), TicketDefinitions.getShareDir(), "share.pkpass", true).execute();
                 return true;
         }
         return false;

@@ -72,6 +72,7 @@ dependencies {
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.1+@aar'
 
     compile 'com.google.zxing:core:3.1.0'
+    //compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
     androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
         exclude group: 'com.android.support'

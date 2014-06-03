@@ -2,13 +2,14 @@ package org.ligi.passandroid.maps;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.FullscreenMapActivity;
 import org.ligi.passandroid.LocationsMapFragment;
 import org.ligi.passandroid.R;
@@ -33,8 +34,7 @@ public class PassbookMapsFacade {
     }
 
     public static void startFullscreenMap(Context context, Passbook passbook) {
-        Intent i = new Intent(context, FullscreenMapActivity.class);
-        i.putExtra("path", passbook.getPath());
-        context.startActivity(i);
+        App.getPassStore().setCurrentPass(passbook);
+        AXT.at(context).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
     }
 }

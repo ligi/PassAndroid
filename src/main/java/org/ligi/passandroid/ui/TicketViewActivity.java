@@ -34,7 +34,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
     @OnClick(R.id.barcode_img)
     void onBarcodeClick() {
-        Intent i = new Intent(TicketViewActivity.this, FullscreenImageActivity.class);
+        Intent i = new Intent(TicketViewActivity.this, FullscreenBarcodeActivity.class);
         i.putExtra("path", path);
         TicketViewActivity.this.startActivity(i);
     }
@@ -71,7 +71,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbook.getPath(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbook.getId(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();
@@ -122,7 +122,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         String result = passbook.getPlainJsonString();
 
-        for (File f : new File(this.passbook.getPath()).listFiles()) {
+        for (File f : new File(this.passbook.getId()).listFiles()) {
             result += f.getName() + "<br/>";
         }
 

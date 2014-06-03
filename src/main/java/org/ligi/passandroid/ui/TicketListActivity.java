@@ -28,6 +28,7 @@ import com.androidquery.service.MarketService;
 import com.google.common.base.Optional;
 import com.squareup.otto.Subscribe;
 
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -35,6 +36,7 @@ import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
+import org.ligi.passandroid.model.Passbook;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -90,9 +92,9 @@ public class TicketListActivity extends ActionBarActivity {
 
     @OnItemClick(R.id.content_list)
     void listItemClick(int position) {
-        Intent intent = new Intent(TicketListActivity.this, TicketViewActivity.class);
-        intent.putExtra("path", App.getPassStore().getPassbookAt(position).getPath());
-        startActivity(intent);
+        final Passbook newSelectedPass = App.getPassStore().getPassbookAt(position);
+        App.getPassStore().setCurrentPass(Optional.of(newSelectedPass));
+        AXT.at(this).startCommonIntent().activityFromClass(TicketViewActivity.class);
     }
 
     public void refreshPasses() {
@@ -343,13 +345,26 @@ public class TicketListActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Optional<String>... values) {
             super.onProgressUpdate(values);
-            if (getActionBar() != null && Build.VERSION.SDK_INT > 10) {
-                if (values[0].isPresent()) {
-                    getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
-                } else {
-                    getActionBar().setSubtitle(null);
-                }
+            setActionbarToProgress(values);
+        }
+
+        private void setActionbarToProgress(Optional<String>[] values) {
+            if (Build.VERSION.SDK_INT < 11) {
+                // no actionbar - no work
+                return;
             }
+
+            if (getActionBar() == null) {
+                // not here - no work
+                return;
+            }
+
+            if (values[0].isPresent()) {
+                getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
+            } else {
+                getActionBar().setSubtitle(null);
+            }
+
         }
 
         /**

@@ -2,6 +2,8 @@ package org.ligi.passandroid.model;
 
 import android.content.Context;
 
+import com.google.common.base.Optional;
+
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
@@ -20,6 +22,7 @@ public class AndroidfileSystemPassStore implements PassStore {
     private String path;
 
     private List<ReducedPassInformation> reducedPassInformations;
+    private Passbook actPass;
 
     public AndroidfileSystemPassStore(Context context) {
         this.context = context;
@@ -157,6 +160,27 @@ public class AndroidfileSystemPassStore implements PassStore {
         Collections.sort(result);
 
         return result;
+    }
+
+    @Override
+    public Optional<Passbook> getCurrentPass() {
+
+        return Optional.of(actPass);
+    }
+
+    @Override
+    public void setCurrentPass(Passbook pass) {
+        actPass = pass;
+    }
+
+    @Override
+    public void setCurrentPass(Optional<Passbook> pass) {
+        actPass = pass.get();
+    }
+
+    @Override
+    public boolean deletePassWithId(String id) {
+        return false;
     }
 
 }
