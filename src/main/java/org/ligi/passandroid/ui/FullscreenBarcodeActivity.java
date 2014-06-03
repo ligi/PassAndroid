@@ -13,7 +13,7 @@ import org.ligi.passandroid.R;
 
 import static butterknife.ButterKnife.findById;
 
-public class FullscreenImageActivity extends TicketViewActivityBase {
+public class FullscreenBarcodeActivity extends TicketViewActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
