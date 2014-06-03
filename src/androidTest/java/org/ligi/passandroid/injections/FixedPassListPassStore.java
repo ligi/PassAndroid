@@ -1,5 +1,7 @@
 package org.ligi.passandroid.injections;
 
+import com.google.common.base.Optional;
+
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Passbook;
 import org.ligi.passandroid.model.ReducedPassInformation;
@@ -10,6 +12,7 @@ import java.util.List;
 public class FixedPassListPassStore implements PassStore {
 
     private final List<Passbook> passes;
+    private Passbook actPass;
 
     public FixedPassListPassStore(List<Passbook> passes) {
         this.passes = passes;
@@ -62,5 +65,25 @@ public class FixedPassListPassStore implements PassStore {
     @Override
     public List<CountedType> getCountedTypes() {
         return new ArrayList<>();
+    }
+
+    @Override
+    public Optional<Passbook> getCurrentPass() {
+        return Optional.of(actPass);
+    }
+
+    @Override
+    public void setCurrentPass(Passbook pass) {
+        actPass = pass;
+    }
+
+    @Override
+    public void setCurrentPass(Optional<Passbook> pass) {
+        actPass = pass.get();
+    }
+
+    @Override
+    public boolean deletePassWithId(String id) {
+        return false;
     }
 }
