@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
+import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.passandroid.model.Passbook;
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FixedPassBook implements Passbook {
+
+    public BarcodeFormat barcodeFormat = BarcodeFormat.AZTEC;
+
     @Override
     public String getDescription() {
         return "desc";
@@ -60,12 +64,12 @@ public class FixedPassBook implements Passbook {
 
     @Override
     public BarcodeFormat getBarcodeFormat() {
-        return BarcodeFormat.AZTEC;
+        return barcodeFormat;
     }
 
     @Override
     public Bitmap getBarcodeBitmap(int size) {
-        return null;
+        return BarcodeHelper.generateBarCodeBitmap("foo", getBarcodeFormat(), size);
     }
 
     @Override
@@ -91,11 +95,6 @@ public class FixedPassBook implements Passbook {
     @Override
     public int getBackGroundColor() {
         return 0;
-    }
-
-    @Override
-    public String getPath() {
-        return null;
     }
 
     @Override
