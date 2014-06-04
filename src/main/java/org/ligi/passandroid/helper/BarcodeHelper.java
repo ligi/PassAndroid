@@ -8,6 +8,8 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import org.ligi.tracedroid.logging.Log;
+
 public class BarcodeHelper {
 
     public static Bitmap generateBarCodeBitmap(String dataNotNull, BarcodeFormat typeNotNull, int size) {
@@ -39,6 +41,7 @@ public class BarcodeHelper {
 
             return barcode_image;
         } catch (com.google.zxing.WriterException e) {
+            Log.w("could not write image " + e);
             // TODO check if we should better return some rescue Image here
             return null;
         }
