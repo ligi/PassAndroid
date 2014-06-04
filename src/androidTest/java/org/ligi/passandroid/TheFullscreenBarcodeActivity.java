@@ -49,45 +49,33 @@ public class TheFullscreenBarcodeActivity extends ActivityInstrumentationTestCas
 
     @MediumTest
     public void test_that_image_is_there() {
-        final FixedPassBook pass = new FixedPassBook();
-        pass.barcodeFormat = BarcodeFormat.PDF_417;
-        App.getPassStore().setCurrentPass(pass);
-        getActivity();
-        onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
+        testWithBarcodeFormat(BarcodeFormat.PDF_417);
 
         Spoon.screenshot(getActivity(), "pdf417_barcode");
-
-        final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_image);
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
-        assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo("foo");
     }
 
 
     @MediumTest
     public void test_that_aztec_barcode_works() {
-        final FixedPassBook pass = new FixedPassBook();
-        pass.barcodeFormat = BarcodeFormat.AZTEC;
-        App.getPassStore().setCurrentPass(pass);
-        getActivity();
-        onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
+        testWithBarcodeFormat(BarcodeFormat.AZTEC);
 
         Spoon.screenshot(getActivity(), "aztec_barcode");
-
-        final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_image);
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
-        assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo("foo");
     }
 
 
     @MediumTest
     public void test_that_qr_barcode_works() {
+        testWithBarcodeFormat(BarcodeFormat.QR_CODE);
+
+        Spoon.screenshot(getActivity(), "qr_barcode");
+    }
+
+    private void testWithBarcodeFormat(BarcodeFormat format) {
         final FixedPassBook pass = new FixedPassBook();
-        pass.barcodeFormat = BarcodeFormat.QR_CODE;
+        pass.barcodeFormat = format;
         App.getPassStore().setCurrentPass(pass);
         getActivity();
         onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
-
-        Spoon.screenshot(getActivity(), "qr_barcode");
 
         final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_image);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
