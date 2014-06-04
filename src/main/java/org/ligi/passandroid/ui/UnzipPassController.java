@@ -69,7 +69,7 @@ public class UnzipPassController {
 
         JSONObject manifest_json;
         try {
-            manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).loadToString());
+            manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).readToString());
         } catch (Exception e) {
             failCallback.fail("Problem with manifest.json: " + e);
             return;

@@ -59,7 +59,7 @@ public class FilePathPassbook implements Passbook {
 
         if (file.exists()) {
             try {
-                plainJsonString = AXT.at(file).loadToString();
+                plainJsonString = AXT.at(file).readToString();
                 pass_json = SafeJSONReader.readJSONSafely(plainJsonString);
             } catch (Exception e) {
                 Log.i("PassParse Exception " + e);
@@ -73,7 +73,7 @@ public class FilePathPassbook implements Passbook {
                 for (Charset charset : Charset.availableCharsets().values()) {
                     try {
 
-                        String json_str = AXT.at(file).loadToString(charset);
+                        String json_str = AXT.at(file).readToString(charset);
                         pass_json = SafeJSONReader.readJSONSafely(json_str);
                     } catch (Exception e) {
                     }
