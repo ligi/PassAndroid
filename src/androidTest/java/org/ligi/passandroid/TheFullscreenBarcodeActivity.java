@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
-import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class TheFullscreenBarcodeActivity extends ActivityInstrumentationTestCase2<FullscreenBarcodeActivity> {
@@ -48,7 +47,7 @@ public class TheFullscreenBarcodeActivity extends ActivityInstrumentationTestCas
     }
 
     @MediumTest
-    public void test_that_image_is_there() {
+    public void test_that_pdf417_barcode_works() {
         testWithBarcodeFormat(BarcodeFormat.PDF_417);
 
         Spoon.screenshot(getActivity(), "pdf417_barcode");
