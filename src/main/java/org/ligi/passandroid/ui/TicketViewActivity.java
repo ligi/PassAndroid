@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
+import org.ligi.passandroid.FullscreenMapActivity;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.helper.PassVisualizer;
@@ -34,9 +35,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
     @OnClick(R.id.barcode_img)
     void onBarcodeClick() {
-        Intent i = new Intent(TicketViewActivity.this, FullscreenBarcodeActivity.class);
-        i.putExtra("path", path);
-        TicketViewActivity.this.startActivity(i);
+        AXT.at(this).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
     }
 
     @InjectView(R.id.barcode_img)
