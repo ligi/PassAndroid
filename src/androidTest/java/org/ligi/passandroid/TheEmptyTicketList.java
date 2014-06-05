@@ -1,6 +1,5 @@
 package org.ligi.passandroid;
 
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
@@ -17,7 +16,7 @@ import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewA
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 
-public class TheEmptyTicketList extends ActivityInstrumentationTestCase2<TicketListActivity> {
+public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
 
     public TheEmptyTicketList() {
         super(TicketListActivity.class);
