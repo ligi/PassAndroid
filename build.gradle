@@ -71,7 +71,11 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:1.5.4'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.1+@aar'
 
-    compile 'com.google.zxing:core:3.1.0'
+    // cannot use this new version: https://github.com/zxing/zxing/issues/165
+    // WARNING: might work on some devices or the emulator - but fails on others
+    // compile 'com.google.zxing:core:3.1.0'
+
+    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
     androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
         exclude group: 'com.android.support'
