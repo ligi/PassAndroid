@@ -16,15 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AndroidfileSystemPassStore implements PassStore {
+public class AndroidFileSystemPassStore implements PassStore {
 
     private final Context context;
     private String path;
 
-    private List<ReducedPassInformation> reducedPassInformations;
+    private List<ReducedPassInformation> reducedPassInformationList;
     private Passbook actPass;
 
-    public AndroidfileSystemPassStore(Context context) {
+    public AndroidFileSystemPassStore(Context context) {
         this.context = context;
         refreshPassesList();
     }
@@ -44,7 +44,7 @@ public class AndroidfileSystemPassStore implements PassStore {
         File passes_dir = getPassesDirSafely();
 
         String[] passIdents = passes_dir.list(new DirectoryFileFilter());
-        reducedPassInformations = new ArrayList<>();
+        reducedPassInformationList = new ArrayList<>();
 
         for (String id : passIdents) {
             final File cachedFile = new File(path + "/" + id + "/base_cache.obj");
@@ -60,7 +60,7 @@ public class AndroidfileSystemPassStore implements PassStore {
                 AXT.at(cachedFile).writeObject(reducedPass);
             }
 
-            reducedPassInformations.add(reducedPass);
+            reducedPassInformationList.add(reducedPass);
         }
 
     }
@@ -75,7 +75,7 @@ public class AndroidfileSystemPassStore implements PassStore {
     }
 
     public int passCount() {
-        return reducedPassInformations.size();
+        return reducedPassInformationList.size();
     }
 
     public boolean isEmpty() {
@@ -83,7 +83,7 @@ public class AndroidfileSystemPassStore implements PassStore {
     }
 
     public Passbook getPassbookAt(int pos) {
-        return getPassbookForId(reducedPassInformations.get(pos).id);
+        return getPassbookForId(reducedPassInformationList.get(pos).id);
     }
 
     public Passbook getPassbookForId(String id) {
@@ -92,13 +92,13 @@ public class AndroidfileSystemPassStore implements PassStore {
     }
 
     public ReducedPassInformation getReducedPassbookAt(int pos) {
-        return reducedPassInformations.get(pos);
+        return reducedPassInformationList.get(pos);
     }
 
     public void sort(SortOrder order) {
         switch (order) {
             case TYPE:
-                Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
+                Collections.sort(reducedPassInformationList, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
                         if (lhs.type == rhs.type) { // that looks bad but makes sense for both being null
@@ -117,7 +117,7 @@ public class AndroidfileSystemPassStore implements PassStore {
                 break;
 
             case DATE:
-                Collections.sort(reducedPassInformations, new Comparator<ReducedPassInformation>() {
+                Collections.sort(reducedPassInformationList, new Comparator<ReducedPassInformation>() {
                     @Override
                     public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
                         if (lhs.relevantDate == rhs.relevantDate) { // that looks bad but makes sense for both being null
@@ -142,7 +142,7 @@ public class AndroidfileSystemPassStore implements PassStore {
         // TODO - some sort of caching
         Map<String, Integer> tempMap = new HashMap<String, Integer>();
 
-        for (ReducedPassInformation info : reducedPassInformations) {
+        for (ReducedPassInformation info : reducedPassInformationList) {
             if (tempMap.containsKey(info.getTypeNotNull())) {
                 Integer i = tempMap.get(info.getTypeNotNull());
                 tempMap.put(info.getTypeNotNull(), i + 1);
