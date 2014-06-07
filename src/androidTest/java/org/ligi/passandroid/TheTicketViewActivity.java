@@ -67,7 +67,7 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
     }
 
     @MediumTest
-    public void test_click_on_barcode_openes_fullscreen_barcode() {
+    public void test_click_on_barcode_opens_fullscreen_barcode() {
         getActivity();
         onView(withId(R.id.barcode_img)).perform(click());
 
