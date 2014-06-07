@@ -120,6 +120,10 @@ android {
                 variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
             }
         }
+        debug {
+            //makes problems
+            //testCoverageEnabled true
+        }
     }
 
     compileOptions {

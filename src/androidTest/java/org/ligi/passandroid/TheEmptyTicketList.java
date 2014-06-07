@@ -39,7 +39,7 @@ public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
     }
 
     @MediumTest
-    public void test_help_goes_to_help() {
+    public void testHelpGoesToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
         onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
     }

@@ -1,9 +1,7 @@
 package org.ligi.passandroid;
 
 
-import android.app.Activity;
 import android.graphics.Bitmap;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.google.zxing.BarcodeFormat;
@@ -13,26 +11,22 @@ import org.ligi.passandroid.helper.BarcodeHelper;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class TheBarcodeHelperTest extends ActivityInstrumentationTestCase2<Activity> {
+public class TheBarcodeHelper extends BaseTest {
 
     public static final BarcodeFormat PDF_417 = BarcodeFormat.PDF_417;
 
-    public TheBarcodeHelperTest() {
-        super(Activity.class);
-    }
-
     @SmallTest
-    public void test_barcode_qr_format_should_have_correct_output_size() throws Exception {
+    public void QRShouldWork() throws Exception {
         testFormat(BarcodeFormat.QR_CODE);
     }
 
     @SmallTest
-    public void test_barcode_pdf417_format_should_have_correct_output_size() {
+    public void PDF417ShouldWork() {
         testFormat(BarcodeFormat.PDF_417);
     }
 
     @SmallTest
-    public void barcode_aztec_format_writer_should_have_correct_output_size() {
+    public void AZTECFormatShouldWork() {
         testFormat(BarcodeFormat.AZTEC);
 
     }

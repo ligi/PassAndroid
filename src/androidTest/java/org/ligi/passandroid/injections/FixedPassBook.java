@@ -15,6 +15,7 @@ import java.util.List;
 
 public class FixedPassBook implements Passbook {
 
+    public DateTime relevantDate;
     public BarcodeFormat barcodeFormat = BarcodeFormat.AZTEC;
 
     @Override
@@ -104,12 +105,12 @@ public class FixedPassBook implements Passbook {
 
     @Override
     public boolean hasRelevantDate() {
-        return false;
+        return relevantDate != null;
     }
 
     @Override
     public DateTime getRelevantDate() {
-        return null;
+        return relevantDate;
     }
 
     @Override

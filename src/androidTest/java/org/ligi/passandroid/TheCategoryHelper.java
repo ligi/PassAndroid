@@ -1,8 +1,6 @@
 package org.ligi.passandroid;
 
 
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.helper.CategoryHelper;
@@ -13,12 +11,7 @@ import java.util.Set;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class TheCategoryHelperTest extends ActivityInstrumentationTestCase2<Activity> {
-
-
-    public TheCategoryHelperTest() {
-        super(Activity.class);
-    }
+public class TheCategoryHelper extends BaseTest {
 
     @SmallTest
     public void test_all_categories_should_b_translated() {
