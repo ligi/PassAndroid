@@ -183,7 +183,7 @@ public class AndroidfileSystemPassStore implements PassStore {
 
     @Override
     public boolean deletePassWithId(String id) {
-        return false;
+        return AXT.at(new File(path + "/" + id)).deleteRecursive();
     }
 
 }
