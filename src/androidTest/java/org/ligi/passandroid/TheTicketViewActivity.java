@@ -17,7 +17,6 @@ import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewA
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
 public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
@@ -64,6 +63,23 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
         getActivity();
 
         onView(withId(R.id.date)).check(matches(isDisplayed()));
+    }
+
+    @MediumTest
+    public void testLinkToCalendarIsThereWhenPassbookHasDate() {
+        act_pass.relevantDate = new DateTime();
+        getActivity();
+
+        onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));
+    }
+
+
+    @MediumTest
+    public void testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
+        act_pass.relevantDate = null;
+        getActivity();
+
+        onView(withId(R.id.addCalendar)).check(matches(not(isDisplayed())));
     }
 
     @MediumTest
