@@ -1,7 +1,6 @@
 package org.ligi.passandroid;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.ImageView;
 
@@ -25,7 +24,7 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class TheFullscreenBarcodeActivity extends ActivityInstrumentationTestCase2<FullscreenBarcodeActivity> {
+public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarcodeActivity> {
 
     public TheFullscreenBarcodeActivity() {
         super(FullscreenBarcodeActivity.class);
@@ -45,6 +44,8 @@ public class TheFullscreenBarcodeActivity extends ActivityInstrumentationTestCas
 
         TraceDroid.deleteStacktraceFiles();
 
+        //inView(withId())
+//swipeLeft()
     }
 
     @MediumTest

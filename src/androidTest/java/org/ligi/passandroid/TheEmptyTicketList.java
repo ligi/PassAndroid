@@ -32,10 +32,9 @@ public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
     @MediumTest
     public void test_that_empty_view_is_there_without_passes() {
 
-        Spoon.screenshot(getActivity(), "empty_view");
-
         onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
 
+        Spoon.screenshot(getActivity(), "empty_view");
     }
 
     @MediumTest

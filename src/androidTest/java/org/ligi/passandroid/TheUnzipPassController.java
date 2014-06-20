@@ -1,14 +1,13 @@
 package org.ligi.passandroid;
 
 import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.ui.UnzipPassController;
 
 import java.io.InputStream;
 
-public class TheUnzipPassController extends ActivityInstrumentationTestCase2<Activity> {
+public class TheUnzipPassController extends BaseIntegration<Activity> {
 
     public TheUnzipPassController() {
         super(Activity.class);

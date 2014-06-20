@@ -1,6 +1,5 @@
 package org.ligi.passandroid;
 
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.squareup.spoon.Spoon;
@@ -13,7 +12,7 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 
 
-public class TheHelpActivity extends ActivityInstrumentationTestCase2<HelpActivity> {
+public class TheHelpActivity extends BaseIntegration<HelpActivity> {
 
     public TheHelpActivity() {
         super(HelpActivity.class);

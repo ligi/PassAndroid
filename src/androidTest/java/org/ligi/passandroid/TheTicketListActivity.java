@@ -1,7 +1,6 @@
 package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
@@ -21,7 +20,7 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
-public class TheTicketListActivity extends ActivityInstrumentationTestCase2<TicketListActivity> {
+public class TheTicketListActivity extends BaseIntegration<TicketListActivity> {
 
     public TheTicketListActivity() {
         super(TicketListActivity.class);
