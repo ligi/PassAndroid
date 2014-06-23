@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.PassField;
@@ -21,11 +22,10 @@ import static butterknife.ButterKnife.findById;
 
 public class PassVisualizer {
     public static void visualize(final Activity activity, final ReducedPassInformation passbook, View res) {
-        TextView titleTextView = findById(res, R.id.title);
-        TextView dateTextView = findById(res, R.id.date);
+        final TextView titleTextView = findById(res, R.id.title);
+        final TextView dateTextView = findById(res, R.id.date);
 
-        CategoryIndicatorView categoryIndicator = findById(res, R.id.categoryView);
-
+        final CategoryIndicatorView categoryIndicator = findById(res, R.id.categoryView);
 
         if (passbook.hasLocation) {
             findById(res, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
@@ -38,14 +38,24 @@ public class PassVisualizer {
             findById(res, R.id.navigateTo).setVisibility(View.GONE);
         }
 
-        if (passbook.relevantDate != null) {
+        final DateTime dateForIntent;
+
+        if (passbook.relevantDate.isPresent()) {
+            dateForIntent = passbook.relevantDate.get();
+        } else if (passbook.expirationDate.isPresent()) {
+            dateForIntent = passbook.expirationDate.get();
+        } else {
+            dateForIntent = null;
+        }
+
+        if (dateForIntent != null) {
             findById(res, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_EDIT);
                     intent.setType("vnd.android.cursor.item/event");
-                    intent.putExtra("beginTime", passbook.relevantDate.getMillis());
-                    intent.putExtra("endTime", passbook.relevantDate.getMillis() + 60 * 60 * 1000);
+                    intent.putExtra("beginTime", dateForIntent.getMillis());
+                    intent.putExtra("endTime", dateForIntent.getMillis() + 60 * 60 * 1000);
                     intent.putExtra("title", passbook.name);
                     activity.startActivity(intent);
                 }
@@ -54,12 +64,12 @@ public class PassVisualizer {
             findById(res, R.id.addCalendar).setVisibility(View.GONE);
         }
 
-        if (passbook.relevantDate == null && !passbook.hasLocation) {
+        if (dateForIntent == null && !passbook.hasLocation) {
             findById(res, R.id.actionsContainer).setVisibility(View.GONE);
         }
 
         int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
-        ImageView icon_img = findById(res, R.id.icon);
+        final ImageView icon_img = findById(res, R.id.icon);
 
         icon_img.setBackgroundColor(passbook.backgroundColor);
 
@@ -83,9 +93,12 @@ public class PassVisualizer {
 
         titleTextView.setText(passbook.name);
 
-        if (passbook.relevantDate != null) {
-            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+        if (passbook.relevantDate.isPresent()) {
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), passbook.relevantDate.get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
             dateTextView.setText(relativeDateTimeString);
+        } else if (passbook.expirationDate.isPresent()) {
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), passbook.expirationDate.get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+            dateTextView.setText("expires " + relativeDateTimeString);
         } else {
             dateTextView.setVisibility(View.GONE);
         }

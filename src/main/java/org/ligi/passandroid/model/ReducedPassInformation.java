@@ -1,5 +1,7 @@
 package org.ligi.passandroid.model;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -12,15 +14,14 @@ public class ReducedPassInformation implements Serializable {
     public int backgroundColor;
     public int foregroundColor;
     public String iconPath;
-    public DateTime relevantDate;
+    public Optional<DateTime> relevantDate;
+    public Optional<DateTime> expirationDate;
     public boolean hasLocation;
 
     public ReducedPassInformation(Passbook pass) {
-
         type = pass.getType();
-        if (pass.getRelevantDate().isPresent()) {
-            relevantDate = pass.getRelevantDate().get();
-        }
+        relevantDate = pass.getRelevantDate();
+        expirationDate = pass.getExpirationDate();
         backgroundColor = pass.getBackGroundColor();
         foregroundColor = pass.getForegroundColor();
         name = pass.getDescription();

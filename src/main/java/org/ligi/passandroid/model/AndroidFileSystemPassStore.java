@@ -124,13 +124,13 @@ public class AndroidFileSystemPassStore implements PassStore {
                             return 0;
                         }
 
-                        if (lhs.relevantDate == null) {
+                        if (!lhs.relevantDate.isPresent()) {
                             return 1;
                         }
-                        if (rhs.relevantDate == null) {
+                        if (!rhs.relevantDate.isPresent()) {
                             return -1;
                         }
-                        return rhs.relevantDate.compareTo(lhs.relevantDate);
+                        return rhs.relevantDate.get().compareTo(lhs.relevantDate.get());
                     }
                 });
                 break;
