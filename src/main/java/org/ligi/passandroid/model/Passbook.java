@@ -2,6 +2,7 @@ package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
 
+import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
@@ -9,7 +10,6 @@ import org.joda.time.DateTime;
 import java.util.List;
 
 public interface Passbook {
-
 
     static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
@@ -47,11 +47,13 @@ public interface Passbook {
 
     int getForegroundColor();
 
-    boolean hasRelevantDate();
+    Optional<DateTime> getRelevantDate();
 
-    DateTime getRelevantDate();
+    Optional<DateTime> getExpirationDate();
 
     String getId();
 
     String getPlainJsonString();
+
+    Optional<String> getOrganisation();
 }

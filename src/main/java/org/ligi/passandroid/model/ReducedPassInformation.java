@@ -17,15 +17,13 @@ public class ReducedPassInformation implements Serializable {
 
     public ReducedPassInformation(Passbook pass) {
 
-        PrettifiedPassbookDecorator prettyPassBook = new PrettifiedPassbookDecorator(pass);
-
         type = pass.getType();
-        if (pass.hasRelevantDate()) {
-            relevantDate = pass.getRelevantDate();
+        if (pass.getRelevantDate().isPresent()) {
+            relevantDate = pass.getRelevantDate().get();
         }
         backgroundColor = pass.getBackGroundColor();
         foregroundColor = pass.getForegroundColor();
-        name = prettyPassBook.getPrettyDescription();
+        name = pass.getDescription();
         iconPath = pass.getIconPath();
         id = pass.getId();
         hasLocation = !pass.getLocations().isEmpty();

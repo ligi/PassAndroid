@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
@@ -18,29 +19,17 @@ import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FilePathPassbook implements Passbook {
+public class FilePathPassbook extends QuirkCorrectingPassbook {
 
-    private String path;
-    private String id;
-    private String type;
-    private boolean passbook_valid = true; // be positive
-    private String barcodeMessage;
-    private BarcodeFormat barcodeFormat;
-    private int backGroundColor;
-    private int foregroundColor;
-    private String description;
-    private DateTime relevantDate;
-    private PassFieldList primaryFields, secondaryFields, backFields, auxiliaryFields, headerFields;
-    private List<PassLocation> locations = new ArrayList<PassLocation>();
     private JSONObject ticketJSONObject = null;
     private String plainJsonString;
+    private String path;
+    private String id;
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
@@ -114,12 +103,24 @@ public class FilePathPassbook implements Passbook {
         }
 
         if (pass_json != null) {
-            try {
-                relevantDate = new DateTime(pass_json.getString("relevantDate"));
-            } catch (JSONException e) {
-            } catch (IllegalArgumentException e) {
-                // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
-                // OK then we just have no date here
+            if (pass_json.has("relevantDate")) {
+                try {
+                    relevantDate = Optional.of(new DateTime(pass_json.getString("relevantDate")));
+                } catch (JSONException | IllegalArgumentException e) {
+                    // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
+                    // OK then we just have no date here
+                    Tracker.get().trackException("problem parsing relevant date", e, false);
+                }
+            }
+
+            if (pass_json.has("expirationDate")) {
+                try {
+                    expirationDate = Optional.of(new DateTime(pass_json.getString("expirationDate")));
+                } catch (JSONException | IllegalArgumentException e) {
+                    // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
+                    // OK then we just have no date here
+                    Tracker.get().trackException("problem parsing expiration date", e, false);
+                }
             }
 
             try {
@@ -194,6 +195,14 @@ public class FilePathPassbook implements Passbook {
             headerFields = new PassFieldList(ticketJSONObject, "headerFields");
         }
 
+        try {
+            organisation = Optional.of(pass_json.getString("organizationName"));
+
+        } catch (JSONException e) {
+            // ok - we have no organisation - big deal ..-)
+        }
+
+        correctQuirks();
     }
 
     public String findType(JSONObject obj) {
@@ -235,33 +244,6 @@ public class FilePathPassbook implements Passbook {
         return description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public PassFieldList getPrimaryFields() {
-        return primaryFields;
-    }
-
-    public PassFieldList getSecondaryFields() {
-        return secondaryFields;
-    }
-
-    public PassFieldList getBackFields() {
-        return backFields;
-    }
-
-    public PassFieldList getAuxiliaryFields() {
-        return auxiliaryFields;
-    }
-
-    public PassFieldList getHeaderFields() {
-        return headerFields;
-    }
-
-    public List<PassLocation> getLocations() {
-        return locations;
-    }
 
     private int parseColor(String color_str, int defaultValue) {
         if (color_str == null) {
@@ -298,13 +280,6 @@ public class FilePathPassbook implements Passbook {
         return defaultValue;
     }
 
-    public boolean isValid() {
-        return passbook_valid;
-    }
-
-    public BarcodeFormat getBarcodeFormat() {
-        return barcodeFormat;
-    }
 
     public Bitmap getBarcodeBitmap(final int size) {
         if (barcodeMessage == null) {
@@ -383,32 +358,18 @@ public class FilePathPassbook implements Passbook {
         return result;
     }
 
-    public int getBackGroundColor() {
-        return backGroundColor;
-    }
-
     public String getPath() {
         return path;
-    }
-
-    public int getForegroundColor() {
-        return foregroundColor;
-    }
-
-    public boolean hasRelevantDate() {
-        return relevantDate != null;
-    }
-
-    public DateTime getRelevantDate() {
-        return relevantDate;
     }
 
     public String getId() {
         return id;
     }
 
+
     @Override
     public String getPlainJsonString() {
         return plainJsonString;
     }
+
 }
