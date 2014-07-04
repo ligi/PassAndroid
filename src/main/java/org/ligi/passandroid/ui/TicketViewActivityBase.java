@@ -12,13 +12,13 @@ import com.google.common.base.Optional;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 public class TicketViewActivityBase extends ActionBarActivity {
 
     protected Bitmap icon_bitmap;
     protected String path;
-    public Passbook passbook;
+    public Pass pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Optional<Passbook> optionalPass = App.getPassStore().getCurrentPass();
+        final Optional<Pass> optionalPass = App.getPassStore().getCurrentPass();
 
         if (!optionalPass.isPresent()) {
             Tracker.get().trackException("pass not present in TicketViewActivityBase", false);
@@ -35,7 +35,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
             return;
         }
 
-        passbook = optionalPass.get();
+        pass = optionalPass.get();
 
         loadIcon();
     }
@@ -45,7 +45,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         int smallestSide = Math.min(display.getHeight(), display.getWidth());
         int size = (int) (2.0f * smallestSide / 3.0f);
 
-        icon_bitmap = passbook.getIconBitmap();
+        icon_bitmap = pass.getIconBitmap();
 
         if (icon_bitmap != null) {
             icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
@@ -60,7 +60,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (new PassMenuOptions(this, passbook).process(item)) {
+        if (new PassMenuOptions(this, pass).process(item)) {
             return true;
         }
 

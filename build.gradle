@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.10.0'
     }
@@ -104,11 +104,11 @@ android {
     buildToolsVersion "19.1"
 
     defaultConfig {
-        versionCode 221
-        versionName "2.2.1"
+        versionCode 222
+        versionName "2.2.2"
         minSdkVersion 9
         targetSdkVersion 19
-        applicationId "org.ligi.org.ligi.passandroid"
+        applicationId "org.ligi.passandroid"
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
 
     }

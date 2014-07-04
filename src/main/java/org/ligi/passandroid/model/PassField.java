@@ -3,7 +3,9 @@ package org.ligi.passandroid.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PassField {
+import java.io.Serializable;
+
+public class PassField implements Serializable{
 
     public final String key;
     public final String label;

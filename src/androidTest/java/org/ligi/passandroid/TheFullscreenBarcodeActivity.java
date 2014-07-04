@@ -8,9 +8,9 @@ import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.helper.BarcodeDecoder;
-import org.ligi.passandroid.injections.FixedPassBook;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
 
@@ -26,6 +26,8 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarcodeActivity> {
 
+    public static final String BARCODE_MESSAGE = "foo";
+
     public TheFullscreenBarcodeActivity() {
         super(FullscreenBarcodeActivity.class);
     }
@@ -35,8 +37,8 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Passbook> list = new ArrayList<Passbook>() {{
-            add(new FixedPassBook());
+        final ArrayList<Pass> list = new ArrayList<Pass>() {{
+            add(new PassImpl());
         }};
 
         App.replacePassStore(new FixedPassListPassStore(list));
@@ -44,8 +46,6 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
         TraceDroid.deleteStacktraceFiles();
 
-        //inView(withId())
-//swipeLeft()
     }
 
     @MediumTest
@@ -72,15 +72,16 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
     }
 
     private void testWithBarcodeFormat(BarcodeFormat format) {
-        final FixedPassBook pass = new FixedPassBook();
-        pass.barcodeFormat = format;
+        final PassImpl pass = new PassImpl();
+        pass.setBarcodeFormat(format);
+        pass.setBarcodeMessage(BARCODE_MESSAGE);
         App.getPassStore().setCurrentPass(pass);
         getActivity();
         onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
 
         final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_image);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
-        assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo("foo");
+        assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo(BARCODE_MESSAGE);
     }
 
 }

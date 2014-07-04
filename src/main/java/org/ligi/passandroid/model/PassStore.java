@@ -45,21 +45,19 @@ public interface PassStore {
 
     public boolean isEmpty();
 
-    public Passbook getPassbookAt(int pos);
+    public Pass getPassbookAt(int pos);
 
-    public Passbook getPassbookForId(String id);
-
-    public ReducedPassInformation getReducedPassbookAt(int pos);
+    public Pass getPassbookForId(String id);
 
     public void sort(SortOrder order);
 
     public List<CountedType> getCountedTypes();
 
-    public Optional<Passbook> getCurrentPass();
+    public Optional<Pass> getCurrentPass();
 
-    public void setCurrentPass(Passbook pass);
+    public void setCurrentPass(Pass pass);
 
-    public void setCurrentPass(Optional<Passbook> pass);
+    public void setCurrentPass(Optional<Pass> pass);
 
     public boolean deletePassWithId(String id);
 }

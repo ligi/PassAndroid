@@ -20,8 +20,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
-import org.ligi.passandroid.model.Passbook;
-import org.ligi.passandroid.model.ReducedPassInformation;
+import org.ligi.passandroid.model.Pass;
 
 import java.io.File;
 
@@ -56,7 +55,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!passbook.isValid()) { // don't deal with invalid passes
+        if (!pass.isValid()) { // don't deal with invalid passes
             new AlertDialog.Builder(this)
                     .setMessage(getString(R.string.pass_problem))
                     .setTitle(getString(R.string.problem))
@@ -69,7 +68,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, passbook.getId(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, pass.getId(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();
@@ -81,46 +80,46 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         ButterKnife.inject(this);
 
-        barcode_img.setImageBitmap(passbook.getBarcodeBitmap(AXT.at(getWindowManager()).getSmallestSide() / 3));
-        logo_img.setImageBitmap(passbook.getLogoBitmap());
+        barcode_img.setImageBitmap(pass.getBarcodeBitmap(AXT.at(getWindowManager()).getSmallestSide() / 3));
+        logo_img.setImageBitmap(pass.getLogoBitmap());
 
-        logo_img.setBackgroundColor(passbook.getBackGroundColor());
-        thumbnail_img.setImageBitmap(passbook.getThumbnailImage());
+        logo_img.setBackgroundColor(pass.getBackGroundColor());
+        thumbnail_img.setImageBitmap(pass.getThumbnailImage());
 
         if (findViewById(R.id.map_container) != null) {
-            if (!(passbook.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {
+            if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {
                 findViewById(R.id.map_container).setVisibility(View.GONE);
             }
         }
 
-        if (passbook.getType() != null) {
+        if (pass.getType() != null) {
             String front_str = "";
-            front_str += PassVisualizer.getFieldListAsString(passbook.getPrimaryFields());
-            front_str += PassVisualizer.getFieldListAsString(passbook.getSecondaryFields());
-            front_str += PassVisualizer.getFieldListAsString(passbook.getHeaderFields());
-            front_str += PassVisualizer.getFieldListAsString(passbook.getAuxiliaryFields());
+            front_str += PassVisualizer.getFieldListAsString(pass.getPrimaryFields());
+            front_str += PassVisualizer.getFieldListAsString(pass.getSecondaryFields());
+            front_str += PassVisualizer.getFieldListAsString(pass.getHeaderFields());
+            front_str += PassVisualizer.getFieldListAsString(pass.getAuxiliaryFields());
 
             front_tv.setText(Html.fromHtml(front_str));
         }
         String back_str = "";
 
         if (App.isDeveloperMode()) {
-            back_str += getPassDebugInfo(passbook);
+            back_str += getPassDebugInfo(pass);
         }
 
-        back_str += PassVisualizer.getFieldListAsString(passbook.getBackFields());
+        back_str += PassVisualizer.getFieldListAsString(pass.getBackFields());
 
         back_tv.setText(Html.fromHtml(back_str));
 
         Linkify.addLinks(back_tv, Linkify.ALL);
-        PassVisualizer.visualize(this, new ReducedPassInformation(passbook), contentView);
+        PassVisualizer.visualize(this, pass, contentView);
     }
 
-    public String getPassDebugInfo(Passbook passbook) {
+    private String getPassDebugInfo(Pass pass) {
 
-        String result = passbook.getPlainJsonString();
+        String result = ""; // TODO bring back sth like passbook.getPlainJsonString();
 
-        for (File f : new File(this.passbook.getId()).listFiles()) {
+        for (File f : new File(this.pass.getId()).listFiles()) {
             result += f.getName() + "<br/>";
         }
 
@@ -130,7 +129,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((passbook.getLocations().size() > 0));
+        menu.findItem(R.id.menu_map).setVisible((pass.getLocations().size() > 0));
         return res;
     }
 

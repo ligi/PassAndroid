@@ -13,7 +13,7 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.FullscreenMapActivity;
 import org.ligi.passandroid.LocationsMapFragment;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 public class PassbookMapsFacade {
 
@@ -33,8 +33,8 @@ public class PassbookMapsFacade {
         return true;
     }
 
-    public static void startFullscreenMap(Context context, Passbook passbook) {
-        App.getPassStore().setCurrentPass(passbook);
+    public static void startFullscreenMap(Context context, Pass pass) {
+        App.getPassStore().setCurrentPass(pass);
         AXT.at(context).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
     }
 }

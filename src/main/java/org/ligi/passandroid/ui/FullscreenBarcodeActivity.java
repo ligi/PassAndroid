@@ -26,7 +26,7 @@ public class FullscreenBarcodeActivity extends TicketViewActivityBase {
 
         setBestFittingOrientationForBarCode();
 
-        iv.setImageBitmap(passbook.getBarcodeBitmap(smallestSize));
+        iv.setImageBitmap(pass.getBarcodeBitmap(smallestSize));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class FullscreenBarcodeActivity extends TicketViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (passbook.getBarcodeFormat() == BarcodeFormat.PDF_417) {
+        if (pass.getBarcodeFormat() == BarcodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

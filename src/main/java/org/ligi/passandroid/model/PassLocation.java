@@ -1,11 +1,14 @@
 package org.ligi.passandroid.model;
 
-public class PassLocation {
+import java.io.Serializable;
 
-    private final Passbook connectedPass;
+public class PassLocation implements Serializable {
+
+    private final Pass connectedPass;
     private String description;
+    public LatLng latlng = new LatLng();
 
-    public PassLocation(Passbook connectedPass) {
+    public PassLocation(Pass connectedPass) {
         this.connectedPass = connectedPass;
     }
 
@@ -21,10 +24,8 @@ public class PassLocation {
         this.description = description;
     }
 
-    public LatLng latlng = new LatLng();
 
-
-    public class LatLng {
+    public class LatLng implements Serializable {
         public double lat;
         public double lon;
     }

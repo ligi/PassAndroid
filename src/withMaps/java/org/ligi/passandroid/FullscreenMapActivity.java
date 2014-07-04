@@ -15,7 +15,7 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
         super.onCreate(savedInstanceState);
 
         if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) { // no google play services
-            NavigateToLocationsDialog.perform(this, passbook, true); // fallback
+            NavigateToLocationsDialog.perform(this, pass, true); // fallback
         }
 
         setContentView(R.layout.fullscreen_map);

@@ -5,9 +5,9 @@ import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
 
-import org.ligi.passandroid.injections.FixedPassBook;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.TicketListActivity;
 
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ public class TheTicketListActivity extends BaseIntegration<TicketListActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Passbook> list = new ArrayList<Passbook>() {{
-            add(new FixedPassBook());
+        final ArrayList<Pass> list = new ArrayList<Pass>() {{
+            add(new PassImpl());
         }};
 
         App.replacePassStore(new FixedPassListPassStore(list));

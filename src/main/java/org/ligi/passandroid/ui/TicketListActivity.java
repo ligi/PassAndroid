@@ -36,7 +36,7 @@ import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -92,7 +92,7 @@ public class TicketListActivity extends ActionBarActivity {
 
     @OnItemClick(R.id.content_list)
     void listItemClick(int position) {
-        final Passbook newSelectedPass = App.getPassStore().getPassbookAt(position);
+        final Pass newSelectedPass = App.getPassStore().getPassbookAt(position);
         App.getPassStore().setCurrentPass(Optional.of(newSelectedPass));
         AXT.at(this).startCommonIntent().activityFromClass(TicketViewActivity.class);
     }
@@ -217,7 +217,7 @@ public class TicketListActivity extends ActionBarActivity {
 
     private void scrollToType(String type) {
         for (int i = 0; i < passadapter.getCount(); i++) {
-            if (App.getPassStore().getReducedPassbookAt(i).getTypeNotNull().equals(type)) {
+            if (App.getPassStore().getPassbookAt(i).getTypeNotNull().equals(type)) {
                 listView.setSelection(i);
                 return; // we are done
             }

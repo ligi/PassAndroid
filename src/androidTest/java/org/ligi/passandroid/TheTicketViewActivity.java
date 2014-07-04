@@ -3,10 +3,12 @@ package org.ligi.passandroid;
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
-import org.ligi.passandroid.injections.FixedPassBook;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.TicketViewActivity;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import static org.hamcrest.CoreMatchers.not;
 @TargetApi(14)
 public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
 
-    private FixedPassBook act_pass;
+    private PassImpl act_pass;
 
     public TheTicketViewActivity() {
         super(TicketViewActivity.class);
@@ -32,8 +34,9 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Passbook> list = new ArrayList<Passbook>() {{
-            act_pass = new FixedPassBook();
+        final ArrayList<Pass> list = new ArrayList<Pass>() {{
+            act_pass = new PassImpl();
+            act_pass.setDescription("foo");
             add(act_pass);
         }};
 
@@ -60,7 +63,7 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
 
     @MediumTest
     public void testDateIsThereWhenPassbookHasDate() {
-        act_pass.relevantDate = new DateTime();
+        act_pass.setRelevantDate(Optional.of(new DateTime()));
         getActivity();
 
         onView(withId(R.id.date)).check(matches(isDisplayed()));
@@ -68,7 +71,7 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
 
     @MediumTest
     public void testLinkToCalendarIsThereWhenPassbookHasDate() {
-        act_pass.relevantDate = new DateTime();
+        act_pass.setRelevantDate(Optional.of(new DateTime()));
         getActivity();
 
         onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));
@@ -77,7 +80,6 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
 
     @MediumTest
     public void testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
-        act_pass.relevantDate = null;
         getActivity();
 
         onView(withId(R.id.addCalendar)).check(matches(not(isDisplayed())));

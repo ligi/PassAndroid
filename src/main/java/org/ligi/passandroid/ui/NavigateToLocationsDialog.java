@@ -9,7 +9,7 @@ import android.net.Uri;
 
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.PassLocation;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -17,8 +17,8 @@ import java.util.List;
 
 public class NavigateToLocationsDialog {
 
-    public static void perform(final Activity activity, Passbook passbook, final boolean finishOnDone) {
-        final List<PassLocation> locations = passbook.getLocations();
+    public static void perform(final Activity activity, Pass pass, final boolean finishOnDone) {
+        final List<PassLocation> locations = pass.getLocations();
 
         if (locations.size() == 0) {
             done(activity, finishOnDone);

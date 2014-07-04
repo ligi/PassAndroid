@@ -7,15 +7,18 @@ import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface Passbook {
+public interface Pass extends Serializable {
 
     static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
     String getDescription();
 
     String getType();
+
+    String getTypeNotNull();
 
     PassFieldList getPrimaryFields();
 
@@ -35,8 +38,6 @@ public interface Passbook {
 
     Bitmap getBarcodeBitmap(final int size);
 
-    String getIconPath();
-
     Bitmap getIconBitmap();
 
     Bitmap getThumbnailImage();
@@ -52,8 +53,6 @@ public interface Passbook {
     Optional<DateTime> getExpirationDate();
 
     String getId();
-
-    String getPlainJsonString();
 
     Optional<String> getOrganisation();
 }

@@ -11,15 +11,15 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 public class PassMenuOptions {
     public final Activity activity;
-    public final Passbook passbook;
+    public final Pass pass;
 
-    public PassMenuOptions(Activity activity, Passbook passbook) {
+    public PassMenuOptions(Activity activity, Pass pass) {
         this.activity = activity;
-        this.passbook = passbook;
+        this.pass = pass;
     }
 
     public boolean process(MenuItem item) {
@@ -32,7 +32,7 @@ public class PassMenuOptions {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                App.getPassStore().deletePassWithId(passbook.getId());
+                                App.getPassStore().deletePassWithId(pass.getId());
                                 if (activity instanceof TicketViewActivityBase) {
                                     Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
                                     NavUtils.navigateUpTo(activity, ticketListIntent);
@@ -48,7 +48,7 @@ public class PassMenuOptions {
                 return true;
 
             case R.id.menu_map:
-                PassbookMapsFacade.startFullscreenMap(activity, passbook);
+                PassbookMapsFacade.startFullscreenMap(activity, pass);
                 return true;
 
             case R.id.menu_share:

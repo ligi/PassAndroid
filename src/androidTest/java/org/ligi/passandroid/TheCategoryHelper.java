@@ -4,7 +4,7 @@ package org.ligi.passandroid;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,13 +16,13 @@ public class TheCategoryHelper extends BaseTest {
     @SmallTest
     public void test_all_categories_should_b_translated() {
 
-        Set<Integer> probe = new HashSet<>();
+        final Set<Integer> probe = new HashSet<>();
 
-        for (String type : Passbook.TYPES) {
+        for (String type : Pass.TYPES) {
             probe.add(CategoryHelper.getHumanCategoryString(type));
         }
 
-        assertThat(probe.size()).isEqualTo(Passbook.TYPES.length);
+        assertThat(probe.size()).isEqualTo(Pass.TYPES.length);
     }
 
 }

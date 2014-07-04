@@ -2,7 +2,7 @@ package org.ligi.passandroid.maps;
 
 import android.content.Context;
 
-import org.ligi.passandroid.model.Passbook;
+import org.ligi.passandroid.model.Pass;
 
 public class PassbookMapsFacade {
 
@@ -10,6 +10,6 @@ public class PassbookMapsFacade {
         return false;
     }
 
-    public static void startFullscreenMap(Context context,Passbook passbook) {
+    public static void startFullscreenMap(Context context,Pass pass) {
     }
 }

@@ -74,7 +74,7 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                     LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
-                    List<PassLocation> locations = base_activity.passbook.getLocations();
+                    List<PassLocation> locations = base_activity.pass.getLocations();
 
                     if (locations.size() > 0) {
                         for (PassLocation l : locations) {
@@ -111,7 +111,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                                 @Override
                                 public void onMapClick(LatLng latLng) {
-                                    App.getPassStore().setCurrentPass(base_activity.passbook);
+                                    App.getPassStore().setCurrentPass(base_activity.pass);
                                     AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
                                 }
                             });

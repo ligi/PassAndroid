@@ -21,8 +21,8 @@ public class AndroidFileSystemPassStore implements PassStore {
     private final Context context;
     private String path;
 
-    private List<ReducedPassInformation> reducedPassInformationList;
-    private Passbook actPass;
+    private List<Pass> passList;
+    private Pass actPass;
 
     public AndroidFileSystemPassStore(Context context) {
         this.context = context;
@@ -30,43 +30,44 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     public void deleteCache() {
-
-        String[] passIdents = getPassesDirSafely().list(new DirectoryFileFilter());
-
-        for (String id : passIdents) {
-            new File(path + "/" + id + "/base_cache.obj").delete();
+        for (String id : getPassIDArray()) {
+            getCacheFile(id).delete();
         }
+    }
+
+    private File getCacheFile(String id) {
+        return new File(getPathForID(id) + "/base_cache.obj");
     }
 
     public void refreshPassesList() {
         path = TicketDefinitions.getPassesDir(context);
 
-        File passes_dir = getPassesDirSafely();
+        passList = new ArrayList<>();
 
-        String[] passIdents = passes_dir.list(new DirectoryFileFilter());
-        reducedPassInformationList = new ArrayList<>();
-
-        for (String id : passIdents) {
-            final File cachedFile = new File(path + "/" + id + "/base_cache.obj");
-
-            ReducedPassInformation reducedPass = null;
-            try {
-                reducedPass = AXT.at(cachedFile).loadToObject();
-            } catch (Exception e) {
-            }
-
-            if (reducedPass == null) {
-                reducedPass = new ReducedPassInformation(new FilePathPassbook(path + "/" + id));
-                AXT.at(cachedFile).writeObject(reducedPass);
-            }
-
-            reducedPassInformationList.add(reducedPass);
+        for (String id : getPassIDArray()) {
+            passList.add(getCachedPassOrLoad(id));
         }
 
     }
 
+    private String[] getPassIDArray() {
+        return getPassesDirSafely().list(new DirectoryFileFilter());
+    }
+
+    private Pass getCachedPassOrLoad(String id) {
+        final File cachedFile = getCacheFile(id);
+        try {
+            return AXT.at(cachedFile).loadToObject();
+        } catch (Exception e) {
+        }
+
+        final Pass pass = AppleStylePassReader.read(getPathForID(id));
+        AXT.at(cachedFile).writeObject(pass);
+        return pass;
+    }
+
     private File getPassesDirSafely() {
-        File passes_dir = new File(TicketDefinitions.getPassesDir(context));
+        final File passes_dir = new File(TicketDefinitions.getPassesDir(context));
 
         if (!passes_dir.exists()) {
             passes_dir.mkdirs();
@@ -75,62 +76,56 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     public int passCount() {
-        return reducedPassInformationList.size();
+        return passList.size();
     }
 
     public boolean isEmpty() {
-        return passCount() == 0;
+        return passList.isEmpty();
     }
 
-    public Passbook getPassbookAt(int pos) {
-        return getPassbookForId(reducedPassInformationList.get(pos).id);
+    public Pass getPassbookAt(final int pos) {
+        return passList.get(pos);
     }
 
-    public Passbook getPassbookForId(String id) {
-        String mPath = path + "/" + id;
-        return new FilePathPassbook(mPath);
+    public Pass getPassbookForId(final String id) {
+        final String mPath = path + "/" + id;
+        // TODO read from cache
+        return AppleStylePassReader.read(mPath);
     }
 
-    public ReducedPassInformation getReducedPassbookAt(int pos) {
-        return reducedPassInformationList.get(pos);
-    }
-
-    public void sort(SortOrder order) {
+    public void sort(final SortOrder order) {
         switch (order) {
             case TYPE:
-                Collections.sort(reducedPassInformationList, new Comparator<ReducedPassInformation>() {
+                Collections.sort(passList, new Comparator<Pass>() {
                     @Override
-                    public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
-                        if (lhs.type == rhs.type) { // that looks bad but makes sense for both being null
+                    public int compare(Pass lhs, Pass rhs) {
+                        if (lhs.getType() == rhs.getType()) { // that looks bad but makes sense for both being null
                             return 0;
                         }
 
-                        if (lhs.type == null) {
+                        if (lhs.getType() == null) {
                             return 1;
                         }
-                        if (rhs.type == null) {
+                        if (rhs.getType() == null) {
                             return -1;
                         }
-                        return lhs.type.compareTo(rhs.type);
+                        return lhs.getType().compareTo(rhs.getType());
                     }
                 });
                 break;
 
             case DATE:
-                Collections.sort(reducedPassInformationList, new Comparator<ReducedPassInformation>() {
+                Collections.sort(passList, new Comparator<Pass>() {
                     @Override
-                    public int compare(ReducedPassInformation lhs, ReducedPassInformation rhs) {
-                        if (lhs.relevantDate == rhs.relevantDate) { // that looks bad but makes sense for both being null
-                            return 0;
-                        }
+                    public int compare(Pass lhs, Pass rhs) {
 
-                        if (!lhs.relevantDate.isPresent()) {
+                        if (!lhs.getRelevantDate().isPresent()) {
                             return 1;
                         }
-                        if (!rhs.relevantDate.isPresent()) {
+                        if (!rhs.getRelevantDate().isPresent()) {
                             return -1;
                         }
-                        return rhs.relevantDate.get().compareTo(lhs.relevantDate.get());
+                        return rhs.getRelevantDate().get().compareTo(lhs.getRelevantDate().get());
                     }
                 });
                 break;
@@ -140,18 +135,18 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     public List<CountedType> getCountedTypes() {
         // TODO - some sort of caching
-        Map<String, Integer> tempMap = new HashMap<String, Integer>();
+        final Map<String, Integer> tempMap = new HashMap<>();
 
-        for (ReducedPassInformation info : reducedPassInformationList) {
+        for (Pass info : passList) {
             if (tempMap.containsKey(info.getTypeNotNull())) {
-                Integer i = tempMap.get(info.getTypeNotNull());
+                final Integer i = tempMap.get(info.getTypeNotNull());
                 tempMap.put(info.getTypeNotNull(), i + 1);
             } else {
                 tempMap.put(info.getTypeNotNull(), 1);
             }
         }
 
-        List<CountedType> result = new ArrayList<CountedType>();
+        final List<CountedType> result = new ArrayList<>();
 
         for (String type : tempMap.keySet()) {
             result.add(new CountedType(type, tempMap.get(type)));
@@ -163,7 +158,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public Optional<Passbook> getCurrentPass() {
+    public Optional<Pass> getCurrentPass() {
         if (actPass == null) {
             return Optional.absent();
         }
@@ -172,18 +167,21 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public void setCurrentPass(Passbook pass) {
+    public void setCurrentPass(final Pass pass) {
         actPass = pass;
     }
 
     @Override
-    public void setCurrentPass(Optional<Passbook> pass) {
+    public void setCurrentPass(final Optional<Pass> pass) {
         actPass = pass.get();
     }
 
     @Override
-    public boolean deletePassWithId(String id) {
-        return AXT.at(new File(path + "/" + id)).deleteRecursive();
+    public boolean deletePassWithId(final String id) {
+        return AXT.at(new File(getPathForID(id))).deleteRecursive();
     }
 
+    private String getPathForID(final String id) {
+        return path + "/" + id;
+    }
 }
