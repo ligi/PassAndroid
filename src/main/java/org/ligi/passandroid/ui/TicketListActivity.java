@@ -354,15 +354,15 @@ public class TicketListActivity extends ActionBarActivity {
                 return;
             }
 
-            if (getActionBar() == null) {
+            if (getSupportActionBar() == null) {
                 // not here - no work
                 return;
             }
 
             if (values[0].isPresent()) {
-                getActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
+                getSupportActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
             } else {
-                getActionBar().setSubtitle(null);
+                getSupportActionBar().setSubtitle(null);
             }
 
         }
