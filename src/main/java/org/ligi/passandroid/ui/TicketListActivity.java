@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -349,11 +348,6 @@ public class TicketListActivity extends ActionBarActivity {
         }
 
         private void setActionbarToProgress(Optional<String>[] values) {
-            if (Build.VERSION.SDK_INT < 11) {
-                // no actionbar - no work
-                return;
-            }
-
             if (getSupportActionBar() == null) {
                 // not here - no work
                 return;
@@ -372,17 +366,16 @@ public class TicketListActivity extends ActionBarActivity {
          *
          * @param path
          */
-        private void search_in(String path) {
+        private void search_in(final File path) {
 
-            publishProgress(Optional.of(path));
+            publishProgress(Optional.of(path.toString()));
 
             if (path == null) {
                 Log.w("trying to search in null path");
                 return;
             }
 
-            final File dir = new File(path);
-            final File[] files = dir.listFiles();
+            final File[] files = path.listFiles();
 
             if (files == null || files.length == 0) {
                 // no files here
@@ -392,7 +385,7 @@ public class TicketListActivity extends ActionBarActivity {
 
             for (File file : files) {
                 if (file.isDirectory()) {
-                    search_in(file.toString());
+                    search_in(file);
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
                     new ImportAndRefreshListAsync(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
@@ -439,19 +432,19 @@ public class TicketListActivity extends ActionBarActivity {
             // up the refreshing of passes as it took so long to traverse all files on the SDCard
             // one could think about not going there anymore but a short look at this showed that it seems cost more time to check than what it gains
             // in download there are mostly single files in a flat dir - no huge tree behind this imho
-            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
+            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
 
             // | /system
-            search_in(Environment.getRootDirectory().toString());
+            search_in(Environment.getRootDirectory());
 
             // | /mnt/sdcard
-            search_in(Environment.getExternalStorageDirectory().toString());
+            search_in(Environment.getExternalStorageDirectory());
 
             // | /cache
-            search_in(Environment.getDownloadCacheDirectory().toString());
+            search_in(Environment.getDownloadCacheDirectory());
 
             // | /data
-            search_in(Environment.getDataDirectory().toString());
+            search_in(Environment.getDataDirectory());
 
             publishProgress(Optional.<String>absent());
             return null;
