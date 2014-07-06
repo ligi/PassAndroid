@@ -41,14 +41,14 @@ public class UnzipPassController {
         try {
             final File tempFile = File.createTempFile("ins", "pass");
             AXT.at(inputStream).toFile(tempFile);
-            processInputStream(tempFile.getAbsolutePath(), context, onSuccessCallback, failCallback);
+            processFile(tempFile.getAbsolutePath(), context, onSuccessCallback, failCallback);
             tempFile.delete();
         } catch (IOException e) {
             failCallback.fail("problem with temp file" + e);
         }
     }
 
-    public static void processInputStream(final String zipFileString, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    public static void processFile(final String zipFileString, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
 
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 

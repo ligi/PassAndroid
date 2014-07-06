@@ -53,10 +53,10 @@ import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends ActionBarActivity {
 
-    private PassAdapter passadapter;
+    private PassAdapter passAdapter;
     private boolean scanning = false;
 
-    private ScanForPassesTask scan_task = null;
+    private ScanForPassesTask scanTask = null;
     private ActionBarDrawerToggle drawerToggle;
 
     @InjectView(R.id.content_list)
@@ -97,7 +97,7 @@ public class TicketListActivity extends ActionBarActivity {
     public void refreshPasses() {
         App.getPassStore().refreshPassesList();
         App.getPassStore().sort(App.getSettings().getSortOrder());
-        passadapter.notifyDataSetChanged();
+        passAdapter.notifyDataSetChanged();
     }
 
     public TicketListActivity() {
@@ -111,8 +111,8 @@ public class TicketListActivity extends ActionBarActivity {
         setContentView(R.layout.ticket_list);
         ButterKnife.inject(this);
 
-        passadapter = new PassAdapter(this);
-        listView.setAdapter(passadapter);
+        passAdapter = new PassAdapter(this);
+        listView.setAdapter(passAdapter);
 
         listView.setEmptyView(emptySwipeRefreshLayout);
 
@@ -121,7 +121,7 @@ public class TicketListActivity extends ActionBarActivity {
             Tracker.get().trackEvent("ui_event", "send", "stacktraces", null);
             TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
         } else { // if no error - check if there is a new version of the app
-            Tracker.get().trackEvent("ui_event", "processInputStream", "updatenotice", null);
+            Tracker.get().trackEvent("ui_event", "processFile", "updatenotice", null);
             MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
 
@@ -211,7 +211,7 @@ public class TicketListActivity extends ActionBarActivity {
     }
 
     private void scrollToType(String type) {
-        for (int i = 0; i < passadapter.getCount(); i++) {
+        for (int i = 0; i < passAdapter.getCount(); i++) {
             if (App.getPassStore().getPassbookAt(i).getTypeNotNull().equals(type)) {
                 listView.setSelection(i);
                 return; // we are done
@@ -247,8 +247,8 @@ public class TicketListActivity extends ActionBarActivity {
         super.onResume();
 
         if (App.getPassStore().isEmpty()) {
-            scan_task = new ScanForPassesTask();
-            scan_task.execute();
+            scanTask = new ScanForPassesTask();
+            scanTask.execute();
         }
 
         updateUIToScanningState();
@@ -308,8 +308,8 @@ public class TicketListActivity extends ActionBarActivity {
     protected void onPause() {
         App.getBus().unregister(this);
 
-        if (scan_task != null) {
-            scan_task.cancel(true);
+        if (scanTask != null) {
+            scanTask.cancel(true);
         }
         scanning = false;
         super.onPause();
@@ -362,7 +362,7 @@ public class TicketListActivity extends ActionBarActivity {
          *
          * @param path
          */
-        private void search_in(final File path) {
+        private void search_in(final File path, final boolean recursive) {
 
             publishProgress(Optional.of(path.toString()));
 
@@ -380,8 +380,8 @@ public class TicketListActivity extends ActionBarActivity {
 
 
             for (File file : files) {
-                if (file.isDirectory()) {
-                    search_in(file);
+                if (recursive && file.isDirectory()) {
+                    search_in(file, true);
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
                     new ImportAndRefreshListAsync(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
@@ -428,19 +428,19 @@ public class TicketListActivity extends ActionBarActivity {
             // up the refreshing of passes as it took so long to traverse all files on the SDCard
             // one could think about not going there anymore but a short look at this showed that it seems cost more time to check than what it gains
             // in download there are mostly single files in a flat dir - no huge tree behind this imho
-            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), true);
 
             // | /system
-            search_in(Environment.getRootDirectory());
+            search_in(Environment.getRootDirectory(), true);
 
             // | /mnt/sdcard
-            search_in(Environment.getExternalStorageDirectory());
+            search_in(Environment.getExternalStorageDirectory(), true);
 
             // | /cache
-            search_in(Environment.getDownloadCacheDirectory());
+            search_in(Environment.getDownloadCacheDirectory(), true);
 
             // | /data
-            search_in(Environment.getDataDirectory());
+            search_in(Environment.getDataDirectory(), true);
 
             publishProgress(Optional.<String>absent());
             return null;
