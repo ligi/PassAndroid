@@ -36,6 +36,7 @@ import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
@@ -317,8 +318,9 @@ public class TicketListActivity extends ActionBarActivity {
 
     class ImportAndRefreshListAsync extends ImportAsyncTask {
 
-        public ImportAndRefreshListAsync(final Activity ticketImportActivity, final Uri uri) {
-            super(ticketImportActivity, uri);
+        public ImportAndRefreshListAsync(final Activity ticketImportActivity, final String path) {
+            super(ticketImportActivity, Uri.parse("file://" + path));
+            new PastLocationsStore(ticketImportActivity).putLocation(path);
         }
 
         @Override
@@ -384,7 +386,8 @@ public class TicketListActivity extends ActionBarActivity {
                     search_in(file, true);
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
-                    new ImportAndRefreshListAsync(TicketListActivity.this, Uri.parse("file://" + file.getAbsolutePath())).execute();
+
+                    new ImportAndRefreshListAsync(TicketListActivity.this, file.getAbsolutePath()).execute();
                 }
             }
 
@@ -418,6 +421,10 @@ public class TicketListActivity extends ActionBarActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+
+            for (String path : new PastLocationsStore(TicketListActivity.this).getLocations()) {
+                search_in(new File(path), false);
+            }
 
             // note to future_me: yea one thinks we only need to search root here, but root was /system for me and so
             // did not contain "/SDCARD" #dontoptimize
