@@ -55,4 +55,6 @@ public interface Pass extends Serializable {
     String getId();
 
     Optional<String> getOrganisation();
+
+    Optional<String> getSource();
 }

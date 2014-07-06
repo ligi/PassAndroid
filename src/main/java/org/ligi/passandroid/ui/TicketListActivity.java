@@ -34,13 +34,13 @@ import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
+import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import java.io.File;
-import java.io.InputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -317,19 +317,19 @@ public class TicketListActivity extends ActionBarActivity {
 
     class ImportAndRefreshListAsync extends ImportAsyncTask {
 
-        public ImportAndRefreshListAsync(Activity ticketImportActivity, Uri intent_uri) {
-            super(ticketImportActivity, intent_uri);
+        public ImportAndRefreshListAsync(final Activity ticketImportActivity, final Uri uri) {
+            super(ticketImportActivity, uri);
         }
 
         @Override
-        protected InputStream doInBackground(Void... params) {
-            InputStream ins = super.doInBackground(params);
+        protected InputStreamWithSource doInBackground(Void... params) {
+            final InputStreamWithSource ins = super.doInBackground(params);
             UnzipPassController.processInputStream(ins, ticketImportActivity, new SilentWin(), new SilentFail());
             return ins;
         }
 
         @Override
-        protected void onPostExecute(InputStream result) {
+        protected void onPostExecute(InputStreamWithSource result) {
             refreshPasses();
             super.onPostExecute(result);
         }

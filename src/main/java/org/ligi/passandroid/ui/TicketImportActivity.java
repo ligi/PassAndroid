@@ -9,9 +9,8 @@ import android.view.Menu;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
-
-import java.io.InputStream;
 
 public class TicketImportActivity extends ActionBarActivity {
 
@@ -23,12 +22,12 @@ public class TicketImportActivity extends ActionBarActivity {
 
     class ImportAndShowAsyncTask extends ImportAsyncTask {
 
-        public ImportAndShowAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
+        public ImportAndShowAsyncTask(final Activity ticketImportActivity, final Uri intent_uri) {
             super(ticketImportActivity, intent_uri);
         }
 
         @Override
-        protected void onPostExecute(InputStream result) {
+        protected void onPostExecute(InputStreamWithSource result) {
             if (result != null) {
 
                 UnzipPassDialog.show(result, ticketImportActivity, new UnzipPassDialog.FinishCallback() {

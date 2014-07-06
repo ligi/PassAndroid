@@ -6,23 +6,23 @@ import android.net.Uri;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class InputStreamProvider {
-    public final static InputStream fromOKHttp(Uri intent_uri) {
+    public final static InputStreamWithSource fromOKHttp(final Uri uri) {
         try {
             final OkHttpClient client = new OkHttpClient();
-            final URL url = new URL(intent_uri.toString());
+            final URL url = new URL(uri.toString());
             final HttpURLConnection connection = client.open(url);
 
-            return connection.getInputStream();
+            return new InputStreamWithSource(uri.toString(), connection.getInputStream());
         } catch (MalformedURLException e) {
             Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
         } catch (IOException e) {
@@ -31,9 +31,9 @@ public class InputStreamProvider {
         return null;
     }
 
-    public final static InputStream fromContent(Context ctx, Uri uri) {
+    public final static InputStreamWithSource fromContent(final Context ctx, final Uri uri) {
         try {
-            return ctx.getContentResolver().openInputStream(uri);
+            return new InputStreamWithSource(uri.toString(), ctx.getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
             Tracker.get().trackException("FileNotFoundException in ticketImportActivity/ImportAsyncTask", e, false);
             return null;
@@ -42,9 +42,9 @@ public class InputStreamProvider {
     }
 
 
-    public final static InputStream getDefaultHttpInputStreamForUri(Uri intent_uri) {
+    public final static InputStreamWithSource getDefaultHttpInputStreamForUri(final Uri uri) {
         try {
-            return new BufferedInputStream(new URL(intent_uri.toString()).openStream(), 4096);
+            return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {
             Tracker.get().trackException("IOException in ticketImportActivity/ImportAsyncTask", e, false);
             return null;

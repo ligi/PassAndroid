@@ -9,10 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.TicketDefinitions;
+import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.UUID;
 
 public class UnzipPassController {
@@ -37,18 +37,18 @@ public class UnzipPassController {
         }
     }
 
-    public static void processInputStream(final InputStream inputStream, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    public static void processInputStream(final InputStreamWithSource inputStreamWithSource, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
         try {
             final File tempFile = File.createTempFile("ins", "pass");
-            AXT.at(inputStream).toFile(tempFile);
-            processFile(tempFile.getAbsolutePath(), context, onSuccessCallback, failCallback);
+            AXT.at(inputStreamWithSource.getInputStream()).toFile(tempFile);
+            processFile(tempFile.getAbsolutePath(), inputStreamWithSource.getSource(), context, onSuccessCallback, failCallback);
             tempFile.delete();
         } catch (IOException e) {
             failCallback.fail("problem with temp file" + e);
         }
     }
 
-    public static void processFile(final String zipFileString, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    public static void processFile(final String zipFileString, final String source, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
 
         String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 
@@ -59,6 +59,8 @@ public class UnzipPassController {
             failCallback.fail("Problem creating the temp dir: " + path);
             return;
         }
+
+        AXT.at(new File(path + "source.obj")).writeObject(source);
 
         try {
             final ZipFile zipFile = new ZipFile(zipFileString);

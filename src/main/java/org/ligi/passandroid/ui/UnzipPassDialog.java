@@ -6,8 +6,7 @@ import android.app.ProgressDialog;
 
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.R;
-
-import java.io.InputStream;
+import org.ligi.passandroid.model.InputStreamWithSource;
 
 public class UnzipPassDialog {
 
@@ -23,7 +22,7 @@ public class UnzipPassDialog {
         public Void call(String path);
     }
 
-    public static void show(final InputStream ins, final Activity activity, final FinishCallback callAfterFinishOnUIThread) {
+    public static void show(final InputStreamWithSource ins, final Activity activity, final FinishCallback callAfterFinishOnUIThread) {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }

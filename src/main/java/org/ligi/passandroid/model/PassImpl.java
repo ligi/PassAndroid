@@ -7,10 +7,13 @@ import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.tracedroid.logging.Log;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -277,5 +280,19 @@ public class PassImpl implements Pass, Serializable {
 
     public void setBackFields(PassFieldList backFields) {
         this.backFields = backFields;
+    }
+
+    @Override
+    public Optional<String> getSource() {
+        final File file = new File(getPath() + "/source.obj");
+        if (file.exists()) {
+            try {
+                return Optional.of((String) AXT.at(file).loadToObject());
+            } catch (IOException | ClassNotFoundException e) {
+                // OK no source info - no big deal - but log
+                Log.w("pass source info file exists but not readable" + e);
+            }
+        }
+        return Optional.absent();
     }
 }

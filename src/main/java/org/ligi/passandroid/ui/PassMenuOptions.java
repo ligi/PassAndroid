@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
+
+import java.io.File;
 
 public class PassMenuOptions {
     public final Activity activity;
@@ -27,21 +30,34 @@ public class PassMenuOptions {
 
             case R.id.menu_delete:
                 Tracker.get().trackEvent("ui_action", "delete", "delete", null);
-                new AlertDialog.Builder(activity).setMessage("Do you really want to delete this passbook?").setTitle("Sure?")
-                        .setPositiveButton(activity.getString(R.string.delete), new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                App.getPassStore().deletePassWithId(pass.getId());
-                                if (activity instanceof TicketViewActivityBase) {
-                                    Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
-                                    NavUtils.navigateUpTo(activity, ticketListIntent);
-                                } else if (activity instanceof TicketListActivity) {
-                                    ((TicketListActivity) activity).refreshPasses();
-                                }
-                            }
+                final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setMessage(activity.getString(R.string.dialog_delete_confirm_text));
+                builder.setTitle(activity.getString(org.ligi.passandroid.R.string.dialog_delete_title));
 
-                        }).setNegativeButton(android.R.string.no, null)
+                final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
+                if (pass.getSource().isPresent() && pass.getSource().get().startsWith("file://")) {
+                    sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
+                    builder.setView(sourceDeleteCheckBox);
+                }
+
+                builder.setPositiveButton(activity.getString(R.string.delete), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (sourceDeleteCheckBox.isChecked()) {
+                            new File(pass.getSource().get().replace("file://", "")).delete();
+                        }
+                        App.getPassStore().deletePassWithId(pass.getId());
+                        if (activity instanceof TicketViewActivityBase) {
+                            final Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
+                            NavUtils.navigateUpTo(activity, ticketListIntent);
+                        } else if (activity instanceof TicketListActivity) {
+                            ((TicketListActivity) activity).refreshPasses();
+                        }
+                    }
+
+                }).setNegativeButton(android.R.string.no, null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
 

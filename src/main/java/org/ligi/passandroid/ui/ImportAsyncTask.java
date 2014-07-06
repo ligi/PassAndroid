@@ -5,41 +5,40 @@ import android.net.Uri;
 import android.os.AsyncTask;
 
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.model.InputStreamWithSource;
 
-import java.io.InputStream;
+class ImportAsyncTask extends AsyncTask<Void, Void, InputStreamWithSource> {
 
-class ImportAsyncTask extends AsyncTask<Void, Void, InputStream> {
-
-    private final Uri intent_uri;
+    private final Uri uri;
     protected final Activity ticketImportActivity;
 
-    public ImportAsyncTask(Activity ticketImportActivity, Uri intent_uri) {
+    public ImportAsyncTask(Activity ticketImportActivity, Uri uri) {
         this.ticketImportActivity = ticketImportActivity;
-        this.intent_uri = intent_uri;
+        this.uri = uri;
     }
 
     @Override
-    protected InputStream doInBackground(Void... params) {
-        Tracker.get().trackEvent("protocol", "to_inputstream", intent_uri.getScheme(), null);
+    protected InputStreamWithSource doInBackground(Void... params) {
+        Tracker.get().trackEvent("protocol", "to_inputstream", uri.getScheme(), null);
 
-        switch (intent_uri.getScheme()) {
+        switch (uri.getScheme()) {
             case "content":
 
-                return InputStreamProvider.fromContent(ticketImportActivity, intent_uri);
+                return InputStreamProvider.fromContent(ticketImportActivity, uri);
 
             case "http":
             case "https":
                 // TODO check if SPDY should be here
-                return InputStreamProvider.fromOKHttp(intent_uri);
+                return InputStreamProvider.fromOKHttp(uri);
 
             default:
-                Tracker.get().trackException("unknown scheme in ImportAsyncTask" + intent_uri.getScheme(), false);
+                Tracker.get().trackException("unknown scheme in ImportAsyncTask" + uri.getScheme(), false);
             case "file":
-                return InputStreamProvider.getDefaultHttpInputStreamForUri(intent_uri);
+                return InputStreamProvider.getDefaultHttpInputStreamForUri(uri);
         }
 
 
-        // TODO bring back Tracker.get().trackTiming("load_time", System.currentTimeMillis() - start_time, "import", "" + intent_uri);
+        // TODO bring back Tracker.get().trackTiming("load_time", System.currentTimeMillis() - start_time, "import", "" + uri);
     }
 
 }
