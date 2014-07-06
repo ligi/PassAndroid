@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +53,6 @@ import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
 
 public class TicketListActivity extends ActionBarActivity {
 
-    private LayoutInflater inflater;
     private PassAdapter passadapter;
     private boolean scanning = false;
 
@@ -115,8 +113,6 @@ public class TicketListActivity extends ActionBarActivity {
 
         passadapter = new PassAdapter(this);
         listView.setAdapter(passadapter);
-
-        inflater = getLayoutInflater();
 
         listView.setEmptyView(emptySwipeRefreshLayout);
 
