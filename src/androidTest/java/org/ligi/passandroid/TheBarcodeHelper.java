@@ -13,30 +13,49 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class TheBarcodeHelper extends BaseTest {
 
-    public static final BarcodeFormat PDF_417 = BarcodeFormat.PDF_417;
-
     @SmallTest
-    public void QRShouldWork() throws Exception {
-        testFormat(BarcodeFormat.QR_CODE);
+    public void testQRBitmatrixHasCorrectSize() throws Exception {
+        testBitMatrixSize(BarcodeFormat.QR_CODE);
     }
 
     @SmallTest
-    public void PDF417ShouldWork() {
-        testFormat(BarcodeFormat.PDF_417);
+    public void testQRBitmapHasCorrectSize() throws Exception {
+        testBitmapSize(BarcodeFormat.QR_CODE);
     }
 
     @SmallTest
-    public void AZTECFormatShouldWork() {
-        testFormat(BarcodeFormat.AZTEC);
-
+    public void testPDF417BitmapHasCorrectSize() {
+        testBitmapSize(BarcodeFormat.PDF_417);
     }
 
-    public void testFormat(BarcodeFormat format) {
+    @SmallTest
+    public void testPDF417BitmatrixHasCorrectSize() {
+        testBitMatrixSize(BarcodeFormat.PDF_417);
+    }
+
+    @SmallTest
+    public void testAZTECBitmapHasCorrectSize() {
+        testBitmapSize(BarcodeFormat.AZTEC);
+    }
+
+    @SmallTest
+    public void testAZTECBitMatrixHasCorrectSize() {
+        testBitMatrixSize(BarcodeFormat.AZTEC);
+    }
+
+    public void testBitMatrixSize(final BarcodeFormat format) {
         try {
             BitMatrix tested = BarcodeHelper.getBitMatrix("foo-data", format, 42);
 
             assertThat(tested.getWidth()).isGreaterThanOrEqualTo(42);
+        } catch (Exception e) {
+            fail("could not create barcode " + e);
+        }
 
+    }
+
+    public void testBitmapSize(final BarcodeFormat format) {
+        try {
             Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format, 42);
 
             assertThat(tested2.getWidth()).isGreaterThanOrEqualTo(42);

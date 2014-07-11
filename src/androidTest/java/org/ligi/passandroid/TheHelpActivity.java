@@ -25,14 +25,17 @@ public class TheHelpActivity extends BaseIntegration<HelpActivity> {
     }
 
     @SmallTest
-    public void test_that_help_is_there() {
+    public void testHelpIsThere() {
         onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
         Spoon.screenshot(getActivity(), "help");
     }
 
 
+    /*
+    depends on this: http://stackoverflow.com/questions/23985181/click-home-icon-with-espresso
     @SmallTest
     public void test_that_help_finishes_on_home() {
-        //onView(withId(android.R.id.home)).perform(click());
+        onView(withId(android.R.id.home)).perform(click());
     }
+    */
 }

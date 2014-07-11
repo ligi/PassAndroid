@@ -14,7 +14,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class TheCategoryHelper extends BaseTest {
 
     @SmallTest
-    public void test_all_categories_should_b_translated() {
+    public void testAllCategoriesAreTranslated() {
 
         final Set<Integer> probe = new HashSet<>();
 

@@ -9,8 +9,8 @@ import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.helper.BarcodeDecoder;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
 
@@ -32,7 +32,6 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         super(FullscreenBarcodeActivity.class);
     }
 
-
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -45,11 +44,10 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         App.getPassStore().setCurrentPass(list.get(0));
 
         TraceDroid.deleteStacktraceFiles();
-
     }
 
     @MediumTest
-    public void test_that_pdf417_barcode_works() {
+    public void testPDF417BarcodeIsShown() {
         testWithBarcodeFormat(BarcodeFormat.PDF_417);
 
         Spoon.screenshot(getActivity(), "pdf417_barcode");
@@ -57,7 +55,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
 
     @MediumTest
-    public void test_that_aztec_barcode_works() {
+    public void testAztecBarcodeIsShown() {
         testWithBarcodeFormat(BarcodeFormat.AZTEC);
 
         Spoon.screenshot(getActivity(), "aztec_barcode");
@@ -65,7 +63,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
 
     @MediumTest
-    public void test_that_qr_barcode_works() {
+    public void testQRCodeIsShown() {
         testWithBarcodeFormat(BarcodeFormat.QR_CODE);
 
         Spoon.screenshot(getActivity(), "qr_barcode");

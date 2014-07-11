@@ -6,8 +6,8 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.TicketListActivity;
 
 import java.util.ArrayList;
@@ -40,29 +40,30 @@ public class TheTicketListActivity extends BaseIntegration<TicketListActivity> {
     }
 
     @MediumTest
-    public void test_that_list_is_there() {
+    public void testListIsThere() {
 
         onView(withId(R.id.content_list)).check(matches(isDisplayed()));
         Spoon.screenshot(getActivity(), "list");
     }
 
     @MediumTest
-    public void test_help_goes_to_help() {
+    public void testHelpMenuBringsUsToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
         onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
     }
 
     @MediumTest
-    public void test_that_navigation_drawer_usualy_not_shown() {
+    public void testNavigationDrawerIsUsuallyNotShown() {
         onView(withId(R.id.left_drawer)).check(matches(not(isDisplayed())));
     }
 
+    /*
     @MediumTest
-
-    public void test_that_navigation_drawer_opens() {
+    public void testThatNavigationDrawerOpens() {
         //onView(withId(android.R.id.home)).perform(click());
         //onView(withId(R.id.left_drawer)).check(matches(isDisplayed()));
 
         Spoon.screenshot(getActivity(), "open_drawer");
     }
+    */
 }

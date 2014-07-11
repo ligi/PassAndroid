@@ -30,7 +30,7 @@ public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
     }
 
     @MediumTest
-    public void test_that_empty_view_is_there_without_passes() {
+    public void testEmptyViewIsThereWhenThereAreNoPasses() {
 
         onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
 

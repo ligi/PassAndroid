@@ -7,8 +7,8 @@ import com.google.common.base.Optional;
 
 import org.joda.time.DateTime;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.TicketViewActivity;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
     }
 
     @MediumTest
-    public void test_click_on_barcode_opens_fullscreen_barcode() {
+    public void testClickOnBarcodeOpensFullscreenImage() {
         getActivity();
         onView(withId(R.id.barcode_img)).perform(click());
 

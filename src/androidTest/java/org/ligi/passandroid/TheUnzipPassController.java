@@ -5,32 +5,44 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.ui.UnzipPassController;
+import org.mockito.MockitoAnnotations;
 
 import java.io.InputStream;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
 public class TheUnzipPassController extends BaseIntegration<Activity> {
+
+    @MockitoAnnotations.Mock
+    UnzipPassController.FailCallback failCallback;
+
+    @MockitoAnnotations.Mock
+    UnzipPassController.SuccessCallback successCallback;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        MockitoAnnotations.initMocks(this);
+    }
 
     public TheUnzipPassController() {
         super(Activity.class);
     }
 
     @SmallTest
-    public void test_should_decompress_all_passes() {
+    public void testShouldFailForBrokenPass() {
 
         try {
+
             final InputStream inputStream = getInstrumentation().getContext().getResources().getAssets().open("passes/broken/fail.pkpass");
             final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource("none", inputStream);
-            UnzipPassController.processInputStream(inputStreamWithSource, getInstrumentation().getTargetContext(), new UnzipPassController.SuccessCallback() {
-                @Override
-                public void call(String pathToPassbook) {
-                    TheUnzipPassController.fail("should not succeed for broken pass");
-                }
-            }, new UnzipPassController.FailCallback() {
-                @Override
-                public void fail(String reason) {
+            UnzipPassController.processInputStream(inputStreamWithSource, getInstrumentation().getTargetContext(), successCallback, failCallback);
 
-                }
-            });
+            verify(successCallback, never()).call(any(String.class));
+            verify(failCallback).fail(any(String.class));
+
         } catch (Exception e) {
             fail("should be able to load file");
         }
