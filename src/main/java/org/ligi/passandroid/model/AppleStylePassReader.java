@@ -25,15 +25,12 @@ import java.util.regex.Pattern;
 
 public class AppleStylePassReader {
 
-    private String plainJsonString;
-
     public static Pass read(String path) {
-        PassImpl pass = new PassImpl();
+        final PassImpl pass = new PassImpl();
 
         if (path.endsWith("/")) {
             path = path.substring(0, path.length() - 1);
         }
-
 
         pass.setPath(path);
 
@@ -120,10 +117,10 @@ public class AppleStylePassReader {
                 }
             }
 
-            List<PassLocation> locations = new ArrayList<>();
+            final List<PassLocation> locations = new ArrayList<>();
             try {
 
-                JSONArray locations_json = pass_json.getJSONArray("locations");
+                final JSONArray locations_json = pass_json.getJSONArray("locations");
                 for (int i = 0; i < locations_json.length(); i++) {
                     JSONObject obj = locations_json.getJSONObject(i);
 
