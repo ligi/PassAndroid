@@ -11,6 +11,7 @@ import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -156,4 +157,11 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onAttachedToWindow() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    }
+
 }

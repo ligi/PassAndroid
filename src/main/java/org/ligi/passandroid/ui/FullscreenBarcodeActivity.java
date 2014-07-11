@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -70,6 +71,11 @@ public class FullscreenBarcodeActivity extends TicketViewActivityBase {
             }
 
         }
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
     }
 
 }
