@@ -63,15 +63,15 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.0'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.jakewharton:butterknife:5.1.0'
+    compile 'com.jakewharton:butterknife:5.1.1'
     compile 'joda-time:joda-time:2.3'
-    compile 'com.squareup:otto:1.3.4'
+    compile 'com.squareup:otto:1.3.5'
 
     compile 'org.ligi:AXT:0.28'
     compile 'org.ligi:tracedroid:1.1'
     compile 'com.google.guava:guava:17.0'
-    compile 'com.squareup.okhttp:okhttp:1.5.4'
-    compile 'fr.nicolaspomepuy:discreetapprate:2.0.1+@aar'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'fr.nicolaspomepuy:discreetapprate:2.0.2+@aar'
 
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
@@ -89,8 +89,11 @@ dependencies {
         exclude group: 'com.google.guava'
     }
 
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.0'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.1'
     androidTestCompile 'com.squareup:fest-android:1.0.7'
+
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
 
     def play_services = 'com.google.android.gms:play-services:4.3.23'
 
@@ -104,8 +107,8 @@ android {
     buildToolsVersion "19.1"
 
     defaultConfig {
-        versionCode 222
-        versionName "2.2.2"
+        versionCode 223
+        versionName "2.2.3"
         minSdkVersion 9
         targetSdkVersion 19
         applicationId "org.ligi.passandroid"
@@ -145,5 +148,3 @@ android {
 
 
 }
-
-

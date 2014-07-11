@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.InputStreamWithSource;
@@ -11,7 +13,6 @@ import org.ligi.passandroid.model.InputStreamWithSource;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -20,9 +21,10 @@ public class InputStreamProvider {
         try {
             final OkHttpClient client = new OkHttpClient();
             final URL url = new URL(uri.toString());
-            final HttpURLConnection connection = client.open(url);
+            Request request = new Request.Builder().url(url).build();
+            final Response response = client.newCall(request).execute();
 
-            return new InputStreamWithSource(uri.toString(), connection.getInputStream());
+            return new InputStreamWithSource(uri.toString(), response.body().byteStream());
         } catch (MalformedURLException e) {
             Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
         } catch (IOException e) {
