@@ -8,6 +8,11 @@ import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
+import static org.ligi.passandroid.ui.UnzipPassController.FailCallback;
+import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
+import static org.ligi.passandroid.ui.UnzipPassController.SuccessCallback;
+import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
+
 public class UnzipPassDialog {
 
     public static void DisplayError(final Activity activity, final String title, final String err) {
@@ -39,8 +44,8 @@ public class UnzipPassDialog {
             }
 
             public void run() {
-                UnzipPassController.processInputStream(ins, activity,
-                        new UnzipPassController.SuccessCallback() {
+                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, activity,
+                        new SuccessCallback() {
 
                             @Override
                             public void call(final String pathToPassbook) {
@@ -53,7 +58,7 @@ public class UnzipPassDialog {
                             }
                         }
                         ,
-                        new UnzipPassController.FailCallback() {
+                        new FailCallback() {
                             @Override
                             public void fail(final String reason) {
                                 activity.runOnUiThread(new Runnable() {
@@ -69,10 +74,11 @@ public class UnzipPassDialog {
                             }
                         }
                 );
+                processInputStream(spec);
             }
         }
 
-        AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(activity, dialog, callAfterFinishOnUIThread);
+        final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(activity, dialog, callAfterFinishOnUIThread);
         new Thread(alertDialogUpdater).start();
 
     }

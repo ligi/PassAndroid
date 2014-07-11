@@ -1,7 +1,7 @@
 .gradle
 build
 .idea
-assets
+#assets
 bin
 gen
 proguard-project.txt

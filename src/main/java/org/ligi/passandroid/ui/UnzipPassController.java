@@ -37,33 +37,33 @@ public class UnzipPassController {
         }
     }
 
-    public static void processInputStream(final InputStreamWithSource inputStreamWithSource, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    public static void processInputStream(InputStreamUnzipControllerSpec spec) {
         try {
             final File tempFile = File.createTempFile("ins", "pass");
-            AXT.at(inputStreamWithSource.getInputStream()).toFile(tempFile);
-            processFile(tempFile.getAbsolutePath(), inputStreamWithSource.getSource(), context, onSuccessCallback, failCallback);
+            AXT.at(spec.inputStreamWithSource.getInputStream()).toFile(tempFile);
+            processFile(new FileUnzipControllerSpec(tempFile.getAbsolutePath(), spec));
             tempFile.delete();
         } catch (IOException e) {
-            failCallback.fail("problem with temp file" + e);
+            spec.failCallback.fail("problem with temp file" + e);
         }
     }
 
-    public static void processFile(final String zipFileString, final String source, final Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+    public static void processFile(FileUnzipControllerSpec spec) {
 
-        String path = context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
+        String path = spec.context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
 
         final File dir_file = new File(path);
         dir_file.mkdirs();
 
         if (!dir_file.exists()) {
-            failCallback.fail("Problem creating the temp dir: " + path);
+            spec.failCallback.fail("Problem creating the temp dir: " + path);
             return;
         }
 
-        AXT.at(new File(path + "source.obj")).writeObject(source);
+        AXT.at(new File(path + "source.obj")).writeObject(spec.source);
 
         try {
-            final ZipFile zipFile = new ZipFile(zipFileString);
+            final ZipFile zipFile = new ZipFile(spec.zipFileString);
             zipFile.extractAll(path);
         } catch (ZipException e) {
             e.printStackTrace();
@@ -73,12 +73,13 @@ public class UnzipPassController {
         try {
             manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).readToString());
         } catch (Exception e) {
-            failCallback.fail("Problem with manifest.json: " + e);
+            spec.failCallback.fail("Problem with manifest.json: " + e);
             return;
         }
 
         try {
-            final String rename_str = TicketDefinitions.getPassesDir(context) + "/" + manifest_json.getString("pass.json");
+            final String rename_str = spec.targetPath + "/" + manifest_json.getString("pass.json");
+            new File(spec.targetPath).mkdirs();
             final File rename_file = new File(rename_str);
 
             if (rename_file.exists()) {
@@ -88,11 +89,67 @@ public class UnzipPassController {
             new File(path + "/").renameTo(rename_file);
             path = rename_str;
         } catch (JSONException e) {
-            failCallback.fail("Problem with pass.json: " + e);
+            spec.failCallback.fail("Problem with pass.json: " + e);
             return;
         }
 
-        onSuccessCallback.call(path);
+        spec.onSuccessCallback.call(path);
+
+    }
+
+    public static class UnzipControllerSpec {
+        public final Context context;
+        public final SuccessCallback onSuccessCallback;
+        public final FailCallback failCallback;
+        public String targetPath;
+
+        public UnzipControllerSpec(String targetPath, Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+            this.context = context;
+            this.onSuccessCallback = onSuccessCallback;
+            this.failCallback = failCallback;
+            this.targetPath = targetPath;
+        }
+
+        public UnzipControllerSpec(Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
+            this(TicketDefinitions.getPassesDir(context), context, onSuccessCallback, failCallback);
+        }
+
+
+    }
+
+    public static class FileUnzipControllerSpec extends UnzipControllerSpec {
+        public final String zipFileString;
+        public final String source;
+
+        public FileUnzipControllerSpec(final String zipFileString,
+                                       final String source,
+                                       final Context context,
+                                       final SuccessCallback onSuccessCallback,
+                                       final FailCallback failCallback) {
+            super(context, onSuccessCallback, failCallback);
+            this.source = source;
+            this.zipFileString = zipFileString;
+        }
+
+        public FileUnzipControllerSpec(final String fileName,
+                                       final InputStreamUnzipControllerSpec spec) {
+            super(spec.targetPath, spec.context, spec.onSuccessCallback, spec.failCallback);
+            zipFileString = fileName;
+            source = spec.inputStreamWithSource.getSource();
+        }
+    }
+
+    public static class InputStreamUnzipControllerSpec extends UnzipControllerSpec {
+        final InputStreamWithSource inputStreamWithSource;
+
+        public InputStreamUnzipControllerSpec(final InputStreamWithSource inputStreamWithSource,
+                                              final Context context,
+                                              final SuccessCallback onSuccessCallback,
+                                              final FailCallback failCallback) {
+            super(context, onSuccessCallback, failCallback);
+            this.inputStreamWithSource = inputStreamWithSource;
+        }
+
 
     }
 

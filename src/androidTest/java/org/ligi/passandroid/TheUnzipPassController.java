@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.InputStream;
 
+import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -38,7 +39,8 @@ public class TheUnzipPassController extends BaseIntegration<Activity> {
 
             final InputStream inputStream = getInstrumentation().getContext().getResources().getAssets().open("passes/broken/fail.pkpass");
             final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource("none", inputStream);
-            UnzipPassController.processInputStream(inputStreamWithSource, getInstrumentation().getTargetContext(), successCallback, failCallback);
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, getInstrumentation().getTargetContext(), successCallback, failCallback);
+            UnzipPassController.processInputStream(spec);
 
             verify(successCallback, never()).call(any(String.class));
             verify(failCallback).fail(any(String.class));

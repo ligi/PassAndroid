@@ -49,8 +49,10 @@ import butterknife.OnItemClick;
 import fr.nicolaspomepuy.discreetapprate.AppRate;
 import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
+import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
+import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 
 public class TicketListActivity extends ActionBarActivity {
 
@@ -326,7 +328,8 @@ public class TicketListActivity extends ActionBarActivity {
         @Override
         protected InputStreamWithSource doInBackground(Void... params) {
             final InputStreamWithSource ins = super.doInBackground(params);
-            UnzipPassController.processInputStream(ins, ticketImportActivity, new SilentWin(), new SilentFail());
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, ticketImportActivity, new SilentWin(), new SilentFail());
+            processInputStream(spec);
             return ins;
         }
 
