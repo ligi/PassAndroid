@@ -281,9 +281,9 @@ public class TicketListActivity extends ActionBarActivity {
 
     public String getHtmlForEmptViewDependingOnScaningState() {
         if (scanning) {
-            return getString(R.string.scan_empty_text);
+            return getString(R.string.scan_empty_text) + getString(R.string.no_passes_appendix);
         } else {
-            return getString(R.string.no_passes_empty_text);
+            return getString(R.string.no_passes_empty_text) + getString(R.string.no_passes_appendix);
         }
     }
 
