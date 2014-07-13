@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/gabrielemariotti/cardslib/master/.travis.yml
+# from https://raw.githubusercontent.com/gabrielemariotti/cardslib/master/.travis.yml
 language: java
 
 branches:
