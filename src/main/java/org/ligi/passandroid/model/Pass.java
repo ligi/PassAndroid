@@ -52,6 +52,8 @@ public interface Pass extends Serializable {
 
     Optional<DateTime> getExpirationDate();
 
+    String getPath();
+
     String getId();
 
     Optional<String> getOrganisation();
