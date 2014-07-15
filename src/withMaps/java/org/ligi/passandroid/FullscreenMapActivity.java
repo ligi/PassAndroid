@@ -14,11 +14,15 @@ public class FullscreenMapActivity extends TicketViewActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) { // no google play services
-            NavigateToLocationsDialog.perform(this, optionalPass.get(), true); // fallback
+        if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) {
+            fallbackForMissingGooglePlay();
         }
 
         setContentView(R.layout.fullscreen_map);
+    }
+
+    private void fallbackForMissingGooglePlay() {
+        NavigateToLocationsDialog.perform(this, optionalPass.get(), true);
     }
 
 
