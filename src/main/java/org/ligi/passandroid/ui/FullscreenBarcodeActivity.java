@@ -20,14 +20,16 @@ public class FullscreenBarcodeActivity extends TicketViewActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.fullscreen_image);
-        final ImageView iv = findById(this, R.id.fullscreen_image);
+        if (optionalPass.isPresent()) {
+            setContentView(R.layout.fullscreen_image);
+            final ImageView iv = findById(this, R.id.fullscreen_image);
 
-        int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
+            int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
 
-        setBestFittingOrientationForBarCode();
+            setBestFittingOrientationForBarCode();
 
-        iv.setImageBitmap(pass.getBarcodeBitmap(smallestSize));
+            iv.setImageBitmap(optionalPass.get().getBarcodeBitmap(smallestSize));
+        }
     }
 
     @Override
@@ -44,7 +46,7 @@ public class FullscreenBarcodeActivity extends TicketViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (pass.getBarcodeFormat() == BarcodeFormat.PDF_417) {
+        if (optionalPass.get().getBarcodeFormat() == BarcodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

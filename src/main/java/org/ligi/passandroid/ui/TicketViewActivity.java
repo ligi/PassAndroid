@@ -56,6 +56,11 @@ public class TicketViewActivity extends TicketViewActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!optionalPass.isPresent()) {
+            return;
+        }
+        final Pass pass = optionalPass.get();
+
         if (!pass.isValid()) { // don't deal with invalid passes
             new AlertDialog.Builder(this)
                     .setMessage(getString(R.string.pass_problem))
@@ -120,7 +125,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         String result = ""; // TODO bring back sth like passbook.getPlainJsonString();
 
-        for (File f : new File(this.pass.getId()).listFiles()) {
+        for (File f : new File(pass.getId()).listFiles()) {
             result += f.getName() + "<br/>";
         }
 
@@ -130,7 +135,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((pass.getLocations().size() > 0));
+        menu.findItem(R.id.menu_map).setVisible((optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
         return res;
     }
 

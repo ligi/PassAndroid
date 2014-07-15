@@ -17,8 +17,7 @@ import org.ligi.passandroid.model.Pass;
 public class TicketViewActivityBase extends ActionBarActivity {
 
     protected Bitmap icon_bitmap;
-    protected String path;
-    public Pass pass;
+    public Optional<Pass> optionalPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +33,6 @@ public class TicketViewActivityBase extends ActionBarActivity {
             finish();
             return;
         }
-
-        pass = optionalPass.get();
-
         loadIcon();
     }
 
@@ -45,7 +41,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         int smallestSide = Math.min(display.getHeight(), display.getWidth());
         int size = (int) (2.0f * smallestSide / 3.0f);
 
-        icon_bitmap = pass.getIconBitmap();
+        icon_bitmap = optionalPass.get().getIconBitmap();
 
         if (icon_bitmap != null) {
             icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
@@ -60,7 +56,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (new PassMenuOptions(this, pass).process(item)) {
+        if (new PassMenuOptions(this, optionalPass.get()).process(item)) {
             return true;
         }
 
