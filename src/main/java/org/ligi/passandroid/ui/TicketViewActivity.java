@@ -76,7 +76,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
             return;
         }
 
-        View contentView = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
+        final View contentView = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
         setContentView(contentView);
 
         ButterKnife.inject(this);
@@ -143,7 +143,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent upIntent = NavUtils.getParentActivityIntent(this);
+            final Intent upIntent = NavUtils.getParentActivityIntent(this);
             if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
                 TaskStackBuilder.create(this)
                         .addNextIntentWithParentStack(upIntent)
