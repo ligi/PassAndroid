@@ -159,11 +159,7 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     @Override
     public Optional<Pass> getCurrentPass() {
-        if (actPass == null) {
-            return Optional.absent();
-        }
-
-        return Optional.of(actPass);
+        return Optional.fromNullable(actPass);
     }
 
     @Override
