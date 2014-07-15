@@ -95,9 +95,9 @@ public class TicketViewActivity extends TicketViewActivityBase {
 
         if (pass.getType() != null) {
             String front_str = "";
+            front_str += PassVisualizer.getFieldListAsString(pass.getHeaderFields());
             front_str += PassVisualizer.getFieldListAsString(pass.getPrimaryFields());
             front_str += PassVisualizer.getFieldListAsString(pass.getSecondaryFields());
-            front_str += PassVisualizer.getFieldListAsString(pass.getHeaderFields());
             front_str += PassVisualizer.getFieldListAsString(pass.getAuxiliaryFields());
 
             front_tv.setText(Html.fromHtml(front_str));
