@@ -31,15 +31,13 @@ public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
 
     @MediumTest
     public void testEmptyViewIsThereWhenThereAreNoPasses() {
-
-        onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
-
         Spoon.screenshot(getActivity(), "empty_view");
+        onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    /*@MediumTest
     public void testHelpGoesToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
         onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
-    }
+    }*/
 }
