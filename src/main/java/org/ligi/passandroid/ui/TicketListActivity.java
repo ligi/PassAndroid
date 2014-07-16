@@ -74,6 +74,9 @@ public class TicketListActivity extends ActionBarActivity {
     @InjectView(R.id.list_swiperefresh_layout)
     SwipeRefreshLayout listSwipeRefreshLayout;
 
+    @InjectView(R.id.empty_swiperefresh_layout)
+    SwipeRefreshLayout emptySwipeRefreshLayout;
+
     private ActionMode actionMode;
 
     @Subscribe
@@ -114,7 +117,7 @@ public class TicketListActivity extends ActionBarActivity {
         passAdapter = new PassAdapter(this);
         listView.setAdapter(passAdapter);
 
-        listView.setEmptyView(emptyView);
+        listView.setEmptyView(emptySwipeRefreshLayout);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -190,6 +193,8 @@ public class TicketListActivity extends ActionBarActivity {
         });
 
         prepareRefreshLayout(listSwipeRefreshLayout);
+        prepareRefreshLayout(emptySwipeRefreshLayout);
+
     }
 
     private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
@@ -271,6 +276,7 @@ public class TicketListActivity extends ActionBarActivity {
     public void updateUIToScanningState() {
 
         listSwipeRefreshLayout.setRefreshing(scanning);
+        emptySwipeRefreshLayout.setRefreshing(scanning);
 
         supportInvalidateOptionsMenu();
 
