@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
@@ -70,7 +69,7 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                new PassExportTask(activity, pass.getPath(), TicketDefinitions.getShareDir(), "share.pkpass", true).execute();
+                new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share.pkpass", true).execute();
                 return true;
         }
         return false;

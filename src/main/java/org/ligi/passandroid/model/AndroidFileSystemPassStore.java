@@ -5,7 +5,7 @@ import android.content.Context;
 import com.google.common.base.Optional;
 
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.TicketDefinitions;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     public void refreshPassesList() {
-        path = TicketDefinitions.getPassesDir(context);
+        path = App.getPassesDir(context);
 
         passList = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     private File getPassesDirSafely() {
-        final File passes_dir = new File(TicketDefinitions.getPassesDir(context));
+        final File passes_dir = new File(App.getPassesDir(context));
 
         if (!passes_dir.exists()) {
             passes_dir.mkdirs();

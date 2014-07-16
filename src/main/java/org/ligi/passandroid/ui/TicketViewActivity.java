@@ -18,7 +18,6 @@ import android.widget.TextView;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.TicketDefinitions;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
@@ -74,7 +73,7 @@ public class TicketViewActivity extends TicketViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, pass.getId(), TicketDefinitions.getShareDir(), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();

@@ -1,6 +1,8 @@
 package org.ligi.passandroid;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Environment;
 
 import com.squareup.otto.Bus;
 
@@ -51,5 +53,13 @@ public class App extends Application {
 
     public static void replacePassStore(PassStore newPassStore) {
         passStore = newPassStore;
+    }
+
+    public static String getPassesDir(final Context ctx) {
+        return ctx.getFilesDir().getAbsolutePath() + "/passes";
+    }
+
+    public static String getShareDir() {
+        return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
     }
 }

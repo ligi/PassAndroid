@@ -8,7 +8,7 @@ import net.lingala.zip4j.exception.ZipException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.TicketDefinitions;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.File;
@@ -111,7 +111,7 @@ public class UnzipPassController {
         }
 
         public UnzipControllerSpec(Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
-            this(TicketDefinitions.getPassesDir(context), context, onSuccessCallback, failCallback);
+            this(App.getPassesDir(context), context, onSuccessCallback, failCallback);
         }
 
 
