@@ -8,6 +8,20 @@ public class ApplePassbookQuirkCorrector {
         careForTUIFlight(pass);
         careForAirBerlin(pass);
         careForWestbahn(pass);
+        careForAirCanada(pass);
+    }
+
+    private static void careForAirCanada(PassImpl pass) {
+        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Air Canada")) {
+            return;
+        }
+
+        final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
+        final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("arrive");
+
+        if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+            pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
+        }
     }
 
     private static void careForWestbahn(PassImpl pass) {
