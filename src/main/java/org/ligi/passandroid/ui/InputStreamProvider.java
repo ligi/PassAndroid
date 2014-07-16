@@ -17,11 +17,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class InputStreamProvider {
+
+    public static final String IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
+
     public final static InputStreamWithSource fromOKHttp(final Uri uri) {
         try {
             final OkHttpClient client = new OkHttpClient();
             final URL url = new URL(uri.toString());
-            Request request = new Request.Builder().url(url).build();
+            final Request.Builder requestBuilder = new Request.Builder().url(url);
+
+            // fake to be an iPhone in some cases when the server decides to send no passbook
+            // to android phones - but only do it then - we are proud to be Android ;-)
+            if (uri.toString().contains("//m.aircanada.ca/ebp/")) {
+                Tracker.get().trackEvent("quirk_fix", "ua_fake", "air_canada", null);
+                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
+            }
+
+            final Request request = requestBuilder.build();
+
             final Response response = client.newCall(request).execute();
 
             return new InputStreamWithSource(uri.toString(), response.body().byteStream());
