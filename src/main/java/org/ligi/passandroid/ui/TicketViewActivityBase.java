@@ -3,6 +3,7 @@ package org.ligi.passandroid.ui;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Optional<Pass> optionalPass = App.getPassStore().getCurrentPass();
+        optionalPass = App.getPassStore().getCurrentPass();
 
         if (!optionalPass.isPresent()) {
             Tracker.get().trackException("pass not present in TicketViewActivityBase", false);
