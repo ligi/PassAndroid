@@ -19,12 +19,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.model.PassLocation;
-import org.ligi.passandroid.ui.TicketViewActivityBase;
+import org.ligi.passandroid.ui.PassViewActivityBase;
 
 import java.util.List;
 
 public class LocationsMapFragment extends SupportMapFragment {
-    private TicketViewActivityBase base_activity;
+    private PassViewActivityBase base_activity;
     public boolean click_to_fullscreen = false;
     private Handler handler;
 
@@ -32,10 +32,10 @@ public class LocationsMapFragment extends SupportMapFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
 
-        base_activity = (TicketViewActivityBase) getActivity();
+        base_activity = (PassViewActivityBase) getActivity();
 
-        if (!(getActivity() instanceof TicketViewActivityBase)) {
-            throw new IllegalArgumentException("LocationsMapFragment must be used inside a TicketViewActivityBase");
+        if (!(getActivity() instanceof PassViewActivityBase)) {
+            throw new IllegalArgumentException("LocationsMapFragment must be used inside a PassViewActivityBase");
         }
 
         final MapInitRunnable mapInitRunnable = new MapInitRunnable();

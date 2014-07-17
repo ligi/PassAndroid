@@ -10,10 +10,10 @@ import org.ligi.passandroid.helper.PassVisualizer;
 
 class PassAdapter extends BaseAdapter {
 
-    private final TicketListActivity ticketListActivity;
+    private final PassListActivity passListActivity;
 
-    public PassAdapter(TicketListActivity ticketListActivity) {
-        this.ticketListActivity = ticketListActivity;
+    public PassAdapter(PassListActivity passListActivity) {
+        this.passListActivity = passListActivity;
     }
 
     @Override
@@ -34,9 +34,9 @@ class PassAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View res = ticketListActivity.getLayoutInflater().inflate(R.layout.pass_list_item, null);
+        View res = passListActivity.getLayoutInflater().inflate(R.layout.pass_list_item, null);
 
-        PassVisualizer.visualize(ticketListActivity, App.getPassStore().getPassbookAt(position), res);
+        PassVisualizer.visualize(passListActivity, App.getPassStore().getPassbookAt(position), res);
 
         return res;
     }

@@ -54,7 +54,7 @@ import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
 import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 
-public class TicketListActivity extends ActionBarActivity {
+public class PassListActivity extends ActionBarActivity {
 
     private PassAdapter passAdapter;
     private boolean scanning = false;
@@ -94,7 +94,7 @@ public class TicketListActivity extends ActionBarActivity {
     void listItemClick(int position) {
         final Pass newSelectedPass = App.getPassStore().getPassbookAt(position);
         App.getPassStore().setCurrentPass(Optional.of(newSelectedPass));
-        AXT.at(this).startCommonIntent().activityFromClass(TicketViewActivity.class);
+        AXT.at(this).startCommonIntent().activityFromClass(PasViewActivity.class);
     }
 
     public void refreshPasses() {
@@ -103,7 +103,7 @@ public class TicketListActivity extends ActionBarActivity {
         passAdapter.notifyDataSetChanged();
     }
 
-    public TicketListActivity() {
+    public PassListActivity() {
         super();
     }
 
@@ -111,7 +111,7 @@ public class TicketListActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.ticket_list);
+        setContentView(R.layout.pass_list);
         ButterKnife.inject(this);
 
         passAdapter = new PassAdapter(this);
@@ -161,7 +161,7 @@ public class TicketListActivity extends ActionBarActivity {
                     @Override
                     public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 
-                        getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
+                        getMenuInflater().inflate(R.menu.activity_pass_view, menu);
                         return true;
                     }
 
@@ -172,7 +172,7 @@ public class TicketListActivity extends ActionBarActivity {
 
                     @Override
                     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        if (new PassMenuOptions(TicketListActivity.this, App.getPassStore().getPassbookAt(position)).process(menuItem)) {
+                        if (new PassMenuOptions(PassListActivity.this, App.getPassStore().getPassbookAt(position)).process(menuItem)) {
                             actionMode.finish();
                             return true;
                         }
@@ -268,7 +268,7 @@ public class TicketListActivity extends ActionBarActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
         if (!scanning) {
-            getMenuInflater().inflate(R.menu.activity_ticket_list_view, menu);
+            getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
         }
         return true;
     }
@@ -320,15 +320,15 @@ public class TicketListActivity extends ActionBarActivity {
 
     class ImportAndRefreshListAsync extends ImportAsyncTask {
 
-        public ImportAndRefreshListAsync(final Activity ticketImportActivity, final String path) {
-            super(ticketImportActivity, Uri.parse("file://" + path));
-            new PastLocationsStore(ticketImportActivity).putLocation(path);
+        public ImportAndRefreshListAsync(final Activity passImportActivity, final String path) {
+            super(passImportActivity, Uri.parse("file://" + path));
+            new PastLocationsStore(passImportActivity).putLocation(path);
         }
 
         @Override
         protected InputStreamWithSource doInBackground(Void... params) {
             final InputStreamWithSource ins = super.doInBackground(params);
-            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, ticketImportActivity, new SilentWin(), new SilentFail());
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, passImportActivity, new SilentWin(), new SilentFail());
             processInputStream(spec);
             return ins;
         }
@@ -390,7 +390,7 @@ public class TicketListActivity extends ActionBarActivity {
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
 
-                    new ImportAndRefreshListAsync(TicketListActivity.this, file.getAbsolutePath()).execute();
+                    new ImportAndRefreshListAsync(PassListActivity.this, file.getAbsolutePath()).execute();
                 }
             }
 
@@ -425,7 +425,7 @@ public class TicketListActivity extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            for (String path : new PastLocationsStore(TicketListActivity.this).getLocations()) {
+            for (String path : new PastLocationsStore(PassListActivity.this).getLocations()) {
                 search_in(new File(path), false);
             }
 

@@ -32,7 +32,7 @@ public class App extends Application {
 
     private void initTraceDroid() {
         TraceDroid.init(this);
-        Log.setTAG("TicketViewer");
+        Log.setTAG("PassAndroid");
     }
 
     public static boolean isDeveloperMode() {

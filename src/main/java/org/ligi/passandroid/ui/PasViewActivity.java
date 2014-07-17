@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class TicketViewActivity extends TicketViewActivityBase {
+public class PasViewActivity extends PassViewActivityBase {
 
 
     @OnClick(R.id.barcode_img)
@@ -73,14 +73,14 @@ public class TicketViewActivity extends TicketViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(TicketViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(PasViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();
             return;
         }
 
-        final View contentView = getLayoutInflater().inflate(R.layout.activity_ticket_view, null);
+        final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
         setContentView(contentView);
 
         ButterKnife.inject(this);

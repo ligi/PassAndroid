@@ -10,10 +10,10 @@ import org.ligi.passandroid.model.InputStreamWithSource;
 class ImportAsyncTask extends AsyncTask<Void, Void, InputStreamWithSource> {
 
     private final Uri uri;
-    protected final Activity ticketImportActivity;
+    protected final Activity passImportActivity;
 
-    public ImportAsyncTask(Activity ticketImportActivity, Uri uri) {
-        this.ticketImportActivity = ticketImportActivity;
+    public ImportAsyncTask(Activity passImportActivity, Uri uri) {
+        this.passImportActivity = passImportActivity;
         this.uri = uri;
     }
 
@@ -24,7 +24,7 @@ class ImportAsyncTask extends AsyncTask<Void, Void, InputStreamWithSource> {
         switch (uri.getScheme()) {
             case "content":
 
-                return InputStreamProvider.fromContent(ticketImportActivity, uri);
+                return InputStreamProvider.fromContent(passImportActivity, uri);
 
             case "http":
             case "https":

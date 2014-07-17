@@ -36,7 +36,7 @@ public class AppleStylePassReader {
 
         pass.setId(path.substring(path.lastIndexOf('/') + 1));
 
-        JSONObject pass_json = null, ticketJSONObject = null;
+        JSONObject pass_json = null, type_json = null;
 
         final File file = new File(path + "/pass.json");
 
@@ -179,18 +179,18 @@ public class AppleStylePassReader {
                     e.printStackTrace();
                 }
             } else try {
-                ticketJSONObject = pass_json.getJSONObject(pass.getType());
+                type_json = pass_json.getJSONObject(pass.getType());
             } catch (JSONException e) {
             }
 
         }
 
-        if (ticketJSONObject != null) {
-            pass.setPrimaryFields(new PassFieldList(ticketJSONObject, "primaryFields"));
-            pass.setSecondaryFields(new PassFieldList(ticketJSONObject, "secondaryFields"));
-            pass.setAuxiliaryFields(new PassFieldList(ticketJSONObject, "auxiliaryFields"));
-            pass.setBackFields(new PassFieldList(ticketJSONObject, "backFields"));
-            pass.setHeaderFields(new PassFieldList(ticketJSONObject, "headerFields"));
+        if (type_json != null) {
+            pass.setPrimaryFields(new PassFieldList(type_json, "primaryFields"));
+            pass.setSecondaryFields(new PassFieldList(type_json, "secondaryFields"));
+            pass.setAuxiliaryFields(new PassFieldList(type_json, "auxiliaryFields"));
+            pass.setBackFields(new PassFieldList(type_json, "backFields"));
+            pass.setHeaderFields(new PassFieldList(type_json, "headerFields"));
         }
 
         try {

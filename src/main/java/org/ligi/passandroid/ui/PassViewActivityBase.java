@@ -3,7 +3,6 @@ package org.ligi.passandroid.ui;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.Pass;
 
-public class TicketViewActivityBase extends ActionBarActivity {
+public class PassViewActivityBase extends ActionBarActivity {
 
     protected Bitmap icon_bitmap;
     public Optional<Pass> optionalPass;
@@ -30,7 +29,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
         optionalPass = App.getPassStore().getCurrentPass();
 
         if (!optionalPass.isPresent()) {
-            Tracker.get().trackException("pass not present in TicketViewActivityBase", false);
+            Tracker.get().trackException("pass not present in " + this, false);
             finish();
             return;
         }
@@ -51,7 +50,7 @@ public class TicketViewActivityBase extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_ticket_view, menu);
+        getMenuInflater().inflate(R.menu.activity_pass_view, menu);
         return true;
     }
 

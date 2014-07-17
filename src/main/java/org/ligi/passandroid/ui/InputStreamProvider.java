@@ -50,7 +50,7 @@ public class InputStreamProvider {
         try {
             return new InputStreamWithSource(uri.toString(), ctx.getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
-            Tracker.get().trackException("FileNotFoundException in ticketImportActivity/ImportAsyncTask", e, false);
+            Tracker.get().trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false);
             return null;
         }
 
@@ -61,7 +61,7 @@ public class InputStreamProvider {
         try {
             return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {
-            Tracker.get().trackException("IOException in ticketImportActivity/ImportAsyncTask", e, false);
+            Tracker.get().trackException("IOException in passImportActivity/ImportAsyncTask", e, false);
             return null;
         }
     }

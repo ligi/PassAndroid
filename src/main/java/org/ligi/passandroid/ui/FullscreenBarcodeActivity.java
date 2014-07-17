@@ -14,7 +14,7 @@ import org.ligi.passandroid.R;
 
 import static butterknife.ButterKnife.findById;
 
-public class FullscreenBarcodeActivity extends TicketViewActivityBase {
+public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

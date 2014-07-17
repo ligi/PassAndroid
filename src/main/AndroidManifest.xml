@@ -27,7 +27,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.TicketListActivity"
+            android:name=".ui.PassListActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +37,7 @@
 
         <activity android:name=".ui.HelpActivity" />
         <activity
-            android:name=".ui.TicketImportActivity"
+            android:name=".ui.PassImportActivity"
             tools:ignore="ExportedActivity">
 
             <intent-filter>
@@ -130,12 +130,12 @@
         </activity>
 
         <activity
-            android:name=".ui.TicketViewActivity"
+            android:name=".ui.PasViewActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.TicketListActivity">
+            android:parentActivityName=".ui.PassListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.TicketListActivity" />
+                android:value=".ui.PassListActivity" />
         </activity>
 
         <activity

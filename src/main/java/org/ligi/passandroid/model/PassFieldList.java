@@ -14,9 +14,9 @@ public class PassFieldList extends ArrayList<PassField> {
     public PassFieldList() {
     }
 
-    public PassFieldList(JSONObject ticketJSONObject, String fieldsName) {
+    public PassFieldList(JSONObject passJSON, String fieldsName) {
         try {
-            final JSONArray jsonArray = ticketJSONObject.getJSONArray(fieldsName);
+            final JSONArray jsonArray = passJSON.getJSONArray(fieldsName);
             for (int i = 0; i < jsonArray.length(); i++) {
                 try {
                     final PassField field = new PassField(jsonArray.getJSONObject(i));

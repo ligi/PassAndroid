@@ -6,20 +6,19 @@ import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.ui.TicketListActivity;
+import org.ligi.passandroid.ui.PassListActivity;
 
 import java.util.ArrayList;
 
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
-import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 
-public class TheEmptyTicketList extends BaseIntegration<TicketListActivity> {
+public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
 
-    public TheEmptyTicketList() {
-        super(TicketListActivity.class);
+    public TheEmptyPassList() {
+        super(PassListActivity.class);
     }
 
     @Override

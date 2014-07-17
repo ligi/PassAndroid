@@ -6,9 +6,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
-import org.ligi.passandroid.ui.TicketViewActivityBase;
+import org.ligi.passandroid.ui.PassViewActivityBase;
 
-public class FullscreenMapActivity extends TicketViewActivityBase {
+public class FullscreenMapActivity extends PassViewActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

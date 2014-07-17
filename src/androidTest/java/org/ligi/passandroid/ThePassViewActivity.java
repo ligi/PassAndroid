@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.ui.TicketViewActivity;
+import org.ligi.passandroid.ui.PasViewActivity;
 
 import java.util.ArrayList;
 
@@ -22,12 +22,12 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
-public class TheTicketViewActivity extends BaseIntegration<TicketViewActivity> {
+public class ThePassViewActivity extends BaseIntegration<PasViewActivity> {
 
     private PassImpl act_pass;
 
-    public TheTicketViewActivity() {
-        super(TicketViewActivity.class);
+    public ThePassViewActivity() {
+        super(PasViewActivity.class);
     }
 
     @Override

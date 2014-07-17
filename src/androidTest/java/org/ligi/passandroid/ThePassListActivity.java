@@ -8,7 +8,7 @@ import com.squareup.spoon.Spoon;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.ui.TicketListActivity;
+import org.ligi.passandroid.ui.PassListActivity;
 
 import java.util.ArrayList;
 
@@ -20,10 +20,10 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
-public class TheTicketListActivity extends BaseIntegration<TicketListActivity> {
+public class ThePassListActivity extends BaseIntegration<PassListActivity> {
 
-    public TheTicketListActivity() {
-        super(TicketListActivity.class);
+    public ThePassListActivity() {
+        super(PassListActivity.class);
     }
 
     @Override

@@ -49,11 +49,11 @@ public class PassMenuOptions {
                             new File(pass.getSource().get().replace("file://", "")).delete();
                         }
                         App.getPassStore().deletePassWithId(pass.getId());
-                        if (activity instanceof TicketViewActivityBase) {
-                            final Intent ticketListIntent = new Intent(activity, TicketListActivity.class);
-                            NavUtils.navigateUpTo(activity, ticketListIntent);
-                        } else if (activity instanceof TicketListActivity) {
-                            ((TicketListActivity) activity).refreshPasses();
+                        if (activity instanceof PassViewActivityBase) {
+                            final Intent passListIntent = new Intent(activity, PassListActivity.class);
+                            NavUtils.navigateUpTo(activity, passListIntent);
+                        } else if (activity instanceof PassListActivity) {
+                            ((PassListActivity) activity).refreshPasses();
                         }
                     }
 
