@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -22,12 +23,26 @@ public class PassImportActivity extends ActionBarActivity {
 
     class ImportAndShowAsyncTask extends ImportAsyncTask {
 
+        private final ProgressDialog progressDialog;
+
         public ImportAndShowAsyncTask(final Activity passImportActivity, final Uri intent_uri) {
             super(passImportActivity, intent_uri);
+            progressDialog = new ProgressDialog(passImportActivity);
+            progressDialog.setMessage(getString(R.string.please_wait));
+            progressDialog.setCancelable(false);
         }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
 
         @Override
         protected void onPostExecute(InputStreamWithSource result) {
+            progressDialog.dismiss();
             if (result != null) {
 
                 UnzipPassDialog.show(result, passImportActivity, new UnzipPassDialog.FinishCallback() {
