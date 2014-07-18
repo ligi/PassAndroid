@@ -2,6 +2,8 @@ package org.ligi.passandroid.model;
 
 import com.google.common.base.Optional;
 
+import org.ligi.passandroid.Tracker;
+
 public class ApplePassbookQuirkCorrector {
 
     public static void correctQuirks(PassImpl pass ) {
@@ -9,6 +11,25 @@ public class ApplePassbookQuirkCorrector {
         careForAirBerlin(pass);
         careForWestbahn(pass);
         careForAirCanada(pass);
+        careForVirginAustralia(pass);
+    }
+
+    private static void careForVirginAustralia(PassImpl pass) {
+        // also good identifier could be  "passTypeIdentifier": "pass.com.virginaustralia.boardingpass
+        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Virgin Australia")) {
+
+            return;
+        }
+
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "virgin_australia", 0L);
+
+        final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("origin");
+        final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destination");
+
+        if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "virgin_australia", 1L);
+            pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
+        }
     }
 
     private static void careForAirCanada(PassImpl pass) {
@@ -16,10 +37,13 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "air_canada", 0L);
+
         final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
         final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("arrive");
 
         if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "air_canada", 1L);
             pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
         }
     }
@@ -32,16 +56,20 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 0L);
+
         final Optional<PassField> originField = pass.getPrimaryFields().getPassFieldForKey("from");
         final Optional<PassField> destinationField = pass.getPrimaryFields().getPassFieldForKey("to");
 
         String description = "WESTbahn";
 
         if (originField.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 1L);
             description = originField.get().value;
         }
 
         if (destinationField.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 2L);
             description += "->" + destinationField.get().value;
         }
 
@@ -53,13 +81,17 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 0L);
+
         final Optional<PassField> originField = pass.getPrimaryFields().getPassFieldForKey("Origin");
         final Optional<PassField> destinationField = pass.getPrimaryFields().getPassFieldForKey("Des");
         final Optional<PassField> seatField = pass.getAuxiliaryFields().getPassFieldForKey("SeatNumber");
 
         if (originField.isPresent() && destinationField.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 1L);
             String description = originField.get().value + "->" + destinationField.get().value;
             if (seatField.isPresent()) {
+                Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 2L);
                 description += " @" + seatField.get().value;
             }
             pass.setDescription(description);
@@ -84,6 +116,7 @@ public class ApplePassbookQuirkCorrector {
         final Optional<PassField> boardingGroupField = pass.getSecondaryFields().getPassFieldForKey("boardingGroup");
 
         if (flightField.isPresent() && seatField.isPresent() && boardingGroupField.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "air_berlin", 0L);
             String description = flightField.get().label + " " + flightField.get().value;
             description += " | " + seatField.get().label + " " + seatField.get().value;
             description += " | " + boardingGroupField.get().label + " " + boardingGroupField.get().value;
