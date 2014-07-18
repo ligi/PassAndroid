@@ -1,9 +1,7 @@
 package org.ligi.passandroid.ui;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,7 +14,6 @@ import org.ligi.passandroid.model.Pass;
 
 public class PassViewActivityBase extends ActionBarActivity {
 
-    protected Bitmap icon_bitmap;
     public Optional<Pass> optionalPass;
 
     @Override
@@ -32,19 +29,6 @@ public class PassViewActivityBase extends ActionBarActivity {
             Tracker.get().trackException("pass not present in " + this, false);
             finish();
             return;
-        }
-        loadIcon();
-    }
-
-    private void loadIcon() {
-        Display display = getWindowManager().getDefaultDisplay();
-        int smallestSide = Math.min(display.getHeight(), display.getWidth());
-        int size = (int) (2.0f * smallestSide / 3.0f);
-
-        icon_bitmap = optionalPass.get().getIconBitmap();
-
-        if (icon_bitmap != null) {
-            icon_bitmap = Bitmap.createScaledBitmap(icon_bitmap, size, size, true);
         }
     }
 

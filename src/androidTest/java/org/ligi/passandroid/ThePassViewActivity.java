@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.ui.PasViewActivity;
+import org.ligi.passandroid.ui.PassViewActivity;
 
 import java.util.ArrayList;
 
@@ -17,17 +17,16 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
-import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
-public class ThePassViewActivity extends BaseIntegration<PasViewActivity> {
+public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
     private PassImpl act_pass;
 
     public ThePassViewActivity() {
-        super(PasViewActivity.class);
+        super(PassViewActivity.class);
     }
 
     @Override

@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class PasViewActivity extends PassViewActivityBase {
+public class PassViewActivity extends PassViewActivityBase {
 
 
     @OnClick(R.id.barcode_img)
@@ -73,7 +73,7 @@ public class PasViewActivity extends PassViewActivityBase {
                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(PasViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
+                            new ExportProblemPassToLigiAndFinishTask(PassViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
                         }
                     })
                     .show();
@@ -134,7 +134,7 @@ public class PasViewActivity extends PassViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
+        menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
         return res;
     }
 

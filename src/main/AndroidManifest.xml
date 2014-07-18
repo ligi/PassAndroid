@@ -142,7 +142,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.PasViewActivity"
+            android:name=".ui.PassViewActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.PassListActivity">
             <meta-data

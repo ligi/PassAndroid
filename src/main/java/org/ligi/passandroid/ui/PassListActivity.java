@@ -94,7 +94,7 @@ public class PassListActivity extends ActionBarActivity {
     void listItemClick(int position) {
         final Pass newSelectedPass = App.getPassStore().getPassbookAt(position);
         App.getPassStore().setCurrentPass(Optional.of(newSelectedPass));
-        AXT.at(this).startCommonIntent().activityFromClass(PasViewActivity.class);
+        AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
     }
 
     public void refreshPasses() {

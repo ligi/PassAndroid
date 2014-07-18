@@ -55,7 +55,7 @@ public class PassImportActivity extends ActionBarActivity {
                         final PassStore store = App.getPassStore();
                         store.setCurrentPass(store.getPassbookForId(id));
 
-                        AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PasViewActivity.class);
+                        AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
 
                         return null;
                     }
