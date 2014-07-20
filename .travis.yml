@@ -5,6 +5,9 @@ android:
     - android-19
     - sysimg-19
     - extra-android-support
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
 
 branches:
   only:
