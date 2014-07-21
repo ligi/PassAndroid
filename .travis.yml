@@ -18,7 +18,7 @@ jdk: oraclejdk7
 
 env:
   global:
-    - ANDROID_SDK_VERSION="r22.6.2"
+    - ANDROID_SDK_VERSION="r23.0.2"
 
 notifications:
   email: true
