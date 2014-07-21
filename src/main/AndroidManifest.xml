@@ -141,6 +141,21 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".ui.ExtractURLAsIphoneActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="mobile.aegeanair.com"
+                    android:pathPattern="/mbp.do.*"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.PassViewActivity"
             android:label="@string/app_name"
