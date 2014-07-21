@@ -3,6 +3,7 @@ package org.ligi.passandroid.helper;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.provider.CalendarContract;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ public class PassVisualizer {
         final DateTime dateForIntent;
 
         if (pass.getRelevantDate().isPresent()) {
+
             dateForIntent = pass.getRelevantDate().get();
         } else if (pass.getExpirationDate().isPresent()) {
             dateForIntent = pass.getExpirationDate().get();
@@ -53,8 +55,8 @@ public class PassVisualizer {
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_EDIT);
                     intent.setType("vnd.android.cursor.item/event");
-                    intent.putExtra("beginTime", dateForIntent.getMillis());
-                    intent.putExtra("endTime", dateForIntent.getMillis() + 60 * 60 * 1000);
+                    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, dateForIntent.getMillis());
+                    intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, dateForIntent.getMillis() + 60 * 60 * 1000);
                     intent.putExtra("title", pass.getDescription());
                     activity.startActivity(intent);
                 }
