@@ -1,4 +1,4 @@
-package org.ligi.passandroid.ui;
+package org.ligi.passandroid.ui.quirk_fix;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.ui.PassImportActivity;
 
 import java.net.URLEncoder;
 

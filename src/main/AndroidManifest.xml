@@ -128,8 +128,8 @@
 
         </activity>
 
-        <activity android:name=".ui.VirginAustraliaLoadActivity">
-            <intent-filter>
+        <activity android:name=".ui.quirk_fix.VirginAustraliaLoadActivity">
+        <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
