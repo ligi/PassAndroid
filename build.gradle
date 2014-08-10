@@ -95,7 +95,7 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
 
-    def play_services = 'com.google.android.gms:play-services:5.0.77'
+    def play_services = 'com.google.android.gms:play-services:5.2.08'
 
     withAnalyticsCompile play_services
     withMapsCompile play_services
