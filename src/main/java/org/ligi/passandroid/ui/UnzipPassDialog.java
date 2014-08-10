@@ -31,7 +31,7 @@ public class UnzipPassDialog {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }
-        ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
+        final ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
 
         class AlertDialogUpdater implements Runnable {
 
@@ -49,6 +49,7 @@ public class UnzipPassDialog {
 
                             @Override
                             public void call(final String pathToPassbook) {
+                                dialog.dismiss();
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -64,6 +65,9 @@ public class UnzipPassDialog {
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        if (dialog.isShowing()) {
+                                            dialog.dismiss();
+                                        }
                                         if (myProgress.isShowing()) {
                                             myProgress.dismiss();
                                             // TODO - check if it would be good to inform the user in another way
