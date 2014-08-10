@@ -11,6 +11,7 @@ public class ApplePassbookQuirkCorrector {
         careForAirBerlin(pass);
         careForWestbahn(pass);
         careForAirCanada(pass);
+        careForUSAirways(pass);
         careForVirginAustralia(pass);
     }
 
@@ -44,6 +45,22 @@ public class ApplePassbookQuirkCorrector {
 
         if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
             Tracker.get().trackEvent("quirk_fix", "description_replace", "air_canada", 1L);
+            pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
+        }
+    }
+
+    private static void careForUSAirways(PassImpl pass) {
+        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("US Airways")) {
+            return;
+        }
+
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "usairways", 0L);
+
+        final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
+        final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destination");
+
+        if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "usairways", 1L);
             pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
         }
     }
