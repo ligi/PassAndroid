@@ -1,7 +1,7 @@
 buildscript {
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -16,10 +16,7 @@ apply plugin: 'android'
 apply plugin: 'spoon'
 
 repositories {
-    mavenCentral()
-    maven {
-        url project.hasProperty('ligisMavenUrl') ? ligisMavenUrl : "https://raw.github.com/ligi/ligis-mvn-repo/master";
-    }
+    jcenter()
 }
 
 android {
@@ -58,7 +55,7 @@ android {
 
 dependencies {
     // The Apache Software License, Version 2.0
-    compile 'com.googlecode.android-query:android-query:0.25.+'
+    compile 'com.googlecode.android-query:android-query:0.25.9'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.android.support:support-v4:20.0.+'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
@@ -68,7 +65,7 @@ dependencies {
     compile 'com.squareup:otto:1.3.5'
 
     compile 'org.ligi:AXT:0.28'
-    compile 'org.ligi:tracedroid:1.1'
+    compile 'org.ligi:tracedroid:1.2'
     compile 'com.google.guava:guava:17.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.2+@aar'
