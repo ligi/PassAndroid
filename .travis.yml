@@ -9,16 +9,24 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 
-branches:
-  only:
-    - dev
-    - master
-
 jdk: oraclejdk7
 
 env:
   global:
     - ANDROID_SDK_VERSION="r23.0.2"
+  matrix:
+    - ANDROID_SDKS=android-19,sysimg-19  ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
+
+before_install:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+
+before_script:
+  - wget https://raw.githubusercontent.com/andrewhr/rxjava-android-example/master/ci/wait_for_emulator
+  - chmod +x wait_for_emulator
+  - ./wait_for_emulator
+  - adb shell input keyevent 82 &
+
 
 notifications:
   email: true
