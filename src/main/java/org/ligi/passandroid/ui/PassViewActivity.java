@@ -58,6 +58,9 @@ public class PassViewActivity extends PassViewActivityBase {
         if (!optionalPass.isPresent()) {
             return;
         }
+
+        AXT.at(this).disableRotation();
+
         final Pass pass = optionalPass.get();
 
         if (!pass.isValid()) { // don't deal with invalid passes
