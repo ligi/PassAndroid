@@ -42,26 +42,35 @@ public class PassImportActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(InputStreamWithSource result) {
-            progressDialog.dismiss();
-            if (result != null) {
-
-                UnzipPassDialog.show(result, passImportActivity, new UnzipPassDialog.FinishCallback() {
-                    @Override
-                    public Void call(String path) {
-
-                        // TODO this is kind of a hack - there should be a better way
-                        final String id = AXT.at(path.split("/")).last();
-
-                        final PassStore store = App.getPassStore();
-                        store.setCurrentPass(store.getPassbookForId(id));
-
-                        AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
-                        finish();
-                        return null;
-                    }
-                });
-            }
             super.onPostExecute(result);
+
+            if (result == null) {
+                return; // no result -> no work here
+            }
+
+            if (isFinishing()) { // finish with no UI/Dialogs
+                // let's do it silently TODO check if we need to jump to a service here as the activity is dying
+                UnzipPassController.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(result, getApplication(), null, null));
+                return;
+            }
+
+
+            UnzipPassDialog.show(result, passImportActivity, new UnzipPassDialog.FinishCallback() {
+                @Override
+                public Void call(String path) {
+
+                    // TODO this is kind of a hack - there should be a better way
+                    final String id = AXT.at(path.split("/")).last();
+
+                    final PassStore store = App.getPassStore();
+                    store.setCurrentPass(store.getPassbookForId(id));
+
+                    AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
+                    finish();
+                    return null;
+                }
+            });
+
         }
     }
 
