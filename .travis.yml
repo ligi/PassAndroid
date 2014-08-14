@@ -1,33 +1,29 @@
 language: android
 android:
   components:
-    - build-tools-20.0.0
-    - android-19
-    - sysimg-19
-    - add-on
-    - extra
+  - build-tools-20.0.0
+  - android-19
+  - sysimg-19
+  - add-on
+  - extra
   licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
+  - android-sdk-preview-license-52d11cd2
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 jdk: oraclejdk7
-
 env:
   global:
-    - ANDROID_SDK_VERSION="r23.0.2"
+  - ANDROID_SDK_VERSION="r23.0.2"
   matrix:
-    - ANDROID_SDKS=android-19,sysimg-19  ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
-
+  - ANDROID_SDKS=android-19,sysimg-19  ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
 before_install:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-
+- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+- emulator -avd test -no-skin -no-audio -no-window &
 before_script:
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-
+- android-wait-for-emulator
+- adb shell input keyevent 82 &
 notifications:
   email: true
 
-
+script:
+ gradle clean build
