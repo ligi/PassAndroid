@@ -54,28 +54,6 @@ android {
 }
 
 dependencies {
-    // The Apache Software License, Version 2.0
-    compile 'com.googlecode.android-query:android-query:0.25.9'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:support-v4:20.0.+'
-    compile 'net.lingala.zip4j:zip4j:1.3.2'
-    compile 'com.android.support:appcompat-v7:20.0.+'
-    compile 'com.jakewharton:butterknife:5.1.1'
-    compile 'joda-time:joda-time:2.3'
-    compile 'com.squareup:otto:1.3.5'
-
-    compile 'org.ligi:AXT:0.28'
-    compile 'org.ligi:tracedroid:1.2'
-    compile 'com.google.guava:guava:17.0'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'fr.nicolaspomepuy:discreetapprate:2.0.2+@aar'
-
-    // cannot use this new version: https://github.com/zxing/zxing/issues/165
-    // WARNING: might work on some devices or the emulator - but fails on others
-    // compile 'com.google.zxing:core:3.1.0'
-
-    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
-
     androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
         exclude group: 'com.android.support'
         exclude group: 'com.google.guava'
@@ -92,6 +70,30 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
 
+    // The Apache Software License, Version 2.0
+    compile 'com.googlecode.android-query:android-query:0.25.9'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'net.lingala.zip4j:zip4j:1.3.2'
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'joda-time:joda-time:2.3'
+    compile 'com.squareup:otto:1.3.5'
+
+    compile 'org.ligi:AXT:0.28'
+    compile 'org.ligi:tracedroid:1.2'
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'fr.nicolaspomepuy:discreetapprate:2.0.2@aar'
+
+    // cannot use this new version: https://github.com/zxing/zxing/issues/165
+    // WARNING: might work on some devices or the emulator - but fails on others
+    // compile 'com.google.zxing:core:3.1.0'
+
+    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
+
+
+
     def play_services = 'com.google.android.gms:play-services:5.0.89'
 
     withAnalyticsCompile play_services
@@ -100,8 +102,8 @@ dependencies {
 
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1"
+    compileSdkVersion 20
+    buildToolsVersion "20"
 
     defaultConfig {
         versionCode 231
