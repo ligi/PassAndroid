@@ -31,6 +31,9 @@ public class InputStreamProvider {
             if (uri.toString().contains("//m.aircanada.ca/ebp/")) {
                 Tracker.get().trackEvent("quirk_fix", "ua_fake", "air_canada", null);
                 requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
+            } else if (uri.toString().contains("//checkin.si.amadeus.net")) {
+                Tracker.get().trackEvent("quirk_fix", "ua_fake", "icelandair", null);
+                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
             }
 
             final Request request = requestBuilder.build();

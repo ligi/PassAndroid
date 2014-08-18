@@ -126,6 +126,18 @@
                     android:scheme="https" />
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="checkin.si.amadeus.net"
+                    android:pathPattern=".*"
+                    android:scheme="https" />
+            </intent-filter>
+
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -593,6 +605,8 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".ui.PassViewActivity"
             android:label="@string/app_name"
