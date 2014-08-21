@@ -536,7 +536,7 @@
 
         </activity>
 
-        <activity android:name=".ui.quirk_fix.VirginAustraliaLoadActivity">
+        <activity android:name="org.ligi.passandroid.ui.quirk_fix.VirginAustraliaLoadActivity">
         <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
