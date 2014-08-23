@@ -536,7 +536,7 @@
 
         </activity>
 
-        <activity android:name="org.ligi.passandroid.ui.quirk_fix.VirginAustraliaLoadActivity">
+        <activity android:name=".ui.quirk_fix.URLRewriteActivity">
         <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -559,6 +559,18 @@
                     android:pathPattern="/virginaustralia/.*"
                     android:scheme="http" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cathaypacific.com"
+                    android:pathPattern="/icheckin2/mbp.do.*"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
 
         <activity android:name=".ui.quirk_fix.USAirwaysLoadActivity">
