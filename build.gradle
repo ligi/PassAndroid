@@ -80,7 +80,7 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'com.squareup:otto:1.3.5'
 
-    compile 'org.ligi:AXT:0.30'
+    compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.2'
     compile 'com.google.guava:guava:17.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
@@ -91,8 +91,6 @@ dependencies {
     // compile 'com.google.zxing:core:3.1.0'
 
     compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
-
-
 
     def play_services = 'com.google.android.gms:play-services:5.0.89'
 
