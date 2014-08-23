@@ -18,7 +18,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
         super.onPostExecute(aVoid);
 
         Intent it = new Intent(Intent.ACTION_SEND);
-        it.putExtra(Intent.EXTRA_SUBJECT, "a Passbook with a problem");
+        it.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: Passbook with a problem");
         it.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
         it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zipPath + zipFileName));
         //it.setType("application/vnd.apple.pkpass");
