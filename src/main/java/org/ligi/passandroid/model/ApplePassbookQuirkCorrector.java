@@ -13,7 +13,27 @@ public class ApplePassbookQuirkCorrector {
         careForAirCanada(pass);
         careForUSAirways(pass);
         careForVirginAustralia(pass);
+        careForCathayPacific(pass);
     }
+
+
+    private static void careForCathayPacific(PassImpl pass) {
+        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Cathay Pacific")) {
+
+            return;
+        }
+
+        Tracker.get().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 0L);
+
+        final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("departure");
+        final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("arrival");
+
+        if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+            Tracker.get().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 1L);
+            pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
+        }
+    }
+
 
     private static void careForVirginAustralia(PassImpl pass) {
         // also good identifier could be  "passTypeIdentifier": "pass.com.virginaustralia.boardingpass
