@@ -2,9 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +11,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
 
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.Tracker;
 
 import java.io.IOException;
@@ -31,7 +30,6 @@ public class ExtractURLAsIphoneActivity extends Activity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
-
         Tracker.get().trackEvent("quirk_fix", "unpack_attempt", getIntent().getData().getHost(), null);
 
         new DownloadExtractAndStartImportTask().execute();
@@ -48,7 +46,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
                 requestBuilder.header("User-Agent", InputStreamProvider.IPHONE_USER_AGENT);
 
                 final ResponseBody body = client.newCall(requestBuilder.build()).execute().body();
-                String bodyString = body.string();
+                final String bodyString = body.string();
                 final Pattern p = Pattern.compile("href=\"(.*\\.pkpass.*?)\"");
                 final Matcher m = p.matcher(bodyString);
 
@@ -73,14 +71,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s == null) {
-                final ComponentName component = new ComponentName(ExtractURLAsIphoneActivity.this, ExtractURLAsIphoneActivity.class);
-                getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-                final Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(getIntent().getData());
-
-                startActivity(intent);
-                getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-
+                AXT.at(ExtractURLAsIphoneActivity.this).rethrowIntentExcludingSelf();
                 tearDown();
                 return;
             }
