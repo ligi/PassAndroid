@@ -48,7 +48,7 @@ public class URLRewriteActivity extends Activity {
                                     Intent intent = new Intent(Intent.ACTION_SEND);
                                     intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: URLRewrite Problem");
                                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
-                                    intent.putExtra(Intent.EXTRA_TEXT, "foo" + getIntent().getData());
+                                    intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
                                     intent.setType("text/plain");
 
                                     startActivity(Intent.createChooser(intent, "How to send Link?"));
