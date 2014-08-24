@@ -96,7 +96,12 @@ public class PassVisualizer {
             dateTextView.setText(relativeDateTimeString);
         } else if (pass.getExpirationDate().isPresent()) {
             final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), pass.getExpirationDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
-            dateTextView.setText("expires " + relativeDateTimeString);
+
+            if (pass.getExpirationDate().get().isAfterNow()) {
+                dateTextView.setText("expires " + relativeDateTimeString);
+            } else {
+                dateTextView.setText("expired " + relativeDateTimeString);
+            }
         } else {
             dateTextView.setVisibility(View.GONE);
         }
