@@ -25,6 +25,8 @@ public class URLRewriteActivity extends Activity {
             url = getVirginAustraliaURL();
         } else if (getIntent().getData().getHost().equals("www.cathaypacific.com")) {
             url = getCathay();
+        } else if (getIntent().getData().getHost().equals("mbp.swiss.com")) {
+            url = getSwiss();
         }
 
         if (url == null) {
@@ -46,7 +48,7 @@ public class URLRewriteActivity extends Activity {
                                     Intent intent = new Intent(Intent.ACTION_SEND);
                                     intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: URLRewrite Problem");
                                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
-                                    intent.putExtra(Intent.EXTRA_TEXT, "foo"+getIntent().getData());
+                                    intent.putExtra(Intent.EXTRA_TEXT, "foo" + getIntent().getData());
                                     intent.setType("text/plain");
 
                                     startActivity(Intent.createChooser(intent, "How to send Link?"));
@@ -68,7 +70,6 @@ public class URLRewriteActivity extends Activity {
         final Intent intent = new Intent(this, PassImportActivity.class);
         intent.setData(Uri.parse(url));
         startActivity(intent);
-
         finish();
     }
 
@@ -100,4 +101,19 @@ public class URLRewriteActivity extends Activity {
         return "https://www.cathaypacific.com/icheckin2/PassbookServlet?v=" + URLEncoder.encode(passId);
     }
 
+    public String getSwiss() {
+        String url = getIntent().getData().toString();
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length() - 1);
+
+        }
+
+        final String[] split = url.split("/");
+
+        if (split.length < 6) {
+            return null;
+        }
+
+        return "http://prod.wap.ncrwebhost.mobi/mobiqa/wap/" + split[split.length - 2] + "/" + split[split.length - 1] + "/passbook";
+    }
 }
