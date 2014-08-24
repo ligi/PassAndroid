@@ -6,11 +6,8 @@ import android.net.Uri;
 
 class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
 
-    private final Activity activity;
-
     public ExportProblemPassToLigiAndFinishTask(Activity activity, String path, String zip_path, String zip_fname) {
         super(activity, path, zip_path, zip_fname, false);
-        this.activity = activity;
     }
 
     @Override
@@ -25,7 +22,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
         it.setType("text/plain");
         it.putExtra(Intent.EXTRA_TEXT, "");
 
-        ctx.startActivity(Intent.createChooser(it, "How to send Pass?"));
+        activity.startActivity(Intent.createChooser(it, "How to send Pass?"));
 
         activity.finish();
 
