@@ -43,7 +43,7 @@ public class UnzipPassController {
             AXT.at(spec.inputStreamWithSource.getInputStream()).toFile(tempFile);
             processFile(new FileUnzipControllerSpec(tempFile.getAbsolutePath(), spec));
             tempFile.delete();
-        } catch (IOException e) {
+        } catch (Exception e) {
             spec.failCallback.fail("problem with temp file" + e);
         }
     }
