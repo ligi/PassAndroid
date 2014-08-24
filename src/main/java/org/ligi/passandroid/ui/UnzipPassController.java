@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
+import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class UnzipPassController {
             processFile(new FileUnzipControllerSpec(tempFile.getAbsolutePath(), spec));
             tempFile.delete();
         } catch (Exception e) {
+            Tracker.get().trackException("problem processing InputStream",e,false);
             spec.failCallback.fail("problem with temp file" + e);
         }
     }
