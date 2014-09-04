@@ -49,6 +49,14 @@ android {
         }
     }
 
+
+    // needed for assertJ
+    packagingOptions {
+      exclude 'asm-license.txt'
+      exclude 'LICENSE'
+      exclude 'NOTICE'
+    }
+
     // https://groups.google.com/forum/#!topic/adt-dev/-Km7VgExKf4
     useOldManifestMerger true
 }
@@ -65,7 +73,8 @@ dependencies {
     }
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.1.1'
-    androidTestCompile 'com.squareup:fest-android:1.0.8'
+
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'

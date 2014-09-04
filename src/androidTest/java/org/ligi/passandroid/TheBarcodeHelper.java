@@ -9,7 +9,7 @@ import com.google.zxing.common.BitMatrix;
 
 import org.ligi.passandroid.helper.BarcodeHelper;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TheBarcodeHelper extends BaseTest {
 
