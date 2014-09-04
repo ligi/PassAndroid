@@ -21,7 +21,7 @@ public class URLRewriteActivity extends Activity {
 
         String url = null;
 
-        if (getIntent().getData().getHost().equals("mobile.virginaustralia.com")) {
+        if (getIntent().getData().getHost().endsWith(".virginaustralia.com")) { // mobile. or checkin.
             url = getVirginAustraliaURL();
         } else if (getIntent().getData().getHost().equals("www.cathaypacific.com")) {
             url = getCathay();
@@ -74,9 +74,18 @@ public class URLRewriteActivity extends Activity {
     }
 
     private String getVirginAustraliaURL() {
-        final String passId = getIntent().getData().getQueryParameter("c");
 
-        Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia", null);
+
+        final Uri data = getIntent().getData();
+
+        final String passId;
+        if (data.toString().contains("CheckInApiIntegration")) {
+            passId = data.getQueryParameter("key");
+            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia2", null);
+        } else {
+            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia1", null);
+            passId = data.getQueryParameter("c");
+        }
 
         if (passId == null) {
             return null;
