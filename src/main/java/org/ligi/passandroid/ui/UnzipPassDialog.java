@@ -31,14 +31,15 @@ public class UnzipPassDialog {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }
-        final ProgressDialog dialog = ProgressDialog.show(activity, "", "Opening the Passbook. Please wait...", true);
+        final ProgressDialog dialog = ProgressDialog.show(activity, "Opening Passbook", "Please wait...", true);
+        dialog.setCancelable(false);
 
         class AlertDialogUpdater implements Runnable {
 
             private final ProgressDialog myProgress;
             private final FinishCallback call_after_finish;
 
-            public AlertDialogUpdater(Activity activity, ProgressDialog progress, FinishCallback call_after_finish) {
+            public AlertDialogUpdater(ProgressDialog progress, FinishCallback call_after_finish) {
                 this.call_after_finish = call_after_finish;
                 myProgress = progress;
             }
@@ -49,7 +50,9 @@ public class UnzipPassDialog {
 
                             @Override
                             public void call(final String pathToPassbook) {
-                                dialog.dismiss();
+                                if (!activity.isFinishing() && dialog.isShowing()) {
+                                    dialog.dismiss();
+                                }
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -65,14 +68,10 @@ public class UnzipPassDialog {
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (dialog.isShowing()) {
+                                        if (!activity.isFinishing() && dialog.isShowing()) {
                                             dialog.dismiss();
                                         }
-                                        if (myProgress.isShowing()) {
-                                            myProgress.dismiss();
-                                            // TODO - check if it would be good to inform the user in another way
-                                            DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
-                                        }
+                                        DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
                                     }
                                 });
                             }
@@ -82,7 +81,7 @@ public class UnzipPassDialog {
             }
         }
 
-        final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(activity, dialog, callAfterFinishOnUIThread);
+        final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(dialog, callAfterFinishOnUIThread);
         new Thread(alertDialogUpdater).start();
 
     }
