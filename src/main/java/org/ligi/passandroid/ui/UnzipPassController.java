@@ -13,7 +13,7 @@ import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class UnzipPassController {
@@ -45,7 +45,7 @@ public class UnzipPassController {
             processFile(new FileUnzipControllerSpec(tempFile.getAbsolutePath(), spec));
             tempFile.delete();
         } catch (Exception e) {
-            Tracker.get().trackException("problem processing InputStream",e,false);
+            Tracker.get().trackException("problem processing InputStream", e, false);
             spec.failCallback.fail("problem with temp file" + e);
         }
     }
@@ -74,6 +74,9 @@ public class UnzipPassController {
         JSONObject manifest_json;
         try {
             manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).readToString());
+        } catch (FileNotFoundException e) {
+            spec.failCallback.fail("Pass contains no Manifest - or PassAndroid could not read it");
+            return;
         } catch (Exception e) {
             spec.failCallback.fail("Problem with manifest.json: " + e);
             return;
