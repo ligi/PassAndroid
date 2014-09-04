@@ -89,10 +89,22 @@ public class PassViewActivity extends PassViewActivityBase {
         ButterKnife.inject(this);
 
         barcode_img.setImageBitmap(pass.getBarcodeBitmap(AXT.at(getWindowManager()).getSmallestSide() / 3));
-        logo_img.setImageBitmap(pass.getLogoBitmap());
+
+        if (pass.getLogoBitmap().isPresent()) {
+            logo_img.setImageBitmap(pass.getLogoBitmap().get());
+            logo_img.setVisibility(View.VISIBLE);
+        } else {
+            logo_img.setVisibility(View.GONE);
+        }
 
         logo_img.setBackgroundColor(pass.getBackGroundColor());
-        thumbnail_img.setImageBitmap(pass.getThumbnailImage());
+
+        if (pass.getThumbnailImage().isPresent()) {
+            thumbnail_img.setImageBitmap(pass.getThumbnailImage().get());
+            thumbnail_img.setVisibility(View.VISIBLE);
+        } else {
+            thumbnail_img.setVisibility(View.GONE);
+        }
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {

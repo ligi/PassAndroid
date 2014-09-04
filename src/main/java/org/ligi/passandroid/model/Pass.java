@@ -38,11 +38,11 @@ public interface Pass extends Serializable {
 
     Bitmap getBarcodeBitmap(final int size);
 
-    Bitmap getIconBitmap();
+    Optional<Bitmap> getIconBitmap();
 
-    Bitmap getThumbnailImage();
+    Optional<Bitmap> getThumbnailImage();
 
-    Bitmap getLogoBitmap();
+    Optional<Bitmap> getLogoBitmap();
 
     int getBackGroundColor();
 

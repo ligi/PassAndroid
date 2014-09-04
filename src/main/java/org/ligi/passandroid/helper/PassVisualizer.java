@@ -74,8 +74,8 @@ public class PassVisualizer {
 
         icon_img.setBackgroundColor(pass.getBackGroundColor());
 
-        if (pass.getIconBitmap() != null) {
-            icon_img.setImageBitmap(Bitmap.createScaledBitmap(pass.getIconBitmap(), size, size, false));
+        if (pass.getIconBitmap().isPresent()) {
+            icon_img.setImageBitmap(Bitmap.createScaledBitmap(pass.getIconBitmap().get(), size, size, false));
         } else {
             icon_img.setImageResource(R.drawable.ic_launcher);
         }

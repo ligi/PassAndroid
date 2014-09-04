@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class PassImpl implements Pass, Serializable {
     private Optional<String> organisation = Optional.absent();
@@ -37,6 +38,10 @@ public class PassImpl implements Pass, Serializable {
     private List<PassLocation> locations = new ArrayList<>();
     private String path;
     private String id;
+
+    private Optional<String> iconBitmapFile;
+    private Optional<String> thumbnailBitmapFile;
+    private Optional<String> logoBitmapFile;
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
 
@@ -122,55 +127,37 @@ public class PassImpl implements Pass, Serializable {
         return description;
     }
 
-
-    public Bitmap getIconBitmap() {
-        Bitmap result = null;
-
-        if (path != null) {
-
-            // first we try to fetch the small icon
-            result = BitmapFactory.decodeFile(path + "/icon@2x.png");
-
-            // if that failed we use the small one
-            if (result == null) {
-                result = BitmapFactory.decodeFile(path + "/icon.png");
-            }
-
-
-        }
-        return result;
+    public void setIconBitmapFile(String iconBitmapFile) {
+        this.iconBitmapFile = Optional.fromNullable(iconBitmapFile);
     }
 
-    public Bitmap getThumbnailImage() {
-        Bitmap result = null;
 
-        if (path != null) {
-
-            // first we try to fetch the small icon
-            result = BitmapFactory.decodeFile(path + "/thumbnail@2x.png");
-
-            // if that failed we use the small one
-            if (result == null) {
-                result = BitmapFactory.decodeFile(path + "/thumbnail.png");
-            }
-
-
-        }
-        return result;
+    public void setLogoBitmapFile(String logoBitmapFile) {
+        this.logoBitmapFile = Optional.fromNullable(logoBitmapFile);
     }
 
-    public Bitmap getLogoBitmap() {
-        Bitmap result = null;
+    public void setThumbnailBitmapFile(String thumbnailBitmapFile) {
+        this.thumbnailBitmapFile = Optional.fromNullable(thumbnailBitmapFile);
+    }
 
-        if (path != null) {
-            result = BitmapFactory.decodeFile(path + "/logo@2x.png");
-
-            if (result == null) {
-                result = BitmapFactory.decodeFile(path + "/logo.png");
-            }
-
+    private Optional<Bitmap> getBitmapFromOptionalString(Optional<String> in) {
+        if (in==null || !in.isPresent()) {
+            return Optional.absent();
         }
-        return result;
+
+        return Optional.fromNullable(BitmapFactory.decodeFile(in.get()));
+    }
+
+    public Optional<Bitmap> getIconBitmap() {
+        return getBitmapFromOptionalString(iconBitmapFile);
+    }
+
+    public Optional<Bitmap> getThumbnailImage() {
+        return getBitmapFromOptionalString(thumbnailBitmapFile);
+    }
+
+    public Optional<Bitmap> getLogoBitmap() {
+        return getBitmapFromOptionalString(logoBitmapFile);
     }
 
     public Bitmap getBarcodeBitmap(final int size) {

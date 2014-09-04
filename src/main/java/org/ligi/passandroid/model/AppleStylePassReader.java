@@ -1,5 +1,6 @@
 package org.ligi.passandroid.model;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import com.google.common.base.Optional;
@@ -37,6 +38,10 @@ public class AppleStylePassReader {
         pass.setId(path.substring(path.lastIndexOf('/') + 1));
 
         JSONObject pass_json = null, type_json = null;
+
+        pass.setIconBitmapFile(findBitmapFile(path, "icon"));
+        pass.setLogoBitmapFile(findBitmapFile(path, "logo"));
+        pass.setThumbnailBitmapFile(findBitmapFile(path, "thumbnail"));
 
         final File file = new File(path + "/pass.json");
 
@@ -205,6 +210,19 @@ public class AppleStylePassReader {
         return pass;
     }
 
+    private static String findBitmapFile(String path, String bitmap) {
+        String res=path+"/"+bitmap+"@2x.png";
+        if (BitmapFactory.decodeFile(res)!=null) {
+            return res;
+        }
+
+        res=path+"/"+bitmap+".png";
+        if (BitmapFactory.decodeFile(res)!=null) {
+            return res;
+        }
+        return null;
+    }
+
     public static String findType(JSONObject obj) {
 
         final Iterator keys = obj.keys();
@@ -244,15 +262,12 @@ public class AppleStylePassReader {
         }
 
         if (color_str.startsWith("#")) {
-            return parseColorPoundStyle(color_str, defaultValue);
+            return Color.parseColor(color_str);
         }
 
         return defaultValue;
     }
 
-    private static int parseColorPoundStyle(String color_str, int defaultValue) {
-        return Color.parseColor(color_str);
-    }
 
     private static int parseColorRGBStyle(String color_str, int defaultValue) {
         Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
