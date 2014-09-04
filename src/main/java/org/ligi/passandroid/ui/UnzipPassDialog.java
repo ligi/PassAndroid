@@ -36,12 +36,10 @@ public class UnzipPassDialog {
 
         class AlertDialogUpdater implements Runnable {
 
-            private final ProgressDialog myProgress;
             private final FinishCallback call_after_finish;
 
-            public AlertDialogUpdater(ProgressDialog progress, FinishCallback call_after_finish) {
+            public AlertDialogUpdater(FinishCallback call_after_finish) {
                 this.call_after_finish = call_after_finish;
-                myProgress = progress;
             }
 
             public void run() {
@@ -81,7 +79,7 @@ public class UnzipPassDialog {
             }
         }
 
-        final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(dialog, callAfterFinishOnUIThread);
+        final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(callAfterFinishOnUIThread);
         new Thread(alertDialogUpdater).start();
 
     }
