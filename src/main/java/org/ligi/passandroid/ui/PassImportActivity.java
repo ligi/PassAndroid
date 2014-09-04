@@ -45,6 +45,12 @@ public class PassImportActivity extends ActionBarActivity {
             super.onPostExecute(result);
 
             if (result == null) {
+
+                if (!passImportActivity.isFinishing()) {
+                    progressDialog.dismiss();
+                }
+                finish();
+                //TODO show some error here?!
                 return; // no result -> no work here
             }
 
