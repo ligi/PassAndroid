@@ -12,14 +12,15 @@ import java.util.ArrayList;
 public class PassFieldList extends ArrayList<PassField> {
 
     public PassFieldList() {
+
     }
 
-    public PassFieldList(JSONObject passJSON, String fieldsName) {
+    public PassFieldList(JSONObject passJSON, String fieldsName, AppleStylePassTranslation translation) {
         try {
             final JSONArray jsonArray = passJSON.getJSONArray(fieldsName);
             for (int i = 0; i < jsonArray.length(); i++) {
                 try {
-                    final PassField field = new PassField(jsonArray.getJSONObject(i));
+                    final PassField field = new PassField(jsonArray.getJSONObject(i), translation);
                     add(field);
                 } catch (JSONException e) {
                     Log.w("could not process PassField from JSON for " + fieldsName + " cause: " + e);

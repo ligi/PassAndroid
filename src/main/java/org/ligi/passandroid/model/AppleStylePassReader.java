@@ -26,8 +26,10 @@ import java.util.regex.Pattern;
 
 public class AppleStylePassReader {
 
-    public static Pass read(String path,String language) {
+    public static Pass read(String path, String language) {
         final PassImpl pass = new PassImpl();
+
+        final AppleStylePassTranslation translation = new AppleStylePassTranslation();
 
         if (path.endsWith("/")) {
             path = path.substring(0, path.length() - 1);
@@ -39,13 +41,16 @@ public class AppleStylePassReader {
 
         JSONObject pass_json = null, type_json = null;
 
-        Optional<String> localized_path=Optional.absent();
+        Optional<String> localized_path = findLocalizedPath(path, language);
 
-        localized_path=findLocalizedPath(path,language);
+        if (localized_path.isPresent()) {
+            final File file = new File(localized_path.get(), "pass.strings");
+            translation.loadFromFile(file);
+        }
 
-        pass.setIconBitmapFile(findBitmapFile(path,localized_path, "icon"));
-        pass.setLogoBitmapFile(findBitmapFile(path,localized_path, "logo"));
-        pass.setThumbnailBitmapFile(findBitmapFile(path,localized_path, "thumbnail"));
+        pass.setIconBitmapFile(findBitmapFile(path, localized_path, "icon"));
+        pass.setLogoBitmapFile(findBitmapFile(path, localized_path, "logo"));
+        pass.setThumbnailBitmapFile(findBitmapFile(path, localized_path, "thumbnail"));
 
         final File file = new File(path + "/pass.json");
 
@@ -131,14 +136,14 @@ public class AppleStylePassReader {
 
                 final JSONArray locations_json = pass_json.getJSONArray("locations");
                 for (int i = 0; i < locations_json.length(); i++) {
-                    JSONObject obj = locations_json.getJSONObject(i);
+                    final JSONObject obj = locations_json.getJSONObject(i);
 
-                    PassLocation location = new PassLocation(pass);
+                    final PassLocation location = new PassLocation(pass);
                     location.latlng.lat = obj.getDouble("latitude");
                     location.latlng.lon = obj.getDouble("longitude");
 
                     if (obj.has("relevantText")) {
-                        location.setDescription(obj.getString("relevantText"));
+                        location.setDescription(translation.translate(obj.getString("relevantText")));
                     }
 
                     locations.add(location);
@@ -161,7 +166,7 @@ public class AppleStylePassReader {
             }
 
             try {
-                pass.setDescription(pass_json.getString("description"));
+                pass.setDescription(translation.translate(pass_json.getString("description")));
             } catch (JSONException e) {
             }
 
@@ -195,11 +200,11 @@ public class AppleStylePassReader {
         }
 
         if (type_json != null) {
-            pass.setPrimaryFields(new PassFieldList(type_json, "primaryFields"));
-            pass.setSecondaryFields(new PassFieldList(type_json, "secondaryFields"));
-            pass.setAuxiliaryFields(new PassFieldList(type_json, "auxiliaryFields"));
-            pass.setBackFields(new PassFieldList(type_json, "backFields"));
-            pass.setHeaderFields(new PassFieldList(type_json, "headerFields"));
+            pass.setPrimaryFields(new PassFieldList(type_json, "primaryFields", translation));
+            pass.setSecondaryFields(new PassFieldList(type_json, "secondaryFields", translation));
+            pass.setAuxiliaryFields(new PassFieldList(type_json, "auxiliaryFields", translation));
+            pass.setBackFields(new PassFieldList(type_json, "backFields", translation));
+            pass.setHeaderFields(new PassFieldList(type_json, "headerFields", translation));
         }
 
         try {
@@ -214,15 +219,15 @@ public class AppleStylePassReader {
         return pass;
     }
 
-    private static Optional<String> findLocalizedPath(String path,String language) {
+    private static Optional<String> findLocalizedPath(String path, String language) {
 
-        final File localized=new File(path,language+".lproj");
+        final File localized = new File(path, language + ".lproj");
 
         if (localized.exists() && localized.isDirectory()) {
             return Optional.of(localized.getPath());
         }
 
-        final File fallback=new File(path,"en.lproj");
+        final File fallback = new File(path, "en.lproj");
 
         if (fallback.exists() && fallback.isDirectory()) {
             return Optional.of(fallback.getPath());
@@ -234,24 +239,24 @@ public class AppleStylePassReader {
     private static String findBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
         String res;
         if (localizedPath.isPresent()) {
-            res=localizedPath.get()+"/"+bitmap+"@2x.png";
-            if (BitmapFactory.decodeFile(res)!=null) {
+            res = localizedPath.get() + "/" + bitmap + "@2x.png";
+            if (BitmapFactory.decodeFile(res) != null) {
                 return res;
             }
 
-            res=localizedPath.get()+"/"+bitmap+".png";
-            if (BitmapFactory.decodeFile(res)!=null) {
+            res = localizedPath.get() + "/" + bitmap + ".png";
+            if (BitmapFactory.decodeFile(res) != null) {
                 return res;
             }
         }
 
-        res=path+"/"+bitmap+"@2x.png";
-        if (BitmapFactory.decodeFile(res)!=null) {
+        res = path + "/" + bitmap + "@2x.png";
+        if (BitmapFactory.decodeFile(res) != null) {
             return res;
         }
 
-        res=path+"/"+bitmap+".png";
-        if (BitmapFactory.decodeFile(res)!=null) {
+        res = path + "/" + bitmap + ".png";
+        if (BitmapFactory.decodeFile(res) != null) {
             return res;
         }
         return null;

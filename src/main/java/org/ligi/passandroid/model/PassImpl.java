@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class PassImpl implements Pass, Serializable {
     private Optional<String> organisation = Optional.absent();
@@ -141,7 +140,7 @@ public class PassImpl implements Pass, Serializable {
     }
 
     private Optional<Bitmap> getBitmapFromOptionalString(Optional<String> in) {
-        if (in==null || !in.isPresent()) {
+        if (in == null || !in.isPresent()) {
             return Optional.absent();
         }
 

@@ -8,18 +8,17 @@ import java.io.Serializable;
 public class PassField implements Serializable{
 
     public final String key;
-    public final String label;
-    public final String value;
+    public String label;
+    public String value;
 
-    public PassField(JSONObject jsonObject) throws JSONException {
+    public PassField(JSONObject jsonObject, AppleStylePassTranslation translation) throws JSONException {
         label = jsonObject.getString("label");
-        value = jsonObject.getString("value");
+        value = translation.translate(jsonObject.getString("value"));
         if (jsonObject.has("key")) {
-            key = jsonObject.getString("key");
+            key = translation.translate(jsonObject.getString("key"));
         } else {
             key = null;
         }
+
     }
-
-
 }
