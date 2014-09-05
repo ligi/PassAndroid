@@ -224,12 +224,14 @@ public class AppleStylePassReader {
         final File localized = new File(path, language + ".lproj");
 
         if (localized.exists() && localized.isDirectory()) {
+            Tracker.get().trackEvent("measure_event", "pass", language + "_native_lproj", null);
             return Optional.of(localized.getPath());
         }
 
         final File fallback = new File(path, "en.lproj");
 
         if (fallback.exists() && fallback.isDirectory()) {
+            Tracker.get().trackEvent("measure_event", "pass", "en_lproj", null);
             return Optional.of(fallback.getPath());
         }
 
