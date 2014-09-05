@@ -61,7 +61,8 @@ public class AndroidFileSystemPassStore implements PassStore {
         } catch (Exception e) {
         }
 
-        final Pass pass = AppleStylePassReader.read(getPathForID(id));
+        final String language = context.getResources().getConfiguration().locale.getLanguage();
+        final Pass pass = AppleStylePassReader.read(getPathForID(id), language);
         AXT.at(cachedFile).writeObject(pass);
         return pass;
     }
@@ -87,10 +88,10 @@ public class AndroidFileSystemPassStore implements PassStore {
         return passList.get(pos);
     }
 
-    public Pass getPassbookForId(final String id) {
+    public Pass getPassbookForId(final String id,final String language) {
         final String mPath = path + "/" + id;
         // TODO read from cache
-        return AppleStylePassReader.read(mPath);
+        return AppleStylePassReader.read(mPath,language);
     }
 
     public void sort(final SortOrder order) {

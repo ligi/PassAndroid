@@ -47,7 +47,7 @@ public interface PassStore {
 
     public Pass getPassbookAt(int pos);
 
-    public Pass getPassbookForId(String id);
+    public Pass getPassbookForId(String id,String language);
 
     public void sort(SortOrder order);
 

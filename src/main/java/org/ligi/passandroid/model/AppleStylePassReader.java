@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class AppleStylePassReader {
 
-    public static Pass read(String path) {
+    public static Pass read(String path,String language) {
         final PassImpl pass = new PassImpl();
 
         if (path.endsWith("/")) {
@@ -39,9 +39,13 @@ public class AppleStylePassReader {
 
         JSONObject pass_json = null, type_json = null;
 
-        pass.setIconBitmapFile(findBitmapFile(path, "icon"));
-        pass.setLogoBitmapFile(findBitmapFile(path, "logo"));
-        pass.setThumbnailBitmapFile(findBitmapFile(path, "thumbnail"));
+        Optional<String> localized_path=Optional.absent();
+
+        localized_path=findLocalizedPath(path,language);
+
+        pass.setIconBitmapFile(findBitmapFile(path,localized_path, "icon"));
+        pass.setLogoBitmapFile(findBitmapFile(path,localized_path, "logo"));
+        pass.setThumbnailBitmapFile(findBitmapFile(path,localized_path, "thumbnail"));
 
         final File file = new File(path + "/pass.json");
 
@@ -210,8 +214,38 @@ public class AppleStylePassReader {
         return pass;
     }
 
-    private static String findBitmapFile(String path, String bitmap) {
-        String res=path+"/"+bitmap+"@2x.png";
+    private static Optional<String> findLocalizedPath(String path,String language) {
+
+        final File localized=new File(path,language+".lproj");
+
+        if (localized.exists() && localized.isDirectory()) {
+            return Optional.of(localized.getPath());
+        }
+
+        final File fallback=new File(path,"en.lproj");
+
+        if (fallback.exists() && fallback.isDirectory()) {
+            return Optional.of(fallback.getPath());
+        }
+
+        return Optional.absent();
+    }
+
+    private static String findBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
+        String res;
+        if (localizedPath.isPresent()) {
+            res=localizedPath.get()+"/"+bitmap+"@2x.png";
+            if (BitmapFactory.decodeFile(res)!=null) {
+                return res;
+            }
+
+            res=localizedPath.get()+"/"+bitmap+".png";
+            if (BitmapFactory.decodeFile(res)!=null) {
+                return res;
+            }
+        }
+
+        res=path+"/"+bitmap+"@2x.png";
         if (BitmapFactory.decodeFile(res)!=null) {
             return res;
         }
