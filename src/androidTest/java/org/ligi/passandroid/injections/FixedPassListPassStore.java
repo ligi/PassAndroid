@@ -2,8 +2,8 @@ package org.ligi.passandroid.injections;
 
 import com.google.common.base.Optional;
 
-import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public Pass getPassbookForId(String id) {
+    public Pass getPassbookForId(String id, String language) {
         for (Pass pass : passes) {
             if (pass.getId().equals(id)) {
                 return pass;
