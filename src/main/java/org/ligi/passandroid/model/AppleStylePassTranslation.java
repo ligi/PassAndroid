@@ -1,13 +1,11 @@
 package org.ligi.passandroid.model;
 
-import org.ligi.axt.AXT;
-import org.ligi.tracedroid.logging.Log;
+import com.google.common.base.Optional;
+import com.google.common.io.Files;
 
 import java.io.File;
-import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.Properties;
 
 public class AppleStylePassTranslation extends HashMap<String, String> {
 
@@ -19,31 +17,44 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
     }
 
     public void loadFromFile(final File file) {
-        for (Charset charset : Charset.availableCharsets().values()) {
-            try {
-                String localizationString = AXT.at(file).readToString(charset);
-                if (localizationString.startsWith("\"")) {
-                    Log.i("", localizationString);
-                }
-                Properties p = new Properties();
-                p.load(new StringReader(localizationString));
-                for (Object key : p.keySet()) {
 
-                    if (key instanceof String && ((String) key).startsWith("\"")) {
-                        final Object value = p.get(key);
-                        if (value instanceof String && ((String) value).startsWith("\"")) {
-                            // TODO think about just replacing first and last "
-                            put(((String) key).replace("\"", ""), ((String) value).replace("\"", ""));
-                        }
-                    }
-                }
-            } catch (Exception e) {
-            }
+        final Optional<String> content = loadStringWithCorrectCharset(file);
 
-            if (keySet().size() > 0) {
-                break;
+        if (!content.isPresent()) {
+            return;
+        }
+
+        final String contentString = content.get();
+
+        for (String pair : contentString.split("\";")) {
+            final String[] kv = pair.split("\" ?= ?\"");
+            if (kv.length == 2) {
+                put(removeLeadingClutter(kv[0]), kv[1]);
             }
+        }
+
+    }
+
+    private final static String removeLeadingClutter(String s) {
+        if (s.startsWith("\"") || s.startsWith("\n") || s.startsWith("\r") || s.startsWith(" ")) {
+            return removeLeadingClutter(s.substring(1));
+        } else {
+            return s;
         }
     }
 
+
+    private Optional<String> loadStringWithCorrectCharset(File file) {
+        for (Charset charset : Charset.availableCharsets().values()) {
+            try {
+                String localizationString = Files.toString(file, charset);
+                if (localizationString.startsWith("\"")) { // this is kind of how we detect the charset
+                    return Optional.of(localizationString);
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        return Optional.absent();
+    }
 }
