@@ -57,7 +57,8 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
 <string name="nav_more">"Mehr"</string>
 <string name="nav_sort">"Sortierung"</string>
 <string name="nav_sort_category">"Kategorie"</string>
-<string name="nav_sort_date">"Datum"</string>
+<string name="nav_sort_date_asc">"Datum (Neues zuerst)"</string>
+<string name="nav_sort_date_desc">"Datum (Altes zuerst)</string>
 <string name="nav_categories">"Kategorien"</string>
 <string name="nav_comunity">"Community"</string>
 <string name="nav_share">"teilen"</string>

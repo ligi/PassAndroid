@@ -69,7 +69,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="nav_more">"MORE"</string>
     <string name="nav_sort">"SORT"</string>
     <string name="nav_sort_category">"Category"</string>
-    <string name="nav_sort_date">"Date"</string>
+    <string name="nav_sort_date_asc">"Date (Newest first)"</string>
+    <string name="nav_sort_date_desc">"Date (Oldest first)"</string>
     <string name="nav_categories">"CATEGORIES"</string>
     <string name="nav_comunity">"Community"</string>
     <string name="nav_share">"Share"</string>

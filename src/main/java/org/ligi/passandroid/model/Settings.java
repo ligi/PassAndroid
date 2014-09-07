@@ -26,6 +26,6 @@ public class Settings {
                 return order;
             }
         }
-        return PassStore.SortOrder.DATE;
+        return PassStore.SortOrder.DATE_ASC;
     }
 }
