@@ -49,7 +49,7 @@ public class TheAppleStyleBarcodeReaderBase extends BaseTest {
                     new UnzipPassController.SuccessCallback() {
                         @Override
                         public void call(String pathToPassbook) {
-                            callback.onPassLoad(AppleStylePassReader.read(pathToPassbook));
+                            callback.onPassLoad(AppleStylePassReader.read(pathToPassbook, "en"));
                         }
                     }
                     , failCallback
