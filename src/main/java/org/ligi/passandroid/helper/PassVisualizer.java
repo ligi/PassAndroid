@@ -12,9 +12,9 @@ import android.widget.TextView;
 import org.joda.time.DateTime;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
 import org.ligi.passandroid.model.PassFieldList;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
@@ -110,10 +110,10 @@ public class PassVisualizer {
     }
 
     public static String getFieldListAsString(PassFieldList fieldList) {
-        String result = "";
+        final StringBuilder result = new StringBuilder();
         for (PassField f : fieldList) {
-            result += "<b>" + f.label + "</b>: " + f.value + "<br/>";
+            result.append("<b>" + f.label + "</b>: " + f.value + "<br/>");
         }
-        return result;
+        return result.toString();
     }
 }
