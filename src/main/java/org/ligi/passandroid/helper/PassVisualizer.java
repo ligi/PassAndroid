@@ -70,12 +70,12 @@ public class PassVisualizer {
             findById(res, R.id.actionsContainer).setVisibility(View.GONE);
         }
 
-        int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
         final ImageView icon_img = findById(res, R.id.icon);
 
         icon_img.setBackgroundColor(pass.getBackGroundColor());
 
         if (pass.getIconBitmap().isPresent()) {
+            final int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
             icon_img.setImageBitmap(Bitmap.createScaledBitmap(pass.getIconBitmap().get(), size, size, false));
         } else {
             icon_img.setImageResource(R.drawable.ic_launcher);
