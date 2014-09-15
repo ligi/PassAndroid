@@ -92,7 +92,12 @@ public class AppleStylePassReader {
             final String barcodeFormatString = barcode_json.getString("format");
 
             final BarcodeFormat barcodeFormat = BarCode.getFormatFromString(barcodeFormatString);
-            pass.setBarCode(new BarCode(barcodeFormat, barcode_json.getString("message")));
+            final BarCode barCode = new BarCode(barcodeFormat, barcode_json.getString("message"));
+            pass.setBarCode(barCode);
+
+            if (barcode_json.has("altText")) {
+                pass.getBarCode().get().setAlternativeText(barcode_json.getString("altText"));
+            }
 
             // TODO should check a bit more with barcode here - this can be dangerous
 

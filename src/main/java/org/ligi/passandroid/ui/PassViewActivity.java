@@ -53,6 +53,10 @@ public class PassViewActivity extends PassViewActivityBase {
     @InjectView(R.id.main_fields)
     TextView front_tv;
 
+    @InjectView(R.id.barcode_alt_text)
+    TextView barcodeAlternatvieText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,19 +95,19 @@ public class PassViewActivity extends PassViewActivityBase {
         ButterKnife.inject(this);
 
         if (pass.getBarCode().isPresent()) {
-
-            barcode_img.setVisibility(View.VISIBLE);
-        } else {
-            barcode_img.setVisibility(View.GONE);
-        }
-
-        if (pass.getBarCode().isPresent()) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
             final Bitmap bitmap = pass.getBarCode().get().getBitmap(smallestSide / 3);
             setBitmapSafe(barcode_img, Optional.fromNullable(bitmap));
+            if (pass.getBarCode().get().getAlternativeText().isPresent()) {
+                barcodeAlternatvieText.setText(pass.getBarCode().get().getAlternativeText().get());
+                barcodeAlternatvieText.setVisibility(View.VISIBLE);
+            } else {
+                barcodeAlternatvieText.setVisibility(View.GONE);
+            }
         } else {
             setBitmapSafe(barcode_img, Optional.<Bitmap>absent());
         }
+
         setBitmapSafe(logo_img, pass.getLogoBitmap());
 
         logo_img.setBackgroundColor(pass.getBackGroundColor());

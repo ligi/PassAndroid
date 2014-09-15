@@ -2,6 +2,7 @@ package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
 
+import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 
 import org.ligi.passandroid.Tracker;
@@ -14,10 +15,12 @@ import java.util.Locale;
 public class BarCode implements Serializable {
     private final BarcodeFormat barcodeFormat;
     private final String barcodeMessage;
+    private Optional<String> alternativeText;
 
     public BarCode(BarcodeFormat barcodeFormat, String barcodeMessage) {
         this.barcodeFormat = barcodeFormat;
         this.barcodeMessage = barcodeMessage;
+        alternativeText = Optional.absent();
     }
 
     public Bitmap getBitmap(final int size) {
@@ -54,5 +57,12 @@ public class BarCode implements Serializable {
 
     }
 
+    public void setAlternativeText(final String alternativeText) {
+        this.alternativeText = Optional.fromNullable(alternativeText);
+    }
+
+    public Optional<String> getAlternativeText() {
+        return alternativeText;
+    }
 
 }
