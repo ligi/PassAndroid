@@ -4,12 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.google.common.base.Optional;
-import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.Tracker;
-import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
@@ -22,8 +19,9 @@ public class PassImpl implements Pass, Serializable {
     private Optional<String> organisation = Optional.absent();
     private String type;
     private boolean valid = true; // be positive
-    private String barcodeMessage;
-    private BarcodeFormat barcodeFormat;
+
+    private Optional<BarCode> barCode = Optional.absent();
+
     private int backGroundColor;
     private int foregroundColor;
     private String description;
@@ -75,10 +73,6 @@ public class PassImpl implements Pass, Serializable {
         return valid;
     }
 
-    @Override
-    public BarcodeFormat getBarcodeFormat() {
-        return barcodeFormat;
-    }
 
     @Override
     public String getType() {
@@ -159,23 +153,6 @@ public class PassImpl implements Pass, Serializable {
         return getBitmapFromOptionalString(logoBitmapFile);
     }
 
-    public Bitmap getBarcodeBitmap(final int size) {
-        if (barcodeMessage == null) {
-            // no message -> no barcode
-            Tracker.get().trackException("No Barcode in pass - strange", false);
-            return null;
-        }
-
-        if (barcodeFormat == null) {
-            Log.w("Barcode format is null - fallback to QR");
-            Tracker.get().trackException("Barcode format is null - fallback to QR", false);
-            BarcodeHelper.generateBarCodeBitmap(barcodeMessage, BarcodeFormat.QR_CODE, size);
-        }
-
-        return BarcodeHelper.generateBarCodeBitmap(barcodeMessage, barcodeFormat, size);
-
-    }
-
 
     public String getTypeNotNull() {
         if (type == null) {
@@ -207,14 +184,6 @@ public class PassImpl implements Pass, Serializable {
 
     public void setInvalid() {
         valid = false;
-    }
-
-    public void setBarcodeFormat(BarcodeFormat barcodeFormat) {
-        this.barcodeFormat = barcodeFormat;
-    }
-
-    public void setBarcodeMessage(String barcodeMessage) {
-        this.barcodeMessage = barcodeMessage;
     }
 
     public void setRelevantDate(Optional<DateTime> relevantDaterele) {
@@ -281,5 +250,14 @@ public class PassImpl implements Pass, Serializable {
             }
         }
         return Optional.absent();
+    }
+
+    @Override
+    public Optional<BarCode> getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(BarCode barCode) {
+        this.barCode = Optional.fromNullable(barCode);
     }
 }

@@ -20,7 +20,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -90,20 +89,10 @@ public class AppleStylePassReader {
 
         try {
             final JSONObject barcode_json = pass_json.getJSONObject("barcode");
-
-            pass.setBarcodeFormat(BarcodeFormat.QR_CODE); // DEFAULT
-
-            pass.setBarcodeMessage(barcode_json.getString("message"));
-
             final String barcodeFormatString = barcode_json.getString("format");
 
-            if (barcodeFormatString.contains("417")) {
-                pass.setBarcodeFormat(BarcodeFormat.PDF_417);
-            }
-
-            if (barcodeFormatString.toUpperCase(Locale.ENGLISH).contains("AZTEC")) {
-                pass.setBarcodeFormat(BarcodeFormat.AZTEC);
-            }
+            final BarcodeFormat barcodeFormat = BarCode.getFormatFromString(barcodeFormatString);
+            pass.setBarCode(new BarCode(barcodeFormat, barcode_json.getString("message")));
 
             // TODO should check a bit more with barcode here - this can be dangerous
 

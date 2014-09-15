@@ -28,7 +28,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
             setBestFittingOrientationForBarCode();
 
-            iv.setImageBitmap(optionalPass.get().getBarcodeBitmap(smallestSize));
+            iv.setImageBitmap(optionalPass.get().getBarCode().get().getBitmap(smallestSize));
         }
     }
 
@@ -46,7 +46,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (optionalPass.get().getBarcodeFormat() == BarcodeFormat.PDF_417) {
+        if (optionalPass.get().getBarCode().get().getFormat() == BarcodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

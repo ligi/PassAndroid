@@ -3,7 +3,6 @@ package org.ligi.passandroid.model;
 import android.graphics.Bitmap;
 
 import com.google.common.base.Optional;
-import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
 
@@ -34,10 +33,6 @@ public interface Pass extends Serializable {
 
     boolean isValid();
 
-    BarcodeFormat getBarcodeFormat();
-
-    Bitmap getBarcodeBitmap(final int size);
-
     Optional<Bitmap> getIconBitmap();
 
     Optional<Bitmap> getThumbnailImage();
@@ -59,4 +54,6 @@ public interface Pass extends Serializable {
     Optional<String> getOrganisation();
 
     Optional<String> getSource();
+
+    Optional<BarCode> getBarCode();
 }

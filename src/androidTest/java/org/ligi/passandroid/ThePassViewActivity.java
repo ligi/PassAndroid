@@ -4,9 +4,11 @@ import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.google.common.base.Optional;
+import com.google.zxing.BarcodeFormat;
 
 import org.joda.time.DateTime;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
+import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.PassViewActivity;
@@ -37,6 +39,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         final ArrayList<Pass> list = new ArrayList<Pass>() {{
             act_pass = new PassImpl();
             act_pass.setDescription("foo");
+            act_pass.setBarCode(new BarCode(BarcodeFormat.QR_CODE, "foo"));
             add(act_pass);
         }};
 

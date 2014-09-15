@@ -9,6 +9,7 @@ import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.helper.BarcodeDecoder;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
+import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
@@ -71,8 +72,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
     private void testWithBarcodeFormat(BarcodeFormat format) {
         final PassImpl pass = new PassImpl();
-        pass.setBarcodeFormat(format);
-        pass.setBarcodeMessage(BARCODE_MESSAGE);
+        pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
         App.getPassStore().setCurrentPass(pass);
         getActivity();
         onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
