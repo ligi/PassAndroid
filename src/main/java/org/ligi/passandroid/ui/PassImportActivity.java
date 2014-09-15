@@ -46,7 +46,7 @@ public class PassImportActivity extends ActionBarActivity {
 
             if (result == null) {
 
-                if (!passImportActivity.isFinishing()) {
+                if (!passImportActivity.isFinishing() && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
                 finish();
@@ -69,7 +69,7 @@ public class PassImportActivity extends ActionBarActivity {
                     final String id = AXT.at(path.split("/")).last();
 
                     final PassStore store = App.getPassStore();
-                    store.setCurrentPass(store.getPassbookForId(id,getResources().getConfiguration().locale.getLanguage()));
+                    store.setCurrentPass(store.getPassbookForId(id, getResources().getConfiguration().locale.getLanguage()));
 
                     AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
                     finish();
