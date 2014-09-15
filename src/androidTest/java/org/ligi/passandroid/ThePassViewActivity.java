@@ -93,7 +93,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         getActivity();
         onView(withId(R.id.barcode_img)).perform(click());
 
-        onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
+        onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
     }
 
 

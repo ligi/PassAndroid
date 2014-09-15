@@ -75,9 +75,9 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
         App.getPassStore().setCurrentPass(pass);
         getActivity();
-        onView(withId(R.id.fullscreen_image)).check(matches(isDisplayed()));
+        onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
 
-        final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_image);
+        final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_barcode);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
         assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo(BARCODE_MESSAGE);
     }

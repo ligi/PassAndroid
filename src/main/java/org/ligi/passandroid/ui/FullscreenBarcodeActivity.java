@@ -4,17 +4,27 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 
-import static butterknife.ButterKnife.findById;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
+
+    @InjectView(R.id.fullscreen_barcode)
+    ImageView barcodeImageView;
+
+    @InjectView(R.id.alternativeBarcodeText)
+    TextView alternativeBarcodeText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +32,23 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
         if (optionalPass.isPresent()) {
             setContentView(R.layout.fullscreen_image);
-            final ImageView iv = findById(this, R.id.fullscreen_image);
 
-            int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
+            ButterKnife.inject(this);
+
+            final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
 
             setBestFittingOrientationForBarCode();
 
-            iv.setImageBitmap(optionalPass.get().getBarCode().get().getBitmap(smallestSize));
+            barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().get().getBitmap(smallestSize));
+
+            if (optionalPass.get().getBarCode().get().getAlternativeText().isPresent()) {
+                alternativeBarcodeText.setVisibility(View.VISIBLE);
+                alternativeBarcodeText.setText(optionalPass.get().getBarCode().get().getAlternativeText().get());
+            } else {
+                alternativeBarcodeText.setVisibility(View.GONE);
+            }
+        } else {
+            finish(); // this should never happen, but better safe than sorry
         }
     }
 

@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<ImageView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fullscreen_image"
+    <ImageView
+        android:id="@+id/fullscreen_barcode"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:src="@drawable/ic_launcher"/>
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:id="@+id/alternativeBarcodeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@android:color/white" />
+
+</LinearLayout>
