@@ -21,14 +21,14 @@ import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import static butterknife.ButterKnife.findById;
 
 public class PassVisualizer {
-    public static void visualize(final Activity activity, final Pass pass, View res) {
-        final TextView titleTextView = findById(res, R.id.title);
-        final TextView dateTextView = findById(res, R.id.date);
+    public static void visualize(final Activity activity, final Pass pass, final View container) {
+        final TextView titleTextView = findById(container, R.id.title);
+        final TextView dateTextView = findById(container, R.id.date);
 
-        final CategoryIndicatorView categoryIndicator = findById(res, R.id.categoryView);
+        final CategoryIndicatorView categoryIndicator = findById(container, R.id.categoryView);
 
         if (pass.getLocations().size() > 0) {
-            findById(res, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
+            findById(container, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final String lang = activity.getResources().getConfiguration().locale.getLanguage();
@@ -36,7 +36,7 @@ public class PassVisualizer {
                 }
             });
         } else {
-            findById(res, R.id.navigateTo).setVisibility(View.GONE);
+            findById(container, R.id.navigateTo).setVisibility(View.GONE);
         }
 
         final DateTime dateForIntent;
@@ -51,7 +51,7 @@ public class PassVisualizer {
         }
 
         if (dateForIntent != null) {
-            findById(res, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
+            findById(container, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_EDIT);
@@ -63,19 +63,19 @@ public class PassVisualizer {
                 }
             });
         } else {
-            findById(res, R.id.addCalendar).setVisibility(View.GONE);
+            findById(container, R.id.addCalendar).setVisibility(View.GONE);
         }
 
         if (dateForIntent == null && !(pass.getLocations().size() > 0)) {
-            findById(res, R.id.actionsContainer).setVisibility(View.GONE);
+            findById(container, R.id.actionsContainer).setVisibility(View.GONE);
         }
 
-        final ImageView icon_img = findById(res, R.id.icon);
+        final ImageView icon_img = findById(container, R.id.icon);
 
         icon_img.setBackgroundColor(pass.getBackGroundColor());
 
         if (pass.getIconBitmap().isPresent()) {
-            final int size = (int) res.getResources().getDimension(R.dimen.pass_icon_size);
+            final int size = (int) container.getResources().getDimension(R.dimen.pass_icon_size);
             icon_img.setImageBitmap(Bitmap.createScaledBitmap(pass.getIconBitmap().get(), size, size, false));
         } else {
             icon_img.setImageResource(R.drawable.ic_launcher);
@@ -93,10 +93,10 @@ public class PassVisualizer {
         titleTextView.setText(pass.getDescription());
 
         if (pass.getRelevantDate().isPresent()) {
-            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), pass.getRelevantDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(container.getContext(), pass.getRelevantDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
             dateTextView.setText(relativeDateTimeString);
         } else if (pass.getExpirationDate().isPresent()) {
-            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(res.getContext(), pass.getExpirationDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(container.getContext(), pass.getExpirationDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
 
             if (pass.getExpirationDate().get().isAfterNow()) {
                 dateTextView.setText("expires " + relativeDateTimeString);
