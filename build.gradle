@@ -77,7 +77,7 @@ dependencies {
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
 
     // The Apache Software License, Version 2.0
     compile 'com.googlecode.android-query:android-query:0.25.9'
@@ -86,12 +86,12 @@ dependencies {
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.jakewharton:butterknife:5.1.2'
-    compile 'joda-time:joda-time:2.3'
+    compile 'joda-time:joda-time:2.4'
     compile 'com.squareup:otto:1.3.5'
 
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.2'
-    compile 'com.google.guava:guava:17.0'
+    compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.2@aar'
 
