@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/ligi/PassAndroid.svg?branch=master)](https://travis-ci.org/ligi/PassAndroid)
-
 [![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=org.ligi.passandroid)
 [![Android app on FDroid](https://f-droid.org/wiki/images/c/c4/F-Droid-button_available-on.png)](https://f-droid.org/repository/browse/?fdid=org.ligi.passandroid)
 
@@ -19,3 +17,10 @@ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIME
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Status
+------
+
+[![Build Status](https://travis-ci.org/ligi/PassAndroid.svg?branch=master)](https://travis-ci.org/ligi/PassAndroid)
+
+[![Dependency Status](https://www.versioneye.com/user/projects/53ff29d6f4df15a4050000b2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53ff29d6f4df15a4050000b2)
