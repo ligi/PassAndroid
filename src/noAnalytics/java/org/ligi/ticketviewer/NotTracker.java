@@ -29,14 +29,4 @@ public class NotTracker implements TrackerInterface {
     public void trackEvent(String category, String action, String label, Long val) {
 
     }
-
-    @Override
-    public void activityStart(FragmentActivity activity) {
-
-    }
-
-    @Override
-    public void activityStop(FragmentActivity activity) {
-
-    }
 }

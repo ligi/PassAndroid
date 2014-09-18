@@ -1,7 +1,6 @@
 package org.ligi.passandroid;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
@@ -12,14 +11,12 @@ import java.util.Map;
 
 public class AnalyticsTracker implements TrackerInterface {
 
-    public static final String PACKAGE_REMOVE_REGEX = ".*\\.";
-    private final GoogleAnalytics analytics;
     private final Tracker tracker;
     private final Context ctx;
 
     public AnalyticsTracker(Context ctx) {
         this.ctx = ctx;
-        analytics = GoogleAnalytics.getInstance(ctx);
+        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(ctx);
         tracker = analytics.newTracker(R.xml.analytics);
     }
 
@@ -63,20 +60,4 @@ public class AnalyticsTracker implements TrackerInterface {
         tracker.send(eventMapBuilder.build());
     }
 
-    @Override
-    public void activityStart(FragmentActivity activity) {
-
-        analytics.reportActivityStart(activity);
-
-        final String activityName = activity.getLocalClassName().replaceAll(PACKAGE_REMOVE_REGEX, "");
-
-        tracker.setScreenName(activityName);
-
-        tracker.send(new HitBuilders.AppViewBuilder().build());
-    }
-
-    @Override
-    public void activityStop(FragmentActivity activity) {
-        analytics.reportActivityStop(activity);
-    }
 }

@@ -51,17 +51,4 @@ public class PassViewActivityBase extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Tracker.get().activityStart(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Tracker.get().activityStop(this);
-    }
-
 }
