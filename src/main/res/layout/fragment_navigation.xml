@@ -31,10 +31,16 @@
                 android:checked="true" />
 
             <RadioButton
-                android:id="@+id/dateRadioButton"
+                android:id="@+id/dateAscRadioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/nav_sort_date" />
+                android:text="@string/nav_sort_date_asc" />
+
+            <RadioButton
+                android:id="@+id/dateDescRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_sort_date_desc" />
         </RadioGroup>
 
         <LinearLayout

@@ -7,7 +7,8 @@ import java.util.List;
 public interface PassStore {
 
     public enum SortOrder {
-        DATE(0),
+        DATE_ASC(0),
+        DATE_DESC(2),
         TYPE(1);
 
         private final int i;

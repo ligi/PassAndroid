@@ -115,7 +115,7 @@ public class AndroidFileSystemPassStore implements PassStore {
                 });
                 break;
 
-            case DATE:
+            case DATE_ASC:
                 Collections.sort(passList, new Comparator<Pass>() {
                     @Override
                     public int compare(Pass lhs, Pass rhs) {
@@ -127,6 +127,22 @@ public class AndroidFileSystemPassStore implements PassStore {
                             return -1;
                         }
                         return rhs.getRelevantDate().get().compareTo(lhs.getRelevantDate().get());
+                    }
+                });
+                break;
+
+            case DATE_DESC:
+                Collections.sort(passList, new Comparator<Pass>() {
+                    @Override
+                    public int compare(Pass lhs, Pass rhs) {
+
+                        if (!rhs.getRelevantDate().isPresent()) {
+                            return 1;
+                        }
+                        if (!lhs.getRelevantDate().isPresent()) {
+                            return -1;
+                        }
+                        return lhs.getRelevantDate().get().compareTo(rhs.getRelevantDate().get());
                     }
                 });
                 break;

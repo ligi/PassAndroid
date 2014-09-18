@@ -51,8 +51,11 @@ public class NavigationFragment extends Fragment {
     @InjectView(R.id.categoryRadioButton)
     RadioButton categoryRadioButton;
 
-    @InjectView(R.id.dateRadioButton)
-    RadioButton dateRadioButton;
+    @InjectView(R.id.dateAscRadioButton)
+    RadioButton dateAscRadioButton;
+
+    @InjectView(R.id.dateDescRadioButton)
+    RadioButton dateDescRadioButton;
 
     @InjectView(R.id.navCategoriesInner)
     ViewGroup categoriesContainer;
@@ -73,8 +76,10 @@ public class NavigationFragment extends Fragment {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (dateRadioButton.isChecked()) {
-                    App.getSettings().setSortOrder(PassStore.SortOrder.DATE);
+                if (dateAscRadioButton.isChecked()) {
+                    App.getSettings().setSortOrder(PassStore.SortOrder.DATE_ASC);
+                } else if (dateDescRadioButton.isChecked()) {
+                    App.getSettings().setSortOrder(PassStore.SortOrder.DATE_DESC);
                 } else if (categoryRadioButton.isChecked()) {
                     App.getSettings().setSortOrder(PassStore.SortOrder.TYPE);
                 }
@@ -84,8 +89,11 @@ public class NavigationFragment extends Fragment {
         });
 
         switch (App.getSettings().getSortOrder()) {
-            case DATE:
-                dateRadioButton.setChecked(true);
+            case DATE_ASC:
+                dateAscRadioButton.setChecked(true);
+                break;
+            case DATE_DESC:
+                dateDescRadioButton.setChecked(true);
                 break;
             case TYPE:
                 categoryRadioButton.setChecked(true);
@@ -96,7 +104,7 @@ public class NavigationFragment extends Fragment {
 
         App.getBus().register(this);
 
-        dateRadioButton.setOnClickListener(new RepeatedOnClicksListener(7, new View.OnClickListener() {
+        dateAscRadioButton.setOnClickListener(new RepeatedOnClicksListener(7, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(Intent.ACTION_SEND);
