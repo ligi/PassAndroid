@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.helper.SafeJSONReader;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.File;
@@ -71,9 +72,11 @@ public class UnzipPassController {
             e.printStackTrace();
         }
 
+
         JSONObject manifest_json;
         try {
-            manifest_json = new JSONObject(AXT.at(new File(path + "/manifest.json")).readToString());
+            final String readToString = AXT.at(new File(path + "/manifest.json")).readToString();
+            manifest_json = SafeJSONReader.readJSONSafely(readToString);
         } catch (FileNotFoundException e) {
             spec.failCallback.fail("Pass contains no Manifest - or PassAndroid could not read it");
             return;
@@ -81,6 +84,7 @@ public class UnzipPassController {
             spec.failCallback.fail("Problem with manifest.json: " + e);
             return;
         }
+
 
         try {
             final String rename_str = spec.targetPath + "/" + manifest_json.getString("pass.json");
