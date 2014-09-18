@@ -113,13 +113,12 @@ android {
     buildToolsVersion "20"
 
     defaultConfig {
-        versionCode 235
-        versionName "2.3.5"
+        versionCode 236
+        versionName "2.3.6"
         minSdkVersion 9
         targetSdkVersion 20
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-
     }
 
     buildTypes {
