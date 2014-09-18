@@ -7,16 +7,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * I got a really broken pass with invalid json from a user. The source was Virgin Australia
- * the bad part looked like this:
- * <p/>
- * "value": "NTL",}
- * <p/>
+ * I got a really broken passes with invalid json from users.
  * As it is not possible to change the problem in the generator side
+ * It has to be worked around here
  */
 public class SafeJSONReader {
 
-    private static Map<String, String> replacementMap = new LinkedHashMap() {{
+    private static Map<String, String> replacementMap = new LinkedHashMap<String, String>() {{
         // first we try without fixing -> always positive and try to have minimal impact
         put("", "");
 

@@ -68,8 +68,7 @@ public class AppleStylePassReader {
 
                 for (Charset charset : Charset.availableCharsets().values()) {
                     try {
-
-                        String json_str = AXT.at(file).readToString(charset);
+                        final String json_str = AXT.at(file).readToString(charset);
                         pass_json = SafeJSONReader.readJSONSafely(json_str);
                     } catch (Exception e) {
                     }
