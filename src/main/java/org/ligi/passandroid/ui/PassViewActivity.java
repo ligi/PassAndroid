@@ -41,6 +41,20 @@ public class PassViewActivity extends PassViewActivityBase {
         AXT.at(this).startCommonIntent().activityFromClass(FullscreenBarcodeActivity.class);
     }
 
+    @OnClick(R.id.moreTextView)
+    void onMoreClick() {
+        if (back_tv.getVisibility() == View.VISIBLE) {
+            back_tv.setVisibility(View.GONE);
+            moreTextView.setText(R.string.more);
+        } else {
+            back_tv.setVisibility(View.VISIBLE);
+            moreTextView.setText(R.string.less);
+        }
+    }
+
+    @InjectView(R.id.moreTextView)
+    TextView moreTextView;
+
     @InjectView(R.id.barcode_img)
     ImageView barcode_img;
 
