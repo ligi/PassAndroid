@@ -12,6 +12,7 @@ import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,6 +92,10 @@ public class PassViewActivity extends PassViewActivityBase {
 
         final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
         setContentView(contentView);
+
+        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
+        final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
+        extraViewContainer.addView(passExtrasView);
 
         ButterKnife.inject(this);
 
