@@ -149,7 +149,7 @@ public class PassImpl implements Pass, Serializable {
             return Optional.absent();
         }
 
-        return Optional.fromNullable(BitmapFactory.decodeFile(in.get()));
+        return Optional.fromNullable(BitmapFactory.decodeFile(getPath()+"/"+in.get()));
     }
 
     public Optional<Bitmap> getIconBitmap() {

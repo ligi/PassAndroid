@@ -2,7 +2,7 @@ package org.ligi.passandroid;
 
 import android.content.Context;
 
-import org.ligi.passandroid.model.AppleStylePassReader;
+import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.UnzipPassController;

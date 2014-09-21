@@ -8,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -72,6 +73,12 @@ public class PassMenuOptions {
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
                 new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share.pkpass", true).execute();
+                return true;
+
+            case R.id.menu_edit:
+                Tracker.get().trackEvent("ui_action", "share", "shared", null);
+                App.getPassStore().setCurrentPass(pass);
+                AXT.at(activity).startCommonIntent().activityFromClass(PassEditActivity.class);
                 return true;
         }
         return false;

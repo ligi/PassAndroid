@@ -22,4 +22,10 @@
         android:title="light"
         android:icon="@drawable/ic_wb_sunny_white_36dp" />
 
+    <item
+        android:id="@+id/menu_edit"
+        yourapp:showAsAction="ifRoom"
+        android:title="edit"
+        android:icon="@drawable/ic_create_white_36dp" />
+
 </menu>

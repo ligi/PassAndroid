@@ -11,24 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:id="@+id/emptyView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="7dp"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:visibility="gone"
-
-                tools:text="foo" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/content_list"
                 android:layout_width="match_parent"
@@ -36,7 +18,6 @@
                 android:choiceMode="singleChoice"
                 android:divider="@null"
                 android:listSelector="@android:color/transparent" />
-        </FrameLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

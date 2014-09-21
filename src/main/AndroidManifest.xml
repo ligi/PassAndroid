@@ -33,6 +33,9 @@
 
         <activity android:name=".ui.HelpActivity" />
         <activity
+            android:name=".ui.PassEditActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
             android:name=".ui.PassImportActivity"
             tools:ignore="ExportedActivity">
 

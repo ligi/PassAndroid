@@ -84,6 +84,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="dialog_delete_confirm_text">Do you really want to delete this passbook?</string>
     <string name="dialog_delete_title">Sure?</string>
     <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
+    <string name="nav_add">Add</string>
     <string name="more">MORE</string>
     <string name="less">LESS</string>
 

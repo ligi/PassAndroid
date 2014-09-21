@@ -65,9 +65,6 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(R.id.emptyView)
-    TextView emptyView;
-
     @InjectView(R.id.list_swiperefresh_layout)
     SwipeRefreshLayout listSwipeRefreshLayout;
 
@@ -175,7 +172,7 @@ public class PassListActivity extends ActionBarActivity {
     }
 
     private void scanForPasses() {
-        new ScanForPassesTask().execute();
+        new ScanForPassesTask(this).execute();
     }
 
     private void scrollToType(String type) {
@@ -246,19 +243,11 @@ public class PassListActivity extends ActionBarActivity {
             }
 
             passAdapter = new PassAdapter(PassListActivity.this);
-            passAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                @Override
-                public void onChanged() {
-                    emptyView.setVisibility((passAdapter.getItemCount() == 0) ? View.VISIBLE : View.GONE);
-                    listView.setVisibility((passAdapter.getItemCount() != 0) ? View.VISIBLE : View.GONE);
-                    super.onChanged();
-                }
-            });
             listView.setAdapter(passAdapter);
 
             if (App.getPassStore().isEmpty()) {
                 uiState.set(PassListUIState.UISTATE_SCAN);
-                scanTask = new ScanForPassesTask();
+                scanTask = new ScanForPassesTask(PassListActivity.this);
                 scanTask.execute();
             } else {
                 uiState.set(PassListUIState.UISTATE_LIST);
@@ -288,10 +277,6 @@ public class PassListActivity extends ActionBarActivity {
         listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
-
-        emptyView.setText(Html.fromHtml(uiState.getHtmlResForEmptyView()));
-
-        emptyView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 
@@ -320,7 +305,7 @@ public class PassListActivity extends ActionBarActivity {
         super.onPause();
     }
 
-    class ImportAndRefreshListAsync extends ImportAsyncTask {
+    public class ImportAndRefreshListAsync extends ImportAsyncTask {
 
         public ImportAndRefreshListAsync(final Activity passImportActivity, final String path) {
             super(passImportActivity, Uri.parse("file://" + path));
@@ -350,6 +335,12 @@ public class PassListActivity extends ActionBarActivity {
 
     class ScanForPassesTask extends AsyncTask<Void, Optional<String>, Void> {
 
+        private final ActionBarActivity activity;
+
+        ScanForPassesTask(ActionBarActivity activity) {
+            this.activity = activity;
+        }
+
         @Override
         @SafeVarargs
         protected final void onProgressUpdate(Optional<String>... values) {
@@ -358,15 +349,16 @@ public class PassListActivity extends ActionBarActivity {
         }
 
         private void setActionbarToProgress(Optional<String>[] values) {
-            if (getSupportActionBar() == null) {
+            final ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar == null) {
                 // not here - no work
                 return;
             }
 
             if (values[0].isPresent()) {
-                getSupportActionBar().setSubtitle(String.format(getString(R.string.searching_in), values[0].get()));
+                actionBar.setSubtitle(String.format(activity.getString(R.string.searching_in), values[0].get()));
             } else {
-                getSupportActionBar().setSubtitle(null);
+                actionBar.setSubtitle(null);
             }
 
         }
@@ -394,7 +386,7 @@ public class PassListActivity extends ActionBarActivity {
                 } else if (file.getName().endsWith(".pkpass")) {
                     Log.i("found" + file.getAbsolutePath());
 
-                    new ImportAndRefreshListAsync(PassListActivity.this, file.getAbsolutePath()).execute();
+                    new ImportAndRefreshListAsync(activity, file.getAbsolutePath()).execute();
                 }
             }
 
@@ -426,7 +418,7 @@ public class PassListActivity extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            for (String path : new PastLocationsStore(PassListActivity.this).getLocations()) {
+            for (String path : new PastLocationsStore(activity).getLocations()) {
                 search_in(new File(path), false);
             }
 

@@ -21,11 +21,10 @@
         android:paddingBottom="10dp" />
 
     <LinearLayout
+        android:id="@+id/front_field_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/front_field_container"
-        />
+        android:orientation="vertical" />
 
     <ImageView
         android:id="@+id/barcode_img"
@@ -43,27 +42,28 @@
         android:paddingBottom="10dp" />
 
     <TextView
+        android:id="@+id/moreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/more"
         android:layout_gravity="center"
+        android:fontFamily="sans-serif"
         android:padding="10dp"
-        android:textSize="21sp"
-        android:id="@+id/moreTextView"
-        android:fontFamily="sans-serif" />
+        android:text="@string/more"
+        android:textSize="21sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:animateLayoutChanges="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
 
         <TextView
-        android:id="@+id/back_fields"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:id="@+id/back_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:padding="20dp"
 
-        android:padding="20dp" />
+            android:visibility="gone" />
     </LinearLayout>
 
     <ImageView
@@ -71,7 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/logo"
-        android:padding="16dp"
-        android:paddingBottom="10dp" />
+        android:padding="3dp"
+        android:paddingBottom="3dp" />
 </LinearLayout>

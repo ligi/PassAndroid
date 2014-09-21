@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface Pass extends Serializable {
 
-    static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+    static final String[] TYPES = new String[]{"generic", "coupon", "eventTicket", "boardingPass", "storeCard"};
 
     String getDescription();
 

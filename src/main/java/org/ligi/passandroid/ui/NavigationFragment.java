@@ -21,6 +21,8 @@ import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
+import org.ligi.passandroid.helper.PassUtil;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
@@ -33,11 +35,16 @@ import butterknife.OnClick;
 
 public class NavigationFragment extends Fragment {
 
-    private int lastDisplayedStoreCount = -1;
-
     @OnClick(R.id.community)
     void community() {
         AXT.at(getActivity()).startCommonIntent().openUrl("https://plus.google.com/communities/116353894782342292067");
+    }
+
+    @OnClick(R.id.add)
+    void add() {
+        final Pass pass = PassUtil.createEmptyPass();
+        App.getPassStore().setCurrentPass(pass);
+        AXT.at(getActivity()).startCommonIntent().activityFromClass(PassEditActivity.class);
     }
 
     @OnClick(R.id.share)
@@ -141,11 +148,7 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        List<PassStore.CountedType> countedTypes = App.getPassStore().getCountedTypes();
-
-        if (lastDisplayedStoreCount == App.getPassStore().passCount()) {
-            return; // nothing new - all displayed
-        }
+        final List<PassStore.CountedType> countedTypes = App.getPassStore().getCountedTypes();
 
         setCategoryNavVisibilityByCurrentConditions();
 

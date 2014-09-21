@@ -4,9 +4,9 @@ import android.graphics.Color;
 
 import org.ligi.passandroid.R;
 
-import java.util.Arrays;
-
 public class CategoryHelper {
+
+    public final static String[] ALL_CATEGORIES = {"boardingPass", "eventTicket", "coupon", "storeCard", "generic"};
 
     public final static int getHumanCategoryString(String fromPass) {
         switch (fromPass) {

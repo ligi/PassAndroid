@@ -65,4 +65,11 @@ public class BarCode implements Serializable {
         return alternativeText;
     }
 
+    public String getMessage() {
+        return barcodeMessage;
+    }
+
+    public BarcodeFormat getBarcodeFormat() {
+        return barcodeFormat;
+    }
 }

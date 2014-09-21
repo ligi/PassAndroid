@@ -66,60 +66,11 @@ android {
 
     // https://groups.google.com/forum/#!topic/adt-dev/-Km7VgExKf4
 //    useOldManifestMerger true
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
-
-    defaultConfig {
-        versionCode 244
-        versionName "2.4.4"
-        minSdkVersion 9
-        targetSdkVersion 21
-        applicationId "org.ligi.passandroid"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"    }
-
-    buildTypes {
-        release {
-            //minifyEnabled true
-            //shrinkResources true
-            proguardFile 'proguard-project.txt'
-
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-
-                    def file = output.outputFile
-                    output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
-                }
-            }
-        }
-        debug {
-            //makes problems
-            //testCoverageEnabled true
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
-    lintOptions {
-        abortOnError false
-        disable "MissingTranslation"
-    }
-
 }
 
 dependencies {
-    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
-        exclude group: 'com.android.support'
-        exclude group: 'com.google.guava'
-    }
-
-    androidTestCompile('com.jakewharton.espresso:espresso-support-v4:1.1-r3') {
-        exclude group: 'com.android.support'
-        exclude group: 'com.google.guava'
-    }
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.1.2'
 
@@ -146,7 +97,12 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.1.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.3@aar'
+    compile 'com.larswerkman:HoloColorPicker:1.4'
 
+    //compile 'fr.baloomba:viewpagerindicator:2.4.2'
+    compile('com.mcxiaoke.viewpagerindicator:library:2.4.1') {
+        exclude group: 'com.android.support'
+    }
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
     // compile 'com.google.zxing:core:3.1.0'
@@ -158,4 +114,3 @@ dependencies {
     withAnalyticsCompile play_services
     withMapsCompile play_services
 }
-

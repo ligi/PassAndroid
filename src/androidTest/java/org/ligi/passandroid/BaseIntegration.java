@@ -6,7 +6,7 @@ import android.view.WindowManager;
 
 import org.ligi.passandroid.reporting.SpooningFailureHandler;
 
-import static com.google.android.apps.common.testing.ui.espresso.Espresso.setFailureHandler;
+import static android.support.test.espresso.Espresso.setFailureHandler;
 
 
 public abstract class BaseIntegration<T extends Activity> extends ActivityInstrumentationTestCase2<T> {

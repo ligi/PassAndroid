@@ -1,4 +1,4 @@
-package org.ligi.passandroid.model;
+package org.ligi.passandroid.reader;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -13,6 +13,13 @@ import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.helper.SafeJSONReader;
+import org.ligi.passandroid.model.ApplePassbookQuirkCorrector;
+import org.ligi.passandroid.model.AppleStylePassTranslation;
+import org.ligi.passandroid.model.BarCode;
+import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassFieldList;
+import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassLocation;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
