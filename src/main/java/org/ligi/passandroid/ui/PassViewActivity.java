@@ -25,6 +25,8 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassField;
+import org.ligi.passandroid.model.PassFieldList;
 
 import java.io.File;
 
@@ -51,8 +53,8 @@ public class PassViewActivity extends PassViewActivityBase {
     @InjectView(R.id.back_fields)
     TextView back_tv;
 
-    @InjectView(R.id.main_fields)
-    TextView front_tv;
+    @InjectView(R.id.front_field_container)
+    ViewGroup frontFieldsContainer;
 
     @InjectView(R.id.barcode_alt_text)
     TextView barcodeAlternatvieText;
@@ -126,13 +128,10 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         if (pass.getType() != null) {
-            String front_str = "";
-            front_str += PassVisualizer.getFieldListAsString(pass.getHeaderFields());
-            front_str += PassVisualizer.getFieldListAsString(pass.getPrimaryFields());
-            front_str += PassVisualizer.getFieldListAsString(pass.getSecondaryFields());
-            front_str += PassVisualizer.getFieldListAsString(pass.getAuxiliaryFields());
-
-            front_tv.setText(Html.fromHtml(front_str));
+            addFrontFields(pass.getHeaderFields());
+            addFrontFields(pass.getPrimaryFields());
+            addFrontFields(pass.getSecondaryFields());
+            addFrontFields(pass.getAuxiliaryFields());
         }
         String back_str = "";
 
@@ -146,6 +145,17 @@ public class PassViewActivity extends PassViewActivityBase {
 
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassVisualizer.visualize(this, pass, contentView);
+    }
+
+    private void addFrontFields(PassFieldList passFields) {
+        for (PassField field : passFields) {
+            View v = getLayoutInflater().inflate(R.layout.main_field_item, null);
+            TextView key = (TextView) v.findViewById(R.id.key);
+            key.setText(field.label);
+            TextView value = (TextView) v.findViewById(R.id.value);
+            value.setText(field.value);
+            frontFieldsContainer.addView(v);
+        }
     }
 
     private static void setBitmapSafe(ImageView imageView, Optional<Bitmap> bitmapOptional) {
