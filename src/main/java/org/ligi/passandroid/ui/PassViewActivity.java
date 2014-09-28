@@ -73,7 +73,6 @@ public class PassViewActivity extends PassViewActivityBase {
     @InjectView(R.id.barcode_alt_text)
     TextView barcodeAlternatvieText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,15 +146,22 @@ public class PassViewActivity extends PassViewActivityBase {
             addFrontFields(pass.getSecondaryFields());
             addFrontFields(pass.getAuxiliaryFields());
         }
+
         String back_str = "";
 
         if (App.isDeveloperMode()) {
             back_str += getPassDebugInfo(pass);
         }
 
-        back_str += PassVisualizer.getFieldListAsString(pass.getBackFields());
 
-        back_tv.setText(Html.fromHtml(back_str));
+        if (pass.getBackFields().size() != 0) {
+            back_str += PassVisualizer.getFieldListAsString(pass.getBackFields());
+            back_tv.setText(Html.fromHtml(back_str));
+            moreTextView.setVisibility(View.VISIBLE);
+        } else {
+            moreTextView.setVisibility(View.GONE);
+        }
+
 
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassVisualizer.visualize(this, pass, contentView);
