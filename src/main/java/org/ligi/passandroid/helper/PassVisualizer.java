@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -74,9 +76,10 @@ public class PassVisualizer {
 
         icon_img.setBackgroundColor(pass.getBackGroundColor());
 
-        if (pass.getIconBitmap().isPresent()) {
+        final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
+        if (iconBitmap.isPresent()) {
             final int size = (int) container.getResources().getDimension(R.dimen.pass_icon_size);
-            icon_img.setImageBitmap(Bitmap.createScaledBitmap(pass.getIconBitmap().get(), size, size, false));
+            icon_img.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap.get(), size, size, false));
         } else {
             icon_img.setImageResource(R.drawable.ic_launcher);
         }
