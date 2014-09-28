@@ -48,7 +48,11 @@ public class UnzipPassDialog {
 
                             @Override
                             public void call(final String pathToPassbook) {
-                                if (!activity.isFinishing() && dialog.isShowing()) {
+                                if (activity.isFinishing()) {
+                                    return;
+                                }
+
+                                if (dialog.isShowing()) {
                                     dialog.dismiss();
                                 }
                                 activity.runOnUiThread(new Runnable() {
@@ -66,7 +70,10 @@ public class UnzipPassDialog {
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (!activity.isFinishing() && dialog.isShowing()) {
+                                        if (activity.isFinishing()) {
+                                            return;
+                                        }
+                                        if (dialog.isShowing()) {
                                             dialog.dismiss();
                                         }
                                         DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
