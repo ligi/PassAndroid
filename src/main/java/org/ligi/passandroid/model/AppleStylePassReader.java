@@ -50,6 +50,7 @@ public class AppleStylePassReader {
         pass.setIconBitmapFile(findBitmapFile(path, localized_path, "icon"));
         pass.setLogoBitmapFile(findBitmapFile(path, localized_path, "logo"));
         pass.setThumbnailBitmapFile(findBitmapFile(path, localized_path, "thumbnail"));
+        pass.setStripBitmapFile(findBitmapFile(path, localized_path, "strip"));
 
         final File file = new File(path + "/pass.json");
 

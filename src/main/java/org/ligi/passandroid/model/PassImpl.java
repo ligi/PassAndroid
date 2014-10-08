@@ -39,8 +39,10 @@ public class PassImpl implements Pass, Serializable {
     private Optional<String> iconBitmapFile;
     private Optional<String> thumbnailBitmapFile;
     private Optional<String> logoBitmapFile;
+    private Optional<String> stripBitmapFile;
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+
 
     @Override
     public Optional<String> getOrganisation() {
@@ -133,6 +135,10 @@ public class PassImpl implements Pass, Serializable {
         this.thumbnailBitmapFile = Optional.fromNullable(thumbnailBitmapFile);
     }
 
+    public void setStripBitmapFile(String stripBitmapFile) {
+        this.stripBitmapFile = Optional.fromNullable(stripBitmapFile);
+    }
+
     private Optional<Bitmap> getBitmapFromOptionalString(Optional<String> in) {
         if (in == null || !in.isPresent()) {
             return Optional.absent();
@@ -148,6 +154,12 @@ public class PassImpl implements Pass, Serializable {
     public Optional<Bitmap> getThumbnailImage() {
         return getBitmapFromOptionalString(thumbnailBitmapFile);
     }
+
+    @Override
+    public Optional<Bitmap> getStripImage() {
+        return getBitmapFromOptionalString(stripBitmapFile);
+    }
+
 
     public Optional<Bitmap> getLogoBitmap() {
         return getBitmapFromOptionalString(logoBitmapFile);

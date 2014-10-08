@@ -64,6 +64,9 @@ public class PassViewActivity extends PassViewActivityBase {
     @InjectView(R.id.thumbnail_img)
     ImageView thumbnail_img;
 
+    @InjectView(R.id.strip_img)
+    ImageView strip_img;
+
     @InjectView(R.id.back_fields)
     TextView back_tv;
 
@@ -133,6 +136,7 @@ public class PassViewActivity extends PassViewActivityBase {
         logo_img.setBackgroundColor(pass.getBackGroundColor());
 
         setBitmapSafe(thumbnail_img, pass.getThumbnailImage());
+        setBitmapSafe(strip_img, pass.getStripImage());
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {

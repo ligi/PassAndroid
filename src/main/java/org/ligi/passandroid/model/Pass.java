@@ -56,4 +56,6 @@ public interface Pass extends Serializable {
     Optional<String> getSource();
 
     Optional<BarCode> getBarCode();
+
+    Optional<Bitmap> getStripImage();
 }
