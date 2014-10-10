@@ -51,7 +51,6 @@ import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
-import static org.ligi.passandroid.ui.UnzipPassController.SilentWin;
 import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 
 public class PassListActivity extends ActionBarActivity {
@@ -198,7 +197,7 @@ public class PassListActivity extends ActionBarActivity {
     }
 
     private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
-        swipeRefreshLayout.setColorScheme(R.color.icon_blue, R.color.icon_green, R.color.icon_lila, R.color.icon_orange);
+        swipeRefreshLayout.setColorSchemeResources(R.color.icon_blue, R.color.icon_green, R.color.icon_lila, R.color.icon_orange);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -328,7 +327,13 @@ public class PassListActivity extends ActionBarActivity {
         @Override
         protected InputStreamWithSource doInBackground(Void... params) {
             final InputStreamWithSource ins = super.doInBackground(params);
-            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, passImportActivity, new SilentWin(), new SilentFail());
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, passImportActivity,
+                    new UnzipPassController.SuccessCallback() {
+                        @Override
+                        public void call(String pathToPassbook) {
+                            refreshPasses();
+                        }
+                    }, new SilentFail());
             processInputStream(spec);
             return ins;
         }
@@ -343,7 +348,8 @@ public class PassListActivity extends ActionBarActivity {
     class ScanForPassesTask extends AsyncTask<Void, Optional<String>, Void> {
 
         @Override
-        protected void onProgressUpdate(Optional<String>... values) {
+        @SafeVarargs
+        protected final void onProgressUpdate(Optional<String>... values) {
             super.onProgressUpdate(values);
             setActionbarToProgress(values);
         }
@@ -370,11 +376,6 @@ public class PassListActivity extends ActionBarActivity {
         private void search_in(final File path, final boolean recursive) {
 
             publishProgress(Optional.of(path.toString()));
-
-            if (path == null) {
-                Log.w("trying to search in null path");
-                return;
-            }
 
             final File[] files = path.listFiles();
 

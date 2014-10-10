@@ -10,6 +10,7 @@ import org.ligi.passandroid.helper.DirectoryFileFilter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     private final Context context;
     private String path;
 
-    private List<Pass> passList;
+    private List<Pass> passList = new ArrayList<>();
     private Pass actPass;
 
     public AndroidFileSystemPassStore(Context context) {
@@ -42,17 +43,30 @@ public class AndroidFileSystemPassStore implements PassStore {
     public void refreshPassesList() {
         path = App.getPassesDir(context);
 
-        passList = new ArrayList<>();
+        final List<String> newIds = Arrays.asList(getPassIDArray());
+        final List<String> oldIds = new ArrayList<>();
+        final List<Pass> toRemove = new ArrayList<>();
 
-        for (String id : getPassIDArray()) {
-            passList.add(getCachedPassOrLoad(id));
+        for (Pass pass : passList) {
+            oldIds.add(pass.getId());
+            if (!newIds.contains(pass.getId())) {
+                toRemove.add(pass);
+            }
         }
 
+        for (String newId : newIds) {
+            if (!oldIds.contains(newId)) {
+                passList.add(getCachedPassOrLoad(newId));
+            }
+        }
+
+        passList.removeAll(toRemove);
     }
 
     private String[] getPassIDArray() {
         return getPassesDirSafely().list(new DirectoryFileFilter());
     }
+
 
     private Pass getCachedPassOrLoad(String id) {
         final File cachedFile = getCacheFile(id);
@@ -88,10 +102,10 @@ public class AndroidFileSystemPassStore implements PassStore {
         return passList.get(pos);
     }
 
-    public Pass getPassbookForId(final String id,final String language) {
+    public Pass getPassbookForId(final String id, final String language) {
         final String mPath = path + "/" + id;
         // TODO read from cache
-        return AppleStylePassReader.read(mPath,language);
+        return AppleStylePassReader.read(mPath, language);
     }
 
     public void sort(final SortOrder order) {
