@@ -16,10 +16,6 @@ public class PastLocationsStore {
     public static final int MAX_ELEMENTS = 5;
     private final Context context;
 
-    public PastLocationsStore(Context context) {
-        this.context = context;
-    }
-
     @TargetApi(11)
     public void putLocation(final String path) {
         if (Build.VERSION.SDK_INT < 11) {
@@ -39,6 +35,10 @@ public class PastLocationsStore {
 
         Tracker.get().trackEvent("scan", "put location", "count", (long) pastLocations.size());
         prefs.edit().putStringSet(KEY_PAST_LOCATIONS, pastLocations).commit();
+    }
+
+    public PastLocationsStore(Context context) {
+        this.context = context;
     }
 
     private void deleteOneElementFromSet(Set<String> pastLocations) {

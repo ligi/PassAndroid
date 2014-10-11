@@ -21,6 +21,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.service.MarketService;
 import com.google.common.base.Optional;
@@ -56,7 +57,12 @@ import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 public class PassListActivity extends ActionBarActivity {
 
     private PassAdapter passAdapter;
-    private boolean scanning = false;
+
+    private final static int UISTATE_INIT = 0;
+    private final static int UISTATE_SCAN = 1;
+    private final static int UISTATE_LIST = 2;
+
+    private int uiState = UISTATE_INIT;
 
     private ScanForPassesTask scanTask = null;
     private ActionBarDrawerToggle drawerToggle;
@@ -77,6 +83,7 @@ public class PassListActivity extends ActionBarActivity {
     SwipeRefreshLayout emptySwipeRefreshLayout;
 
     private ActionMode actionMode;
+    private NavigationFragment navigationFragment;
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
@@ -109,12 +116,10 @@ public class PassListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
         ButterKnife.inject(this);
 
-        passAdapter = new PassAdapter(this);
-        listView.setAdapter(passAdapter);
 
         listView.setEmptyView(emptySwipeRefreshLayout);
 
@@ -224,8 +229,18 @@ public class PassListActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (uiState!=UISTATE_LIST) {
+            Toast.makeText(this,R.string.please_wait,Toast.LENGTH_LONG).show();
+            return true;
+        }
+
 
         if (drawerToggle.onOptionsItemSelected(item)) {
+            if (navigationFragment==null) {
+                navigationFragment = new NavigationFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commit();
+            }
+
             return true;
         }
 
@@ -240,55 +255,85 @@ public class PassListActivity extends ActionBarActivity {
                 return true;
 
         }
-        return super.onOptionsItemSelected(item);
+    return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
 
-        if (App.getPassStore().isEmpty()) {
-            scanTask = new ScanForPassesTask();
-            scanTask.execute();
-        }
-
-        updateUIToScanningState();
-
-        Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
+        new InitAsyncTask().execute();
 
         App.getBus().register(this);
-
-        refreshPasses();
     }
 
+    private class InitAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            App.getPassStore();
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            updateUIRegardingToUIState();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            passAdapter = new PassAdapter(PassListActivity.this);
+            listView.setAdapter(passAdapter);
+
+            if (App.getPassStore().isEmpty()) {
+                uiState = UISTATE_SCAN;
+                scanTask = new ScanForPassesTask();
+                scanTask.execute();
+            } else {
+                uiState = UISTATE_LIST;
+            }
+
+            updateUIRegardingToUIState();
+
+            Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
+
+            refreshPasses();
+        }
+    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        if (!scanning) {
+        if (uiState == UISTATE_LIST) {
             getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
         }
         return true;
     }
 
-    public void updateUIToScanningState() {
+    public void updateUIRegardingToUIState() {
 
-        listSwipeRefreshLayout.setRefreshing(scanning);
-        emptySwipeRefreshLayout.setRefreshing(scanning);
+        listSwipeRefreshLayout.setRefreshing(uiState!=UISTATE_LIST);
+        emptySwipeRefreshLayout.setRefreshing(uiState!=UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
 
-        emptyView.setText(Html.fromHtml(getHtmlForEmptViewDependingOnScaningState()));
-
+        emptyView.setText(Html.fromHtml(getHtmlForEmptyView()));
         emptyView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public String getHtmlForEmptViewDependingOnScaningState() {
-        if (scanning) {
-            return getString(R.string.scan_empty_text) + getString(R.string.no_passes_appendix);
-        } else {
-            return getString(R.string.no_passes_empty_text) + getString(R.string.no_passes_appendix);
+    public String getHtmlForEmptyView() {
+        switch (uiState) {
+            case UISTATE_INIT:
+                return getString(R.string.please_wait);
+
+            case UISTATE_SCAN:
+                return getString(R.string.scan_empty_text) + getString(R.string.no_passes_appendix);
+
+            default:
+                return getString(R.string.no_passes_empty_text) + getString(R.string.no_passes_appendix);
         }
     }
 
@@ -313,7 +358,7 @@ public class PassListActivity extends ActionBarActivity {
         if (scanTask != null) {
             scanTask.cancel(true);
         }
-        scanning = false;
+        uiState=UISTATE_LIST;
         super.onPause();
     }
 
@@ -400,21 +445,20 @@ public class PassListActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            scanning = true;
+            uiState=UISTATE_LIST;
 
             Tracker.get().trackEvent("ui_event", "scan", "started", null);
 
-            updateUIToScanningState();
+            updateUIRegardingToUIState();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            scanning = false;
-
+            uiState=UISTATE_LIST;
 
             // TODO bring back Tracker.get().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
-            updateUIToScanningState();
+            updateUIRegardingToUIState();
         }
 
         @Override

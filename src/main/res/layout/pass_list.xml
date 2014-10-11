@@ -21,7 +21,7 @@
                 android:layout_height="match_parent"
                 android:choiceMode="singleChoice"
                 android:divider="@null"
-                android:listSelector="@android:color/transparent"></ListView>
+                android:listSelector="@android:color/transparent"/>
 
 
         </android.support.v4.widget.SwipeRefreshLayout>
@@ -46,14 +46,21 @@
     </FrameLayout>
 
 
-    <fragment
+    <FrameLayout
         android:id="@+id/left_drawer"
+        android:layout_gravity="start"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
+    <!--
+    <fragment
+
         android:name="org.ligi.passandroid.ui.NavigationFragment"
         android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@android:color/white"
-        android:orientation="vertical" />
 
+
+        android:orientation="vertical" />
+-->
 
 </android.support.v4.widget.DrawerLayout>

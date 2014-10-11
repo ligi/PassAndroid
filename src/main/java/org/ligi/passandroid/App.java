@@ -17,6 +17,7 @@ public class App extends Application {
     private static Bus bus;
     private static Settings settings;
     private static PassStore passStore;
+    private static App instance;
 
     @Override
     public void onCreate() {
@@ -25,9 +26,9 @@ public class App extends Application {
         Tracker.init(this);
         initTraceDroid();
 
+        instance = this;
         bus = new Bus();
         settings = new Settings(this);
-        passStore = new AndroidFileSystemPassStore(this);
     }
 
     private void initTraceDroid() {
@@ -48,6 +49,9 @@ public class App extends Application {
     }
 
     public static PassStore getPassStore() {
+        if (passStore==null) {
+            passStore=new AndroidFileSystemPassStore(instance);
+        }
         return passStore;
     }
 
