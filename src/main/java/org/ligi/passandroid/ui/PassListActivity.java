@@ -37,6 +37,7 @@ import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -57,12 +58,6 @@ import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 public class PassListActivity extends ActionBarActivity {
 
     private PassAdapter passAdapter;
-
-    private final static int UISTATE_INIT = 0;
-    private final static int UISTATE_SCAN = 1;
-    private final static int UISTATE_LIST = 2;
-
-    private int uiState = UISTATE_INIT;
 
     private ScanForPassesTask scanTask = null;
     private ActionBarDrawerToggle drawerToggle;
@@ -104,13 +99,33 @@ public class PassListActivity extends ActionBarActivity {
     }
 
     public void refreshPasses() {
-        App.getPassStore().refreshPassesList();
-        App.getPassStore().sort(App.getSettings().getSortOrder());
-        passAdapter.notifyDataSetChanged();
+        final PassStore passStore = App.getPassStore();
+        passStore.preCachePassesList();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                passStore.refreshPassesList();
+                passStore.sort(App.getSettings().getSortOrder());
+
+                passAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
+
+    final PassListUIState uiState;
 
     public PassListActivity() {
         super();
+        uiState = new PassListUIState(this) {
+            @Override
+            public void set(int state) {
+                Log.i("setting ui state " + state);
+                super.set(state);
+                updateUIRegardingToUIState();
+            }
+        };
     }
 
     @Override
@@ -144,6 +159,7 @@ public class PassListActivity extends ActionBarActivity {
                 App.getBus().post(new NavigationOpenedEvent());
             }
         };
+
         drawer.setDrawerListener(drawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -206,14 +222,15 @@ public class PassListActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
-                scanForPasses();
+                if (uiState.get() ==PassListUIState.UISTATE_LIST) {
+                    Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
+                    scanForPasses();
+                }
             }
         });
     }
 
     private void scanForPasses() {
-        App.getPassStore().deleteCache();
         new ScanForPassesTask().execute();
     }
 
@@ -229,18 +246,13 @@ public class PassListActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (uiState!=UISTATE_LIST) {
-            Toast.makeText(this,R.string.please_wait,Toast.LENGTH_LONG).show();
+        if (uiState.get() != PassListUIState.UISTATE_LIST) {
+            Toast.makeText(this, R.string.please_wait, Toast.LENGTH_LONG).show();
             return true;
         }
 
 
         if (drawerToggle.onOptionsItemSelected(item)) {
-            if (navigationFragment==null) {
-                navigationFragment = new NavigationFragment();
-                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commit();
-            }
-
             return true;
         }
 
@@ -255,7 +267,7 @@ public class PassListActivity extends ActionBarActivity {
                 return true;
 
         }
-    return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -289,53 +301,45 @@ public class PassListActivity extends ActionBarActivity {
             listView.setAdapter(passAdapter);
 
             if (App.getPassStore().isEmpty()) {
-                uiState = UISTATE_SCAN;
+                uiState.set(PassListUIState.UISTATE_SCAN);
                 scanTask = new ScanForPassesTask();
                 scanTask.execute();
             } else {
-                uiState = UISTATE_LIST;
+                uiState.set(PassListUIState.UISTATE_LIST);
             }
-
-            updateUIRegardingToUIState();
 
             Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
 
             refreshPasses();
+
+            if (navigationFragment == null) {
+                navigationFragment = new NavigationFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commit();
+            }
         }
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        if (uiState == UISTATE_LIST) {
+        if (uiState.get() == PassListUIState.UISTATE_LIST) {
             getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
         }
         return true;
     }
 
     public void updateUIRegardingToUIState() {
+        Log.i("", "changeuistate" + uiState);
 
-        listSwipeRefreshLayout.setRefreshing(uiState!=UISTATE_LIST);
-        emptySwipeRefreshLayout.setRefreshing(uiState!=UISTATE_LIST);
+        listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
+        emptySwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
 
-        emptyView.setText(Html.fromHtml(getHtmlForEmptyView()));
+        emptyView.setText(Html.fromHtml(uiState.getHtmlResForEmptyView()));
         emptyView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public String getHtmlForEmptyView() {
-        switch (uiState) {
-            case UISTATE_INIT:
-                return getString(R.string.please_wait);
-
-            case UISTATE_SCAN:
-                return getString(R.string.scan_empty_text) + getString(R.string.no_passes_appendix);
-
-            default:
-                return getString(R.string.no_passes_empty_text) + getString(R.string.no_passes_appendix);
-        }
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -358,7 +362,7 @@ public class PassListActivity extends ActionBarActivity {
         if (scanTask != null) {
             scanTask.cancel(true);
         }
-        uiState=UISTATE_LIST;
+        uiState.set(PassListUIState.UISTATE_LIST);
         super.onPause();
     }
 
@@ -445,20 +449,18 @@ public class PassListActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            uiState=UISTATE_LIST;
+            uiState.set(PassListUIState.UISTATE_SCAN);
 
             Tracker.get().trackEvent("ui_event", "scan", "started", null);
 
-            updateUIRegardingToUIState();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            uiState=UISTATE_LIST;
+            uiState.set(PassListUIState.UISTATE_LIST);
 
             // TODO bring back Tracker.get().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
-            updateUIRegardingToUIState();
         }
 
         @Override

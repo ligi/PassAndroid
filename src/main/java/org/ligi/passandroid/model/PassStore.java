@@ -37,6 +37,8 @@ public interface PassStore {
         }
     }
 
+    public void preCachePassesList();
+
     public void deleteCache();
 
     public void refreshPassesList();
@@ -47,7 +49,7 @@ public interface PassStore {
 
     public Pass getPassbookAt(int pos);
 
-    public Pass getPassbookForId(String id,String language);
+    public Pass getPassbookForId(String id);
 
     public void sort(SortOrder order);
 

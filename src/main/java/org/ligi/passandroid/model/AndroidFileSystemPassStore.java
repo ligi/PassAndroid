@@ -7,6 +7,7 @@ import com.google.common.base.Optional;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
+import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class AndroidFileSystemPassStore implements PassStore {
         return new File(getPathForID(id) + "/base_cache.obj");
     }
 
+    public void preCachePassesList() {
+        for (String key : getPassIDArray()) {
+            getPassbookForId(key);
+        }
+    }
+
     public void refreshPassesList() {
         path = App.getPassesDir(context);
 
@@ -69,12 +76,15 @@ public class AndroidFileSystemPassStore implements PassStore {
 
 
     private Pass getCachedPassOrLoad(String id) {
+        Log.i("PassGet " + id);
         final File cachedFile = getCacheFile(id);
         try {
             return AXT.at(cachedFile).loadToObject();
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        Log.i("PassGet cache miss" +  cachedFile.exists() );
         final String language = context.getResources().getConfiguration().locale.getLanguage();
         final Pass pass = AppleStylePassReader.read(getPathForID(id), language);
         AXT.at(cachedFile).writeObject(pass);
@@ -102,10 +112,14 @@ public class AndroidFileSystemPassStore implements PassStore {
         return passList.get(pos);
     }
 
-    public Pass getPassbookForId(final String id, final String language) {
-        final String mPath = path + "/" + id;
-        // TODO read from cache
-        return AppleStylePassReader.read(mPath, language);
+    public Pass getPassbookForId(final String id) {
+        for (Pass pass : passList) {
+            if (pass.getId().equals(id)) {
+                return pass;
+            }
+        }
+
+        return getCachedPassOrLoad(id);
     }
 
     public void sort(final SortOrder order) {

@@ -33,8 +33,7 @@ public class PassVisualizer {
             findById(container, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final String lang = activity.getResources().getConfiguration().locale.getLanguage();
-                    NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(pass.getId(), lang), false);
+                    NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(pass.getId()), false);
                 }
             });
         } else {

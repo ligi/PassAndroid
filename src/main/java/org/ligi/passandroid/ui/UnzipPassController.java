@@ -91,11 +91,13 @@ public class UnzipPassController {
             new File(spec.targetPath).mkdirs();
             final File rename_file = new File(rename_str);
 
-            if (rename_file.exists()) {
-                AXT.at(rename_file).deleteRecursive();
+            if (!rename_file.exists()) {
+                new File(path + "/").renameTo(rename_file);
+            } else {
+                spec.failCallback.fail("Pass with same ID exists");
+                return;
             }
 
-            new File(path + "/").renameTo(rename_file);
             path = rename_str;
         } catch (JSONException e) {
             spec.failCallback.fail("Problem with pass.json: " + e);
