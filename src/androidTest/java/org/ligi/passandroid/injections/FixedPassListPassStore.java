@@ -18,6 +18,11 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
+    public void preCachePassesList() {
+        // no effect in this impl
+    }
+
+    @Override
     public void deleteCache() {
         // no effect in this impl
     }
@@ -43,7 +48,7 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public Pass getPassbookForId(String id, String language) {
+    public Pass getPassbookForId(String id) {
         for (Pass pass : passes) {
             if (pass.getId().equals(id)) {
                 return pass;
