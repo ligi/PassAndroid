@@ -68,14 +68,11 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(R.id.emptyView)
+    @InjectView(android.R.id.empty)
     TextView emptyView;
 
-    @InjectView(R.id.list_swiperefresh_layout)
-    SwipeRefreshLayout listSwipeRefreshLayout;
-
-    @InjectView(R.id.empty_swiperefresh_layout)
-    SwipeRefreshLayout emptySwipeRefreshLayout;
+    @InjectView(R.id.swiperefresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private ActionMode actionMode;
     private NavigationFragment navigationFragment;
@@ -136,7 +133,7 @@ public class PassListActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
 
-        listView.setEmptyView(emptySwipeRefreshLayout);
+        listView.setEmptyView(emptyView);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -212,9 +209,7 @@ public class PassListActivity extends ActionBarActivity {
             }
         });
 
-        prepareRefreshLayout(listSwipeRefreshLayout);
-        prepareRefreshLayout(emptySwipeRefreshLayout);
-
+        prepareRefreshLayout(swipeRefreshLayout);
     }
 
     private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
@@ -314,7 +309,7 @@ public class PassListActivity extends ActionBarActivity {
 
             if (navigationFragment == null) {
                 navigationFragment = new NavigationFragment();
-                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commitAllowingStateLoss();
             }
         }
     }
@@ -331,8 +326,7 @@ public class PassListActivity extends ActionBarActivity {
     public void updateUIRegardingToUIState() {
         Log.i("", "changeuistate" + uiState);
 
-        listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
-        emptySwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
+        swipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
 

@@ -5,15 +5,27 @@
     android:layout_height="match_parent">
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/list_swiperefresh_layout"
+            android:id="@+id/swiperefresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:id="@id/android:empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="test"
+                android:textAppearance="?android:textAppearanceLarge" />
 
             <ListView
                 android:id="@+id/content_list"
@@ -23,27 +35,9 @@
                 android:divider="@null"
                 android:listSelector="@android:color/transparent"/>
 
-
+            </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/empty_swiperefresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/emptyView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="7dp"
-                android:text="test"
-                android:textAppearance="?android:textAppearanceLarge" />
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-
-    </FrameLayout>
 
 
     <FrameLayout
@@ -52,15 +46,5 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:background="@android:color/white"/>
-    <!--
-    <fragment
-
-        android:name="org.ligi.passandroid.ui.NavigationFragment"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-
-
-        android:orientation="vertical" />
--->
 
 </android.support.v4.widget.DrawerLayout>
