@@ -8,12 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/box_bg">
+        android:layout_marginTop="8dp"
+        android:background="@drawable/box_bg"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,102 +30,88 @@
 
             <LinearLayout
                 android:layout_width="0dip"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
 
-                android:layout_gravity="center_vertical">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/date"
-                    tools:text="12.10.2013 17:00"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
-                    android:textColor="?android:textColorSecondary"
+
+                    android:paddingRight="3dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:paddingRight="3dp" />
+                    android:textColor="?android:textColorSecondary"
+                    tools:text="12.10.2013 17:00" />
 
                 <TextView
                     android:id="@+id/title"
-                    tools:text="Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="3dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    tools:text="Title" />
 
             </LinearLayout>
 
             <org.ligi.passandroid.ui.views.CategoryIndicatorView
+                android:id="@+id/categoryView"
                 android:layout_width="48dp"
                 android:layout_height="74dp"
-                android:layout_gravity="center"
-                android:id="@+id/categoryView" />
+                android:layout_gravity="center" />
             <!-- <include layout="@layout/category_indicator" /> -->
         </LinearLayout>
 
 
         <RelativeLayout
+            android:id="@+id/actionsContainer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/actionsContainer">
+            android:layout_height="wrap_content">
 
             <View
+                android:id="@+id/actions_separator"
                 android:layout_width="match_parent"
                 android:layout_height="2dip"
+                android:layout_margin="7dp"
                 android:background="#dfdfdf"
-                android:padding="7dp"
-                android:id="@+id/actions_separator"
-                android:layout_margin="7dp" />
+                android:padding="7dp" />
 
-            <LinearLayout
-                android:layout_below="@id/actions_separator"
-                android:clickable="true"
+
+            <TextView
+
                 android:id="@+id/navigateTo"
-                android:background="@drawable/clickable_bg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@android:drawable/ic_menu_directions"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-
-                <TextView
-                    android:text="@string/pass_directions"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/clickable_bg"
                 android:clickable="true"
-                android:id="@+id/addCalendar"
-                android:background="@drawable/clickable_bg"
-                android:layout_width="wrap_content"
+                android:drawableLeft="@drawable/ic_place_grey600_18dp"
                 android:layout_below="@id/actions_separator"
-                android:layout_height="wrap_content">
+                android:text="@string/pass_directions" />
 
-                <ImageView
-                    android:src="@android:drawable/ic_menu_my_calendar"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
 
-                <TextView
-                    android:text="@string/pass_to_calendar"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <TextView
+
+                android:id="@+id/addCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/actions_separator"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/clickable_bg"
+                android:clickable="true"
+                android:drawableRight="@drawable/ic_today_grey600_18dp"
+                android:text="@string/pass_to_calendar" />
+
 
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/passExtrasContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passExtrasContainer"
             android:orientation="vertical" />
     </LinearLayout>
 </LinearLayout>
