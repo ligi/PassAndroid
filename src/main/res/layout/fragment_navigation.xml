@@ -11,11 +11,8 @@
         android:animateLayoutChanges="true">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffe3e3e3"
-            android:text="@string/nav_sort"
-            android:padding="7dp" />
+            style="@style/nav_topic"
+            android:text="@string/nav_sort" />
 
 
         <RadioGroup

@@ -1,7 +1,10 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/window_bg</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/secondary</item>
+        <item name="android:statusBarColor">@color/secondary</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />
@@ -37,7 +40,8 @@
     <style name="nav_topic">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">#ffe3e3e3</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/primary_text_default_material_dark</item>
         <item name="android:padding">7dp</item>
     </style>
 </resources>
