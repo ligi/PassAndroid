@@ -18,6 +18,7 @@ public class AnalyticsTracker implements TrackerInterface {
         this.ctx = ctx;
         final GoogleAnalytics analytics = GoogleAnalytics.getInstance(ctx);
         tracker = analytics.newTracker(R.xml.analytics);
+        tracker.enableAutoActivityTracking(true);
     }
 
     @Override
