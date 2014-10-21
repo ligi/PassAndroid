@@ -34,7 +34,7 @@ class PassAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View res = passListActivity.getLayoutInflater().inflate(R.layout.pass_list_item, null);
+        View res = passListActivity.getLayoutInflater().inflate(R.layout.pass_list_item, parent, false);
 
         PassVisualizer.visualize(passListActivity, App.getPassStore().getPassbookAt(position), res);
 
