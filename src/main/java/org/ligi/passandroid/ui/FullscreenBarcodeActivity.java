@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,11 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         super.onCreate(savedInstanceState);
 
         if (optionalPass.isPresent()) {
+            Window win = getWindow();
+            WindowManager.LayoutParams params = win.getAttributes();
+            params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+            win.setAttributes(params);
+
             setContentView(R.layout.fullscreen_image);
 
             ButterKnife.inject(this);
