@@ -67,8 +67,9 @@ public class PassVisualizer {
             findById(container, R.id.addCalendar).setVisibility(View.GONE);
         }
 
+
         if (dateForIntent == null && !(pass.getLocations().size() > 0)) {
-            findById(container, R.id.actionsContainer).setVisibility(View.GONE);
+            findById(container, R.id.actions_separator).setVisibility(View.GONE);
         }
 
         final ImageView icon_img = findById(container, R.id.icon);
