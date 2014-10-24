@@ -34,6 +34,7 @@ public class PassMenuOptions {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage(activity.getString(R.string.dialog_delete_confirm_text));
                 builder.setTitle(activity.getString(org.ligi.passandroid.R.string.dialog_delete_title));
+                builder.setIcon(R.drawable.ic_warning_amber_36dp);
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
                 if (pass.getSource().isPresent() && pass.getSource().get().startsWith("file://")) {
@@ -57,9 +58,10 @@ public class PassMenuOptions {
                         }
                     }
 
-                }).setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                });
+                builder.setNegativeButton(android.R.string.no, null);
+
+                builder.show();
 
                 return true;
 

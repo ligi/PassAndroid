@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.common.base.Optional;
 
@@ -48,6 +50,17 @@ public class PassViewActivityBase extends ActionBarActivity {
             finish();
             return true;
         }
+        if (item.getItemId() == R.id.menu_light) {
+
+            Window win = getWindow();
+            WindowManager.LayoutParams params = win.getAttributes();
+            params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+            win.setAttributes(params);
+
+
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
