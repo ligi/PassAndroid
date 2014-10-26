@@ -7,10 +7,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.view.ActionMode;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -68,11 +69,14 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(android.R.id.empty)
+    @InjectView(R.id.emptyView)
     TextView emptyView;
 
-    @InjectView(R.id.swiperefresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @InjectView(R.id.list_swiperefresh_layout)
+    SwipeRefreshLayout listSwipeRefreshLayout;
+
+    @InjectView(R.id.empty_swiperefresh_layout)
+    SwipeRefreshLayout emptySwipeRefreshLayout;
 
     private ActionMode actionMode;
     private NavigationFragment navigationFragment;
@@ -131,9 +135,17 @@ public class PassListActivity extends ActionBarActivity {
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
         ButterKnife.inject(this);
+/*
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        setSupportActionBar(toolbar);
+        */
+        /*
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setHomeButtonEnabled(true);*/
 
-
-        listView.setEmptyView(emptyView);
+        listView.setEmptyView(emptySwipeRefreshLayout);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -150,7 +162,7 @@ public class PassListActivity extends ActionBarActivity {
                     .checkAndShow();
         }
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 App.getBus().post(new NavigationOpenedEvent());
@@ -159,7 +171,6 @@ public class PassListActivity extends ActionBarActivity {
 
         drawer.setDrawerListener(drawerToggle);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -209,7 +220,15 @@ public class PassListActivity extends ActionBarActivity {
             }
         });
 
-        prepareRefreshLayout(swipeRefreshLayout);
+        prepareRefreshLayout(listSwipeRefreshLayout);
+        prepareRefreshLayout(emptySwipeRefreshLayout);
+
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
@@ -217,7 +236,7 @@ public class PassListActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (uiState.get() ==PassListUIState.UISTATE_LIST) {
+                if (uiState.get() == PassListUIState.UISTATE_LIST) {
                     Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
                     scanForPasses();
                 }
@@ -326,7 +345,8 @@ public class PassListActivity extends ActionBarActivity {
     public void updateUIRegardingToUIState() {
         Log.i("", "changeuistate" + uiState);
 
-        swipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
+        listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
+        emptySwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
 
