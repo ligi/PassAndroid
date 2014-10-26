@@ -125,6 +125,11 @@ public class AppleStylePassReader {
                 }
             }
 
+            pass.setSerial(readJsonSafeAsOptional(pass_json,"serialNumber"));
+            pass.setAuthToken(readJsonSafeAsOptional(pass_json,"authenticationToken"));
+            pass.setWebserviceURL(readJsonSafeAsOptional(pass_json,"webServiceURL"));
+            pass.setPassTypeIdent(readJsonSafeAsOptional(pass_json,"passTypeIdentifier"));
+
             final List<PassLocation> locations = new ArrayList<>();
             try {
 
@@ -147,22 +152,27 @@ public class AppleStylePassReader {
             }
             pass.setLocations(locations);
 
-            try {
-                String backgroundColor = pass_json.getString("backgroundColor");
-                pass.setBackgroundColor(parseColor(backgroundColor, 0));
-            } catch (JSONException e) {
-            }
 
-            try {
-                String foregroundColor = pass_json.getString("foregroundColor");
-                pass.setForegroundColor(parseColor(foregroundColor, 0xffffffff));
-            } catch (JSONException e) {
-            }
+            readJsonSafe(pass_json, "backgroundColor", new JsonStringReadCallback() {
+                @Override
+                public void onString(String string) {
+                    pass.setBackgroundColor(parseColor(string, 0));
+                }
+            });
 
-            try {
-                pass.setDescription(translation.translate(pass_json.getString("description")));
-            } catch (JSONException e) {
-            }
+            readJsonSafe(pass_json, "foregroundColor", new JsonStringReadCallback() {
+                @Override
+                public void onString(String string) {
+                    pass.setForegroundColor(parseColor(string, 0xffffffff));
+                }
+            });
+
+            readJsonSafe(pass_json, "description", new JsonStringReadCallback() {
+                @Override
+                public void onString(String string) {
+                    pass.setDescription(translation.translate(string));
+                }
+            });
 
 
             // try to find in a predefined set of tickets
@@ -230,6 +240,31 @@ public class AppleStylePassReader {
         }
 
         return Optional.absent();
+    }
+
+    interface JsonStringReadCallback {
+        void onString(String string);
+    }
+
+    private static Optional<String> readJsonSafeAsOptional(JSONObject json, String key) {
+        if (json.has(key)) {
+            try {
+                return Optional.of(json.getString(key));
+            } catch (JSONException e) {
+                // some passes just do not have the field
+            }
+        }
+        return Optional.absent();
+    }
+
+    private static void readJsonSafe(JSONObject json, String key, JsonStringReadCallback callback) {
+        if (json.has(key)) {
+            try {
+                callback.onString(json.getString(key));
+            } catch (JSONException e) {
+                // some passes just do not have the field
+            }
+        }
     }
 
     private static String findBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
@@ -305,8 +340,8 @@ public class AppleStylePassReader {
 
 
     private static int parseColorRGBStyle(String color_str, int defaultValue) {
-        Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
-        Matcher matcher = pattern.matcher(color_str);
+        final Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
+        final Matcher matcher = pattern.matcher(color_str);
 
         if (matcher.matches()) {
             return (255 << 24 |

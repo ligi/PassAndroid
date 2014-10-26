@@ -113,6 +113,7 @@ public class UnzipPassController {
         public final SuccessCallback onSuccessCallback;
         public final FailCallback failCallback;
         public String targetPath;
+        public boolean overwrite=false;
 
         public UnzipControllerSpec(String targetPath, Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
             this.context = context;

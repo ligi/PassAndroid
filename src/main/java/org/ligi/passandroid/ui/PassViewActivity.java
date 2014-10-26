@@ -208,12 +208,14 @@ public class PassViewActivity extends PassViewActivityBase {
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
+        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent() && optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.map_item, menu);
+        getMenuInflater().inflate(R.menu.update, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

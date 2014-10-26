@@ -58,4 +58,13 @@ public interface Pass extends Serializable {
     Optional<BarCode> getBarCode();
 
     Optional<Bitmap> getStripImage();
+
+    Optional<String> getWebServiceURL();
+
+    Optional<String> getAuthToken();
+
+    Optional<String> getSerial();
+
+    Optional<String> getPassIdent();
+
 }

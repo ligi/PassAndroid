@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_update"
+        yourapp:showAsAction="ifRoom"
+        android:title="update"
+        android:icon="@android:drawable/ic_popup_sync" />
+</menu>

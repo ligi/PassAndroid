@@ -41,8 +41,12 @@ public class PassImpl implements Pass, Serializable {
     private Optional<String> logoBitmapFile;
     private Optional<String> stripBitmapFile;
 
-    public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+    private Optional<String> authToken;
+    private Optional<String> webServiceURL;
+    private Optional<String> serial;
 
+    public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
+    private Optional<String> passTypeIdent;
 
     @Override
     public Optional<String> getOrganisation() {
@@ -160,6 +164,25 @@ public class PassImpl implements Pass, Serializable {
         return getBitmapFromOptionalString(stripBitmapFile);
     }
 
+    @Override
+    public Optional<String> getWebServiceURL() {
+        return webServiceURL;
+    }
+
+    @Override
+    public Optional<String> getAuthToken() {
+        return authToken;
+    }
+
+    @Override
+    public Optional<String> getSerial() {
+        return serial;
+    }
+
+    @Override
+    public Optional<String> getPassIdent() {
+        return passTypeIdent;
+    }
 
     public Optional<Bitmap> getLogoBitmap() {
         return getBitmapFromOptionalString(logoBitmapFile);
@@ -271,5 +294,21 @@ public class PassImpl implements Pass, Serializable {
 
     public void setBarCode(BarCode barCode) {
         this.barCode = Optional.fromNullable(barCode);
+    }
+
+    public void setSerial(Optional<String> serial) {
+        this.serial = serial;
+    }
+
+    public void setAuthToken(Optional<String> authToken) {
+        this.authToken = authToken;
+    }
+
+    public void setWebserviceURL(Optional<String> webServiceURL) {
+        this.webServiceURL = webServiceURL;
+    }
+
+    public void setPassTypeIdent(Optional<String> passTypeIdent) {
+        this.passTypeIdent = passTypeIdent;
     }
 }
