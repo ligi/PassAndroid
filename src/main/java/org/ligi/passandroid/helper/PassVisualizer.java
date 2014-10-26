@@ -29,17 +29,6 @@ public class PassVisualizer {
 
         final CategoryIndicatorView categoryIndicator = findById(container, R.id.categoryView);
 
-        if (pass.getLocations().size() > 0) {
-            findById(container, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(pass.getId()), false);
-                }
-            });
-        } else {
-            findById(container, R.id.navigateTo).setVisibility(View.GONE);
-        }
-
         final DateTime dateForIntent;
 
         if (pass.getRelevantDate().isPresent()) {
@@ -50,6 +39,28 @@ public class PassVisualizer {
         } else {
             dateForIntent = null;
         }
+
+
+        final boolean noButtons = dateForIntent == null && !(pass.getLocations().size() > 0);
+        if (noButtons) {
+            findById(container, R.id.actions_separator).setVisibility(View.GONE);
+        }
+
+        if (pass.getLocations().size() > 0) {
+            findById(container, R.id.navigateTo).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(pass.getId()), false);
+                }
+            });
+        } else {
+            if (noButtons) {
+                findById(container, R.id.navigateTo).setVisibility(View.GONE);
+            } else {
+                findById(container, R.id.navigateTo).setVisibility(View.INVISIBLE);
+            }
+        }
+
 
         if (dateForIntent != null) {
             findById(container, R.id.addCalendar).setOnClickListener(new View.OnClickListener() {
@@ -68,9 +79,6 @@ public class PassVisualizer {
         }
 
 
-        if (dateForIntent == null && !(pass.getLocations().size() > 0)) {
-            findById(container, R.id.actions_separator).setVisibility(View.GONE);
-        }
 
         final ImageView icon_img = findById(container, R.id.icon);
 
