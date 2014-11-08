@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 
 import java.io.IOException;
 
@@ -42,6 +44,9 @@ public class PassViewActivityBase extends ActionBarActivity {
         }
     }
 
+    protected void refresh() {
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_pass_view, menu);
@@ -75,8 +80,20 @@ public class PassViewActivityBase extends ActionBarActivity {
 
     class UpdateAsync implements Runnable {
 
+        private ProgressDialog dlg;
+
         @Override
         public void run() {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dlg=new ProgressDialog(PassViewActivityBase.this);
+                    dlg.setMessage("downloading new pass version");
+                    dlg.show();
+
+                }
+            });
 
             final OkHttpClient client = new OkHttpClient();
             final Pass pass = optionalPass.get();
@@ -92,12 +109,25 @@ public class PassViewActivityBase extends ActionBarActivity {
 
                 final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource(url, response.body().byteStream());
 
-                UnzipPassController.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(inputStreamWithSource, PassViewActivityBase.this, new UnzipPassController.SuccessCallback() {
+                final UnzipPassController.InputStreamUnzipControllerSpec spec = new UnzipPassController.InputStreamUnzipControllerSpec(inputStreamWithSource, PassViewActivityBase.this, new UnzipPassController.SuccessCallback() {
                     @Override
-                    public void call(String pathToPassbook) {
+                    public void call(final String id) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (isFinishing()) {
+                                    return;
+                                }
+                                dlg.dismiss();
+                                final PassStore passStore = App.getPassStore();
+                                if (!optionalPass.get().getId().equals(id)) {
+                                    passStore.deletePassWithId(optionalPass.get().getId());
+                                }
+                                passStore.deleteCacheForId(id);
+                                final Pass newPass = passStore.getPassbookForId(id);
+                                passStore.setCurrentPass(newPass);
+                                optionalPass = App.getPassStore().getCurrentPass();
+                                refresh();
                                 Toast.makeText(PassViewActivityBase.this, "Pass Updated", Toast.LENGTH_LONG).show();
                             }
                         });
@@ -109,12 +139,18 @@ public class PassViewActivityBase extends ActionBarActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (isFinishing()) {
+                                    return;
+                                }
+                                dlg.dismiss();
                                 new AlertDialog.Builder(PassViewActivityBase.this).setMessage("Could not update pass :( " + reason + ")").setPositiveButton(android.R.string.ok, null).show();
                             }
                         });
 
                     }
-                }));
+                });
+                spec.overwrite=true;
+                UnzipPassController.processInputStream(spec);
 
             } catch (IOException e) {
                 e.printStackTrace();

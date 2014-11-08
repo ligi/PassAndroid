@@ -31,9 +31,15 @@ public class AndroidFileSystemPassStore implements PassStore {
         refreshPassesList();
     }
 
+    @Override
+    public void deleteCacheForId(String id) {
+        getCacheFile(id).delete();
+    }
+
+    @Override
     public void deleteCache() {
         for (String id : getPassIDArray()) {
-            getCacheFile(id).delete();
+            deletePassWithId(id);
         }
     }
 
@@ -41,12 +47,14 @@ public class AndroidFileSystemPassStore implements PassStore {
         return new File(getPathForID(id) + "/base_cache.obj");
     }
 
+    @Override
     public void preCachePassesList() {
         for (String key : getPassIDArray()) {
             getPassbookForId(key);
         }
     }
 
+    @Override
     public void refreshPassesList() {
         path = App.getPassesDir(context);
 
@@ -100,18 +108,22 @@ public class AndroidFileSystemPassStore implements PassStore {
         return passes_dir;
     }
 
+    @Override
     public int passCount() {
         return passList.size();
     }
 
+    @Override
     public boolean isEmpty() {
         return passList.isEmpty();
     }
 
+    @Override
     public Pass getPassbookAt(final int pos) {
         return passList.get(pos);
     }
 
+    @Override
     public Pass getPassbookForId(final String id) {
         for (Pass pass : passList) {
             if (pass.getId().equals(id)) {
@@ -122,6 +134,7 @@ public class AndroidFileSystemPassStore implements PassStore {
         return getCachedPassOrLoad(id);
     }
 
+    @Override
     public void sort(final SortOrder order) {
         switch (order) {
             case TYPE:
@@ -162,6 +175,7 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     }
 
+    @Override
     public List<CountedType> getCountedTypes() {
         // TODO - some sort of caching
         final Map<String, Integer> tempMap = new HashMap<>();

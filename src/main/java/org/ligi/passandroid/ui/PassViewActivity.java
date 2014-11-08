@@ -36,6 +36,8 @@ import butterknife.OnClick;
 
 public class PassViewActivity extends PassViewActivityBase {
 
+    private View contentView;
+
     @OnClick(R.id.barcode_img)
     void onBarcodeClick() {
         AXT.at(this).startCommonIntent().activityFromClass(FullscreenBarcodeActivity.class);
@@ -86,6 +88,23 @@ public class PassViewActivity extends PassViewActivityBase {
 
         AXT.at(this).disableRotation();
 
+
+        contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
+        setContentView(contentView);
+
+        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
+        final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
+        extraViewContainer.addView(passExtrasView);
+
+        ButterKnife.inject(this);
+
+        refresh();
+    }
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+
         final Pass pass = optionalPass.get();
 
         if (!pass.isValid()) { // don't deal with invalid passes
@@ -108,14 +127,8 @@ public class PassViewActivity extends PassViewActivityBase {
             return;
         }
 
-        final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
-        setContentView(contentView);
 
-        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
-        final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
-        extraViewContainer.addView(passExtrasView);
 
-        ButterKnife.inject(this);
 
         if (pass.getBarCode().isPresent()) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
@@ -145,6 +158,7 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         if (pass.getType() != null) {
+            frontFieldsContainer.removeAllViews();
             addFrontFields(pass.getHeaderFields());
             addFrontFields(pass.getPrimaryFields());
             addFrontFields(pass.getSecondaryFields());

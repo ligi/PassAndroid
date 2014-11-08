@@ -53,7 +53,8 @@ public class UnzipPassController {
 
     public static void processFile(FileUnzipControllerSpec spec) {
 
-        String path = spec.context.getCacheDir() + "/temp/" + UUID.randomUUID() + "/";
+        String uuid = UUID.randomUUID().toString();
+        String path = spec.context.getCacheDir() + "/temp/" + uuid + "/";
 
         final File dir_file = new File(path);
         dir_file.mkdirs();
@@ -87,9 +88,14 @@ public class UnzipPassController {
 
 
         try {
-            final String rename_str = spec.targetPath + "/" + manifest_json.getString("pass.json");
+            uuid= manifest_json.getString("pass.json");
+            final String rename_str = spec.targetPath + "/" + uuid;
             new File(spec.targetPath).mkdirs();
             final File rename_file = new File(rename_str);
+
+            if (spec.overwrite && rename_file.exists()) {
+                AXT.at(rename_file).deleteRecursive();
+            }
 
             if (!rename_file.exists()) {
                 new File(path + "/").renameTo(rename_file);
@@ -98,13 +104,12 @@ public class UnzipPassController {
                 return;
             }
 
-            path = rename_str;
         } catch (JSONException e) {
             spec.failCallback.fail("Problem with pass.json: " + e);
             return;
         }
 
-        spec.onSuccessCallback.call(path);
+        spec.onSuccessCallback.call(uuid);
 
     }
 
@@ -148,6 +153,8 @@ public class UnzipPassController {
             super(spec.targetPath, spec.context, spec.onSuccessCallback, spec.failCallback);
             zipFileString = fileName;
             source = spec.inputStreamWithSource.getSource();
+            overwrite = spec.overwrite;
+
         }
     }
 
