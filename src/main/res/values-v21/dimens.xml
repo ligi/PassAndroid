@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_h_margin">4dp</dimen>
+    <dimen name="card_v_margin">4dp</dimen>
+</resources>
