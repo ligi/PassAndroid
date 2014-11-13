@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.14.1'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.10.0'
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.14.1'
     }
 }
 
@@ -89,6 +89,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.2'
     compile 'joda-time:joda-time:2.5'
     compile 'com.squareup:otto:1.3.5'
+    compile 'com.android.support:recyclerview-v7:21.0.0'
 
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.2'

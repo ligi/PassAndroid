@@ -1,120 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android.support.v7.cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pass_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android.support.v7.cardview:cardMaxElevation="@dimen/card_longclick_elevation_half"
+    android.support.v7.cardview:cardPreventCornerOverlap="true"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/pass_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:id="@+id/pass_top"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
 
-                <ImageView
-                    android:id="@+id/icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/ic_launcher" />
 
-                <LinearLayout
-                    android:layout_width="0dip"
+                    android:paddingRight="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?android:textColorSecondary"
+                    tools:text="12.10.2013 17:00" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:paddingTop="4dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    tools:text="Title" />
 
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:paddingRight="3dp"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="?android:textColorSecondary"
-                        tools:text="12.10.2013 17:00" />
-
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        tools:text="Title" />
-
-                </LinearLayout>
-
-                <org.ligi.passandroid.ui.views.CategoryIndicatorView
-                    android:id="@+id/categoryView"
-                    android:layout_width="48dp"
-                    android:layout_height="74dp"
-                    android:layout_margin="4dp"
-                    android:layout_gravity="center" />
-                <!-- <include layout="@layout/category_indicator" /> -->
             </LinearLayout>
 
-            <View
-                android:id="@+id/actions_separator"
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_margin="7dp"
-                android:background="#dfdfdf"
-                android:padding="7dp"
-                android:layout_below="@id/pass_top"
-                />
+            <org.ligi.passandroid.ui.views.CategoryIndicatorView
+                android:id="@+id/categoryView"
+                android:layout_width="48dp"
+                android:layout_height="74dp"
+                android:layout_gravity="center"
+                android:layout_margin="4dp" />
+            <!-- <include layout="@layout/category_indicator" /> -->
+        </LinearLayout>
+
+        <View
+            android:id="@+id/actions_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_below="@id/pass_top"
+            android:layout_margin="7dp"
+            android:background="#dfdfdf"
+            android:padding="7dp" />
 
 
-            <TextView
+        <TextView
 
-                android:id="@+id/navigateTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/clickable_bg"
-                android:clickable="true"
-                android:padding="4dp"
-                android:drawableLeft="@drawable/ic_place_grey600_18dp"
-                android:layout_below="@id/actions_separator"
-                android:text="@string/pass_directions" />
-
-
-            <TextView
-                android:padding="4dp"
-                android:id="@+id/addCalendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/actions_separator"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/clickable_bg"
-                android:clickable="true"
-                android:drawableRight="@drawable/ic_today_grey600_18dp"
-                android:text="@string/pass_to_calendar" />
-
-            <LinearLayout
-                android:layout_below="@id/addCalendar"
-                android:id="@+id/passExtrasContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
-        </RelativeLayout>
+            android:id="@+id/navigateTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/actions_separator"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/clickable_bg"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_place_grey600_18dp"
+            android:padding="4dp"
+            android:text="@string/pass_directions" />
 
 
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+        <TextView
+            android:id="@+id/addCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/actions_separator"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/clickable_bg"
+            android:clickable="true"
+            android:drawableRight="@drawable/ic_today_grey600_18dp"
+            android:padding="4dp"
+            android:text="@string/pass_to_calendar" />
+
+        <LinearLayout
+            android:id="@+id/passExtrasContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addCalendar"
+            android:orientation="vertical" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="pass_icon_size">64dp</dimen>
+    <dimen name="card_longclick_elevation">12dp</dimen>
+    <dimen name="card_longclick_elevation_half">4dp</dimen>
 
 </resources>

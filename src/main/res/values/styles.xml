@@ -4,7 +4,8 @@
         <item name="android:windowBackground">@color/window_bg</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/secondary</item>
-        <item name="android:statusBarColor">@color/secondary</item>
+        <item name="color">@color/secondary</item>
+        <item name="actionModeBackground">@color/secondary</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />

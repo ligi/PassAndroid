@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
         <android.support.v4.widget.SwipeRefreshLayout
@@ -15,35 +12,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ListView
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/emptyView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:visibility="gone"
+                    tools:text="foo"
+
+                    android:textAppearance="?android:textAppearanceLarge" />
+
+                <android.support.v7.widget.RecyclerView
                 android:id="@+id/content_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:choiceMode="singleChoice"
                 android:divider="@null"
                 android:listSelector="@android:color/transparent" />
+            </FrameLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/empty_swiperefresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/emptyView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="7dp"
-                android:visibility="gone"
-                tools:text="foo"
-                android:textAppearance="?android:textAppearanceLarge" />
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-
-    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/left_drawer"

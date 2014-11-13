@@ -180,7 +180,6 @@ public class PassViewActivity extends PassViewActivityBase {
             moreTextView.setVisibility(View.GONE);
         }
 
-
         Linkify.addLinks(back_tv, Linkify.ALL);
         PassVisualizer.visualize(this, pass, contentView);
     }
@@ -222,7 +221,9 @@ public class PassViewActivity extends PassViewActivityBase {
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
-        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent() && optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getPassIdent().isPresent()));
+        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() &&
+                optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent()
+        ));//&& optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 

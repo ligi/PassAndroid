@@ -13,11 +13,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -64,7 +68,7 @@ public class PassListActivity extends ActionBarActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     @InjectView(R.id.content_list)
-    ListView listView;
+    RecyclerView listView;
 
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -75,10 +79,6 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.list_swiperefresh_layout)
     SwipeRefreshLayout listSwipeRefreshLayout;
 
-    @InjectView(R.id.empty_swiperefresh_layout)
-    SwipeRefreshLayout emptySwipeRefreshLayout;
-
-    private ActionMode actionMode;
     private NavigationFragment navigationFragment;
 
     @Subscribe
@@ -90,13 +90,6 @@ public class PassListActivity extends ActionBarActivity {
     public void typeFocus(TypeFocusEvent typeFocusEvent) {
         scrollToType(typeFocusEvent.type);
         drawer.closeDrawers();
-    }
-
-    @OnItemClick(R.id.content_list)
-    void listItemClick(int position) {
-        final Pass newSelectedPass = App.getPassStore().getPassbookAt(position);
-        App.getPassStore().setCurrentPass(Optional.of(newSelectedPass));
-        AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
     }
 
     public void refreshPasses() {
@@ -145,7 +138,10 @@ public class PassListActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
         getSupportActionBar().setHomeButtonEnabled(true);*/
 
-        listView.setEmptyView(emptySwipeRefreshLayout);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        llm.scrollToPosition(0);
+        listView.setLayoutManager(llm);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -173,56 +169,7 @@ public class PassListActivity extends ActionBarActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, long id) {
-
-                listView.setItemChecked(position, true);
-                view.refreshDrawableState();
-
-                if (actionMode != null) {
-                    // no need to restart -> NTFS restarting is even dangerous as this deselects the item
-                    return true;
-                }
-
-                actionMode = startSupportActionMode(new ActionMode.Callback() {
-                    @Override
-                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-
-                        getMenuInflater().inflate(R.menu.activity_pass_view, menu);
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        if (new PassMenuOptions(PassListActivity.this, App.getPassStore().getPassbookAt(position)).process(menuItem)) {
-                            actionMode.finish();
-                            return true;
-                        }
-
-                        return false;
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(ActionMode _actionMode) {
-                        listView.setItemChecked(position, false);
-                        actionMode = null;
-                    }
-                });
-
-                return true;
-
-            }
-        });
-
         prepareRefreshLayout(listSwipeRefreshLayout);
-        prepareRefreshLayout(emptySwipeRefreshLayout);
-
 
         ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
@@ -249,9 +196,9 @@ public class PassListActivity extends ActionBarActivity {
     }
 
     private void scrollToType(String type) {
-        for (int i = 0; i < passAdapter.getCount(); i++) {
+        for (int i = 0; i < passAdapter.getItemCount(); i++) {
             if (App.getPassStore().getPassbookAt(i).getTypeNotNull().equals(type)) {
-                listView.setSelection(i);
+                listView.scrollToPosition(i);
                 return; // we are done
             }
         }
@@ -312,6 +259,14 @@ public class PassListActivity extends ActionBarActivity {
             super.onPostExecute(aVoid);
 
             passAdapter = new PassAdapter(PassListActivity.this);
+            passAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onChanged() {
+                    emptyView.setVisibility((passAdapter.getItemCount() == 0)?View.VISIBLE:View.GONE);
+                    listView.setVisibility((passAdapter.getItemCount() != 0)?View.VISIBLE:View.GONE);
+                    super.onChanged();
+                }
+            });
             listView.setAdapter(passAdapter);
 
             if (App.getPassStore().isEmpty()) {
@@ -343,14 +298,12 @@ public class PassListActivity extends ActionBarActivity {
     }
 
     public void updateUIRegardingToUIState() {
-        Log.i("", "changeuistate" + uiState);
-
         listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
-        emptySwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
 
         supportInvalidateOptionsMenu();
 
         emptyView.setText(Html.fromHtml(uiState.getHtmlResForEmptyView()));
+
         emptyView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 

@@ -2,6 +2,7 @@ package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 
 import com.google.common.base.Optional;
 
@@ -36,17 +37,17 @@ public class PassImpl implements Pass, Serializable {
     private String path;
     private String id;
 
-    private Optional<String> iconBitmapFile;
-    private Optional<String> thumbnailBitmapFile;
-    private Optional<String> logoBitmapFile;
-    private Optional<String> stripBitmapFile;
+    private Optional<String> iconBitmapFile = Optional.absent();
+    private Optional<String> thumbnailBitmapFile = Optional.absent();
+    private Optional<String> logoBitmapFile = Optional.absent();
+    private Optional<String> stripBitmapFile = Optional.absent();
 
-    private Optional<String> authToken;
-    private Optional<String> webServiceURL;
-    private Optional<String> serial;
+    private Optional<String> authToken = Optional.absent();
+    private Optional<String> webServiceURL = Optional.absent();
+    private Optional<String> serial = Optional.absent();
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
-    private Optional<String> passTypeIdent;
+    private Optional<String> passTypeIdent = Optional.absent();
 
     @Override
     public Optional<String> getOrganisation() {
@@ -296,19 +297,19 @@ public class PassImpl implements Pass, Serializable {
         this.barCode = Optional.fromNullable(barCode);
     }
 
-    public void setSerial(Optional<String> serial) {
+    public void setSerial(@NonNull Optional<String> serial) {
         this.serial = serial;
     }
 
-    public void setAuthToken(Optional<String> authToken) {
+    public void setAuthToken(@NonNull Optional<String> authToken) {
         this.authToken = authToken;
     }
 
-    public void setWebserviceURL(Optional<String> webServiceURL) {
+    public void setWebserviceURL(@NonNull Optional<String> webServiceURL) {
         this.webServiceURL = webServiceURL;
     }
 
-    public void setPassTypeIdent(Optional<String> passTypeIdent) {
+    public void setPassTypeIdent(@NonNull Optional<String> passTypeIdent) {
         this.passTypeIdent = passTypeIdent;
     }
 }
