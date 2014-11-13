@@ -64,6 +64,7 @@ public class PassViewActivityBase extends ActionBarActivity {
                 finish();
                 return true;
             case R.id.menu_light:
+                item.setVisible(false);
                 setToFullBrightness();
                 return true;
 
