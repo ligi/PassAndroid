@@ -70,7 +70,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
                     @Override
                     public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 
-                        passListActivity.getMenuInflater().inflate(R.menu.activity_pass_view, menu);
+                        passListActivity.getMenuInflater().inflate(R.menu.activity_pass_action_mode, menu);
                         return true;
                     }
 
