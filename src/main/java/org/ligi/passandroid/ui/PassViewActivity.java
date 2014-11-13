@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,6 +86,11 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         AXT.at(this).disableRotation();
+
+        Window win = getWindow();
+        WindowManager.LayoutParams params = win.getAttributes();
+        params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+        win.setAttributes(params);
 
         final Pass pass = optionalPass.get();
 
