@@ -161,6 +161,10 @@ public class AndroidFileSystemPassStore implements PassStore {
                     @Override
                     public int compare(Pass lhs, Pass rhs) {
 
+                        if (!lhs.getRelevantDate().isPresent() && !rhs.getRelevantDate().isPresent()) {
+                            return 0;
+                        }
+
                         if (!lhs.getRelevantDate().isPresent()) {
                             return 1;
                         }
