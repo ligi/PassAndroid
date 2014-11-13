@@ -79,8 +79,9 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
                     NavigateToLocationsDialog.perform(activity, App.getPassStore().getPassbookForId(pass.getId()), false);
                 }
             });
+            navigateTo.setVisibility(View.VISIBLE);
         } else {
-            navigateTo.setVisibility(noButtons ? View.GONE : View.VISIBLE);
+            navigateTo.setVisibility(View.GONE);
         }
 
         if (dateForIntent != null) {
