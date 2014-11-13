@@ -82,14 +82,15 @@ dependencies {
     // The Apache Software License, Version 2.0
     compile 'com.googlecode.android-query:android-query:0.25.9'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.android.support:support-v4:21.0.0'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
-    compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'com.android.support:cardview-v7:21.0.0'
-    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.jakewharton:butterknife:6.0.0'
     compile 'joda-time:joda-time:2.5'
     compile 'com.squareup:otto:1.3.5'
+
+    compile 'com.android.support:support-v4:21.0.0'
     compile 'com.android.support:recyclerview-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:cardview-v7:21.0.0'
 
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.2'
@@ -112,13 +113,13 @@ dependencies {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21"
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
         versionCode 242
         versionName "2.4.2"
         minSdkVersion 9
-        targetSdkVersion 20
+        targetSdkVersion 21
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
     }
