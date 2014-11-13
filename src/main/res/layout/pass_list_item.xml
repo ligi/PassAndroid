@@ -5,10 +5,9 @@
     android:id="@+id/pass_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
+    android:layout_margin="4dp"
     android.support.v7.cardview:cardMaxElevation="@dimen/card_longclick_elevation_half"
-    android.support.v7.cardview:cardPreventCornerOverlap="true"
+
     android:orientation="vertical">
 
     <RelativeLayout
