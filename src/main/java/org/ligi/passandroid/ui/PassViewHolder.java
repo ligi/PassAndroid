@@ -96,6 +96,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
                     activity.startActivity(intent);
                 }
             });
+            addCalendar.setVisibility(View.VISIBLE);
         } else {
             addCalendar.setVisibility(View.GONE);
         }
@@ -124,7 +125,9 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
         if (pass.getRelevantDate().isPresent()) {
             final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(), pass.getRelevantDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
             date.setText(relativeDateTimeString);
+            date.setVisibility(View.VISIBLE);
         } else if (pass.getExpirationDate().isPresent()) {
+            date.setVisibility(View.VISIBLE);
             final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(), pass.getExpirationDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
 
             if (pass.getExpirationDate().get().isAfterNow()) {
