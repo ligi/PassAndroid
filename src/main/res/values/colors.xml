@@ -8,6 +8,7 @@
 
     <color name="icon_blue">#ff6ea0f2</color>
     <color name="icon_green">#ffbfdf00</color>
+    <color name="icon_green_dark">#ff669900</color>
     <color name="icon_lila">#ffc46ee3</color>
     <color name="icon_orange">#ffffb420</color>
 
