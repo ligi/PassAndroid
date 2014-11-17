@@ -10,13 +10,6 @@
 
     <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="seperator_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:background">@color/dividing_color</item>
-    </style>
-
     <style name="nav_btn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
