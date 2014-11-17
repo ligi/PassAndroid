@@ -15,8 +15,24 @@ public class ApplePassbookQuirkCorrector {
         careForVirginAustralia(pass);
         careForCathayPacific(pass);
         careForSWISS(pass);
+        careForRenfe(pass);
     }
-
+    
+    private static void careForRenfe(PassImpl pass) {
+    	if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("RENFE OPERADORA")) {
+    		return;
+    	}
+    	Tracker.get().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 0L);
+    	
+    	final Optional<PassField> optionalDepart = pass.getPrimaryFields().getPassFieldForKey("boardingTime");
+    	final Optional<PassField> optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destino");
+    	
+    	if (optionalDepart.isPresent() && optionalArrive.isPresent()) {
+    		Tracker.get().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 1L);
+    		pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
+    	}
+    }
+    
     private static void careForSWISS(PassImpl pass) {
         if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("SWISS")) {
             return;
