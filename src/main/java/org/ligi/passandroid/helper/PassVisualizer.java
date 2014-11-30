@@ -31,7 +31,11 @@ public class PassVisualizer {
     public static String getFieldListAsString(PassFieldList fieldList) {
         final StringBuilder result = new StringBuilder();
         for (PassField f : fieldList) {
-            result.append("<b>" + f.label + "</b>: " + f.value + "<br/>");
+            result.append("<b>");
+            result.append(f.label);
+            result.append("</b>: ");
+            result.append(f.value);
+            result.append("<br/>");
         }
         return result.toString();
     }
