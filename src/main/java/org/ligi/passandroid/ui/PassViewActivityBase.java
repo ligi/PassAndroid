@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class PassViewActivityBase extends ActionBarActivity {
 
@@ -34,6 +36,22 @@ public class PassViewActivityBase extends ActionBarActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // a little hack because I strongly disagree with the style guide here
+        // ;-)
+        // not having the Actionbar overfow menu also with devices with hardware
+        // key really helps discoverability
+        // http://stackoverflow.com/questions/9286822/how-to-force-use-of-overflow-menu-on-devices-with-menu-button
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore - but at least we tried ;-)
+        }
 
         optionalPass = App.getPassStore().getCurrentPass();
 
