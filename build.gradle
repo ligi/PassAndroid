@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0-rc1'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.14.1'
     }
@@ -81,22 +81,22 @@ dependencies {
 
     // The Apache Software License, Version 2.0
     compile 'com.googlecode.android-query:android-query:0.25.9'
-    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.code.gson:gson:2.3.1'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'joda-time:joda-time:2.5'
+    compile 'joda-time:joda-time:2.6'
     compile 'com.squareup:otto:1.3.5'
 
-    compile 'com.android.support:support-v4:21.0.2'
+    compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.0'
-    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.0'
 
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.2'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.1.0'
-    compile 'fr.nicolaspomepuy:discreetapprate:2.0.2@aar'
+    compile 'fr.nicolaspomepuy:discreetapprate:2.0.3@aar'
 
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
@@ -104,7 +104,7 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
-    def play_services = 'com.google.android.gms:play-services:6.1.+'
+    def play_services = 'com.google.android.gms:play-services-maps:6.5.+'
 
     withAnalyticsCompile play_services
     withMapsCompile play_services
