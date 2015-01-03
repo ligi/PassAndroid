@@ -18,7 +18,7 @@ public abstract class BaseIntegration<T extends Activity> extends ActivityInstru
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        setFailureHandler(new SpooningFailureHandler(getInstrumentation().getTargetContext()));
+        setFailureHandler(new SpooningFailureHandler(this));
 
     }
 
