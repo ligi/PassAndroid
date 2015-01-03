@@ -49,16 +49,61 @@ android {
         }
     }
 
-
     // needed for assertJ
     packagingOptions {
-      exclude 'asm-license.txt'
-      exclude 'LICENSE'
-      exclude 'NOTICE'
+        // needed for assertJ
+        exclude 'asm-license.txt'
+        exclude 'LICENSE'
+        exclude 'NOTICE'
+
+        // hack for instrumentation testing :-(
+        exclude 'LICENSE.txt'
     }
 
     // https://groups.google.com/forum/#!topic/adt-dev/-Km7VgExKf4
 //    useOldManifestMerger true
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        versionCode 244
+        versionName "2.4.4"
+        minSdkVersion 9
+        targetSdkVersion 21
+        applicationId "org.ligi.passandroid"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"    }
+
+    buildTypes {
+        release {
+            //minifyEnabled true
+            //shrinkResources true
+            proguardFile 'proguard-project.txt'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+
+                    def file = output.outputFile
+                    output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+                }
+            }
+        }
+        debug {
+            //makes problems
+            //testCoverageEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+        disable "MissingTranslation"
+    }
+
 }
 
 dependencies {
@@ -110,54 +155,3 @@ dependencies {
     withMapsCompile play_services
 }
 
-
-android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
-
-    defaultConfig {
-        versionCode 244
-        versionName "2.4.4"
-        minSdkVersion 9
-        targetSdkVersion 21
-        applicationId "org.ligi.passandroid"
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-    }
-
-    buildTypes {
-        release {
-            //minifyEnabled true
-            //shrinkResources true
-            proguardFile 'proguard-project.txt'
-
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-
-                    def file = output.outputFile
-                    output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
-                }
-            }
-        }
-        debug {
-            //makes problems
-            //testCoverageEnabled true
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
-    lintOptions {
-        abortOnError false
-        disable "MissingTranslation"
-    }
-
-    // hack for instrumentation testing :-(
-    packagingOptions {
-        exclude 'LICENSE.txt'
-    }
-
-
-}
