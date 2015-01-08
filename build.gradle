@@ -7,7 +7,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.14.1'
+        classpath('com.stanfy.spoon:spoon-gradle-plugin:0.14.1') {
+            // https://github.com/stanfy/spoon-gradle-plugin/issues/33
+            exclude module: 'guava'
+        }
+
     }
 }
 
