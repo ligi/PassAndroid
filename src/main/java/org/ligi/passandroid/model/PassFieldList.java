@@ -52,4 +52,14 @@ public class PassFieldList extends ArrayList<PassField> {
         }
         return Optional.absent();
     }
+
+    public String toHTMLString() {
+        final StringBuilder result = new StringBuilder();
+        for (PassField f : this) {
+            result.append("<b>").append(f.label).append("</b>: ").append(f.value);
+            result.append("<br/>");
+        }
+        return result.toString();
+    }
+
 }

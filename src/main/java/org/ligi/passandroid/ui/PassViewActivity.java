@@ -22,7 +22,6 @@ import com.google.common.base.Optional;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
@@ -35,8 +34,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class PassViewActivity extends PassViewActivityBase {
-
-    private View contentView;
 
     @OnClick(R.id.barcode_img)
     void onBarcodeClick() {
@@ -87,8 +84,7 @@ public class PassViewActivity extends PassViewActivityBase {
 
         AXT.at(this).disableRotation();
 
-
-        contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
+        final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
         setContentView(contentView);
 
         final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
@@ -125,9 +121,6 @@ public class PassViewActivity extends PassViewActivityBase {
                     .show();
             return;
         }
-
-
-
 
         if (pass.getBarCode().isPresent()) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
@@ -170,9 +163,8 @@ public class PassViewActivity extends PassViewActivityBase {
             back_str += getPassDebugInfo(pass);
         }
 
-
         if (pass.getBackFields().size() != 0) {
-            back_str += PassVisualizer.getFieldListAsString(pass.getBackFields());
+            back_str += pass.getBackFields().toHTMLString();
             back_tv.setText(Html.fromHtml(back_str));
             moreTextView.setVisibility(View.VISIBLE);
         } else {
@@ -180,7 +172,8 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         Linkify.addLinks(back_tv, Linkify.ALL);
-        PassVisualizer.visualize(this, pass, getWindow().getDecorView());
+
+        new PassViewHolder(findViewById(R.id.pass_card)).apply(pass, this);
         super.onPostResume();
     }
 

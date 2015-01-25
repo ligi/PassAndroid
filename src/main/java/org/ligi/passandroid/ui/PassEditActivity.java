@@ -17,7 +17,6 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
-import org.ligi.passandroid.helper.PassVisualizer;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassWriter;
@@ -121,7 +120,8 @@ public class PassEditActivity extends ActionBarActivity {
     }
 
     private void refresh(Pass pass) {
-        PassVisualizer.visualize(this, pass, getWindow().getDecorView());
+        //new PassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card)).apply(pass, this);
+        new PassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card)).apply(pass, this);
     }
 
     @Override
