@@ -24,6 +24,20 @@ repositories {
 }
 
 android {
+
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        versionCode 244
+        versionName "2.4.4"
+        minSdkVersion 9
+        targetSdkVersion 21
+        applicationId "org.ligi.passandroid"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
     flavorDimensions "maps", "analytics", "distribution"
 
     productFlavors {
@@ -76,8 +90,9 @@ dependencies {
 
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 
+    // have to wait with update till this is solved: https://code.google.com/p/dexmaker/issues/detail?id=40
     androidTestCompile 'org.mockito:mockito-core:1.9.5'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     // The Apache Software License, Version 2.0
     compile 'com.googlecode.android-query:android-query:0.25.9'
@@ -93,7 +108,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.0'
 
     compile 'org.ligi:AXT:0.31'
-    compile 'org.ligi:tracedroid:1.2'
+    compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.1.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.3@aar'
