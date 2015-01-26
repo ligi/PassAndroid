@@ -3,6 +3,8 @@ package org.ligi.passandroid.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.provider.CalendarContract;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -101,16 +103,15 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             addCalendar.setVisibility(View.GONE);
         }
 
-        icon.setBackgroundColor(pass.getBackGroundColor());
-
         final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
+
         if (iconBitmap.isPresent()) {
             final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);
             icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap.get(), size, size, false));
         } else {
-            icon.setImageResource(R.drawable.ic_launcher);
+            final ColorDrawable colorDrawable = new ColorDrawable(pass.getBackGroundColor());
+            icon.setImageDrawable(colorDrawable);
         }
-
 
         if (pass.getType() != null) {
             category.setImageByCategory(pass.getType());

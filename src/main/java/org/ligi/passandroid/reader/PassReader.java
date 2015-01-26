@@ -36,27 +36,11 @@ public class PassReader {
             pass.setBackgroundColor(Color.parseColor(pass_json.getString("bgColor")));
             pass.setForegroundColor(Color.parseColor(pass_json.getString("fgColor")));
 
-
         } catch (Exception e) {
             Log.i("PassParse Exception " + e);
         }
 
-        pass.setIconBitmapFile(findBitmapFile(path, "icon"));
-        pass.setLogoBitmapFile(findBitmapFile(path, "logo"));
-        pass.setThumbnailBitmapFile(findBitmapFile(path, "thumbnail"));
-        pass.setStripBitmapFile(findBitmapFile(path, "strip"));
-
         return pass;
-    }
-
-    private static String findBitmapFile(String path, String bitmap) {
-
-        String res = path + "/" + bitmap + ".png";
-        if (BitmapFactory.decodeFile(res) != null) {
-            return res;
-        }
-
-        return null;
     }
 
 }

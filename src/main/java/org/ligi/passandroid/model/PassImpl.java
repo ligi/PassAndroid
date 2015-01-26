@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PassImpl implements Pass, Serializable {
+    public static final String FNAME_ICON = "icon";
+    public static final String FNAME_THUMBNAIL = "thumbnail";
+    public static final String FNAME_STRIP = "strip";
+    public static final String FNAME_LOGO = "logo";
+    public static final String FILETYPE_IMAGES = ".png";
+
     private Optional<String> organisation = Optional.absent();
     private String type;
     private boolean valid = true; // be positive
@@ -36,11 +42,6 @@ public class PassImpl implements Pass, Serializable {
     private List<PassLocation> locations = new ArrayList<>();
     private String path;
     private String id;
-
-    private Optional<String> iconBitmapFile = Optional.absent();
-    private Optional<String> thumbnailBitmapFile = Optional.absent();
-    private Optional<String> logoBitmapFile = Optional.absent();
-    private Optional<String> stripBitmapFile = Optional.absent();
 
     private Optional<String> authToken = Optional.absent();
     private Optional<String> webServiceURL = Optional.absent();
@@ -127,42 +128,22 @@ public class PassImpl implements Pass, Serializable {
         return description;
     }
 
-    public void setIconBitmapFile(String iconBitmapFile) {
-        this.iconBitmapFile = Optional.fromNullable(iconBitmapFile);
-    }
 
-
-    public void setLogoBitmapFile(String logoBitmapFile) {
-        this.logoBitmapFile = Optional.fromNullable(logoBitmapFile);
-    }
-
-    public void setThumbnailBitmapFile(String thumbnailBitmapFile) {
-        this.thumbnailBitmapFile = Optional.fromNullable(thumbnailBitmapFile);
-    }
-
-    public void setStripBitmapFile(String stripBitmapFile) {
-        this.stripBitmapFile = Optional.fromNullable(stripBitmapFile);
-    }
-
-    private Optional<Bitmap> getBitmapFromOptionalString(Optional<String> in) {
-        if (in == null || !in.isPresent()) {
-            return Optional.absent();
-        }
-
-        return Optional.fromNullable(BitmapFactory.decodeFile(getPath()+"/"+in.get()));
+    private Optional<Bitmap> getBitmapFromFileNameString(String in) {
+        return Optional.fromNullable(BitmapFactory.decodeFile(getPath() + "/" + in + PassImpl.FILETYPE_IMAGES));
     }
 
     public Optional<Bitmap> getIconBitmap() {
-        return getBitmapFromOptionalString(iconBitmapFile);
+        return getBitmapFromFileNameString(FNAME_ICON);
     }
 
     public Optional<Bitmap> getThumbnailImage() {
-        return getBitmapFromOptionalString(thumbnailBitmapFile);
+        return getBitmapFromFileNameString(FNAME_THUMBNAIL);
     }
 
     @Override
     public Optional<Bitmap> getStripImage() {
-        return getBitmapFromOptionalString(stripBitmapFile);
+        return getBitmapFromFileNameString(FNAME_STRIP);
     }
 
     @Override
@@ -186,7 +167,7 @@ public class PassImpl implements Pass, Serializable {
     }
 
     public Optional<Bitmap> getLogoBitmap() {
-        return getBitmapFromOptionalString(logoBitmapFile);
+        return getBitmapFromFileNameString(FNAME_LOGO);
     }
 
 

@@ -25,7 +25,7 @@ import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ImageEditFragment extends Fragment  {
+public class ImageEditFragment extends Fragment {
 
 
     private static final int REQ_CODE_PICK_LOGO = 1;
@@ -88,19 +88,15 @@ public class ImageEditFragment extends Fragment  {
             switch (requestCode) {
                 case REQ_CODE_PICK_LOGO:
                     extractImage(imageReturnedIntent, "logo");
-                    pass.setLogoBitmapFile("logo.png");
                     break;
                 case REQ_CODE_PICK_ICON:
                     extractImage(imageReturnedIntent, "icon");
-                    pass.setIconBitmapFile("icon.png");
                     break;
                 case REQ_CODE_PICK_THUMBNAIL:
                     extractImage(imageReturnedIntent, "thumbnail");
-                    pass.setThumbnailBitmapFile("thumbnail.png");
                     break;
                 case REQ_CODE_PICK_STRIP:
                     extractImage(imageReturnedIntent, "strip");
-                    pass.setStripBitmapFile("strip.png");
                     break;
             }
             refresh();
@@ -112,7 +108,7 @@ public class ImageEditFragment extends Fragment  {
     private void extractImage(Intent imageReturnedIntent, String name) {
         final File extract = new ImageFromIntentUriExtractor(getActivity()).extract(imageReturnedIntent.getData());
         try {
-            copy(extract, new File(pass.getPath() + "/" + name + ".png"));
+            copy(extract, new File(pass.getPath() + "/" + name + PassImpl.FILETYPE_IMAGES));
         } catch (IOException e) {
             e.printStackTrace();
         }

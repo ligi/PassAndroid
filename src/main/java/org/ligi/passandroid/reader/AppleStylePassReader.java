@@ -1,5 +1,6 @@
 package org.ligi.passandroid.reader;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
@@ -23,6 +24,7 @@ import org.ligi.passandroid.model.PassLocation;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -54,10 +56,10 @@ public class AppleStylePassReader {
             translation.loadFromFile(file);
         }
 
-        pass.setIconBitmapFile(findBitmapFile(path, localized_path, "icon"));
-        pass.setLogoBitmapFile(findBitmapFile(path, localized_path, "logo"));
-        pass.setThumbnailBitmapFile(findBitmapFile(path, localized_path, "thumbnail"));
-        pass.setStripBitmapFile(findBitmapFile(path, localized_path, "strip"));
+        copyBitmapFile(path, localized_path, PassImpl.FNAME_ICON);
+        copyBitmapFile(path, localized_path, PassImpl.FNAME_LOGO);
+        copyBitmapFile(path, localized_path, PassImpl.FNAME_STRIP);
+        copyBitmapFile(path, localized_path, PassImpl.FNAME_THUMBNAIL);
 
         final File file = new File(path + "/pass.json");
 
@@ -132,10 +134,10 @@ public class AppleStylePassReader {
                 }
             }
 
-            pass.setSerial(readJsonSafeAsOptional(pass_json,"serialNumber"));
-            pass.setAuthToken(readJsonSafeAsOptional(pass_json,"authenticationToken"));
-            pass.setWebserviceURL(readJsonSafeAsOptional(pass_json,"webServiceURL"));
-            pass.setPassTypeIdent(readJsonSafeAsOptional(pass_json,"passTypeIdentifier"));
+            pass.setSerial(readJsonSafeAsOptional(pass_json, "serialNumber"));
+            pass.setAuthToken(readJsonSafeAsOptional(pass_json, "authenticationToken"));
+            pass.setWebserviceURL(readJsonSafeAsOptional(pass_json, "webServiceURL"));
+            pass.setPassTypeIdent(readJsonSafeAsOptional(pass_json, "passTypeIdentifier"));
 
             final List<PassLocation> locations = new ArrayList<>();
             try {
@@ -274,29 +276,33 @@ public class AppleStylePassReader {
         }
     }
 
-    private static String findBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
-        String res;
+    private static void copyBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
+        final Bitmap bitmap1 = findBitmap(path, localizedPath, bitmap);
+        try {
+            bitmap1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File(path, bitmap + PassImpl.FILETYPE_IMAGES)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Bitmap findBitmap(String path, Optional<String> localizedPath, String bitmap) {
+
+        final List<String> searchList = new ArrayList<>();
         if (localizedPath.isPresent()) {
-            res = localizedPath.get() + "/" + bitmap + "@2x.png";
-            if (BitmapFactory.decodeFile(res) != null) {
+            searchList.add(localizedPath.get() + "/" + bitmap + "@2x.png");
+            searchList.add(localizedPath.get() + "/" + bitmap + ".png");
+        }
+
+        searchList.add(path + "/" + bitmap + "@2x.png");
+        searchList.add(path + "/" + bitmap + ".png");
+
+        for (String current : searchList) {
+            final Bitmap res = BitmapFactory.decodeFile(current);
+            if (res != null) {
                 return res;
             }
-
-            res = localizedPath.get() + "/" + bitmap + ".png";
-            if (BitmapFactory.decodeFile(res) != null) {
-                return res;
-            }
         }
 
-        res = path + "/" + bitmap + "@2x.png";
-        if (BitmapFactory.decodeFile(res) != null) {
-            return res;
-        }
-
-        res = path + "/" + bitmap + ".png";
-        if (BitmapFactory.decodeFile(res) != null) {
-            return res;
-        }
         return null;
     }
 
