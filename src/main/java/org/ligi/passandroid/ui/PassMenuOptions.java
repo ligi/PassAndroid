@@ -38,6 +38,7 @@ public class PassMenuOptions {
                 builder.setIcon(R.drawable.ic_warning_amber_36dp);
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
+
                 if (pass.getSource().isPresent() && pass.getSource().get().startsWith("file://")) {
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
                     builder.setView(sourceDeleteCheckBox);

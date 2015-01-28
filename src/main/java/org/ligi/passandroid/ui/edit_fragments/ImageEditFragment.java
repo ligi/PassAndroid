@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.common.io.Files;
+
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.ImageFromIntentUriExtractor;
 import org.ligi.passandroid.R;
@@ -15,10 +17,7 @@ import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,17 +26,13 @@ import static android.app.Activity.RESULT_OK;
 
 public class ImageEditFragment extends Fragment {
 
-
     private static final int REQ_CODE_PICK_LOGO = 1;
     private static final int REQ_CODE_PICK_ICON = 2;
     private static final int REQ_CODE_PICK_STRIP = 3;
     private static final int REQ_CODE_PICK_THUMBNAIL = 4;
 
-    private final PassImpl pass;
-
-    public ImageEditFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass().get();
-
+    private static PassImpl getPass() {
+        return (PassImpl) App.getPassStore().getCurrentPass().get();
     }
 
     @OnClick(R.id.pickIcon)
@@ -61,23 +56,22 @@ public class ImageEditFragment extends Fragment {
     }
 
     private void startPick(int reqCodePickLogo) {
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), reqCodePickLogo);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View inflate = inflater.inflate(R.layout.edit_images, null);
+        final View inflate = inflater.inflate(R.layout.edit_images, container, false);
         ButterKnife.inject(this, inflate);
 
         return inflate;
     }
 
     private void refresh() {
-        App.getBus().post(new PassRefreshEvent(pass));
+        App.getBus().post(new PassRefreshEvent(getPass()));
     }
 
     public void onActivityResult(int requestCode, int resultCode,
@@ -85,42 +79,33 @@ public class ImageEditFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
         if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQ_CODE_PICK_LOGO:
-                    extractImage(imageReturnedIntent, "logo");
-                    break;
-                case REQ_CODE_PICK_ICON:
-                    extractImage(imageReturnedIntent, "icon");
-                    break;
-                case REQ_CODE_PICK_THUMBNAIL:
-                    extractImage(imageReturnedIntent, "thumbnail");
-                    break;
-                case REQ_CODE_PICK_STRIP:
-                    extractImage(imageReturnedIntent, "strip");
-                    break;
-            }
+            extractImage(imageReturnedIntent, getImageStringByRequestCode(requestCode));
             refresh();
         }
 
+    }
 
+    private static String getImageStringByRequestCode(final int requestCode) {
+        switch (requestCode) {
+            case REQ_CODE_PICK_LOGO:
+                return "logo";
+            case REQ_CODE_PICK_ICON:
+                return "icon";
+            case REQ_CODE_PICK_THUMBNAIL:
+                return "thumbnail";
+            case REQ_CODE_PICK_STRIP:
+                return "strip";
+        }
+        throw new IllegalArgumentException("unknown request code " + requestCode);
     }
 
     private void extractImage(Intent imageReturnedIntent, String name) {
         final File extract = new ImageFromIntentUriExtractor(getActivity()).extract(imageReturnedIntent.getData());
         try {
-            copy(extract, new File(pass.getPath() + "/" + name + PassImpl.FILETYPE_IMAGES));
+            Files.copy(extract, new File(getPass().getPath() + "/" + name + PassImpl.FILETYPE_IMAGES));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void copy(File src, File dst) throws IOException {
-        FileInputStream inStream = new FileInputStream(src);
-        FileOutputStream outStream = new FileOutputStream(dst);
-        FileChannel inChannel = inStream.getChannel();
-        FileChannel outChannel = outStream.getChannel();
-        inChannel.transferTo(0, inChannel.size(), outChannel);
-        inStream.close();
-        outStream.close();
-    }
 }
