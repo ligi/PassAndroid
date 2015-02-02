@@ -99,8 +99,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'joda-time:joda-time:2.6'
-    compile 'com.squareup:otto:1.3.5'
+    compile 'joda-time:joda-time:2.7'
+    compile 'com.squareup:otto:1.3.6'
 
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
@@ -110,7 +110,7 @@ dependencies {
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'
-    compile 'com.squareup.okhttp:okhttp:2.1.0'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.3@aar'
     compile 'com.larswerkman:HoloColorPicker:1.4'
 
