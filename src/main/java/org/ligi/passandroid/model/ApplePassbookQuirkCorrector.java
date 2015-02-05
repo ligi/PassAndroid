@@ -46,9 +46,7 @@ public class ApplePassbookQuirkCorrector {
             Tracker.get().trackEvent("quirk_fix", "description_replace", "SWISS", 1L);
             pass.setDescription(optionalDepart.get().value + " -> " + optionalArrive.get().value);
         }
-
     }
-
 
     private static void careForCathayPacific(PassImpl pass) {
         if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Cathay Pacific")) {
@@ -66,7 +64,6 @@ public class ApplePassbookQuirkCorrector {
             pass.setDescription(optionalDepart.get().label + " -> " + optionalArrive.get().label);
         }
     }
-
 
     private static void careForVirginAustralia(PassImpl pass) {
         // also good identifier could be  "passTypeIdentifier": "pass.com.virginaustralia.boardingpass
