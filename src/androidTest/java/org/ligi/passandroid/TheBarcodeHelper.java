@@ -2,6 +2,7 @@ package org.ligi.passandroid;
 
 
 import android.graphics.Bitmap;
+import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.google.zxing.BarcodeFormat;
@@ -11,10 +12,10 @@ import org.ligi.passandroid.helper.BarcodeHelper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TheBarcodeHelper extends BaseTest {
+public class TheBarcodeHelper extends InstrumentationTestCase {
 
     @SmallTest
-    public void testQRBitmatrixHasCorrectSize() throws Exception {
+    public void testQRBitMatrixHasCorrectSize() throws Exception {
         testBitMatrixSize(BarcodeFormat.QR_CODE);
     }
 
@@ -29,7 +30,7 @@ public class TheBarcodeHelper extends BaseTest {
     }
 
     @SmallTest
-    public void testPDF417BitmatrixHasCorrectSize() {
+    public void testPDF417BitMatrixHasCorrectSize() {
         testBitMatrixSize(BarcodeFormat.PDF_417);
     }
 

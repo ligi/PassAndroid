@@ -1,6 +1,7 @@
 package org.ligi.passandroid;
 
 
+import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.helper.CategoryHelper;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TheCategoryHelper extends BaseTest {
+public class TheCategoryHelper extends InstrumentationTestCase {
 
     @SmallTest
     public void testAllCategoriesAreTranslated() {
