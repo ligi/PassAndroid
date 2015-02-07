@@ -73,7 +73,7 @@ public class PassViewActivity extends PassViewActivityBase {
     ViewGroup frontFieldsContainer;
 
     @InjectView(R.id.barcode_alt_text)
-    TextView barcodeAlternatvieText;
+    TextView barcodeAlternativeText;
 
     @Override
     protected void onResume() {
@@ -127,10 +127,10 @@ public class PassViewActivity extends PassViewActivityBase {
             final Bitmap bitmap = pass.getBarCode().get().getBitmap(smallestSide / 3);
             setBitmapSafe(barcode_img, Optional.fromNullable(bitmap));
             if (pass.getBarCode().get().getAlternativeText().isPresent()) {
-                barcodeAlternatvieText.setText(pass.getBarCode().get().getAlternativeText().get());
-                barcodeAlternatvieText.setVisibility(View.VISIBLE);
+                barcodeAlternativeText.setText(pass.getBarCode().get().getAlternativeText().get());
+                barcodeAlternativeText.setVisibility(View.VISIBLE);
             } else {
-                barcodeAlternatvieText.setVisibility(View.GONE);
+                barcodeAlternativeText.setVisibility(View.GONE);
             }
         } else {
             setBitmapSafe(barcode_img, Optional.<Bitmap>absent());
