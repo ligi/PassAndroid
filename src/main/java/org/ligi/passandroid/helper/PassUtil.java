@@ -8,7 +8,7 @@ import java.util.UUID;
 public class PassUtil {
     public static Pass createEmptyPass() {
 
-        PassImpl pass = new PassImpl();
+        final PassImpl pass = new PassImpl();
 
         pass.setId(UUID.randomUUID().toString());
         pass.setBackgroundColor(0xFF0000ff);
