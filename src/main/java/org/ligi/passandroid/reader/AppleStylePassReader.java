@@ -17,6 +17,7 @@ import org.ligi.passandroid.helper.SafeJSONReader;
 import org.ligi.passandroid.model.ApplePassbookQuirkCorrector;
 import org.ligi.passandroid.model.AppleStylePassTranslation;
 import org.ligi.passandroid.model.BarCode;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.PassImpl;
@@ -34,7 +35,7 @@ import java.util.regex.Pattern;
 
 public class AppleStylePassReader {
 
-    public static Pass read(String path, String language) {
+    public static FiledPass read(String path, String language) {
         final PassImpl pass = new PassImpl();
 
         final AppleStylePassTranslation translation = new AppleStylePassTranslation();

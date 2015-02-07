@@ -1,12 +1,13 @@
 package org.ligi.passandroid.helper;
 
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 
 import java.util.UUID;
 
 public class PassUtil {
-    public static Pass createEmptyPass() {
+    public static FiledPass createEmptyPass() {
 
         final PassImpl pass = new PassImpl();
 

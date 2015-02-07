@@ -25,7 +25,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     private final Context context;
     private String path;
 
-    private List<Pass> passList = new ArrayList<>();
+    private List<FiledPass> passList = new ArrayList<>();
     private Pass actPass;
 
     public AndroidFileSystemPassStore(Context context) {
@@ -90,7 +90,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
 
-    private Pass getCachedPassOrLoad(String id) {
+    private FiledPass getCachedPassOrLoad(String id) {
         final File cachedFile = getCacheFile(id);
         try {
             return AXT.at(cachedFile).loadToObject();
@@ -101,20 +101,18 @@ public class AndroidFileSystemPassStore implements PassStore {
         Log.i("Passbook cache miss");
         final String language = context.getResources().getConfiguration().locale.getLanguage();
 
-        final Pass pass = readPass(id, language);
+        final FiledPass pass = readPass(id, language);
 
         AXT.at(cachedFile).writeObject(pass);
         return pass;
     }
 
-    private Pass readPass(String id, String language) {
-        Pass pass;
+    private FiledPass readPass(String id, String language) {
         if (new File(getPathForID(id), "data.json").exists()) {
-            pass = PassReader.read(getPathForID(id));
+            return PassReader.read(getPathForID(id));
         } else {
-            pass = AppleStylePassReader.read(getPathForID(id), language);
+            return AppleStylePassReader.read(getPathForID(id), language);
         }
-        return pass;
     }
 
     private File getPassesDirSafely() {
@@ -246,4 +244,6 @@ public class AndroidFileSystemPassStore implements PassStore {
     public String getPathForID(final String id) {
         return path + "/" + id;
     }
+
+
 }

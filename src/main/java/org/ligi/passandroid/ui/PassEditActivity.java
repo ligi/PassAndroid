@@ -151,15 +151,8 @@ public class PassEditActivity extends ActionBarActivity {
                 finish();
                 return true;
             case R.id.menu_save:
-                final String jsonString = PassWriter.toJSON(pass);
-
-                final String path = App.getPassStore().getPathForID(pass.getId());
-                new File(path).mkdirs();
-                final File file = new File(path, "data.json");
-                App.getPassStore().deleteCache(pass.getId());
-                AXT.at(file).writeString(jsonString);
-
                 App.getPassStore().setCurrentPass(pass);
+                pass.save(App.getPassStore());
                 AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
                 return true;
         }

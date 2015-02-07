@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassImpl implements Pass, Serializable {
+public class PassImpl implements FiledPass, Serializable {
     public static final String FNAME_ICON = "icon";
     public static final String FNAME_THUMBNAIL = "thumbnail";
     public static final String FNAME_STRIP = "strip";
@@ -195,8 +195,21 @@ public class PassImpl implements Pass, Serializable {
         this.id = id;
     }
 
+    @Override
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public void save(PassStore store) {
+        final String jsonString = PassWriter.toJSON(this);
+
+        path = store.getPathForID(getId());
+        new File(path).mkdirs();
+        final File file = new File(path, "data.json");
+        store.deleteCache(getId());
+        AXT.at(file).writeString(jsonString);
+
     }
 
     public void setInvalid() {

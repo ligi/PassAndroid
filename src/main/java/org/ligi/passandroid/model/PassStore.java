@@ -40,6 +40,7 @@ public interface PassStore {
     public void preCachePassesList();
 
     public void deleteCacheForId(String id);
+
     public void deleteCache();
 
     public void deleteCache(String id);

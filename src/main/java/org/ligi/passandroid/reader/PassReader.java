@@ -1,12 +1,11 @@
 package org.ligi.passandroid.reader;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.helper.SafeJSONReader;
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.tracedroid.logging.Log;
 
@@ -14,7 +13,7 @@ import java.io.File;
 
 public class PassReader {
 
-    public static Pass read(String path) {
+    public static FiledPass read(String path) {
         final PassImpl pass = new PassImpl();
 
         if (path.endsWith("/")) {

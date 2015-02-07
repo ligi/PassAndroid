@@ -22,6 +22,7 @@ import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.helper.PassUtil;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
@@ -42,8 +43,9 @@ public class NavigationFragment extends Fragment {
 
     @OnClick(R.id.add)
     void add() {
-        final Pass pass = PassUtil.createEmptyPass();
+        final FiledPass pass = PassUtil.createEmptyPass();
         App.getPassStore().setCurrentPass(pass);
+        pass.save(App.getPassStore());
         AXT.at(getActivity()).startCommonIntent().activityFromClass(PassEditActivity.class);
     }
 
