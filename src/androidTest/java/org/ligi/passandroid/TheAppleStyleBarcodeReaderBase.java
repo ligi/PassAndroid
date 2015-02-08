@@ -49,8 +49,8 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
             final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, getInstrumentation().getTargetContext(),
                     new UnzipPassController.SuccessCallback() {
                         @Override
-                        public void call(String pathToPassbook) {
-                            callback.onPassLoad(AppleStylePassReader.read(getTestTargetPath(getInstrumentation().getTargetContext())+"/"+pathToPassbook, "en"));
+                        public void call(String uuid) {
+                            callback.onPassLoad(AppleStylePassReader.read(getTestTargetPath(getInstrumentation().getTargetContext())+"/"+ uuid, "en"));
                         }
                     }
                     , failCallback

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class UnzipPassController {
 
     public interface SuccessCallback {
-        public void call(String pathToPassbook);
+        public void call(String uuid);
     }
 
     public interface FailCallback {
@@ -35,7 +35,7 @@ public class UnzipPassController {
 
     public static class SilentWin implements SuccessCallback {
         @Override
-        public void call(String path) {
+        public void call(String uuid) {
         }
     }
 
@@ -88,7 +88,7 @@ public class UnzipPassController {
 
 
         try {
-            uuid= manifest_json.getString("pass.json");
+            uuid = manifest_json.getString("pass.json");
             final String rename_str = spec.targetPath + "/" + uuid;
             new File(spec.targetPath).mkdirs();
             final File rename_file = new File(rename_str);
@@ -118,7 +118,7 @@ public class UnzipPassController {
         public final SuccessCallback onSuccessCallback;
         public final FailCallback failCallback;
         public String targetPath;
-        public boolean overwrite=false;
+        public boolean overwrite = false;
 
         public UnzipControllerSpec(String targetPath, Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
             this.context = context;
@@ -137,16 +137,6 @@ public class UnzipPassController {
     public static class FileUnzipControllerSpec extends UnzipControllerSpec {
         public final String zipFileString;
         public final String source;
-
-        public FileUnzipControllerSpec(final String zipFileString,
-                                       final String source,
-                                       final Context context,
-                                       final SuccessCallback onSuccessCallback,
-                                       final FailCallback failCallback) {
-            super(context, onSuccessCallback, failCallback);
-            this.source = source;
-            this.zipFileString = zipFileString;
-        }
 
         public FileUnzipControllerSpec(final String fileName,
                                        final InputStreamUnzipControllerSpec spec) {

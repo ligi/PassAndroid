@@ -53,12 +53,25 @@ public class PassViewActivityBase extends ActionBarActivity {
             // Ignore - but at least we tried ;-)
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (getIntent().getExtras()!=null) {
+            final String uuid = getIntent().getExtras().getString("uuid");
+            if (uuid != null) {
+                final Pass passbookForId = App.getPassStore().getPassbookForId(uuid);
+                App.getPassStore().setCurrentPass(passbookForId);
+            }
+        }
+
         optionalPass = App.getPassStore().getCurrentPass();
 
         if (!optionalPass.isPresent()) {
             Tracker.get().trackException("pass not present in " + this, false);
             finish();
-            return;
         }
     }
 
@@ -130,7 +143,7 @@ public class PassViewActivityBase extends ActionBarActivity {
 
                 final UnzipPassController.InputStreamUnzipControllerSpec spec = new UnzipPassController.InputStreamUnzipControllerSpec(inputStreamWithSource, PassViewActivityBase.this, new UnzipPassController.SuccessCallback() {
                     @Override
-                    public void call(final String id) {
+                    public void call(final String uuid) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -139,11 +152,11 @@ public class PassViewActivityBase extends ActionBarActivity {
                                 }
                                 dlg.dismiss();
                                 final PassStore passStore = App.getPassStore();
-                                if (!optionalPass.get().getId().equals(id)) {
+                                if (!optionalPass.get().getId().equals(uuid)) {
                                     passStore.deletePassWithId(optionalPass.get().getId());
                                 }
-                                passStore.deleteCacheForId(id);
-                                final Pass newPass = passStore.getPassbookForId(id);
+                                passStore.deleteCacheForId(uuid);
+                                final Pass newPass = passStore.getPassbookForId(uuid);
                                 passStore.setCurrentPass(newPass);
                                 optionalPass = App.getPassStore().getCurrentPass();
                                 refresh();

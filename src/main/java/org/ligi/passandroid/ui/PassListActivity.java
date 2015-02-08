@@ -1,14 +1,10 @@
 package org.ligi.passandroid.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,8 +18,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidquery.service.MarketService;
-import com.google.common.base.Optional;
-
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
 
@@ -37,14 +31,10 @@ import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
-import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
-
-import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -52,15 +42,10 @@ import butterknife.OnClick;
 import fr.nicolaspomepuy.discreetapprate.AppRate;
 import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
-import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
-import static org.ligi.passandroid.ui.UnzipPassController.SilentFail;
-import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
-
 public class PassListActivity extends ActionBarActivity {
 
     private PassAdapter passAdapter;
 
-    private ScanForPassesTask scanTask = null;
     private ActionBarDrawerToggle drawerToggle;
 
     @InjectView(R.id.content_list)
@@ -69,14 +54,11 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(R.id.list_swiperefresh_layout)
-    SwipeRefreshLayout listSwipeRefreshLayout;
-
     @InjectView(R.id.fab)
     FloatingActionButton fab;
 
     @OnClick(R.id.fab)
-    void foo(){
+    void foo() {
         new MaterialDialog.Builder(this)
                 .title("Pass Source")
                 .items(R.array.items)
@@ -85,6 +67,8 @@ public class PassListActivity extends ActionBarActivity {
                     public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
                         switch (i) {
                             case 0: // scan
+                                final Intent intent = new Intent(PassListActivity.this, SearchPassesIntentService.class);
+                                startService(intent);
                                 break;
 
                             case 1: // demo-pass
@@ -104,6 +88,7 @@ public class PassListActivity extends ActionBarActivity {
                 .negativeText(android.R.string.cancel)
                 .show();
     }
+
     private NavigationFragment navigationFragment;
 
     @Subscribe
@@ -131,20 +116,6 @@ public class PassListActivity extends ActionBarActivity {
             }
         });
 
-    }
-
-    final PassListUIState uiState;
-
-    public PassListActivity() {
-        super();
-        uiState = new PassListUIState(this) {
-            @Override
-            public void set(int state) {
-                Log.i("setting ui state " + state);
-                super.set(state);
-                updateUIRegardingToUIState();
-            }
-        };
     }
 
     @Override
@@ -185,30 +156,11 @@ public class PassListActivity extends ActionBarActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        prepareRefreshLayout(listSwipeRefreshLayout);
-
         ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
-    }
-
-    private void prepareRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
-        swipeRefreshLayout.setColorSchemeResources(R.color.icon_blue, R.color.icon_green, R.color.icon_lila, R.color.icon_orange);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (uiState.get() == PassListUIState.UISTATE_LIST) {
-                    Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_swipe", null);
-                    scanForPasses();
-                }
-            }
-        });
-    }
-
-    private void scanForPasses() {
-        new ScanForPassesTask(this).execute();
     }
 
     private void scrollToType(String type) {
@@ -223,21 +175,12 @@ public class PassListActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (uiState.get() != PassListUIState.UISTATE_LIST) {
-            Toast.makeText(this, R.string.please_wait, Toast.LENGTH_LONG).show();
-            return true;
-        }
-
 
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
         switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                Tracker.get().trackEvent(TrackerInterface.EVENT_CATEGORY_UI_ACTION, "refresh", "from_optionsitem", null);
-                scanForPasses();
-                return true;
             case R.id.menu_help:
                 Intent intent = new Intent(this, HelpActivity.class);
                 startActivity(intent);
@@ -282,14 +225,6 @@ public class PassListActivity extends ActionBarActivity {
             passAdapter = new PassAdapter(PassListActivity.this);
             recyclerView.setAdapter(passAdapter);
 
-            if (App.getPassStore().isEmpty()) {
-                uiState.set(PassListUIState.UISTATE_SCAN);
-                scanTask = new ScanForPassesTask(PassListActivity.this);
-                scanTask.execute();
-            } else {
-                uiState.set(PassListUIState.UISTATE_LIST);
-            }
-
             Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
 
             refreshPasses();
@@ -304,15 +239,11 @@ public class PassListActivity extends ActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        if (uiState.get() == PassListUIState.UISTATE_LIST) {
-            getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
-        }
+        getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
         return true;
     }
 
     public void updateUIRegardingToUIState() {
-        listSwipeRefreshLayout.setRefreshing(uiState.get() != PassListUIState.UISTATE_LIST);
-
         supportInvalidateOptionsMenu();
     }
 
@@ -320,7 +251,6 @@ public class PassListActivity extends ActionBarActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
     }
 
@@ -330,161 +260,10 @@ public class PassListActivity extends ActionBarActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-
     @Override
     protected void onPause() {
         App.getBus().unregister(this);
-
-        if (scanTask != null) {
-            scanTask.cancel(true);
-        }
-        uiState.set(PassListUIState.UISTATE_LIST);
         super.onPause();
-    }
-
-    public class ImportAndRefreshListAsync extends ImportAsyncTask {
-
-        public ImportAndRefreshListAsync(final Activity passImportActivity, final String path) {
-            super(passImportActivity, Uri.parse("file://" + path));
-            new PastLocationsStore(passImportActivity).putLocation(path);
-        }
-
-        @Override
-        protected InputStreamWithSource doInBackground(Void... params) {
-            final InputStreamWithSource ins = super.doInBackground(params);
-            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, passImportActivity,
-                    new UnzipPassController.SuccessCallback() {
-                        @Override
-                        public void call(String pathToPassbook) {
-                            refreshPasses();
-                        }
-                    }, new SilentFail());
-            processInputStream(spec);
-            return ins;
-        }
-
-        @Override
-        protected void onPostExecute(InputStreamWithSource result) {
-            refreshPasses();
-            super.onPostExecute(result);
-        }
-    }
-
-    class ScanForPassesTask extends AsyncTask<Void, Optional<String>, Void> {
-
-        private final ActionBarActivity activity;
-
-        ScanForPassesTask(ActionBarActivity activity) {
-            this.activity = activity;
-        }
-
-        @Override
-        @SafeVarargs
-        protected final void onProgressUpdate(Optional<String>... values) {
-            super.onProgressUpdate(values);
-            setActionbarToProgress(values);
-        }
-
-        private void setActionbarToProgress(Optional<String>[] values) {
-            final ActionBar actionBar = activity.getSupportActionBar();
-            if (actionBar == null) {
-                // not here - no work
-                return;
-            }
-
-            if (values[0].isPresent()) {
-                actionBar.setSubtitle(String.format(activity.getString(R.string.searching_in), values[0].get()));
-            } else {
-                actionBar.setSubtitle(null);
-            }
-
-        }
-
-        /**
-         * recursive traversion from path on to find files named .pkpass
-         *
-         * @param path
-         */
-        private void search_in(final File path, final boolean recursive) {
-
-            publishProgress(Optional.of(path.toString()));
-
-            final File[] files = path.listFiles();
-
-            if (files == null || files.length == 0) {
-                // no files here
-                return;
-            }
-
-
-            for (File file : files) {
-                if (recursive && file.isDirectory()) {
-                    search_in(file, true);
-                } else if (file.getName().endsWith(".pkpass")) {
-                    Log.i("found" + file.getAbsolutePath());
-
-                    new ImportAndRefreshListAsync(activity, file.getAbsolutePath()).execute();
-                }
-            }
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            uiState.set(PassListUIState.UISTATE_SCAN);
-
-            Tracker.get().trackEvent("ui_event", "scan", "started", null);
-
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            uiState.set(PassListUIState.UISTATE_LIST);
-
-            // TODO bring back Tracker.get().trackTiming("timing", System.currentTimeMillis() - start_time, "scan", "scan_time");
-        }
-
-        @Override
-        protected void onCancelled() {
-            Tracker.get().trackEvent("ui_event", "scan", "cancelled", null);
-            super.onCancelled();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            for (String path : new PastLocationsStore(activity).getLocations()) {
-                search_in(new File(path), false);
-            }
-
-            // note to future_me: yea one thinks we only need to search root here, but root was /system for me and so
-            // did not contain "/SDCARD" #dontoptimize
-            // on my phone:
-
-            // | /mnt/sdcard/Download << this looks kind of stupid as we do /mnt/sdcard later and hence will go here twice
-            // but this helps finding passes in Downloads ( where they are very often ) fast - some users with lots of files on the SDCard gave
-            // up the refreshing of passes as it took so long to traverse all files on the SDCard
-            // one could think about not going there anymore but a short look at this showed that it seems cost more time to check than what it gains
-            // in download there are mostly single files in a flat dir - no huge tree behind this imho
-            search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), true);
-
-            // | /system
-            search_in(Environment.getRootDirectory(), true);
-
-            // | /mnt/sdcard
-            search_in(Environment.getExternalStorageDirectory(), true);
-
-            // | /cache
-            search_in(Environment.getDownloadCacheDirectory(), true);
-
-            // | /data
-            search_in(Environment.getDataDirectory(), true);
-
-            publishProgress(Optional.<String>absent());
-            return null;
-        }
     }
 
 }

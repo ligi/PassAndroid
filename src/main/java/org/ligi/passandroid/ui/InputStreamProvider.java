@@ -20,7 +20,27 @@ public class InputStreamProvider {
 
     public static final String IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
 
-    public final static InputStreamWithSource fromOKHttp(final Uri uri) {
+    public static InputStreamWithSource fromURI(final Context context,final Uri uri) {
+        Tracker.get().trackEvent("protocol", "to_inputstream", uri.getScheme(), null);
+        switch (uri.getScheme()) {
+            case "content":
+
+                return InputStreamProvider.fromContent(context, uri);
+
+            case "http":
+            case "https":
+                // TODO check if SPDY should be here
+                return InputStreamProvider.fromOKHttp(uri);
+
+            default:
+                Tracker.get().trackException("unknown scheme in ImportAsyncTask" + uri.getScheme(), false);
+            case "file":
+                return InputStreamProvider.getDefaultHttpInputStreamForUri(uri);
+        }
+
+    }
+
+    public static InputStreamWithSource fromOKHttp(final Uri uri) {
         try {
             final OkHttpClient client = new OkHttpClient();
             final URL url = new URL(uri.toString());
@@ -52,7 +72,7 @@ public class InputStreamProvider {
         return null;
     }
 
-    public final static InputStreamWithSource fromContent(final Context ctx, final Uri uri) {
+    public static InputStreamWithSource fromContent(final Context ctx, final Uri uri) {
         try {
             return new InputStreamWithSource(uri.toString(), ctx.getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
@@ -63,7 +83,7 @@ public class InputStreamProvider {
     }
 
 
-    public final static InputStreamWithSource getDefaultHttpInputStreamForUri(final Uri uri) {
+    public static InputStreamWithSource getDefaultHttpInputStreamForUri(final Uri uri) {
         try {
             return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {

@@ -77,6 +77,7 @@ public class PassViewActivity extends PassViewActivityBase {
 
     @Override
     protected void onResume() {
+        super.onResume();
 
         if (!optionalPass.isPresent()) {
             return;

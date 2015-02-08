@@ -47,7 +47,7 @@ public class UnzipPassDialog {
                         new SuccessCallback() {
 
                             @Override
-                            public void call(final String pathToPassbook) {
+                            public void call(final String uuid) {
                                 if (activity.isFinishing()) {
                                     return;
                                 }
@@ -58,7 +58,7 @@ public class UnzipPassDialog {
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        call_after_finish.call(pathToPassbook);
+                                        call_after_finish.call(uuid);
                                     }
                                 });
                             }

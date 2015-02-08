@@ -3,6 +3,7 @@ package org.ligi.passandroid.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -21,17 +22,25 @@ public class PassImportActivity extends ActionBarActivity {
         new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
     }
 
-    class ImportAndShowAsyncTask extends ImportAsyncTask {
+    class ImportAndShowAsyncTask extends AsyncTask<Void,Void,InputStreamWithSource> {
 
         private final ProgressDialog progressDialog;
+        final Activity passImportActivity;
+        final Uri intent_uri;
 
         public ImportAndShowAsyncTask(final Activity passImportActivity, final Uri intent_uri) {
-            super(passImportActivity, intent_uri);
             progressDialog = new ProgressDialog(passImportActivity);
             progressDialog.setMessage(getString(R.string.please_wait));
             progressDialog.setCancelable(false);
+            this.intent_uri = intent_uri;
+            this.passImportActivity = passImportActivity;
         }
 
+
+        @Override
+        protected InputStreamWithSource doInBackground(Void... params) {
+            return InputStreamProvider.fromURI(passImportActivity,intent_uri);
+        }
 
         @Override
         protected void onPreExecute() {
@@ -61,7 +70,7 @@ public class PassImportActivity extends ActionBarActivity {
             }
 
 
-            UnzipPassDialog.show(result, passImportActivity, new UnzipPassDialog.FinishCallback() {
+            UnzipPassDialog.show(result, PassImportActivity.this, new UnzipPassDialog.FinishCallback() {
                 @Override
                 public Void call(String path) {
 

@@ -88,5 +88,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="more">MORE</string>
     <string name="less">LESS</string>
     <string name="select_picture">Select Picture</string>
+    <string name="scanning_for_passes" >Scanning for Passes</string>
 
 </resources>
