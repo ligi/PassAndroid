@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items" >
+        <item>Scan for pkpass files</item>
+        <item>Add Demo-Pass</item>
+        <item>Create Pass (experimental)</item>
+    </string-array>
+</resources>

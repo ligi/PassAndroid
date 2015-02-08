@@ -107,6 +107,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.0'
 
+    compile 'com.melnykov:floatingactionbutton:1.1.0'
+    compile 'com.afollestad:material-dialogs:0.6.2.3'
+
     compile 'org.ligi:AXT:0.31'
     compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'

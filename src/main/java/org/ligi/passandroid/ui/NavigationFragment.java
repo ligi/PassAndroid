@@ -21,9 +21,6 @@ import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.helper.PassUtil;
-import org.ligi.passandroid.model.FiledPass;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
@@ -34,19 +31,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class NavigationFragment extends Fragment {
 
     @OnClick(R.id.community)
     void community() {
         AXT.at(getActivity()).startCommonIntent().openUrl("https://plus.google.com/communities/116353894782342292067");
-    }
-
-    @OnClick(R.id.add)
-    void add() {
-        final FiledPass pass = PassUtil.createEmptyPass();
-        App.getPassStore().setCurrentPass(pass);
-        pass.save(App.getPassStore());
-        AXT.at(getActivity()).startCommonIntent().activityFromClass(PassEditActivity.class);
     }
 
     @OnClick(R.id.share)
@@ -128,24 +120,16 @@ public class NavigationFragment extends Fragment {
         createCategoryJumpMarks(LayoutInflater.from(getActivity()));
     }
 
-    private boolean shouldDisplaCategoryNav() {
-        if (App.getPassStore().getCountedTypes().size() < 2) { // navigation only makes sense with >=2 Elements
-            return false;
-        }
-
-        if (App.getSettings().getSortOrder() != PassStore.SortOrder.TYPE) { // nav only makes sense if we order by category
-            return false;
-        }
-
-        return true; // we are good to give this user this feature
+    private boolean shouldDisplayCategoryNav() {
+        return shouldDisplaySort() && App.getSettings().getSortOrder() == PassStore.SortOrder.TYPE;
     }
 
+    private boolean shouldDisplaySort() {
+        return App.getPassStore().getCountedTypes().size() >= 2;
+    }
     private void setCategoryNavVisibilityByCurrentConditions() {
-        if (shouldDisplaCategoryNav()) {
-            categoriesContainerOuter.setVisibility(View.VISIBLE);
-        } else {
-            categoriesContainerOuter.setVisibility(View.GONE);
-        }
+        categoriesContainerOuter.setVisibility(shouldDisplayCategoryNav()? VISIBLE: GONE);
+        radioGroup.setVisibility(shouldDisplaySort()? VISIBLE: GONE);
     }
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {

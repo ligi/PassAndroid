@@ -14,19 +14,20 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidquery.service.MarketService;
 import com.google.common.base.Optional;
+
+import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
 
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -34,6 +35,8 @@ import org.ligi.passandroid.TrackerInterface;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
+import org.ligi.passandroid.helper.PassUtil;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PastLocationsStore;
@@ -45,6 +48,7 @@ import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import fr.nicolaspomepuy.discreetapprate.AppRate;
 import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
@@ -60,7 +64,7 @@ public class PassListActivity extends ActionBarActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     @InjectView(R.id.content_list)
-    RecyclerView listView;
+    RecyclerView recyclerView;
 
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -68,6 +72,38 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.list_swiperefresh_layout)
     SwipeRefreshLayout listSwipeRefreshLayout;
 
+    @InjectView(R.id.fab)
+    FloatingActionButton fab;
+
+    @OnClick(R.id.fab)
+    void foo(){
+        new MaterialDialog.Builder(this)
+                .title("Pass Source")
+                .items(R.array.items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                        switch (i) {
+                            case 0: // scan
+                                break;
+
+                            case 1: // demo-pass
+                                AXT.at(PassListActivity.this).startCommonIntent().openUrl("http://ligi.de/passandroid_samples/index.html");
+                                break;
+
+                            case 2: // add
+                                final FiledPass pass = PassUtil.createEmptyPass();
+                                App.getPassStore().setCurrentPass(pass);
+                                pass.save(App.getPassStore());
+                                AXT.at(PassListActivity.this).startCommonIntent().activityFromClass(PassEditActivity.class);
+                                break;
+
+                        }
+                    }
+                })
+                .negativeText(android.R.string.cancel)
+                .show();
+    }
     private NavigationFragment navigationFragment;
 
     @Subscribe
@@ -121,7 +157,7 @@ public class PassListActivity extends ActionBarActivity {
         final LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         llm.scrollToPosition(0);
-        listView.setLayoutManager(llm);
+        recyclerView.setLayoutManager(llm);
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
@@ -178,7 +214,7 @@ public class PassListActivity extends ActionBarActivity {
     private void scrollToType(String type) {
         for (int i = 0; i < passAdapter.getItemCount(); i++) {
             if (App.getPassStore().getPassbookAt(i).getTypeNotNull().equals(type)) {
-                listView.scrollToPosition(i);
+                recyclerView.scrollToPosition(i);
                 return; // we are done
             }
         }
@@ -215,6 +251,7 @@ public class PassListActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
+        fab.attachToRecyclerView(recyclerView);
         new InitAsyncTask().execute();
 
         App.getBus().register(this);
@@ -243,7 +280,7 @@ public class PassListActivity extends ActionBarActivity {
             }
 
             passAdapter = new PassAdapter(PassListActivity.this);
-            listView.setAdapter(passAdapter);
+            recyclerView.setAdapter(passAdapter);
 
             if (App.getPassStore().isEmpty()) {
                 uiState.set(PassListUIState.UISTATE_SCAN);
