@@ -93,7 +93,12 @@ public class PassListActivity extends ActionBarActivity {
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
-        refreshPasses();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshPasses();
+            }
+        });
     }
 
     @Subscribe

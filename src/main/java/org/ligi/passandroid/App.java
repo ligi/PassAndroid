@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 import org.ligi.passandroid.model.AndroidFileSystemPassStore;
 import org.ligi.passandroid.model.PassStore;
@@ -27,7 +28,7 @@ public class App extends Application {
         initTraceDroid();
 
         instance = this;
-        bus = new Bus();
+        bus = new Bus(ThreadEnforcer.ANY);
         settings = new Settings(this);
     }
 

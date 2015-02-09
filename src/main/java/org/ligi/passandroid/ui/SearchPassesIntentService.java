@@ -6,13 +6,18 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.common.base.Optional;
 
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.SortOrderChangeEvent;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.passandroid.reader.AppleStylePassReader;
@@ -41,15 +46,16 @@ public class SearchPassesIntentService extends IntentService {
 
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        progressNotificationBuilder = new NotificationCompat.Builder(this);
-        findNotificationBuilder = new NotificationCompat.Builder(this);
-
-        progressNotificationBuilder.setContentTitle(getString(R.string.scanning_for_passes))
+        progressNotificationBuilder = new NotificationCompat.Builder(this)
+                .setContentTitle(getString(R.string.scanning_for_passes))
                 .setSmallIcon(R.drawable.ic_menu_refresh)
-                .setOngoing(true);
-        progressNotificationBuilder.setProgress(1, 1, true);
+                .setOngoing(true)
+                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0))
+                .setProgress(1, 1, true);
 
-        progressNotificationBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0));
+        findNotificationBuilder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher);
 
         for (String path : new PastLocationsStore(getApplicationContext()).getLocations()) {
             search_in(new File(path), false);
@@ -96,7 +102,7 @@ public class SearchPassesIntentService extends IntentService {
         }
 
 
-        for (File file : files) {
+        for (final File file : files) {
             if (recursive && file.isDirectory()) {
                 search_in(file, true);
             } else if (file.getName().endsWith(".pkpass")) {
@@ -107,20 +113,26 @@ public class SearchPassesIntentService extends IntentService {
                         new UnzipPassController.SuccessCallback() {
                             @Override
                             public void call(String uuid) {
-                                final Optional<Bitmap> iconBitmap = AppleStylePassReader.read(uuid, getBaseContext().getResources().getConfiguration().locale.getLanguage()).getIconBitmap();
+                                final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), getBaseContext().getResources().getConfiguration().locale.getLanguage());
+                                App.getBus().post(new SortOrderChangeEvent());
+                                final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
                                 if (iconBitmap.isPresent()) {
-                                    findNotificationBuilder.setLargeIcon(iconBitmap.get());
+                                    //findNotificationBuilder.setLargeIcon(iconBitmap.get());
+                                    final Bitmap bitmap = scale2maxSize(iconBitmap.get(), getResources().getDimensionPixelSize(R.dimen.finger));
+                                    findNotificationBuilder.setLargeIcon(bitmap);
                                 }
-                                findNotificationBuilder.setContentTitle("found");
-                                findNotificationBuilder.setSmallIcon(R.drawable.ic_launcher);
-                                findNotificationBuilder.setContentText(uuid);
-                                findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, new Intent(getBaseContext(),PassViewActivity.class),0));
+                                findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
+
+                                findNotificationBuilder.setContentText(file.getAbsolutePath());
+                                final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
+                                intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
+                                findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));
                                 notifyManager.notify(FOUND_NOTIFICATION_ID, findNotificationBuilder.build());
                             }
-                        },new UnzipPassController.FailCallback() {
+                        }, new UnzipPassController.FailCallback() {
                     @Override
                     public void fail(String reason) {
-                        Log.i("fail",reason);
+                        Log.i("fail", reason);
                     }
                 });
                 UnzipPassController.processInputStream(spec);
@@ -128,6 +140,16 @@ public class SearchPassesIntentService extends IntentService {
         }
 
 
+    }
+
+    private Bitmap scale2maxSize(Bitmap bitmap, int dimensionPixelSize) {
+        final float scale;
+        if (bitmap.getWidth() > bitmap.getHeight()) {
+            scale = (float) dimensionPixelSize /bitmap.getWidth();
+        } else {
+            scale = (float) dimensionPixelSize / bitmap.getHeight();
+        }
+        return Bitmap.createScaledBitmap(bitmap,(int) (bitmap.getWidth()*scale),(int)(bitmap.getHeight()*scale), false);
     }
 
 }

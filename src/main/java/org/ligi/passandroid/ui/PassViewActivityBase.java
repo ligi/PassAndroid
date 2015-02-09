@@ -28,6 +28,7 @@ import java.lang.reflect.Field;
 
 public class PassViewActivityBase extends ActionBarActivity {
 
+    public static final String EXTRA_KEY_UUID = "uuid";
     public Optional<Pass> optionalPass;
 
     @Override
@@ -59,14 +60,12 @@ public class PassViewActivityBase extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        if (getIntent().getExtras()!=null) {
-            final String uuid = getIntent().getExtras().getString("uuid");
-            if (uuid != null) {
-                final Pass passbookForId = App.getPassStore().getPassbookForId(uuid);
-                App.getPassStore().setCurrentPass(passbookForId);
-            }
-        }
+        final String uuid = getIntent().getStringExtra(EXTRA_KEY_UUID);
 
+        if (uuid != null) {
+            final Pass passbookForId = App.getPassStore().getPassbookForId(uuid);
+            App.getPassStore().setCurrentPass(passbookForId);
+        }
         optionalPass = App.getPassStore().getCurrentPass();
 
         if (!optionalPass.isPresent()) {
