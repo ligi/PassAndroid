@@ -117,7 +117,6 @@ public class SearchPassesIntentService extends IntentService {
                                 App.getBus().post(new SortOrderChangeEvent());
                                 final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
                                 if (iconBitmap.isPresent()) {
-                                    //findNotificationBuilder.setLargeIcon(iconBitmap.get());
                                     final Bitmap bitmap = scale2maxSize(iconBitmap.get(), getResources().getDimensionPixelSize(R.dimen.finger));
                                     findNotificationBuilder.setLargeIcon(bitmap);
                                 }
