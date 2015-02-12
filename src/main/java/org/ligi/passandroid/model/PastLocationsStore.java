@@ -30,7 +30,7 @@ public class PastLocationsStore {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         final Set<String> pastLocations = prefs.getStringSet(KEY_PAST_LOCATIONS, new HashSet<String>());
 
-        if (pastLocations.size() > MAX_ELEMENTS) {
+        if (pastLocations.size() >= MAX_ELEMENTS) {
             deleteOneElementFromSet(pastLocations);
         }
 

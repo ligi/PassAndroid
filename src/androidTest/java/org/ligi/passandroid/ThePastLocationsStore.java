@@ -21,7 +21,7 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
             tested.putLocation("" + i);
         }
 
-        assertThat(tested.getLocations().size()).isLessThan(PastLocationsStore.MAX_ELEMENTS);
+        assertThat(tested.getLocations().size()).isEqualTo(PastLocationsStore.MAX_ELEMENTS);
 
     }
 
