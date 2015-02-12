@@ -24,6 +24,8 @@ import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
@@ -37,12 +39,16 @@ public class SearchPassesIntentService extends IntentService {
     private NotificationCompat.Builder progressNotificationBuilder;
     private NotificationCompat.Builder findNotificationBuilder;
 
+    private List<String> foundList;
+
     public SearchPassesIntentService() {
         super("SearchPassesIntentService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
+        foundList=new ArrayList<>();
 
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -113,6 +119,7 @@ public class SearchPassesIntentService extends IntentService {
                         new UnzipPassController.SuccessCallback() {
                             @Override
                             public void call(String uuid) {
+                                foundList.add(uuid);
                                 final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), getBaseContext().getResources().getConfiguration().locale.getLanguage());
                                 App.getBus().post(new SortOrderChangeEvent());
                                 final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
@@ -121,8 +128,11 @@ public class SearchPassesIntentService extends IntentService {
                                     findNotificationBuilder.setLargeIcon(bitmap);
                                 }
                                 findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
-
-                                findNotificationBuilder.setContentText(file.getAbsolutePath());
+                                if (foundList.size()>1) {
+                                    findNotificationBuilder.setContentText("And " + (foundList.size()-1) + " more ");
+                                } else {
+                                    findNotificationBuilder.setContentText(file.getAbsolutePath());
+                                }
                                 final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
                                 intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
                                 findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));
