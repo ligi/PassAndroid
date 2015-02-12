@@ -29,14 +29,17 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fullscreen_image);
 
+        ButterKnife.inject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
         if (optionalPass.isPresent()) {
-            setContentView(R.layout.fullscreen_image);
-
-            ButterKnife.inject(this);
-
-            final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
-
             setBestFittingOrientationForBarCode();
 
             barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().get().getBitmap(smallestSize));
