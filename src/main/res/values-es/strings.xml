@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-<string name="app_name">"PassAndroid"</string>
-<string name="menu_settings">"Opciones"</string>
-<string name="logo">"logo"</string>
-<string name="menu_map">"mostrar en mapa"</string>
-<string name="menu_delete">"eliminar"</string>
-<string name="menu_share">"compartir"</string>
-<string name="menu_refresh">"actualizar"</string>
-<string name="barcode">"código de barras"</string>
-<string name="help_label">"Ayuda"</string>
-<string name="help_content"><![CDATA[
+  <string name="app_name">PassAndroid</string>
+  <string name="menu_settings">Opciones</string>
+  <string name="logo">logo</string>
+  <string name="menu_map">mostrar en mapa</string>
+  <string name="menu_delete">eliminar</string>
+  <string name="menu_share">compartir</string>
+  <string name="menu_refresh">actualizar</string>
+  <string name="barcode">código de barras</string>
+  <string name="help_label">Ayuda</string>
+  <string name="help_content"><![CDATA[
 <h1>¿Qué es esto?</h1> 
 
 Esta aplicación es un visor de passbook - un passbook puedes ser p. ej. una <b>tarjeta de embarque</b> para tu próximo vuelo, un cupón para una deliciosa bebida en tu próxima visita, una entrada de cine, una tarjeta de socio, hay un motón de posibilidades. Básicamente es el reemplazo de un trozo de papel o plástico que puedes llevar normalmente contigo - salvemos unos cuantos árboles <b>¡reduce desperdicios!</b> 
@@ -24,7 +24,7 @@ Existen unos archivos llamados pkpass - puedes abrirlos con esta aplicación - p
 !Puedes utilizarla la aplicación sin conexión una vez hayas descargado tus pases!
 
 <H1>Créditos</H1>
-¡Un enorme agradecimiento a <a href="http://ltorrecilla.com/">Luis Torrecilla</a> por el Diseño y a <a href="https://github.com/cketti">Cketti</a> por sus sugerencias!
+¡Un enorme agradecimiento a <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> por el Diseño y a <a href=\"https://github.com/cketti\">Cketti</a> por sus sugerencias!
 
 <H1>Sugerencias</H1>
 Puedes contribuir en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> o enviar un email al <a href=\'mailto:ligi@ligi.de\'>autor.</a> Si te gusta la aplicación puedes valorarla en <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>, también me gustaría leer algunas de vuestras historias con el uso de esta aplicación.
@@ -41,7 +41,7 @@ Todo esto fue llevando PassAndroid  - a un completa nueva versión - con un nuev
 
 * renfe <br/>
 * chaos communication congress<br/>
-* <a href="http://entradas.com">entrada cine</a><br/>
+* <a href=\"http://entradas.com\">entrada cine</a><br/>
 * Empire Theatres Tickets<br/>
 * Air Berlin
 * Lufthansa
@@ -51,31 +51,31 @@ Esta aplicación se abre mejor con <a href=\'https://play.google.com/store/apps/
 
 <H1>Aviso legal</H1>Esta aplicación no esta afiliada con Apple - Passbook puede ser una marca de Apple, pero fue introducido como un estandar, por lo que esto estaría bien.<br/> 
 
-ESTE SOFTWARE SE OFRECE "TAL CUAL" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
+ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
 
 ]]></string>
-<string name="drawer_open">"abrir"</string>
-<string name="drawer_close">"cerrar"</string>
-<string name="pass_problem">"Lo sentimos, ha ocurrido un problema procesando este Passbook. Si lo deseas puedes enviarnos dicho Passbook para comprobar cual es el problema y mejorar el software"</string>
-<string name="problem">"Problema"</string>
-<string name="send">"Enviar"</string>
-<string name="delete">"¡Eliminar!"</string>
-<string name="choose_location">"Seleccionar ubicación"</string>
-<string name="scan_empty_text"><![CDATA[Buscando pases - también puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a> ]]></string>
-<string name="no_passes_empty_text"><![CDATA[No dispones de pases - puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a>]]></string>
-<string name="boarding_pass">"Tarjeta de embarque"</string>
-<string name="category_event">"Evento"</string>
-<string name="category_coupon">"Cupón"</string>
-<string name="category_storecard">"Tarjeta de compra"</string>
-<string name="category_generic">"Generico"</string>
-<string name="category_none">"sin Categoría"</string>
-<string name="nav_more">"MAS"</string>
-<string name="nav_sort">"ORDENAR"</string>
-<string name="nav_sort_category">"Categoría"</string>
-<string name="nav_sort_date">"Fecha"</string>
-<string name="nav_categories">"CATEGORÍAS"</string>
-<string name="nav_comunity">"Comunidad"</string>
-<string name="nav_share">"Compartir"</string>
-<string name="pass_directions">"Navegar"</string>
-<string name="pass_to_calendar">"al Calendario"</string>
+  <string name="drawer_open">abrir</string>
+  <string name="drawer_close">cerrar</string>
+  <string name="pass_problem">Lo sentimos, ha ocurrido un problema procesando este Passbook. Si lo deseas puedes enviarnos dicho Passbook para comprobar cual es el problema y mejorar el software</string>
+  <string name="problem">Problema</string>
+  <string name="send">Enviar</string>
+  <string name="delete">¡Eliminar!</string>
+  <string name="choose_location">Seleccionar ubicación</string>
+  <string name="scan_empty_text"><![CDATA[Buscando pases - también puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a> ]]></string>
+  <string name="no_passes_empty_text"><![CDATA[No dispones de pases - puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a>]]></string>
+  <string name="boarding_pass">Tarjeta de embarque</string>
+  <string name="category_event">Evento</string>
+  <string name="category_coupon">Cupón</string>
+  <string name="category_storecard">Tarjeta de compra</string>
+  <string name="category_generic">Generico</string>
+  <string name="category_none">sin Categoría</string>
+  <string name="nav_more">MAS</string>
+  <string name="nav_sort">ORDENAR</string>
+  <string name="nav_sort_category">Categoría</string>
+  <string name="nav_sort_date">Fecha</string>
+  <string name="nav_categories">CATEGORÍAS</string>
+  <string name="nav_comunity">Comunidad</string>
+  <string name="nav_share">Compartir</string>
+  <string name="pass_directions">Navegar</string>
+  <string name="pass_to_calendar">al Calendario</string>
 </resources>
