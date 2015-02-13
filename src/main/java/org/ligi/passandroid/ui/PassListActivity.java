@@ -214,12 +214,6 @@ public class PassListActivity extends ActionBarActivity {
         }
 
         @Override
-        protected void onPreExecute() {
-            updateUIRegardingToUIState();
-            super.onPreExecute();
-        }
-
-        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
@@ -247,11 +241,6 @@ public class PassListActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
         return true;
     }
-
-    public void updateUIRegardingToUIState() {
-        supportInvalidateOptionsMenu();
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
