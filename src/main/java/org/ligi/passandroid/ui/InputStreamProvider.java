@@ -15,6 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class InputStreamProvider {
 
@@ -48,18 +51,18 @@ public class InputStreamProvider {
 
             // fake to be an iPhone in some cases when the server decides to send no passbook
             // to android phones - but only do it then - we are proud to be Android ;-)
-            if (uri.toString().contains("//m.aircanada.ca/ebp/")) {
-                Tracker.get().trackEvent("quirk_fix", "ua_fake", "air_canada", null);
-                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
-            } else if (uri.toString().contains("//checkin.si.amadeus.net")) {
-                Tracker.get().trackEvent("quirk_fix", "ua_fake", "icelandair", null);
-                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
-            } else if (uri.toString().contains("//mbk.thy.com/")) {
-                Tracker.get().trackEvent("quirk_fix", "ua_fake", "mbk", null);
-                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
-            } else if (uri.toString().contains("//passbook.heathrow.com/")) {
-                Tracker.get().trackEvent("quirk_fix", "ua_fake", "heathrow", null);
-                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
+            final Set<Map.Entry<String, String>> iPhoneFakeMap = new HashMap<String, String>() {{
+                put("air_canada", "//m.aircanada.ca/ebp/");
+                put("icelandair","//checkin.si.amadeus.net");
+                put("mbk","//mbk.thy.com/");
+                put("heathrow","//passbook.heathrow.com/");
+            }}.entrySet();
+
+            for (Map.Entry<String, String> fakeConfig : iPhoneFakeMap) {
+                if (uri.toString().contains(fakeConfig.getValue())) {
+                    Tracker.get().trackEvent("quirk_fix", "ua_fake", fakeConfig.getKey(), null);
+                    requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
+                }
             }
 
             final Request request = requestBuilder.build();
