@@ -78,6 +78,9 @@ android {
         exclude 'LICENSE.txt'
     }
 
+    lintOptions {
+        disable 'MissingTranslation'
+    }
     // https://groups.google.com/forum/#!topic/adt-dev/-Km7VgExKf4
 //    useOldManifestMerger true
 }
