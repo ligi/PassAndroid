@@ -20,7 +20,7 @@ public class InputStreamProvider {
 
     public static final String IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
 
-    public static InputStreamWithSource fromURI(final Context context,final Uri uri) {
+    public static InputStreamWithSource fromURI(final Context context, final Uri uri) {
         Tracker.get().trackEvent("protocol", "to_inputstream", uri.getScheme(), null);
         switch (uri.getScheme()) {
             case "content":
@@ -56,6 +56,9 @@ public class InputStreamProvider {
                 requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
             } else if (uri.toString().contains("//mbk.thy.com/")) {
                 Tracker.get().trackEvent("quirk_fix", "ua_fake", "mbk", null);
+                requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
+            } else if (uri.toString().contains("//passbook.heathrow.com/")) {
+                Tracker.get().trackEvent("quirk_fix", "ua_fake", "heathrow", null);
                 requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
             }
 
