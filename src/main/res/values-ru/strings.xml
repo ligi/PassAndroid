@@ -83,6 +83,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="dialog_delete_confirm_text">Вы правда хотите удалить эту карточку?</string>
   <string name="dialog_delete_title">Уверены?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">исходный файл тоже удалить?</string>
+  <string name="nav_add">Добавить</string>
   <string name="more">ПОДРОБНЕЕ</string>
   <string name="less">СКРЫТЬ ПОДРОБНОСТИ</string>
+  <string name="select_picture">Выберите изображение</string>
+  <string name="scanning_for_passes">Ищу Карточки</string>
 </resources>

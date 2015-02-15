@@ -64,8 +64,15 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
   <string name="invalid_passbook_title">Ungültiger Pass</string>
   <string name="searching_in">suche in %s</string>
   <string name="passbook_share_chooser_title">Wie soll der Pass gesendet werden?</string>
+  <string name="dialog_delete_confirm_text">Wollen Sie diesen Pass wirklich löschen?</string>
   <string name="dialog_delete_title">Sicher?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">auch die Quelle entfernen?</string>
   <string name="more">MEHR</string>
   <string name="less">WENIGER</string>
+  <string name="select_picture">Wähle Bild</string>
+  <string name="scanning_for_passes">Suche nach Pässen</string>
+  <string name="fab_add_dialog_title">Quelle</string>
+  <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
+  <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
+  <string name="fab_choice_create_pass">Erstelle Pass</string>
 </resources>
