@@ -89,5 +89,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="less">LESS</string>
     <string name="select_picture">Select Picture</string>
     <string name="scanning_for_passes" >Scanning for Passes</string>
-
+    <string name="fab_add_dialog_title">Source</string>
+    <string name="fab_choice_scan_pkpass_files">Scan for pkpass files</string>
+    <string name="fab_choice_add_demo_pass">Add Demo-Pass</string>
+    <string name="fab_choice_create_pass">Create Pass (experimental)</string>
 </resources>

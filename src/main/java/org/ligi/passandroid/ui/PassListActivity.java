@@ -60,7 +60,7 @@ public class PassListActivity extends ActionBarActivity {
     @OnClick(R.id.fab)
     void onFABClick() {
         new MaterialDialog.Builder(this)
-                .title("Pass Source")
+                .title(getString(R.string.fab_add_dialog_title))
                 .items(R.array.items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
