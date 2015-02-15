@@ -58,7 +58,7 @@ public class PassListActivity extends ActionBarActivity {
     FloatingActionButton fab;
 
     @OnClick(R.id.fab)
-    void foo() {
+    void onFABClick() {
         new MaterialDialog.Builder(this)
                 .title("Pass Source")
                 .items(R.array.items)
