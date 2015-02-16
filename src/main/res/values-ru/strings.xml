@@ -88,4 +88,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="less">СКРЫТЬ ПОДРОБНОСТИ</string>
   <string name="select_picture">Выберите изображение</string>
   <string name="scanning_for_passes">Ищу Карточки</string>
+  <string name="fab_add_dialog_title">Источник</string>
+  <string name="fab_choice_scan_pkpass_files">Искать файлы карточек .pkpass</string>
+  <string name="fab_choice_add_demo_pass">Добавить пример</string>
+  <string name="fab_choice_create_pass">Создать карточку (бета-версия)</string>
 </resources>
