@@ -75,12 +75,10 @@ public class PassImpl implements FiledPass, Serializable {
         return backGroundColor;
     }
 
-
     @Override
     public boolean isValid() {
         return valid;
     }
-
 
     @Override
     public String getType() {
