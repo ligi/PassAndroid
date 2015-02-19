@@ -1,5 +1,6 @@
 package org.ligi.passandroid;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -47,28 +48,7 @@ public class ImageFromIntentUriExtractor {
                 String filePath = cursor.getString(columnIndex);
                 // taken from http://stackoverflow.com/questions/20067508/get-real-path-from-uri-android-kitkat-new-storage-access-framework
                 if (filePath == null && Build.VERSION.SDK_INT >= 19) {
-                    // Will return "image:x*"
-                    String wholeID = DocumentsContract.getDocumentId(selectedImage);
-
-                    // Split at colon, use second item in the array
-                    String id = wholeID.split(":")[1];
-
-                    String[] column = {MediaStore.Images.Media.DATA};
-
-                    // where id is equal to
-                    String sel = MediaStore.Images.Media._ID + "=?";
-
-                    cursor = context.getContentResolver().
-                            query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                    column, sel, new String[]{id}, null);
-
-
-                    columnIndex = cursor.getColumnIndex(column[0]);
-
-                    if (cursor.moveToFirst()) {
-                        filePath = cursor.getString(columnIndex);
-                    }
-
+                    filePath = getFilePathForKITKAT(selectedImage);
                 }
                 cursor.close();
                 return new File(filePath);
@@ -79,6 +59,30 @@ public class ImageFromIntentUriExtractor {
             final Uri uriurl = selectedImage;
             // Do this in a background thread, since we are fetching a large image from the web
             return getBitmap("image_file_name.jpg", uriurl);
+        }
+        return null;
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private String getFilePathForKITKAT(Uri selectedImage) {
+        final String wholeID = DocumentsContract.getDocumentId(selectedImage);
+
+        // Split at colon, use second item in the array
+        final String id = wholeID.split(":")[1];
+
+        final String[] column = {MediaStore.Images.Media.DATA};
+
+        // where id is equal to
+        final String sel = MediaStore.Images.Media._ID + "=?";
+
+        final Cursor innerCursor = context.getContentResolver().
+                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column, sel, new String[]{id}, null);
+
+        final int columnIndex = innerCursor.getColumnIndex(column[0]);
+
+        if (innerCursor.moveToFirst()) {
+            return innerCursor.getString(columnIndex);
         }
         return null;
     }
