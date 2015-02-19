@@ -43,8 +43,8 @@ public class SpooningFailureHandler implements FailureHandler {
         instrumentation.runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
-                final Collection<Activity> activites = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
-                activity[0] = com.google.common.collect.Iterables.getOnlyElement(activites);
+                final Collection<Activity> activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+                activity[0] = com.google.common.collect.Iterables.getOnlyElement(activities);
             }
         });
         return activity[0];
