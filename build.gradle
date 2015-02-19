@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.1'
+        classpath 'com.android.tools.build:gradle:1.1.0'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
         classpath('com.stanfy.spoon:spoon-gradle-plugin:0.14.1') {
             // https://github.com/stanfy/spoon-gradle-plugin/issues/33
@@ -86,6 +86,7 @@ android {
 }
 
 dependencies {
+    androidTestCompile 'com.android.support:support-v4:21.0.3'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
 
