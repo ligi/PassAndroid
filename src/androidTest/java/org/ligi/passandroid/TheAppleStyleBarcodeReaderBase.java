@@ -21,9 +21,6 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
     @MockitoAnnotations.Mock
     UnzipPassController.FailCallback failCallback;
 
-    @MockitoAnnotations.Mock
-    UnzipPassController.SuccessCallback successCallback;
-
     @Override
     protected void setUp() throws Exception {
         super.setUp();
