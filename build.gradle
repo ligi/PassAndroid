@@ -82,8 +82,6 @@ android {
         disable 'MissingTranslation'
         disable 'InvalidPackage'
     }
-    // https://groups.google.com/forum/#!topic/adt-dev/-Km7VgExKf4
-//    useOldManifestMerger true
 }
 
 dependencies {
