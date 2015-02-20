@@ -214,8 +214,8 @@ public class PassImpl implements FiledPass, Serializable {
         valid = false;
     }
 
-    public void setRelevantDate(Optional<DateTime> relevantDaterele) {
-        this.relevantDate = relevantDaterele;
+    public void setRelevantDate(Optional<DateTime> relevantDate) {
+        this.relevantDate = relevantDate;
     }
 
     public void setExpirationDate(Optional<DateTime> expirationDate) {
