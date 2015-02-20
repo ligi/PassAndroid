@@ -222,8 +222,8 @@ public class AppleStylePassReader {
         }
 
         try {
-            pass.setOrganization(Optional.of(pass_json.getString("organizationName")));
-            Tracker.get().trackEvent("measure_event", "organisation_parse", pass.getOrganisation().get(), 1L);
+            pass.setOrganization(pass_json.getString("organizationName"));
+            Tracker.get().trackEvent("measure_event", "organisation_parse", pass.getOrganisation(), 1L);
         } catch (JSONException e) {
             // ok - we have no organisation - big deal ..-)
         }

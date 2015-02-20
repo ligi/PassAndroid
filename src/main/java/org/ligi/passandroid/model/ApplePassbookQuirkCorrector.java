@@ -19,7 +19,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForRenfe(PassImpl pass) {
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("RENFE OPERADORA")) {
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("RENFE OPERADORA")) {
             return;
         }
         Tracker.get().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 0L);
@@ -34,7 +34,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForSWISS(PassImpl pass) {
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("SWISS")) {
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("SWISS")) {
             return;
         }
         Tracker.get().trackEvent("quirk_fix", "description_replace", "SWISS", 0L);
@@ -49,7 +49,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForCathayPacific(PassImpl pass) {
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Cathay Pacific")) {
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("Cathay Pacific")) {
 
             return;
         }
@@ -67,8 +67,7 @@ public class ApplePassbookQuirkCorrector {
 
     private static void careForVirginAustralia(PassImpl pass) {
         // also good identifier could be  "passTypeIdentifier": "pass.com.virginaustralia.boardingpass
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Virgin Australia")) {
-
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("Virgin Australia")) {
             return;
         }
 
@@ -84,7 +83,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForAirCanada(PassImpl pass) {
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("Air Canada")) {
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("Air Canada")) {
             return;
         }
 
@@ -100,7 +99,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForUSAirways(PassImpl pass) {
-        if (!pass.getOrganisation().isPresent() || !pass.getOrganisation().get().equals("US Airways")) {
+        if (pass.getOrganisation() == null || !pass.getOrganisation().equals("US Airways")) {
             return;
         }
 
@@ -117,8 +116,8 @@ public class ApplePassbookQuirkCorrector {
 
     private static void careForWestbahn(PassImpl pass) {
         if (pass.getRelevantDate().isPresent() ||
-                !pass.getOrganisation().isPresent() ||
-                !pass.getOrganisation().get().equals("WESTbahn")
+                pass.getOrganisation() == null ||
+                !pass.getOrganisation().equals("WESTbahn")
                 ) {
             return;
         }

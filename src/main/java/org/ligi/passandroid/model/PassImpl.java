@@ -3,6 +3,7 @@ package org.ligi.passandroid.model;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.common.base.Optional;
 
@@ -23,7 +24,7 @@ public class PassImpl implements FiledPass, Serializable {
     public static final String FNAME_LOGO = "logo";
     public static final String FILETYPE_IMAGES = ".png";
 
-    private Optional<String> organisation = Optional.absent();
+    private String organisation = null;
     private String type;
     private boolean valid = true; // be positive
 
@@ -50,8 +51,8 @@ public class PassImpl implements FiledPass, Serializable {
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
     private Optional<String> passTypeIdent = Optional.absent();
 
-    @Override
-    public Optional<String> getOrganisation() {
+    @Override @Nullable
+    public String getOrganisation() {
         return organisation;
     }
 
@@ -234,7 +235,7 @@ public class PassImpl implements FiledPass, Serializable {
         this.type = type;
     }
 
-    public void setOrganization(Optional<String> organization) {
+    public void setOrganization(@Nullable String organization) {
         this.organisation = organization;
     }
 

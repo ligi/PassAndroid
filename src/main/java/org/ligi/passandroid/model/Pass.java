@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 
 import com.google.common.base.Optional;
 
@@ -51,7 +52,8 @@ public interface Pass extends Serializable {
 
     String getId();
 
-    Optional<String> getOrganisation();
+    @Nullable
+    String getOrganisation();
 
     Optional<String> getSource();
 

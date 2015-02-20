@@ -19,6 +19,7 @@ import com.squareup.okhttp.Response;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
@@ -77,11 +78,32 @@ public class PassViewActivityBase extends ActionBarActivity {
     protected void refresh() {
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_pass_view, menu);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean res = super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.menu_edit).setVisible(shouldAllowEdit());
+        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() &&
+                optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent()
+        ));//&& optionalPass.get().getPassIdent().isPresent()));
+        return res;
+    }
+
+    private boolean shouldAllowEdit() {
+        if (!optionalPass.isPresent()) {
+            return false;
+        }
+
+        final String org = optionalPass.get().getOrganisation();
+        return (org != null && org.equals(PassUtil.ORGANIZATION));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -119,7 +141,7 @@ public class PassViewActivityBase extends ActionBarActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    dlg=new ProgressDialog(PassViewActivityBase.this);
+                    dlg = new ProgressDialog(PassViewActivityBase.this);
                     dlg.setMessage("downloading new pass version");
                     dlg.show();
 
@@ -180,7 +202,7 @@ public class PassViewActivityBase extends ActionBarActivity {
 
                     }
                 });
-                spec.overwrite=true;
+                spec.overwrite = true;
                 UnzipPassController.processInputStream(spec);
 
             } catch (IOException e) {
