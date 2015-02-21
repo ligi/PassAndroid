@@ -11,37 +11,38 @@
   <string name="help_content"><![CDATA[
 <h1>Что это?</h1>
 
-Это приложение для просмотра карточек passbook - в карточке passbook может быть например <b>посадочный талон</b> на ваш авиарейс, <b>купон</b> на бесплатный кофе вместе с адресом кофейни, <b>билет</b> в кино, <b>дисконтная карта</b> одного из магазинов - возможна масса вариантов.
-По сути это замена куска бумаги или пластика которые вам приходится носить с собой - давайте спасем несколько деревьев и <b>уменьшим количество мусора!</b>
+Это приложение для просмотра карточек passbook - в карточке passbook может быть <b>посадочный талон</b> на ваш авиарейс, <b>купон</b> на бесплатный кофе вместе с адресом кофейни, <b>билет</b> в кино, <b>дисконтная карта</b> одного из магазинов - возможна масса вариантов.
+По сути это замена куска бумаги или пластика которые вам приходится носить с собой - <b>давайте спасем несколько деревьев и уменьшим количество мусора!</b>
 
 <h1>Примеры карточек</h1>
 
-У вас нет карточек passbook, но вы хотите посмотреть как все работает? <a href=\'http://ligi.de/passandroid_samples/index.html\'>Здесь есть тестовые карточки</a>, все для вас!
+У вас нет карточек passbook но вы хотите посмотреть как они выглядят? <a href=\'http://ligi.de/passandroid_samples/index.html\'>Здесь есть тестовые карточки</a>, все для вас!
 
 <h1>Как это работает?</h1>
 
-Карточки passbook хранятся в файлах с расширением \"pkpass\", эти файлы и открывает данная программа, например когда вы получаете карточки по почте или загружаете с сайтов. Самое важное в карточке это <b>штрих-код</b> (типы QR, AZTEC, PDF417) который в итоге считывают на кассе в магазине или на стойке регистрации рейсов, но в карточке может содержаться еще и детальное описание, время события, например вы сможете добавить напоминание о сеансе кино в ваш календарь, а так же и место события - попробуйте, это удобно!
+Карточки passbook хранятся в файлах с расширением \"pkpass\", эти файлы и открывает данное приложение, например когда вы получаете карточки по почте или загружаете с сайтов. Самое важное в карточке это <b>штрих-код</b> (типы QR, AZTEC, PDF417) который в итоге считывают на кассе в магазине или на стойке регистрации рейсов, но в карточке может содержаться еще и детальное описание, время события, например вы сможете добавить напоминание о сеансе кино в ваш календарь, а так же и место события - попробуйте, это удобно!
 С помощью данной программы карточки можно просматривать и без подключения к Интернет, просто сохраните их в памяти телефона!
 
-<H1>Credits</H1>
-Big thanks to <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> for the Design & <a href=\"https://github.com/cketti\">Cketti</a> for pull-requests!
+<H1><Благодарности</H1>
+Большое спасибо <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> за дизайн и <a href=\"https://github.com/cketti\">Cketti</a> за pull-requests!
 
-<H1>Feedback</H1>
-Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
+<H1>Обратная связь</H1>
+Оставляйте отзывы в <a href=\'https://plus.google.com/communities/116353894782342292067\'>сообществе Google+</a> или вы можете <a href=\'mailto:ligi@ligi.de\'>написать автору.</a> Если приложение вам понравилось, оставьте отзыв в <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>. Интересно было бы прочитать вашу историю, как вы использовали это приложение.
 
-<h1>History</h1>
+<h1>История создания</h1>
 
-I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
-One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
- - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
- - I got a mail from a nice designer who did a nice redesign
-This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
+Я наткнулся на файлы Passbook когда получил билет на  конференцию \"29C3\" (ежегодные компьютерные конференции, эта проводилась в 2013г.), мне понравилась идея но не было приложения под Android которое меня бы устроило. Я увидел что технически реализация довольно проста:  обычный zip архив со скриптом json и картинками. Первая версия приложения была создана очень быстро и сработала, меня пустили на конференцию. В течении следующего года я почти не занимался этим приложением, поскольку лично у меня оно не находило постоянного применения. Однако много людей скачали приложение и используют его (около 100 тысяч человек), люди писали отзывы, присылали файлы passbook которые не открывались в приложении, пришлось поработать и добиться нормальной работы с файлами passbook, в которых json был просто \"сломан\", написан не по стандарту.
+Годом позже  - как раз перед конференцией \"30C3\" (2014г.) - я  опять начал активно работать над этим приложением по двум причинам:
+ - один мой друг увлекся темой устройств с BTLE (BlueTooth Low Energy), геометками и распознаванием контекста использования для устройств, возможно там найдется применение и для Passbook, но пока в этом направлении ничего не готово
+ - я получил письмо от одного дизайнера который нарисовал новый дизайн приложения.
+Все это привело к появлению следующей версии PassAndroid, полностью новой версии с новым функциональным интерфейсом.
 
-<H1>More</H1>
-This app ist best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
+<H1>Дополнительно</H1>
+Это приложение удобно запускать с помощью <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a>, еще одного бесплатного приложения с минимальным набором системных разрешений!
 
-<H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
+<H1>Официальное заявление</H1>Это приложение никак не связано с корпорацией Apple. Passbook может быть зарегистрированной торговой маркой Apple, но был представлен как открытый стандарт, так что все должно быть OK.<br/>
 
+Текст лицензии приведен на языке оригинала, в том виде в котором его приводит автор:
 THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -55,7 +56,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="problem">Проблема</string>
   <string name="send">Отправить</string>
   <string name="delete">Удалить!</string>
-  <string name="choose_location">Укажите на карте</string>
+  <string name="choose_location">Выберите адрес</string>
   <string name="scan_empty_text"><![CDATA[ищу карточки - вы можете <a href=\'http://ligi.de/passandroid_samples/index.html\'>загрузить примеры карточек здесь</a> ]]></string>
   <string name="no_passes_empty_text"><![CDATA[Нет карточек? -> вы можете <a href=\'http://ligi.de/passandroid_samples/index.html\'>загрузить примеры карточек здесь</a> ]]>javascript:;</string>
   <string name="no_passes_appendix"><![CDATA[<br/><br/>С <b>Вашей карточкой</b> что то не так? -><a href=\"mailto:ligi@ligi.de?subject=my%20pass%20is%20not%20working\"> Напишите мне!</a> ]]></string>
