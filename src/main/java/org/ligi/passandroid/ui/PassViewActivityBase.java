@@ -41,7 +41,7 @@ public class PassViewActivityBase extends ActionBarActivity {
 
         // a little hack because I strongly disagree with the style guide here
         // ;-)
-        // not having the Actionbar overfow menu also with devices with hardware
+        // not having the Actionbar overflow menu also with devices with hardware
         // key really helps discoverability
         // http://stackoverflow.com/questions/9286822/how-to-force-use-of-overflow-menu-on-devices-with-menu-button
         try {
@@ -120,9 +120,7 @@ public class PassViewActivityBase extends ActionBarActivity {
                 new Thread(new UpdateAsync()).start();
 
                 return true;
-
         }
-
 
         return super.onOptionsItemSelected(item);
     }
