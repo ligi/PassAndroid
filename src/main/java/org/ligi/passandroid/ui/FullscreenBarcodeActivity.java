@@ -55,11 +55,6 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
-
     /**
      * QR and AZTEC are best fit in Portrait
      * PDF417 is best viewed in Landscape
