@@ -45,8 +45,8 @@ public class PassViewActivityBase extends ActionBarActivity {
         // key really helps discoverability
         // http://stackoverflow.com/questions/9286822/how-to-force-use-of-overflow-menu-on-devices-with-menu-button
         try {
-            ViewConfiguration config = ViewConfiguration.get(this);
-            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            final ViewConfiguration config = ViewConfiguration.get(this);
+            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
             if (menuKeyField != null) {
                 menuKeyField.setAccessible(true);
                 menuKeyField.setBoolean(config, false);
@@ -87,11 +87,8 @@ public class PassViewActivityBase extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean res = super.onPrepareOptionsMenu(menu);
+        final boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(shouldAllowEdit());
-        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() &&
-                optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent()
-        ));//&& optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 
@@ -103,7 +100,6 @@ public class PassViewActivityBase extends ActionBarActivity {
         final String org = optionalPass.get().getOrganisation();
         return (org != null && org.equals(PassUtil.ORGANIZATION));
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
