@@ -6,12 +6,13 @@ file_filter = src/main/res/values-<lang>/strings.xml
 source_file = src/main/res/values/strings.xml
 source_lang = en
 
-[passandroid.play_short_description.txt]
+[passandroid.play_short_description]
 file_filter = meta/txt/<lang>/play_short_description.txt
 source_file = meta/txt/play_short_description.txt
 source_lang = en
 
-[passandroid.play_description.txt]
+[passandroid.play_description]
 file_filter = meta/txt/<lang>/play_description.txt
 source_file = meta/txt/play_description.txt
 source_lang = en
+
