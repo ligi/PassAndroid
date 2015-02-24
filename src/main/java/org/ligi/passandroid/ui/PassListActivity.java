@@ -113,7 +113,7 @@ public class PassListActivity extends ActionBarActivity {
             TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
         } else { // if no error - check if there is a new version of the app
             Tracker.get().trackEvent("ui_event", "processFile", "updatenotice", null);
-            MarketService ms = new MarketService(this);
+            final MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
 
             AppRate.with(this)
@@ -133,11 +133,10 @@ public class PassListActivity extends ActionBarActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        ActionBar ab = getSupportActionBar();
+        final ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
-
     }
 
     private void scrollToType(String type) {
