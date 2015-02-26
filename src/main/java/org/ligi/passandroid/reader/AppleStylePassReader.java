@@ -50,7 +50,7 @@ public class AppleStylePassReader {
 
         JSONObject pass_json = null, type_json = null;
 
-        Optional<String> localized_path = findLocalizedPath(path, language);
+        final Optional<String> localized_path = findLocalizedPath(path, language);
 
         if (localized_path.isPresent()) {
             final File file = new File(localized_path.get(), "pass.strings");
