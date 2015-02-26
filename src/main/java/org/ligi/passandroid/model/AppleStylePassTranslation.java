@@ -1,10 +1,13 @@
 package org.ligi.passandroid.model;
 
-import com.google.common.base.Optional;
-import com.google.common.io.Files;
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
+import java.io.DataInputStream;
 import java.io.File;
-import java.nio.charset.Charset;
+import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 public class AppleStylePassTranslation extends HashMap<String, String> {
@@ -18,15 +21,13 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
 
     public void loadFromFile(final File file) {
 
-        final Optional<String> content = loadStringWithCorrectCharset(file);
+        final String content = readFileAsStringGuessEncoding(file);
 
-        if (!content.isPresent()) {
+        if (content == null) {
             return;
         }
 
-        final String contentString = content.get();
-
-        for (String pair : contentString.split("\";")) {
+        for (String pair : content.split("\";")) {
             final String[] kv = pair.split("\" ?= ?\"");
             if (kv.length == 2) {
                 put(removeLeadingClutter(kv[0]), kv[1]);
@@ -35,7 +36,7 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
 
     }
 
-    private final static String removeLeadingClutter(String s) {
+    private static String removeLeadingClutter(String s) {
         if (s.startsWith("\"") || s.startsWith("\n") || s.startsWith("\r") || s.startsWith(" ")) {
             return removeLeadingClutter(s.substring(1));
         } else {
@@ -44,17 +45,25 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
     }
 
 
-    private Optional<String> loadStringWithCorrectCharset(File file) {
-        for (Charset charset : Charset.availableCharsets().values()) {
-            try {
-                String localizationString = Files.toString(file, charset);
-                if (localizationString.startsWith("\"")) { // this is kind of how we detect the charset
-                    return Optional.of(localizationString);
-                }
-            } catch (Exception e) {
-            }
-        }
+    @Nullable
+    public static String readFileAsStringGuessEncoding(final @NonNull File file) {
+        try {
+            final byte[] fileData = new byte[(int) file.length()];
+            final DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file));
+            dataInputStream.readFully(fileData);
+            dataInputStream.close();
 
-        return Optional.absent();
+            final CharsetMatch match = new CharsetDetector().setText(fileData).detect();
+
+            if (match != null) try {
+                return new String(fileData, match.getName());
+            } catch (UnsupportedEncodingException ignored) {
+            }
+            return new String(fileData);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
 }
