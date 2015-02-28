@@ -166,14 +166,14 @@ public class AppleStylePassReader {
             readJsonSafe(pass_json, "backgroundColor", new JsonStringReadCallback() {
                 @Override
                 public void onString(String string) {
-                    pass.setBackgroundColor(parseColor(string, 0));
+                    pass.setBackgroundColor(AXT.at(string).parseColor(0));
                 }
             });
 
             readJsonSafe(pass_json, "foregroundColor", new JsonStringReadCallback() {
                 @Override
                 public void onString(String string) {
-                    pass.setForegroundColor(parseColor(string, 0xffffffff));
+                    pass.setForegroundColor(AXT.at(string).parseColor(0xffffffff));
                 }
             });
 
@@ -336,36 +336,5 @@ public class AppleStylePassReader {
 
     }
 
-    private static int parseColor(String color_str, int defaultValue) {
-        if (color_str == null) {
-            return defaultValue;
-        }
-
-        if (color_str.startsWith("rgb")) {
-            return parseColorRGBStyle(color_str, defaultValue);
-        }
-
-        if (color_str.startsWith("#")) {
-            return Color.parseColor(color_str);
-        }
-
-        return defaultValue;
-    }
-
-
-    private static int parseColorRGBStyle(String color_str, int defaultValue) {
-        final Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
-        final Matcher matcher = pattern.matcher(color_str);
-
-        if (matcher.matches()) {
-            return (255 << 24 |
-                    Integer.valueOf(matcher.group(1)) << 16 |  // r
-                    Integer.valueOf(matcher.group(2)) << 8 |  // g
-                    Integer.valueOf(matcher.group(3))); // b
-
-        }
-
-        return defaultValue;
-    }
 
 }
