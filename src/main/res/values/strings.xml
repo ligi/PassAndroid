@@ -99,4 +99,5 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     \n\n or try a demo pass
     \n\n just press + down below
     </string>
+    <string name="downloading_new_pass_version">downloading new pass version</string>
 </resources>

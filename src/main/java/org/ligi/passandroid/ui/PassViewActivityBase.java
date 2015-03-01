@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -10,12 +11,12 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.google.common.base.Optional;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
+import java.io.IOException;
+import java.lang.reflect.Field;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -23,9 +24,6 @@ import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
-
-import java.io.IOException;
-import java.lang.reflect.Field;
 
 public class PassViewActivityBase extends ActionBarActivity {
 
@@ -92,6 +90,28 @@ public class PassViewActivityBase extends ActionBarActivity {
         return res;
     }
 
+    protected void showPassProblemDialog(final Pass pass, final String reason) {
+        new AlertDialog.Builder(this).setMessage(getString(R.string.pass_problem))
+                                     .setTitle(getString(R.string.problem))
+                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                         @Override
+                                         public void onClick(DialogInterface dialog, int which) {
+                                             finish();
+                                         }
+                                     })
+                                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
+                                         @Override
+                                         public void onClick(DialogInterface dialog, int which) {
+                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
+                                                                                      pass.getId(),
+                                                                                      App.getShareDir(),
+                                                                                      "share.pkpass",
+                                                                                      reason).execute();
+                                         }
+                                     })
+                                     .show();
+    }
+
     private boolean shouldAllowEdit() {
         if (!optionalPass.isPresent()) {
             return false;
@@ -131,19 +151,27 @@ public class PassViewActivityBase extends ActionBarActivity {
 
         @Override
         public void run() {
-
+            final Pass pass = optionalPass.get();
+            if (!pass.getWebServiceURL().isPresent() || !pass.getPassIdent().isPresent() || !pass.getSerial().isPresent()) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showPassProblemDialog(pass, "cannot update");
+                    }
+                });
+                return;
+            }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     dlg = new ProgressDialog(PassViewActivityBase.this);
-                    dlg.setMessage("downloading new pass version");
+                    dlg.setMessage(getString(R.string.downloading_new_pass_version));
                     dlg.show();
-
                 }
             });
 
             final OkHttpClient client = new OkHttpClient();
-            final Pass pass = optionalPass.get();
+
             final String url = pass.getWebServiceURL().get() + "/v1/passes/" + pass.getPassIdent().get() + "/" + pass.getSerial().get();
             final Request.Builder requestBuilder = new Request.Builder().url(url);
             requestBuilder.addHeader("Authorization", "ApplePass " + pass.getAuthToken().get());
@@ -156,46 +184,80 @@ public class PassViewActivityBase extends ActionBarActivity {
 
                 final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource(url, response.body().byteStream());
 
-                final UnzipPassController.InputStreamUnzipControllerSpec spec = new UnzipPassController.InputStreamUnzipControllerSpec(inputStreamWithSource, PassViewActivityBase.this, new UnzipPassController.SuccessCallback() {
-                    @Override
-                    public void call(final String uuid) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (isFinishing()) {
-                                    return;
-                                }
-                                dlg.dismiss();
-                                final PassStore passStore = App.getPassStore();
-                                if (!optionalPass.get().getId().equals(uuid)) {
-                                    passStore.deletePassWithId(optionalPass.get().getId());
-                                }
-                                passStore.deleteCacheForId(uuid);
-                                final Pass newPass = passStore.getPassbookForId(uuid);
-                                passStore.setCurrentPass(newPass);
-                                optionalPass = App.getPassStore().getCurrentPass();
-                                refresh();
-                                Toast.makeText(PassViewActivityBase.this, "Pass Updated", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                final UnzipPassController.InputStreamUnzipControllerSpec spec = new UnzipPassController.InputStreamUnzipControllerSpec(inputStreamWithSource,
+                                                                                                                                       PassViewActivityBase.this,
+                                                                                                                                       new UnzipPassController.SuccessCallback() {
+                                                                                                                                           @Override
+                                                                                                                                           public void call(
+                                                                                                                                                   final String uuid) {
+                                                                                                                                               runOnUiThread(new Runnable() {
+                                                                                                                                                   @Override
+                                                                                                                                                   public void run() {
+                                                                                                                                                       if (isFinishing()) {
+                                                                                                                                                           return;
+                                                                                                                                                       }
+                                                                                                                                                       dlg.dismiss();
+                                                                                                                                                       final PassStore passStore = App
+                                                                                                                                                               .getPassStore();
+                                                                                                                                                       if (!optionalPass
+                                                                                                                                                               .get()
+                                                                                                                                                               .getId()
+                                                                                                                                                               .equals(uuid)) {
+                                                                                                                                                           passStore
+                                                                                                                                                                   .deletePassWithId(
+                                                                                                                                                                           optionalPass
+                                                                                                                                                                                   .get()
+                                                                                                                                                                                   .getId());
+                                                                                                                                                       }
+                                                                                                                                                       passStore
+                                                                                                                                                               .deleteCacheForId(
+                                                                                                                                                                       uuid);
+                                                                                                                                                       final Pass newPass = passStore
+                                                                                                                                                               .getPassbookForId(
+                                                                                                                                                                       uuid);
+                                                                                                                                                       passStore
+                                                                                                                                                               .setCurrentPass(
+                                                                                                                                                                       newPass);
+                                                                                                                                                       optionalPass = App
+                                                                                                                                                               .getPassStore()
+                                                                                                                                                               .getCurrentPass();
+                                                                                                                                                       refresh();
+                                                                                                                                                       Toast.makeText(
+                                                                                                                                                               PassViewActivityBase.this,
+                                                                                                                                                               "Pass Updated",
+                                                                                                                                                               Toast.LENGTH_LONG)
+                                                                                                                                                            .show();
+                                                                                                                                                   }
+                                                                                                                                               });
 
-                    }
-                }, new UnzipPassController.FailCallback() {
-                    @Override
-                    public void fail(final String reason) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (isFinishing()) {
-                                    return;
-                                }
-                                dlg.dismiss();
-                                new AlertDialog.Builder(PassViewActivityBase.this).setMessage("Could not update pass :( " + reason + ")").setPositiveButton(android.R.string.ok, null).show();
-                            }
-                        });
+                                                                                                                                           }
+                                                                                                                                       },
+                                                                                                                                       new UnzipPassController.FailCallback() {
+                                                                                                                                           @Override
+                                                                                                                                           public void fail(
+                                                                                                                                                   final String reason) {
+                                                                                                                                               runOnUiThread(new Runnable() {
+                                                                                                                                                   @Override
+                                                                                                                                                   public void run() {
+                                                                                                                                                       if (isFinishing()) {
+                                                                                                                                                           return;
+                                                                                                                                                       }
+                                                                                                                                                       dlg.dismiss();
+                                                                                                                                                       new AlertDialog.Builder(
+                                                                                                                                                               PassViewActivityBase.this)
+                                                                                                                                                               .setMessage(
+                                                                                                                                                                       "Could not update pass :( " +
+                                                                                                                                                                       reason +
+                                                                                                                                                                       ")")
+                                                                                                                                                               .setPositiveButton(
+                                                                                                                                                                       android.R.string.ok,
+                                                                                                                                                                       null)
+                                                                                                                                                               .show();
+                                                                                                                                                   }
+                                                                                                                                               });
 
-                    }
-                });
+                                                                                                                                           }
+                                                                                                                                       });
                 spec.overwrite = true;
                 UnzipPassController.processInputStream(spec);
 

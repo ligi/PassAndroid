@@ -6,24 +6,24 @@ import android.net.Uri;
 
 class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
 
-    public ExportProblemPassToLigiAndFinishTask(Activity activity, String path, String zip_path, String zip_fname) {
+    private final String reason;
+
+    public ExportProblemPassToLigiAndFinishTask(Activity activity, String path, String zip_path, String zip_fname, final String reason) {
         super(activity, path, zip_path, zip_fname, false);
+        this.reason = reason;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        Intent it = new Intent(Intent.ACTION_SEND);
-        it.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: Passbook with a problem");
-        it.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
-        it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zipPath + zipFileName));
-        //it.setType("application/vnd.apple.pkpass");
-        it.setType("text/plain");
-        it.putExtra(Intent.EXTRA_TEXT, "");
-
-        activity.startActivity(Intent.createChooser(it, "How to send Pass?"));
-
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: Passbook with a problem");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + zipPath + zipFileName));
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "reason: " + reason);
+        activity.startActivity(Intent.createChooser(intent, "How to send Pass?"));
         activity.finish();
 
     }

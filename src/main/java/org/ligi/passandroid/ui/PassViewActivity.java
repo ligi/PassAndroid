@@ -1,7 +1,5 @@
 package org.ligi.passandroid.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,9 +14,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.google.common.base.Optional;
-
+import java.io.File;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -26,12 +26,6 @@ import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
 import org.ligi.passandroid.model.PassFieldList;
-
-import java.io.File;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 
 public class PassViewActivity extends PassViewActivityBase {
 
@@ -104,22 +98,7 @@ public class PassViewActivity extends PassViewActivityBase {
         final Pass pass = optionalPass.get();
 
         if (!pass.isValid()) { // don't deal with invalid passes
-            new AlertDialog.Builder(this)
-                    .setMessage(getString(R.string.pass_problem))
-                    .setTitle(getString(R.string.problem))
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            new ExportProblemPassToLigiAndFinishTask(PassViewActivity.this, pass.getId(), App.getShareDir(), "share.pkpass").execute();
-                        }
-                    })
-                    .show();
+            showPassProblemDialog(pass, "invalid");
             return;
         }
 
@@ -231,9 +210,10 @@ public class PassViewActivity extends PassViewActivityBase {
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
-        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() &&
-                optionalPass.get().getAuthToken().isPresent() && optionalPass.get().getSerial().isPresent()
-        ));//&& optionalPass.get().getPassIdent().isPresent()));
+        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() &&
+                                                    optionalPass.get().isValid() &&
+                                                    optionalPass.get().getAuthToken().isPresent() &&
+                                                    optionalPass.get().getSerial().isPresent()));//&& optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 
@@ -249,9 +229,7 @@ public class PassViewActivity extends PassViewActivityBase {
         if (item.getItemId() == android.R.id.home) {
             final Intent upIntent = NavUtils.getParentActivityIntent(this);
             if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-                TaskStackBuilder.create(this)
-                        .addNextIntentWithParentStack(upIntent)
-                        .startActivities();
+                TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities();
                 finish();
             } else {
                 NavUtils.navigateUpTo(this, upIntent);
