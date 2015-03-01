@@ -14,12 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidquery.service.MarketService;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
-
+import fr.nicolaspomepuy.discreetapprate.AppRate;
+import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -29,12 +34,6 @@ import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-import fr.nicolaspomepuy.discreetapprate.AppRate;
-import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 
 public class PassListActivity extends ActionBarActivity {
 
@@ -51,14 +50,16 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.fab)
     FloatingActionButton fab;
 
+    @InjectView(R.id.emptyView)
+    TextView emptyView;
+
     @OnClick(R.id.fab)
     void onFABClick() {
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.fab_add_dialog_title))
-                .items(R.array.items)
-                .itemsCallback( new FABCallback(this))
-                .negativeText(android.R.string.cancel)
-                .show();
+        new MaterialDialog.Builder(this).title(getString(R.string.fab_add_dialog_title))
+                                        .items(R.array.items)
+                                        .itemsCallback(new FABCallback(this))
+                                        .negativeText(android.R.string.cancel)
+                                        .show();
     }
 
     private NavigationFragment navigationFragment;
@@ -89,7 +90,10 @@ public class PassListActivity extends ActionBarActivity {
                 passStore.refreshPassesList();
                 passStore.sort(App.getSettings().getSortOrder());
 
+                AXT.at(emptyView).setVisibility(passStore.passCount() == 0);
+
                 passAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -116,10 +120,7 @@ public class PassListActivity extends ActionBarActivity {
             final MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
 
-            AppRate.with(this)
-                    .retryPolicy(RetryPolicy.EXPONENTIAL)
-                    .initialLaunchCount(5)
-                    .checkAndShow();
+            AppRate.with(this).retryPolicy(RetryPolicy.EXPONENTIAL).initialLaunchCount(5).checkAndShow();
         }
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
