@@ -94,8 +94,7 @@ public class AndroidFileSystemPassStore implements PassStore {
         final File cachedFile = getCacheFile(id);
         try {
             return AXT.at(cachedFile).loadToObject();
-        } catch (Exception e) {
-            //noinspection EmptyCatchBlock
+        } catch (Exception ignored) {
         }
 
         Log.i("Passbook cache miss");
