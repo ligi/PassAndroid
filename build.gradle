@@ -16,7 +16,7 @@ buildscript {
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
-apply plugin: 'de.felixschulze.gradle.spoon'
+apply plugin: 'spoon'
 
 repositories {
     jcenter()
