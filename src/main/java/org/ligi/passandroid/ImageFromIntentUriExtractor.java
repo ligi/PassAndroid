@@ -55,10 +55,9 @@ public class ImageFromIntentUriExtractor {
             }
         }
         // If it is a picasa image on devices running OS prior to 3.0
-        else if (selectedImage != null && selectedImage.toString().length() > 0) {
-            final Uri uriurl = selectedImage;
+        else if (selectedImage.toString().length() > 0) {
             // Do this in a background thread, since we are fetching a large image from the web
-            return getBitmap("image_file_name.jpg", uriurl);
+            return getBitmap("image_file_name.jpg", selectedImage);
         }
         return null;
     }
@@ -108,12 +107,10 @@ public class ImageFromIntentUriExtractor {
     }
 
     private InputStream getInputStreamByURL(Uri url) throws IOException {
-        InputStream is;
         if (url.toString().startsWith("content://com.google.android.gallery3d")) {
-            is = context.getContentResolver().openInputStream(url);
+            return context.getContentResolver().openInputStream(url);
         } else {
-            is = new URL(url.toString()).openStream();
+            return new URL(url.toString()).openStream();
         }
-        return is;
     }
 }
