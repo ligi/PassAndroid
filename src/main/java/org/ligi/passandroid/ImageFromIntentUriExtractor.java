@@ -19,13 +19,13 @@ public class ImageFromIntentUriExtractor {
 
     final Context context;
 
-    public ImageFromIntentUriExtractor(Context context) {
+    public ImageFromIntentUriExtractor(final Context context) {
         this.context = context;
     }
 
     public File extract(Uri selectedImage) {
         final String[] filePathColumn = {MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME};
-        Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        final Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
         // some devices (OS versions return an URI of com.android instead of com.google.android
         if (selectedImage.toString().startsWith("content://com.android.gallery3d.provider")) {
             // use the com.google provider, not the com.android provider.
@@ -38,10 +38,9 @@ public class ImageFromIntentUriExtractor {
             if (selectedImage.toString().startsWith("content://com.google.android.gallery3d")) {
                 columnIndex = cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME);
                 if (columnIndex != -1) {
-                    final Uri uriurl = selectedImage;
                     // Do this in a background thread, since we are fetching a large image from the web
 
-                    return getBitmap("image_file_name.jpg", uriurl);
+                    return getBitmap("image_file_name.jpg", selectedImage);
 
                 }
             } else { // it is a regular local image file
