@@ -1,5 +1,6 @@
 package org.ligi.passandroid.helper;
 
+import android.support.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,7 +65,7 @@ public class SafeJSONReader {
 
     }};
 
-    public static JSONObject readJSONSafely(String str) throws JSONException {
+    public static JSONObject readJSONSafely(@Nullable String str) throws JSONException {
         if (str == null) {
             return null;
         }
