@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.google.common.io.Files;
 
 import org.ligi.passandroid.App;
-import org.ligi.passandroid.ImageFromIntentUriExtractor;
+import org.ligi.passandroid.ImageFromIntentUriToFileConverter;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
@@ -100,7 +100,7 @@ public class ImageEditFragment extends Fragment {
     }
 
     private void extractImage(Intent imageReturnedIntent, String name) {
-        final File extract = new ImageFromIntentUriExtractor(getActivity()).extract(imageReturnedIntent.getData());
+        final File extract = new ImageFromIntentUriToFileConverter(getActivity()).extract(imageReturnedIntent.getData());
         try {
             Files.copy(extract, new File(getPass().getPath() + "/" + name + PassImpl.FILETYPE_IMAGES));
         } catch (IOException e) {

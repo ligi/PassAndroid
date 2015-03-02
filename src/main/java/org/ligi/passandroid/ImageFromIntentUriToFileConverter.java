@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class ImageFromIntentUriExtractor {
+public class ImageFromIntentUriToFileConverter {
 
     final Context context;
 
-    public ImageFromIntentUriExtractor(final Context context) {
+    public ImageFromIntentUriToFileConverter(final Context context) {
         this.context = context;
     }
 
@@ -45,6 +45,7 @@ public class ImageFromIntentUriExtractor {
                 }
             } else { // it is a regular local image file
                 String filePath = cursor.getString(columnIndex);
+
                 // taken from http://stackoverflow.com/questions/20067508/get-real-path-from-uri-android-kitkat-new-storage-access-framework
                 if (filePath == null && Build.VERSION.SDK_INT >= 19) {
                     filePath = getFilePathForKITKAT(selectedImage);
