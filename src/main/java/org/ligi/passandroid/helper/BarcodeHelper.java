@@ -25,8 +25,8 @@ public class BarcodeHelper {
             final BitMatrix matrix = getBitMatrix(dataNotNull, typeNotNull, size);
 
             // generate an image from the byte matrix
-            int width = matrix.getWidth();
-            int height = matrix.getHeight();
+            final int width = matrix.getWidth();
+            final int height = matrix.getHeight();
 
             // create buffered image to draw to
             // NTFS Bitmap.Config.ALPHA_8 sounds like an awesome idea - been there - done that ..
