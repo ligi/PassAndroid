@@ -2,6 +2,7 @@ package org.ligi.passandroid.helper;
 
 import android.graphics.Bitmap;
 
+import android.support.annotation.Nullable;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
 import com.google.zxing.FormatException;
@@ -15,27 +16,22 @@ import com.google.zxing.common.HybridBinarizer;
 
 public class BarcodeDecoder {
 
+    @Nullable
     public static String decodeBitmap(Bitmap bMap) {
-        String contents = null;
-
-        int[] intArray = new int[bMap.getWidth() * bMap.getHeight()];
+        final int[] intArray = new int[bMap.getWidth() * bMap.getHeight()];
         bMap.getPixels(intArray, 0, bMap.getWidth(), 0, 0, bMap.getWidth(), bMap.getHeight());
 
-        LuminanceSource source = new RGBLuminanceSource(bMap.getWidth(), bMap.getHeight(), intArray);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        final LuminanceSource source = new RGBLuminanceSource(bMap.getWidth(), bMap.getHeight(), intArray);
+        final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-        Reader reader = new MultiFormatReader();// use this otherwise ChecksumException
+        final Reader reader = new MultiFormatReader();// use this otherwise ChecksumException
         try {
-            Result result = reader.decode(bitmap);
-            contents = result.getText();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        } catch (ChecksumException e) {
-            e.printStackTrace();
-        } catch (FormatException e) {
+            final Result result = reader.decode(bitmap);
+            return result.getText();
+        } catch (NotFoundException | ChecksumException | FormatException e) {
             e.printStackTrace();
         }
-        return contents;
+        return null;
     }
 
 }
