@@ -196,14 +196,14 @@ public class PassViewActivity extends PassViewActivityBase {
     }
 
     private String getPassDebugInfo(Pass pass) {
-
-        String result = ""; // TODO bring back sth like passbook.getPlainJsonString();
+        // TODO bring back sth like passbook.getPlainJsonString();
+        final StringBuilder result = new StringBuilder();
 
         for (File f : new File(pass.getId()).listFiles()) {
-            result += f.getName() + "<br/>";
+            result.append(f.getName()).append("<br/>");
         }
 
-        return result;
+        return result.toString();
     }
 
     @Override
