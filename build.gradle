@@ -20,6 +20,7 @@ apply plugin: 'spoon'
 
 repositories {
     jcenter()
+    mavenLocal()
 }
 
 android {
@@ -112,7 +113,7 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.afollestad:material-dialogs:0.6.3.3'
 
-    compile 'org.ligi:AXT:0.32'
+    compile 'org.ligi:AXT:0.33'
     compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.2.0'

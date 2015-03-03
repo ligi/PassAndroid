@@ -7,21 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.common.io.Files;
-
+import java.io.File;
+import java.io.IOException;
+import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
-import org.ligi.passandroid.ImageFromIntentUriToFileConverter;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
-
-import java.io.File;
-import java.io.IOException;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import static android.app.Activity.RESULT_OK;
 
 public class ImageEditFragment extends Fragment {
@@ -74,8 +69,7 @@ public class ImageEditFragment extends Fragment {
         App.getBus().post(new PassRefreshEvent(getPass()));
     }
 
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent imageReturnedIntent) {
+    public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
         if (resultCode == RESULT_OK) {
@@ -100,7 +94,7 @@ public class ImageEditFragment extends Fragment {
     }
 
     private void extractImage(Intent imageReturnedIntent, String name) {
-        final File extract = new ImageFromIntentUriToFileConverter(getActivity()).extract(imageReturnedIntent.getData());
+        final File extract = AXT.at(imageReturnedIntent.getData()).loadImage(getActivity());
         try {
             Files.copy(extract, new File(getPass().getPath() + "/" + name + PassImpl.FILETYPE_IMAGES));
         } catch (IOException e) {
