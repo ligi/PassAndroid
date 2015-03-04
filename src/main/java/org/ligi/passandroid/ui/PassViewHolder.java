@@ -68,7 +68,6 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             dateForIntent = null;
         }
 
-
         final boolean noButtons = dateForIntent == null && !(pass.getLocations().size() > 0);
         if (noButtons) {
             actionsSeparator.setVisibility(View.GONE);
