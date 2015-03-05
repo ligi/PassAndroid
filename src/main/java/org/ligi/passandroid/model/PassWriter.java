@@ -29,8 +29,8 @@ public class PassWriter {
                 object.put("barcode", barcode);
             }
 
-            object.put("fgColor", "#" + Integer.toHexString(pass.getForegroundColor()));
-            object.put("bgColor", "#" + Integer.toHexString(pass.getBackGroundColor()));
+            object.put("fgColor", "#" +String.format("%08X", pass.getForegroundColor()));
+            object.put("bgColor", "#" +String.format("%08X", pass.getBackGroundColor()));
 
 
             return object.toString(2);
