@@ -2,6 +2,9 @@ package org.ligi.passandroid.model;
 
 import com.google.common.base.Optional;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +35,14 @@ public class PassWriter {
             object.put("fgColor", "#" +String.format("%08X", pass.getForegroundColor()));
             object.put("bgColor", "#" +String.format("%08X", pass.getBackGroundColor()));
 
+            final Optional<DateTime> relevantDate = pass.getRelevantDate();
+
+            if (relevantDate.isPresent()) {
+                final JSONObject timeObject = new JSONObject();
+                DateTimeFormatter df = DateTimeFormat.forPattern("dd MM yyyy HH:mm:ss.SSS Z");
+                timeObject.put("dateTime", relevantDate.get().toString());
+                object.put("when", timeObject);
+            }
 
             return object.toString(2);
         } catch (JSONException e) {

@@ -1,8 +1,10 @@
 package org.ligi.passandroid.reader;
 
 import android.graphics.Color;
+import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 import java.io.File;
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.helper.SafeJSONReader;
@@ -46,6 +48,12 @@ public class PassReader {
                     barCode.setAlternativeText(barcode_json.getString("altText"));
                 }
 
+            }
+
+            if (pass_json.has("when")) {
+                final JSONObject when = pass_json.getJSONObject("when");
+                final String dateTime = when.getString("dateTime");
+                pass.setRelevantDate(Optional.of(DateTime.parse(dateTime)));
             }
 
         } catch (Exception e) {
