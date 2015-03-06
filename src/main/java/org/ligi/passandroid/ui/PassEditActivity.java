@@ -67,7 +67,7 @@ public class PassEditActivity extends ActionBarActivity {
         titlePageIndicator.setSelectedColor(0xFF000000);
     }
 
-    public class CreateFragmentPager extends FragmentPagerAdapter {
+    private class CreateFragmentPager extends FragmentPagerAdapter {
         public CreateFragmentPager(FragmentManager fm) {
             super(fm);
         }
