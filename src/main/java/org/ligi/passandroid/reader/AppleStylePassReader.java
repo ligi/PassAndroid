@@ -66,7 +66,7 @@ public class AppleStylePassReader {
 
         if (file.exists()) {
             try {
-                final String plainJsonString = AXT.at(file).readToString();
+                final String plainJsonString = AppleStylePassTranslation.readFileAsStringGuessEncoding(file);
                 pass_json = SafeJSONReader.readJSONSafely(plainJsonString);
             } catch (Exception e) {
                 Log.i("PassParse Exception " + e);
