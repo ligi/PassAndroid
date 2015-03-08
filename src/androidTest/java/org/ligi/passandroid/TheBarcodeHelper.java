@@ -59,6 +59,7 @@ public class TheBarcodeHelper extends InstrumentationTestCase {
         try {
             Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format, 42);
 
+            assertNotNull(tested2);
             assertThat(tested2.getWidth()).isGreaterThanOrEqualTo(42);
         } catch (Exception e) {
             fail("could not create barcode " + e);
