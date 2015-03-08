@@ -2,6 +2,8 @@ package org.ligi.passandroid.helper;
 
 import android.graphics.Bitmap;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Writer;
@@ -12,17 +14,14 @@ import org.ligi.tracedroid.logging.Log;
 
 public class BarcodeHelper {
 
-    public static Bitmap generateBarCodeBitmap(String dataNotNull, BarcodeFormat typeNotNull, int size) {
+    @Nullable public static Bitmap generateBarCodeBitmap(@NonNull String data, @NonNull BarcodeFormat type, int size) {
 
-        if (dataNotNull == null) {
-            throw new IllegalArgumentException("date must not be null");
+        if (data.isEmpty()) {
+            return null;
         }
 
-        if (typeNotNull == null) {
-            throw new IllegalArgumentException("type must not be null");
-        }
         try {
-            final BitMatrix matrix = getBitMatrix(dataNotNull, typeNotNull, size);
+            final BitMatrix matrix = getBitMatrix(data, type, size);
 
             // generate an image from the byte matrix
             final int width = matrix.getWidth();
