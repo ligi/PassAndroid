@@ -1,8 +1,11 @@
 package org.ligi.passandroid.ui;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -18,12 +21,12 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidquery.service.MarketService;
-import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
 import fr.nicolaspomepuy.discreetapprate.AppRate;
 import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
+import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
+import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -31,12 +34,15 @@ import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
+import org.ligi.passandroid.helper.PassUtil;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 public class PassListActivity extends ActionBarActivity {
 
+    private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
     private PassAdapter passAdapter;
 
     private ActionBarDrawerToggle drawerToggle;
@@ -47,20 +53,61 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(R.id.fab)
-    FloatingActionButton fab;
-
     @InjectView(R.id.emptyView)
     TextView emptyView;
 
-    @OnClick(R.id.fab)
+    @InjectView(R.id.fam)
+    FloatingActionsMenu floatingActionsMenu;
+
+    @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
-        new MaterialDialog.Builder(this).title(getString(R.string.fab_add_dialog_title))
-                                        .items(R.array.items)
-                                        .itemsCallback(new FABCallback(this))
-                                        .negativeText(android.R.string.cancel)
-                                        .show();
+        final FiledPass pass = PassUtil.createEmptyPass();
+        App.getPassStore().setCurrentPass(pass);
+        pass.save(App.getPassStore());
+        AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
+        floatingActionsMenu.collapse();
     }
+
+    @OnClick(R.id.fab_action_scan)
+    void onScanClick() {
+        final Intent intent = new Intent(this, SearchPassesIntentService.class);
+        startService(intent);
+        floatingActionsMenu.collapse();
+    }
+
+
+    @OnClick(R.id.fab_action_demo_pass)
+    void onAddDemoClick() {
+        AXT.at(this).startCommonIntent().openUrl("http://ligi.de/passandroid_samples/index.html");
+        floatingActionsMenu.collapse();
+    }
+
+
+    @InjectView(R.id.fab_action_open_file)
+    FloatingActionButton openFileFAB;
+
+    public final static int VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK =19;
+
+    @OnClick(R.id.fab_action_open_file)
+    @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
+    void onAddOpenFileClick() {
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*"); // tried with octet stream - no use
+        startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        if (requestCode == OPEN_FILE_READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (resultData != null) {
+                final Intent targetIntent = new Intent(this, PassImportActivity.class);
+                targetIntent.setData(resultData.getData());
+                startActivity(targetIntent);
+            }
+        }
+    }
+
 
     private NavigationFragment navigationFragment;
 
@@ -105,6 +152,8 @@ public class PassListActivity extends ActionBarActivity {
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
         ButterKnife.inject(this);
+
+        AXT.at(openFileFAB).setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK);
 
         final LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -171,7 +220,6 @@ public class PassListActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        fab.attachToRecyclerView(recyclerView);
         new InitAsyncTask().execute();
 
         App.getBus().register(this);

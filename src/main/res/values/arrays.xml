@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="items" >
-        <item>@string/fab_choice_scan_pkpass_files</item>
-        <item>@string/fab_choice_add_demo_pass</item>
-        <item>@string/fab_choice_create_pass</item>
-    </string-array>
-</resources>

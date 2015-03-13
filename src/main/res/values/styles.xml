@@ -38,4 +38,11 @@
         <item name="android:textColor">@color/primary_text_default_material_dark</item>
         <item name="android:padding">7dp</item>
     </style>
+
+
+    <style name="menu_labels_style">
+        <item name="android:background">@color/secondary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">4dp</item>
+    </style>
 </resources>
