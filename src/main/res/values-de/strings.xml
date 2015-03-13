@@ -71,7 +71,6 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
   <string name="less">WENIGER</string>
   <string name="select_picture">Wähle Bild</string>
   <string name="scanning_for_passes">Suche nach Pässen</string>
-  <string name="fab_add_dialog_title">Quelle</string>
   <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
   <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
   <string name="fab_choice_create_pass">Erstelle Pass</string>
