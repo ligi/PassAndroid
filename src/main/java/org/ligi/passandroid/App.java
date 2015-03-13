@@ -3,10 +3,9 @@ package org.ligi.passandroid;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
-
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
-
+import net.danlew.android.joda.JodaTimeAndroid;
 import org.ligi.passandroid.model.AndroidFileSystemPassStore;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
@@ -23,6 +22,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        JodaTimeAndroid.init(this);
 
         Tracker.init(this);
         initTraceDroid();
@@ -50,8 +51,8 @@ public class App extends Application {
     }
 
     public static PassStore getPassStore() {
-        if (passStore==null) {
-            passStore=new AndroidFileSystemPassStore(instance);
+        if (passStore == null) {
+            passStore = new AndroidFileSystemPassStore(instance);
         }
         return passStore;
     }
