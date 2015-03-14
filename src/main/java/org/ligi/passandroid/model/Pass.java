@@ -69,4 +69,5 @@ public interface Pass extends Serializable {
 
     Optional<String> getPassIdent();
 
+    String getApp();
 }

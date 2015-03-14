@@ -13,9 +13,18 @@ public class PassWriter {
         final JSONObject object = new JSONObject();
 
         try {
-            object.put("description", pass.getDescription());
-            object.put("id", pass.getId());
-            object.put("type", pass.getType());
+            final JSONObject whatObject = new JSONObject();
+
+            whatObject.put("description", pass.getDescription()); // ok
+            object.put("what",whatObject);
+
+            final JSONObject metaObject = new JSONObject();
+
+            metaObject.put("id", pass.getId()); // ok
+            metaObject.put("type", pass.getType()); //
+            metaObject.put("app",pass.getApp());
+
+            object.put("meta",metaObject);
 
             if (pass.getBarCode().isPresent()) {
                 final JSONObject barcode = new JSONObject();
@@ -47,4 +56,5 @@ public class PassWriter {
         }
         return null;
     }
+
 }

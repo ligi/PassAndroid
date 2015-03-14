@@ -43,6 +43,7 @@ public class PassImpl implements FiledPass, Serializable {
     private List<PassLocation> locations = new ArrayList<>();
     private String path;
     private String id;
+    private String app;
 
     private Optional<String> authToken = Optional.absent();
     private Optional<String> webServiceURL = Optional.absent();
@@ -163,6 +164,11 @@ public class PassImpl implements FiledPass, Serializable {
     @Override
     public Optional<String> getPassIdent() {
         return passTypeIdent;
+    }
+
+    @Override
+    public String getApp() {
+        return app;
     }
 
     public Optional<Bitmap> getLogoBitmap() {
