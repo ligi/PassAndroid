@@ -3,8 +3,6 @@ package org.ligi.passandroid.model;
 import com.google.common.base.Optional;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,7 +37,6 @@ public class PassWriter {
 
             if (relevantDate.isPresent()) {
                 final JSONObject timeObject = new JSONObject();
-                DateTimeFormatter df = DateTimeFormat.forPattern("dd MM yyyy HH:mm:ss.SSS Z");
                 timeObject.put("dateTime", relevantDate.get().toString());
                 object.put("when", timeObject);
             }
