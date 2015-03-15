@@ -92,4 +92,10 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="fab_choice_scan_pkpass_files">Искать карточки на этом устройстве</string>
   <string name="fab_choice_add_demo_pass">Загрузить примеры карточек</string>
   <string name="fab_choice_create_pass">Создать карточку (бета-версия)</string>
+  <string name="empty_text_view"><big><b>Пока карточек нет</b></big>
+\n\n\n Можно поискать карточки в телефоне
+\n\n или создать карточку самостоятельно
+\n\n или скачать пример
+\n\n просто нажмите на \"+\" ниже</string>
+  <string name="downloading_new_pass_version">скачать обновленную карточку</string>
 </resources>
