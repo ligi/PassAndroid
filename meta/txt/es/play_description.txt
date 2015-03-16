@@ -1,0 +1,81 @@
+PassAndroid Passbooks para Android
+
+
+¿Qué es esto?
+========
+
+Esta aplicación es un visor para passbooks - un passbook podría ser por ejemplo, una tarjeta de embarque para tu siguiente vuelo, un cupón para una bebida caliente en el destino, una entrada de cine, una tarjeta de membresía - hay un montón de posibilidades. 
+Básicamente es un remplazo de una pieza de plástico que normalmente tendrías que llevar contigo - ¡salvemos algunos árboles y reduzcamos residuos!
+Además esta aplicación es Software Libre - Libre no solo como "Cerveza gratis" - pero más que el concepto de Software libre y abierto de Richard Stallmans para un mundo mejor.
+
+¿Cómo funciona?
+==============
+
+Existen los archivos llamados pkpass - se pueden abrir con esta aplicación - por ejemplo, cuando los reciba por correo electrónico o mediante un enlace de descarga. El contenido más importante es el código de barras (QR, AZTEC Y PDF417 que le autoriza la mayor parte del tiempo - pero también tiene otros contenidos interesantes, como una descripción - a menudo una fecha (que ahora puede añadir a su calendario) - a menudo también lugares (para darle instrucciones) - ¡sólo pruébelo!
+¡Esta aplicación se puede usar sin conexión una vez haya descargado su pase!
+
+Historia
+=====
+
+Me tropecé con archivos passbook cuando recibí mi pase para el 29C3 - Me gustó la idea - pero no había una aplicación para Android que funcionase. Vi que la aplicación era bastante sencilla (sólo un contenedor zip con un JSON e imágenes) - La primera versión fue hecha muy rápida y funcionaba (tienía mi entrada para 29C3) - En el siguiente año no trabajé mucho en esta aplicación, ya que no tenía casos de uso reales, pero mientras muchos usuarios descargaban la aplicación y arreglé el procesamiento de algunos pases que me enviaban (algunos pases contienen un JSON realmente roto...)
+Un año después - justo antes que 30C3 - Empecé a trabajar de nuevo un poco más en esta aplicación - por 2 razones
+ - un amigo mío está muy metido en todo este asunto del BTLE y la localización contexto, cosa que podría ser interesante para Passbook - pero todavía no hay nada listo
+ - Me llegó un email de Luís Torrecilla - un estupendo diseñador que hico un gran rediseño
+Todo esto estaba llevando a PassAndroid - una versión completamente nueva - con un nuevo aspecto y nuevas funciones (clasificación y añadir al calendario junto a tirón para refrescar, un cajón de navegación y el menú contextual "Barra de acciones")
+
+Pases que funcionan
+=============
+
+Air Berlin
+Air Canada
+Czech Airlines
+Brussels Airlines
+Emirates airlines
+Lufthansa
+German Wings
+Iberia
+Swiss Air
+Austrian Airlines ( http://www.austrian.com/ )
+Virgin Australia
+Virgin Atlantic
+Cleartrip (probado con IRCTC - Indian Railway )
+Porter Airlines (probado en Norte América) 
+Ticketfly (probado en Norte América) 
+TAM Airlines 
+TUI-Fly
+Norwegian Airlines
+LAN Peru
+Qantas
+Saudi Arabian Airlines 
+
+Entrada de cine (entradas.com)
+Entradas de Empire Theatres
+Owl ticket Kinépolis
+Cineworld en Middlesborough UK
+Cinecitta en Nuremberg
+Cineplex-Kinos
+Cathay Pacific
+UCI Kinowelt
+Cines Kinépolis en Bélgica
+
+Renfe
+Chaos communication congress
+TAP (Portugal)
+
+esto son solo alguno de los que conozco - por favor, mándeme un email o escriba un mensaje en la comunidad para los pases que conozca que funcionan
+
+Código fuente / Fallos
+==================
+
+ambos en github:
+
+https://github.com/ligi/PassAndroid/
+
+
+Licencia 
+======
+
+GPLv3
+
+
+Keywords: tarjeta regalo tarjetas tienda cartas pase pases passbooks codigo-qr codigos-qr ticket tickets entrada fidelidad tarjetas membresia identificacion miembro conferencia tarjeta embarque pase viaje
