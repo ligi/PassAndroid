@@ -5,12 +5,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.1.3'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath('com.stanfy.spoon:spoon-gradle-plugin:0.14.1') {
-            // https://github.com/stanfy/spoon-gradle-plugin/issues/33
-            exclude module: 'guava'
-        }
+        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.0.0')
     }
 }
 
@@ -30,7 +27,7 @@ android {
 
     defaultConfig {
         versionCode 250
-        versionName "2.5.0"
+        versionName "2.5.1"
         minSdkVersion 9
         targetSdkVersion 22
         applicationId "org.ligi.passandroid"
@@ -118,7 +115,7 @@ dependencies {
     compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
-    compile 'fr.nicolaspomepuy:discreetapprate:2.0.3@aar'
+    compile 'fr.nicolaspomepuy:discreetapprate:2.0.4@aar'
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
