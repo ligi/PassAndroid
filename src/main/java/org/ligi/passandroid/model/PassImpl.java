@@ -176,6 +176,7 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
 
+    @NonNull
     public String getTypeNotNull() {
         if (type == null) {
             return "none";

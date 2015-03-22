@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.common.base.Optional;
@@ -16,8 +17,10 @@ public interface Pass extends Serializable {
 
     String getDescription();
 
+    @Nullable
     String getType();
 
+    @NonNull
     String getTypeNotNull();
 
     PassFieldList getPrimaryFields();
