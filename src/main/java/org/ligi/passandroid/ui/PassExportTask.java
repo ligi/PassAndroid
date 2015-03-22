@@ -6,16 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
+import java.io.File;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.util.Zip4jConstants;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 class PassExportTask extends AsyncTask<Void, Void, Void> {
 
@@ -27,11 +23,7 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
     private boolean share_after_export;
     private Exception exception;
 
-    public PassExportTask(final Activity activity,
-                          final String inputPath,
-                          final String zipPath,
-                          final String zipFileName,
-                          final boolean share_after_export) {
+    public PassExportTask(final Activity activity, final String inputPath, final String zipPath, final String zipFileName, final boolean share_after_export) {
         super();
         this.activity = activity;
         this.inputPath = inputPath;
@@ -53,43 +45,20 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        byte[] buf = new byte[1024];
-
         try {
-            final File zipPathFile = new File(zipPath);
-            zipPathFile.mkdirs();
-
             final String zipFullFilename = zipPath + "/" + zipFileName;
+            new File(zipFullFilename).delete();
+            final ZipFile zipFile = new ZipFile(zipFullFilename);
+            zipFile.createZipFileFromFolder(inputPath, new ZipParameters() {{
+                setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
+                setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+            }}, false, 0);
 
-            // Create the ZIP file
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFullFilename));
-            // Compress the files
-
-            final File[] files = new File(inputPath).listFiles();
-
-            if (files == null) {
-                throw new IllegalStateException("cannot listFiles in InputPath - is null");
-            }
-
-            for (File filename : files) {
-                final FileInputStream in = new FileInputStream(filename);
-                // Add ZIP entry to output stream.
-                out.putNextEntry(new ZipEntry(filename.getName()));
-                // Transfer bytes from the file to the ZIP file
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-                out.closeEntry();
-                in.close();
-            }
-            out.close();
-        } catch (IOException | IllegalStateException exception) {
+        } catch (Exception exception) {
             Tracker.get().trackException("when exporting pass to zip", exception, false);
             this.exception = exception; // we need to take action on the main thread later
             new File(zipFileName).delete(); // prevent zombies from taking over
         }
-
         return null;
     }
 
