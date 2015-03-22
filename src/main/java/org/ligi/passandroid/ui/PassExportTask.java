@@ -50,6 +50,7 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
             new File(zipFullFilename).delete();
             final ZipFile zipFile = new ZipFile(zipFullFilename);
             zipFile.createZipFileFromFolder(inputPath, new ZipParameters() {{
+                setIncludeRootFolder(false);
                 setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
                 setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
             }}, false, 0);
