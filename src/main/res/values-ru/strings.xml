@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="app_name">PassAndroid</string>
   <string name="menu_settings">Настройки</string>
   <string name="logo">логотип</string>
   <string name="menu_map">показать на карте</string>
