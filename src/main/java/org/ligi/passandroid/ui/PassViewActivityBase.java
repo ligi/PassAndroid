@@ -105,7 +105,7 @@ public class PassViewActivityBase extends ActionBarActivity {
                                              new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
                                                                                       pass.getId(),
                                                                                       App.getShareDir(),
-                                                                                      "share.pkpass",
+                                                                                      "share",
                                                                                       reason).execute();
                                          }
                                      })

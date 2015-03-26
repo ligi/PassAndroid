@@ -6,16 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
-
+import com.afollestad.materialdialogs.MaterialDialog;
+import java.io.File;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
-
-import java.io.File;
 
 public class PassMenuOptions {
     public final Activity activity;
@@ -73,7 +73,33 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share.pkpass", true).execute();
+                new MaterialDialog.Builder(activity).items(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"})
+                                                    .itemsCallback(new MaterialDialog.ListCallback() {
+                                                        @Override
+                                                        public void onSelection(final MaterialDialog materialDialog,
+                                                                                final View view,
+                                                                                final int i,
+                                                                                final CharSequence charSequence) {
+                                                            final int passFormat;
+
+                                                            switch (i){
+                                                                case 1:
+                                                                    passFormat = PassExporter.FORMAT_PKPASS;
+                                                                    break;
+
+                                                                default:
+                                                                    passFormat = PassExporter.FORMAT_OPENPASS;
+                                                            }
+
+                                                            new PassExportTask(activity,
+                                                                               pass.getPath(),
+                                                                               App.getShareDir(),
+                                                                               "share",
+                                                                               true, passFormat).execute();
+                                                        }
+                                                    })
+                                                    .show();
+
                 return true;
 
             case R.id.menu_edit:
