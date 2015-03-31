@@ -39,8 +39,12 @@ public class PassWriter {
                 object.put("barcode", barcode);
             }
 
+            final JSONObject uiObject = new JSONObject();
+
             object.put("fgColor", "#" +String.format("%08X", pass.getForegroundColor()));
             object.put("bgColor", "#" +String.format("%08X", pass.getBackGroundColor()));
+
+            object.put("ui",uiObject);
 
             final Optional<DateTime> relevantDate = pass.getRelevantDate();
 
