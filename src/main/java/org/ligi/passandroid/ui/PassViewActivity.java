@@ -141,10 +141,6 @@ public class PassViewActivity extends PassViewActivityBase {
 
         final StringBuilder back_str = new StringBuilder();
 
-        if (BuildConfig.DEBUG) {
-            back_str.append(getPassDebugInfo(pass));
-        }
-
         if (pass.getBackFields().size() != 0) {
             back_str.append(pass.getBackFields().toHTMLString());
             back_tv.setText(Html.fromHtml(back_str.toString()));
@@ -197,16 +193,6 @@ public class PassViewActivity extends PassViewActivityBase {
 
     }
 
-    private String getPassDebugInfo(Pass pass) {
-        // TODO bring back sth like passbook.getPlainJsonString();
-        final StringBuilder result = new StringBuilder();
-
-        for (File f : new File(pass.getId()).listFiles()) {
-            result.append(f.getName()).append("<br/>");
-        }
-
-        return result.toString();
-    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
