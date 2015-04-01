@@ -3,19 +3,16 @@ package org.ligi.passandroid.ui;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.zxing.BarcodeFormat;
-
-import org.ligi.axt.AXT;
-import org.ligi.passandroid.R;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import com.google.zxing.BarcodeFormat;
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.R;
+import org.ligi.tracedroid.logging.Log;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
@@ -39,20 +36,22 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         super.onResume();
 
         final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
-        if (optionalPass.isPresent()) {
-            setBestFittingOrientationForBarCode();
-
-            barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().get().getBitmap(smallestSize));
-
-            if (optionalPass.get().getBarCode().get().getAlternativeText().isPresent()) {
-                alternativeBarcodeText.setVisibility(View.VISIBLE);
-                alternativeBarcodeText.setText(optionalPass.get().getBarCode().get().getAlternativeText().get());
-            } else {
-                alternativeBarcodeText.setVisibility(View.GONE);
-            }
-        } else {
+        if (!optionalPass.isPresent() || optionalPass.get().getBarCode() == null) {
+            Log.w("FullscreenBarcodeActivity in bad state");
             finish(); // this should never happen, but better safe than sorry
+            return;
         }
+        setBestFittingOrientationForBarCode();
+
+        barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().getBitmap(smallestSize));
+
+        if (optionalPass.get().getBarCode().getAlternativeText().isPresent()) {
+            alternativeBarcodeText.setVisibility(View.VISIBLE);
+            alternativeBarcodeText.setText(optionalPass.get().getBarCode().getAlternativeText().get());
+        } else {
+            alternativeBarcodeText.setVisibility(View.GONE);
+        }
+
     }
 
     /**
@@ -64,7 +63,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (optionalPass.get().getBarCode().get().getFormat() == BarcodeFormat.PDF_417) {
+        if (optionalPass.get().getBarCode().getFormat() == BarcodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

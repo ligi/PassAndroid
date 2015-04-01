@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -21,6 +22,7 @@ import com.google.common.base.Optional;
 import java.io.File;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
+import org.ligi.passandroid.BuildConfig;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
@@ -102,12 +104,12 @@ public class PassViewActivity extends PassViewActivityBase {
             return;
         }
 
-        if (pass.getBarCode().isPresent()) {
+        if (pass.getBarCode()!=null) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
-            final Bitmap bitmap = pass.getBarCode().get().getBitmap(smallestSide / 3);
+            final Bitmap bitmap = pass.getBarCode().getBitmap(smallestSide / 3);
             setBitmapSafe(barcode_img, Optional.fromNullable(bitmap));
-            if (pass.getBarCode().get().getAlternativeText().isPresent()) {
-                barcodeAlternativeText.setText(pass.getBarCode().get().getAlternativeText().get());
+            if (pass.getBarCode().getAlternativeText().isPresent()) {
+                barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText().get());
                 barcodeAlternativeText.setVisibility(View.VISIBLE);
             } else {
                 barcodeAlternativeText.setVisibility(View.GONE);
@@ -137,15 +139,15 @@ public class PassViewActivity extends PassViewActivityBase {
             addFrontFields(pass.getAuxiliaryFields());
         }
 
-        String back_str = "";
+        final StringBuilder back_str = new StringBuilder();
 
-        if (App.isDeveloperMode()) {
-            back_str += getPassDebugInfo(pass);
+        if (BuildConfig.DEBUG) {
+            back_str.append(getPassDebugInfo(pass));
         }
 
         if (pass.getBackFields().size() != 0) {
-            back_str += pass.getBackFields().toHTMLString();
-            back_tv.setText(Html.fromHtml(back_str));
+            back_str.append(pass.getBackFields().toHTMLString());
+            back_tv.setText(Html.fromHtml(back_str.toString()));
             moreTextView.setVisibility(View.VISIBLE);
         } else {
             moreTextView.setVisibility(View.GONE);

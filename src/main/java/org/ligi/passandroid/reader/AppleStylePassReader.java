@@ -106,12 +106,12 @@ public class AppleStylePassReader {
             pass.setBarCode(barCode);
 
             if (barcode_json.has("altText")) {
-                pass.getBarCode().get().setAlternativeText(barcode_json.getString("altText"));
+                pass.getBarCode().setAlternativeText(barcode_json.getString("altText"));
             }
 
             // TODO should check a bit more with barcode here - this can be dangerous
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         if (pass_json != null) {
@@ -137,7 +137,7 @@ public class AppleStylePassReader {
 
             pass.setSerial(readJsonSafeAsOptional(pass_json, "serialNumber"));
             pass.setAuthToken(readJsonSafeAsOptional(pass_json, "authenticationToken"));
-            pass.setWebserviceURL(readJsonSafeAsOptional(pass_json, "webServiceURL"));
+            pass.setWebServiceURL(readJsonSafeAsOptional(pass_json, "webServiceURL"));
             pass.setPassTypeIdent(readJsonSafeAsOptional(pass_json, "passTypeIdentifier"));
 
             final List<PassLocation> locations = new ArrayList<>();
@@ -158,7 +158,7 @@ public class AppleStylePassReader {
                     locations.add(location);
                 }
 
-            } catch (JSONException e) {
+            } catch (JSONException ignored) {
             }
             pass.setLocations(locations);
 
@@ -316,19 +316,19 @@ public class AppleStylePassReader {
                 JSONArray arr = null;
                 try {
                     arr = pass_obj.getJSONArray("primaryFields");
-                } catch (JSONException e) {
+                } catch (JSONException ignored) {
                 }
 
                 try {
                     arr = pass_obj.getJSONArray("backFields");
-                } catch (JSONException e) {
+                } catch (JSONException ignored) {
                 }
 
                 if (arr != null) {
                     Log.i("foundtype " + key);
                     return key;
                 }
-            } catch (JSONException e) {
+            } catch (JSONException ignored) {
             }
         }
 

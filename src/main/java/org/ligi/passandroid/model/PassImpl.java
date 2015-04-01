@@ -4,19 +4,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.google.common.base.Optional;
-
-import org.joda.time.DateTime;
-import org.ligi.axt.AXT;
-import org.ligi.tracedroid.logging.Log;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+import lombok.Setter;
+import org.joda.time.DateTime;
+import org.ligi.axt.AXT;
+import org.ligi.tracedroid.logging.Log;
 
+@Data
 public class PassImpl implements FiledPass, Serializable {
     public static final String FNAME_ICON = "icon";
     public static final String FNAME_THUMBNAIL = "thumbnail";
@@ -28,7 +28,8 @@ public class PassImpl implements FiledPass, Serializable {
     private String type;
     private boolean valid = true; // be positive
 
-    private Optional<BarCode> barCode = Optional.absent();
+    @Nullable
+    private BarCode barCode;
 
     private int backGroundColor;
     private int foregroundColor;
@@ -43,16 +44,20 @@ public class PassImpl implements FiledPass, Serializable {
     private List<PassLocation> locations = new ArrayList<>();
     private String path;
     private String id;
+
     private String app;
 
     private Optional<String> authToken = Optional.absent();
+
+    @Setter
     private Optional<String> webServiceURL = Optional.absent();
     private Optional<String> serial = Optional.absent();
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
     private Optional<String> passTypeIdent = Optional.absent();
 
-    @Override @Nullable
+    @Override
+    @Nullable
     public String getOrganisation() {
         return organisation;
     }
@@ -147,11 +152,6 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
     @Override
-    public Optional<String> getWebServiceURL() {
-        return webServiceURL;
-    }
-
-    @Override
     public Optional<String> getAuthToken() {
         return authToken;
     }
@@ -164,11 +164,6 @@ public class PassImpl implements FiledPass, Serializable {
     @Override
     public Optional<String> getPassIdent() {
         return passTypeIdent;
-    }
-
-    @Override
-    public String getApp() {
-        return app;
     }
 
     public Optional<Bitmap> getLogoBitmap() {
@@ -288,28 +283,4 @@ public class PassImpl implements FiledPass, Serializable {
         return Optional.absent();
     }
 
-    @Override
-    public Optional<BarCode> getBarCode() {
-        return barCode;
-    }
-
-    public void setBarCode(BarCode barCode) {
-        this.barCode = Optional.fromNullable(barCode);
-    }
-
-    public void setSerial(@NonNull Optional<String> serial) {
-        this.serial = serial;
-    }
-
-    public void setAuthToken(@NonNull Optional<String> authToken) {
-        this.authToken = authToken;
-    }
-
-    public void setWebserviceURL(@NonNull Optional<String> webServiceURL) {
-        this.webServiceURL = webServiceURL;
-    }
-
-    public void setPassTypeIdent(@NonNull Optional<String> passTypeIdent) {
-        this.passTypeIdent = passTypeIdent;
-    }
 }

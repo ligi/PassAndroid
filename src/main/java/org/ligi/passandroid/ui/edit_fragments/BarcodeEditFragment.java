@@ -16,24 +16,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
-
+import java.util.Collections;
+import java.util.UUID;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
-
-import java.util.Collections;
-import java.util.UUID;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
 import static android.text.TextUtils.isEmpty;
 
 public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
@@ -54,7 +49,7 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (data!=null && data.hasExtra("SCAN_RESULT")) {
+        if (data != null && data.hasExtra("SCAN_RESULT")) {
             messageInput.setText(data.getStringExtra("SCAN_RESULT"));
         }
 
@@ -99,7 +94,7 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if (!pass.getBarCode().isPresent()) {
+        if (pass.getBarCode() != null) {
             pass.setBarCode(new BarCode(BarcodeFormat.QR_CODE, UUID.randomUUID().toString()));
         }
 
@@ -110,10 +105,11 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
         final Display display = getActivity().getWindowManager().getDefaultDisplay();
         barcodeSize = display.getWidth() / 3;
 
-        final Optional<BarCode> barCodeOptional = pass.getBarCode();
 
-        messageInput.setText(barCodeOptional.get().getMessage());
-        final Optional<String> alternativeTextOptional = barCodeOptional.get().getAlternativeText();
+        final BarCode barCode = pass.getBarCode();
+
+        messageInput.setText(barCode.getMessage());
+        final Optional<String> alternativeTextOptional = barCode.getAlternativeText();
 
         if (alternativeTextOptional.isPresent()) {
             alternativeMessageInput.setText(alternativeTextOptional.get());
@@ -121,7 +117,7 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
             alternativeMessageInput.setText("");
         }
 
-        switch (barCodeOptional.get().getFormat()) {
+        switch (barCode.getFormat()) {
             case PDF_417:
                 pdfCheck.setChecked(true);
                 break;
