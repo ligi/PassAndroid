@@ -54,7 +54,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View inflate = inflater.inflate(R.layout.edit_meta_data, null);
+        final View inflate = inflater.inflate(R.layout.edit_meta_data, container, false);
         ButterKnife.inject(this, inflate);
 
         descriptionEdit.setText(pass.getDescription());
