@@ -82,14 +82,14 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             });
             navigateTo.setVisibility(View.VISIBLE);
         } else {
-            navigateTo.setVisibility(View.GONE);
+            navigateTo.setVisibility(View.INVISIBLE);
         }
 
         if (dateForIntent != null) {
             addCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                    final Intent intent = new Intent(Intent.ACTION_EDIT);
                     intent.setType("vnd.android.cursor.item/event");
                     intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, dateForIntent.getMillis());
                     intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, dateForIntent.getMillis() + 60 * 60 * 1000);
@@ -99,7 +99,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             });
             addCalendar.setVisibility(View.VISIBLE);
         } else {
-            addCalendar.setVisibility(View.GONE);
+            addCalendar.setVisibility(View.INVISIBLE);
         }
 
         final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
