@@ -94,7 +94,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("QR")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().get().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
         Spoon.screenshot(getActivity(), "edit_set_qr");
     }
 
@@ -105,7 +105,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("PDF417")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().get().getFormat()).isEqualTo(BarcodeFormat.PDF_417);
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getFormat()).isEqualTo(BarcodeFormat.PDF_417);
         Spoon.screenshot(getActivity(), "edit_set_pdf417");
     }
 
@@ -116,7 +116,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("AZTEC")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().get().getFormat()).isEqualTo(BarcodeFormat.AZTEC);
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getFormat()).isEqualTo(BarcodeFormat.AZTEC);
         Spoon.screenshot(getActivity(), "edit_set_aztec");
     }
 
@@ -127,7 +127,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
         onView(withId(R.id.messageInput)).perform(clearText());
         onView(withId(R.id.messageInput)).perform(typeText("msg foo txt ;-)"));
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().get().getMessage()).isEqualTo("msg foo txt ;-)");
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getMessage()).isEqualTo("msg foo txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_msg");
     }
 
@@ -138,7 +138,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"));
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().get().getAlternativeText().get()).isEqualTo("alt bar txt ;-)");
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getAlternativeText().get()).isEqualTo("alt bar txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
     }
 
