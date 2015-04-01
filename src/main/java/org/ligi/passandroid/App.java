@@ -38,10 +38,6 @@ public class App extends Application {
         Log.setTAG("PassAndroid");
     }
 
-    public static boolean isDeveloperMode() {
-        return false;
-    }
-
     public static Bus getBus() {
         return bus;
     }
