@@ -12,19 +12,16 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.google.common.base.Optional;
-
 import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 
 public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -77,7 +74,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-        time = time.withYear(year).withMonthOfYear(monthOfYear).withDayOfMonth(dayOfMonth);
+        time = time.withYear(year).withMonthOfYear(monthOfYear + 1).withDayOfMonth(dayOfMonth);
 
         pass.setRelevantDate(Optional.of(time));
 
