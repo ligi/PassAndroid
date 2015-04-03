@@ -3,7 +3,6 @@ package org.ligi.passandroid.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.provider.CalendarContract;
 import android.support.v7.widget.CardView;
@@ -12,17 +11,13 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.common.base.Optional;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import org.joda.time.DateTime;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class PassViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,11 +54,11 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
 
         final DateTime dateForIntent;
 
-        if (pass.getRelevantDate().isPresent()) {
+        if (pass.getRelevantDate() != null) {
 
-            dateForIntent = pass.getRelevantDate().get();
-        } else if (pass.getExpirationDate().isPresent()) {
-            dateForIntent = pass.getExpirationDate().get();
+            dateForIntent = pass.getRelevantDate();
+        } else if (pass.getExpirationDate() != null) {
+            dateForIntent = pass.getExpirationDate();
         } else {
             dateForIntent = null;
         }
@@ -102,11 +97,11 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             addCalendar.setVisibility(View.INVISIBLE);
         }
 
-        final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
+        final Bitmap iconBitmap = pass.getIconBitmap();
 
-        if (iconBitmap.isPresent()) {
+        if (iconBitmap != null) {
             final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);
-            icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap.get(), size, size, false));
+            icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap, size, size, false));
         } else {
             final ColorDrawable colorDrawable = new ColorDrawable(pass.getBackGroundColor());
             icon.setImageDrawable(colorDrawable);
@@ -122,15 +117,23 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
 
         title.setText(pass.getDescription());
 
-        if (pass.getRelevantDate().isPresent()) {
-            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(), pass.getRelevantDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+        if (pass.getRelevantDate()!=null) {
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(),
+                                                                                            pass.getRelevantDate().getMillis(),
+                                                                                            DateUtils.MINUTE_IN_MILLIS,
+                                                                                            DateUtils.WEEK_IN_MILLIS,
+                                                                                            0);
             date.setText(relativeDateTimeString);
             date.setVisibility(View.VISIBLE);
-        } else if (pass.getExpirationDate().isPresent()) {
+        } else if (pass.getExpirationDate()!=null) {
             date.setVisibility(View.VISIBLE);
-            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(), pass.getExpirationDate().get().getMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0);
+            final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(root.getContext(),
+                                                                                            pass.getExpirationDate().getMillis(),
+                                                                                            DateUtils.MINUTE_IN_MILLIS,
+                                                                                            DateUtils.WEEK_IN_MILLIS,
+                                                                                            0);
 
-            if (pass.getExpirationDate().get().isAfterNow()) {
+            if (pass.getExpirationDate().isAfterNow()) {
                 date.setText("expires " + relativeDateTimeString);
             } else {
                 date.setText("expired " + relativeDateTimeString);

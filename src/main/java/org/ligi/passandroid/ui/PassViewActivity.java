@@ -2,7 +2,6 @@ package org.ligi.passandroid.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -19,10 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.google.common.base.Optional;
-import java.io.File;
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
-import org.ligi.passandroid.BuildConfig;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
@@ -104,10 +100,10 @@ public class PassViewActivity extends PassViewActivityBase {
             return;
         }
 
-        if (pass.getBarCode()!=null) {
+        if (pass.getBarCode() != null) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
             final Bitmap bitmap = pass.getBarCode().getBitmap(smallestSide / 3);
-            setBitmapSafe(barcode_img, Optional.fromNullable(bitmap));
+            setBitmapSafe(barcode_img, bitmap);
             if (pass.getBarCode().getAlternativeText().isPresent()) {
                 barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText().get());
                 barcodeAlternativeText.setVisibility(View.VISIBLE);
@@ -115,7 +111,7 @@ public class PassViewActivity extends PassViewActivityBase {
                 barcodeAlternativeText.setVisibility(View.GONE);
             }
         } else {
-            setBitmapSafe(barcode_img, Optional.<Bitmap>absent());
+            setBitmapSafe(barcode_img, null);
         }
 
         setBitmapSafe(logo_img, pass.getLogoBitmap());
@@ -123,7 +119,7 @@ public class PassViewActivity extends PassViewActivityBase {
         logo_img.setBackgroundColor(pass.getBackGroundColor());
 
         setBitmapSafe(thumbnail_img, pass.getThumbnailImage());
-        setBitmapSafe(strip_img, pass.getStripImage());
+        setBitmapSafe(strip_img, pass.getStripBitmap());
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {
@@ -182,10 +178,10 @@ public class PassViewActivity extends PassViewActivityBase {
         }
     }
 
-    private static void setBitmapSafe(ImageView imageView, Optional<Bitmap> bitmapOptional) {
+    private static void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
 
-        if (bitmapOptional.isPresent()) {
-            imageView.setImageBitmap(bitmapOptional.get());
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
             imageView.setVisibility(View.VISIBLE);
         } else {
             imageView.setVisibility(View.GONE);
@@ -200,8 +196,8 @@ public class PassViewActivity extends PassViewActivityBase {
         menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
         menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() &&
                                                     optionalPass.get().isValid() &&
-                                                    optionalPass.get().getAuthToken().isPresent() &&
-                                                    optionalPass.get().getSerial().isPresent()));//&& optionalPass.get().getPassIdent().isPresent()));
+                                                    optionalPass.get().getAuthToken() != null &&
+                                                    optionalPass.get().getSerial() != null));//&& optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 

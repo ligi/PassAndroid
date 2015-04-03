@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.google.common.base.Optional;
-
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -13,7 +11,7 @@ import java.util.List;
 
 public interface Pass extends Serializable {
 
-    static final String[] TYPES = new String[]{"generic", "coupon", "eventTicket", "boardingPass", "storeCard"};
+    String[] TYPES = new String[]{"generic", "coupon", "eventTicket", "boardingPass", "storeCard"};
 
     String getDescription();
 
@@ -37,20 +35,17 @@ public interface Pass extends Serializable {
 
     boolean isValid();
 
-    Optional<Bitmap> getIconBitmap();
-
-    Optional<Bitmap> getThumbnailImage();
-
-    Optional<Bitmap> getLogoBitmap();
-
     int getBackGroundColor();
 
     int getForegroundColor();
 
-    Optional<DateTime> getRelevantDate();
+    @Nullable
+    DateTime getRelevantDate();
 
-    Optional<DateTime> getExpirationDate();
+    @Nullable
+    DateTime getExpirationDate();
 
+    @Deprecated
     String getPath();
 
     String getId();
@@ -58,20 +53,39 @@ public interface Pass extends Serializable {
     @Nullable
     String getOrganisation();
 
-    Optional<String> getSource();
+    @Nullable
+    String getSource();
 
     @Nullable
     BarCode getBarCode();
 
-    Optional<Bitmap> getStripImage();
+    @Nullable
+    String getWebServiceURL();
 
-    Optional<String> getWebServiceURL();
+    @Nullable
+    String getAuthToken();
 
-    Optional<String> getAuthToken();
+    @Nullable
+    String getSerial();
 
-    Optional<String> getSerial();
+    @Nullable
+    String getPassIdent();
 
-    Optional<String> getPassIdent();
-
+    @Nullable
     String getApp();
+
+
+    @Nullable
+    Bitmap getIconBitmap();
+
+    @Nullable
+    Bitmap getThumbnailImage();
+
+    @Nullable
+    Bitmap getStripBitmap();
+
+    @Nullable
+    Bitmap getLogoBitmap();
+
+
 }

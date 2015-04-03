@@ -53,7 +53,7 @@ public class PassReader {
             if (pass_json.has("when")) {
                 final JSONObject when = pass_json.getJSONObject("when");
                 final String dateTime = when.getString("dateTime");
-                pass.setRelevantDate(Optional.of(DateTime.parse(dateTime)));
+                pass.setRelevantDate(DateTime.parse(dateTime));
             }
 
         } catch (Exception e) {

@@ -34,8 +34,8 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
     public MetaDataFragment() {
         pass = (PassImpl) App.getPassStore().getCurrentPass().get();
 
-        if (pass.getRelevantDate().isPresent()) {
-            time = pass.getRelevantDate().get();
+        if (pass.getRelevantDate()!=null) {
+            time = pass.getRelevantDate();
         } else {
             time = DateTime.now();
         }
@@ -76,7 +76,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
 
         time = time.withYear(year).withMonthOfYear(monthOfYear + 1).withDayOfMonth(dayOfMonth);
 
-        pass.setRelevantDate(Optional.of(time));
+        pass.setRelevantDate(time);
 
         refresh();
     }
@@ -90,7 +90,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
 
         time = time.withHourOfDay(hourOfDay).withMinuteOfHour(minute);
 
-        pass.setRelevantDate(Optional.of(time));
+        pass.setRelevantDate(time);
         refresh();
     }
 

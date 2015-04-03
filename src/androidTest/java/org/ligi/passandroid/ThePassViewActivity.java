@@ -66,7 +66,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
     @MediumTest
     public void testDateIsThereWhenPassbookHasDate() {
-        act_pass.setRelevantDate(Optional.of(new DateTime()));
+        act_pass.setRelevantDate(new DateTime());
         getActivity();
 
         onView(withId(R.id.date)).check(matches(isDisplayed()));
@@ -74,7 +74,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
     @MediumTest
     public void testLinkToCalendarIsThereWhenPassbookHasDate() {
-        act_pass.setRelevantDate(Optional.of(new DateTime()));
+        act_pass.setRelevantDate(new DateTime());
         getActivity();
 
         onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));

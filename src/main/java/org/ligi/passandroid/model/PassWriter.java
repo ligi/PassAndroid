@@ -45,11 +45,11 @@ public class PassWriter {
 
             object.put("ui", uiObject);
 
-            final Optional<DateTime> relevantDate = pass.getRelevantDate();
+            final DateTime relevantDate = pass.getRelevantDate();
 
-            if (relevantDate.isPresent()) {
+            if (relevantDate != null) {
                 final JSONObject timeObject = new JSONObject();
-                timeObject.put("dateTime", relevantDate.get().toString());
+                timeObject.put("dateTime", relevantDate.toString());
                 object.put("when", timeObject);
             }
 

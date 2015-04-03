@@ -34,8 +34,13 @@ public class PassImpl implements FiledPass, Serializable {
     private int backGroundColor;
     private int foregroundColor;
     private String description;
-    private Optional<DateTime> relevantDate = Optional.absent();
-    private Optional<DateTime> expirationDate = Optional.absent();
+
+    @Nullable
+    private DateTime relevantDate;
+
+    @Nullable
+    private DateTime expirationDate;
+
     private PassFieldList primaryFields = new PassFieldList();
     private PassFieldList backFields = new PassFieldList();
     private PassFieldList secondaryFields = new PassFieldList();
@@ -47,40 +52,20 @@ public class PassImpl implements FiledPass, Serializable {
 
     private String app;
 
-    private Optional<String> authToken = Optional.absent();
+    @Nullable
+    private String authToken;
 
     @Setter
-    private Optional<String> webServiceURL = Optional.absent();
-    private Optional<String> serial = Optional.absent();
+    @Nullable
+    private String webServiceURL;
+
+    @Nullable
+    private String serial;
 
     public static final String[] TYPES = new String[]{"coupon", "eventTicket", "boardingPass", "generic", "storeCard"};
-    private Optional<String> passTypeIdent = Optional.absent();
 
-    @Override
     @Nullable
-    public String getOrganisation() {
-        return organisation;
-    }
-
-    @Override
-    public int getForegroundColor() {
-        return foregroundColor;
-    }
-
-    @Override
-    public Optional<DateTime> getRelevantDate() {
-        return relevantDate;
-    }
-
-    @Override
-    public Optional<DateTime> getExpirationDate() {
-        return expirationDate;
-    }
-
-    @Override
-    public int getBackGroundColor() {
-        return backGroundColor;
-    }
+    private String passIdent;
 
     @Override
     public boolean isValid() {
@@ -90,36 +75,6 @@ public class PassImpl implements FiledPass, Serializable {
     @Override
     public String getType() {
         return type;
-    }
-
-    @Override
-    public PassFieldList getPrimaryFields() {
-        return primaryFields;
-    }
-
-    @Override
-    public PassFieldList getSecondaryFields() {
-        return secondaryFields;
-    }
-
-    @Override
-    public PassFieldList getBackFields() {
-        return backFields;
-    }
-
-    @Override
-    public PassFieldList getAuxiliaryFields() {
-        return auxiliaryFields;
-    }
-
-    @Override
-    public PassFieldList getHeaderFields() {
-        return headerFields;
-    }
-
-    @Override
-    public List<PassLocation> getLocations() {
-        return locations;
     }
 
     @Override
@@ -134,39 +89,24 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
 
-    private Optional<Bitmap> getBitmapFromFileNameString(String in) {
-        return Optional.fromNullable(BitmapFactory.decodeFile(getPath() + "/" + in + PassImpl.FILETYPE_IMAGES));
+    private Bitmap getBitmapFromFileNameString(String in) {
+        return BitmapFactory.decodeFile(getPath() + "/" + in + PassImpl.FILETYPE_IMAGES);
     }
 
-    public Optional<Bitmap> getIconBitmap() {
+    public Bitmap getIconBitmap() {
         return getBitmapFromFileNameString(FNAME_ICON);
     }
 
-    public Optional<Bitmap> getThumbnailImage() {
+    public Bitmap getThumbnailImage() {
         return getBitmapFromFileNameString(FNAME_THUMBNAIL);
     }
 
     @Override
-    public Optional<Bitmap> getStripImage() {
+    public Bitmap getStripBitmap() {
         return getBitmapFromFileNameString(FNAME_STRIP);
     }
 
-    @Override
-    public Optional<String> getAuthToken() {
-        return authToken;
-    }
-
-    @Override
-    public Optional<String> getSerial() {
-        return serial;
-    }
-
-    @Override
-    public Optional<String> getPassIdent() {
-        return passTypeIdent;
-    }
-
-    public Optional<Bitmap> getLogoBitmap() {
+    public Bitmap getLogoBitmap() {
         return getBitmapFromFileNameString(FNAME_LOGO);
     }
 
@@ -217,14 +157,6 @@ public class PassImpl implements FiledPass, Serializable {
         valid = false;
     }
 
-    public void setRelevantDate(Optional<DateTime> relevantDate) {
-        this.relevantDate = relevantDate;
-    }
-
-    public void setExpirationDate(Optional<DateTime> expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     public void setBackgroundColor(final int backgroundColor) {
         this.backGroundColor = backgroundColor;
     }
@@ -270,17 +202,18 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
     @Override
-    public Optional<String> getSource() {
+    @Nullable
+    public String getSource() {
         final File file = new File(getPath() + "/source.obj");
         if (file.exists()) {
             try {
-                return Optional.of((String) AXT.at(file).loadToObject());
+                return (String) AXT.at(file).loadToObject();
             } catch (IOException | ClassNotFoundException e) {
                 // OK no source info - no big deal - but log
                 Log.w("pass source info file exists but not readable" + e);
             }
         }
-        return Optional.absent();
+        return null;
     }
 
 }

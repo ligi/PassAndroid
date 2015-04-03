@@ -1,7 +1,7 @@
 package org.ligi.passandroid.model;
 
 import com.google.common.base.Optional;
-
+import com.google.common.base.Strings;
 import org.ligi.passandroid.Tracker;
 
 public class ApplePassbookQuirkCorrector {
@@ -115,10 +115,7 @@ public class ApplePassbookQuirkCorrector {
     }
 
     private static void careForWestbahn(PassImpl pass) {
-        if (pass.getRelevantDate().isPresent() ||
-                pass.getOrganisation() == null ||
-                !pass.getOrganisation().equals("WESTbahn")
-                ) {
+        if (pass.getRelevantDate() != null || !Strings.nullToEmpty(pass.getOrganisation()).equals("WESTbahn")) {
             return;
         }
 

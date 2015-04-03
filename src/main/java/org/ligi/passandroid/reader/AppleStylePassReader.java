@@ -2,8 +2,8 @@ package org.ligi.passandroid.reader;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 
+import android.support.annotation.Nullable;
 import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 
@@ -18,7 +18,6 @@ import org.ligi.passandroid.model.ApplePassbookQuirkCorrector;
 import org.ligi.passandroid.model.AppleStylePassTranslation;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.FiledPass;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassLocation;
@@ -30,8 +29,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AppleStylePassReader {
 
@@ -117,7 +114,7 @@ public class AppleStylePassReader {
         if (pass_json != null) {
             if (pass_json.has("relevantDate")) {
                 try {
-                    pass.setRelevantDate(Optional.of(new DateTime(pass_json.getString("relevantDate"))));
+                    pass.setRelevantDate(new DateTime(pass_json.getString("relevantDate")));
                 } catch (JSONException | IllegalArgumentException e) {
                     // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                     // OK then we just have no date here
@@ -127,7 +124,7 @@ public class AppleStylePassReader {
 
             if (pass_json.has("expirationDate")) {
                 try {
-                    pass.setExpirationDate(Optional.of(new DateTime(pass_json.getString("expirationDate"))));
+                    pass.setExpirationDate(new DateTime(pass_json.getString("expirationDate")));
                 } catch (JSONException | IllegalArgumentException e) {
                     // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                     // OK then we just have no date here
@@ -138,7 +135,7 @@ public class AppleStylePassReader {
             pass.setSerial(readJsonSafeAsOptional(pass_json, "serialNumber"));
             pass.setAuthToken(readJsonSafeAsOptional(pass_json, "authenticationToken"));
             pass.setWebServiceURL(readJsonSafeAsOptional(pass_json, "webServiceURL"));
-            pass.setPassTypeIdent(readJsonSafeAsOptional(pass_json, "passTypeIdentifier"));
+            pass.setPassIdent(readJsonSafeAsOptional(pass_json, "passTypeIdentifier"));
 
             final List<PassLocation> locations = new ArrayList<>();
             try {
@@ -256,15 +253,16 @@ public class AppleStylePassReader {
         void onString(String string);
     }
 
-    private static Optional<String> readJsonSafeAsOptional(JSONObject json, String key) {
+    @Nullable
+    private static String readJsonSafeAsOptional(JSONObject json, String key) {
         if (json.has(key)) {
             try {
-                return Optional.of(json.getString(key));
+                return json.getString(key);
             } catch (JSONException e) {
                 // some passes just do not have the field
             }
         }
-        return Optional.absent();
+        return null;
     }
 
     private static void readJsonSafe(JSONObject json, String key, JsonStringReadCallback callback) {

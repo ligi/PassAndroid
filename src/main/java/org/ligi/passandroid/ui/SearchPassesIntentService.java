@@ -122,9 +122,9 @@ public class SearchPassesIntentService extends IntentService {
                                 foundList.add(uuid);
                                 final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), getBaseContext().getResources().getConfiguration().locale.getLanguage());
                                 App.getBus().post(new SortOrderChangeEvent());
-                                final Optional<Bitmap> iconBitmap = pass.getIconBitmap();
-                                if (iconBitmap.isPresent()) {
-                                    final Bitmap bitmap = scale2maxSize(iconBitmap.get(), getResources().getDimensionPixelSize(R.dimen.finger));
+                                final Bitmap iconBitmap = pass.getIconBitmap();
+                                if (iconBitmap!=null) {
+                                    final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
                                     findNotificationBuilder.setLargeIcon(bitmap);
                                 }
                                 findNotificationBuilder.setContentTitle("found: " + pass.getDescription());

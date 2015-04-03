@@ -39,7 +39,7 @@ public class PassMenuOptions {
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
 
-                if (pass.getSource().isPresent() && pass.getSource().get().startsWith("file://")) {
+                if (pass.getSource()!=null && pass.getSource().startsWith("file://")) {
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
                     builder.setView(sourceDeleteCheckBox);
                 }
@@ -49,7 +49,7 @@ public class PassMenuOptions {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (sourceDeleteCheckBox.isChecked()) {
-                            new File(pass.getSource().get().replace("file://", "")).delete();
+                            new File(pass.getSource().replace("file://", "")).delete();
                         }
                         App.getPassStore().deletePassWithId(pass.getId());
                         if (activity instanceof PassViewActivityBase) {
