@@ -7,7 +7,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.3'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.1'
+        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.0.1') {
+            exclude module: "guava"
+        }
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
@@ -85,7 +87,7 @@ android {
 
 
 configurations {
-   // http://qathread.blogspot.de/2015/02/discovering-espresso-for-android.html
+    // http://qathread.blogspot.de/2015/02/discovering-espresso-for-android.html
     androidTestCompile.exclude group: 'com.android.support', module: 'support-v4'
 }
 
