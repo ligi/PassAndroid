@@ -138,7 +138,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"));
 
-        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getAlternativeText().get()).isEqualTo("alt bar txt ;-)");
+        assertThat(App.getPassStore().getCurrentPass().get().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
     }
 
