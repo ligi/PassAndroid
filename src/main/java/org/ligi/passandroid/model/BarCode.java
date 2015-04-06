@@ -2,9 +2,10 @@ package org.ligi.passandroid.model;
 
 import android.graphics.Bitmap;
 
-import com.google.common.base.Optional;
+import android.support.annotation.Nullable;
 import com.google.zxing.BarcodeFormat;
 
+import lombok.Data;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.tracedroid.logging.Log;
@@ -12,36 +13,34 @@ import org.ligi.tracedroid.logging.Log;
 import java.io.Serializable;
 import java.util.Locale;
 
+@Data
 public class BarCode implements Serializable {
-    private final BarcodeFormat barcodeFormat;
-    private final String barcodeMessage;
-    private Optional<String> alternativeText;
+    private final BarcodeFormat format;
+    private final String message;
 
-    public BarCode(BarcodeFormat barcodeFormat, String barcodeMessage) {
-        this.barcodeFormat = barcodeFormat;
-        this.barcodeMessage = barcodeMessage;
-        alternativeText = Optional.absent();
+    @Nullable
+    private String alternativeText;
+
+    public BarCode(BarcodeFormat format, String message) {
+        this.format = format;
+        this.message = message;
     }
 
     public Bitmap getBitmap(final int size) {
-        if (barcodeMessage == null) {
+        if (message == null) {
             // no message -> no barcode
             Tracker.get().trackException("No Barcode in pass - strange", false);
             return null;
         }
 
-        if (barcodeFormat == null) {
+        if (format == null) {
             Log.w("Barcode format is null - fallback to QR");
             Tracker.get().trackException("Barcode format is null - fallback to QR", false);
-            BarcodeHelper.generateBarCodeBitmap(barcodeMessage, BarcodeFormat.QR_CODE, size);
+            return BarcodeHelper.generateBarCodeBitmap(message, BarcodeFormat.QR_CODE, size);
         }
 
-        return BarcodeHelper.generateBarCodeBitmap(barcodeMessage, barcodeFormat, size);
+        return BarcodeHelper.generateBarCodeBitmap(message, format, size);
 
-    }
-
-    public BarcodeFormat getFormat() {
-        return barcodeFormat;
     }
 
     public static BarcodeFormat getFormatFromString(String format) {
@@ -57,19 +56,4 @@ public class BarCode implements Serializable {
 
     }
 
-    public void setAlternativeText(final String alternativeText) {
-        this.alternativeText = Optional.fromNullable(alternativeText);
-    }
-
-    public Optional<String> getAlternativeText() {
-        return alternativeText;
-    }
-
-    public String getMessage() {
-        return barcodeMessage;
-    }
-
-    public BarcodeFormat getBarcodeFormat() {
-        return barcodeFormat;
-    }
 }

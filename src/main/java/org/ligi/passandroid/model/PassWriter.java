@@ -28,11 +28,11 @@ public class PassWriter {
             if (pass.getBarCode() != null) {
                 final JSONObject barcode = new JSONObject();
                 barcode.put("message", pass.getBarCode().getMessage());
-                barcode.put("type", pass.getBarCode().getBarcodeFormat());
+                barcode.put("type", pass.getBarCode().getFormat());
 
-                final Optional<String> alternativeText = pass.getBarCode().getAlternativeText();
-                if (alternativeText.isPresent()) {
-                    barcode.put("altText", alternativeText.get());
+                final String alternativeText = pass.getBarCode().getAlternativeText();
+                if (alternativeText != null) {
+                    barcode.put("altText", alternativeText);
                 }
 
                 object.put("barcode", barcode);
@@ -41,7 +41,7 @@ public class PassWriter {
             final JSONObject uiObject = new JSONObject();
 
             object.put("fgColor", "#" + String.format("%08X", pass.getForegroundColor()));
-            object.put("bgColor", "#" + String.format("%08X", pass.getBackGroundColor()));
+            object.put("bgColor", "#" + String.format("%08X", pass.getBackgroundColor()));
 
             object.put("ui", uiObject);
 

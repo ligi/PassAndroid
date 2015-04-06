@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.google.zxing.BarcodeFormat;
 import java.util.Collections;
 import java.util.UUID;
@@ -109,13 +109,9 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
         final BarCode barCode = pass.getBarCode();
 
         messageInput.setText(barCode.getMessage());
-        final Optional<String> alternativeTextOptional = barCode.getAlternativeText();
+        final String alternativeTextOptional = barCode.getAlternativeText();
 
-        if (alternativeTextOptional.isPresent()) {
-            alternativeMessageInput.setText(alternativeTextOptional.get());
-        } else {
-            alternativeMessageInput.setText("");
-        }
+        alternativeMessageInput.setText(Strings.nullToEmpty(alternativeTextOptional));
 
         switch (barCode.getFormat()) {
             case PDF_417:

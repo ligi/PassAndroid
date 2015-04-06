@@ -17,7 +17,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.google.common.base.Optional;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
@@ -104,8 +103,8 @@ public class PassViewActivity extends PassViewActivityBase {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
             final Bitmap bitmap = pass.getBarCode().getBitmap(smallestSide / 3);
             setBitmapSafe(barcode_img, bitmap);
-            if (pass.getBarCode().getAlternativeText().isPresent()) {
-                barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText().get());
+            if (pass.getBarCode().getAlternativeText()!=null) {
+                barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText());
                 barcodeAlternativeText.setVisibility(View.VISIBLE);
             } else {
                 barcodeAlternativeText.setVisibility(View.GONE);
@@ -116,7 +115,7 @@ public class PassViewActivity extends PassViewActivityBase {
 
         setBitmapSafe(logo_img, pass.getLogoBitmap());
 
-        logo_img.setBackgroundColor(pass.getBackGroundColor());
+        logo_img.setBackgroundColor(pass.getBackgroundColor());
 
         setBitmapSafe(thumbnail_img, pass.getThumbnailImage());
         setBitmapSafe(strip_img, pass.getStripBitmap());

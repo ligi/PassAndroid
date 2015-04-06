@@ -45,9 +45,9 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
         barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().getBitmap(smallestSize));
 
-        if (optionalPass.get().getBarCode().getAlternativeText().isPresent()) {
+        if (optionalPass.get().getBarCode().getAlternativeText()!=null) {
             alternativeBarcodeText.setVisibility(View.VISIBLE);
-            alternativeBarcodeText.setText(optionalPass.get().getBarCode().getAlternativeText().get());
+            alternativeBarcodeText.setText(optionalPass.get().getBarCode().getAlternativeText());
         } else {
             alternativeBarcodeText.setVisibility(View.GONE);
         }

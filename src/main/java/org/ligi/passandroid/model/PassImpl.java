@@ -4,14 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.google.common.base.Optional;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.Setter;
 import org.joda.time.DateTime;
 import org.ligi.axt.AXT;
 import org.ligi.tracedroid.logging.Log;
@@ -31,7 +29,7 @@ public class PassImpl implements FiledPass, Serializable {
     @Nullable
     private BarCode barCode;
 
-    private int backGroundColor;
+    private int backgroundColor;
     private int foregroundColor;
     private String description;
 
@@ -55,7 +53,6 @@ public class PassImpl implements FiledPass, Serializable {
     @Nullable
     private String authToken;
 
-    @Setter
     @Nullable
     private String webServiceURL;
 
@@ -73,11 +70,6 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
     @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
     public String getDescription() {
         if (description == null) {
             return ""; // better way of returning no description - so we can avoid optional / null checks and it is kind of the same thing
@@ -87,7 +79,6 @@ public class PassImpl implements FiledPass, Serializable {
         }
         return description;
     }
-
 
     private Bitmap getBitmapFromFileNameString(String in) {
         return BitmapFactory.decodeFile(getPath() + "/" + in + PassImpl.FILETYPE_IMAGES);
@@ -110,35 +101,9 @@ public class PassImpl implements FiledPass, Serializable {
         return getBitmapFromFileNameString(FNAME_LOGO);
     }
 
-
     @NonNull
     public String getTypeNotNull() {
-        if (type == null) {
-            return "none";
-        } else {
-            return type;
-        }
-    }
-
-
-    @Override
-    public String getPath() {
-        return path;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public void setPath(String path) {
-        this.path = path;
+        return (type == null) ? "none" : type;
     }
 
     @Override
@@ -155,50 +120,6 @@ public class PassImpl implements FiledPass, Serializable {
 
     public void setInvalid() {
         valid = false;
-    }
-
-    public void setBackgroundColor(final int backgroundColor) {
-        this.backGroundColor = backgroundColor;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setOrganization(@Nullable String organization) {
-        this.organisation = organization;
-    }
-
-    public void setForegroundColor(int foregroundColor) {
-        this.foregroundColor = foregroundColor;
-    }
-
-    public void setLocations(List<PassLocation> locations) {
-        this.locations = locations;
-    }
-
-    public void setPrimaryFields(PassFieldList primaryFields) {
-        this.primaryFields = primaryFields;
-    }
-
-    public void setSecondaryFields(PassFieldList secondaryFields) {
-        this.secondaryFields = secondaryFields;
-    }
-
-    public void setAuxiliaryFields(PassFieldList auxiliaryFields) {
-        this.auxiliaryFields = auxiliaryFields;
-    }
-
-    public void setHeaderFields(PassFieldList headerFields) {
-        this.headerFields = headerFields;
-    }
-
-    public void setBackFields(PassFieldList backFields) {
-        this.backFields = backFields;
     }
 
     @Override

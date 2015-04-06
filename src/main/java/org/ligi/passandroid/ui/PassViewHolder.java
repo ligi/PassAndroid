@@ -103,7 +103,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);
             icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap, size, size, false));
         } else {
-            final ColorDrawable colorDrawable = new ColorDrawable(pass.getBackGroundColor());
+            final ColorDrawable colorDrawable = new ColorDrawable(pass.getBackgroundColor());
             icon.setImageDrawable(colorDrawable);
         }
 
@@ -112,7 +112,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             category.setExtraTextToCatShortString(pass.getType());
         }
 
-        category.setTextBackgroundColor(pass.getBackGroundColor());
+        category.setTextBackgroundColor(pass.getBackgroundColor());
         category.setTextColor(pass.getForegroundColor());
 
         title.setText(pass.getDescription());

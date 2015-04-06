@@ -33,7 +33,7 @@ public class ColorPickFragment extends Fragment {
         final View view = inflater.inflate(R.layout.edit_color, null);
         ButterKnife.inject(this, view);
 
-        colorPicker.setOldCenterColor(pass.getBackGroundColor());
+        colorPicker.setOldCenterColor(pass.getBackgroundColor());
 
         // until PR is merged
         colorPicker.setShowOldCenterColor(false);
@@ -46,7 +46,7 @@ public class ColorPickFragment extends Fragment {
             }
         });
 
-        colorPicker.setColor(pass.getBackGroundColor());
+        colorPicker.setColor(pass.getBackgroundColor());
 
         return view;
     }

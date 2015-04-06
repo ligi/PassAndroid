@@ -35,7 +35,7 @@ public interface Pass extends Serializable {
 
     boolean isValid();
 
-    int getBackGroundColor();
+    int getBackgroundColor();
 
     int getForegroundColor();
 
