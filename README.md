@@ -19,6 +19,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 Status
 ------
 
-[![Build Status](https://travis-ci.org/ligi/PassAndroid.svg?branch=master)](https://travis-ci.org/ligi/PassAndroid)
+[![Build Status](https://snap-ci.com/ligi/PassAndroid/branch/master/build_image)](https://snap-ci.com/ligi/PassAndroid/branch/master)
 
 [![Dependency Status](https://www.versioneye.com/user/projects/53ff29d6f4df15a4050000b2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53ff29d6f4df15a4050000b2)
