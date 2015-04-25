@@ -123,8 +123,6 @@ dependencies {
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.9.0'
 
-    compile 'com.afollestad:material-dialogs:0.6.5.2'
-
     compile 'org.ligi:AXT:0.33'
     compile 'org.ligi:tracedroid:1.4'
     compile 'com.google.guava:guava:18.0'

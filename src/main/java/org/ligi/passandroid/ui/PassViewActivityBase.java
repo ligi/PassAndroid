@@ -1,10 +1,10 @@
 package org.ligi.passandroid.ui;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -103,8 +103,7 @@ public class PassViewActivityBase extends ActionBarActivity {
                                      .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                                          @Override
                                          public void onClick(DialogInterface dialog, int which) {
-                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
-                                                                                      pass.getId(),
+                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this, pass.getId(),
                                                                                       App.getShareDir(),
                                                                                       "share",
                                                                                       reason).execute();

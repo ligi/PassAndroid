@@ -1,14 +1,12 @@
 package org.ligi.passandroid.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CheckBox;
-import com.afollestad.materialdialogs.MaterialDialog;
 import java.io.File;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
@@ -39,7 +37,7 @@ public class PassMenuOptions {
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
 
-                if (pass.getSource()!=null && pass.getSource().startsWith("file://")) {
+                if (pass.getSource() != null && pass.getSource().startsWith("file://")) {
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
                     builder.setView(sourceDeleteCheckBox);
                 }
@@ -73,32 +71,13 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                new MaterialDialog.Builder(activity).items(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"})
-                                                    .itemsCallback(new MaterialDialog.ListCallback() {
-                                                        @Override
-                                                        public void onSelection(final MaterialDialog materialDialog,
-                                                                                final View view,
-                                                                                final int i,
-                                                                                final CharSequence charSequence) {
-                                                            final int passFormat;
-
-                                                            switch (i){
-                                                                case 1:
-                                                                    passFormat = PassExporter.FORMAT_PKPASS;
-                                                                    break;
-
-                                                                default:
-                                                                    passFormat = PassExporter.FORMAT_OPENPASS;
-                                                            }
-
-                                                            new PassExportTask(activity,
-                                                                               pass.getPath(),
-                                                                               App.getShareDir(),
-                                                                               "share",
-                                                                               true, passFormat).execute();
-                                                        }
-                                                    })
-                                                    .show();
+                new AlertDialog.Builder(activity).setItems(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"},
+                                                           new DialogInterface.OnClickListener() {
+                                                               @Override
+                                                               public void onClick(final DialogInterface dialog, final int which) {
+                                                                   exportInFormat(which);
+                                                               }
+                                                           }).show();
 
                 return true;
 
@@ -109,6 +88,21 @@ public class PassMenuOptions {
                 return true;
         }
         return false;
+    }
+
+    private void exportInFormat(final int which) {
+        final int passFormat;
+
+        switch (which) {
+            case 1:
+                passFormat = PassExporter.FORMAT_PKPASS;
+                break;
+
+            default:
+                passFormat = PassExporter.FORMAT_OPENPASS;
+        }
+
+        new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share", true, passFormat).execute();
     }
 
 

@@ -1,12 +1,12 @@
 package org.ligi.passandroid.ui.quirk_fix;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.support.v7.app.AlertDialog;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.ui.PassImportActivity;

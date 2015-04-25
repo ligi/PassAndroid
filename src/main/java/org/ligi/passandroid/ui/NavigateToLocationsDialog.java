@@ -1,12 +1,12 @@
 package org.ligi.passandroid.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 
+import android.support.v7.app.AlertDialog;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.passandroid.model.Pass;
