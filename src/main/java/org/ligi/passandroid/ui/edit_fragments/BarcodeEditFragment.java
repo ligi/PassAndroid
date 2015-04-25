@@ -11,7 +11,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -31,7 +30,7 @@ import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
 import static android.text.TextUtils.isEmpty;
 
-public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class BarcodeEditFragment extends Fragment {
 
     @OnClick(R.id.scanButton)
     public void onScanButtonClick() {
@@ -81,7 +80,7 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
     RadioButton aztecCheck;
 
     @InjectView(R.id.barcodeTypeRadioGroup)
-    RadioGroup qrTypeGroup;
+    RadioGroup typeGroup;
 
     private final PassImpl pass;
     private int barcodeSize;
@@ -101,10 +100,8 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
         final View inflate = inflater.inflate(R.layout.edit_barcode, container, false);
         ButterKnife.inject(this, inflate);
 
-
         final Display display = getActivity().getWindowManager().getDefaultDisplay();
         barcodeSize = display.getWidth() / 3;
-
 
         final BarCode barCode = pass.getBarCode();
 
@@ -127,30 +124,23 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
 
         refresh();
 
-        messageInput.addTextChangedListener(new SimpleTextWatcher() {
+        final SimpleTextWatcher refreshingTextWatcher = new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 refresh();
             }
-        });
+        };
 
-        alternativeMessageInput.addTextChangedListener(new SimpleTextWatcher() {
+        messageInput.addTextChangedListener(refreshingTextWatcher);
+        alternativeMessageInput.addTextChangedListener(refreshingTextWatcher);
+
+        typeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void afterTextChanged(Editable s) {
+            public void onCheckedChanged(final RadioGroup group, final int checkedId) {
                 refresh();
             }
         });
 
-
-        qrTypeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                refresh();
-            }
-        });
-
-        qrCheck.setOnCheckedChangeListener(this);
-        qrCheck.setOnCheckedChangeListener(this);
         return inflate;
     }
 
@@ -161,12 +151,7 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
             message = " ";
         }
 
-        BarcodeFormat format = BarcodeFormat.QR_CODE;
-        if (pdfCheck.isChecked()) {
-            format = BarcodeFormat.PDF_417;
-        } else if (aztecCheck.isChecked()) {
-            format = BarcodeFormat.AZTEC;
-        }
+        final BarcodeFormat format = getBarcodeFormatFromCheckedState();
 
         final BarCode newBarCode = new BarCode(format, message);
         newBarCode.setAlternativeText(alternativeMessageInput.getText().toString());
@@ -176,6 +161,16 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
         new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(BarcodeFormat.PDF_417, message));
         new AsyncSetBarCodeImageTask(selectorAztec).execute(new BarCode(BarcodeFormat.AZTEC, message));
     }
+
+    private BarcodeFormat getBarcodeFormatFromCheckedState() {
+        if (pdfCheck.isChecked()) {
+            return BarcodeFormat.PDF_417;
+        } else if (aztecCheck.isChecked()) {
+            return BarcodeFormat.AZTEC;
+        }
+        return BarcodeFormat.QR_CODE; // default/fallback
+    }
+
 
     private class AsyncSetBarCodeImageTask extends AsyncTask<BarCode, Void, Bitmap> {
 
@@ -197,8 +192,4 @@ public class BarcodeEditFragment extends Fragment implements CompoundButton.OnCh
         }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        refresh();
-    }
 }
