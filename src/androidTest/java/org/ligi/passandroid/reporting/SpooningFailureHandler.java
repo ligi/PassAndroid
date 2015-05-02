@@ -1,7 +1,7 @@
 package org.ligi.passandroid.reporting;
 
 import android.app.Activity;
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.internal.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import android.support.test.runner.lifecycle.Stage;
 import android.test.InstrumentationTestCase;
 import android.view.View;
