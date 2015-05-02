@@ -105,21 +105,23 @@ public class BarcodeEditFragment extends Fragment {
 
         final BarCode barCode = pass.getBarCode();
 
-        messageInput.setText(barCode.getMessage());
-        final String alternativeTextOptional = barCode.getAlternativeText();
+        if (barCode!=null) {
+            messageInput.setText(barCode.getMessage());
+            final String alternativeTextOptional = barCode.getAlternativeText();
 
-        alternativeMessageInput.setText(Strings.nullToEmpty(alternativeTextOptional));
+            alternativeMessageInput.setText(Strings.nullToEmpty(alternativeTextOptional));
 
-        switch (barCode.getFormat()) {
-            case PDF_417:
-                pdfCheck.setChecked(true);
-                break;
-            case AZTEC:
-                aztecCheck.setChecked(true);
-                break;
-            case QR_CODE:
-                qrCheck.setChecked(true);
-                break;
+            switch (barCode.getFormat()) {
+                case PDF_417:
+                    pdfCheck.setChecked(true);
+                    break;
+                case AZTEC:
+                    aztecCheck.setChecked(true);
+                    break;
+                case QR_CODE:
+                    qrCheck.setChecked(true);
+                    break;
+            }
         }
 
         refresh();
