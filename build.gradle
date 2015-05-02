@@ -149,6 +149,6 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
-    withAnalyticsCompile 'com.google.android.gms:play-services-analytics:7.0.0'
-    withMapsCompile 'com.google.android.gms:play-services-maps:7.0.0'
+    withAnalyticsCompile 'com.google.android.gms:play-services-analytics:7.3.0'
+    withMapsCompile 'com.google.android.gms:play-services-maps:7.3.0'
 }
