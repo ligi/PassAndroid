@@ -180,7 +180,9 @@ public class PassListActivity extends AppCompatActivity {
 
         drawer.setDrawerListener(drawerToggle);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
 
         final ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
