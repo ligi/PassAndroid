@@ -1,7 +1,6 @@
 package org.ligi.passandroid.reader;
 
 import android.graphics.Color;
-import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
 import java.io.File;
 import org.joda.time.DateTime;
@@ -31,10 +30,23 @@ public class PassReader {
             final String plainJsonString = AXT.at(file).readToString();
             final JSONObject pass_json = SafeJSONReader.readJSONSafely(plainJsonString);
 
-            pass.setDescription(pass_json.getString("description"));
-            pass.setType(pass_json.getString("type"));
-            pass.setBackgroundColor(Color.parseColor(pass_json.getString("bgColor")));
-            pass.setForegroundColor(Color.parseColor(pass_json.getString("fgColor")));
+            if (pass_json.has("what")) {
+                final JSONObject what_json = pass_json.getJSONObject("what");
+                pass.setDescription(what_json.getString("description"));
+            }
+
+            if (pass_json.has("meta")) {
+                final JSONObject meta_json = pass_json.getJSONObject("meta");
+                pass.setType(meta_json.getString("type"));
+                pass.setOrganisation(meta_json.getString("organisation"));
+                pass.setApp(meta_json.getString("app"));
+            }
+
+            if (pass_json.has("ui")) {
+                final JSONObject ui_json = pass_json.getJSONObject("ui");
+                pass.setBackgroundColor(Color.parseColor(ui_json.getString("bgColor")));
+                pass.setForegroundColor(Color.parseColor(ui_json.getString("fgColor")));
+            }
 
             if (pass_json.has("barcode")) {
                 final JSONObject barcode_json = pass_json.getJSONObject("barcode");
@@ -47,7 +59,6 @@ public class PassReader {
                 if (barcode_json.has("altText")) {
                     barCode.setAlternativeText(barcode_json.getString("altText"));
                 }
-
             }
 
             if (pass_json.has("when")) {

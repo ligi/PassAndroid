@@ -118,8 +118,8 @@ public class PassViewActivityBase extends AppCompatActivity {
             return false;
         }
 
-        final String org = optionalPass.get().getOrganisation();
-        return (org != null && org.equals(PassUtil.ORGANIZATION));
+        final String app = optionalPass.get().getApp();
+        return (app != null && app.equals(PassUtil.APP));
     }
 
     @Override

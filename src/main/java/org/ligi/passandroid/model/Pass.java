@@ -3,11 +3,9 @@ package org.ligi.passandroid.model;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
 import java.util.List;
+import org.joda.time.DateTime;
 
 public interface Pass extends Serializable {
 
@@ -73,7 +71,6 @@ public interface Pass extends Serializable {
 
     @Nullable
     String getApp();
-
 
     @Nullable
     Bitmap getIconBitmap();

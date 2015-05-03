@@ -1,6 +1,5 @@
 package org.ligi.passandroid.model;
 
-import com.google.common.base.Optional;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +21,7 @@ public class PassWriter {
             metaObject.put("id", pass.getId()); // ok
             metaObject.put("type", pass.getType()); //
             metaObject.put("app", pass.getApp());
+            metaObject.put("organisation", pass.getOrganisation());
 
             object.put("meta", metaObject);
 
@@ -40,8 +40,8 @@ public class PassWriter {
 
             final JSONObject uiObject = new JSONObject();
 
-            object.put("fgColor", "#" + String.format("%08X", pass.getForegroundColor()));
-            object.put("bgColor", "#" + String.format("%08X", pass.getBackgroundColor()));
+            uiObject.put("fgColor", "#" + String.format("%08X", pass.getForegroundColor()));
+            uiObject.put("bgColor", "#" + String.format("%08X", pass.getBackgroundColor()));
 
             object.put("ui", uiObject);
 
