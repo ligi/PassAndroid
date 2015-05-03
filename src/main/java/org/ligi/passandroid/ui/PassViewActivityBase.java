@@ -3,8 +3,8 @@ package org.ligi.passandroid.ui;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -26,7 +26,7 @@ import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
-public class PassViewActivityBase extends ActionBarActivity {
+public class PassViewActivityBase extends AppCompatActivity {
 
     public static final String EXTRA_KEY_UUID = "uuid";
     public Optional<Pass> optionalPass;
@@ -103,7 +103,8 @@ public class PassViewActivityBase extends ActionBarActivity {
                                      .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                                          @Override
                                          public void onClick(DialogInterface dialog, int which) {
-                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this, pass.getId(),
+                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
+                                                                                      pass.getId(),
                                                                                       App.getShareDir(),
                                                                                       "share",
                                                                                       reason).execute();

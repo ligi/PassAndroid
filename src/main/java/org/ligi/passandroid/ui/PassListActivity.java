@@ -9,8 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -40,7 +40,7 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
-public class PassListActivity extends ActionBarActivity {
+public class PassListActivity extends AppCompatActivity {
 
     private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
     private PassAdapter passAdapter;
@@ -86,7 +86,7 @@ public class PassListActivity extends ActionBarActivity {
     @InjectView(R.id.fab_action_open_file)
     FloatingActionButton openFileFAB;
 
-    public final static int VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK =19;
+    public final static int VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19;
 
     @OnClick(R.id.fab_action_open_file)
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)

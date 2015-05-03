@@ -1,19 +1,17 @@
 package org.ligi.passandroid.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import org.ligi.passandroid.R;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import org.ligi.passandroid.R;
 
-public class HelpActivity extends ActionBarActivity {
+public class HelpActivity extends AppCompatActivity {
 
     @InjectView(R.id.help_tv)
     TextView helpTextView;

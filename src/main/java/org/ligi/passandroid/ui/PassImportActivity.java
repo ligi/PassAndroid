@@ -5,16 +5,15 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
 
-public class PassImportActivity extends ActionBarActivity {
+public class PassImportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class PassImportActivity extends ActionBarActivity {
         new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
     }
 
-    class ImportAndShowAsyncTask extends AsyncTask<Void,Void,InputStreamWithSource> {
+    class ImportAndShowAsyncTask extends AsyncTask<Void, Void, InputStreamWithSource> {
 
         private final ProgressDialog progressDialog;
         final Activity passImportActivity;
@@ -39,7 +38,7 @@ public class PassImportActivity extends ActionBarActivity {
 
         @Override
         protected InputStreamWithSource doInBackground(Void... params) {
-            return InputStreamProvider.fromURI(passImportActivity,intent_uri);
+            return InputStreamProvider.fromURI(passImportActivity, intent_uri);
         }
 
         @Override

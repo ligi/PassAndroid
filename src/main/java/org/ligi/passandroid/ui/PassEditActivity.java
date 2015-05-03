@@ -5,33 +5,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.google.common.base.Optional;
 import com.squareup.otto.Subscribe;
 import com.viewpagerindicator.TitlePageIndicator;
-
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassWriter;
 import org.ligi.passandroid.ui.edit_fragments.BarcodeEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ImageEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
 
-import java.io.File;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
-public class PassEditActivity extends ActionBarActivity {
+public class PassEditActivity extends AppCompatActivity {
 
     @InjectView(R.id.passEditPager)
     ViewPager viewPager;
