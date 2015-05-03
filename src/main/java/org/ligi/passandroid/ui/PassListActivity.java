@@ -157,7 +157,6 @@ public class PassListActivity extends ActionBarActivity {
 
         final LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        llm.scrollToPosition(0);
         recyclerView.setLayoutManager(llm);
 
         // don't want too many windows in worst case - so check for errors first
