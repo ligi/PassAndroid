@@ -28,7 +28,6 @@
                 android:id="@+id/emptyView"
                 />
 
-
         <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
                 android:id="@+id/fam"
                 android:layout_width="wrap_content"
@@ -46,9 +45,11 @@
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_action_open_file"
+                    android:src="@drawable/ic_fam_open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
+
                     fab:fab_size="mini"
                     fab:fab_colorNormal="@color/secondary"
                     fab:fab_title="Open File"
@@ -56,6 +57,7 @@
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_action_demo_pass"
+                    android:src="@drawable/ic_fam_giftcard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     fab:fab_size="mini"
@@ -66,6 +68,7 @@
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_action_scan"
+                    android:src="@drawable/ic_fam_find"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     fab:fab_size="mini"
@@ -76,6 +79,7 @@
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_action_create_pass"
+                    android:src="@drawable/ic_fam_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     fab:fab_size="mini"
