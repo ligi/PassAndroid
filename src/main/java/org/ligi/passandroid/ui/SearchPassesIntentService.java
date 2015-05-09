@@ -6,14 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
-
-import com.google.common.base.Optional;
-
-import org.ligi.axt.AXT;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
@@ -22,17 +20,13 @@ import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.tracedroid.logging.Log;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
 public class SearchPassesIntentService extends IntentService {
 
     public static final int PROGRESS_NOTIFICATION_ID = 1;
     public static final int FOUND_NOTIFICATION_ID = 2;
+
     private static final int REQUEST_CODE = 1;
 
     private NotificationManager notifyManager;
@@ -48,20 +42,18 @@ public class SearchPassesIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        foundList=new ArrayList<>();
+        foundList = new ArrayList<>();
 
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        progressNotificationBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.scanning_for_passes))
-                .setSmallIcon(R.drawable.ic_action_refresh)
-                .setOngoing(true)
-                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0))
-                .setProgress(1, 1, true);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0);
+        progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
+                                                                          .setSmallIcon(R.drawable.ic_action_refresh)
+                                                                          .setOngoing(true)
+                                                                          .setContentIntent(pendingIntent)
+                                                                          .setProgress(1, 1, true);
 
-        findNotificationBuilder = new NotificationCompat.Builder(this)
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher);
+        findNotificationBuilder = new NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher);
 
         for (String path : new PastLocationsStore(getApplicationContext()).getLocations()) {
             search_in(new File(path), false);
@@ -115,50 +107,50 @@ public class SearchPassesIntentService extends IntentService {
                 Log.i("found" + file.getAbsolutePath());
 
                 final InputStreamWithSource ins = InputStreamProvider.fromURI(getBaseContext(), Uri.parse("file://" + file.getAbsolutePath()));
-                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, getBaseContext(),
-                        new UnzipPassController.SuccessCallback() {
-                            @Override
-                            public void call(String uuid) {
-                                foundList.add(uuid);
-                                final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), getBaseContext().getResources().getConfiguration().locale.getLanguage());
-                                App.getBus().post(new SortOrderChangeEvent());
-                                final Bitmap iconBitmap = pass.getIconBitmap();
-                                if (iconBitmap!=null) {
-                                    final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
-                                    findNotificationBuilder.setLargeIcon(bitmap);
-                                }
-                                findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
-                                if (foundList.size()>1) {
-                                    findNotificationBuilder.setContentText("And " + (foundList.size()-1) + " more ");
-                                } else {
-                                    findNotificationBuilder.setContentText(file.getAbsolutePath());
-                                }
-                                final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
-                                intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
-                                findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-                                notifyManager.notify(FOUND_NOTIFICATION_ID, findNotificationBuilder.build());
-                            }
-                        }, new UnzipPassController.FailCallback() {
-                    @Override
-                    public void fail(String reason) {
-                        Log.i("fail", reason);
-                    }
-                });
+                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins,
+                                                                                               getBaseContext(),
+                                                                                               getOnSuccessCallback(file),
+                                                                                               new UnzipPassController.FailCallback() {
+                                                                                                   @Override
+                                                                                                   public void fail(String reason) {
+                                                                                                       Log.i("fail", reason);
+                                                                                                   }
+                                                                                               });
                 UnzipPassController.processInputStream(spec);
             }
         }
+    }
 
-
+    private UnzipPassController.SuccessCallback getOnSuccessCallback(final File file) {
+        return new UnzipPassController.SuccessCallback() {
+            @Override
+            public void call(String uuid) {
+                foundList.add(uuid);
+                final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
+                final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), language);
+                App.getBus().post(new SortOrderChangeEvent());
+                final Bitmap iconBitmap = pass.getIconBitmap();
+                if (iconBitmap != null) {
+                    final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
+                    findNotificationBuilder.setLargeIcon(bitmap);
+                }
+                findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
+                if (foundList.size() > 1) {
+                    findNotificationBuilder.setContentText("And " + (foundList.size() - 1) + " more ");
+                } else {
+                    findNotificationBuilder.setContentText(file.getAbsolutePath());
+                }
+                final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
+                intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
+                findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                notifyManager.notify(FOUND_NOTIFICATION_ID, findNotificationBuilder.build());
+            }
+        };
     }
 
     private Bitmap scale2maxSize(Bitmap bitmap, int dimensionPixelSize) {
-        final float scale;
-        if (bitmap.getWidth() > bitmap.getHeight()) {
-            scale = (float) dimensionPixelSize /bitmap.getWidth();
-        } else {
-            scale = (float) dimensionPixelSize / bitmap.getHeight();
-        }
-        return Bitmap.createScaledBitmap(bitmap,(int) (bitmap.getWidth()*scale),(int)(bitmap.getHeight()*scale), false);
+        final float scale = (float) dimensionPixelSize / ((bitmap.getWidth() > bitmap.getHeight()) ? bitmap.getWidth() : bitmap.getHeight());
+        return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
     }
 
 }
