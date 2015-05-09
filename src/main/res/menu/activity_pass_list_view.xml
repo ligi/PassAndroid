@@ -4,6 +4,6 @@
         android:id="@+id/menu_help"
         yourapp:showAsAction="ifRoom"
         android:title="@string/help_label"
-        android:icon="@drawable/ic_help_white_36dp" />
+        android:icon="@drawable/ic_action_help" />
 
 </menu>
