@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -59,7 +60,7 @@ public class NavigationFragment extends Fragment {
     ViewGroup categoriesContainer;
 
     @InjectView(R.id.navCategoriesOuter)
-    ViewGroup categoriesContainerOuter;
+    View categoriesContainerOuter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,8 @@ public class NavigationFragment extends Fragment {
     }
     private void setCategoryNavVisibilityByCurrentConditions() {
         categoriesContainerOuter.setVisibility(shouldDisplayCategoryNav()? VISIBLE: GONE);
+        categoriesContainer.setVisibility(shouldDisplayCategoryNav()? VISIBLE: GONE);
+
         radioGroup.setVisibility(shouldDisplaySort()? VISIBLE: GONE);
     }
 
@@ -143,21 +146,21 @@ public class NavigationFragment extends Fragment {
         for (PassStore.CountedType countedType : countedTypes) {
             final String type = countedType.type;
 
-            View item = inflater.inflate(R.layout.item_nav_pass_category, null);
+            final View item = inflater.inflate(R.layout.item_nav_pass_category, categoriesContainer,false);
 
             // gather views
-            CategoryIndicatorView categoryIndicatorView = ButterKnife.findById(item, R.id.categoryView);
+            final CategoryIndicatorView categoryIndicatorView = ButterKnife.findById(item, R.id.categoryView);
             TextView labelText = ButterKnife.findById(item, R.id.navCategoryLabel);
 
             categoryIndicatorView.setExtraText(String.valueOf(countedType.count));
-            categoryIndicatorView.setTextBackgroundColor(CategoryHelper.getCategoryDefaultBG(type));
-            categoryIndicatorView.setTextColor(CategoryHelper.getCategoryDefaultFG(type));
+            categoryIndicatorView.setTextBackgroundColor(0xAA343434);
+            categoryIndicatorView.setTextColor(Color.WHITE);
             categoryIndicatorView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
 
+            item.setBackgroundResource(R.drawable.clickable_bg);
             categoryIndicatorView.setImageByCategory(type);
 
             labelText.setText(CategoryHelper.getHumanCategoryString(type));
-
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

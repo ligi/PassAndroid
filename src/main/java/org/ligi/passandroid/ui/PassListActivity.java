@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -107,9 +106,6 @@ public class PassListActivity extends AppCompatActivity {
         }
     }
 
-
-    private NavigationFragment navigationFragment;
-
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
         runOnUiThread(new Runnable() {
@@ -150,6 +146,9 @@ public class PassListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, new NavigationFragment()).commitAllowingStateLoss();
+
         ButterKnife.inject(this);
 
         AXT.at(openFileFAB).setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK);
@@ -182,7 +181,8 @@ public class PassListActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
+        passAdapter = new PassAdapter(PassListActivity.this);
+        recyclerView.setAdapter(passAdapter);
     }
 
     private void scrollToType(String type) {
@@ -216,39 +216,8 @@ public class PassListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        new InitAsyncTask().execute();
-
         App.getBus().register(this);
-    }
-
-    private class InitAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            App.getPassStore();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if (isFinishing()) {
-                return;
-            }
-
-            passAdapter = new PassAdapter(PassListActivity.this);
-            recyclerView.setAdapter(passAdapter);
-
-            Tracker.get().trackEvent("ui_event", "resume", "passes", (long) App.getPassStore().passCount());
-
-            refreshPasses();
-
-            if (navigationFragment == null) {
-                navigationFragment = new NavigationFragment();
-                getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, navigationFragment).commitAllowingStateLoss();
-            }
-        }
+        refreshPasses();
     }
 
     @Override

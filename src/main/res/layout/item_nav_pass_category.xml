@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@drawable/clickable_bg">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:orientation="horizontal"
+              android:background="@drawable/clickable_bg">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="7dp">
 
-        <org.ligi.passandroid.ui.views.CategoryIndicatorView
-            android:layout_width="23dp"
-            android:layout_height="36dp"
-            android:id="@+id/categoryView" />
+    <org.ligi.passandroid.ui.views.CategoryIndicatorView
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/categoryView"/>
 
-    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        tools:text="Boarding Pass"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:id="@+id/navCategoryLabel" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="Boarding Pass"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:id="@+id/navCategoryLabel"/>
 </LinearLayout>

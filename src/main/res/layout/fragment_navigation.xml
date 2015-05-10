@@ -1,87 +1,73 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="240dp"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
     <LinearLayout
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical">
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
 
         <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
-                style="@style/nav_topic"
-                android:text="@string/nav_sort" />
+                    style="@style/nav_topic"
+                    android:text="@string/nav_sort"/>
 
             <RadioButton
-                android:id="@+id/categoryRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/nav_sort_category" />
+                    android:id="@+id/categoryRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/nav_sort_category"/>
 
             <RadioButton
-                android:id="@+id/dateRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_sort_date" />
+                    android:id="@+id/dateRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_sort_date"/>
         </RadioGroup>
 
-        <LinearLayout
-            android:id="@+id/navCategoriesOuter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
+        <TextView
+                android:id="@+id/navCategoriesOuter"
                 style="@style/nav_topic"
-                android:text="@string/nav_categories" />
+                android:text="@string/nav_categories"/>
 
-            <LinearLayout
+        <LinearLayout
                 android:id="@+id/navCategoriesInner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </LinearLayout>
+                android:orientation="vertical"/>
 
         <TextView
-            style="@style/nav_topic"
-            android:text="@string/nav_more" />
+                style="@style/nav_topic"
+                android:text="@string/nav_more"/>
 
 
-        <LinearLayout
-            android:id="@+id/community"
-
-            style="@style/nav_btn">
-
-            <ImageView
-                style="@style/nav_icon"
-                android:src="@drawable/community_icon" />
-
-            <TextView
+        <TextView
+                android:id="@+id/community"
                 style="@style/nav_text"
-                android:text="@string/nav_comunity" />
-        </LinearLayout>
+                android:background="@drawable/clickable_bg"
+                android:drawableLeft="@drawable/ic_action_gplus"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/nav_comunity"/>
 
-        <LinearLayout
-            android:id="@+id/share"
-            style="@style/nav_btn">
 
-            <ImageView
-                style="@style/nav_icon"
-                android:src="@android:drawable/ic_menu_share" />
-
-            <TextView
+        <TextView
+                android:id="@+id/share"
                 style="@style/nav_text"
-                android:text="@string/nav_share" />
-        </LinearLayout>
+                android:background="@drawable/clickable_bg"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_nav_share"
+                android:text="@string/nav_share"/>
 
 
     </LinearLayout>

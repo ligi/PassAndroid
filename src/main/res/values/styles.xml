@@ -19,9 +19,8 @@
     </style>
 
     <style name="nav_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
 
@@ -34,9 +33,8 @@
     <style name="nav_topic">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/primary</item>
-        <item name="android:textColor">@color/primary_text_default_material_dark</item>
         <item name="android:padding">7dp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
 
