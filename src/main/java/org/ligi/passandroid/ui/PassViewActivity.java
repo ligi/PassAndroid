@@ -79,8 +79,8 @@ public class PassViewActivity extends PassViewActivityBase {
         final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
         setContentView(contentView);
 
-        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
         final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
+        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer, false);
         extraViewContainer.addView(passExtrasView);
 
         ButterKnife.inject(this);
@@ -103,7 +103,7 @@ public class PassViewActivity extends PassViewActivityBase {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
             final Bitmap bitmap = pass.getBarCode().getBitmap(smallestSide / 3);
             setBitmapSafe(barcode_img, bitmap);
-            if (pass.getBarCode().getAlternativeText()!=null) {
+            if (pass.getBarCode().getAlternativeText() != null) {
                 barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText());
                 barcodeAlternativeText.setVisibility(View.VISIBLE);
             } else {
