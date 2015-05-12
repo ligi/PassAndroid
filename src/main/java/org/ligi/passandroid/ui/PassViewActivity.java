@@ -158,9 +158,8 @@ public class PassViewActivity extends PassViewActivityBase {
 
         setContentView(R.layout.activity_pass_view);
 
-        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, null);
         final ViewGroup extraViewContainer = (ViewGroup) findViewById(R.id.passExtrasContainer);
-        extraViewContainer.addView(passExtrasView);
+        getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer);
 
         ButterKnife.inject(this);
 
@@ -168,12 +167,12 @@ public class PassViewActivity extends PassViewActivityBase {
 
     private void addFrontFields(PassFieldList passFields) {
         for (PassField field : passFields) {
-            final View v = getLayoutInflater().inflate(R.layout.main_field_item, null);
+
+            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer);
             final TextView key = (TextView) v.findViewById(R.id.key);
             key.setText(field.label);
             final TextView value = (TextView) v.findViewById(R.id.value);
             value.setText(field.value);
-            frontFieldsContainer.addView(v);
         }
     }
 
