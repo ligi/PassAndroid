@@ -22,8 +22,7 @@ public class FullscreenMapActivity extends PassViewActivityBase {
     }
 
     private void fallbackForMissingGooglePlay() {
-        NavigateToLocationsDialog.perform(this, optionalPass.get(), true);
+        NavigateToLocationsDialog.perform(this, optionalPass, true);
     }
-
 
 }

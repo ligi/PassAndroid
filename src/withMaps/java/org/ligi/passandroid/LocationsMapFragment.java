@@ -74,7 +74,7 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                     LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
-                    List<PassLocation> locations = base_activity.optionalPass.get().getLocations();
+                    List<PassLocation> locations = base_activity.optionalPass.getLocations();
 
                     if (locations.size() > 0) {
                         for (PassLocation l : locations) {

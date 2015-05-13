@@ -1,16 +1,6 @@
 package org.ligi.passandroid.model;
 
 import android.content.Context;
-
-import com.google.common.base.Optional;
-
-import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
-import org.ligi.passandroid.helper.DirectoryFileFilter;
-import org.ligi.passandroid.reader.AppleStylePassReader;
-import org.ligi.passandroid.reader.PassReader;
-import org.ligi.tracedroid.logging.Log;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +9,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.App;
+import org.ligi.passandroid.helper.DirectoryFileFilter;
+import org.ligi.passandroid.reader.AppleStylePassReader;
+import org.ligi.passandroid.reader.PassReader;
+import org.ligi.tracedroid.logging.Log;
 
 public class AndroidFileSystemPassStore implements PassStore {
 
@@ -177,14 +173,14 @@ public class AndroidFileSystemPassStore implements PassStore {
                     @Override
                     public int compare(Pass lhs, Pass rhs) {
 
-                        if (lhs.getRelevantDate()==null && rhs.getRelevantDate()==null) {
+                        if (lhs.getRelevantDate() == null && rhs.getRelevantDate() == null) {
                             return 0;
                         }
 
-                        if (lhs.getRelevantDate()==null) {
+                        if (lhs.getRelevantDate() == null) {
                             return 1;
                         }
-                        if (rhs.getRelevantDate()==null) {
+                        if (rhs.getRelevantDate() == null) {
                             return -1;
                         }
                         return rhs.getRelevantDate().compareTo(lhs.getRelevantDate());
@@ -221,18 +217,13 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public Optional<Pass> getCurrentPass() {
-        return Optional.fromNullable(actPass);
+    public Pass getCurrentPass() {
+        return actPass;
     }
 
     @Override
     public void setCurrentPass(final Pass pass) {
         actPass = pass;
-    }
-
-    @Override
-    public void setCurrentPass(final Optional<Pass> pass) {
-        actPass = pass.get();
     }
 
     @Override

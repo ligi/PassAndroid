@@ -2,19 +2,14 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
-
-import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
-
+import java.util.ArrayList;
 import org.joda.time.DateTime;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.PassViewActivity;
-
-import java.util.ArrayList;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;

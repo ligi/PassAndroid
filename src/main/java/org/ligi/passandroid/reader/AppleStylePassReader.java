@@ -2,11 +2,14 @@ package org.ligi.passandroid.reader;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 import android.support.annotation.Nullable;
-import com.google.common.base.Optional;
 import com.google.zxing.BarcodeFormat;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,13 +25,6 @@ import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.tracedroid.logging.Log;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class AppleStylePassReader {
 
@@ -47,10 +43,10 @@ public class AppleStylePassReader {
 
         JSONObject pass_json = null, type_json = null;
 
-        final Optional<String> localized_path = findLocalizedPath(path, language);
+        final String localized_path = findLocalizedPath(path, language);
 
-        if (localized_path.isPresent()) {
-            final File file = new File(localized_path.get(), "pass.strings");
+        if (localized_path != null) {
+            final File file = new File(localized_path, "pass.strings");
             translation.loadFromFile(file);
         }
 
@@ -230,23 +226,24 @@ public class AppleStylePassReader {
         return pass;
     }
 
-    private static Optional<String> findLocalizedPath(String path, String language) {
+    @Nullable
+    private static String findLocalizedPath(String path, String language) {
 
         final File localized = new File(path, language + ".lproj");
 
         if (localized.exists() && localized.isDirectory()) {
             Tracker.get().trackEvent("measure_event", "pass", language + "_native_lproj", null);
-            return Optional.of(localized.getPath());
+            return localized.getPath();
         }
 
         final File fallback = new File(path, "en.lproj");
 
         if (fallback.exists() && fallback.isDirectory()) {
             Tracker.get().trackEvent("measure_event", "pass", "en_lproj", null);
-            return Optional.of(fallback.getPath());
+            return fallback.getPath();
         }
 
-        return Optional.absent();
+        return null;
     }
 
     interface JsonStringReadCallback {
@@ -275,7 +272,7 @@ public class AppleStylePassReader {
         }
     }
 
-    private static void copyBitmapFile(String path, Optional<String> localizedPath, String bitmap) {
+    private static void copyBitmapFile(String path, @Nullable String localizedPath, String bitmap) {
         final Bitmap bitmap1 = findBitmap(path, localizedPath, bitmap);
         try {
             bitmap1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File(path, bitmap + PassImpl.FILETYPE_IMAGES)));
@@ -284,12 +281,12 @@ public class AppleStylePassReader {
         }
     }
 
-    private static Bitmap findBitmap(String path, Optional<String> localizedPath, String bitmap) {
+    private static Bitmap findBitmap(String path, @Nullable String localizedPath, String bitmap) {
 
         final List<String> searchList = new ArrayList<>();
-        if (localizedPath.isPresent()) {
-            searchList.add(localizedPath.get() + "/" + bitmap + "@2x.png");
-            searchList.add(localizedPath.get() + "/" + bitmap + ".png");
+        if (localizedPath != null) {
+            searchList.add(localizedPath + "/" + bitmap + "@2x.png");
+            searchList.add(localizedPath + "/" + bitmap + ".png");
         }
 
         searchList.add(path + "/" + bitmap + "@2x.png");

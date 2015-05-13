@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.common.base.Optional;
-
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -46,7 +44,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
             @Override
             public void onClick(View v) {
                 root.setCardElevation(v.getContext().getResources().getDimension(R.dimen.card_longclick_elevation));
-                App.getPassStore().setCurrentPass(Optional.of(pass));
+                App.getPassStore().setCurrentPass(pass);
                 AXT.at(passListActivity).startCommonIntent().activityFromClass(PassViewActivity.class);
             }
         });

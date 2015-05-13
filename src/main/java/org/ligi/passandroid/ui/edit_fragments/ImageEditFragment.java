@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
+import org.ligi.passandroid.helper.Files;
 import org.ligi.passandroid.model.PassImpl;
 import static android.app.Activity.RESULT_OK;
 
@@ -27,7 +27,7 @@ public class ImageEditFragment extends Fragment {
     private static final int REQ_CODE_PICK_THUMBNAIL = 4;
 
     private static PassImpl getPass() {
-        return (PassImpl) App.getPassStore().getCurrentPass().get();
+        return (PassImpl) App.getPassStore().getCurrentPass();
     }
 
     @OnClick(R.id.pickIcon)

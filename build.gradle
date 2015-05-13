@@ -124,7 +124,6 @@ dependencies {
 
     compile 'org.ligi:AXT:0.33'
     compile 'org.ligi:tracedroid:1.4'
-    compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'fr.nicolaspomepuy:discreetapprate:2.0.4@aar'
     compile 'com.larswerkman:HoloColorPicker:1.4'

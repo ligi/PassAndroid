@@ -15,7 +15,6 @@ import android.widget.TimePicker;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.google.common.base.Optional;
 import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
@@ -32,7 +31,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
     private final PassImpl pass;
 
     public MetaDataFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass().get();
+        pass = (PassImpl) App.getPassStore().getCurrentPass();
 
         if (pass.getRelevantDate()!=null) {
             time = pass.getRelevantDate();

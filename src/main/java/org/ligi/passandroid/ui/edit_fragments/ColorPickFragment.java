@@ -25,7 +25,7 @@ public class ColorPickFragment extends Fragment {
     private final PassImpl pass;
 
     public ColorPickFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass().get();
+        pass = (PassImpl) App.getPassStore().getCurrentPass();
     }
 
     @Override

@@ -22,7 +22,7 @@ public class CategoryPickFragment extends ListFragment {
     private final PassImpl pass;
 
     public CategoryPickFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass().get();
+        pass = (PassImpl) App.getPassStore().getCurrentPass();
     }
 
     @Override

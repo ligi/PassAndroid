@@ -1,7 +1,7 @@
 package org.ligi.passandroid.model;
 
-import com.google.common.base.Optional;
 import java.util.List;
+import javax.annotation.Nullable;
 
 public interface PassStore {
 
@@ -58,11 +58,10 @@ public interface PassStore {
 
     List<CountedType> getCountedTypes();
 
-    Optional<Pass> getCurrentPass();
+    @Nullable
+    Pass getCurrentPass();
 
-    void setCurrentPass(Pass pass);
-
-    void setCurrentPass(Optional<Pass> pass);
+    void setCurrentPass(@Nullable Pass pass);
 
     boolean deletePassWithId(String id);
 

@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import com.google.common.base.Optional;
 import com.squareup.otto.Subscribe;
 import com.viewpagerindicator.TitlePageIndicator;
 import org.ligi.axt.AXT;
@@ -41,9 +40,9 @@ public class PassEditActivity extends AppCompatActivity {
         setContentView(R.layout.edit);
         ButterKnife.inject(this);
 
-        final Optional<Pass> currentPass = App.getPassStore().getCurrentPass();
-        if (currentPass.isPresent()) {
-            pass = (PassImpl) currentPass.get();
+        final Pass currentPass = App.getPassStore().getCurrentPass();
+        if (currentPass != null) {
+            pass = (PassImpl) currentPass;
         } else {
             finish();
         }

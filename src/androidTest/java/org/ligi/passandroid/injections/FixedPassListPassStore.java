@@ -1,12 +1,9 @@
 package org.ligi.passandroid.injections;
 
-import com.google.common.base.Optional;
-
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassStore;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 
 public class FixedPassListPassStore implements PassStore {
 
@@ -77,18 +74,13 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public Optional<Pass> getCurrentPass() {
-        return Optional.of(actPass);
+    public Pass getCurrentPass() {
+        return actPass;
     }
 
     @Override
     public void setCurrentPass(Pass pass) {
         actPass = pass;
-    }
-
-    @Override
-    public void setCurrentPass(Optional<Pass> pass) {
-        actPass = pass.get();
     }
 
     @Override

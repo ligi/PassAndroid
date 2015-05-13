@@ -36,18 +36,18 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         super.onResume();
 
         final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
-        if (!optionalPass.isPresent() || optionalPass.get().getBarCode() == null) {
+        if (optionalPass == null || optionalPass.getBarCode() == null) {
             Log.w("FullscreenBarcodeActivity in bad state");
             finish(); // this should never happen, but better safe than sorry
             return;
         }
         setBestFittingOrientationForBarCode();
 
-        barcodeImageView.setImageBitmap(optionalPass.get().getBarCode().getBitmap(smallestSize));
+        barcodeImageView.setImageBitmap(optionalPass.getBarCode().getBitmap(smallestSize));
 
-        if (optionalPass.get().getBarCode().getAlternativeText()!=null) {
+        if (optionalPass.getBarCode().getAlternativeText() != null) {
             alternativeBarcodeText.setVisibility(View.VISIBLE);
-            alternativeBarcodeText.setText(optionalPass.get().getBarCode().getAlternativeText());
+            alternativeBarcodeText.setText(optionalPass.getBarCode().getAlternativeText());
         } else {
             alternativeBarcodeText.setVisibility(View.GONE);
         }
@@ -63,7 +63,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (optionalPass.get().getBarCode().getFormat() == BarcodeFormat.PDF_417) {
+        if (optionalPass.getBarCode().getFormat() == BarcodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

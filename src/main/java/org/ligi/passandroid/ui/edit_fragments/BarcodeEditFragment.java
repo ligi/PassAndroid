@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.google.common.base.Strings;
 import com.google.zxing.BarcodeFormat;
 import java.util.Collections;
 import java.util.UUID;
@@ -26,6 +25,7 @@ import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.BarcodeHelper;
+import org.ligi.passandroid.helper.Strings;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
 import static android.text.TextUtils.isEmpty;
@@ -87,7 +87,7 @@ public class BarcodeEditFragment extends Fragment {
 
 
     public BarcodeEditFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass().get();
+        pass = (PassImpl) App.getPassStore().getCurrentPass();
     }
 
     @Override

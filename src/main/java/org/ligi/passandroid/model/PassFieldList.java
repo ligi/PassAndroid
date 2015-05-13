@@ -1,13 +1,11 @@
 package org.ligi.passandroid.model;
 
-import com.google.common.base.Optional;
-
+import android.support.annotation.Nullable;
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.tracedroid.logging.Log;
-
-import java.util.ArrayList;
 
 public class PassFieldList extends ArrayList<PassField> {
 
@@ -32,25 +30,26 @@ public class PassFieldList extends ArrayList<PassField> {
         }
     }
 
-    public Optional<PassField> getPassFieldForKey(String key) {
+    @Nullable
+    public PassField getPassFieldForKey(String key) {
 
         for (PassField field : this) {
             if (field.key != null && field.key.equals(key)) {
-                return Optional.of(field);
+                return field;
             }
         }
-        return Optional.absent();
+        return null;
     }
 
 
-    public Optional<PassField> getPassFieldThatMatchesLabel(String matcher) {
+    public PassField getPassFieldThatMatchesLabel(String matcher) {
 
         for (PassField field : this) {
             if (field.label != null && field.label.matches(matcher)) {
-                return Optional.of(field);
+                return field;
             }
         }
-        return Optional.absent();
+        return null;
     }
 
     public String toHTMLString() {

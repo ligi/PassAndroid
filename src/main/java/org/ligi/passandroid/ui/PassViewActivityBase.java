@@ -11,12 +11,12 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-import com.google.common.base.Optional;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import javax.annotation.Nullable;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
@@ -29,7 +29,9 @@ import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpe
 public class PassViewActivityBase extends AppCompatActivity {
 
     public static final String EXTRA_KEY_UUID = "uuid";
-    public Optional<Pass> optionalPass;
+
+    @Nullable
+    public Pass optionalPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class PassViewActivityBase extends AppCompatActivity {
         }
         optionalPass = App.getPassStore().getCurrentPass();
 
-        if (!optionalPass.isPresent()) {
+        if (optionalPass == null) {
             Tracker.get().trackException("pass not present in " + this, false);
             finish();
         }
@@ -114,17 +116,17 @@ public class PassViewActivityBase extends AppCompatActivity {
     }
 
     private boolean shouldAllowEdit() {
-        if (!optionalPass.isPresent()) {
+        if (optionalPass == null) {
             return false;
         }
 
-        final String app = optionalPass.get().getApp();
+        final String app = optionalPass.getApp();
         return (app != null && app.equals(PassUtil.APP));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (new PassMenuOptions(this, optionalPass.get()).process(item)) {
+        if (new PassMenuOptions(this, optionalPass).process(item)) {
             return true;
         }
 
@@ -152,7 +154,7 @@ public class PassViewActivityBase extends AppCompatActivity {
 
         @Override
         public void run() {
-            final Pass pass = optionalPass.get();
+            final Pass pass = optionalPass;
             if (pass.getWebServiceURL() == null || pass.getPassIdent() == null || pass.getSerial() == null) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -198,9 +200,8 @@ public class PassViewActivityBase extends AppCompatActivity {
                                                                                                                }
                                                                                                                dlg.dismiss();
                                                                                                                final PassStore passStore = App.getPassStore();
-                                                                                                               if (!optionalPass.get().getId().equals(uuid)) {
-                                                                                                                   passStore.deletePassWithId(optionalPass.get()
-                                                                                                                                                          .getId());
+                                                                                                               if (!optionalPass.getId().equals(uuid)) {
+                                                                                                                   passStore.deletePassWithId(optionalPass.getId());
                                                                                                                }
                                                                                                                passStore.deleteCacheForId(uuid);
                                                                                                                final Pass newPass = passStore.getPassbookForId(

@@ -70,7 +70,7 @@ public class PassViewActivity extends PassViewActivityBase {
     protected void onResume() {
         super.onResume();
 
-        if (!optionalPass.isPresent()) {
+        if (optionalPass == null) {
             return;
         }
 
@@ -92,7 +92,7 @@ public class PassViewActivity extends PassViewActivityBase {
     protected void refresh() {
         super.refresh();
 
-        final Pass pass = optionalPass.get();
+        final Pass pass = optionalPass;
 
         if (!pass.isValid()) { // don't deal with invalid passes
             showPassProblemDialog(pass, "invalid");
@@ -191,11 +191,11 @@ public class PassViewActivity extends PassViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((optionalPass.isPresent() && optionalPass.get().isValid() && optionalPass.get().getLocations().size() > 0));
-        menu.findItem(R.id.menu_update).setVisible((optionalPass.isPresent() &&
-                                                    optionalPass.get().isValid() &&
-                                                    optionalPass.get().getAuthToken() != null &&
-                                                    optionalPass.get().getSerial() != null));//&& optionalPass.get().getPassIdent().isPresent()));
+        menu.findItem(R.id.menu_map).setVisible((optionalPass != null && optionalPass.isValid() && optionalPass.getLocations().size() > 0));
+        menu.findItem(R.id.menu_update).setVisible((optionalPass != null &&
+                                                    optionalPass.isValid() &&
+                                                    optionalPass.getAuthToken() != null &&
+                                                    optionalPass.getSerial() != null));//&& optionalPass.get().getPassIdent().isPresent()));
         return res;
     }
 
