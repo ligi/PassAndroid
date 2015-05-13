@@ -1,12 +1,11 @@
 package org.ligi.passandroid.model;
 
 import com.google.common.base.Optional;
-
 import java.util.List;
 
 public interface PassStore {
 
-    public enum SortOrder {
+    enum SortOrder {
         DATE(0),
         TYPE(1);
 
@@ -22,7 +21,7 @@ public interface PassStore {
 
     }
 
-    public class CountedType implements Comparable<CountedType> {
+    class CountedType implements Comparable<CountedType> {
         public final String type;
         public final Integer count;
 
@@ -37,35 +36,35 @@ public interface PassStore {
         }
     }
 
-    public void preCachePassesList();
+    void preCachePassesList();
 
-    public void deleteCacheForId(String id);
+    void deleteCacheForId(String id);
 
-    public void deleteCache();
+    void deleteCache();
 
-    public void deleteCache(String id);
+    void deleteCache(String id);
 
-    public void refreshPassesList();
+    void refreshPassesList();
 
-    public int passCount();
+    int passCount();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public Pass getPassbookAt(int pos);
+    Pass getPassbookAt(int pos);
 
-    public Pass getPassbookForId(String id);
+    Pass getPassbookForId(String id);
 
-    public void sort(SortOrder order);
+    void sort(SortOrder order);
 
-    public List<CountedType> getCountedTypes();
+    List<CountedType> getCountedTypes();
 
-    public Optional<Pass> getCurrentPass();
+    Optional<Pass> getCurrentPass();
 
-    public void setCurrentPass(Pass pass);
+    void setCurrentPass(Pass pass);
 
-    public void setCurrentPass(Optional<Pass> pass);
+    void setCurrentPass(Optional<Pass> pass);
 
-    public boolean deletePassWithId(String id);
+    boolean deletePassWithId(String id);
 
-    public String getPathForID(String id);
+    String getPathForID(String id);
 }
