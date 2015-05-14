@@ -37,8 +37,10 @@ public class PassViewActivityBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // a little hack because I strongly disagree with the style guide here
         // ;-)
@@ -155,7 +157,7 @@ public class PassViewActivityBase extends AppCompatActivity {
         @Override
         public void run() {
             final Pass pass = optionalPass;
-            if (pass.getWebServiceURL() == null || pass.getPassIdent() == null || pass.getSerial() == null) {
+            if (pass == null || pass.getWebServiceURL() == null || pass.getPassIdent() == null || pass.getSerial() == null) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
