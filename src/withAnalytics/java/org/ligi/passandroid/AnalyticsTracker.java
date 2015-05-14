@@ -1,12 +1,11 @@
 package org.ligi.passandroid;
 
 import android.content.Context;
-
+import android.support.annotation.Nullable;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
-
 import java.util.Map;
 
 public class AnalyticsTracker implements TrackerInterface {
@@ -23,12 +22,9 @@ public class AnalyticsTracker implements TrackerInterface {
 
     @Override
     public void trackException(String s, Exception e, boolean fatal) {
-        final String description = new StandardExceptionParser(ctx, null)
-                .getDescription(Thread.currentThread().getName(), e);
+        final String description = new StandardExceptionParser(ctx, null).getDescription(Thread.currentThread().getName(), e);
 
-        final Map<String, String> exceptionMap = new HitBuilders.ExceptionBuilder()
-                .setDescription(s + " " + description)
-                .setFatal(fatal).build();
+        final Map<String, String> exceptionMap = new HitBuilders.ExceptionBuilder().setDescription(s + " " + description).setFatal(fatal).build();
 
         tracker.send(exceptionMap);
     }
@@ -39,7 +35,7 @@ public class AnalyticsTracker implements TrackerInterface {
     }
 
     @Override
-    public void trackEvent(String category, String action, String label, Long val) {
+    public void trackEvent(@Nullable String category, @Nullable String action, @Nullable String label, @Nullable Long val) {
         final HitBuilders.EventBuilder eventMapBuilder = new HitBuilders.EventBuilder();
 
         if (category != null) {

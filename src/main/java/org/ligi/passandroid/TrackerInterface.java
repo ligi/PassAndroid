@@ -1,14 +1,12 @@
 package org.ligi.passandroid;
 
 
+import android.support.annotation.Nullable;
+
 public interface TrackerInterface {
-
-    public final static String EVENT_CATEGORY_UI_ACTION = "ui_event";
-
     void trackException(String s, Exception e, boolean fatal);
 
     void trackException(String s, boolean fatal);
 
-    void trackEvent(String category, String action, String label, Long val);
-
+    void trackEvent(@Nullable String category, @Nullable String action, @Nullable String label, @Nullable Long val);
 }
