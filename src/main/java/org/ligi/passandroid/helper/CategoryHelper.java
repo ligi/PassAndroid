@@ -8,7 +8,7 @@ public class CategoryHelper {
 
     public final static String[] ALL_CATEGORIES = {"boardingPass", "eventTicket", "coupon", "storeCard", "generic"};
 
-    public final static int getHumanCategoryString(String fromPass) {
+    public static int getHumanCategoryString(String fromPass) {
         switch (fromPass) {
             case "boardingPass":
                 return R.string.boarding_pass;
@@ -31,7 +31,7 @@ public class CategoryHelper {
 
     }
 
-    public final static int getCategoryDefaultBG(String category) {
+    public static int getCategoryDefaultBG(String category) {
         switch (category) {
             case "boardingPass":
                 return 0xFF3d73e9;
@@ -54,7 +54,7 @@ public class CategoryHelper {
 
     }
 
-    public final static int getCategoryDefaultFG(String category) {
+    public static int getCategoryDefaultFG(String category) {
         switch (category) {
             case "boardingPass":
                 return Color.BLACK;
@@ -78,7 +78,7 @@ public class CategoryHelper {
     }
 
 
-    public final static int getCategoryTopImageRes(String fromPass) {
+    public static int getCategoryTopImageRes(String fromPass) {
         switch (fromPass) {
             case "boardingPass":
                 return R.drawable.cat_bp;
@@ -100,7 +100,7 @@ public class CategoryHelper {
     }
 
 
-    public final static String getCategoryShortStr(String fromPass) {
+    public static String getCategoryShortStr(String fromPass) {
         switch (fromPass) {
             case "boardingPass":
                 return "BP";
@@ -120,6 +120,5 @@ public class CategoryHelper {
 
         }
     }
-
 
 }
