@@ -16,7 +16,7 @@ public class Settings {
     }
 
     public void setSortOrder(PassStore.SortOrder order) {
-        sharedPreferences.edit().putInt(ORDER_KEY, order.getInt()).commit();
+        sharedPreferences.edit().putInt(ORDER_KEY, order.getInt()).apply();
     }
 
     public PassStore.SortOrder getSortOrder() {
