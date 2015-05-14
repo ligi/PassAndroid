@@ -24,7 +24,7 @@ public class UnzipPassDialog {
     }
 
     public interface FinishCallback {
-        public Void call(String path);
+        Void call(String path);
     }
 
     public static void show(final InputStreamWithSource ins, final Activity activity, final FinishCallback callAfterFinishOnUIThread) {
