@@ -274,13 +274,16 @@ public class AppleStylePassReader {
 
     private static void copyBitmapFile(String path, @Nullable String localizedPath, String bitmap) {
         final Bitmap bitmap1 = findBitmap(path, localizedPath, bitmap);
-        try {
-            bitmap1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File(path, bitmap + PassImpl.FILETYPE_IMAGES)));
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (bitmap1!=null) {
+            try {
+                bitmap1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File(path, bitmap + PassImpl.FILETYPE_IMAGES)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    @Nullable
     private static Bitmap findBitmap(String path, @Nullable String localizedPath, String bitmap) {
 
         final List<String> searchList = new ArrayList<>();
