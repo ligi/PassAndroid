@@ -47,16 +47,13 @@ public class UnzipPassDialog {
 
                     @Override
                     public void call(final String uuid) {
-                        if (activity.isFinishing()) {
-                            return;
-                        }
-
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (!prepareResult(activity, dialog)) {
+                                    return;
+                                }
+
                                 call_after_finish.call(uuid);
                             }
                         });
@@ -67,12 +64,10 @@ public class UnzipPassDialog {
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (activity.isFinishing()) {
+                                if (!prepareResult(activity, dialog)) {
                                     return;
                                 }
-                                if (dialog.isShowing()) {
-                                    dialog.dismiss();
-                                }
+
                                 DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
                             }
                         });
@@ -85,6 +80,17 @@ public class UnzipPassDialog {
         final AlertDialogUpdater alertDialogUpdater = new AlertDialogUpdater(callAfterFinishOnUIThread);
         new Thread(alertDialogUpdater).start();
 
+    }
+
+    private static boolean prepareResult(final Activity activity, final ProgressDialog dialog) {
+        if (activity.isFinishing()) {
+            return false;
+        }
+
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        return true;
     }
 
 }
