@@ -2,12 +2,10 @@ package org.ligi.passandroid.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-
 import android.support.v7.app.AlertDialog;
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
-
 import static org.ligi.passandroid.ui.UnzipPassController.FailCallback;
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.ligi.passandroid.ui.UnzipPassController.SuccessCallback;
@@ -16,11 +14,10 @@ import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 public class UnzipPassDialog {
 
     public static void DisplayError(final Activity activity, final String title, final String err) {
-        new AlertDialog.Builder(activity)
-                .setTitle(title)
-                .setMessage(err)
-                .setPositiveButton("OK", new ActivityFinishingOnClickListener(activity))
-                .show();
+        new AlertDialog.Builder(activity).setTitle(title)
+                                         .setMessage(err)
+                                         .setPositiveButton(android.R.string.ok, new ActivityFinishingOnClickListener(activity))
+                                         .show();
     }
 
     public interface FinishCallback {
@@ -31,7 +28,10 @@ public class UnzipPassDialog {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }
-        final ProgressDialog dialog = ProgressDialog.show(activity, "Opening Passbook", "Please wait...", true);
+        final ProgressDialog dialog = ProgressDialog.show(activity,
+                                                          activity.getString(R.string.unzip_pass_dialog_title),
+                                                          activity.getString(R.string.unzip_pass_dialog_message),
+                                                          true);
         dialog.setCancelable(false);
 
         class AlertDialogUpdater implements Runnable {
@@ -43,45 +43,41 @@ public class UnzipPassDialog {
             }
 
             public void run() {
-                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, activity,
-                        new SuccessCallback() {
+                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, activity, new SuccessCallback() {
 
+                    @Override
+                    public void call(final String uuid) {
+                        if (activity.isFinishing()) {
+                            return;
+                        }
+
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        activity.runOnUiThread(new Runnable() {
                             @Override
-                            public void call(final String uuid) {
+                            public void run() {
+                                call_after_finish.call(uuid);
+                            }
+                        });
+                    }
+                }, new FailCallback() {
+                    @Override
+                    public void fail(final String reason) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
                                 if (activity.isFinishing()) {
                                     return;
                                 }
-
                                 if (dialog.isShowing()) {
                                     dialog.dismiss();
                                 }
-                                activity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        call_after_finish.call(uuid);
-                                    }
-                                });
+                                DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
                             }
-                        }
-                        ,
-                        new FailCallback() {
-                            @Override
-                            public void fail(final String reason) {
-                                activity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (activity.isFinishing()) {
-                                            return;
-                                        }
-                                        if (dialog.isShowing()) {
-                                            dialog.dismiss();
-                                        }
-                                        DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
-                                    }
-                                });
-                            }
-                        }
-                );
+                        });
+                    }
+                });
                 processInputStream(spec);
             }
         }
