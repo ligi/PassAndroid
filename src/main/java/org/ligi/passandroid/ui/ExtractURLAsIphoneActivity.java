@@ -6,19 +6,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
-
-import org.ligi.axt.AXT;
-import org.ligi.passandroid.Tracker;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.ui.quirk_fix.OpenIphoneWebView;
 
 public class ExtractURLAsIphoneActivity extends Activity {
 
@@ -71,7 +68,9 @@ public class ExtractURLAsIphoneActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s == null) {
-                AXT.at(ExtractURLAsIphoneActivity.this).rethrowIntentExcludingSelf();
+                final Intent intent = new Intent(ExtractURLAsIphoneActivity.this, OpenIphoneWebView.class);
+                intent.setData(getIntent().getData());
+                startActivity(intent);
                 tearDown();
                 return;
             }

@@ -5,13 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.v7.app.AlertDialog;
-import org.ligi.axt.AXT;
+import java.net.URLEncoder;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.ui.PassImportActivity;
-
-import java.net.URLEncoder;
 
 public class URLRewriteActivity extends Activity {
 
@@ -30,39 +27,41 @@ public class URLRewriteActivity extends Activity {
         }
 
         if (url == null) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Workaround failed")
-                    .setMessage("The URL PassAndroid tried to work around failed :-( some companies just send PassBooks to Apple Devices - this was an attempt to workaround this." +
-                            "Unfortunately it failed - perhaps there where changes on the serverside - you can open the site with your browser now - to see it in PassAndroid in future again it would help if you can send me the pass")
-                    .setPositiveButton("Browser", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Tracker.get().trackException("URLRewrite with invalid activity", false);
-                            AXT.at(URLRewriteActivity.this).rethrowIntentExcludingSelf();
-                        }
-                    })
-                    .setNeutralButton("send", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+            new AlertDialog.Builder(this).setTitle("Workaround failed")
+                                         .setMessage(
+                                                 "The URL PassAndroid tried to work around failed :-( some companies just send PassBooks to Apple Devices - this was an attempt to workaround this." +
+                                                 "Unfortunately it failed - perhaps there where changes on the serverside - you can open the site with your browser now - to see it in PassAndroid in future again it would help if you can send me the pass")
+                                         .setPositiveButton("Browser", new DialogInterface.OnClickListener() {
+                                             @Override
+                                             public void onClick(DialogInterface dialog, int which) {
+                                                 Tracker.get().trackException("URLRewrite with invalid activity", false);
+                                                 final Intent intent = new Intent(URLRewriteActivity.this, OpenIphoneWebView.class);
+                                                 intent.setData(getIntent().getData());
+                                                 startActivity(intent);
 
-                                    Intent intent = new Intent(Intent.ACTION_SEND);
-                                    intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: URLRewrite Problem");
-                                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
-                                    intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
-                                    intent.setType("text/plain");
+                                             }
+                                         })
+                                         .setNeutralButton("send", new DialogInterface.OnClickListener() {
+                                                               @Override
+                                                               public void onClick(DialogInterface dialog, int which) {
 
-                                    startActivity(Intent.createChooser(intent, "How to send Link?"));
-                                    finish();
-                                }
-                            }
-                    )
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            URLRewriteActivity.this.finish();
-                        }
-                    })
-                    .show();
+                                                                   Intent intent = new Intent(Intent.ACTION_SEND);
+                                                                   intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: URLRewrite Problem");
+                                                                   intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
+                                                                   intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
+                                                                   intent.setType("text/plain");
+
+                                                                   startActivity(Intent.createChooser(intent, "How to send Link?"));
+                                                                   finish();
+                                                               }
+                                                           })
+                                         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                             @Override
+                                             public void onClick(DialogInterface dialog, int which) {
+                                                 URLRewriteActivity.this.finish();
+                                             }
+                                         })
+                                         .show();
 
             return;
         }
