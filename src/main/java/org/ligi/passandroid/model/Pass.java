@@ -16,11 +16,13 @@ public interface Pass extends Serializable {
     String BITMAP_THUMBNAIL = "thumbnail";
     String BITMAP_STRIP = "strip";
     String BITMAP_LOGO = "logo";
+    String BITMAP_FOOTER = "footer";
 
-    @StringDef({BITMAP_ICON, BITMAP_THUMBNAIL, BITMAP_STRIP, BITMAP_LOGO})
+    @StringDef({BITMAP_ICON, BITMAP_THUMBNAIL, BITMAP_STRIP, BITMAP_LOGO, BITMAP_FOOTER})
     @Retention(RetentionPolicy.SOURCE)
     @interface PassBitmap {
     }
+
 
     String[] TYPES = new String[]{"generic", "coupon", "eventTicket", "boardingPass", "storeCard"};
 

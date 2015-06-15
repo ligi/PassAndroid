@@ -1,8 +1,10 @@
 package org.ligi.passandroid.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -50,6 +53,9 @@ public class PassViewActivity extends PassViewActivityBase {
 
     @InjectView(R.id.logo_img)
     ImageView logo_img;
+
+    @InjectView(R.id.footer_img)
+    ImageView footer_img;
 
     @InjectView(R.id.thumbnail_img)
     ImageView thumbnail_img;
@@ -114,8 +120,7 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         setBitmapSafe(logo_img, pass.getBitmap(Pass.BITMAP_LOGO));
-
-        logo_img.setBackgroundColor(pass.getBackgroundColor());
+        setBitmapSafe(footer_img, pass.getBitmap(Pass.BITMAP_FOOTER));
 
         setBitmapSafe(thumbnail_img, pass.getBitmap(Pass.BITMAP_THUMBNAIL));
         setBitmapSafe(strip_img, pass.getBitmap(Pass.BITMAP_STRIP));
@@ -179,12 +184,29 @@ public class PassViewActivity extends PassViewActivityBase {
     private static void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
 
         if (bitmap != null) {
+            imageView.setLayoutParams(getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(imageView, bitmap));
+
             imageView.setImageBitmap(bitmap);
             imageView.setVisibility(View.VISIBLE);
+            imageView.requestLayout();
         } else {
             imageView.setVisibility(View.GONE);
         }
 
+    }
+
+    @NonNull
+    private static ViewGroup.LayoutParams getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(final ImageView imageView, final Bitmap bitmap) {
+        final Context context = imageView.getContext();
+        final int halfAFingerInPixels = context.getResources().getDimensionPixelSize(R.dimen.finger)/2 ;
+        final ViewGroup.LayoutParams params=imageView.getLayoutParams();
+        if (bitmap.getHeight()< halfAFingerInPixels) {
+            params.height= halfAFingerInPixels;
+
+        } else {
+            params.height= LinearLayout.LayoutParams.WRAP_CONTENT;
+        }
+        return params;
     }
 
 

@@ -54,6 +54,7 @@ public class AppleStylePassReader {
         copyBitmapFile(path, localized_path, PassImpl.BITMAP_LOGO);
         copyBitmapFile(path, localized_path, PassImpl.BITMAP_STRIP);
         copyBitmapFile(path, localized_path, PassImpl.BITMAP_THUMBNAIL);
+        copyBitmapFile(path, localized_path, PassImpl.BITMAP_FOOTER);
 
         final File file = new File(path + "/pass.json");
 
