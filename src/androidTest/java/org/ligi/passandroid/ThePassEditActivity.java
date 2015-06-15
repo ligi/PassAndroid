@@ -23,6 +23,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.ligi.passandroid.steps.PassEditSteps.goToBarCode;
 import static org.ligi.passandroid.steps.PassEditSteps.goToColor;
@@ -136,6 +137,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     public void testCanSetAltMessage() {
         goToBarCode();
 
+        onView(withId(R.id.alternativeMessageInput)).perform(scrollTo());
         onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"));
 
         assertThat(App.getPassStore().getCurrentPass().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
