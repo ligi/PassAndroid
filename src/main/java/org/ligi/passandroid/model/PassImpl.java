@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -80,8 +82,16 @@ public class PassImpl implements FiledPass, Serializable {
         return description;
     }
 
-    private Bitmap getBitmapFromFileNameString(String in) {
-        return BitmapFactory.decodeFile(getPath() + "/" + in + PassImpl.FILETYPE_IMAGES);
+    @Nullable
+    private Bitmap getBitmapFromFileNameString(final String in) {
+        final String fileWithPathString = getPath() + "/" + in + PassImpl.FILETYPE_IMAGES;
+
+        try {
+            final File file = new File(fileWithPathString);
+            return BitmapFactory.decodeStream(new FileInputStream(file));
+        } catch (FileNotFoundException expectedInSomeCases_willJustReturnNull) {
+            return null;
+        }
     }
 
     public Bitmap getIconBitmap() {
