@@ -3,6 +3,7 @@ package org.ligi.passandroid;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -22,6 +23,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LeakCanary.install(this);
 
         JodaTimeAndroid.init(this);
 
