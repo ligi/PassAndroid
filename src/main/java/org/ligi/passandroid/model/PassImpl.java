@@ -94,19 +94,26 @@ public class PassImpl implements FiledPass, Serializable {
         }
     }
 
+    @Override
+    @Nullable
     public Bitmap getIconBitmap() {
         return getBitmapFromFileNameString(FNAME_ICON);
     }
 
+    @Override
+    @Nullable
     public Bitmap getThumbnailImage() {
         return getBitmapFromFileNameString(FNAME_THUMBNAIL);
     }
 
     @Override
+    @Nullable
     public Bitmap getStripBitmap() {
         return getBitmapFromFileNameString(FNAME_STRIP);
     }
 
+    @Override
+    @Nullable
     public Bitmap getLogoBitmap() {
         return getBitmapFromFileNameString(FNAME_LOGO);
     }
