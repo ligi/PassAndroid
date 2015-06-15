@@ -97,7 +97,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
             addCalendar.setVisibility(View.INVISIBLE);
         }
 
-        final Bitmap iconBitmap = pass.getIconBitmap();
+        final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
 
         if (iconBitmap != null) {
             final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);

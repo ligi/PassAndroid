@@ -3,11 +3,24 @@ package org.ligi.passandroid.model;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import org.joda.time.DateTime;
 
 public interface Pass extends Serializable {
+
+    String BITMAP_ICON = "icon";
+    String BITMAP_THUMBNAIL = "thumbnail";
+    String BITMAP_STRIP = "strip";
+    String BITMAP_LOGO = "logo";
+
+    @StringDef({BITMAP_ICON, BITMAP_THUMBNAIL, BITMAP_STRIP, BITMAP_LOGO})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface PassBitmap {
+    }
 
     String[] TYPES = new String[]{"generic", "coupon", "eventTicket", "boardingPass", "storeCard"};
 
@@ -73,16 +86,6 @@ public interface Pass extends Serializable {
     String getApp();
 
     @Nullable
-    Bitmap getIconBitmap();
-
-    @Nullable
-    Bitmap getThumbnailImage();
-
-    @Nullable
-    Bitmap getStripBitmap();
-
-    @Nullable
-    Bitmap getLogoBitmap();
-
+    Bitmap getBitmap(@PassBitmap String passBitmap);
 
 }

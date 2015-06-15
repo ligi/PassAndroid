@@ -4,11 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -18,10 +21,7 @@ import org.ligi.tracedroid.logging.Log;
 
 @Data
 public class PassImpl implements FiledPass, Serializable {
-    public static final String FNAME_ICON = "icon";
-    public static final String FNAME_THUMBNAIL = "thumbnail";
-    public static final String FNAME_STRIP = "strip";
-    public static final String FNAME_LOGO = "logo";
+
     public static final String FILETYPE_IMAGES = ".png";
 
     private String organisation = null;
@@ -83,8 +83,9 @@ public class PassImpl implements FiledPass, Serializable {
     }
 
     @Nullable
-    private Bitmap getBitmapFromFileNameString(final String in) {
-        final String fileWithPathString = getPath() + "/" + in + PassImpl.FILETYPE_IMAGES;
+    @Override
+    public Bitmap getBitmap(@PassBitmap final String passBitmap) {
+        final String fileWithPathString = getPath() + "/" + passBitmap + PassImpl.FILETYPE_IMAGES;
 
         try {
             final File file = new File(fileWithPathString);
@@ -92,30 +93,6 @@ public class PassImpl implements FiledPass, Serializable {
         } catch (FileNotFoundException expectedInSomeCases_willJustReturnNull) {
             return null;
         }
-    }
-
-    @Override
-    @Nullable
-    public Bitmap getIconBitmap() {
-        return getBitmapFromFileNameString(FNAME_ICON);
-    }
-
-    @Override
-    @Nullable
-    public Bitmap getThumbnailImage() {
-        return getBitmapFromFileNameString(FNAME_THUMBNAIL);
-    }
-
-    @Override
-    @Nullable
-    public Bitmap getStripBitmap() {
-        return getBitmapFromFileNameString(FNAME_STRIP);
-    }
-
-    @Override
-    @Nullable
-    public Bitmap getLogoBitmap() {
-        return getBitmapFromFileNameString(FNAME_LOGO);
     }
 
     @NonNull

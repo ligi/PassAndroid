@@ -113,12 +113,12 @@ public class PassViewActivity extends PassViewActivityBase {
             setBitmapSafe(barcode_img, null);
         }
 
-        setBitmapSafe(logo_img, pass.getLogoBitmap());
+        setBitmapSafe(logo_img, pass.getBitmap(Pass.BITMAP_LOGO));
 
         logo_img.setBackgroundColor(pass.getBackgroundColor());
 
-        setBitmapSafe(thumbnail_img, pass.getThumbnailImage());
-        setBitmapSafe(strip_img, pass.getStripBitmap());
+        setBitmapSafe(thumbnail_img, pass.getBitmap(Pass.BITMAP_THUMBNAIL));
+        setBitmapSafe(strip_img, pass.getBitmap(Pass.BITMAP_STRIP));
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {

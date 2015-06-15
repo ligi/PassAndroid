@@ -50,10 +50,10 @@ public class AppleStylePassReader {
             translation.loadFromFile(file);
         }
 
-        copyBitmapFile(path, localized_path, PassImpl.FNAME_ICON);
-        copyBitmapFile(path, localized_path, PassImpl.FNAME_LOGO);
-        copyBitmapFile(path, localized_path, PassImpl.FNAME_STRIP);
-        copyBitmapFile(path, localized_path, PassImpl.FNAME_THUMBNAIL);
+        copyBitmapFile(path, localized_path, PassImpl.BITMAP_ICON);
+        copyBitmapFile(path, localized_path, PassImpl.BITMAP_LOGO);
+        copyBitmapFile(path, localized_path, PassImpl.BITMAP_STRIP);
+        copyBitmapFile(path, localized_path, PassImpl.BITMAP_THUMBNAIL);
 
         final File file = new File(path + "/pass.json");
 

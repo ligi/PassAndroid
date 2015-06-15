@@ -17,6 +17,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.tracedroid.logging.Log;
@@ -129,7 +130,7 @@ public class SearchPassesIntentService extends IntentService {
                 final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
                 final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), language);
                 App.getBus().post(new SortOrderChangeEvent());
-                final Bitmap iconBitmap = pass.getIconBitmap();
+                final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
                 if (iconBitmap != null) {
                     final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
                     findNotificationBuilder.setLargeIcon(bitmap);
