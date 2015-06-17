@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NavigateToLocationsDialog {
 
-    public static void perform(final Activity activity, Pass pass, final boolean finishOnDone) {
+    public static void perform(final Activity activity, final Pass pass, final boolean finishOnDone) {
         final List<PassLocation> locations = pass.getLocations();
 
         if (locations.size() == 0) {
@@ -42,8 +42,6 @@ public class NavigateToLocationsDialog {
             }).show();
 
         }
-        return;
-
     }
 
     private static void done(Activity activity, boolean finishOnDone) {
