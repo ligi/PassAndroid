@@ -173,11 +173,13 @@ public class PassViewActivity extends PassViewActivityBase {
     private void addFrontFields(PassFieldList passFields) {
         for (PassField field : passFields) {
 
-            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer);
+            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer,false);
             final TextView key = (TextView) v.findViewById(R.id.key);
             key.setText(field.label);
             final TextView value = (TextView) v.findViewById(R.id.value);
             value.setText(field.value);
+
+            frontFieldsContainer.addView(v);
         }
     }
 
