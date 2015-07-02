@@ -37,6 +37,8 @@ android {
         applicationId "org.ligi.passandroid"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        archivesBaseName = "PassAndroid-$versionName"
     }
 
     flavorDimensions "maps", "analytics", "distribution"
