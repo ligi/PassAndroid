@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.0.1') {
+        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.0.3') {
             exclude module: "guava"
         }
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
@@ -101,7 +101,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
 
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.9'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.10'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 
     // have to wait with update till this is solved: https://code.google.com/p/dexmaker/issues/detail?id=40
