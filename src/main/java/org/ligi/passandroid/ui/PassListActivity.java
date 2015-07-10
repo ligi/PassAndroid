@@ -16,8 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.androidquery.service.MarketService;
 import com.squareup.otto.Subscribe;
@@ -45,16 +45,16 @@ public class PassListActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
-    @InjectView(R.id.content_list)
+    @Bind(R.id.content_list)
     RecyclerView recyclerView;
 
-    @InjectView(R.id.drawer_layout)
+    @Bind(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @InjectView(R.id.emptyView)
+    @Bind(R.id.emptyView)
     TextView emptyView;
 
-    @InjectView(R.id.fam)
+    @Bind(R.id.fam)
     FloatingActionsMenu floatingActionsMenu;
 
     @OnClick(R.id.fab_action_create_pass)
@@ -81,7 +81,7 @@ public class PassListActivity extends AppCompatActivity {
     }
 
 
-    @InjectView(R.id.fab_action_open_file)
+    @Bind(R.id.fab_action_open_file)
     FloatingActionButton openFileFAB;
 
     public final static int VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19;
@@ -149,7 +149,7 @@ public class PassListActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, new NavigationFragment()).commitAllowingStateLoss();
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         AXT.at(openFileFAB).setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK);
 

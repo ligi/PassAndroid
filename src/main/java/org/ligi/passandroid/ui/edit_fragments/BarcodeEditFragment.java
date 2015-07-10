@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.google.zxing.BarcodeFormat;
 import java.util.Collections;
@@ -55,31 +55,31 @@ public class BarcodeEditFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @InjectView(R.id.selectorQR)
+    @Bind(R.id.selectorQR)
     ImageView selectorQR;
 
-    @InjectView(R.id.selectorPDF417)
+    @Bind(R.id.selectorPDF417)
     ImageView selectorPDF417;
 
-    @InjectView(R.id.selectorAZTEC)
+    @Bind(R.id.selectorAZTEC)
     ImageView selectorAztec;
 
-    @InjectView(R.id.messageInput)
+    @Bind(R.id.messageInput)
     EditText messageInput;
 
-    @InjectView(R.id.alternativeMessageInput)
+    @Bind(R.id.alternativeMessageInput)
     EditText alternativeMessageInput;
 
-    @InjectView(R.id.PDFCheck)
+    @Bind(R.id.PDFCheck)
     RadioButton pdfCheck;
 
-    @InjectView(R.id.QRCheck)
+    @Bind(R.id.QRCheck)
     RadioButton qrCheck;
 
-    @InjectView(R.id.AZTecCheck)
+    @Bind(R.id.AZTecCheck)
     RadioButton aztecCheck;
 
-    @InjectView(R.id.barcodeTypeRadioGroup)
+    @Bind(R.id.barcodeTypeRadioGroup)
     RadioGroup typeGroup;
 
     private final PassImpl pass;
@@ -98,14 +98,14 @@ public class BarcodeEditFragment extends Fragment {
         }
 
         final View inflate = inflater.inflate(R.layout.edit_barcode, container, false);
-        ButterKnife.inject(this, inflate);
+        ButterKnife.bind(this, inflate);
 
         final Display display = getActivity().getWindowManager().getDefaultDisplay();
         barcodeSize = display.getWidth() / 3;
 
         final BarCode barCode = pass.getBarCode();
 
-        if (barCode!=null) {
+        if (barCode != null) {
             messageInput.setText(barCode.getMessage());
             final String alternativeTextOptional = barCode.getAlternativeText();
 

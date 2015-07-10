@@ -8,8 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.squareup.otto.Subscribe;
 import com.viewpagerindicator.TitlePageIndicator;
 import org.ligi.axt.AXT;
@@ -26,10 +26,10 @@ import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
 
 public class PassEditActivity extends AppCompatActivity {
 
-    @InjectView(R.id.passEditPager)
+    @Bind(R.id.passEditPager)
     ViewPager viewPager;
 
-    @InjectView(R.id.titlesViewPagerIndicator)
+    @Bind(R.id.titlesViewPagerIndicator)
     TitlePageIndicator titlePageIndicator;
 
     private PassImpl pass;
@@ -38,7 +38,7 @@ public class PassEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         final Pass currentPass = App.getPassStore().getCurrentPass();
         if (currentPass != null) {

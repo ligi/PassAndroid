@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -16,7 +16,7 @@ import org.ligi.passandroid.model.PassImpl;
 
 public class ColorPickFragment extends Fragment {
 
-    @InjectView(R.id.colorPicker)
+    @Bind(R.id.colorPicker)
     ColorPicker colorPicker;
 
     private final PassImpl pass;
@@ -28,7 +28,7 @@ public class ColorPickFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.edit_color, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         colorPicker.setOldCenterColor(pass.getBackgroundColor());
 

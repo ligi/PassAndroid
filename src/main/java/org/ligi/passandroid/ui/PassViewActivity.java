@@ -17,8 +17,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
@@ -45,31 +45,31 @@ public class PassViewActivity extends PassViewActivityBase {
         }
     }
 
-    @InjectView(R.id.moreTextView)
+    @Bind(R.id.moreTextView)
     TextView moreTextView;
 
-    @InjectView(R.id.barcode_img)
+    @Bind(R.id.barcode_img)
     ImageView barcode_img;
 
-    @InjectView(R.id.logo_img)
+    @Bind(R.id.logo_img)
     ImageView logo_img;
 
-    @InjectView(R.id.footer_img)
+    @Bind(R.id.footer_img)
     ImageView footer_img;
 
-    @InjectView(R.id.thumbnail_img)
+    @Bind(R.id.thumbnail_img)
     ImageView thumbnail_img;
 
-    @InjectView(R.id.strip_img)
+    @Bind(R.id.strip_img)
     ImageView strip_img;
 
-    @InjectView(R.id.back_fields)
+    @Bind(R.id.back_fields)
     TextView back_tv;
 
-    @InjectView(R.id.front_field_container)
+    @Bind(R.id.front_field_container)
     ViewGroup frontFieldsContainer;
 
-    @InjectView(R.id.barcode_alt_text)
+    @Bind(R.id.barcode_alt_text)
     TextView barcodeAlternativeText;
 
     @Override
@@ -89,7 +89,7 @@ public class PassViewActivity extends PassViewActivityBase {
         final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer, false);
         extraViewContainer.addView(passExtrasView);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         refresh();
     }
@@ -166,7 +166,7 @@ public class PassViewActivity extends PassViewActivityBase {
         final ViewGroup extraViewContainer = (ViewGroup) findViewById(R.id.passExtrasContainer);
         getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
     }
 

@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.google.zxing.BarcodeFormat;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
@@ -16,10 +16,10 @@ import org.ligi.tracedroid.logging.Log;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
-    @InjectView(R.id.fullscreen_barcode)
+    @Bind(R.id.fullscreen_barcode)
     ImageView barcodeImageView;
 
-    @InjectView(R.id.alternativeBarcodeText)
+    @Bind(R.id.alternativeBarcodeText)
     TextView alternativeBarcodeText;
 
 
@@ -28,7 +28,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fullscreen_image);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

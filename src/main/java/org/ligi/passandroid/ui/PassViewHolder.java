@@ -13,8 +13,8 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import org.joda.time.DateTime;
 import org.ligi.passandroid.R;
@@ -28,22 +28,22 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
 
     final CardView root;
 
-    @InjectView(R.id.icon)
+    @Bind(R.id.icon)
     ImageView icon;
 
-    @InjectView(R.id.date)
+    @Bind(R.id.date)
     TextView date;
 
-    @InjectView(R.id.title)
+    @Bind(R.id.title)
     TextView title;
 
-    @InjectView(R.id.categoryView)
+    @Bind(R.id.categoryView)
     CategoryIndicatorView category;
 
-    @InjectView(R.id.actions_separator)
+    @Bind(R.id.actions_separator)
     View actionsSeparator;
 
-    @InjectView(R.id.navigateTo)
+    @Bind(R.id.navigateTo)
     TextView navigateTo;
 
     @OnClick(R.id.navigateTo)
@@ -51,7 +51,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
         NavigateToLocationsDialog.perform(activity, pass, false);
     }
 
-    @InjectView(R.id.addCalendar)
+    @Bind(R.id.addCalendar)
     TextView addCalendar;
 
     @OnClick(R.id.addCalendar)
@@ -71,7 +71,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
     public PassViewHolder(View view) {
         super(view);
         root = (CardView) view;
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
     }
 
     public void apply(final Pass pass, final Activity activity) {
@@ -105,9 +105,9 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
         title.setText(pass.getDescription());
 
         if (pass.getRelevantDate() != null) {
-            setDateTextFromDateAndPrefix("",pass.getRelevantDate());
+            setDateTextFromDateAndPrefix("", pass.getRelevantDate());
         } else if (pass.getExpirationDate() != null) {
-            setDateTextFromDateAndPrefix(pass.getExpirationDate().isAfterNow()?"expires ":" expired ",pass.getExpirationDate());
+            setDateTextFromDateAndPrefix(pass.getExpirationDate().isAfterNow() ? "expires " : " expired ", pass.getExpirationDate());
         } else {
             date.setVisibility(GONE);
         }

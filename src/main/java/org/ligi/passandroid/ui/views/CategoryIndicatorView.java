@@ -8,19 +8,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.CategoryHelper;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class CategoryIndicatorView extends LinearLayout {
 
 
-    @InjectView(R.id.categoryExtraText)
+    @Bind(R.id.categoryExtraText)
     TextView extraText;
 
-    @InjectView(R.id.topImageView)
+    @Bind(R.id.topImageView)
     ImageView topImageView;
 
     public CategoryIndicatorView(Context context) {
@@ -31,7 +31,7 @@ public class CategoryIndicatorView extends LinearLayout {
         super(context, attrs);
         setOrientation(VERTICAL);
         LayoutInflater.from(context).inflate(R.layout.category_indicator, this, true);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     public void setImageByCategory(String category) {

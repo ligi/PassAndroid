@@ -75,7 +75,8 @@ public class AppleStylePassReader {
                     try {
                         final String json_str = AXT.at(file).readToString(charset);
                         pass_json = SafeJSONReader.readJSONSafely(json_str);
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
+                        // we try with next charset
                     }
 
                     if (pass_json != null) {
@@ -202,7 +203,7 @@ public class AppleStylePassReader {
                 }
             } else try {
                 type_json = pass_json.getJSONObject(pass.getType());
-            } catch (JSONException e) {
+            } catch (JSONException ignored) {
             }
 
         }
@@ -218,7 +219,7 @@ public class AppleStylePassReader {
         try {
             pass.setOrganisation(pass_json.getString("organizationName"));
             Tracker.get().trackEvent("measure_event", "organisation_parse", pass.getOrganisation(), 1L);
-        } catch (JSONException e) {
+        } catch (JSONException ignored) {
             // ok - we have no organisation - big deal ..-)
         }
 

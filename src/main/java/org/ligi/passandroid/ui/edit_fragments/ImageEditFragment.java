@@ -60,7 +60,7 @@ public class ImageEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.edit_images, container, false);
-        ButterKnife.inject(this, inflate);
+        ButterKnife.bind(this, inflate);
 
         return inflate;
     }

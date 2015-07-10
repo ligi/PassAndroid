@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
@@ -24,7 +24,7 @@ import org.ligi.passandroid.model.PassImpl;
 
 public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    @InjectView(R.id.descriptionEdit)
+    @Bind(R.id.descriptionEdit)
     EditText descriptionEdit;
 
     private DateTime time;
@@ -54,7 +54,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.edit_meta_data, container, false);
-        ButterKnife.inject(this, inflate);
+        ButterKnife.bind(this, inflate);
 
         descriptionEdit.setText(pass.getDescription());
         descriptionEdit.addTextChangedListener(new SimpleTextWatcher() {

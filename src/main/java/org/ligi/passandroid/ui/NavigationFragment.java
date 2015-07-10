@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.squareup.otto.Subscribe;
-
+import java.util.List;
 import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.RepeatedOnClicksListener;
 import org.ligi.passandroid.App;
@@ -25,13 +27,6 @@ import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
-
-import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -47,19 +42,19 @@ public class NavigationFragment extends Fragment {
         AXT.at(getActivity()).startCommonIntent().shareUrl(getMarketUrl());
     }
 
-    @InjectView(R.id.radioGroup)
+    @Bind(R.id.radioGroup)
     RadioGroup radioGroup;
 
-    @InjectView(R.id.categoryRadioButton)
+    @Bind(R.id.categoryRadioButton)
     RadioButton categoryRadioButton;
 
-    @InjectView(R.id.dateRadioButton)
+    @Bind(R.id.dateRadioButton)
     RadioButton dateRadioButton;
 
-    @InjectView(R.id.navCategoriesInner)
+    @Bind(R.id.navCategoriesInner)
     ViewGroup categoriesContainer;
 
-    @InjectView(R.id.navCategoriesOuter)
+    @Bind(R.id.navCategoriesOuter)
     View categoriesContainerOuter;
 
     @Override
@@ -70,7 +65,7 @@ public class NavigationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_navigation, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -128,11 +123,12 @@ public class NavigationFragment extends Fragment {
     private boolean shouldDisplaySort() {
         return App.getPassStore().getCountedTypes().size() >= 2;
     }
-    private void setCategoryNavVisibilityByCurrentConditions() {
-        categoriesContainerOuter.setVisibility(shouldDisplayCategoryNav()? VISIBLE: GONE);
-        categoriesContainer.setVisibility(shouldDisplayCategoryNav()? VISIBLE: GONE);
 
-        radioGroup.setVisibility(shouldDisplaySort()? VISIBLE: GONE);
+    private void setCategoryNavVisibilityByCurrentConditions() {
+        categoriesContainerOuter.setVisibility(shouldDisplayCategoryNav() ? VISIBLE : GONE);
+        categoriesContainer.setVisibility(shouldDisplayCategoryNav() ? VISIBLE : GONE);
+
+        radioGroup.setVisibility(shouldDisplaySort() ? VISIBLE : GONE);
     }
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
@@ -146,7 +142,7 @@ public class NavigationFragment extends Fragment {
         for (PassStore.CountedType countedType : countedTypes) {
             final String type = countedType.type;
 
-            final View item = inflater.inflate(R.layout.item_nav_pass_category, categoriesContainer,false);
+            final View item = inflater.inflate(R.layout.item_nav_pass_category, categoriesContainer, false);
 
             // gather views
             final CategoryIndicatorView categoryIndicatorView = ButterKnife.findById(item, R.id.categoryView);
