@@ -1,13 +1,13 @@
 package org.ligi.passandroid.reporting;
 
 import android.app.Activity;
-import android.support.test.internal.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.espresso.FailureHandler;
+import android.support.test.espresso.base.DefaultFailureHandler;
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import android.support.test.runner.lifecycle.Stage;
 import android.test.InstrumentationTestCase;
 import android.view.View;
 
-import android.support.test.espresso.FailureHandler;
-import android.support.test.espresso.base.DefaultFailureHandler;
 import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Matcher;

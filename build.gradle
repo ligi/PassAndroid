@@ -98,8 +98,9 @@ dependencies {
     androidTestCompile 'com.android.support:support-v4:22.2.0'
     androidTestCompile 'com.android.support:support-annotations:22.2.0'
 
-    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.1.10'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
