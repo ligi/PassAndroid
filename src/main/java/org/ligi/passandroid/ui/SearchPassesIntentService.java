@@ -40,6 +40,8 @@ public class SearchPassesIntentService extends IntentService {
         super("SearchPassesIntentService");
     }
 
+    private long lastProgressUpdate = 0;
+
     @Override
     protected void onHandleIntent(Intent intent) {
 
@@ -90,8 +92,11 @@ public class SearchPassesIntentService extends IntentService {
      */
     private void search_in(final File path, final boolean recursive) {
 
-        progressNotificationBuilder.setContentText(path.toString());
-        notifyManager.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder.build());
+        if (System.currentTimeMillis() - lastProgressUpdate > 1000) {
+            lastProgressUpdate = System.currentTimeMillis();
+            progressNotificationBuilder.setContentText(path.toString());
+            notifyManager.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder.build());
+        }
 
         final File[] files = path.listFiles();
 
