@@ -6,6 +6,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
+import java.util.ConcurrentModificationException;
 import java.util.Map;
 
 public class AnalyticsTracker implements TrackerInterface {
@@ -54,7 +55,12 @@ public class AnalyticsTracker implements TrackerInterface {
             eventMapBuilder.setValue(val);
         }
 
-        tracker.send(eventMapBuilder.build());
+        try {
+            tracker.send(eventMapBuilder.build());
+        } catch (ConcurrentModificationException ignored) {
+            // https://code.google.com/p/analytics-issues/issues/detail?id=227
+        }
+
     }
 
 }
