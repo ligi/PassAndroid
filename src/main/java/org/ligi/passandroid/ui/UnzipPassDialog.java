@@ -28,6 +28,7 @@ public class UnzipPassDialog {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }
+
         final ProgressDialog dialog = ProgressDialog.show(activity,
                                                           activity.getString(R.string.unzip_pass_dialog_title),
                                                           activity.getString(R.string.unzip_pass_dialog_message),
@@ -88,9 +89,14 @@ public class UnzipPassDialog {
         }
 
         if (dialog.isShowing()) {
-            dialog.dismiss();
+            try {
+                dialog.dismiss();
+                return true;
+            } catch (IllegalArgumentException ignored) {
+                // Would love a better option - searched a long time - found nothing - and this is better than a crash
+            }
         }
-        return true;
+        return false;
     }
 
 }
