@@ -1,10 +1,8 @@
 package org.ligi.passandroid;
 
 import android.os.Bundle;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 
@@ -22,7 +20,9 @@ public class FullscreenMapActivity extends PassViewActivityBase {
     }
 
     private void fallbackForMissingGooglePlay() {
-        NavigateToLocationsDialog.perform(this, optionalPass, true);
+        if (optionalPass != null) {
+            NavigateToLocationsDialog.perform(this, optionalPass, true);
+        }
     }
 
 }
