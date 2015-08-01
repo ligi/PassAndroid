@@ -55,7 +55,11 @@ public class PassImportActivity extends AppCompatActivity {
             if (result == null) {
 
                 if (!passImportActivity.isFinishing() && progressDialog.isShowing()) {
-                    progressDialog.dismiss();
+                    try {
+                        progressDialog.dismiss();
+                    } catch (Exception ignored) {
+
+                    }
                 }
                 finish();
                 //TODO show some error here?!
