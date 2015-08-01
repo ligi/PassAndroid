@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.otto.Subscribe;
-import com.viewpagerindicator.TitlePageIndicator;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -29,8 +29,8 @@ public class PassEditActivity extends AppCompatActivity {
     @Bind(R.id.passEditPager)
     ViewPager viewPager;
 
-    @Bind(R.id.titlesViewPagerIndicator)
-    TitlePageIndicator titlePageIndicator;
+    @Bind(R.id.sliding_tabs)
+    TabLayout titlePageIndicator;
 
     private PassImpl pass;
 
@@ -55,9 +55,7 @@ public class PassEditActivity extends AppCompatActivity {
     private void setupViewPager() {
         viewPager.setAdapter(new CreateFragmentPager(getSupportFragmentManager()));
 
-        titlePageIndicator.setViewPager(viewPager);
-        titlePageIndicator.setTextColor(0xFF424242);
-        titlePageIndicator.setSelectedColor(0xFF000000);
+        titlePageIndicator.setupWithViewPager(viewPager);
     }
 
     private class CreateFragmentPager extends FragmentPagerAdapter {

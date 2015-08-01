@@ -127,8 +127,8 @@ dependencies {
 
     compile 'org.ligi:AXT:0.33'
     compile 'org.ligi:tracedroid:1.4'
+    compile 'org.ligi:snackengage:0.4'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'fr.nicolaspomepuy:discreetapprate:2.0.4@aar'
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 
@@ -138,9 +138,6 @@ dependencies {
 
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
 
-    compile('com.mcxiaoke.viewpagerindicator:library:2.4.1') {
-        exclude group: 'com.android.support'
-    }
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
     // compile 'com.google.zxing:core:3.1.0'

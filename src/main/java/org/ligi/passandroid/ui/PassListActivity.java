@@ -21,8 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.androidquery.service.MarketService;
 import com.squareup.otto.Subscribe;
-import fr.nicolaspomepuy.discreetapprate.AppRate;
-import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.axt.AXT;
@@ -35,6 +33,8 @@ import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.snackengage.SnackEngage;
+import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
@@ -166,7 +166,7 @@ public class PassListActivity extends AppCompatActivity {
             final MarketService ms = new MarketService(this);
             ms.level(MarketService.MINOR).checkVersion();
 
-            AppRate.with(this).retryPolicy(RetryPolicy.EXPONENTIAL).initialLaunchCount(5).checkAndShow();
+            SnackEngage.from(this).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
