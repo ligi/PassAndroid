@@ -19,7 +19,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.androidquery.service.MarketService;
 import com.squareup.otto.Subscribe;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
@@ -163,8 +162,6 @@ public class PassListActivity extends AppCompatActivity {
             TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
         } else { // if no error - check if there is a new version of the app
             Tracker.get().trackEvent("ui_event", "processFile", "updatenotice", null);
-            final MarketService ms = new MarketService(this);
-            ms.level(MarketService.MINOR).checkVersion();
 
             SnackEngage.from(this).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }
