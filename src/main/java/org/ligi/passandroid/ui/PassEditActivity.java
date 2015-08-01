@@ -47,7 +47,9 @@ public class PassEditActivity extends AppCompatActivity {
             finish();
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         setupViewPager();
     }
