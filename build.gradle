@@ -137,6 +137,10 @@ dependencies {
 
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
 
+    testCompile 'com.squareup.assertj:assertj-android:1.0.1'
+    testCompile 'com.android.support:support-annotations:22.2.1'
+    testCompile 'junit:junit:4.12'
+
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
     // compile 'com.google.zxing:core:3.1.0'
