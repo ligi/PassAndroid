@@ -152,3 +152,9 @@ dependencies {
     withAnalyticsCompile 'com.google.android.gms:play-services-analytics:7.8.0'
     withMapsCompile 'com.google.android.gms:play-services-maps:7.8.0'
 }
+
+spoon {
+    debug = true
+}
+
+
