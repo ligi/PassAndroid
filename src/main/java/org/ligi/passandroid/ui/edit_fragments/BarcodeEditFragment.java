@@ -1,8 +1,6 @@
 package org.ligi.passandroid.ui.edit_fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,10 +22,10 @@ import java.util.UUID;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.helper.Strings;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
 import static android.text.TextUtils.isEmpty;
 
 public class BarcodeEditFragment extends Fragment {
@@ -159,9 +157,9 @@ public class BarcodeEditFragment extends Fragment {
         newBarCode.setAlternativeText(alternativeMessageInput.getText().toString());
         pass.setBarCode(newBarCode);
 
-        new AsyncSetBarCodeImageTask(selectorQR).execute(new BarCode(BarcodeFormat.QR_CODE, message));
-        new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(BarcodeFormat.PDF_417, message));
-        new AsyncSetBarCodeImageTask(selectorAztec).execute(new BarCode(BarcodeFormat.AZTEC, message));
+        new AsyncSetBarCodeImageTask(selectorQR, barcodeSize).execute(new BarCode(BarcodeFormat.QR_CODE, message));
+        new AsyncSetBarCodeImageTask(selectorPDF417, barcodeSize).execute(new BarCode(BarcodeFormat.PDF_417, message));
+        new AsyncSetBarCodeImageTask(selectorAztec, barcodeSize).execute(new BarCode(BarcodeFormat.AZTEC, message));
     }
 
     private BarcodeFormat getBarcodeFormatFromCheckedState() {
@@ -173,25 +171,5 @@ public class BarcodeEditFragment extends Fragment {
         return BarcodeFormat.QR_CODE; // default/fallback
     }
 
-
-    private class AsyncSetBarCodeImageTask extends AsyncTask<BarCode, Void, Bitmap> {
-
-        private final ImageView view;
-
-        private AsyncSetBarCodeImageTask(ImageView view) {
-            this.view = view;
-        }
-
-        @Override
-        protected Bitmap doInBackground(BarCode... params) {
-            return BarcodeHelper.generateBarCodeBitmap(params[0].getMessage(), params[0].getFormat(), barcodeSize);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            view.setImageBitmap(bitmap);
-        }
-    }
 
 }
