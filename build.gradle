@@ -101,7 +101,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.10'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.2.0'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 
     // have to wait with update till this is solved: https://code.google.com/p/dexmaker/issues/detail?id=40
