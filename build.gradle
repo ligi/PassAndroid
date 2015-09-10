@@ -92,7 +92,7 @@ configurations {
 }
 
 dependencies {
-    apt 'org.projectlombok:lombok:1.16.4'
+    apt 'org.projectlombok:lombok:1.16.6'
 
     androidTestCompile 'com.android.support:support-v4:23.0.1'
     androidTestCompile 'com.android.support:support-annotations:23.0.1'
@@ -102,17 +102,16 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.2.0'
-    androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.0'
 
-    // have to wait with update till this is solved: https://code.google.com/p/dexmaker/issues/detail?id=40
-    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'org.mockito:mockito-core:2.0.14-beta'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     // The Apache Software License, Version 2.0
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'net.danlew:android.joda:2.8.1'
+    compile 'net.danlew:android.joda:2.8.2'
     compile 'com.squareup:otto:1.3.8'
 
     compile 'com.android.support:support-annotations:23.0.1'
@@ -126,17 +125,17 @@ dependencies {
     compile 'org.ligi:AXT:0.33'
     compile 'org.ligi:tracedroid:1.4'
     compile 'org.ligi:snackengage:0.4'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 
     compile 'net.steamcrafted:load-toast:1.0.8'
 
-    provided "org.projectlombok:lombok:1.16.4"
+    provided "org.projectlombok:lombok:1.16.6"
 
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
 
-    testCompile 'com.squareup.assertj:assertj-android:1.0.1'
+    testCompile 'com.squareup.assertj:assertj-android:1.1.0'
     testCompile 'com.android.support:support-annotations:23.0.1'
     testCompile 'junit:junit:4.12'
 
