@@ -1,7 +1,7 @@
 package org.ligi.passandroid.model;
 
+import android.support.annotation.Nullable;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public interface PassStore {
 
