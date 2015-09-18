@@ -107,12 +107,7 @@ public class PassListActivity extends AppCompatActivity {
 
     @Subscribe
     public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                refreshPasses();
-            }
-        });
+        refreshPasses();
     }
 
     @Subscribe
