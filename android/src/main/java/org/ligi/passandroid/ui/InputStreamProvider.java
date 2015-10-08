@@ -38,7 +38,7 @@ public class InputStreamProvider {
             default:
                 Tracker.get().trackException("unknown scheme in ImportAsyncTask" + uri.getScheme(), false);
             case "file":
-                return InputStreamProvider.getDefaultHttpInputStreamForUri(uri);
+                return InputStreamProvider.getDefaultInputStreamForUri(uri);
         }
 
     }
@@ -89,7 +89,7 @@ public class InputStreamProvider {
     }
 
 
-    public static InputStreamWithSource getDefaultHttpInputStreamForUri(final Uri uri) {
+    public static InputStreamWithSource getDefaultInputStreamForUri(final Uri uri) {
         try {
             return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {

@@ -1,19 +1,17 @@
 package org.ligi.passandroid.ui;
 
-import android.content.Context;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -72,6 +70,52 @@ public class PassViewActivity extends PassViewActivityBase {
     @Bind(R.id.barcode_alt_text)
     TextView barcodeAlternativeText;
 
+    @OnClick(R.id.zoomIn)
+    void zoomIn() {
+        setBarCodeSize(currentBarcodeWidth + getFingerSize());
+    }
+
+    @OnClick(R.id.zoomOut)
+    void zooOut() {
+        setBarCodeSize(currentBarcodeWidth - getFingerSize());
+    }
+
+    @Bind(R.id.zoomOut)
+    View zoomOut;
+
+    @Bind(R.id.zoomIn)
+    View zoomIn;
+
+    private void setBarCodeSize(int width) {
+        if (width < getFingerSize() * 2) {
+            zoomOut.setVisibility(View.INVISIBLE);
+        } else {
+            zoomOut.setVisibility(View.VISIBLE);
+        }
+
+        if (width > getWindowWidth() - getFingerSize() * 2) {
+            zoomIn.setVisibility(View.INVISIBLE);
+        } else {
+            zoomIn.setVisibility(View.VISIBLE);
+        }
+
+        currentBarcodeWidth = width;
+        barcode_img.setLayoutParams(new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    @SuppressWarnings("deprecation")
+    private int getWindowWidth() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            final Point point = new Point();
+            getWindowManager().getDefaultDisplay().getSize(point);
+            return point.x;
+        } else {
+            return getWindowManager().getDefaultDisplay().getWidth();
+        }
+    }
+
+    int currentBarcodeWidth;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -107,7 +151,8 @@ public class PassViewActivity extends PassViewActivityBase {
 
         if (pass.getBarCode() != null) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
-            final Bitmap bitmap = pass.getBarCode().getBitmap(smallestSide / 3);
+            final Bitmap bitmap = pass.getBarCode().getBitmap(getWindowWidth());
+
             setBitmapSafe(barcode_img, bitmap);
             if (pass.getBarCode().getAlternativeText() != null) {
                 barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText());
@@ -115,6 +160,8 @@ public class PassViewActivity extends PassViewActivityBase {
             } else {
                 barcodeAlternativeText.setVisibility(View.GONE);
             }
+
+            setBarCodeSize(smallestSide / 2);
         } else {
             setBitmapSafe(barcode_img, null);
         }
@@ -173,7 +220,7 @@ public class PassViewActivity extends PassViewActivityBase {
     private void addFrontFields(PassFieldList passFields) {
         for (PassField field : passFields) {
 
-            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer,false);
+            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer, false);
             final TextView key = (TextView) v.findViewById(R.id.key);
             key.setText(field.label);
             final TextView value = (TextView) v.findViewById(R.id.value);
@@ -183,7 +230,7 @@ public class PassViewActivity extends PassViewActivityBase {
         }
     }
 
-    private static void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
+    private void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
 
         if (bitmap != null) {
             imageView.setLayoutParams(getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(imageView, bitmap));
@@ -198,23 +245,24 @@ public class PassViewActivity extends PassViewActivityBase {
     }
 
     @NonNull
-    private static ViewGroup.LayoutParams getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(final ImageView imageView, final Bitmap bitmap) {
-        final Context context = imageView.getContext();
-        final int halfAFingerInPixels = context.getResources().getDimensionPixelSize(R.dimen.finger)/2 ;
-        final ViewGroup.LayoutParams params=imageView.getLayoutParams();
-        if (bitmap.getHeight()< halfAFingerInPixels) {
-            params.height= halfAFingerInPixels;
-
+    private ViewGroup.LayoutParams getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(final ImageView imageView, final Bitmap bitmap) {
+        final int halfAFingerInPixels = getFingerSize() / 2;
+        final ViewGroup.LayoutParams params = imageView.getLayoutParams();
+        if (bitmap.getHeight() < halfAFingerInPixels) {
+            params.height = halfAFingerInPixels;
         } else {
-            params.height= LinearLayout.LayoutParams.WRAP_CONTENT;
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         }
         return params;
     }
 
+    private int getFingerSize() {
+        return getResources().getDimensionPixelSize(R.dimen.finger);
+    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean res = super.onPrepareOptionsMenu(menu);
+        final boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_map).setVisible((optionalPass != null && optionalPass.isValid() && optionalPass.getLocations().size() > 0));
         menu.findItem(R.id.menu_update).setVisible(mightPassBeAbleToUpdate(optionalPass));
         return res;
@@ -242,7 +290,6 @@ public class PassViewActivity extends PassViewActivityBase {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onAttachedToWindow() {
