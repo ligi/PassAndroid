@@ -18,6 +18,7 @@ public interface Pass extends Serializable {
     String BITMAP_LOGO = "logo";
     String BITMAP_FOOTER = "footer";
 
+
     @StringDef({BITMAP_ICON, BITMAP_THUMBNAIL, BITMAP_STRIP, BITMAP_LOGO, BITMAP_FOOTER})
     @Retention(RetentionPolicy.SOURCE)
     @interface PassBitmap {
@@ -88,6 +89,8 @@ public interface Pass extends Serializable {
     String getApp();
 
     @Nullable
-    Bitmap getBitmap(@PassBitmap String passBitmap);
+    // change to Bitmap getBitmap(@PassBitmap String passBitmap);
+    // once this is resolved https://code.google.com/p/android/issues/detail?id=175532
+    Bitmap getBitmap(String passBitmap);
 
 }
