@@ -2,6 +2,7 @@ package org.ligi.passandroid.model;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import java.io.DataInputStream;
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+@VisibleForTesting
 public class AppleStylePassTranslation extends HashMap<String, String> {
 
     public String translate(String key) {
@@ -20,14 +22,18 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
     }
 
     public void loadFromFile(final File file) {
-
         final String content = readFileAsStringGuessEncoding(file);
+        loadFromString(content);
+    }
 
-        if (content == null) {
+    @VisibleForTesting
+    public void loadFromString(final String inputString) {
+
+        if (inputString == null) {
             return;
         }
 
-        for (String pair : content.split("\";")) {
+        for (String pair : inputString.split("\";")) {
             final String[] kv = pair.split("\" ?= ?\"");
             if (kv.length == 2) {
                 put(removeLeadingClutter(kv[0]), kv[1]);
