@@ -48,7 +48,7 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="http" />
             </intent-filter>
             <intent-filter>
@@ -59,7 +59,7 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="https" />
             </intent-filter>
             <intent-filter>
@@ -70,7 +70,7 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="file" />
             </intent-filter>
             <intent-filter>
@@ -81,7 +81,7 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="content" />
             </intent-filter>
             <intent-filter>
@@ -183,7 +183,7 @@
 
                 <data
                     android:host="checkin.si.amadeus.net"
-                    android:pathPattern=".*"
+                    android:pathPattern="/.*"
                     android:scheme="https" />
             </intent-filter>
 
@@ -197,47 +197,47 @@
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
             </intent-filter>
 
@@ -249,91 +249,39 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="http" />
             </intent-filter>
             <intent-filter>
@@ -344,43 +292,95 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="https" />
             </intent-filter>
             <intent-filter>
@@ -391,43 +391,43 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
             </intent-filter>
             <intent-filter>
@@ -438,100 +438,43 @@
 
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
                 <data
                     android:host="*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
-                    android:scheme="file" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="file" />
             </intent-filter>
             <intent-filter>
@@ -543,47 +486,104 @@
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\.pkpass"
+                    android:pathPattern="/.*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:scheme="file" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern="/.*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
                 <data
                     android:host="*"
                     android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
+                    android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.pkpass"
                     android:scheme="content" />
             </intent-filter>
 
