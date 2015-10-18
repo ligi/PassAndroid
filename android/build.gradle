@@ -133,7 +133,7 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 
-    compile 'net.steamcrafted:load-toast:1.0.8'
+    compile 'net.steamcrafted:load-toast:1.0.9'
 
     provided "org.projectlombok:lombok:1.16.6"
 
