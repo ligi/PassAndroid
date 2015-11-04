@@ -44,6 +44,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
 
                 final ResponseBody body = client.newCall(requestBuilder.build()).execute().body();
                 final String bodyString = body.string();
+                body.close();
                 final Pattern p = Pattern.compile("href=\"(.*\\.pkpass.*?)\"");
                 final Matcher m = p.matcher(bodyString);
 
