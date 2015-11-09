@@ -34,7 +34,6 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
     @Override
     public void onBindViewHolder(PassViewHolder viewHolder, final int longClickedCardPosition) {
         final Pass pass = App.getPassStore().getPassbookAt(longClickedCardPosition);
-        viewHolder.title.setText(pass.getDescription());
 
         viewHolder.apply(pass,passListActivity);
 
