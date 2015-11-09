@@ -2,8 +2,8 @@
 host = https://www.transifex.com
 
 [passandroid.strings]
-file_filter = src/main/res/values-<lang>/strings.xml
-source_file = src/main/res/values/strings.xml
+file_filter = android/src/main/res/values-<lang>/strings.xml
+source_file = android/src/main/res/values/strings.xml
 source_lang = en
 
 [passandroid.play_short_description]
