@@ -101,4 +101,5 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="downloading_new_pass_version">downloading new pass version</string>
     <string name="unzip_pass_dialog_title">Opening Passbook</string>
     <string name="unzip_pass_dialog_message">Please wait...</string>
+    <string name="action_update">update</string>
 </resources>
