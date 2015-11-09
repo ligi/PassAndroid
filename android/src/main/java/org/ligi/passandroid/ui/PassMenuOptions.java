@@ -91,18 +91,19 @@ public class PassMenuOptions {
     }
 
     private void exportInFormat(final int which) {
-        final int passFormat;
+        final int passFormat = getPassFormat(which);
+        new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share", true, passFormat).execute();
+    }
 
+    @PassExporter.PassFormat
+    private int getPassFormat(int which) {
         switch (which) {
             case 1:
-                passFormat = PassExporter.FORMAT_PKPASS;
-                break;
+                return PassExporter.FORMAT_PKPASS;
 
             default:
-                passFormat = PassExporter.FORMAT_OPENPASS;
+                return PassExporter.FORMAT_OPENPASS;
         }
-
-        new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share", true, passFormat).execute();
     }
 
 
