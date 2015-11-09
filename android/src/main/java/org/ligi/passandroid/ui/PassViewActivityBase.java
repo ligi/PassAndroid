@@ -150,6 +150,13 @@ public class PassViewActivityBase extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static boolean mightPassBeAbleToUpdate(Pass pass) {
+        return pass != null
+               && pass.getWebServiceURL() != null
+               && pass.getPassIdent() != null
+               && pass.getSerial() != null;
+    }
+
     class UpdateAsync implements Runnable {
 
         private ProgressDialog dlg;
@@ -157,15 +164,6 @@ public class PassViewActivityBase extends AppCompatActivity {
         @Override
         public void run() {
             final Pass pass = optionalPass;
-            if (pass == null || pass.getWebServiceURL() == null || pass.getPassIdent() == null || pass.getSerial() == null) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showPassProblemDialog(pass, "cannot update");
-                    }
-                });
-                return;
-            }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -174,6 +172,16 @@ public class PassViewActivityBase extends AppCompatActivity {
                     dlg.show();
                 }
             });
+            if (!mightPassBeAbleToUpdate(pass)) {
+                //TODO: might be removed if not on path of user anymore
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showPassProblemDialog(pass, "cannot update");
+                    }
+                });
+                return;
+            }
 
             final OkHttpClient client = new OkHttpClient();
 

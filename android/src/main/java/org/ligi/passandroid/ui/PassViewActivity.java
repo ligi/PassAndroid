@@ -216,10 +216,7 @@ public class PassViewActivity extends PassViewActivityBase {
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_map).setVisible((optionalPass != null && optionalPass.isValid() && optionalPass.getLocations().size() > 0));
-        menu.findItem(R.id.menu_update).setVisible((optionalPass != null &&
-                                                    optionalPass.isValid() &&
-                                                    optionalPass.getAuthToken() != null &&
-                                                    optionalPass.getSerial() != null));//&& optionalPass.get().getPassIdent().isPresent()));
+        menu.findItem(R.id.menu_update).setVisible(mightPassBeAbleToUpdate(optionalPass));
         return res;
     }
 
