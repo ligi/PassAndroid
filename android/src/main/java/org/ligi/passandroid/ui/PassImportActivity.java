@@ -13,11 +13,19 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
 
+import javax.inject.Inject;
+
 public class PassImportActivity extends AppCompatActivity {
+
+    @Inject
+    PassStore passStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.component().inject(this);
+
         new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
     }
 
@@ -80,8 +88,7 @@ public class PassImportActivity extends AppCompatActivity {
                     // TODO this is kind of a hack - there should be a better way
                     final String id = AXT.at(path.split("/")).last();
 
-                    final PassStore store = App.getPassStore();
-                    store.setCurrentPass(store.getPassbookForId(id));
+                    passStore.setCurrentPass(passStore.getPassbookForId(id));
 
                     AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
                     finish();

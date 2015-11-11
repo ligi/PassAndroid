@@ -6,24 +6,20 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
 
-import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.PassEditActivity;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import javax.inject.Inject;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.ligi.passandroid.steps.PassEditSteps.goToBarCode;
 import static org.ligi.passandroid.steps.PassEditSteps.goToColor;
@@ -31,6 +27,9 @@ import static org.ligi.passandroid.steps.PassEditSteps.goToMetaData;
 
 @TargetApi(14)
 public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
+
+    @Inject
+    PassStore passStore;
 
     public ThePassEditActivity() {
         super(PassEditActivity.class);
@@ -40,15 +39,9 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Pass> list = new ArrayList<Pass>() {{
-            final PassImpl object = new PassImpl();
-            object.setBarCode(new BarCode(BarcodeFormat.QR_CODE, UUID.randomUUID().toString()));
-            add(object);
-        }};
-
-        final FixedPassListPassStore newPassStore = new FixedPassListPassStore(list);
-        newPassStore.setCurrentPass(list.get(0));
-        App.replacePassStore(newPassStore);
+        final TestComponent build = DaggerTestComponent.create();
+        build.inject(this);
+        App.setComponent(build);
 
         getActivity();
     }
@@ -56,7 +49,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testSetToEventWorks() {
         onView(withText("Event")).perform(click());
-        assertThat(App.getPassStore().getCurrentPass().getType()).isEqualTo("eventTicket");
+        assertThat(passStore.getCurrentPass().getType()).isEqualTo("eventTicket");
 
         Spoon.screenshot(getActivity(), "edit_set_event");
     }
@@ -64,7 +57,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testSetToCouponWorks() {
         onView(withText("Coupon")).perform(click());
-        assertThat(App.getPassStore().getCurrentPass().getType()).isEqualTo("coupon");
+        assertThat(passStore.getCurrentPass().getType()).isEqualTo("coupon");
 
         Spoon.screenshot(getActivity(), "edit_set_coupon");
     }
@@ -73,8 +66,8 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     public void testSetDescriptionWorks() {
         goToMetaData();
 
-        onView(withId(R.id.descriptionEdit)).perform(typeText("test description"));
-        assertThat(App.getPassStore().getCurrentPass().getDescription()).isEqualTo("test description");
+        onView(withId(R.id.descriptionEdit)).perform(clearText(),typeText("test description"));
+        assertThat(passStore.getCurrentPass().getDescription()).isEqualTo("test description");
 
         Spoon.screenshot(getActivity(), "edit_set_description");
     }
@@ -95,7 +88,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("QR")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
+        assertThat(passStore.getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
         Spoon.screenshot(getActivity(), "edit_set_qr");
     }
 
@@ -106,7 +99,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("PDF417")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.PDF_417);
+        assertThat(passStore.getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.PDF_417);
         Spoon.screenshot(getActivity(), "edit_set_pdf417");
     }
 
@@ -117,7 +110,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withText("AZTEC")).perform(click());
 
-        assertThat(App.getPassStore().getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.AZTEC);
+        assertThat(passStore.getCurrentPass().getBarCode().getFormat()).isEqualTo(BarcodeFormat.AZTEC);
         Spoon.screenshot(getActivity(), "edit_set_aztec");
     }
 
@@ -128,7 +121,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
         onView(withId(R.id.messageInput)).perform(clearText());
         onView(withId(R.id.messageInput)).perform(typeText("msg foo txt ;-)"));
 
-        assertThat(App.getPassStore().getCurrentPass().getBarCode().getMessage()).isEqualTo("msg foo txt ;-)");
+        assertThat(passStore.getCurrentPass().getBarCode().getMessage()).isEqualTo("msg foo txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_msg");
     }
 
@@ -140,7 +133,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
         onView(withId(R.id.alternativeMessageInput)).perform(scrollTo());
         onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"));
 
-        assertThat(App.getPassStore().getCurrentPass().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
+        assertThat(passStore.getCurrentPass().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
     }
 

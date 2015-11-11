@@ -1,5 +1,6 @@
 package org.ligi.passandroid.model;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public interface PassStore {
         }
 
         @Override
-        public int compareTo(CountedType another) {
+        public int compareTo(@NonNull CountedType another) {
             return another.count - count;
         }
     }

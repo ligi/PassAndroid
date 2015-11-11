@@ -21,8 +21,11 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 
-public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+import javax.inject.Inject;
+
+public class MetaDataFragment extends PassStoreBackedFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     @Bind(R.id.descriptionEdit)
     EditText descriptionEdit;
@@ -31,7 +34,7 @@ public class MetaDataFragment extends Fragment implements TimePickerDialog.OnTim
     private final PassImpl pass;
 
     public MetaDataFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass();
+        pass = (PassImpl) passStore.getCurrentPass();
 
         if (pass.getRelevantDate()!=null) {
             time = pass.getRelevantDate();

@@ -15,14 +15,21 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
+import javax.inject.Inject;
+
 public class CategoryPickFragment extends ListFragment {
+
+    @Inject
+    PassStore passStore;
 
     private final PassImpl pass;
 
     public CategoryPickFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass();
+        App.component().inject(this);
+        pass = (PassImpl) passStore.getCurrentPass();
     }
 
     @Override

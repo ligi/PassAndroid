@@ -19,16 +19,12 @@ import org.ligi.passandroid.helper.Files;
 import org.ligi.passandroid.model.PassImpl;
 import static android.app.Activity.RESULT_OK;
 
-public class ImageEditFragment extends Fragment {
+public class ImageEditFragment extends PassStoreBackedFragment {
 
     private static final int REQ_CODE_PICK_LOGO = 1;
     private static final int REQ_CODE_PICK_ICON = 2;
     private static final int REQ_CODE_PICK_STRIP = 3;
     private static final int REQ_CODE_PICK_THUMBNAIL = 4;
-
-    private static PassImpl getPass() {
-        return (PassImpl) App.getPassStore().getCurrentPass();
-    }
 
     @OnClick(R.id.pickIcon)
     public void onPickIcon() {

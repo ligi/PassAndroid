@@ -13,13 +13,20 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 
-class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
+import javax.inject.Inject;
+
+public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
+
+    @Inject
+    PassStore passStore;
 
     protected final PassListActivity passListActivity;
     ActionMode actionMode;
 
     public PassAdapter(PassListActivity passListActivity) {
+        App.component().inject(this);
         this.passListActivity = passListActivity;
     }
 
@@ -33,7 +40,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
     @Override
     public void onBindViewHolder(PassViewHolder viewHolder, final int longClickedCardPosition) {
-        final Pass pass = App.getPassStore().getPassbookAt(longClickedCardPosition);
+        final Pass pass = passStore.getPassbookAt(longClickedCardPosition);
 
         viewHolder.apply(pass,passListActivity);
 
@@ -43,7 +50,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
             @Override
             public void onClick(View v) {
                 root.setCardElevation(v.getContext().getResources().getDimension(R.dimen.card_longclick_elevation));
-                App.getPassStore().setCurrentPass(pass);
+                passStore.setCurrentPass(pass);
                 AXT.at(passListActivity).startCommonIntent().activityFromClass(PassViewActivity.class);
             }
         });
@@ -52,7 +59,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
             @Override
             public boolean onLongClick(View v) {
 
-                final Pass pass = App.getPassStore().getPassbookAt(longClickedCardPosition);
+                final Pass pass = passStore.getPassbookAt(longClickedCardPosition);
 
                 if (actionMode != null) {
                     final boolean clickedOnDifferentItem = actionMode.getTag() == null || !actionMode.getTag().equals(pass);
@@ -78,7 +85,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
                     @Override
                     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        if (new PassMenuOptions(passListActivity, App.getPassStore().getPassbookAt(longClickedCardPosition)).process(menuItem)) {
+                        if (new PassMenuOptions(passListActivity, passStore.getPassbookAt(longClickedCardPosition)).process(menuItem)) {
                             actionMode.finish();
                             return true;
                         }
@@ -93,7 +100,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
                     }
                 });
 
-                actionMode.setTag(App.getPassStore().getPassbookAt(longClickedCardPosition));
+                actionMode.setTag(passStore.getPassbookAt(longClickedCardPosition));
 
                 root.setCardElevation(v.getContext().getResources().getDimension(R.dimen.card_longclick_elevation));
 
@@ -111,7 +118,7 @@ class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
     @Override
     public int getItemCount() {
-        return App.getPassStore().passCount();
+        return passStore.passCount();
     }
 
 }

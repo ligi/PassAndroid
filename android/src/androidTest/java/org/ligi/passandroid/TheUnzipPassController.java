@@ -5,6 +5,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.ui.UnzipPassController;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.InputStream;
@@ -16,10 +17,10 @@ import static org.mockito.Mockito.verify;
 
 public class TheUnzipPassController extends BaseIntegration<Activity> {
 
-    @MockitoAnnotations.Mock
+    @Mock
     UnzipPassController.FailCallback failCallback;
 
-    @MockitoAnnotations.Mock
+    @Mock
     UnzipPassController.SuccessCallback successCallback;
 
     @Override

@@ -18,13 +18,19 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.edit_fragments.BarcodeEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ImageEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
 
+import javax.inject.Inject;
+
 public class PassEditActivity extends AppCompatActivity {
+
+    @Inject
+    PassStore passStore;
 
     @Bind(R.id.passEditPager)
     ViewPager viewPager;
@@ -37,10 +43,12 @@ public class PassEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.component().inject(this);
         setContentView(R.layout.edit);
         ButterKnife.bind(this);
 
-        final Pass currentPass = App.getPassStore().getCurrentPass();
+        final Pass currentPass = passStore.getCurrentPass();
         if (currentPass != null) {
             pass = (PassImpl) currentPass;
         } else {
@@ -144,8 +152,8 @@ public class PassEditActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_save:
-                App.getPassStore().setCurrentPass(pass);
-                pass.save(App.getPassStore());
+                passStore.setCurrentPass(pass);
+                pass.save(passStore);
                 AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
                 return true;
         }

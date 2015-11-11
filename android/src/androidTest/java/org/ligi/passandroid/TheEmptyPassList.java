@@ -4,7 +4,6 @@ import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
 
-import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.PassListActivity;
 
@@ -24,14 +23,15 @@ public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        App.replacePassStore(new FixedPassListPassStore(new ArrayList<Pass>()));
+
+        App.setComponent(DaggerTestComponent.builder().testModule(new TestModule(new ArrayList<Pass>())).build());
         getActivity();
     }
 
     @MediumTest
     public void testEmptyViewIsThereWhenThereAreNoPasses() {
         Spoon.screenshot(getActivity(), "empty_view");
-        // this fails even though the view is visually there :-( onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
+         onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
     }
 
     /*@MediumTest

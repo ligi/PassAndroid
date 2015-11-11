@@ -37,12 +37,17 @@ import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
+import javax.inject.Inject;
+
 public class PassListActivity extends AppCompatActivity {
 
     private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
     private PassAdapter passAdapter;
 
     private ActionBarDrawerToggle drawerToggle;
+
+    @Inject
+    PassStore passStore;
 
     @Bind(R.id.content_list)
     RecyclerView recyclerView;
@@ -59,8 +64,9 @@ public class PassListActivity extends AppCompatActivity {
     @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
         final FiledPass pass = PassUtil.createEmptyPass();
-        App.getPassStore().setCurrentPass(pass);
-        pass.save(App.getPassStore());
+
+        passStore.setCurrentPass(pass);
+        pass.save(passStore);
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
         floatingActionsMenu.collapse();
     }
@@ -117,7 +123,6 @@ public class PassListActivity extends AppCompatActivity {
     }
 
     public void refreshPasses() {
-        final PassStore passStore = App.getPassStore();
         passStore.preCachePassesList();
         runOnUiThread(new Runnable() {
             @Override
@@ -138,6 +143,9 @@ public class PassListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.component().inject(this);
+
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
 
@@ -179,7 +187,7 @@ public class PassListActivity extends AppCompatActivity {
 
     private void scrollToType(String type) {
         for (int i = 0; i < passAdapter.getItemCount(); i++) {
-            if (App.getPassStore().getPassbookAt(i).getTypeNotNull().equals(type)) {
+            if (passStore.getPassbookAt(i).getTypeNotNull().equals(type)) {
                 recyclerView.scrollToPosition(i);
                 return; // we are done
             }

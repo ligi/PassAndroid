@@ -14,12 +14,20 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
+
+import javax.inject.Inject;
 
 public class PassMenuOptions {
+
+    @Inject
+    PassStore passStore;
+
     public final Activity activity;
     public final Pass pass;
 
     public PassMenuOptions(final Activity activity, final Pass pass) {
+        App.component().inject(this);
         this.activity = activity;
         this.pass = pass;
     }
@@ -49,7 +57,7 @@ public class PassMenuOptions {
                         if (sourceDeleteCheckBox.isChecked()) {
                             new File(pass.getSource().replace("file://", "")).delete();
                         }
-                        App.getPassStore().deletePassWithId(pass.getId());
+                        passStore.deletePassWithId(pass.getId());
                         if (activity instanceof PassViewActivityBase) {
                             final Intent passListIntent = new Intent(activity, PassListActivity.class);
                             NavUtils.navigateUpTo(activity, passListIntent);
@@ -83,7 +91,7 @@ public class PassMenuOptions {
 
             case R.id.menu_edit:
                 Tracker.get().trackEvent("ui_action", "share", "shared", null);
-                App.getPassStore().setCurrentPass(pass);
+                passStore.setCurrentPass(pass);
                 AXT.at(activity).startCommonIntent().activityFromClass(PassEditActivity.class);
                 return true;
         }

@@ -9,7 +9,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.FullscreenMapActivity;
 import org.ligi.passandroid.LocationsMapFragment;
 import org.ligi.passandroid.R;
@@ -18,6 +17,7 @@ import org.ligi.passandroid.model.Pass;
 public class PassbookMapsFacade {
 
     public static boolean init(FragmentActivity context) {
+
         final boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
 
         if (!isGooglePlayServicesAvailable) {
@@ -34,7 +34,6 @@ public class PassbookMapsFacade {
     }
 
     public static void startFullscreenMap(Context context, Pass pass) {
-        App.getPassStore().setCurrentPass(pass);
         AXT.at(context).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
     }
 }

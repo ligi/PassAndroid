@@ -2,14 +2,14 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
-import com.google.zxing.BarcodeFormat;
-import java.util.ArrayList;
+
 import org.joda.time.DateTime;
-import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.PassViewActivity;
+
+import javax.inject.Inject;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -21,7 +21,10 @@ import static org.hamcrest.CoreMatchers.not;
 @TargetApi(14)
 public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
-    private PassImpl act_pass;
+    @Inject
+    PassStore passStore;
+
+    PassImpl act_pass;
 
     public ThePassViewActivity() {
         super(PassViewActivity.class);
@@ -31,16 +34,11 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Pass> list = new ArrayList<Pass>() {{
-            act_pass = new PassImpl();
-            act_pass.setDescription("foo");
-            act_pass.setBarCode(new BarCode(BarcodeFormat.QR_CODE, "foo"));
-            add(act_pass);
-        }};
+        final TestComponent newComponent = DaggerTestComponent.create();
+        newComponent.inject(this);
+        App.setComponent(newComponent);
 
-        App.replacePassStore(new FixedPassListPassStore(list));
-        App.getPassStore().setCurrentPass(App.getPassStore().getPassbookAt(0));
-
+        act_pass= (PassImpl) passStore.getCurrentPass();
     }
 
     @MediumTest

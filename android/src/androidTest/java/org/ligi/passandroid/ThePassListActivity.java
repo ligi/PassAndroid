@@ -5,12 +5,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
 
-import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.PassListActivity;
-
-import java.util.ArrayList;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -22,6 +17,7 @@ import static org.hamcrest.CoreMatchers.not;
 @TargetApi(14)
 public class ThePassListActivity extends BaseIntegration<PassListActivity> {
 
+
     public ThePassListActivity() {
         super(PassListActivity.class);
     }
@@ -30,19 +26,14 @@ public class ThePassListActivity extends BaseIntegration<PassListActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Pass> list = new ArrayList<Pass>() {{
-            add(new PassImpl());
-        }};
-
-        App.replacePassStore(new FixedPassListPassStore(list));
-
+        App.setComponent(DaggerTestComponent.builder().build());
         getActivity();
     }
 
     @MediumTest
     public void testListIsThere() {
 
-        //onView(withId(R.id.content_list)).check(matches(isDisplayed()));
+        onView(withId(R.id.content_list)).check(matches(isDisplayed()));
         Spoon.screenshot(getActivity(), "list");
     }
 

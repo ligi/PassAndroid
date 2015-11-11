@@ -3,6 +3,8 @@ package org.ligi.passandroid;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.VisibleForTesting;
+
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
@@ -15,22 +17,22 @@ import org.ligi.tracedroid.logging.Log;
 
 public class App extends Application {
 
+    private static AppComponent component;
+
     private static Bus bus;
     private static Settings settings;
-    private static PassStore passStore;
-    private static App instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+
         LeakCanary.install(this);
-
         JodaTimeAndroid.init(this);
-
         Tracker.init(this);
         initTraceDroid();
 
-        instance = this;
         bus = new Bus(ThreadEnforcer.ANY);
         settings = new Settings(this);
     }
@@ -48,22 +50,20 @@ public class App extends Application {
         return settings;
     }
 
-    public static PassStore getPassStore() {
-        if (passStore == null) {
-            passStore = new AndroidFileSystemPassStore(instance);
-        }
-        return passStore;
-    }
-
-    public static void replacePassStore(PassStore newPassStore) {
-        passStore = newPassStore;
-    }
-
     public static String getPassesDir(final Context ctx) {
         return ctx.getFilesDir().getAbsolutePath() + "/passes";
     }
 
     public static String getShareDir() {
         return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
+    }
+
+    public static AppComponent component() {
+        return component;
+    }
+
+    @VisibleForTesting
+    public static void setComponent(AppComponent newComponent) {
+        component = newComponent;
     }
 }

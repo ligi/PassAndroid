@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 import static android.text.TextUtils.isEmpty;
 
-public class BarcodeEditFragment extends Fragment {
+public class BarcodeEditFragment extends PassStoreBackedFragment {
 
     @OnClick(R.id.scanButton)
     public void onScanButtonClick() {
@@ -84,23 +84,17 @@ public class BarcodeEditFragment extends Fragment {
     @Bind(R.id.barcodeTypeRadioGroup)
     RadioGroup typeGroup;
 
-    private final PassImpl pass;
-
-    public BarcodeEditFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if (pass.getBarCode() != null) {
-            pass.setBarCode(new BarCode(BarcodeFormat.QR_CODE, UUID.randomUUID().toString()));
+        if (getPass().getBarCode() != null) {
+            getPass().setBarCode(new BarCode(BarcodeFormat.QR_CODE, UUID.randomUUID().toString()));
         }
 
         final View inflate = inflater.inflate(R.layout.edit_barcode, container, false);
         ButterKnife.bind(this, inflate);
 
-        final BarCode barCode = pass.getBarCode();
+        final BarCode barCode = getPass().getBarCode();
 
         if (barCode != null) {
             messageInput.setText(barCode.getMessage());
@@ -144,7 +138,7 @@ public class BarcodeEditFragment extends Fragment {
 
         final BarCode newBarCode = new BarCode(format, message);
         newBarCode.setAlternativeText(alternativeMessageInput.getText().toString());
-        pass.setBarCode(newBarCode);
+        getPass().setBarCode(newBarCode);
 
         new AsyncSetBarCodeImageTask(selectorQR).execute(new BarCode(BarcodeFormat.QR_CODE, message));
         new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(BarcodeFormat.PDF_417, message));

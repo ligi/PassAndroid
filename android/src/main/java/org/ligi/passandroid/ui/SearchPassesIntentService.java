@@ -9,18 +9,24 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PastLocationsStore;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.tracedroid.logging.Log;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
 public class SearchPassesIntentService extends IntentService {
@@ -36,14 +42,20 @@ public class SearchPassesIntentService extends IntentService {
 
     private List<String> foundList;
 
+
+    private long lastProgressUpdate = 0;
+
+    @Inject
+    PassStore passStore;
+
     public SearchPassesIntentService() {
         super("SearchPassesIntentService");
     }
 
-    private long lastProgressUpdate = 0;
-
     @Override
     protected void onHandleIntent(Intent intent) {
+
+        App.component().inject(this);
 
         foundList = new ArrayList<>();
 
@@ -133,7 +145,7 @@ public class SearchPassesIntentService extends IntentService {
             public void call(String uuid) {
                 foundList.add(uuid);
                 final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
-                final FiledPass pass = AppleStylePassReader.read(App.getPassStore().getPathForID(uuid), language);
+                final FiledPass pass = AppleStylePassReader.read(passStore.getPathForID(uuid), language);
                 App.getBus().post(new SortOrderChangeEvent());
                 final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
                 if (iconBitmap != null) {

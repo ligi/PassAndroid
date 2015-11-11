@@ -1,102 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:fab="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/drawer_layout"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:fab="http://schemas.android.com/apk/res-auto"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/content_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:choiceMode="singleChoice"
-                android:divider="@null"
-                android:listSelector="@android:color/transparent"/>
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/empty_text_view"
-                android:singleLine="false"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:id="@+id/emptyView"
-                />
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text="@string/empty_text_view" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/content_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent" />
 
         <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
-                android:id="@+id/fam"
+            android:id="@+id/fam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            fab:fab_addButtonColorNormal="@color/accent"
+            fab:fab_addButtonColorPressed="@color/icon_green"
+            fab:fab_addButtonPlusIconColor="@android:color/black"
+            fab:fab_labelStyle="@style/menu_labels_style">
+
+            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_action_open_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                fab:fab_addButtonColorNormal="@color/accent"
-                fab:fab_addButtonColorPressed="@color/icon_green"
-                fab:fab_addButtonPlusIconColor="@android:color/black"
-                fab:fab_labelStyle="@style/menu_labels_style"
-                android:layout_marginBottom="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginEnd="16dp">
+                android:src="@drawable/ic_fam_open"
+                android:visibility="gone"
+
+                fab:fab_colorNormal="@color/secondary"
+                fab:fab_colorPressed="@color/icon_green"
+                fab:fab_size="mini"
+                fab:fab_title="Open File" />
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_action_open_file"
-                    android:src="@drawable/ic_fam_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-
-                    fab:fab_size="mini"
-                    fab:fab_colorNormal="@color/secondary"
-                    fab:fab_title="Open File"
-                    fab:fab_colorPressed="@color/icon_green"/>
-
-            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_action_demo_pass"
-                    android:src="@drawable/ic_fam_giftcard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_size="mini"
-                    fab:fab_colorNormal="@color/secondary"
-                    fab:fab_title="@string/fab_choice_add_demo_pass"
-                    fab:fab_colorPressed="@color/icon_green"/>
+                android:id="@+id/fab_action_demo_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fam_giftcard"
+                fab:fab_colorNormal="@color/secondary"
+                fab:fab_colorPressed="@color/icon_green"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_choice_add_demo_pass" />
 
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_action_scan"
-                    android:src="@drawable/ic_fam_find"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_size="mini"
-                    fab:fab_colorNormal="@color/secondary"
-                    fab:fab_title="@string/fab_choice_scan_pkpass_files"
-                    fab:fab_colorPressed="@color/icon_green"/>
+                android:id="@+id/fab_action_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fam_find"
+                fab:fab_colorNormal="@color/secondary"
+                fab:fab_colorPressed="@color/icon_green"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_choice_scan_pkpass_files" />
 
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_action_create_pass"
-                    android:src="@drawable/ic_fam_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_size="mini"
-                    fab:fab_colorNormal="@color/secondary"
-                    fab:fab_title="@string/fab_choice_create_pass"
-                    fab:fab_colorPressed="@color/icon_green"/>
+                android:id="@+id/fab_action_create_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fam_add"
+                fab:fab_colorNormal="@color/secondary"
+                fab:fab_colorPressed="@color/icon_green"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_choice_create_pass" />
 
 
         </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
     <FrameLayout
-            android:id="@+id/left_drawer"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white"/>
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white" />
 
 </android.support.v4.widget.DrawerLayout>

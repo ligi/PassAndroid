@@ -9,14 +9,13 @@ import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.helper.BarcodeDecoder;
-import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -28,6 +27,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarcodeActivity> {
 
+    @Inject
+    PassStore passStore;
+
     public static final String BARCODE_MESSAGE = "foo";
 
     public TheFullscreenBarcodeActivity() {
@@ -38,12 +40,11 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
     public void setUp() throws Exception {
         super.setUp();
 
-        final ArrayList<Pass> list = new ArrayList<Pass>() {{
-            add(new PassImpl());
-        }};
+        TestComponent component = DaggerTestComponent.create();
 
-        App.replacePassStore(new FixedPassListPassStore(list));
-        App.getPassStore().setCurrentPass(list.get(0));
+        component.inject(this);
+
+        App.setComponent(component);
 
         TraceDroid.deleteStacktraceFiles();
     }
@@ -71,10 +72,11 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         Spoon.screenshot(getActivity(), "qr_barcode");
     }
 
-    private void testWithBarcodeFormat(BarcodeFormat format) {
+    private void testWithBarcodeFormat(final BarcodeFormat format) {
         final PassImpl pass = new PassImpl();
         pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
-        App.getPassStore().setCurrentPass(pass);
+
+        passStore.setCurrentPass(pass);
         getActivity();
         onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
 

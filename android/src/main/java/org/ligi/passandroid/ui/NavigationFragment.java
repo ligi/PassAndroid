@@ -27,10 +27,16 @@ import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
+
+import javax.inject.Inject;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class NavigationFragment extends Fragment {
+
+    @Inject
+    PassStore passStore;
 
     @OnClick(R.id.community)
     void community() {
@@ -60,6 +66,7 @@ public class NavigationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.component().inject(this);
     }
 
     @Override
@@ -121,7 +128,7 @@ public class NavigationFragment extends Fragment {
     }
 
     private boolean shouldDisplaySort() {
-        return App.getPassStore().getCountedTypes().size() >= 2;
+        return passStore.getCountedTypes().size() >= 2;
     }
 
     private void setCategoryNavVisibilityByCurrentConditions() {
@@ -133,7 +140,7 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        final List<PassStore.CountedType> countedTypes = App.getPassStore().getCountedTypes();
+        final List<PassStore.CountedType> countedTypes = passStore.getCountedTypes();
 
         setCategoryNavVisibilityByCurrentConditions();
 

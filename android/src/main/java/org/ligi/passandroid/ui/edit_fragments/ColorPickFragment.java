@@ -13,24 +13,22 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassStore;
 
-public class ColorPickFragment extends Fragment {
+import javax.inject.Inject;
+
+public class ColorPickFragment extends PassStoreBackedFragment {
 
     @Bind(R.id.colorPicker)
     ColorPicker colorPicker;
 
-    private final PassImpl pass;
-
-    public ColorPickFragment() {
-        pass = (PassImpl) App.getPassStore().getCurrentPass();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.edit_color, container, false);
         ButterKnife.bind(this, view);
 
-        colorPicker.setOldCenterColor(pass.getBackgroundColor());
+        colorPicker.setOldCenterColor(getPass().getBackgroundColor());
 
         // until PR is merged
         colorPicker.setShowOldCenterColor(false);
@@ -38,12 +36,12 @@ public class ColorPickFragment extends Fragment {
         colorPicker.setOnColorSelectedListener(new ColorPicker.OnColorSelectedListener() {
             @Override
             public void onColorSelected(int i) {
-                pass.setBackgroundColor(i);
-                App.getBus().post(new PassRefreshEvent(pass));
+                getPass().setBackgroundColor(i);
+                App.getBus().post(new PassRefreshEvent(getPass()));
             }
         });
 
-        colorPicker.setColor(pass.getBackgroundColor());
+        colorPicker.setColor(getPass().getBackgroundColor());
 
         return view;
     }

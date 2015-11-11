@@ -111,7 +111,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                                 @Override
                                 public void onMapClick(LatLng latLng) {
-                                    App.getPassStore().setCurrentPass(base_activity.optionalPass);
+                                    App.component().passStore().setCurrentPass(base_activity.optionalPass);
                                     AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
                                 }
                             });
