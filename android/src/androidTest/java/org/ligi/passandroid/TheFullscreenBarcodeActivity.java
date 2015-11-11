@@ -1,5 +1,6 @@
 package org.ligi.passandroid;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.ImageView;
@@ -79,7 +80,17 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
         final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_barcode);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
-        assertThat(BarcodeDecoder.decodeBitmap(bitmapDrawable.getBitmap())).isEqualTo(BARCODE_MESSAGE);
+        final Bitmap bitmap = bitmapDrawable.getBitmap();
+
+        final Bitmap bitmapToTest;
+        if (format == BarcodeFormat.AZTEC) {
+            // not sure why - but for the decoder to pick up AZTEC it must have moar pixelz - smells like a zxing bug
+            bitmapToTest = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() * 2, bitmap.getHeight() * 2, false);
+        } else {
+            bitmapToTest = bitmap;
+        }
+
+        assertThat(BarcodeDecoder.decodeBitmap(bitmapToTest)).isEqualTo(BARCODE_MESSAGE);
     }
 
 }

@@ -1,9 +1,9 @@
 package org.ligi.passandroid.ui;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,19 +11,25 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
 import org.ligi.passandroid.model.PassFieldList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PassViewActivity extends PassViewActivityBase {
 
@@ -151,9 +157,15 @@ public class PassViewActivity extends PassViewActivityBase {
 
         if (pass.getBarCode() != null) {
             final int smallestSide = AXT.at(getWindowManager()).getSmallestSide();
-            final Bitmap bitmap = pass.getBarCode().getBitmap(getWindowWidth());
 
-            setBitmapSafe(barcode_img, bitmap);
+            final BitmapDrawable bitmapDrawable = pass.getBarCode().getBitmap(getResources());
+
+            if (bitmapDrawable!=null) {
+                barcode_img.setImageDrawable(bitmapDrawable);
+            } else {
+                barcode_img.setVisibility(View.GONE);
+            }
+
             if (pass.getBarCode().getAlternativeText() != null) {
                 barcodeAlternativeText.setText(pass.getBarCode().getAlternativeText());
                 barcodeAlternativeText.setVisibility(View.VISIBLE);

@@ -1,17 +1,19 @@
 package org.ligi.passandroid.model;
 
-import android.graphics.Bitmap;
-
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
+
 import com.google.zxing.BarcodeFormat;
 
-import lombok.Data;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.Serializable;
 import java.util.Locale;
+
+import lombok.Data;
 
 @Data
 public class BarCode implements Serializable {
@@ -26,7 +28,7 @@ public class BarCode implements Serializable {
         this.message = message;
     }
 
-    public Bitmap getBitmap(final int size) {
+    public BitmapDrawable getBitmap(Resources resources) {
         if (message == null) {
             // no message -> no barcode
             Tracker.get().trackException("No Barcode in pass - strange", false);
@@ -36,10 +38,10 @@ public class BarCode implements Serializable {
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR");
             Tracker.get().trackException("Barcode format is null - fallback to QR", false);
-            return BarcodeHelper.generateBarCodeBitmap(message, BarcodeFormat.QR_CODE, size);
+            return BarcodeHelper.generateBitmapDrawable(resources,message, BarcodeFormat.QR_CODE);
         }
 
-        return BarcodeHelper.generateBarCodeBitmap(message, format, size);
+        return BarcodeHelper.generateBitmapDrawable(resources, message, format);
 
     }
 

@@ -16,51 +16,51 @@ public class TheBarcodeHelper extends InstrumentationTestCase {
 
     @SmallTest
     public void testQRBitMatrixHasCorrectSize() throws Exception {
-        testBitMatrixSize(BarcodeFormat.QR_CODE);
+        testBitMatrixSizeIsSane(BarcodeFormat.QR_CODE);
     }
 
     @SmallTest
     public void testQRBitmapHasCorrectSize() throws Exception {
-        testBitmapSize(BarcodeFormat.QR_CODE);
+        testBitmapSizeIsSane(BarcodeFormat.QR_CODE);
     }
 
     @SmallTest
     public void testPDF417BitmapHasCorrectSize() {
-        testBitmapSize(BarcodeFormat.PDF_417);
+        testBitmapSizeIsSane(BarcodeFormat.PDF_417);
     }
 
     @SmallTest
     public void testPDF417BitMatrixHasCorrectSize() {
-        testBitMatrixSize(BarcodeFormat.PDF_417);
+        testBitMatrixSizeIsSane(BarcodeFormat.PDF_417);
     }
 
     @SmallTest
     public void testAZTECBitmapHasCorrectSize() {
-        testBitmapSize(BarcodeFormat.AZTEC);
+        testBitmapSizeIsSane(BarcodeFormat.AZTEC);
     }
 
     @SmallTest
     public void testAZTECBitMatrixHasCorrectSize() {
-        testBitMatrixSize(BarcodeFormat.AZTEC);
+        testBitMatrixSizeIsSane(BarcodeFormat.AZTEC);
     }
 
-    public void testBitMatrixSize(final BarcodeFormat format) {
+    public void testBitMatrixSizeIsSane(final BarcodeFormat format) {
         try {
-            BitMatrix tested = BarcodeHelper.getBitMatrix("foo-data", format, 42);
+            BitMatrix tested = BarcodeHelper.getBitMatrix("foo-data", format);
 
-            assertThat(tested.getWidth()).isGreaterThanOrEqualTo(42);
+            assertThat(tested.getWidth()).isGreaterThan(3);
         } catch (Exception e) {
             fail("could not create barcode " + e);
         }
 
     }
 
-    public void testBitmapSize(final BarcodeFormat format) {
+    public void testBitmapSizeIsSane(final BarcodeFormat format) {
         try {
-            Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format, 42);
+            Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format);
 
             assertNotNull(tested2);
-            assertThat(tested2.getWidth()).isGreaterThanOrEqualTo(42);
+            assertThat(tested2.getWidth()).isGreaterThan(3);
         } catch (Exception e) {
             fail("could not create barcode " + e);
         }

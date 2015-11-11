@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.google.zxing.BarcodeFormat;
+
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.tracedroid.logging.Log;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
@@ -35,7 +38,6 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
     protected void onResume() {
         super.onResume();
 
-        final int smallestSize = AXT.at(getWindowManager()).getSmallestSide();
         if (optionalPass == null || optionalPass.getBarCode() == null) {
             Log.w("FullscreenBarcodeActivity in bad state");
             finish(); // this should never happen, but better safe than sorry
@@ -43,7 +45,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
         }
         setBestFittingOrientationForBarCode();
 
-        barcodeImageView.setImageBitmap(optionalPass.getBarCode().getBitmap(smallestSize));
+        barcodeImageView.setImageDrawable(optionalPass.getBarCode().getBitmap(getResources()));
 
         if (optionalPass.getBarCode().getAlternativeText() != null) {
             alternativeBarcodeText.setVisibility(View.VISIBLE);

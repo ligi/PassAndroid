@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.google.zxing.BarcodeFormat;
-import java.util.Collections;
-import java.util.UUID;
+
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -26,6 +22,14 @@ import org.ligi.passandroid.helper.Strings;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
+
+import java.util.Collections;
+import java.util.UUID;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import static android.text.TextUtils.isEmpty;
 
 public class BarcodeEditFragment extends Fragment {
@@ -81,8 +85,6 @@ public class BarcodeEditFragment extends Fragment {
     RadioGroup typeGroup;
 
     private final PassImpl pass;
-    private int barcodeSize;
-
 
     public BarcodeEditFragment() {
         pass = (PassImpl) App.getPassStore().getCurrentPass();
@@ -98,9 +100,6 @@ public class BarcodeEditFragment extends Fragment {
         final View inflate = inflater.inflate(R.layout.edit_barcode, container, false);
         ButterKnife.bind(this, inflate);
 
-        final Display display = getActivity().getWindowManager().getDefaultDisplay();
-        barcodeSize = display.getWidth() / 3;
-
         final BarCode barCode = pass.getBarCode();
 
         if (barCode != null) {
@@ -109,17 +108,7 @@ public class BarcodeEditFragment extends Fragment {
 
             alternativeMessageInput.setText(Strings.nullToEmpty(alternativeTextOptional));
 
-            switch (barCode.getFormat()) {
-                case PDF_417:
-                    pdfCheck.setChecked(true);
-                    break;
-                case AZTEC:
-                    aztecCheck.setChecked(true);
-                    break;
-                case QR_CODE:
-                    qrCheck.setChecked(true);
-                    break;
-            }
+            getCheckboxForBarcodeType(barCode).setChecked(true);
         }
 
         refresh();
@@ -157,9 +146,9 @@ public class BarcodeEditFragment extends Fragment {
         newBarCode.setAlternativeText(alternativeMessageInput.getText().toString());
         pass.setBarCode(newBarCode);
 
-        new AsyncSetBarCodeImageTask(selectorQR, barcodeSize).execute(new BarCode(BarcodeFormat.QR_CODE, message));
-        new AsyncSetBarCodeImageTask(selectorPDF417, barcodeSize).execute(new BarCode(BarcodeFormat.PDF_417, message));
-        new AsyncSetBarCodeImageTask(selectorAztec, barcodeSize).execute(new BarCode(BarcodeFormat.AZTEC, message));
+        new AsyncSetBarCodeImageTask(selectorQR).execute(new BarCode(BarcodeFormat.QR_CODE, message));
+        new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(BarcodeFormat.PDF_417, message));
+        new AsyncSetBarCodeImageTask(selectorAztec).execute(new BarCode(BarcodeFormat.AZTEC, message));
     }
 
     private BarcodeFormat getBarcodeFormatFromCheckedState() {
@@ -171,5 +160,17 @@ public class BarcodeEditFragment extends Fragment {
         return BarcodeFormat.QR_CODE; // default/fallback
     }
 
+    private RadioButton getCheckboxForBarcodeType(BarCode barCode) {
+        switch (barCode.getFormat()) {
+            case PDF_417:
+                return pdfCheck;
+            case AZTEC:
+                return aztecCheck;
+
+            default:
+            case QR_CODE:
+                return pdfCheck;
+        }
+    }
 
 }

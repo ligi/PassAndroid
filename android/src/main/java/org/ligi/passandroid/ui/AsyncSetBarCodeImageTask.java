@@ -1,29 +1,35 @@
 package org.ligi.passandroid.ui;
 
-import android.graphics.Bitmap;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.model.BarCode;
 
-public class AsyncSetBarCodeImageTask extends AsyncTask<BarCode, Void, Bitmap> {
+public class AsyncSetBarCodeImageTask extends AsyncTask<BarCode, Void, BitmapDrawable> {
 
     private final ImageView view;
-    private final int barcodeSize;
 
-    public AsyncSetBarCodeImageTask(ImageView view, final int barcodeSize) {
+    private Resources resources;
+
+    public AsyncSetBarCodeImageTask(ImageView view) {
         this.view = view;
-        this.barcodeSize = barcodeSize;
     }
 
     @Override
-    protected Bitmap doInBackground(BarCode... params) {
-        return BarcodeHelper.generateBarCodeBitmap(params[0].getMessage(), params[0].getFormat(), barcodeSize);
+    protected void onPreExecute() {
+        resources = view.getContext().getResources();
     }
 
     @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        super.onPostExecute(bitmap);
-        view.setImageBitmap(bitmap);
+    protected BitmapDrawable doInBackground(BarCode... params) {
+        return BarcodeHelper.generateBitmapDrawable(resources, params[0].getMessage(), params[0].getFormat());
+    }
+
+    @Override
+    protected void onPostExecute(BitmapDrawable bitmap) {
+        view.setImageDrawable(bitmap);
     }
 }

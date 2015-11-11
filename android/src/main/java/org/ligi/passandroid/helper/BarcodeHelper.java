@@ -1,9 +1,11 @@
 package org.ligi.passandroid.helper;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
-
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Writer;
@@ -14,14 +16,27 @@ import org.ligi.tracedroid.logging.Log;
 
 public class BarcodeHelper {
 
-    @Nullable public static Bitmap generateBarCodeBitmap(@NonNull String data, @NonNull BarcodeFormat type, int size) {
+    @Nullable
+    public static BitmapDrawable generateBitmapDrawable(@NonNull Resources resources, @NonNull String data, @NonNull BarcodeFormat type) {
+        final Bitmap bitmap = generateBarCodeBitmap(data, type);
+        if (bitmap == null) {
+            return null;
+        }
+
+        final BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmap);
+        bitmapDrawable.setFilterBitmap(false);
+        return bitmapDrawable;
+    }
+
+    @Nullable
+    public static Bitmap generateBarCodeBitmap(@NonNull String data, @NonNull BarcodeFormat type) {
 
         if (data.isEmpty()) {
             return null;
         }
 
         try {
-            final BitMatrix matrix = getBitMatrix(data, type, size);
+            final BitMatrix matrix = getBitMatrix(data, type);
 
             // generate an image from the byte matrix
             final int width = matrix.getWidth();
@@ -47,8 +62,8 @@ public class BarcodeHelper {
 
     }
 
-    public static BitMatrix getBitMatrix(String data, BarcodeFormat type, int size) throws WriterException {
+    public static BitMatrix getBitMatrix(String data, BarcodeFormat type) throws WriterException {
         final Writer writer = new MultiFormatWriter();
-        return writer.encode(data, type, size, size);
+        return writer.encode(data, type,0,0);
     }
 }
