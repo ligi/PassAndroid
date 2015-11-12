@@ -10,31 +10,13 @@ import android.support.v7.app.AlertDialog;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.ui.PassImportActivity;
 
-import java.net.URLEncoder;
-
 public class URLRewriteActivity extends Activity {
-
-    private String getUrlByHost(final String host) {
-        if (host.endsWith(".virginaustralia.com")) { // mobile. or checkin.
-            return getVirginAustraliaURL();
-        }
-
-        switch (host) {
-            case "www.cathaypacific.com":
-                return getCathay();
-            case "mbp.swiss.com":
-            case "prod.wap.ncrwebhost.mobi":
-                return getNrcWebHost();
-        }
-
-        return null;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String url = getUrlByHost(getIntent().getData().getHost());
+        final String url = URLRewriteController.getUrlByHost(getIntent().getData());
 
         if (url == null) {
             new AlertDialog.Builder(this).setTitle("Workaround failed")
@@ -82,58 +64,4 @@ public class URLRewriteActivity extends Activity {
         finish();
     }
 
-    private String getBrusselsAirline() {
-        return "";
-    }
-
-    private String getVirginAustraliaURL() {
-
-        final Uri data = getIntent().getData();
-
-        final String passId;
-        if (data.toString().contains("CheckInApiIntegration")) {
-            passId = data.getQueryParameter("key");
-            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia2", null);
-        } else {
-            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia1", null);
-            passId = data.getQueryParameter("c");
-        }
-
-        if (passId == null) {
-            return null;
-        }
-
-        Tracker.get().trackEvent("quirk_fix", "redirect", "virgin_australia", null);
-
-        return "https://mobile.virginaustralia.com/boarding/pass.pkpass?key=" + URLEncoder.encode(passId);
-    }
-
-    private String getCathay() {
-        final String passId = getIntent().getData().getQueryParameter("v");
-
-        Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "cathay", null);
-
-        if (passId == null) {
-            return null;
-        }
-
-        Tracker.get().trackEvent("quirk_fix", "redirect", "cathay", null);
-
-        return "https://www.cathaypacific.com/icheckin2/PassbookServlet?v=" + URLEncoder.encode(passId);
-    }
-
-    public String getNrcWebHost() {
-        String url = getIntent().getData().toString();
-        if (url.endsWith("/")) {
-            url = url.substring(0, url.length() - 1);
-        }
-
-        final String[] split = url.split("/");
-
-        if (split.length < 6) {
-            return null;
-        }
-
-        return "http://prod.wap.ncrwebhost.mobi/mobiqa/wap/" + split[split.length - 2] + "/" + split[split.length - 1] + "/passbook";
-    }
 }
