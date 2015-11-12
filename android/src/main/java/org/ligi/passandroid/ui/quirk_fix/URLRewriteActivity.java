@@ -16,7 +16,7 @@ public class URLRewriteActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String url = URLRewriteController.getUrlByHost(getIntent().getData());
+        final String url = new URLRewriteController(Tracker.get()).getUrlByUri(getIntent().getData());
 
         if (url == null) {
             new AlertDialog.Builder(this).setTitle("Workaround failed")

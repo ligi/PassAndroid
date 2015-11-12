@@ -2,12 +2,20 @@ package org.ligi.passandroid.ui.quirk_fix;
 
 import android.net.Uri;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.TrackerInterface;
 
 import java.net.URLEncoder;
 
 public class URLRewriteController {
-    public static String getUrlByHost(final Uri uri) {
+
+    private final TrackerInterface tracker;
+
+    public URLRewriteController(TrackerInterface tracker) {
+        this.tracker = tracker;
+    }
+
+    public String getUrlByUri(final Uri uri) {
+
         if (uri.getHost().endsWith(".virginaustralia.com")) { // mobile. or checkin.
             return getVirginAustraliaURL(uri);
         }
@@ -23,14 +31,14 @@ public class URLRewriteController {
         return null;
     }
 
-    private static String getVirginAustraliaURL(final Uri uri) {
+    private String getVirginAustraliaURL(final Uri uri) {
 
         final String passId;
         if (uri.toString().contains("CheckInApiIntegration")) {
             passId = uri.getQueryParameter("key");
-            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia2", null);
+            tracker.trackEvent("quirk_fix", "redirect_attempt", "virgin_australia2", null);
         } else {
-            Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "virgin_australia1", null);
+            tracker.trackEvent("quirk_fix", "redirect_attempt", "virgin_australia1", null);
             passId = uri.getQueryParameter("c");
         }
 
@@ -38,21 +46,21 @@ public class URLRewriteController {
             return null;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "redirect", "virgin_australia", null);
+        tracker.trackEvent("quirk_fix", "redirect", "virgin_australia", null);
 
         return "https://mobile.virginaustralia.com/boarding/pass.pkpass?key=" + URLEncoder.encode(passId);
     }
 
-    private static String getCathay(Uri uri) {
+    private String getCathay(Uri uri) {
         final String passId = uri.getQueryParameter("v");
 
-        Tracker.get().trackEvent("quirk_fix", "redirect_attempt", "cathay", null);
+        tracker.trackEvent("quirk_fix", "redirect_attempt", "cathay", null);
 
         if (passId == null) {
             return null;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "redirect", "cathay", null);
+        tracker.trackEvent("quirk_fix", "redirect", "cathay", null);
 
         return "https://www.cathaypacific.com/icheckin2/PassbookServlet?v=" + URLEncoder.encode(passId);
     }
