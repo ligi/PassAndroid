@@ -111,6 +111,13 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
 
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+        // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
     androidTestCompile 'com.squareup.spoon:spoon-client:1.2.0'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 

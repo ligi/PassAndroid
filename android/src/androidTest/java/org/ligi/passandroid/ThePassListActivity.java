@@ -10,6 +10,7 @@ import org.ligi.passandroid.ui.PassListActivity;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.DrawerActions.open;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.not;
@@ -48,13 +49,15 @@ public class ThePassListActivity extends BaseIntegration<PassListActivity> {
         onView(withId(R.id.left_drawer)).check(matches(not(isDisplayed())));
     }
 
-    /*
+
     @MediumTest
     public void testThatNavigationDrawerOpens() {
-        //onView(withId(android.R.id.home)).perform(click());
-        //onView(withId(R.id.left_drawer)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout)).perform(open());
+        onView(withId(R.id.left_drawer)).check(matches(isDisplayed()));
 
         Spoon.screenshot(getActivity(), "open_drawer");
     }
-    */
+
+
 }
