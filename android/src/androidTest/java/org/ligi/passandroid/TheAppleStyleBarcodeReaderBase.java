@@ -3,10 +3,11 @@ package org.ligi.passandroid;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
-import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.ui.UnzipPassController;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.InputStream;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.verify;
 
 public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
 
-    @MockitoAnnotations.Mock
+    @Mock
     UnzipPassController.FailCallback failCallback;
 
     @Override
