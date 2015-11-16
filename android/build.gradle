@@ -7,11 +7,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.3.1'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath 'de.felixschulze.gradle:gradle-spoon-plugin:2.5'
+        classpath 'de.felixschulze.gradle:gradle-spoon-plugin:2.3'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'de.mobilej.unmock:UnMockPlugin:0.3.5'
-
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.3.6'
     }
 }
 
@@ -140,11 +139,11 @@ dependencies {
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.0'
 
-    compile 'org.ligi:AXT:0.33'
+    compile 'org.ligi:AXT:0.35'
     compile 'org.ligi:tracedroid:1.4'
     compile 'org.ligi:snackengage:0.4'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
-    compile 'com.larswerkman:HoloColorPicker:1.4'
+    compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
 
     compile 'net.steamcrafted:load-toast:1.0.9'
@@ -157,7 +156,7 @@ dependencies {
     testCompile 'com.squareup.assertj:assertj-android:1.1.1'
     testCompile 'com.android.support:support-annotations:23.1.1'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'org.mockito:mockito-core:2.0.31-beta'
 
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
