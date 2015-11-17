@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
@@ -31,6 +33,9 @@ public class PassEditActivity extends AppCompatActivity {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Bus bus;
 
     @Bind(R.id.passEditPager)
     ViewPager viewPager;
@@ -128,13 +133,13 @@ public class PassEditActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        App.getBus().register(this);
+        bus.register(this);
         refresh(pass);
     }
 
     @Override
     protected void onPause() {
-        App.getBus().unregister(this);
+        bus.unregister(this);
         super.onPause();
     }
 

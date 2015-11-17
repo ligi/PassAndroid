@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 
+import com.squareup.otto.Bus;
+
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
@@ -47,6 +49,9 @@ public class SearchPassesIntentService extends IntentService {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Bus bus;
 
     public SearchPassesIntentService() {
         super("SearchPassesIntentService");
@@ -146,7 +151,7 @@ public class SearchPassesIntentService extends IntentService {
                 foundList.add(uuid);
                 final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
                 final FiledPass pass = AppleStylePassReader.read(passStore.getPathForID(uuid), language);
-                App.getBus().post(new SortOrderChangeEvent());
+                bus.post(new SortOrderChangeEvent());
                 final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
                 if (iconBitmap != null) {
                     final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +16,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassStore;
 
-import javax.inject.Inject;
-
-public class MetaDataFragment extends PassStoreBackedFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class MetaDataFragment extends PassandroidFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     @Bind(R.id.descriptionEdit)
     EditText descriptionEdit;
@@ -84,7 +79,7 @@ public class MetaDataFragment extends PassStoreBackedFragment implements TimePic
     }
 
     private void refresh() {
-        App.getBus().post(new PassRefreshEvent(pass));
+        bus.post(new PassRefreshEvent(pass));
     }
 
     @Override

@@ -28,4 +28,9 @@ public class Settings {
         }
         return PassStore.SortOrder.DATE;
     }
+
+    public boolean doTraceDroidEmailSend() {
+        // will be overridden in test-module
+        return true;
+    }
 }

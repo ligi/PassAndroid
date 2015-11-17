@@ -3,7 +3,6 @@ package org.ligi.passandroid.ui.edit_fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,9 @@ import android.widget.RadioGroup;
 import com.google.zxing.BarcodeFormat;
 
 import org.ligi.axt.simplifications.SimpleTextWatcher;
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.Strings;
 import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
 
 import java.util.Collections;
@@ -32,7 +29,7 @@ import butterknife.OnClick;
 
 import static android.text.TextUtils.isEmpty;
 
-public class BarcodeEditFragment extends PassStoreBackedFragment {
+public class BarcodeEditFragment extends PassandroidFragment {
 
     @OnClick(R.id.scanButton)
     public void onScanButtonClick() {

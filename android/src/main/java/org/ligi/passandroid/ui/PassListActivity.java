@@ -16,12 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
+import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
+
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
+
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -32,12 +33,17 @@ import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.Settings;
 import org.ligi.snackengage.SnackEngage;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PassListActivity extends AppCompatActivity {
 
@@ -48,6 +54,12 @@ public class PassListActivity extends AppCompatActivity {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Settings settings;
+
+    @Inject
+    Bus bus;
 
     @Bind(R.id.content_list)
     RecyclerView recyclerView;
@@ -129,7 +141,7 @@ public class PassListActivity extends AppCompatActivity {
             public void run() {
 
                 passStore.refreshPassesList();
-                passStore.sort(App.getSettings().getSortOrder());
+                passStore.sort(settings.getSortOrder());
 
                 AXT.at(emptyView).setVisibility(passStore.passCount() == 0);
 
@@ -162,7 +174,9 @@ public class PassListActivity extends AppCompatActivity {
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
             Tracker.get().trackEvent("ui_event", "send", "stacktraces", null);
-            TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
+            if (settings.doTraceDroidEmailSend()) {
+                TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
+            }
         } else { // if no error - check if there is a new version of the app
             Tracker.get().trackEvent("ui_event", "processFile", "updatenotice", null);
 
@@ -172,7 +186,7 @@ public class PassListActivity extends AppCompatActivity {
         drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                App.getBus().post(new NavigationOpenedEvent());
+                bus.post(new NavigationOpenedEvent());
             }
         };
 
@@ -216,7 +230,7 @@ public class PassListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        App.getBus().register(this);
+        bus.register(this);
         refreshPasses();
     }
 
@@ -241,7 +255,7 @@ public class PassListActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        App.getBus().unregister(this);
+        bus.unregister(this);
         super.onPause();
     }
 

@@ -19,9 +19,6 @@ public class App extends Application {
 
     private static AppComponent component;
 
-    private static Bus bus;
-    private static Settings settings;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,21 +30,11 @@ public class App extends Application {
         Tracker.init(this);
         initTraceDroid();
 
-        bus = new Bus(ThreadEnforcer.ANY);
-        settings = new Settings(this);
     }
 
     private void initTraceDroid() {
         TraceDroid.init(this);
         Log.setTAG("PassAndroid");
-    }
-
-    public static Bus getBus() {
-        return bus;
-    }
-
-    public static Settings getSettings() {
-        return settings;
     }
 
     public static String getPassesDir(final Context ctx) {

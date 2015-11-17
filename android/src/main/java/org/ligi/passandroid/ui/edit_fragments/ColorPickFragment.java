@@ -2,26 +2,20 @@ package org.ligi.passandroid.ui.edit_fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.larswerkman.holocolorpicker.ColorPicker;
-import org.ligi.passandroid.App;
+
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
-import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassStore;
 
-import javax.inject.Inject;
-
-public class ColorPickFragment extends PassStoreBackedFragment {
+public class ColorPickFragment extends PassandroidFragment {
 
     @Bind(R.id.colorPicker)
     ColorPicker colorPicker;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,7 +31,7 @@ public class ColorPickFragment extends PassStoreBackedFragment {
             @Override
             public void onColorSelected(int i) {
                 getPass().setBackgroundColor(i);
-                App.getBus().post(new PassRefreshEvent(getPass()));
+                bus.post(new PassRefreshEvent(getPass()));
             }
         });
 

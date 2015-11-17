@@ -14,6 +14,8 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import java.util.List;
 import org.ligi.axt.AXT;
@@ -25,6 +27,7 @@ import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
 
@@ -37,6 +40,12 @@ public class NavigationFragment extends Fragment {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Settings settings;
+
+    @Inject
+    Bus bus;
 
     @OnClick(R.id.community)
     void community() {
@@ -78,16 +87,16 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (dateRadioButton.isChecked()) {
-                    App.getSettings().setSortOrder(PassStore.SortOrder.DATE);
+                    settings.setSortOrder(PassStore.SortOrder.DATE);
                 } else if (categoryRadioButton.isChecked()) {
-                    App.getSettings().setSortOrder(PassStore.SortOrder.TYPE);
+                    settings.setSortOrder(PassStore.SortOrder.TYPE);
                 }
                 setCategoryNavVisibilityByCurrentConditions();
-                App.getBus().post(new SortOrderChangeEvent());
+                bus.post(new SortOrderChangeEvent());
             }
         });
 
-        switch (App.getSettings().getSortOrder()) {
+        switch (settings.getSortOrder()) {
             case DATE:
                 dateRadioButton.setChecked(true);
                 break;
@@ -98,7 +107,7 @@ public class NavigationFragment extends Fragment {
 
         createCategoryJumpMarks(inflater);
 
-        App.getBus().register(this);
+        bus.register(this);
 
         dateRadioButton.setOnClickListener(new RepeatedOnClicksListener(7, new View.OnClickListener() {
             @Override
@@ -115,7 +124,7 @@ public class NavigationFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        App.getBus().unregister(this);
+        bus.unregister(this);
     }
 
     @Subscribe
@@ -124,7 +133,7 @@ public class NavigationFragment extends Fragment {
     }
 
     private boolean shouldDisplayCategoryNav() {
-        return shouldDisplaySort() && App.getSettings().getSortOrder() == PassStore.SortOrder.TYPE;
+        return shouldDisplaySort() && settings.getSortOrder() == PassStore.SortOrder.TYPE;
     }
 
     private boolean shouldDisplaySort() {
@@ -167,7 +176,7 @@ public class NavigationFragment extends Fragment {
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    App.getBus().post(new TypeFocusEvent(type));
+                    bus.post(new TypeFocusEvent(type));
                 }
             });
 

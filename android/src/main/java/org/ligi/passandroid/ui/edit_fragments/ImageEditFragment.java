@@ -3,7 +3,6 @@ package org.ligi.passandroid.ui.edit_fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,13 @@ import butterknife.OnClick;
 import java.io.File;
 import java.io.IOException;
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.helper.Files;
 import org.ligi.passandroid.model.PassImpl;
 import static android.app.Activity.RESULT_OK;
 
-public class ImageEditFragment extends PassStoreBackedFragment {
+public class ImageEditFragment extends PassandroidFragment {
 
     private static final int REQ_CODE_PICK_LOGO = 1;
     private static final int REQ_CODE_PICK_ICON = 2;
@@ -62,7 +60,7 @@ public class ImageEditFragment extends PassStoreBackedFragment {
     }
 
     private void refresh() {
-        App.getBus().post(new PassRefreshEvent(getPass()));
+        bus.post(new PassRefreshEvent(getPass()));
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {

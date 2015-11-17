@@ -12,7 +12,7 @@ import org.ligi.passandroid.ui.SearchPassesIntentService;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
-import org.ligi.passandroid.ui.edit_fragments.PassStoreBackedFragment;
+import org.ligi.passandroid.ui.edit_fragments.PassandroidFragment;
 
 import javax.inject.Singleton;
 
@@ -34,7 +34,7 @@ public interface AppComponent {
 
     void inject(MetaDataFragment metaDataFragment);
 
-    void inject(PassStoreBackedFragment passStoreBackedFragment);
+    void inject(PassandroidFragment passandroidFragment);
 
     void inject(CategoryPickFragment categoryPickFragment);
 

@@ -10,6 +10,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.otto.Bus;
+
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
@@ -25,6 +27,9 @@ public class CategoryPickFragment extends ListFragment {
     @Inject
     PassStore passStore;
 
+    @Inject
+    Bus bus;
+
     private final PassImpl pass;
 
     public CategoryPickFragment() {
@@ -35,7 +40,7 @@ public class CategoryPickFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         pass.setType(CategoryHelper.ALL_CATEGORIES[position]);
-        App.getBus().post(new PassRefreshEvent(pass));
+        bus.post(new PassRefreshEvent(pass));
         super.onListItemClick(l, v, position, id);
     }
 
