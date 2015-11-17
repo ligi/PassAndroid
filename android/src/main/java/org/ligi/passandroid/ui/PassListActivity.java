@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
@@ -26,40 +24,26 @@ import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
-import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.Settings;
 import org.ligi.snackengage.SnackEngage;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PassListActivity extends AppCompatActivity {
+public class PassListActivity extends PassAndroidActivity {
 
     private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
     private PassAdapter passAdapter;
 
     private ActionBarDrawerToggle drawerToggle;
-
-    @Inject
-    PassStore passStore;
-
-    @Inject
-    Settings settings;
-
-    @Inject
-    Bus bus;
 
     @Bind(R.id.content_list)
     RecyclerView recyclerView;
@@ -173,12 +157,12 @@ public class PassListActivity extends AppCompatActivity {
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().length > 0) {
-            Tracker.get().trackEvent("ui_event", "send", "stacktraces", null);
+            tracker.trackEvent("ui_event", "send", "stacktraces", null);
             if (settings.doTraceDroidEmailSend()) {
                 TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this);
             }
         } else { // if no error - check if there is a new version of the app
-            Tracker.get().trackEvent("ui_event", "processFile", "updatenotice", null);
+            tracker.trackEvent("ui_event", "processFile", "updatenotice", null);
 
             SnackEngage.from(this).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }

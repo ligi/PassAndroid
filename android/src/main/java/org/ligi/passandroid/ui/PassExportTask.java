@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.Tracker;
 
 class PassExportTask extends AsyncTask<Void, Void, Void> {
 
@@ -56,7 +57,7 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
         }
 
         if (passExporter.exception != null) {
-            Tracker.get().trackException("passExporterException", passExporter.exception, false);
+            App.component().tracker().trackException("passExporterException", passExporter.exception, false);
             Toast.makeText(activity, "could not export pass " + passExporter.exception, Toast.LENGTH_LONG).show();
             return;
         }

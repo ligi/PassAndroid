@@ -2,15 +2,15 @@ package org.ligi.passandroid.ui.quirk_fix;
 
 import android.net.Uri;
 
-import org.ligi.passandroid.TrackerInterface;
+import org.ligi.passandroid.Tracker;
 
 import java.net.URLEncoder;
 
 public class URLRewriteController {
 
-    private final TrackerInterface tracker;
+    private final Tracker tracker;
 
-    public URLRewriteController(TrackerInterface tracker) {
+    public URLRewriteController(Tracker tracker) {
         this.tracker = tracker;
     }
 

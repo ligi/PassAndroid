@@ -6,12 +6,9 @@ import android.os.Environment;
 import android.support.annotation.VisibleForTesting;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.squareup.otto.Bus;
-import com.squareup.otto.ThreadEnforcer;
+
 import net.danlew.android.joda.JodaTimeAndroid;
-import org.ligi.passandroid.model.AndroidFileSystemPassStore;
-import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.Settings;
+
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 
@@ -23,13 +20,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .trackerModule(new TrackerModule(this))
+                .build();
 
         LeakCanary.install(this);
         JodaTimeAndroid.init(this);
-        Tracker.init(this);
         initTraceDroid();
-
     }
 
     private void initTraceDroid() {

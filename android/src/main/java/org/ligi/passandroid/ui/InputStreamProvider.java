@@ -7,7 +7,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
 import java.io.BufferedInputStream;
@@ -24,7 +24,7 @@ public class InputStreamProvider {
     public static final String IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
 
     public static InputStreamWithSource fromURI(final Context context, final Uri uri) {
-        Tracker.get().trackEvent("protocol", "to_inputstream", uri.getScheme(), null);
+        App.component().tracker().trackEvent("protocol", "to_inputstream", uri.getScheme(), null);
         switch (uri.getScheme()) {
             case "content":
 
@@ -36,7 +36,7 @@ public class InputStreamProvider {
                 return InputStreamProvider.fromOKHttp(uri);
 
             default:
-                Tracker.get().trackException("unknown scheme in ImportAsyncTask" + uri.getScheme(), false);
+                App.component().tracker().trackException("unknown scheme in ImportAsyncTask" + uri.getScheme(), false);
             case "file":
                 return InputStreamProvider.getDefaultInputStreamForUri(uri);
         }
@@ -60,7 +60,7 @@ public class InputStreamProvider {
 
             for (Map.Entry<String, String> fakeConfig : iPhoneFakeMap) {
                 if (uri.toString().contains(fakeConfig.getValue())) {
-                    Tracker.get().trackEvent("quirk_fix", "ua_fake", fakeConfig.getKey(), null);
+                    App.component().tracker().trackEvent("quirk_fix", "ua_fake", fakeConfig.getKey(), null);
                     requestBuilder.header("User-Agent", IPHONE_USER_AGENT);
                 }
             }
@@ -71,9 +71,9 @@ public class InputStreamProvider {
 
             return new InputStreamWithSource(uri.toString(), response.body().byteStream());
         } catch (MalformedURLException e) {
-            Tracker.get().trackException("MalformedURLException in ImportAsyncTask", e, false);
+            App.component().tracker().trackException("MalformedURLException in ImportAsyncTask", e, false);
         } catch (IOException e) {
-            Tracker.get().trackException("IOException in ImportAsyncTask", e, false);
+            App.component().tracker().trackException("IOException in ImportAsyncTask", e, false);
         }
         return null;
     }
@@ -82,7 +82,7 @@ public class InputStreamProvider {
         try {
             return new InputStreamWithSource(uri.toString(), ctx.getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
-            Tracker.get().trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false);
+            App.component().tracker().trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false);
             return null;
         }
 
@@ -93,7 +93,7 @@ public class InputStreamProvider {
         try {
             return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {
-            Tracker.get().trackException("IOException in passImportActivity/ImportAsyncTask", e, false);
+            App.component().tracker().trackException("IOException in passImportActivity/ImportAsyncTask", e, false);
             return null;
         }
     }

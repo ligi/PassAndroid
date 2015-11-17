@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -18,25 +17,19 @@ import com.squareup.okhttp.Response;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
-public class PassViewActivityBase extends AppCompatActivity {
+public class PassViewActivityBase extends PassAndroidActivity {
 
     public static final String EXTRA_KEY_UUID = "uuid";
-
-    @Inject
-    PassStore passStore;
 
     @Nullable
     public Pass optionalPass;
@@ -45,7 +38,6 @@ public class PassViewActivityBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        App.component().inject(this);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -82,7 +74,7 @@ public class PassViewActivityBase extends AppCompatActivity {
         optionalPass = passStore.getCurrentPass();
 
         if (optionalPass == null) {
-            Tracker.get().trackException("pass not present in " + this, false);
+            tracker.trackException("pass not present in " + this, false);
             finish();
         }
     }

@@ -3,7 +3,7 @@ package org.ligi.passandroid;
 
 import android.support.annotation.Nullable;
 
-public interface TrackerInterface {
+public interface Tracker {
     void trackException(String s, Exception e, boolean fatal);
 
     void trackException(String s, boolean fatal);

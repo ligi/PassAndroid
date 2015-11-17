@@ -1,23 +1,24 @@
 package org.ligi.passandroid.ui;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
+
+import org.ligi.passandroid.ui.quirk_fix.OpenIphoneWebView;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.ligi.passandroid.Tracker;
-import org.ligi.passandroid.ui.quirk_fix.OpenIphoneWebView;
 
-public class ExtractURLAsIphoneActivity extends Activity {
+public class ExtractURLAsIphoneActivity extends PassAndroidActivity {
 
     private ProgressDialog progressDialog;
 
@@ -27,7 +28,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
-        Tracker.get().trackEvent("quirk_fix", "unpack_attempt", getIntent().getData().getHost(), null);
+        tracker.trackEvent("quirk_fix", "unpack_attempt", getIntent().getData().getHost(), null);
 
         new DownloadExtractAndStartImportTask().execute();
     }
@@ -59,7 +60,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
 
                 return url;
             } catch (IOException | URISyntaxException e) {
-                Tracker.get().trackException("ExtractURLAsIphoneActivity", e, false);
+                tracker.trackException("ExtractURLAsIphoneActivity", e, false);
             }
 
             return null;
@@ -76,7 +77,7 @@ public class ExtractURLAsIphoneActivity extends Activity {
                 return;
             }
 
-            Tracker.get().trackEvent("quirk_fix", "unpack_success", getIntent().getData().getHost(), null);
+            tracker.trackEvent("quirk_fix", "unpack_success", getIntent().getData().getHost(), null);
 
             final Intent intent = new Intent(ExtractURLAsIphoneActivity.this, PassImportActivity.class);
             intent.setData(Uri.parse(s));

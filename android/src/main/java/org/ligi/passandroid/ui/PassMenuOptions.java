@@ -7,7 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import java.io.File;
+
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -16,12 +16,17 @@ import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 public class PassMenuOptions {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Tracker tracker;
 
     public final Activity activity;
     public final Pass pass;
@@ -36,7 +41,7 @@ public class PassMenuOptions {
         switch (item.getItemId()) {
 
             case R.id.menu_delete:
-                Tracker.get().trackEvent("ui_action", "delete", "delete", null);
+                tracker.trackEvent("ui_action", "delete", "delete", null);
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage(activity.getString(R.string.dialog_delete_confirm_text));
@@ -78,7 +83,7 @@ public class PassMenuOptions {
                 return true;
 
             case R.id.menu_share:
-                Tracker.get().trackEvent("ui_action", "share", "shared", null);
+                tracker.trackEvent("ui_action", "share", "shared", null);
                 new AlertDialog.Builder(activity).setItems(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"},
                                                            new DialogInterface.OnClickListener() {
                                                                @Override
@@ -90,7 +95,7 @@ public class PassMenuOptions {
                 return true;
 
             case R.id.menu_edit:
-                Tracker.get().trackEvent("ui_action", "share", "shared", null);
+                tracker.trackEvent("ui_action", "share", "shared", null);
                 passStore.setCurrentPass(pass);
                 AXT.at(activity).startCommonIntent().activityFromClass(PassEditActivity.class);
                 return true;

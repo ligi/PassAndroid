@@ -11,14 +11,19 @@ import org.ligi.passandroid.Tracker;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 public class PastLocationsStore {
     public static final String KEY_PAST_LOCATIONS = "past_locations";
     public static final int MAX_ELEMENTS = 5;
 
     private final Context context;
+    private final Tracker tracker;
 
-    public PastLocationsStore(Context context) {
+    @Inject
+    public PastLocationsStore(Context context, Tracker tracker) {
         this.context = context;
+        this.tracker = tracker;
     }
 
     @TargetApi(11)
@@ -38,7 +43,7 @@ public class PastLocationsStore {
             pastLocations.add(path);
         }
 
-        Tracker.get().trackEvent("scan", "put location", "count", (long) pastLocations.size());
+        tracker.trackEvent("scan", "put location", "count", (long) pastLocations.size());
         prefs.edit().putStringSet(KEY_PAST_LOCATIONS, pastLocations).apply();
     }
 

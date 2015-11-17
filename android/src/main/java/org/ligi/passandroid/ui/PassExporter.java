@@ -1,11 +1,14 @@
 package org.ligi.passandroid.ui;
 
 import android.support.annotation.IntDef;
-import java.io.File;
+
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.util.Zip4jConstants;
-import org.ligi.passandroid.Tracker;
+
+import org.ligi.passandroid.App;
+
+import java.io.File;
 
 public class PassExporter {
 
@@ -58,7 +61,7 @@ public class PassExporter {
             }}, false, 0);
 
         } catch (Exception exception) {
-            Tracker.get().trackException("when exporting pass to zip", exception, false);
+            App.component().tracker().trackException("when exporting pass to zip", exception, false);
             this.exception = exception; // we need to take action on the main thread later
             new File(fullZipFileName).delete(); // prevent zombies from taking over
         }

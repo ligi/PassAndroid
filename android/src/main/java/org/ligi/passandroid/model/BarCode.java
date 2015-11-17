@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.google.zxing.BarcodeFormat;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.tracedroid.logging.Log;
 
@@ -31,13 +31,13 @@ public class BarCode implements Serializable {
     public BitmapDrawable getBitmap(Resources resources) {
         if (message == null) {
             // no message -> no barcode
-            Tracker.get().trackException("No Barcode in pass - strange", false);
+            App.component().tracker().trackException("No Barcode in pass - strange", false);
             return null;
         }
 
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR");
-            Tracker.get().trackException("Barcode format is null - fallback to QR", false);
+            App.component().tracker().trackException("Barcode format is null - fallback to QR", false);
             return BarcodeHelper.generateBitmapDrawable(resources,message, BarcodeFormat.QR_CODE);
         }
 

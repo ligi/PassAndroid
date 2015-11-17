@@ -2,16 +2,17 @@ package org.ligi.passandroid;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
-import com.google.android.gms.analytics.Tracker;
+
 import java.util.ConcurrentModificationException;
 import java.util.Map;
 
-public class AnalyticsTracker implements TrackerInterface {
+public class AnalyticsTracker implements Tracker {
 
-    private final Tracker tracker;
+    private final com.google.android.gms.analytics.Tracker tracker;
     private final Context ctx;
 
     public AnalyticsTracker(Context ctx) {

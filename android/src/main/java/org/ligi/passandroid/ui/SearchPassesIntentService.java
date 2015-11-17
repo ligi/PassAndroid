@@ -14,6 +14,7 @@ import com.squareup.otto.Bus;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
@@ -53,6 +54,9 @@ public class SearchPassesIntentService extends IntentService {
     @Inject
     Bus bus;
 
+    @Inject
+    Tracker tracker;
+
     public SearchPassesIntentService() {
         super("SearchPassesIntentService");
     }
@@ -75,7 +79,7 @@ public class SearchPassesIntentService extends IntentService {
 
         findNotificationBuilder = new NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher);
 
-        for (String path : new PastLocationsStore(getApplicationContext()).getLocations()) {
+        for (String path : new PastLocationsStore(getApplicationContext(), tracker).getLocations()) {
             search_in(new File(path), false);
         }
 

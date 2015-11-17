@@ -1,14 +1,13 @@
 package org.ligi.passandroid.ui.quirk_fix;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassImportActivity;
 
-public class USAirwaysLoadActivity extends Activity {
+public class USAirwaysLoadActivity extends PassAndroidActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class USAirwaysLoadActivity extends Activity {
 
         final String redirectUrl = "http://prod.wap.ncrwebhost.mobi/mobiqa/wap/" + passId + "/passbook";
 
-        Tracker.get().trackEvent("quirk_fix", "redirect", "usairways", null);
+        tracker.trackEvent("quirk_fix", "redirect", "usairways", null);
         final Intent intent = new Intent(this, PassImportActivity.class);
         intent.setData(Uri.parse(redirectUrl));
         startActivity(intent);

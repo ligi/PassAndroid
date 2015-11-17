@@ -1,22 +1,21 @@
 package org.ligi.passandroid.ui.quirk_fix;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassImportActivity;
 
-public class URLRewriteActivity extends Activity {
+public class URLRewriteActivity extends PassAndroidActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String url = new URLRewriteController(Tracker.get()).getUrlByUri(getIntent().getData());
+        final String url = new URLRewriteController(tracker).getUrlByUri(getIntent().getData());
 
         if (url == null) {
             new AlertDialog.Builder(this).setTitle("Workaround failed")
@@ -26,7 +25,7 @@ public class URLRewriteActivity extends Activity {
                     .setPositiveButton("Browser", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Tracker.get().trackException("URLRewrite with invalid activity", false);
+                            tracker.trackException("URLRewrite with invalid activity", false);
                             final Intent intent = new Intent(URLRewriteActivity.this, OpenIphoneWebView.class);
                             intent.setData(getIntent().getData());
                             startActivity(intent);

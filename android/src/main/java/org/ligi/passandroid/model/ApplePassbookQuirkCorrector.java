@@ -1,6 +1,6 @@
 package org.ligi.passandroid.model;
 
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.Strings;
 
 public class ApplePassbookQuirkCorrector {
@@ -21,13 +21,13 @@ public class ApplePassbookQuirkCorrector {
         if (pass.getOrganisation() == null || !pass.getOrganisation().equals("RENFE OPERADORA")) {
             return;
         }
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("boardingTime");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destino");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "RENFE OPERADORA", 1L);
             pass.setDescription(optionalDepart.label + " -> " + optionalArrive.label);
         }
     }
@@ -36,13 +36,13 @@ public class ApplePassbookQuirkCorrector {
         if (pass.getOrganisation() == null || !pass.getOrganisation().equals("SWISS")) {
             return;
         }
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "SWISS", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "SWISS", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destination");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "SWISS", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "SWISS", 1L);
             pass.setDescription(optionalDepart.value + " -> " + optionalArrive.value);
         }
     }
@@ -53,13 +53,13 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("departure");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("arrival");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "cathay_pacific", 1L);
             pass.setDescription(optionalDepart.label + " -> " + optionalArrive.label);
         }
     }
@@ -70,13 +70,13 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "virgin_australia", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "virgin_australia", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("origin");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destination");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "virgin_australia", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "virgin_australia", 1L);
             pass.setDescription(optionalDepart.label + " -> " + optionalArrive.label);
         }
     }
@@ -86,13 +86,13 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "air_canada", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "air_canada", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("arrive");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "air_canada", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "air_canada", 1L);
             pass.setDescription(optionalDepart.label + " -> " + optionalArrive.label);
         }
     }
@@ -102,13 +102,13 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "usairways", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "usairways", 0L);
 
         final PassField optionalDepart = pass.getPrimaryFields().getPassFieldForKey("depart");
         final PassField optionalArrive = pass.getPrimaryFields().getPassFieldForKey("destination");
 
         if (optionalDepart != null && optionalArrive != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "usairways", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "usairways", 1L);
             pass.setDescription(optionalDepart.label + " -> " + optionalArrive.label);
         }
     }
@@ -118,7 +118,7 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "westbahn", 0L);
 
         final PassField originField = pass.getPrimaryFields().getPassFieldForKey("from");
         final PassField destinationField = pass.getPrimaryFields().getPassFieldForKey("to");
@@ -126,12 +126,12 @@ public class ApplePassbookQuirkCorrector {
         String description = "WESTbahn";
 
         if (originField != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "westbahn", 1L);
             description = originField.value;
         }
 
         if (destinationField != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "westbahn", 2L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "westbahn", 2L);
             description += "->" + destinationField.value;
         }
 
@@ -143,17 +143,17 @@ public class ApplePassbookQuirkCorrector {
             return;
         }
 
-        Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 0L);
+        App.component().tracker().trackEvent("quirk_fix", "description_replace", "tuiflight", 0L);
 
         final PassField originField = pass.getPrimaryFields().getPassFieldForKey("Origin");
         final PassField destinationField = pass.getPrimaryFields().getPassFieldForKey("Des");
         final PassField seatField = pass.getAuxiliaryFields().getPassFieldForKey("SeatNumber");
 
         if (originField != null && destinationField != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 1L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "tuiflight", 1L);
             String description = originField.value + "->" + destinationField.value;
             if (seatField != null) {
-                Tracker.get().trackEvent("quirk_fix", "description_replace", "tuiflight", 2L);
+                App.component().tracker().trackEvent("quirk_fix", "description_replace", "tuiflight", 2L);
                 description += " @" + seatField.value;
             }
             pass.setDescription(description);
@@ -173,12 +173,11 @@ public class ApplePassbookQuirkCorrector {
         if (flightField == null) {
             flightField = pass.getHeaderFields().getPassFieldThatMatchesLabel(flightRegex);
         }
-
         final PassField seatField = pass.getAuxiliaryFields().getPassFieldForKey("seat");
         final PassField boardingGroupField = pass.getSecondaryFields().getPassFieldForKey("boardingGroup");
 
         if (flightField != null && seatField != null && boardingGroupField != null) {
-            Tracker.get().trackEvent("quirk_fix", "description_replace", "air_berlin", 0L);
+            App.component().tracker().trackEvent("quirk_fix", "description_replace", "air_berlin", 0L);
             String description = flightField.label + " " + flightField.value;
             description += " | " + seatField.label + " " + seatField.value;
             description += " | " + boardingGroupField.label + " " + boardingGroupField.value;

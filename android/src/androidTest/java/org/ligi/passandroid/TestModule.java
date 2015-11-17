@@ -64,4 +64,11 @@ public class TestModule {
     Bus provideBus() {
         return mock(Bus.class);
     }
+
+
+    @Singleton
+    @Provides
+    Tracker provideTracker() {
+        return mock(Tracker.class);
+    }
 }

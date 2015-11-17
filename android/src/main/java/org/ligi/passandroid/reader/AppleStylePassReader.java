@@ -3,19 +3,15 @@ package org.ligi.passandroid.reader;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
+
 import com.google.zxing.BarcodeFormat;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.SafeJSONReader;
 import org.ligi.passandroid.model.ApplePassbookQuirkCorrector;
 import org.ligi.passandroid.model.AppleStylePassTranslation;
@@ -25,6 +21,13 @@ import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassLocation;
 import org.ligi.tracedroid.logging.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class AppleStylePassReader {
 
@@ -87,7 +90,7 @@ public class AppleStylePassReader {
         }
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ");
-            Tracker.get().trackEvent("problem_event", "pass", "without_pass_json", null);
+            App.component().tracker().trackEvent("problem_event", "pass", "without_pass_json", null);
             pass.setInvalid();
             return pass;
         }
@@ -116,7 +119,7 @@ public class AppleStylePassReader {
                 } catch (JSONException | IllegalArgumentException e) {
                     // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                     // OK then we just have no date here
-                    Tracker.get().trackException("problem parsing relevant date", e, false);
+                    App.component().tracker().trackException("problem parsing relevant date", e, false);
                 }
             }
 
@@ -126,7 +129,7 @@ public class AppleStylePassReader {
                 } catch (JSONException | IllegalArgumentException e) {
                     // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                     // OK then we just have no date here
-                    Tracker.get().trackException("problem parsing expiration date", e, false);
+                    App.component().tracker().trackException("problem parsing expiration date", e, false);
                 }
             }
 
@@ -191,12 +194,12 @@ public class AppleStylePassReader {
             // try to rescue the situation and find types
             if (pass.getType() == null) {
                 pass.setType(findType(pass_json));
-                Tracker.get().trackEvent("problem_event", "strange_type", pass.getType(), null);
+                App.component().tracker().trackEvent("problem_event", "strange_type", pass.getType(), null);
             }
 
             if (pass.getType() == null) {
                 try {
-                    Tracker.get().trackEvent("problem_event", "pass", "without_type", null);
+                    App.component().tracker().trackEvent("problem_event", "pass", "without_type", null);
                     Log.i("pass without type " + pass_json.toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -218,7 +221,7 @@ public class AppleStylePassReader {
 
         try {
             pass.setOrganisation(pass_json.getString("organizationName"));
-            Tracker.get().trackEvent("measure_event", "organisation_parse", pass.getOrganisation(), 1L);
+            App.component().tracker().trackEvent("measure_event", "organisation_parse", pass.getOrganisation(), 1L);
         } catch (JSONException ignored) {
             // ok - we have no organisation - big deal ..-)
         }
@@ -234,14 +237,14 @@ public class AppleStylePassReader {
         final File localized = new File(path, language + ".lproj");
 
         if (localized.exists() && localized.isDirectory()) {
-            Tracker.get().trackEvent("measure_event", "pass", language + "_native_lproj", null);
+            App.component().tracker().trackEvent("measure_event", "pass", language + "_native_lproj", null);
             return localized.getPath();
         }
 
         final File fallback = new File(path, "en.lproj");
 
         if (fallback.exists() && fallback.isDirectory()) {
-            Tracker.get().trackEvent("measure_event", "pass", "en_lproj", null);
+            App.component().tracker().trackEvent("measure_event", "pass", "en_lproj", null);
             return fallback.getPath();
         }
 
