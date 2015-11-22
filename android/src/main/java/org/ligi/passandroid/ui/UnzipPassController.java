@@ -19,23 +19,11 @@ import java.util.UUID;
 public class UnzipPassController {
 
     public interface SuccessCallback {
-        public void call(String uuid);
+        void call(String uuid);
     }
 
     public interface FailCallback {
-        public void fail(String reason);
-    }
-
-    public static class SilentFail implements FailCallback {
-        @Override
-        public void fail(String reason) {
-        }
-    }
-
-    public static class SilentWin implements SuccessCallback {
-        @Override
-        public void call(String uuid) {
-        }
+        void fail(String reason);
     }
 
     public static void processInputStream(InputStreamUnzipControllerSpec spec) {
