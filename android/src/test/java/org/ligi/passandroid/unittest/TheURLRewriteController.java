@@ -58,4 +58,10 @@ public class TheURLRewriteController {
         assertThat(res).isEqualTo("https://mobile.virginaustralia.com/boarding/pass.pkpass?key=foo");
     }
 
+    @Test
+    public void testAirCanada() {
+        final String res = tested.getUrlByUri(Uri.parse("http://m.aircanada.ca/ebp/XYZ"));
+
+        assertThat(res).isEqualTo("http://m.aircanada.ca/ebp/XYZ?appDetection=false");
+    }
 }

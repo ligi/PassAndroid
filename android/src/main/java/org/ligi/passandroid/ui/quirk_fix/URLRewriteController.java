@@ -21,6 +21,8 @@ public class URLRewriteController {
         }
 
         switch (uri.getHost()) {
+            case "m.aircanada.ca":
+                return getAirCanada(uri);
             case "www.cathaypacific.com":
                 return getCathay(uri);
             case "mbp.swiss.com":
@@ -29,6 +31,10 @@ public class URLRewriteController {
         }
 
         return null;
+    }
+
+    private String getAirCanada(Uri uri) {
+        return uri.toString()+ "?appDetection=false";
     }
 
     private String getVirginAustraliaURL(final Uri uri) {
