@@ -176,6 +176,8 @@ public class PassViewActivity extends PassViewActivityBase {
             setBarCodeSize(smallestSide / 2);
         } else {
             setBitmapSafe(barcode_img, null);
+            zoomIn.setVisibility(View.GONE);
+            zoomOut.setVisibility(View.GONE);
         }
 
         setBitmapSafe(logo_img, pass.getBitmap(Pass.BITMAP_LOGO));

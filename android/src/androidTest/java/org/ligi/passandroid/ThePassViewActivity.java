@@ -3,7 +3,10 @@ package org.ligi.passandroid;
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import com.google.zxing.BarcodeFormat;
+
 import org.joda.time.DateTime;
+import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.PassViewActivity;
@@ -89,5 +92,23 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
     }
 
+
+    @MediumTest
+    public void testZoomControlsAreThereWithBarcode() {
+        act_pass.setBarCode(new BarCode(BarcodeFormat.AZTEC,"foo"));
+        getActivity();
+
+        onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));
+        onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));
+    }
+
+    @MediumTest
+    public void testZoomControlsAreGoneWithoutBarcode() {
+        act_pass.setBarCode(null);
+        getActivity();
+
+        onView(withId(R.id.zoomIn)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.zoomIn)).check(matches(not(isDisplayed())));
+    }
 
 }
