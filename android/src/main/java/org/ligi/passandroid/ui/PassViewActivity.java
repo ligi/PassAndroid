@@ -247,7 +247,7 @@ public class PassViewActivity extends PassViewActivityBase {
     private void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
 
         if (bitmap != null) {
-            imageView.setLayoutParams(getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(imageView, bitmap));
+            imageView.setLayoutParams(getLayoutParamsSoThatWeHaveMinimumAFingerInHeight(imageView, bitmap));
 
             imageView.setImageBitmap(bitmap);
             imageView.setVisibility(View.VISIBLE);
@@ -259,8 +259,8 @@ public class PassViewActivity extends PassViewActivityBase {
     }
 
     @NonNull
-    private ViewGroup.LayoutParams getLayoutParamsSoThatWeHaveAtLeasHalfAFinger(final ImageView imageView, final Bitmap bitmap) {
-        final int halfAFingerInPixels = getFingerSize() / 2;
+    private ViewGroup.LayoutParams getLayoutParamsSoThatWeHaveMinimumAFingerInHeight(final ImageView imageView, final Bitmap bitmap) {
+        final int halfAFingerInPixels = getFingerSize();
         final ViewGroup.LayoutParams params = imageView.getLayoutParams();
         if (bitmap.getHeight() < halfAFingerInPixels) {
             params.height = halfAFingerInPixels;
