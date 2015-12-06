@@ -22,6 +22,7 @@ public abstract class BaseIntegration<T extends Activity> extends ActivityInstru
 
     }
 
+
     @Override
     public T getActivity() {
         final T activity = super.getActivity();
