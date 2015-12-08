@@ -103,4 +103,7 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
     \n\n sólo tiene que pulsar + de abajo
     </string>
   <string name="downloading_new_pass_version">descargando nueva versión del pase</string>
+  <string name="unzip_pass_dialog_title">Abriendo Passbook</string>
+  <string name="unzip_pass_dialog_message">Por favor, espere...</string>
+  <string name="action_update">actualizado</string>
 </resources>
