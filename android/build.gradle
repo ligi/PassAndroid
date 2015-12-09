@@ -118,7 +118,7 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     // The Apache Softwjsrare License, Version 2.0
-    compile 'com.google.code.gson:gson:2.4'
+
     compile 'net.lingala.zip4j:zip4j:1.3.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'net.danlew:android.joda:2.9.0'
