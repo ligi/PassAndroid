@@ -1,7 +1,6 @@
 package org.ligi.passandroid.model;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -17,12 +16,12 @@ public class PastLocationsStore {
     public static final String KEY_PAST_LOCATIONS = "past_locations";
     public static final int MAX_ELEMENTS = 5;
 
-    private final Context context;
+    private final SharedPreferences sharedPreferences;
     private final Tracker tracker;
 
     @Inject
-    public PastLocationsStore(Context context, Tracker tracker) {
-        this.context = context;
+    public PastLocationsStore(SharedPreferences sharedPreferences, Tracker tracker) {
+        this.sharedPreferences = sharedPreferences;
         this.tracker = tracker;
     }
 
@@ -32,8 +31,7 @@ public class PastLocationsStore {
             // feature not available for these versions
             return;
         }
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final Set<String> pastLocations = prefs.getStringSet(KEY_PAST_LOCATIONS, new HashSet<String>());
+        final Set<String> pastLocations = sharedPreferences.getStringSet(KEY_PAST_LOCATIONS, new HashSet<String>());
 
         if (pastLocations.size() >= MAX_ELEMENTS) {
             deleteOneElementFromSet(pastLocations);
@@ -44,7 +42,7 @@ public class PastLocationsStore {
         }
 
         tracker.trackEvent("scan", "put location", "count", (long) pastLocations.size());
-        prefs.edit().putStringSet(KEY_PAST_LOCATIONS, pastLocations).apply();
+        sharedPreferences.edit().putStringSet(KEY_PAST_LOCATIONS, pastLocations).apply();
     }
 
     private void deleteOneElementFromSet(Set<String> pastLocations) {
@@ -65,7 +63,6 @@ public class PastLocationsStore {
             // feature not available for these versions
             return new HashSet<>();
         }
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getStringSet(KEY_PAST_LOCATIONS, new HashSet<String>());
+        return sharedPreferences.getStringSet(KEY_PAST_LOCATIONS, new HashSet<String>());
     }
 }

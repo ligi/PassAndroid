@@ -1,9 +1,10 @@
 package org.ligi.passandroid;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import org.junit.Before;
 import org.ligi.passandroid.model.PastLocationsStore;
 
 import javax.inject.Inject;
@@ -22,12 +23,22 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        ((TestComponent)App.component()).inject(this);
+        ((TestComponent) App.component()).inject(this);
     }
-    
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        getSharedPrefs().edit().clear();
+    }
+
+    private SharedPreferences getSharedPrefs() {
+        return getInstrumentation().getContext().getSharedPreferences("" + (System.currentTimeMillis() / 100000), Context.MODE_PRIVATE);
+    }
+
     @SmallTest
     public void testPastLocationsStoreShouldNeverContainMoreThanMaxElements() {
-        PastLocationsStore tested = new PastLocationsStore(getInstrumentation().getContext(), tracker);
+        PastLocationsStore tested = new PastLocationsStore(getSharedPrefs(), tracker);
 
         for (int i = 0; i < PastLocationsStore.MAX_ELEMENTS * 2; i++) {
             tested.putLocation("" + i);
@@ -39,13 +50,13 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
 
     @SmallTest
     public void testPastLocationsStoreShouldStoreOnlyOneOfAKind() {
-        PastLocationsStore tested = new PastLocationsStore(getInstrumentation().getContext(), tracker);
+        PastLocationsStore tested = new PastLocationsStore(getSharedPrefs(), tracker);
 
         for (int i = 0; i < 3; i++) {
             tested.putLocation("foo");
         }
 
-        assertThat(tested.getLocations().size()).isLessThan(2);
+        assertThat(tested.getLocations()).containsOnly("foo");
 
     }
 

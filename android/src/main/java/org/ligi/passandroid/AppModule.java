@@ -1,5 +1,8 @@
 package org.ligi.passandroid;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -33,6 +36,11 @@ public class AppModule {
         return new Settings(app);
     }
 
+    @Singleton
+    @Provides
+    SharedPreferences provideSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(app);
+    }
 
     @Singleton
     @Provides

@@ -5,9 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.squareup.otto.Bus;
@@ -79,7 +81,8 @@ public class SearchPassesIntentService extends IntentService {
 
         findNotificationBuilder = new NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher);
 
-        for (String path : new PastLocationsStore(getApplicationContext(), tracker).getLocations()) {
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        for (String path : new PastLocationsStore(preferences, tracker).getLocations()) {
             search_in(new File(path), false);
         }
 
