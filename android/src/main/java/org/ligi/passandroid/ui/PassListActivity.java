@@ -2,10 +2,12 @@ package org.ligi.passandroid.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -90,10 +92,14 @@ public class PassListActivity extends PassAndroidActivity {
     @OnClick(R.id.fab_action_open_file)
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
     void onAddOpenFileClick() {
-        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // tried with octet stream - no use
-        startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
+        try {
+            final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("*/*"); // tried with octet stream - no use
+            startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
+        } catch (ActivityNotFoundException e) {
+            Snackbar.make(floatingActionsMenu,"Unavailable",Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override
