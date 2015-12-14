@@ -30,7 +30,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
     @Inject
     PassStore passStore;
 
-    public static final String BARCODE_MESSAGE = "foo";
+    public static final String BARCODE_MESSAGE = "2323";
 
     public TheFullscreenBarcodeActivity() {
         super(FullscreenBarcodeActivity.class);
@@ -71,6 +71,23 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
         Spoon.screenshot(getActivity(), "qr_barcode");
     }
+
+    @MediumTest
+    public void testCode128CodeIsShown() {
+        testWithBarcodeFormat(BarcodeFormat.CODE_128);
+
+        Spoon.screenshot(getActivity(), "code128_barcode");
+    }
+
+
+    @MediumTest
+    public void testCode39CodeIsShown() {
+        testWithBarcodeFormat(BarcodeFormat.CODE_39);
+
+        Spoon.screenshot(getActivity(), "code39_barcode");
+    }
+
+
 
     private void testWithBarcodeFormat(final BarcodeFormat format) {
         final PassImpl pass = new PassImpl();

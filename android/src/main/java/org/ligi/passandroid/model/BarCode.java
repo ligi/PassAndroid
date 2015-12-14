@@ -59,6 +59,18 @@ public class BarCode implements Serializable {
             return BarcodeFormat.CODE_128;
         }
 
+        /*
+        requested but not supported by xing (yet)
+        https://github.com/ligi/PassAndroid/issues/43
+
+        if (format.toUpperCase(Locale.ENGLISH).contains("93")) {
+            return BarcodeFormat.CODE_93;
+        }
+
+        */
+        if (format.toUpperCase(Locale.ENGLISH).contains("39")) {
+            return BarcodeFormat.CODE_39;
+        }
 
         return BarcodeFormat.QR_CODE;
 
