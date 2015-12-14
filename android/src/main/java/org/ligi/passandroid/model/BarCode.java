@@ -54,6 +54,12 @@ public class BarCode implements Serializable {
             return BarcodeFormat.AZTEC;
         }
 
+
+        if (format.toUpperCase(Locale.ENGLISH).contains("128")) {
+            return BarcodeFormat.CODE_128;
+        }
+
+
         return BarcodeFormat.QR_CODE;
 
     }
