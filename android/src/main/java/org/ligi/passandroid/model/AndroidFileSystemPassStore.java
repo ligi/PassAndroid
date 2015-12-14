@@ -1,20 +1,23 @@
 package org.ligi.passandroid.model;
 
 import android.content.Context;
+
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.App;
+import org.ligi.passandroid.helper.DirectoryFileFilter;
+import org.ligi.passandroid.model.comparator.PassByTimeComparator;
+import org.ligi.passandroid.model.comparator.PassByTypeFirstAndTimeSecondComparator;
+import org.ligi.passandroid.reader.AppleStylePassReader;
+import org.ligi.passandroid.reader.PassReader;
+import org.ligi.tracedroid.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
-import org.ligi.passandroid.helper.DirectoryFileFilter;
-import org.ligi.passandroid.reader.AppleStylePassReader;
-import org.ligi.passandroid.reader.PassReader;
-import org.ligi.tracedroid.logging.Log;
 
 public class AndroidFileSystemPassStore implements PassStore {
 
@@ -150,42 +153,11 @@ public class AndroidFileSystemPassStore implements PassStore {
     public void sort(final SortOrder order) {
         switch (order) {
             case TYPE:
-                Collections.sort(passList, new Comparator<Pass>() {
-                    @Override
-                    public int compare(Pass lhs, Pass rhs) {
-                        if (lhs.getType() == rhs.getType()) { // that looks bad but makes sense for both being null
-                            return 0;
-                        }
-
-                        if (lhs.getType() == null) {
-                            return 1;
-                        }
-                        if (rhs.getType() == null) {
-                            return -1;
-                        }
-                        return lhs.getType().compareTo(rhs.getType());
-                    }
-                });
+                Collections.sort(passList, new PassByTypeFirstAndTimeSecondComparator());
                 break;
 
             case DATE:
-                Collections.sort(passList, new Comparator<Pass>() {
-                    @Override
-                    public int compare(Pass lhs, Pass rhs) {
-
-                        if (lhs.getRelevantDate() == null && rhs.getRelevantDate() == null) {
-                            return 0;
-                        }
-
-                        if (lhs.getRelevantDate() == null) {
-                            return 1;
-                        }
-                        if (rhs.getRelevantDate() == null) {
-                            return -1;
-                        }
-                        return rhs.getRelevantDate().compareTo(lhs.getRelevantDate());
-                    }
-                });
+                Collections.sort(passList, new PassByTimeComparator());
                 break;
         }
 
@@ -234,6 +206,5 @@ public class AndroidFileSystemPassStore implements PassStore {
     public String getPathForID(final String id) {
         return path + "/" + id;
     }
-
 
 }
