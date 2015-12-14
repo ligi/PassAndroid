@@ -40,7 +40,15 @@ public class BarcodeHelper {
 
             // generate an image from the byte matrix
             final int width = matrix.getWidth();
-            final int height = matrix.getHeight();
+
+            final int height;
+            final boolean is1D = matrix.getHeight() == 1;
+            if (is1D) {
+                height = width / 5;
+            } else {
+                height = matrix.getHeight();
+            }
+
 
             // create buffered image to draw to
             // NTFS Bitmap.Config.ALPHA_8 sounds like an awesome idea - been there - done that ..
@@ -49,7 +57,7 @@ public class BarcodeHelper {
             // iterate through the matrix and draw the pixels to the image
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    barcode_image.setPixel(x, y, matrix.get(x, y) ? 0 : 0xFFFFFF);
+                    barcode_image.setPixel(x, y, matrix.get(x, is1D ? 0 : y) ? 0 : 0xFFFFFF);
                 }
             }
 
@@ -64,7 +72,7 @@ public class BarcodeHelper {
 
     public static BitMatrix getBitMatrix(String data, BarcodeFormat type) throws WriterException {
         final Writer writer = new MultiFormatWriter();
-        return writer.encode(data, type,0,0);
+        return writer.encode(data, type, 0, 0);
     }
 
     public static boolean isBarcodeFormatQuadratic(BarcodeFormat format) {
