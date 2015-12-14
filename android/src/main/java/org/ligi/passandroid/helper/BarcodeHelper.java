@@ -66,4 +66,15 @@ public class BarcodeHelper {
         final Writer writer = new MultiFormatWriter();
         return writer.encode(data, type,0,0);
     }
+
+    public static boolean isBarcodeFormatQuadratic(BarcodeFormat format) {
+        switch (format) {
+            case QR_CODE:
+            case AZTEC:
+                return true;
+
+            default:
+                return false;
+        }
+    }
 }

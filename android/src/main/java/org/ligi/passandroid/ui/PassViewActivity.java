@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
@@ -106,7 +107,9 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         currentBarcodeWidth = width;
-        barcode_img.setLayoutParams(new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
+        assert (optionalPass.getBarCode() != null); // we will not setBarCodeSize otherwise
+        final boolean quadratic = BarcodeHelper.isBarcodeFormatQuadratic(optionalPass.getBarCode().getFormat());
+        barcode_img.setLayoutParams(new LinearLayout.LayoutParams(width, quadratic ? width : ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     @SuppressWarnings("deprecation")
@@ -160,7 +163,7 @@ public class PassViewActivity extends PassViewActivityBase {
 
             final BitmapDrawable bitmapDrawable = pass.getBarCode().getBitmap(getResources());
 
-            if (bitmapDrawable!=null) {
+            if (bitmapDrawable != null) {
                 barcode_img.setImageDrawable(bitmapDrawable);
             } else {
                 barcode_img.setVisibility(View.GONE);
