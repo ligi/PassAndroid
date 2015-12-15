@@ -99,6 +99,7 @@ public class AppleStylePassReader {
             final JSONObject barcode_json = pass_json.getJSONObject("barcode");
             final String barcodeFormatString = barcode_json.getString("format");
 
+            App.component().tracker().trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L);
             final BarcodeFormat barcodeFormat = BarCode.getFormatFromString(barcodeFormatString);
             final BarCode barCode = new BarCode(barcodeFormat, barcode_json.getString("message"));
             pass.setBarCode(barCode);
@@ -279,7 +280,7 @@ public class AppleStylePassReader {
 
     private static void copyBitmapFile(String path, @Nullable String localizedPath, String bitmap) {
         final Bitmap bitmap1 = findBitmap(path, localizedPath, bitmap);
-        if (bitmap1!=null) {
+        if (bitmap1 != null) {
             try {
                 bitmap1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File(path, bitmap + PassImpl.FILETYPE_IMAGES)));
             } catch (Exception e) {
