@@ -11,14 +11,16 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MetaDataFragment extends PassandroidFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -31,7 +33,7 @@ public class MetaDataFragment extends PassandroidFragment implements TimePickerD
     public MetaDataFragment() {
         pass = (PassImpl) passStore.getCurrentPass();
 
-        if (pass.getRelevantDate()!=null) {
+        if (pass.getRelevantDate() != null) {
             time = pass.getRelevantDate();
         } else {
             time = DateTime.now();

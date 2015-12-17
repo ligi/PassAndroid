@@ -41,15 +41,9 @@ public interface PassStore {
 
     void deleteCacheForId(String id);
 
-    void deleteCache();
-
-    void deleteCache(String id);
-
     void refreshPassesList();
 
     int passCount();
-
-    boolean isEmpty();
 
     Pass getPassbookAt(int pos);
 

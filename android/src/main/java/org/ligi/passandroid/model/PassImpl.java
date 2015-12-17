@@ -107,7 +107,7 @@ public class PassImpl implements FiledPass, Serializable {
         path = store.getPathForID(getId());
         new File(path).mkdirs();
         final File file = new File(path, "data.json");
-        store.deleteCache(getId());
+        store.deleteCacheForId(getId());
         AXT.at(file).writeString(jsonString);
 
     }

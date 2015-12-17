@@ -1,9 +1,10 @@
 package org.ligi.passandroid.injections;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FixedPassListPassStore implements PassStore {
 
@@ -25,16 +26,6 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public void deleteCache() {
-        // no effect in this impl
-    }
-
-    @Override
-    public void deleteCache(String id) {
-        // no effect in this impl
-    }
-
-    @Override
     public void refreshPassesList() {
         // no effect in this impl
     }
@@ -42,11 +33,6 @@ public class FixedPassListPassStore implements PassStore {
     @Override
     public int passCount() {
         return passes.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return passCount() == 0;
     }
 
     @Override
