@@ -10,6 +10,8 @@ import android.widget.Toast;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 
+import java.io.File;
+
 class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     private final ProgressDialog progress_dialog;
@@ -19,13 +21,12 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
     protected PassExporter passExporter;
 
     public PassExportTask(final Activity activity,
-                          final String inputPath,
+                          final File inputPath,
                           final String zipPath,
                           final String zipFileName,
-                          final boolean share_after_export,
-                          @PassExporter.PassFormat final int passFormat) {
+                          final boolean share_after_export) {
         this.activity = activity;
-        passExporter = new PassExporter(passFormat, inputPath, zipPath + "/" + zipFileName);
+        passExporter = new PassExporter( inputPath, zipPath + "/" + zipFileName);
         this.share_after_export = share_after_export;
         progress_dialog = new ProgressDialog(activity);
     }

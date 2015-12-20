@@ -7,7 +7,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-
+import com.squareup.otto.Bus;
+import java.io.File;
+import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -16,10 +18,6 @@ import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
-
-import java.io.File;
-
-import javax.inject.Inject;
 
 public class PassMenuOptions {
 
@@ -31,6 +29,9 @@ public class PassMenuOptions {
 
     @Inject
     Settings settings;
+
+    @Inject
+    Bus bus;
 
     public final Activity activity;
     public final Pass pass;
@@ -54,7 +55,7 @@ public class PassMenuOptions {
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
 
-                if (pass.getSource() != null && pass.getSource().startsWith("file://")) {
+                if (pass.getSource(passStore) != null && pass.getSource(passStore).startsWith("file://")) {
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
                     builder.setView(sourceDeleteCheckBox);
                 }
@@ -64,14 +65,12 @@ public class PassMenuOptions {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (sourceDeleteCheckBox.isChecked()) {
-                            new File(pass.getSource().replace("file://", "")).delete();
+                            new File(pass.getSource(passStore).replace("file://", "")).delete();
                         }
                         passStore.deletePassWithId(pass.getId());
                         if (activity instanceof PassViewActivityBase) {
                             final Intent passListIntent = new Intent(activity, PassListActivity.class);
                             NavUtils.navigateUpTo(activity, passListIntent);
-                        } else if (activity instanceof PassListActivity) {
-                            ((PassListActivity) activity).refreshPasses();
                         }
                     }
 
@@ -88,14 +87,7 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 tracker.trackEvent("ui_action", "share", "shared", null);
-                new AlertDialog.Builder(activity).setItems(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"},
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialog, final int which) {
-                                exportInFormat(which);
-                            }
-                        }).show();
-
+                new PassExportTask(activity, passStore.getPathForID(pass.getId()), settings.getShareDir(), "share", true).execute();
                 return true;
 
             case R.id.menu_edit:
@@ -107,21 +99,6 @@ public class PassMenuOptions {
         return false;
     }
 
-    private void exportInFormat(final int which) {
-        final int passFormat = getPassFormat(which);
-        new PassExportTask(activity, pass.getPath(), settings.getShareDir(), "share", true, passFormat).execute();
-    }
-
-    @PassExporter.PassFormat
-    private int getPassFormat(int which) {
-        switch (which) {
-            case 1:
-                return PassExporter.FORMAT_PKPASS;
-
-            default:
-                return PassExporter.FORMAT_OPENPASS;
-        }
-    }
 
 
 }

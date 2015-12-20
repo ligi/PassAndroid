@@ -1,32 +1,21 @@
 package org.ligi.passandroid.model;
 
-import java.io.Serializable;
+public class PassLocation {
 
-public class PassLocation implements Serializable {
+    private String name;
+    public double lat;
+    public double lon;
 
-    private final Pass connectedPass;
-    private String description;
-    public LatLng latlng = new LatLng();
-
-    public PassLocation(Pass connectedPass) {
-        this.connectedPass = connectedPass;
-    }
-
-    public String getDescription() {
-        if (description == null) {
+    public String getName(Pass pass) {
+        if (name == null) {
             // fallback for passes with locations without description - e.g. AirBerlin
-            return connectedPass.getDescription();
+            return pass.getDescription();
         }
-        return description;
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    public class LatLng implements Serializable {
-        public double lat;
-        public double lon;
-    }
 }

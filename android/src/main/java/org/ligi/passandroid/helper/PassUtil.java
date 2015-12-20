@@ -1,26 +1,20 @@
 package org.ligi.passandroid.helper;
 
 import java.util.UUID;
-import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassType;
 
 public class PassUtil {
 
-    public static final String ORGANIZATION = "org.ligi.passandroid";
-    public static final String APP = ORGANIZATION;
+    public static final String APP = "passandroid";
 
-    public static FiledPass createEmptyPass() {
-
-        final PassImpl pass = new PassImpl();
-
-        pass.setId(UUID.randomUUID().toString());
-        pass.setBackgroundColor(0xFF0000ff);
+    public static Pass createEmptyPass() {
+        final PassImpl pass = new PassImpl(UUID.randomUUID().toString());
+        pass.setAccentColor(0xFF0000ff);
         pass.setDescription("custom Pass");
-        pass.setOrganisation(ORGANIZATION);
         pass.setApp(APP);
-        pass.setType(Pass.TYPES[0]);
-
+        pass.setType(PassType.EVENT);
         return pass;
     }
 }

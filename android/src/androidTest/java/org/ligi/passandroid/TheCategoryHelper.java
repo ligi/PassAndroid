@@ -5,7 +5,8 @@ import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassDefinitions;
+import org.ligi.passandroid.model.PassType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,11 +20,11 @@ public class TheCategoryHelper extends InstrumentationTestCase {
 
         final Set<Integer> probe = new HashSet<>();
 
-        for (String type : Pass.TYPES) {
+        for (PassType type : PassDefinitions.INSTANCE.getTYPES().keySet()) {
             probe.add(CategoryHelper.getHumanCategoryString(type));
         }
 
-        assertThat(probe.size()).isEqualTo(Pass.TYPES.length);
+        assertThat(probe.size()).isEqualTo(PassDefinitions.INSTANCE.getTYPES().keySet().size());
     }
 
 }

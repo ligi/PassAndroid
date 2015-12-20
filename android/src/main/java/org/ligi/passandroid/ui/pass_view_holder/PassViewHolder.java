@@ -11,20 +11,19 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.joda.time.DateTime;
-import org.ligi.passandroid.R;
-import org.ligi.passandroid.actions.AddToCalendar;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassField;
-import org.ligi.passandroid.ui.NavigateToLocationsDialog;
-import org.ligi.passandroid.ui.Visibility;
-import org.ligi.passandroid.ui.views.CategoryIndicatorView;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+import org.ligi.passandroid.R;
+import org.ligi.passandroid.actions.AddToCalendar;
+import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassBitmapDefinitions;
+import org.ligi.passandroid.model.PassField;
+import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.ui.NavigateToLocationsDialog;
+import org.ligi.passandroid.ui.Visibility;
+import org.ligi.passandroid.ui.views.CategoryIndicatorView;
+import org.threeten.bp.ZonedDateTime;
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -74,7 +73,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, view);
     }
 
-    public void apply(final Pass pass, final Activity activity) {
+    public void apply(final Pass pass, final PassStore passStore, final Activity activity) {
         this.pass = pass;
         this.activity = activity;
 
@@ -84,23 +83,21 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
         navigateTo.setVisibility(getVisibilityForGlobalAndLocal(noButtons, (pass.getLocations().size() > 0)));
         addCalendar.setVisibility(getVisibilityForGlobalAndLocal(noButtons, getDateOrExtraText() != null));
 
-        final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
+        final Bitmap iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON);
 
         if (iconBitmap != null) {
             final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);
             icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap, size, size, false));
         } else {
-            final ColorDrawable colorDrawable = new ColorDrawable(pass.getBackgroundColor());
+            final ColorDrawable colorDrawable = new ColorDrawable(pass.getAccentColor());
             icon.setImageDrawable(colorDrawable);
         }
 
         if (pass.getType() != null) {
             category.setImageByCategory(pass.getType());
-            category.setExtraTextToCatShortString(pass.getType());
         }
 
-        category.setTextBackgroundColor(pass.getBackgroundColor());
-        category.setTextColor(pass.getForegroundColor());
+        category.setAccentColor(pass.getAccentColor());
 
         title.setText(pass.getDescription());
 
@@ -109,28 +106,21 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
 
     @Nullable
     protected String getExtraString() {
-        if (pass.getHeaderFields().size() > 0) {
-            return getExtraStringForField(pass.getHeaderFields().get(0));
-        }
-
-        if (pass.getPrimaryFields().size() > 0) {
-            return getExtraStringForField(pass.getPrimaryFields().get(0));
-        }
-
-        if (pass.getSecondaryFields().size() > 0) {
-            return getExtraStringForField(pass.getSecondaryFields().get(0));
+        if (pass.getFields().size() > 0) {
+            return getExtraStringForField(pass.getFields().get(0));
         }
 
         return null;
     }
 
     private String getExtraStringForField(final PassField passField) {
-        return (passField.label + ": " + passField.value);
+        return (passField.getLabel() + ": " + passField.getValue());
     }
+
     @NonNull
-    private String setDateTextFromDateAndPrefix(String prefix, @NonNull final DateTime relevantDate) {
+    private String setDateTextFromDateAndPrefix(String prefix, @NonNull final ZonedDateTime relevantDate) {
         final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(activity,
-                relevantDate.getMillis(),
+                relevantDate.toEpochSecond() * 1000,
                 DateUtils.MINUTE_IN_MILLIS,
                 DateUtils.WEEK_IN_MILLIS,
                 0);
@@ -140,21 +130,25 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
 
     @Nullable
     protected String getTimeInfoString() {
-        if (pass.getRelevantDate() != null) {
-            return setDateTextFromDateAndPrefix("", pass.getRelevantDate());
-        } else if (pass.getExpirationDate() != null) {
-            return setDateTextFromDateAndPrefix(pass.getExpirationDate().isAfterNow() ? "expires " : " expired ", pass.getExpirationDate());
+        if (pass.getCalendarTimespan() != null && pass.getCalendarTimespan().getFrom() != null) {
+            return setDateTextFromDateAndPrefix("", pass.getCalendarTimespan().getFrom());
+        } else if (pass.getValidTimespans().size() > 0 && pass.getValidTimespans().get(0).getTo()!=null) {
+            final ZonedDateTime to = pass.getValidTimespans().get(0).getTo();
+            return setDateTextFromDateAndPrefix(to.isAfter(ZonedDateTime.now()) ? "expires " : " expired ", to);
         } else {
             return null;
         }
     }
 
     @Nullable
-    private DateTime getDateOrExtraText() {
-        if (pass.getRelevantDate() != null) {
-            return pass.getRelevantDate();
+    private ZonedDateTime getDateOrExtraText() {
+        if (pass.getCalendarTimespan() != null && pass.getCalendarTimespan().getFrom() != null) {
+            return pass.getCalendarTimespan().getFrom();
         }
-        return pass.getExpirationDate();
+        if (pass.getValidTimespans().size() > 0) {
+            return pass.getValidTimespans().get(0).getTo();
+        }
+        return null;
     }
 
     @Visibility

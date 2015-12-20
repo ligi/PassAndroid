@@ -15,6 +15,8 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -90,7 +92,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
 
     private void testWithBarcodeFormat(final BarcodeFormat format) {
-        final PassImpl pass = new PassImpl();
+        final PassImpl pass = new PassImpl(UUID.randomUUID().toString());
         pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
 
         passStore.setCurrentPass(pass);

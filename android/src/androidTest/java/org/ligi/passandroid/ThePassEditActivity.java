@@ -6,6 +6,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.squareup.spoon.Spoon;
 
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.PassType;
 import org.ligi.passandroid.ui.PassEditActivity;
 
 import javax.inject.Inject;
@@ -46,7 +47,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testSetToEventWorks() {
         onView(withText(R.string.category_event)).perform(click());
-        assertThat(passStore.getCurrentPass().getType()).isEqualTo("eventTicket");
+        assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.EVENT);
 
         Spoon.screenshot(getActivity(), "edit_set_event");
     }
@@ -54,7 +55,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testSetToCouponWorks() {
         onView(withText(R.string.category_coupon)).perform(click());
-        assertThat(passStore.getCurrentPass().getType()).isEqualTo("coupon");
+        assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.COUPON);
 
         Spoon.screenshot(getActivity(), "edit_set_coupon");
     }

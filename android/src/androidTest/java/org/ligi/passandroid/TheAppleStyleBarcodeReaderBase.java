@@ -2,16 +2,14 @@ package org.ligi.passandroid;
 
 import android.content.Context;
 import android.test.InstrumentationTestCase;
-
+import java.io.File;
+import java.io.InputStream;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.ui.UnzipPassController;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.io.InputStream;
-
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
@@ -48,14 +46,14 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
                     new UnzipPassController.SuccessCallback() {
                         @Override
                         public void call(String uuid) {
-                            callback.onPassLoad(AppleStylePassReader.read(getTestTargetPath(getInstrumentation().getTargetContext())+"/"+ uuid, "en"));
+                            callback.onPassLoad(AppleStylePassReader.INSTANCE.read(new File(getTestTargetPath(getInstrumentation().getTargetContext()), uuid), "en"));
                         }
                     }
                     , failCallback
             );
 
-            spec.overwrite = true;
-            spec.targetPath = getTestTargetPath(spec.context);
+            spec.setOverwrite(true);
+            spec.setTargetPath(getTestTargetPath(spec.getContext()));
             UnzipPassController.processInputStream(spec);
 
             verify(failCallback, never()).fail(any(String.class));

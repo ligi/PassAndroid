@@ -1,7 +1,6 @@
 package org.ligi.passandroid.unittest;
 
 import org.junit.Test;
-import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassImpl;
@@ -90,10 +89,8 @@ public class ThePassClassifier {
         assertThat(tested.getTopics()).containsExactly(PassClassifier.DEFAULT_TOPIC);
     }
 
-    public FiledPass getPassWithId(String id) {
-        PassImpl result = new PassImpl();
-        result.setId(id);
-        return result;
+    public Pass getPassWithId(String id) {
+        return new PassImpl(id);
     }
 
 

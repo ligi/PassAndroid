@@ -9,11 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+import java.util.List;
+import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PassStoreProjection;
@@ -21,10 +21,6 @@ import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
-
-import java.util.List;
-
-import javax.inject.Inject;
 
 public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
@@ -59,10 +55,10 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final PassViewHolder viewHolder, int longClickedCardPosition) {
-        final Pass pass = passStoreProjection.getPassList().get(longClickedCardPosition);
+    public void onBindViewHolder(final PassViewHolder viewHolder, int position) {
+        final Pass pass = passStoreProjection.getPassList().get(position);
 
-        viewHolder.apply(pass, passListActivity);
+        viewHolder.apply(pass, passStore, passListActivity);
 
         final CardView root = viewHolder.root;
 
@@ -136,7 +132,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
         return position;
     }
 
-    private List<FiledPass> getList() {
+    private List<Pass> getList() {
         return passStoreProjection.getPassList();
     }
 

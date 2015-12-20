@@ -9,10 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-
+import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -29,11 +30,6 @@ import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
 import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
-
-import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class PassEditActivity extends AppCompatActivity {
 
@@ -142,7 +138,7 @@ public class PassEditActivity extends AppCompatActivity {
             passViewHolder = new VerbosePassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
         }
 
-        passViewHolder.apply(pass, this);
+        passViewHolder.apply(pass,passStore, this);
     }
 
     @Override
@@ -173,7 +169,8 @@ public class PassEditActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_save:
                 passStore.setCurrentPass(pass);
-                pass.save(passStore);
+
+                passStore.save(pass);
                 AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
                 return true;
         }

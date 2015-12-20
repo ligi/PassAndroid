@@ -12,11 +12,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import org.joda.time.DateTime;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassImpl;
+import org.threeten.bp.ZonedDateTime;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,28 +27,28 @@ public class MetaDataFragment extends PassandroidFragment implements TimePickerD
     @Bind(R.id.descriptionEdit)
     EditText descriptionEdit;
 
-    private DateTime time;
+    private ZonedDateTime time;
     private final PassImpl pass;
 
     public MetaDataFragment() {
         pass = (PassImpl) passStore.getCurrentPass();
 
-        if (pass.getRelevantDate() != null) {
-            time = pass.getRelevantDate();
+        if (pass.getCalendarTimespan() != null) {
+            time = pass.getCalendarTimespan().getFrom();
         } else {
-            time = DateTime.now();
+            time = ZonedDateTime.now();
         }
     }
 
     @OnClick(R.id.pickTime)
     public void onPickTime() {
-        new TimePickerDialog(getActivity(), this, time.hourOfDay().get(), time.minuteOfHour().get(), true).show();
+        new TimePickerDialog(getActivity(), this, time.getHour(), time.getMinute(), true).show();
     }
 
 
     @OnClick(R.id.pickDate)
     public void onPickDate() {
-        new DatePickerDialog(getActivity(), this, time.year().get(), time.monthOfYear().get() - 1, time.dayOfMonth().get()).show();
+        new DatePickerDialog(getActivity(), this, time.getYear(), time.getMonth().getValue() - 1, time.getDayOfMonth()).show();
     }
 
     @Override
@@ -73,9 +73,9 @@ public class MetaDataFragment extends PassandroidFragment implements TimePickerD
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-        time = time.withYear(year).withMonthOfYear(monthOfYear + 1).withDayOfMonth(dayOfMonth);
+        time = time.withYear(year).withMonth(monthOfYear + 1).withDayOfMonth(dayOfMonth);
 
-        pass.setRelevantDate(time);
+        pass.setCalendarTimespan(new PassImpl.TimeSpan(time,null,null));
 
         refresh();
     }
@@ -87,9 +87,10 @@ public class MetaDataFragment extends PassandroidFragment implements TimePickerD
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        time = time.withHourOfDay(hourOfDay).withMinuteOfHour(minute);
+        time = time.withHour(hourOfDay).withMinute(minute);
 
-        pass.setRelevantDate(time);
+        pass.setCalendarTimespan(new PassImpl.TimeSpan(time,null,null));
+
         refresh();
     }
 

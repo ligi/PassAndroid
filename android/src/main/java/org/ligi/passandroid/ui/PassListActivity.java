@@ -2,7 +2,6 @@ package org.ligi.passandroid.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -18,39 +17,39 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
-import com.squareup.otto.Subscribe;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import java.util.Collection;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
-
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import net.steamcrafted.loadtoast.LoadToast;
 import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.PassStoreChangeEvent;
 import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.events.ScanProgressEvent;
 import org.ligi.passandroid.helper.PassUtil;
-import org.ligi.passandroid.model.FiledPass;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassClassifier;
+import org.ligi.passandroid.model.PassStoreProjection;
 import org.ligi.snackengage.SnackEngage;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
-import java.util.Collection;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-public class PassListActivity extends PassAndroidActivity implements PassClassifier.OnClassificationChangeListener {
+public class PassListActivity extends PassAndroidActivity {
 
     private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
 
@@ -75,24 +74,19 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
     FloatingActionsMenu floatingActionsMenu;
 
     private PassTopicFragmentPagerAdapter adapter;
+    private ProgressDialog pd;
 
     @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
-        final FiledPass pass = PassUtil.createEmptyPass();
-
-
+        final Pass pass = PassUtil.createEmptyPass();
         passStore.setCurrentPass(pass);
-        passStore.getClassifier().moveToTopic(pass, adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
-        pass.save(passStore);
-        AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
+        passStore.save(pass);
         floatingActionsMenu.collapse();
-
+        AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
+        passStore.getClassifier().moveToTopic(pass, adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
     }
 
-
-    ProgressDialog pd;
-
-    @Subscribe
+    @Subscribe()
     public void onScanProgress(final ScanProgressEvent event) {
         if (pd != null && pd.isShowing()) {
             runOnUiThread(new Runnable() {
@@ -106,21 +100,21 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     @Subscribe
     public void onScanFinished(final ScanFinishedEvent event) {
-        if (pd != null && pd.isShowing()) {
-            final String message = getString(R.string.scan_finished_dialog_text, event.foundPasses.size());
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    OnClassificationChange();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (pd != null && pd.isShowing()) {
+                    final String message = getString(R.string.scan_finished_dialog_text, event.getFoundPasses().size());
                     pd.dismiss();
-                    new AlertDialog.Builder(PassListActivity.this)
-                            .setTitle(R.string.scan_finished_dialog_title)
-                            .setMessage(message)
-                            .setPositiveButton(android.R.string.ok,null)
-                            .show();
+                    new AlertDialog.Builder(PassListActivity.this).setTitle(R.string.scan_finished_dialog_title)
+                                                                  .setMessage(message)
+                                                                  .setPositiveButton(android.R.string.ok, null)
+                                                                  .show();
                 }
-            });
-        }
+
+            }
+        });
     }
 
     @OnClick(R.id.fab_action_scan)
@@ -139,13 +133,11 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         floatingActionsMenu.collapse();
     }
 
-
     @OnClick(R.id.fab_action_demo_pass)
     void onAddDemoClick() {
-        AXT.at(this).startCommonIntent().openUrl("http://ligi.de/passandroid_samples/index.html");
+        AXT.at(this).startCommonIntent().openUrl("http://espass.it/examples");
         floatingActionsMenu.collapse();
     }
-
 
     @Bind(R.id.fab_action_open_file)
     FloatingActionButton openFileFAB;
@@ -175,21 +167,6 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         }
     }
 
-    public void refreshPasses() {
-        passStore.preCachePassesList();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                passStore.refreshPassesList();
-
-                AXT.at(emptyView).setVisibility(passStore.getPassList().isEmpty());
-
-            }
-        });
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,7 +175,6 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
-
 
         ButterKnife.bind(this);
 
@@ -229,10 +205,24 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         adapter = new PassTopicFragmentPagerAdapter(passStore.getClassifier(), getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        tabLayout.setupWithViewPager(viewPager);
 
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        final boolean res = getDelegate().applyDayNight();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                supportInvalidateOptionsMenu();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+
+            }
+        });
+        onPassStoreChangeEvent(null);
 
     }
 
@@ -249,6 +239,28 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
                 AXT.at(this).startCommonIntent().activityFromClass(HelpActivity.class);
                 return true;
 
+            case R.id.menu_emptytrash:
+                new AlertDialog.Builder(this).setMessage("Really empty trash? You cannot restore ")
+                                             .setIcon(R.drawable.ic_alert_warning)
+                                             .setTitle("warning")
+                                             .setPositiveButton(R.string.emtytrash_label, new DialogInterface.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(final DialogInterface dialog, final int which) {
+                                                     final PassStoreProjection passStoreProjection = new PassStoreProjection(passStore,
+                                                                                                                             getString(R.string.topic_trash),
+                                                                                                                             null);
+
+                                                     for (final Pass pass : passStoreProjection.getPassList()) {
+                                                         passStore.deletePassWithId(pass.getId());
+                                                     }
+
+                                                 }
+                                             })
+                                             .setNegativeButton(android.R.string.cancel, null)
+                                             .show();
+                return true;
+
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -258,17 +270,22 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         super.onResume();
 
         bus.register(this);
-        refreshPasses();
 
         adapter.notifyDataSetChanged();
-        passStore.getClassifier().onClassificationChangeListeners.add(this);
+        onPassStoreChangeEvent(null);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
+
+        menu.findItem(R.id.menu_emptytrash).setVisible(adapter.getPageTitle(viewPager.getCurrentItem()).equals(getString(R.string.topic_trash)));
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_pass_list_view, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -285,18 +302,27 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     @Override
     protected void onPause() {
-        passStore.getClassifier().onClassificationChangeListeners.remove(this);
         bus.unregister(this);
         super.onPause();
     }
 
-    @Override
-    public void OnClassificationChange() {
-        refreshPasses();
+    @Subscribe
+    public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
 
-        adapter.notifyDataSetChanged();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
 
-        setupWithViewPagerIfNeeded();
+                setupWithViewPagerIfNeeded();
+
+                supportInvalidateOptionsMenu();
+
+                final boolean empty = passStore.getPassMap().isEmpty();
+                emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
+                tabLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
+            }
+        });
     }
 
     private void setupWithViewPagerIfNeeded() {
@@ -308,7 +334,8 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
     private boolean areTabLayoutAndViewPagerInSync() {
         if (adapter.getCount() == tabLayout.getTabCount()) {
             for (int i = 0; i < adapter.getCount(); i++) {
-                if (!adapter.getPageTitle(i).equals(tabLayout.getTabAt(i).getText())) {
+                final TabLayout.Tab tabAt = tabLayout.getTabAt(i);
+                if (tabAt == null || !adapter.getPageTitle(i).equals(tabAt.getText())) {
                     return false;
                 }
             }

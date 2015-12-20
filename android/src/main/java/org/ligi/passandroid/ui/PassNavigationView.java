@@ -1,25 +1,25 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Context;
+import android.os.Looper;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.NavigationView;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.PassClassifier;
+import org.ligi.passandroid.events.PassStoreChangeEvent;
 import org.ligi.passandroid.model.PassStore;
 
-import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
-public class PassNavigationView extends NavigationView implements PassClassifier.OnClassificationChangeListener {
+public class PassNavigationView extends NavigationView {
 
     @Bind(R.id.pass_count_header)
     TextView passCountTextView;
@@ -29,6 +29,9 @@ public class PassNavigationView extends NavigationView implements PassClassifier
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Bus bus;
 
     public PassNavigationView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,31 +70,33 @@ public class PassNavigationView extends NavigationView implements PassClassifier
     public View inflateHeaderView(@LayoutRes int res) {
         final View view = super.inflateHeaderView(res);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
 
         App.component().inject(this);
 
-        passStore.getClassifier().onClassificationChangeListeners.add(this);
-        OnClassificationChange();
+        bus.register(this);
+        onPassStoreChangeEvent(PassStoreChangeEvent.INSTANCE);
         return view;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        passStore.getClassifier().onClassificationChangeListeners.remove(this);
+        bus.unregister(this);
     }
 
     private String getMarketUrl() {
         return getContext().getString(R.string.market_url, getContext().getPackageName());
     }
 
-    @Override
-    public void OnClassificationChange() {
-        final int passCount = passStore.getPassList().size();
-        passCountTextView.setText(getContext().getString(R.string.passes_nav, passCount));
+    @Subscribe
+    public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            final int passCount = passStore.getPassMap().size();
+            passCountTextView.setText(getContext().getString(R.string.passes_nav, passCount));
 
-        final int topicCount = passStore.getClassifier().getTopics().size();
-        topicCountTextView.setText(getContext().getString(R.string.categories_nav, topicCount));
+            final int topicCount = passStore.getClassifier().getTopics().size();
+            topicCountTextView.setText(getContext().getString(R.string.categories_nav, topicCount));
+        }
     }
 }

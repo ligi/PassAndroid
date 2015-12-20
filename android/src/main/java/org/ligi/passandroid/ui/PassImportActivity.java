@@ -7,13 +7,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
-
-import javax.inject.Inject;
 
 public class PassImportActivity extends AppCompatActivity {
 
@@ -88,7 +88,10 @@ public class PassImportActivity extends AppCompatActivity {
                     // TODO this is kind of a hack - there should be a better way
                     final String id = AXT.at(path.split("/")).last();
 
-                    passStore.setCurrentPass(passStore.getPassbookForId(id));
+                    final Pass passbookForId = passStore.getPassbookForId(id);
+                    passStore.setCurrentPass(passbookForId);
+
+                    passStore.getClassifier().moveToTopic(passbookForId,getString(R.string.topic_new));
 
                     AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
                     finish();

@@ -8,15 +8,15 @@ import android.content.Intent;
 import android.provider.CalendarContract;
 import android.support.design.widget.Snackbar;
 
-import org.joda.time.DateTime;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.Pass;
+import org.threeten.bp.ZonedDateTime;
 
 public class AddToCalendar {
 
-    public static void tryAddDateToCalendar(final Pass pass, final Activity activity, final DateTime date) {
+    public static void tryAddDateToCalendar(final Pass pass, final Activity activity, final ZonedDateTime date) {
 
-        if (pass.getRelevantDate() == null) {
+        if (pass.getCalendarTimespan() == null) {
             new AlertDialog.Builder(activity)
                     .setMessage(R.string.expiration_date_to_calendar_warning_message)
                     .setTitle(R.string.expiration_date_to_calendar_warning_title)
@@ -40,12 +40,12 @@ public class AddToCalendar {
 
     }
 
-    private static void reallyAddToCalendar(Pass pass, Activity activity, DateTime date) {
+    private static void reallyAddToCalendar(Pass pass, Activity activity, ZonedDateTime date) {
         try {
             final Intent intent = new Intent(Intent.ACTION_EDIT);
             intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date.getMillis());
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, date.getMillis() + 60 * 60 * 1000);
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date.toEpochSecond()*1000);
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, date.toEpochSecond()*1000 + 60 * 60 * 1000);
             intent.putExtra("title", pass.getDescription());
             activity.startActivity(intent);
         } catch (ActivityNotFoundException exception) {

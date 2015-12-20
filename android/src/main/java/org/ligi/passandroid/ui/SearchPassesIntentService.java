@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -19,12 +18,10 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.events.ScanProgressEvent;
-import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PastLocationsStore;
-import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
@@ -40,14 +37,13 @@ public class SearchPassesIntentService extends IntentService {
     public static final int PROGRESS_NOTIFICATION_ID = 1;
     public static final int FOUND_NOTIFICATION_ID = 2;
 
-    private static final int REQUEST_CODE = 1;
+    public static final int REQUEST_CODE = 1;
 
     private NotificationManager notifyManager;
     private NotificationCompat.Builder progressNotificationBuilder;
     private NotificationCompat.Builder findNotificationBuilder;
 
     private List<Pass> foundList;
-
 
     private long lastProgressUpdate = 0;
 
@@ -144,7 +140,7 @@ public class SearchPassesIntentService extends IntentService {
                 final InputStreamWithSource ins = InputStreamProvider.fromURI(getBaseContext(), Uri.parse("file://" + file.getAbsolutePath()));
                 final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins,
                         getBaseContext(),
-                        getOnSuccessCallback(file),
+                        new SearchSuccessCallback(getBaseContext(), passStore, foundList, findNotificationBuilder, file, notifyManager),
                         new UnzipPassController.FailCallback() {
                             @Override
                             public void fail(String reason) {
@@ -156,43 +152,6 @@ public class SearchPassesIntentService extends IntentService {
         }
     }
 
-    private UnzipPassController.SuccessCallback getOnSuccessCallback(final File file) {
-        return new UnzipPassController.SuccessCallback() {
-            @Override
-            public void call(String uuid) {
 
-                final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
-                final FiledPass pass = AppleStylePassReader.read(passStore.getPathForID(uuid), language);
-
-                foundList.add(pass);
-                final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
-
-                if (iconBitmap != null) {
-                    final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
-                    findNotificationBuilder.setLargeIcon(bitmap);
-                }
-
-                final String foundString = getString(R.string.found_pass, pass.getDescription());
-                findNotificationBuilder.setContentTitle(foundString);
-
-                if (foundList.size() > 1) {
-                    final String foundMoreString = getString(R.string.found__pass, foundList.size() - 1);
-                    findNotificationBuilder.setContentText(foundMoreString);
-                } else {
-                    findNotificationBuilder.setContentText(file.getAbsolutePath());
-                }
-
-                final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
-                intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
-                findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-                notifyManager.notify(FOUND_NOTIFICATION_ID, findNotificationBuilder.build());
-            }
-        };
-    }
-
-    private Bitmap scale2maxSize(Bitmap bitmap, int dimensionPixelSize) {
-        final float scale = (float) dimensionPixelSize / ((bitmap.getWidth() > bitmap.getHeight()) ? bitmap.getWidth() : bitmap.getHeight());
-        return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
-    }
 
 }

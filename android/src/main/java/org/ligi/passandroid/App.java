@@ -3,9 +3,8 @@ package org.ligi.passandroid;
 import android.app.Application;
 import android.support.annotation.VisibleForTesting;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.squareup.leakcanary.LeakCanary;
-
-import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -24,7 +23,7 @@ public class App extends Application {
                 .build();
 
         LeakCanary.install(this);
-        JodaTimeAndroid.init(this);
+        AndroidThreeTen.init(this);
         initTraceDroid();
     }
 

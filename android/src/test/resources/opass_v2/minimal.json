@@ -1,0 +1,27 @@
+{
+  "format_version": 2,
+  "what": {
+    "description": "Concert Ticket"
+  },
+  "where": {
+  },
+  "when": {
+  },
+  "secrets": [
+    {
+      "message": "",
+      "transfer": "barcode_QR",
+      "order": 1
+    },
+    {
+      "message": "",
+      "transfer": "text",
+      "order": 2
+    }
+  ],
+  "meta": {
+    "app": "org.ligi.passandroid",
+    "id": "28293fd5-d129-4bd3-b935-22746b4b1248",
+    "type": "event"
+  }
+}

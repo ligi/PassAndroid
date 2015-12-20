@@ -1,0 +1,71 @@
+package org.ligi.passandroid.reader
+
+import android.graphics.Color
+import org.ligi.axt.AXT
+import org.ligi.passandroid.helper.SafeJSONReader
+import org.ligi.passandroid.model.BarCode
+import org.ligi.passandroid.model.Pass
+import org.ligi.passandroid.model.PassDefinitions
+import org.ligi.passandroid.model.PassImpl
+import org.ligi.tracedroid.logging.Log
+import org.threeten.bp.ZonedDateTime
+import java.io.File
+
+object PassReader {
+
+    fun read(path: File): Pass {
+
+        val pass = PassImpl(path.name)
+
+        val file = File(path, "data.json")
+
+        try {
+            val plainJsonString = AXT.at(file).readToString()
+            val pass_json = SafeJSONReader.readJSONSafely(plainJsonString)
+
+            if (pass_json.has("what")) {
+                val what_json = pass_json.getJSONObject("what")
+                pass.description = what_json.getString("description")
+            }
+
+            if (pass_json.has("meta")) {
+                val meta_json = pass_json.getJSONObject("meta")
+                pass.type = PassDefinitions.getTypeForString(meta_json.getString("type"))
+                pass.creator = meta_json.getString("organisation")
+                pass.app = meta_json.getString("app")
+            }
+
+            if (pass_json.has("ui")) {
+                val ui_json = pass_json.getJSONObject("ui")
+                pass.accentColor = Color.parseColor(ui_json.getString("bgColor"))
+            }
+
+            if (pass_json.has("barcode")) {
+                val barcode_json = pass_json.getJSONObject("barcode")
+                val barcodeFormatString = barcode_json.getString("type")
+
+                val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
+                val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
+                pass.barCode = barCode
+
+                if (barcode_json.has("altText")) {
+                    barCode.alternativeText = barcode_json.getString("altText")
+                }
+            }
+
+            if (pass_json.has("when")) {
+                val `when` = pass_json.getJSONObject("when")
+                val dateTime = `when`.getString("dateTime")
+
+                pass.calendarTimespan = PassImpl.TimeSpan()
+                pass.calendarTimespan= PassImpl.TimeSpan(from = ZonedDateTime.parse(dateTime));
+            }
+
+        } catch (e: Exception) {
+            Log.i("PassParse Exception " + e)
+        }
+
+        return pass
+    }
+
+}

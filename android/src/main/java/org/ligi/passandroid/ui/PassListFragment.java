@@ -10,27 +10,24 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.squareup.otto.Bus;
-
+import com.squareup.otto.Subscribe;
+import java.util.Collection;
+import javax.inject.Inject;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.PassStoreChangeEvent;
+import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.helper.MoveHelper;
-import org.ligi.passandroid.model.FiledPass;
+import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PassStoreProjection;
 import org.ligi.passandroid.model.Settings;
-
-import java.util.Collection;
-
-import javax.inject.Inject;
-
 import static android.support.v7.widget.helper.ItemTouchHelper.LEFT;
 import static android.support.v7.widget.helper.ItemTouchHelper.RIGHT;
 import static android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback;
-import static org.ligi.passandroid.model.PassClassifier.OnClassificationChangeListener;
 
-public class PassListFragment extends Fragment implements OnClassificationChangeListener {
+public class PassListFragment extends Fragment {
 
     private static final String BUNDLE_KEY_TOPIC = "topic";
     private PassStoreProjection passStoreProjection;
@@ -81,7 +78,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                final FiledPass pass = passStoreProjection.getPassList().get(viewHolder.getAdapterPosition());
+                final Pass pass = passStoreProjection.getPassList().get(viewHolder.getAdapterPosition());
 
                 final String nextTopic = calculateNextTopic(swipeDir, pass);
 
@@ -95,7 +92,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
             }
 
             @Nullable
-            private String calculateNextTopic(final int swipeDir, final FiledPass pass) {
+            private String calculateNextTopic(final int swipeDir, final Pass pass) {
                 final Collection<String> topics = passStore.getClassifier().getTopics();
 
                 switch (swipeDir) {
@@ -109,7 +106,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
             }
 
             @Nullable
-            private String getNextTopicRight(FiledPass pass, Collection<String> topics) {
+            private String getNextTopicRight(Pass pass, Collection<String> topics) {
 
                 boolean nextIsCandidate = false;
 
@@ -126,7 +123,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
 
             @Nullable
-            private String getNextTopicLeft(FiledPass pass, Collection<String> topics) {
+            private String getNextTopicLeft(Pass pass, Collection<String> topics) {
                 String prev = null;
 
                 for (String topic : topics) {
@@ -144,8 +141,6 @@ public class PassListFragment extends Fragment implements OnClassificationChange
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        passStore.getClassifier().onClassificationChangeListeners.add(this);
-
         bus.register(this);
         return inflate;
     }
@@ -154,13 +149,29 @@ public class PassListFragment extends Fragment implements OnClassificationChange
     public void onDestroyView() {
         super.onDestroyView();
         bus.unregister(this);
-        passStore.getClassifier().onClassificationChangeListeners.remove(this);
     }
 
-    @Override
-    public void OnClassificationChange() {
-        passStoreProjection.refresh();
-        adapter.notifyDataSetChanged();
+    @Subscribe
+    public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                passStoreProjection.refresh();
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Subscribe
+    public void onScanFinishedEvent(ScanFinishedEvent scanFinishedEvent) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                passStoreProjection.refresh();
+                adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
 }

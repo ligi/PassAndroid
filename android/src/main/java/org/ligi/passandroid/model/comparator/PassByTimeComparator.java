@@ -19,16 +19,17 @@ public class PassByTimeComparator implements Comparator<Pass> {
     @Override
     public int compare(Pass lhs, Pass rhs) {
 
-        if (lhs.getRelevantDate() == null && rhs.getRelevantDate() == null) {
+        if ((lhs.getCalendarTimespan() == null || lhs.getCalendarTimespan().getFrom() == null)
+                && (rhs.getCalendarTimespan() == null || rhs.getCalendarTimespan().getFrom() == null)) {
             return 0;
         }
 
-        if (lhs.getRelevantDate() == null) {
+        if (lhs.getCalendarTimespan() == null || lhs.getCalendarTimespan().getFrom() == null) {
             return 1;
         }
-        if (rhs.getRelevantDate() == null) {
+        if (rhs.getCalendarTimespan() == null || rhs.getCalendarTimespan().getFrom() == null) {
             return -1;
         }
-        return rhs.getRelevantDate().compareTo(lhs.getRelevantDate()) * direction;
+        return rhs.getCalendarTimespan().getFrom().compareTo(lhs.getCalendarTimespan().getFrom()) * direction;
     }
 }

@@ -111,6 +111,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
     <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
     <string name="topic_trash">trash</string>
+    <string name="topic_new">new</string>
     <string name="topic_archive">archive</string>
     <string name="move_to_new_topic">Move to new Topic</string>
     <string name="categories_nav">%d Categories</string>
@@ -122,6 +123,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="scan_progressdialog_title">Searching ...</string>
     <string name="scan_progressdialog_message">Please wait.</string>
     <string name="scan_dialog_send_background_button">background</string>
+    <string name="emtytrash_label">empty trash</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>

@@ -20,20 +20,18 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassBitmapDefinitions;
 import org.ligi.passandroid.model.PassField;
-import org.ligi.passandroid.model.PassFieldList;
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PassViewActivity extends PassViewActivityBase {
 
@@ -137,7 +135,7 @@ public class PassViewActivity extends PassViewActivityBase {
 
         final Pass pass = optionalPass;
 
-        if (!pass.isValid()) { // don't deal with invalid passes
+        if (pass == null) { // don't deal with invalid passes
             showPassProblemDialog(pass, "invalid");
             return;
         }
@@ -167,11 +165,11 @@ public class PassViewActivity extends PassViewActivityBase {
             zoomOut.setVisibility(View.GONE);
         }
 
-        setBitmapSafe(logo_img, pass.getBitmap(Pass.BITMAP_LOGO));
-        setBitmapSafe(footer_img, pass.getBitmap(Pass.BITMAP_FOOTER));
+        setBitmapSafe(logo_img, pass.getBitmap(passStore,PassBitmapDefinitions.BITMAP_LOGO));
+        setBitmapSafe(footer_img, pass.getBitmap(passStore,PassBitmapDefinitions.BITMAP_FOOTER));
 
-        setBitmapSafe(thumbnail_img, pass.getBitmap(Pass.BITMAP_THUMBNAIL));
-        setBitmapSafe(strip_img, pass.getBitmap(Pass.BITMAP_STRIP));
+        setBitmapSafe(thumbnail_img, pass.getBitmap(passStore,PassBitmapDefinitions.BITMAP_THUMBNAIL));
+        setBitmapSafe(strip_img, pass.getBitmap(passStore,PassBitmapDefinitions.BITMAP_STRIP));
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {
@@ -180,27 +178,39 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         if (pass.getType() != null) {
+            final StringBuilder back_str = new StringBuilder();
+
             frontFieldsContainer.removeAllViews();
-            addFrontFields(pass.getHeaderFields());
-            addFrontFields(pass.getPrimaryFields());
-            addFrontFields(pass.getSecondaryFields());
-            addFrontFields(pass.getAuxiliaryFields());
+
+            for (PassField field : pass.getFields()) {
+                if (field.getHide()) {
+                    back_str.append(field.toHtmlSnippet());
+                } else {
+                    final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer, false);
+                    final TextView key = (TextView) v.findViewById(R.id.key);
+                    key.setText(field.getLabel());
+                    final TextView value = (TextView) v.findViewById(R.id.value);
+                    value.setText(field.getValue());
+
+                    frontFieldsContainer.addView(v);
+                }
+            }
+
+
+            if (back_str.length() > 0) {
+                back_tv.setText(Html.fromHtml(back_str.toString()));
+                moreTextView.setVisibility(View.VISIBLE);
+            } else {
+                moreTextView.setVisibility(View.GONE);
+            }
+
         }
 
-        final StringBuilder back_str = new StringBuilder();
-
-        if (pass.getBackFields().size() != 0) {
-            back_str.append(pass.getBackFields().toHTMLString());
-            back_tv.setText(Html.fromHtml(back_str.toString()));
-            moreTextView.setVisibility(View.VISIBLE);
-        } else {
-            moreTextView.setVisibility(View.GONE);
-        }
 
         Linkify.addLinks(back_tv, Linkify.ALL);
 
         final PassViewHolder passViewHolder = new VerbosePassViewHolder(findViewById(R.id.pass_card));
-        passViewHolder.apply(pass, this);
+        passViewHolder.apply(pass, passStore, this);
 
         super.onPostResume();
     }
@@ -239,20 +249,6 @@ public class PassViewActivity extends PassViewActivityBase {
         refresh();
     }
 
-
-    private void addFrontFields(PassFieldList passFields) {
-        for (PassField field : passFields) {
-
-            final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer, false);
-            final TextView key = (TextView) v.findViewById(R.id.key);
-            key.setText(field.label);
-            final TextView value = (TextView) v.findViewById(R.id.value);
-            value.setText(field.value);
-
-            frontFieldsContainer.addView(v);
-        }
-    }
-
     private void setBitmapSafe(ImageView imageView, Bitmap bitmap) {
 
         if (bitmap != null) {
@@ -286,7 +282,7 @@ public class PassViewActivity extends PassViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((optionalPass != null && optionalPass.isValid() && optionalPass.getLocations().size() > 0));
+        menu.findItem(R.id.menu_map).setVisible((optionalPass != null && !optionalPass.getLocations().isEmpty()));
         menu.findItem(R.id.menu_update).setVisible(mightPassBeAbleToUpdate(optionalPass));
         return res;
     }

@@ -5,12 +5,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.larswerkman.holocolorpicker.ColorPicker;
 
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ColorPickFragment extends PassandroidFragment {
 
@@ -22,7 +24,7 @@ public class ColorPickFragment extends PassandroidFragment {
         final View view = inflater.inflate(R.layout.edit_color, container, false);
         ButterKnife.bind(this, view);
 
-        colorPicker.setOldCenterColor(getPass().getBackgroundColor());
+        colorPicker.setOldCenterColor(getPass().getAccentColor());
 
         // until PR is merged
         colorPicker.setShowOldCenterColor(false);
@@ -30,12 +32,12 @@ public class ColorPickFragment extends PassandroidFragment {
         colorPicker.setOnColorSelectedListener(new ColorPicker.OnColorSelectedListener() {
             @Override
             public void onColorSelected(int i) {
-                getPass().setBackgroundColor(i);
+                getPass().setAccentColor(i);
                 bus.post(new PassRefreshEvent(getPass()));
             }
         });
 
-        colorPicker.setColor(getPass().getBackgroundColor());
+        colorPicker.setColor(getPass().getAccentColor());
 
         return view;
     }

@@ -1,9 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/menu_help"
-        yourapp:showAsAction="ifRoom"
-        android:title="@string/help_label"
-        android:icon="@drawable/ic_action_help_outline" />
+            android:id="@+id/menu_emptytrash"
+            yourapp:showAsAction="ifRoom"
+            android:title="@string/emtytrash_label"
+            android:icon="@drawable/ic_action_delete"/>
+
+    <item
+            android:id="@+id/menu_help"
+            yourapp:showAsAction="ifRoom"
+            android:title="@string/help_label"
+            android:icon="@drawable/ic_action_help_outline"/>
 
 </menu>

@@ -1,21 +1,16 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Context;
-
+import java.io.File;
+import java.util.UUID;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.SafeJSONReader;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.tracedroid.logging.Log;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.UUID;
 
 public class UnzipPassController {
 
@@ -35,104 +30,77 @@ public class UnzipPassController {
             tempFile.delete();
         } catch (Exception e) {
             App.component().tracker().trackException("problem processing InputStream", e, false);
-            spec.failCallback.fail("problem with temp file" + e);
+            spec.getFailCallback().fail("problem with temp file" + e);
         }
     }
 
     public static void processFile(FileUnzipControllerSpec spec) {
 
         String uuid = UUID.randomUUID().toString();
-        String path = spec.context.getCacheDir() + "/temp/" + uuid + "/";
+        File path = new File(spec.getContext().getCacheDir(), "temp/" + uuid);
 
-        final File dir_file = new File(path);
-        dir_file.mkdirs();
+        path.mkdirs();
 
-        if (!dir_file.exists()) {
-            spec.failCallback.fail("Problem creating the temp dir: " + path);
+        if (!path.exists()) {
+            spec.getFailCallback().fail("Problem creating the temp dir: " + path);
             return;
         }
 
-        AXT.at(new File(path + "source.obj")).writeObject(spec.source);
+        AXT.at(new File(path, "source.obj")).writeObject(spec.getSource());
 
         try {
-            final ZipFile zipFile = new ZipFile(spec.zipFileString);
-            zipFile.extractAll(path);
+            final ZipFile zipFile = new ZipFile(spec.getZipFileString());
+            zipFile.extractAll(path.getAbsolutePath());
         } catch (ZipException e) {
             e.printStackTrace();
         }
 
 
         JSONObject manifest_json;
-        try {
-            final String readToString = AXT.at(new File(path + "/manifest.json")).readToString();
-            manifest_json = SafeJSONReader.readJSONSafely(readToString);
-        } catch (FileNotFoundException e) {
-            spec.failCallback.fail("Pass contains no Manifest - or PassAndroid could not read it");
-            return;
-        } catch (Exception e) {
-            spec.failCallback.fail("Problem with manifest.json: " + e);
-            return;
-        }
+        final File manifestFile = new File(path, "manifest.json");
+        final File espassFile = new File(path, "main.json");
 
-
-        try {
-            uuid = manifest_json.getString("pass.json");
-            final String rename_str = spec.targetPath + "/" + uuid;
-            new File(spec.targetPath).mkdirs();
-            final File rename_file = new File(rename_str);
-
-            if (spec.overwrite && rename_file.exists()) {
-                AXT.at(rename_file).deleteRecursive();
+        if (manifestFile.exists()) {
+            try {
+                final String readToString = AXT.at(manifestFile).readToString();
+                manifest_json = SafeJSONReader.readJSONSafely(readToString);
+                uuid = manifest_json.getString("pass.json");
+            } catch (Exception e) {
+                spec.getFailCallback().fail("Problem with manifest.json: " + e);
+                return;
             }
-
-            if (!rename_file.exists()) {
-                new File(path + "/").renameTo(rename_file);
-            } else {
-                Log.i("Pass with same ID exists");
+        } else if (espassFile.exists()) {
+            try {
+                final String readToString = AXT.at(espassFile).readToString();
+                manifest_json = SafeJSONReader.readJSONSafely(readToString);
+                uuid = manifest_json.getString("id");
+            } catch (Exception e) {
+                spec.getFailCallback().fail("Problem with manifest.json: " + e);
+                return;
             }
-
-        } catch (JSONException e) {
-            spec.failCallback.fail("Problem with pass.json: " + e);
+        } else {
+            spec.getFailCallback().fail("Pass is not espass or pkpass format :-(");
             return;
         }
 
-        spec.onSuccessCallback.call(uuid);
 
-    }
+        final String rename_str = spec.getTargetPath() + "/" + uuid;
+        new File(spec.getTargetPath()).mkdirs();
+        final File rename_file = new File(rename_str);
 
-    public static class UnzipControllerSpec {
-        public final Context context;
-        public final SuccessCallback onSuccessCallback;
-        public final FailCallback failCallback;
-        public String targetPath;
-        public boolean overwrite = false;
-
-        public UnzipControllerSpec(String targetPath, Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
-            this.context = context;
-            this.onSuccessCallback = onSuccessCallback;
-            this.failCallback = failCallback;
-            this.targetPath = targetPath;
+        if (spec.getOverwrite() && rename_file.exists()) {
+            AXT.at(rename_file).deleteRecursive();
         }
 
-        public UnzipControllerSpec(Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
-            this(App.component().settings().getPassesDir(), context, onSuccessCallback, failCallback);
+        if (!rename_file.exists()) {
+            new File(path + "/").renameTo(rename_file);
+        } else {
+            Log.i("Pass with same ID exists");
         }
 
 
-    }
+        spec.getOnSuccessCallback().call(uuid);
 
-    public static class FileUnzipControllerSpec extends UnzipControllerSpec {
-        public final String zipFileString;
-        public final String source;
-
-        public FileUnzipControllerSpec(final String fileName,
-                                       final InputStreamUnzipControllerSpec spec) {
-            super(spec.targetPath, spec.context, spec.onSuccessCallback, spec.failCallback);
-            zipFileString = fileName;
-            source = spec.inputStreamWithSource.getSource();
-            overwrite = spec.overwrite;
-
-        }
     }
 
     public static class InputStreamUnzipControllerSpec extends UnzipControllerSpec {

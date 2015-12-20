@@ -5,15 +5,13 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.MoveHelper;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 class MoveToNewTopicUI {
 
@@ -58,13 +56,13 @@ class MoveToNewTopicUI {
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        passStore.getClassifier().notifyDataChange();
+                        passStore.notifyChange();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        passStore.getClassifier().notifyDataChange();
+                        passStore.notifyChange();
                     }
                 })
                 .show();

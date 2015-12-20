@@ -18,6 +18,7 @@ import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.PassType;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
 import javax.inject.Inject;
@@ -31,6 +32,7 @@ public class CategoryPickFragment extends ListFragment {
     Bus bus;
 
     private final PassImpl pass;
+    private final PassType[] passTypes= {PassType.BOARDING,PassType.EVENT,PassType.GENERIC,PassType.LOYALTY,PassType.VOUCHER,PassType.COUPON};
 
     public CategoryPickFragment() {
         App.component().inject(this);
@@ -39,7 +41,7 @@ public class CategoryPickFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        pass.setType(CategoryHelper.ALL_CATEGORIES[position]);
+        pass.setType(passTypes[position]);
         bus.post(new PassRefreshEvent(pass));
         super.onListItemClick(l, v, position, id);
     }
@@ -52,12 +54,12 @@ public class CategoryPickFragment extends ListFragment {
 
             @Override
             public int getCount() {
-                return CategoryHelper.ALL_CATEGORIES.length;
+                return passTypes.length;
             }
 
             @Override
-            public String getItem(int position) {
-                return CategoryHelper.ALL_CATEGORIES[position];
+            public PassType getItem(int position) {
+                return passTypes[position];
             }
 
             @Override
@@ -71,13 +73,12 @@ public class CategoryPickFragment extends ListFragment {
                 final View inflate = inflater.inflate(R.layout.item_nav_pass_category, parent, false);
 
                 final CategoryIndicatorView categoryIndicatorView = (CategoryIndicatorView) inflate.findViewById(R.id.categoryView);
-                final String category = getItem(position);
-                categoryIndicatorView.setImageByCategory(category);
-                categoryIndicatorView.setTextBackgroundColor(CategoryHelper.getCategoryDefaultBG(category));
-                categoryIndicatorView.setTextColor(CategoryHelper.getCategoryDefaultFG(category));
-                categoryIndicatorView.setExtraText(CategoryHelper.getCategoryShortStr(category));
+
+                final PassType type = getItem(position);
+                categoryIndicatorView.setImageByCategory(type);
+                categoryIndicatorView.setAccentColor(CategoryHelper.getCategoryDefaultBG(type));
                 final TextView tv = (TextView) inflate.findViewById(R.id.navCategoryLabel);
-                tv.setText(CategoryHelper.getHumanCategoryString(category));
+                tv.setText(CategoryHelper.getHumanCategoryString(type));
 
                 return inflate;
             }

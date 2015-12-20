@@ -3,26 +3,25 @@ package org.ligi.passandroid.helper;
 import android.graphics.Color;
 
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.model.PassType;
 
 public class CategoryHelper {
 
-    public final static String[] ALL_CATEGORIES = {"boardingPass", "eventTicket", "coupon", "storeCard", "generic"};
-
-    public static int getHumanCategoryString(String fromPass) {
+    public static int getHumanCategoryString(PassType fromPass) {
         switch (fromPass) {
-            case "boardingPass":
+            case BOARDING:
                 return R.string.boarding_pass;
 
-            case "eventTicket":
+            case EVENT:
                 return R.string.category_event;
 
-            case "coupon":
+            case COUPON:
                 return R.string.category_coupon;
 
-            case "storeCard":
+            case LOYALTY:
                 return R.string.category_storecard;
 
-            case "generic":
+            case GENERIC:
                 return R.string.category_generic;
 
             default:
@@ -31,21 +30,21 @@ public class CategoryHelper {
 
     }
 
-    public static int getCategoryDefaultBG(String category) {
+    public static int getCategoryDefaultBG(PassType category) {
         switch (category) {
-            case "boardingPass":
+            case BOARDING:
                 return 0xFF3d73e9;
 
-            case "eventTicket":
+            case EVENT:
                 return 0xFF9f3dd0;
 
-            case "coupon":
+            case COUPON:
                 return 0xFF9ccb05;
 
-            case "storeCard":
+            case LOYALTY:
                 return 0xFFf29b21;
 
-            case "generic":
+            case GENERIC:
                 return 0xFFea3c48;
 
             default:
@@ -54,69 +53,23 @@ public class CategoryHelper {
 
     }
 
-    public static int getCategoryDefaultFG(String category) {
-        switch (category) {
-            case "boardingPass":
-                return Color.BLACK;
-
-            case "eventTicket":
-                return Color.BLACK;
-
-            case "coupon":
-                return Color.BLACK;
-
-            case "storeCard":
-                return Color.BLACK;
-
-            case "generic":
-                return Color.BLACK;
-
-            default:
-                return Color.BLACK;
-        }
-
-    }
-
-
-    public static int getCategoryTopImageRes(String fromPass) {
-        switch (fromPass) {
-            case "boardingPass":
+    public static int getCategoryTopImageRes(PassType type) {
+        switch (type) {
+            case BOARDING:
                 return R.drawable.cat_bp;
 
-            case "eventTicket":
+            case EVENT:
                 return R.drawable.cat_et;
 
-            case "coupon":
+            case COUPON:
                 return R.drawable.cat_cp;
 
-            case "storeCard":
+            case LOYALTY:
                 return R.drawable.cat_sc;
 
-            case "generic":
+            case GENERIC:
             default:
                 return R.drawable.cat_none;
-
-        }
-    }
-
-
-    public static String getCategoryShortStr(String fromPass) {
-        switch (fromPass) {
-            case "boardingPass":
-                return "BP";
-
-            case "eventTicket":
-                return "T";
-
-            case "coupon":
-                return "%";
-
-            case "storeCard":
-                return "SC";
-
-            case "generic":
-            default:
-                return "*";
 
         }
     }
