@@ -54,9 +54,9 @@ public class AndroidFileSystemPassStore implements PassStore {
 
         final List<String> newIds = Arrays.asList(getPassIDArray());
         final List<String> oldIds = new ArrayList<>();
-        final List<Pass> toRemove = new ArrayList<>();
+        final List<FiledPass> toRemove = new ArrayList<>();
 
-        for (Pass pass : passList) {
+        for (FiledPass pass : passList) {
             oldIds.add(pass.getId());
             if (!newIds.contains(pass.getId())) {
                 toRemove.add(pass);
