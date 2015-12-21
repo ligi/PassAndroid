@@ -2,19 +2,23 @@ package org.ligi.passandroid.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
+import org.ligi.passandroid.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import org.ligi.passandroid.R;
 
 public class HelpActivity extends AppCompatActivity {
 
-    @Bind(R.id.help_tv)
-    TextView helpTextView;
+    @Bind(R.id.help_webview)
+    WebView helpWebView;
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +26,13 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
         ButterKnife.bind(this);
 
-        helpTextView.setText(Html.fromHtml(getString(R.string.help_content)));
+        WebSettings webSettings = helpWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setStandardFontFamily("Sans-Serif");
 
-        Linkify.addLinks(helpTextView, Linkify.ALL);
+        helpWebView.loadData(getString(R.string.help_content),"text/html","utf-8");
 
-        helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

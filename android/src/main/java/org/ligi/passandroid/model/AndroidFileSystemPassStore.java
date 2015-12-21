@@ -4,7 +4,6 @@ import android.content.Context;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
-import org.ligi.passandroid.model.comparator.PassSortOrder;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.reader.PassReader;
 import org.ligi.tracedroid.logging.Log;
@@ -12,7 +11,6 @@ import org.ligi.tracedroid.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AndroidFileSystemPassStore implements PassStore {
@@ -22,12 +20,15 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     private List<FiledPass> passList = new ArrayList<>();
     private Pass actPass;
+    private final PassClassifier passClassifier;
 
     public AndroidFileSystemPassStore(final Context context, final Settings settings) {
         this.context = context;
         path = settings.getPassesDir();
 
         refreshPassesList();
+        final File classificationFile = new File(settings.getStateDir(), "classification_state.json");
+        passClassifier = new FileBackedPassClassifier(classificationFile);
     }
 
     @Override
@@ -125,11 +126,6 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public void sort(final PassSortOrder order) {
-        Collections.sort(passList, order.toComparator());
-    }
-
-    @Override
     public Pass getCurrentPass() {
         return actPass;
     }
@@ -140,8 +136,17 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
+    public PassClassifier getClassifier() {
+        return passClassifier;
+    }
+
+    @Override
     public boolean deletePassWithId(final String id) {
-        return AXT.at(new File(getPathForID(id))).deleteRecursive();
+        final boolean result = AXT.at(new File(getPathForID(id))).deleteRecursive();
+        if (result) {
+            refreshPassesList();
+        }
+        return result;
     }
 
     public String getPathForID(final String id) {

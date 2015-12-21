@@ -1,0 +1,110 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+#http://stackoverflow.com/questions/19274974/android-badparcelableexception-only-with-signed-apk
+-keep class * implements android.os.Parcelable {
+   public static final android.os.Parcelable$Creator *;
+}
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+# optimize
+-optimizationpasses 2 
+-optimizations !code/simplification/arithmetic 
+-dontusemixedcaseclassnames 
+-dontskipnonpubliclibraryclasses 
+
+# AppCompat
+
+-dontwarn android.support.v7.**
+-keep class android.support.v7.** { *; }
+-keep interface android.support.v7.** { *; }
+
+# Keep line numbers to alleviate debugging stack traces 
+
+-renamesourcefileattribute SourceFile 
+
+-keepattributes SourceFile,LineNumberTable
+
+### for api client
+
+
+-keepattributes Signature,RuntimeVisibleAnnotations,AnnotationDefault
+
+-keepclassmembers class * {
+  @com.google.api.client.util.Key <fields>;
+}
+
+# Needed by Guava
+# See https://groups.google.com/forum/#!topic/guava-discuss/YCZzeCiIVoI
+
+
+-dontwarn sun.misc.Unsafe
+-dontwarn com.google.common.collect.MinMaxPriorityQueue
+
+# Needed by google-http-client-android when linking against an older platform version
+
+-dontwarn com.google.api.client.extensions.android.**
+
+# Needed by google-api-client-android when linking against an older platform version
+
+-dontwarn com.google.api.client.googleapis.extensions.android.**
+
+
+#### for butterknife
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepnames class * { @butterknife.Bind *;}
+
+#### for support 22
+-dontwarn android.support.**
+
+#### for guava
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+-dontwarn sun.misc.Unsafe
+-dontwarn com.google.common.collect.MinMaxPriorityQueue
+
+-keep,allowoptimization class com.google.inject.** { *; }
+-keep,allowoptimization class javax.inject.** { *; }
+-keep,allowoptimization class javax.annotation.** { *; }
+-keep,allowoptimization class com.google.inject.Binder
+
+-keepclasseswithmembers public class * {
+    public static void main(java.lang.String[]);
+}
+
+-keepclassmembers,allowoptimization class com.google.common.* {
+    void finalizeReferent();
+    void startFinalizer(java.lang.Class,java.lang.Object);
+}
+
+-keepclassmembers class * {
+       @com.google.common.eventbus.Subscribe *;
+}
+
+
+-dontwarn java.nio.file.Files
+-dontwarn java.nio.file.Path
+-dontwarn java.nio.file.OpenOption
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+-keep public class com.google.android.gms.**
+-dontwarn com.google.android.gms.**
+

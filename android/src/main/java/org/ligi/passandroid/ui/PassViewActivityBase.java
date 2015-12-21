@@ -37,11 +37,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         // a little hack because I strongly disagree with the style guide here
         // ;-)
         // not having the Actionbar overflow menu also with devices with hardware
@@ -57,7 +52,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
         } catch (Exception ex) {
             // Ignore - but at least we tried ;-)
         }
-
     }
 
     @Override
@@ -75,6 +69,16 @@ public class PassViewActivityBase extends PassAndroidActivity {
         if (optionalPass == null) {
             tracker.trackException("pass not present in " + this, false);
             finish();
+        }
+
+        configureActionBar();
+
+    }
+
+    protected void configureActionBar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 

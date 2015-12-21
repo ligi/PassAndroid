@@ -14,6 +14,7 @@ import static android.support.test.espresso.contrib.DrawerActions.open;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.not;
+import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 
 @TargetApi(14)
 public class ThePassListActivity extends BaseIntegration<PassListActivity> {
@@ -34,14 +35,15 @@ public class ThePassListActivity extends BaseIntegration<PassListActivity> {
     @MediumTest
     public void testListIsThere() {
 
-        onView(withId(R.id.content_list)).check(matches(isDisplayed()));
+        onView(withId(R.id.pass_recyclerview)).check(matches(isDisplayed()));
         Spoon.screenshot(getActivity(), "list");
     }
 
     @MediumTest
     public void testHelpMenuBringsUsToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
-        onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
+
+        checkThatHelpIsThere();
     }
 
     @MediumTest

@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <TextView
             android:id="@+id/emptyView"
@@ -21,13 +48,6 @@
             android:singleLine="false"
             android:text="@string/empty_text_view" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/content_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="@null"
-            android:listSelector="@android:color/transparent" />
 
         <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/fam"
@@ -36,9 +56,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_gravity="right|bottom"
             android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
+
             android:layout_marginRight="16dp"
+            app:layout_behavior=".ui.MyShyFABBehavior"
             fab:fab_addButtonColorNormal="@color/accent"
             fab:fab_addButtonColorPressed="@color/icon_green"
             fab:fab_addButtonPlusIconColor="@android:color/black"
@@ -79,6 +101,7 @@
 
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+
                 android:id="@+id/fab_action_create_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +114,7 @@
 
         </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
 
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <FrameLayout
         android:id="@+id/left_drawer"
