@@ -1,8 +1,6 @@
 package org.ligi.passandroid;
 
 import android.app.Application;
-import android.content.Context;
-import android.os.Environment;
 import android.support.annotation.VisibleForTesting;
 
 import com.squareup.leakcanary.LeakCanary;
@@ -33,14 +31,6 @@ public class App extends Application {
     private void initTraceDroid() {
         TraceDroid.init(this);
         Log.setTAG("PassAndroid");
-    }
-
-    public static String getPassesDir(final Context ctx) {
-        return ctx.getFilesDir().getAbsolutePath() + "/passes";
-    }
-
-    public static String getShareDir() {
-        return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
     }
 
     public static AppComponent component() {

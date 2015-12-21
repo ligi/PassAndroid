@@ -15,7 +15,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.InputStreamWithSource;
@@ -111,7 +110,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
                                 pass.getId(),
-                                App.getShareDir(),
+                                settings.getShareDir(),
                                 "share",
                                 reason).execute();
                     }

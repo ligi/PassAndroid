@@ -15,6 +15,7 @@ import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.Settings;
 
 import java.io.File;
 
@@ -27,6 +28,9 @@ public class PassMenuOptions {
 
     @Inject
     Tracker tracker;
+
+    @Inject
+    Settings settings;
 
     public final Activity activity;
     public final Pass pass;
@@ -85,12 +89,12 @@ public class PassMenuOptions {
             case R.id.menu_share:
                 tracker.trackEvent("ui_action", "share", "shared", null);
                 new AlertDialog.Builder(activity).setItems(new CharSequence[]{"OpenPass ( no Apple support yet)", "Passbook"},
-                                                           new DialogInterface.OnClickListener() {
-                                                               @Override
-                                                               public void onClick(final DialogInterface dialog, final int which) {
-                                                                   exportInFormat(which);
-                                                               }
-                                                           }).show();
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                exportInFormat(which);
+                            }
+                        }).show();
 
                 return true;
 
@@ -105,7 +109,7 @@ public class PassMenuOptions {
 
     private void exportInFormat(final int which) {
         final int passFormat = getPassFormat(which);
-        new PassExportTask(activity, pass.getPath(), App.getShareDir(), "share", true, passFormat).execute();
+        new PassExportTask(activity, pass.getPath(), settings.getShareDir(), "share", true, passFormat).execute();
     }
 
     @PassExporter.PassFormat

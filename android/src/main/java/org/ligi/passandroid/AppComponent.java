@@ -1,6 +1,7 @@
 package org.ligi.passandroid;
 
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.NavigationFragment;
 import org.ligi.passandroid.ui.PassAdapter;
 import org.ligi.passandroid.ui.PassAndroidActivity;
@@ -56,4 +57,5 @@ public interface AppComponent {
 
     Tracker tracker();
 
+    Settings settings();
 }

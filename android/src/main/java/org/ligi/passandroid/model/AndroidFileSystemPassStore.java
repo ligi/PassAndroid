@@ -3,7 +3,6 @@ package org.ligi.passandroid.model;
 import android.content.Context;
 
 import org.ligi.axt.AXT;
-import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
 import org.ligi.passandroid.model.comparator.PassByTimeComparator;
 import org.ligi.passandroid.model.comparator.PassByTypeFirstAndTimeSecondComparator;
@@ -22,13 +21,15 @@ import java.util.Map;
 public class AndroidFileSystemPassStore implements PassStore {
 
     private final Context context;
-    private String path;
+    private final String path;
 
     private List<FiledPass> passList = new ArrayList<>();
     private Pass actPass;
 
-    public AndroidFileSystemPassStore(Context context) {
+    public AndroidFileSystemPassStore(final Context context,final Settings settings) {
         this.context = context;
+        path = settings.getPassesDir();
+
         refreshPassesList();
     }
 
@@ -50,7 +51,6 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     @Override
     public void refreshPassesList() {
-        path = App.getPassesDir(context);
 
         final List<String> newIds = Arrays.asList(getPassIDArray());
         final List<String> oldIds = new ArrayList<>();
@@ -102,7 +102,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     private File getPassesDirSafely() {
-        final File passes_dir = new File(App.getPassesDir(context));
+        final File passes_dir = new File(path);
 
         if (!passes_dir.exists()) {
             passes_dir.mkdirs();
