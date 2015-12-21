@@ -58,7 +58,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.addCalendar)
     void onCalendarClick() {
-        AddToCalendar.tryAddDateToCalendar(pass,activity,getDate());
+        AddToCalendar.tryAddDateToCalendar(pass, activity, getDate());
     }
 
     private Pass pass;

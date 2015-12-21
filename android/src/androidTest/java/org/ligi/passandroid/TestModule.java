@@ -13,6 +13,7 @@ import org.ligi.passandroid.model.comparator.PassSortOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Singleton;
 
@@ -29,10 +30,11 @@ public class TestModule {
 
     public TestModule() {
         passList = new ArrayList<>();
-        final PassImpl object = new PassImpl();
-        object.setDescription("description");
-        object.setBarCode(new BarCode(BarcodeFormat.AZTEC, "messageprobe"));
-        passList.add(object);
+        final PassImpl pass = new PassImpl();
+        pass.setId(UUID.randomUUID().toString());
+        pass.setDescription("description");
+        pass.setBarCode(new BarCode(BarcodeFormat.AZTEC, "messageprobe"));
+        passList.add(pass);
 
     }
     public TestModule(List<FiledPass> passList) {

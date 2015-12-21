@@ -8,13 +8,11 @@ import org.ligi.passandroid.ui.HelpActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.allOf;
+import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 
 
 public class TheHelpActivity extends BaseIntegration<HelpActivity> {
@@ -31,7 +29,9 @@ public class TheHelpActivity extends BaseIntegration<HelpActivity> {
 
     @SmallTest
     public void testHelpIsThere() {
-        onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
+
+        checkThatHelpIsThere();
+
         Spoon.screenshot(getActivity(), "help");
     }
 

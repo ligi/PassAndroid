@@ -2,20 +2,9 @@ package org.ligi.passandroid.model;
 
 import android.support.annotation.Nullable;
 
-import org.ligi.passandroid.model.comparator.PassSortOrder;
-
 import java.util.List;
 
 public interface PassStore {
-
-    boolean deletePassWithId(String id);
-
-    String getPathForID(String id);
-
-
-    List<FiledPass> getPassList();
-
-    void preCachePassesList();
 
     void deleteCacheForId(String id);
 
@@ -23,12 +12,18 @@ public interface PassStore {
 
     Pass getPassbookForId(String id);
 
+    boolean deletePassWithId(String id);
 
-    void sort(PassSortOrder order);
+    String getPathForID(String id);
+
+    void preCachePassesList();
+
+    List<FiledPass> getPassList();
 
     @Nullable
     Pass getCurrentPass();
 
     void setCurrentPass(@Nullable Pass pass);
 
+    PassClassifier getClassifier();
 }

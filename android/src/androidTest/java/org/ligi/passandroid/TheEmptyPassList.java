@@ -14,6 +14,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 
 public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
 
@@ -38,7 +39,8 @@ public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
     @MediumTest
     public void testHelpGoesToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
-        onView(withId(R.id.help_tv)).check(matches(isDisplayed()));
+
+        checkThatHelpIsThere();
     }
 
 }

@@ -1,4 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppBaseThemeNoActionbar" parent="AppBaseTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/window_bg</item>
         <item name="colorPrimary">@color/primary</item>
@@ -7,6 +14,7 @@
         <item name="color">@color/secondary</item>
         <item name="actionModeBackground">@color/secondary</item>
     </style>
+
 
     <style name="AppTheme" parent="AppBaseTheme" />
 

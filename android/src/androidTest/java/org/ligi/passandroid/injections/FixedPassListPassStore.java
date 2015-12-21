@@ -2,15 +2,18 @@ package org.ligi.passandroid.injections;
 
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.comparator.PassSortOrder;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class FixedPassListPassStore implements PassStore {
 
     private final List<FiledPass> passes;
     private Pass actPass;
+    private PassClassifier passClassifier;
 
     public FixedPassListPassStore(List<FiledPass> passes) {
         this.passes = passes;
@@ -47,10 +50,6 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public void sort(PassSortOrder order) {
-    }
-
-    @Override
     public Pass getCurrentPass() {
         return actPass;
     }
@@ -58,6 +57,14 @@ public class FixedPassListPassStore implements PassStore {
     @Override
     public void setCurrentPass(Pass pass) {
         actPass = pass;
+    }
+
+    @Override
+    public PassClassifier getClassifier() {
+        if (passClassifier == null) {
+            passClassifier = new PassClassifier(new HashMap<String, Collection<String>>());
+        }
+        return passClassifier;
     }
 
     @Override

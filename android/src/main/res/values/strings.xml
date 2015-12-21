@@ -36,11 +36,6 @@ The app is offline usable once you downloaded the pass!
 <li>The new passbook is visible in PassAndroid.</li>
 </ol>
 
-<h2>Why this app?</h2>
-The tickets for the Chaos Congress were only for print and iPhone passbooks.
-Ligi - the original author - didn\'t want to print the ticket or buy an Apple device, so he programmed PassAndroid.
-<a href="https://twitter.com/mr_ligi/status/678708731190841346">Source</a>
-
 <H1>Credits</H1>
 Big thanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design & <a href="https://github.com/cketti">Cketti</a> for pull-requests!
 
@@ -123,4 +118,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="pass_updated">Pass Updated</string>
     <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
     <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
+    <string name="topic_trash">trash</string>
+    <string name="topic_archive">archive</string>
+    <string name="move_to_new_topic">Move to new Topic</string>
 </resources>

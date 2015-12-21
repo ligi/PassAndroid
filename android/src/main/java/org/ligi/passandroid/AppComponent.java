@@ -8,6 +8,7 @@ import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassEditActivity;
 import org.ligi.passandroid.ui.PassImportActivity;
 import org.ligi.passandroid.ui.PassListActivity;
+import org.ligi.passandroid.ui.PassListFragment;
 import org.ligi.passandroid.ui.PassMenuOptions;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 import org.ligi.passandroid.ui.SearchPassesIntentService;
@@ -52,6 +53,8 @@ public interface AppComponent {
     void inject(USAirwaysLoadActivity usAirwaysLoadActivity);
 
     void inject(PassAndroidActivity passAndroidActivity);
+
+    void inject(PassListFragment passListFragment);
 
     PassStore passStore();
 

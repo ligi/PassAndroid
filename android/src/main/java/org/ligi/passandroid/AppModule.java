@@ -7,6 +7,7 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
 import org.ligi.passandroid.model.AndroidFileSystemPassStore;
+import org.ligi.passandroid.model.AndroidSettings;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 
@@ -33,7 +34,7 @@ public class AppModule {
     @Singleton
     @Provides
     Settings provideSettings() {
-        return new Settings(app);
+        return new AndroidSettings(app);
     }
 
     @Singleton

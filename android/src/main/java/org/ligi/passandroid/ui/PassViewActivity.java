@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.util.Linkify;
 import android.view.Menu;
@@ -77,6 +78,9 @@ public class PassViewActivity extends PassViewActivityBase {
     @Bind(R.id.barcode_alt_text)
     TextView barcodeAlternativeText;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
     @OnClick(R.id.zoomIn)
     void zoomIn() {
         setBarCodeSize(currentBarcodeWidth + getFingerSize());
@@ -124,28 +128,6 @@ public class PassViewActivity extends PassViewActivityBase {
     }
 
     int currentBarcodeWidth;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (optionalPass == null) {
-            return;
-        }
-
-        AXT.at(this).disableRotation();
-
-        final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
-        setContentView(contentView);
-
-        final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
-        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer, false);
-        extraViewContainer.addView(passExtrasView);
-
-        ButterKnife.bind(this);
-
-        refresh();
-    }
 
     @Override
     protected void refresh() {
@@ -226,13 +208,33 @@ public class PassViewActivity extends PassViewActivityBase {
         AXT.at(this).disableRotation();
 
         setContentView(R.layout.activity_pass_view);
+    }
 
-        final ViewGroup extraViewContainer = (ViewGroup) findViewById(R.id.passExtrasContainer);
-        getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (optionalPass == null) {
+            return;
+        }
+
+        AXT.at(this).disableRotation();
+
+        final View contentView = getLayoutInflater().inflate(R.layout.activity_pass_view, null);
+        setContentView(contentView);
+
+        final ViewGroup extraViewContainer = (ViewGroup) contentView.findViewById(R.id.passExtrasContainer);
+        final View passExtrasView = getLayoutInflater().inflate(R.layout.pass_view_extra_data, extraViewContainer, false);
+        extraViewContainer.addView(passExtrasView);
 
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+
+        configureActionBar();
+        refresh();
     }
+
 
     private void addFrontFields(PassFieldList passFields) {
         for (PassField field : passFields) {
