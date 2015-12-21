@@ -2,6 +2,7 @@ package org.ligi.passandroid.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 
 public class Settings {
@@ -33,4 +34,13 @@ public class Settings {
         // will be overridden in test-module
         return true;
     }
+
+    public String getPassesDir() {
+        return context.getFilesDir().getAbsolutePath() + "/passes";
+    }
+
+    public String getShareDir() {
+        return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
+    }
+
 }

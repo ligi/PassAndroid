@@ -26,8 +26,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    PassStore providePassStore() {
-        return new AndroidFileSystemPassStore(app);
+    PassStore providePassStore(Settings settings) {
+        return new AndroidFileSystemPassStore(app, settings);
     }
 
     @Singleton

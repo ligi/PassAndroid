@@ -115,7 +115,7 @@ public class UnzipPassController {
         }
 
         public UnzipControllerSpec(Context context, SuccessCallback onSuccessCallback, FailCallback failCallback) {
-            this(App.getPassesDir(context), context, onSuccessCallback, failCallback);
+            this(App.component().settings().getPassesDir(), context, onSuccessCallback, failCallback);
         }
 
 
