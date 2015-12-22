@@ -1,10 +1,13 @@
 package org.ligi.passandroid.injections;
 
+import org.ligi.passandroid.model.CountedType;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class FixedPassListPassStore implements PassStore {
 
@@ -51,12 +54,12 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public void sort(SortOrder order) {
+    public void sort(PassSortOrder order) {
     }
 
     @Override
-    public List<CountedType> getCountedTypes() {
-        return new ArrayList<>();
+    public Set<CountedType> getCountedTypes() {
+        return new TreeSet<>();
     }
 
     @Override
