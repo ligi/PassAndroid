@@ -135,7 +135,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public void sort(final SortOrder order) {
+    public void sort(final PassSortOrder order) {
         switch (order) {
             case TYPE:
                 Collections.sort(passList, new PassByTypeFirstAndTimeSecondComparator());

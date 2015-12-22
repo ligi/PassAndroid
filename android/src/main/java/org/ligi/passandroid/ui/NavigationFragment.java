@@ -23,6 +23,8 @@ import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
+import org.ligi.passandroid.model.CountedType;
+import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
@@ -90,9 +92,9 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (dateRadioButton.isChecked()) {
-                    settings.setSortOrder(PassStore.SortOrder.DATE);
+                    settings.setSortOrder(PassSortOrder.DATE);
                 } else if (categoryRadioButton.isChecked()) {
-                    settings.setSortOrder(PassStore.SortOrder.TYPE);
+                    settings.setSortOrder(PassSortOrder.TYPE);
                 }
                 setCategoryNavVisibilityByCurrentConditions();
                 bus.post(new SortOrderChangeEvent());
@@ -136,7 +138,7 @@ public class NavigationFragment extends Fragment {
     }
 
     private boolean shouldDisplayCategoryNav() {
-        return shouldDisplaySort() && settings.getSortOrder() == PassStore.SortOrder.TYPE;
+        return shouldDisplaySort() && settings.getSortOrder() == PassSortOrder.TYPE;
     }
 
     private boolean shouldDisplaySort() {
@@ -152,13 +154,13 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        final Set<PassStore.CountedType> countedTypes = passStore.getCountedTypes();
+        final Set<CountedType> countedTypes = passStore.getCountedTypes();
 
         setCategoryNavVisibilityByCurrentConditions();
 
         categoriesContainer.removeAllViews();
 
-        for (PassStore.CountedType countedType : countedTypes) {
+        for (CountedType countedType : countedTypes) {
             final String type = countedType.type;
 
             final View item = inflater.inflate(R.layout.item_nav_pass_category, categoriesContainer, false);

@@ -7,6 +7,7 @@ import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 
@@ -53,7 +54,7 @@ public class TestModule {
     @Provides
     Settings provideSettings() {
         final Settings mock = mock(Settings.class);
-        when(mock.getSortOrder()).thenReturn(PassStore.SortOrder.DATE);
+        when(mock.getSortOrder()).thenReturn(PassSortOrder.DATE);
         when(mock.doTraceDroidEmailSend()).thenReturn(false);
         return mock;
     }
