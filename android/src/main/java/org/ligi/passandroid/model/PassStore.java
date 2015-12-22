@@ -2,7 +2,8 @@ package org.ligi.passandroid.model;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import java.util.List;
+
+import java.util.Set;
 
 public interface PassStore {
 
@@ -51,7 +52,7 @@ public interface PassStore {
 
     void sort(SortOrder order);
 
-    List<CountedType> getCountedTypes();
+    Set<CountedType> getCountedTypes();
 
     @Nullable
     Pass getCurrentPass();

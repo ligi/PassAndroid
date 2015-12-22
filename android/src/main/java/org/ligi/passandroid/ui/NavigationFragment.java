@@ -11,13 +11,10 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-import java.util.List;
+
 import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.RepeatedOnClicksListener;
 import org.ligi.passandroid.App;
@@ -31,7 +28,13 @@ import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
 
+import java.util.Set;
+
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -149,7 +152,7 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        final List<PassStore.CountedType> countedTypes = passStore.getCountedTypes();
+        final Set<PassStore.CountedType> countedTypes = passStore.getCountedTypes();
 
         setCategoryNavVisibilityByCurrentConditions();
 

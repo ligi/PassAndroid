@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AndroidFileSystemPassStore implements PassStore {
 
@@ -147,7 +149,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public List<CountedType> getCountedTypes() {
+    public Set<CountedType> getCountedTypes() {
         // TODO - some sort of caching
         final Map<String, Integer> tempMap = new HashMap<>();
 
@@ -160,13 +162,11 @@ public class AndroidFileSystemPassStore implements PassStore {
             }
         }
 
-        final List<CountedType> result = new ArrayList<>();
+        final Set<CountedType> result = new TreeSet<>();
 
         for (String type : tempMap.keySet()) {
             result.add(new CountedType(type, tempMap.get(type)));
         }
-
-        Collections.sort(result);
 
         return result;
     }
