@@ -12,7 +12,7 @@
   <string name="help_content"><![CDATA[
 <h1>Worum handelt es sich?</h1>
 
-Diese Anwendung ist zur Darstellung von PassBooks gedacht. Dies können Eintrittskarten für z.B. Kinos oder Konzerte sein. Oder auch Boardingkarten  für Bus, Zug und Flug. Die Möglichkeiten sind vielfältig.
+Diese Anwendung ist zur Darstellung von Pässen gedacht. Dies können Eintrittskarten für z.B. Kinos oder Konzerte sein. Oder auch Boardingkarten  für Bus, Zug und Flug. Die Möglichkeiten sind vielfältig.
 Im Grunde ist es ein Ersatz für Karten aus Plastik oder Papier - kann so gutes für unsere Erde tun ;-)
 
 Beispiel-Karten
@@ -20,19 +20,36 @@ Beispiel-Karten
 Brauchst du ein paar Karten um die Anwendung auszuprobieren? 
 <a href=\'http://ligi.de/passandroid_samples/index.html\'>Hier findest du einige!</a>
 
-<h1>Wie funktioniert das ganze?</h1>
+<h1>Wie funktioniert das Ganze?</h1>
 
-Es gibt sogenannte pkpass Dateien. Du kannst sie mit dieser Anwendung öffnen. Oft bekommst Du sie via Email oder als Download nachdem du z.B. deinen Eintritt oder deine Fahrkarte bezahlt hast.
-Das wichtigste daran ist der BarCode den du zu sehen bekommst und den Du dann oft vorzeigen musst - aber es gibt auch anderen interessanten Inhalt wie relevante Örtlichkeiten ( die du dann auf einer Karte siehst ) oder auch die Zeit die du dann in den Kalender übernehmen kannst.
-Du kannst die Anwendung ohne Internet benutzen sobald du den Pass geladen hast hast.
+Es gibt sogenannte pkpass Dateien. Du kannst sie mit dieser Anwendung öffnen. Oft bekommst Du sie via E-Mail oder als Download nachdem du z.B. deinen Eintritt oder deine Fahrkarte bezahlt hast.
+Das Wichtigste daran ist der Barcode, den du zu sehen bekommst und den Du dann oft vorzeigen musst - aber es gibt auch anderen interessanten Inhalt wie relevante Örtlichkeiten (die du dann auf einer Karte siehst) oder auch die Zeit, die du dann in den Kalender übernehmen kannst.
+Du kannst die Anwendung ohne Internet benutzen, sobald du den Pass geladen hast.
+
+<h1>Häufige Fragen</h1>
+<h2>Wie transferiere ich Pässe von iPhone nach PassAndroid?</h2>
+<ol>
+<li>Öffne den Pass im iPhone</li>
+<li>Klicke auf das Teilen-Icon in der linken unteren Ecke</li>
+<li>Sende dir eine E-Mail, die du auf deinem Android empfangen kannst</li>
+<li>Öffne die E-Mail auf deinem Android und speichere den Anhang</li>
+<li>Lass PassAndroid nach Pässen scannen</li>
+<li>Der neue Pass taucht in PassAndroid auf</li>
+</ol>
+
+<h2>Warum gibt es diese App</h2>
+Die Tickets für den Chaos Congress gab es zum Ausdrucken und für iPhone. Ligi wollte weder das Ticket ausdrucken, noch ein Apple-Gerät kaufen, daher ist PassAndroid entstanden. <a href=\"https://twitter.com/mr_ligi/status/678708731190841346\">Quelle</a>
 
 <h1>Danksagung</h1>
 
 Vielen Dank and Luis Torrecilla für das Design und Cketti für pull requests!
 
+<h1>Mehr</h1>
+PassAndroid ist am Besten zu Öffnen mit <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a>, welches kostenlos und ohne Berechtigung zu erhalten ist.
+
 <h1>Feedback</h1>
 
-Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder was ihr nicht so toll findet. Kommt am besten in <a href=\'https://plus.google.com/communities/116353894782342292067\'>die Google+ Community</a> - oder schreibt mir  <a href=\'mailto:ligi@ligi.de\'>eine Email.</a> 
+Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was ihr nicht so toll findet. Kommt am besten in <a href=\'https://plus.google.com/communities/116353894782342292067\'>die Google+ Community</a> - oder schreibt mir  <a href=\'mailto:ligi@ligi.de\'>eine E-Mail.</a> 
 
 <H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>  THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 
@@ -46,6 +63,7 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
   <string name="choose_location">wähle den Ort</string>
   <string name="scan_empty_text"><![CDATA[suche nach Pässen - Du kannst <a href=\'http://ligi.de/passandroid_samples/index.html\'>hier Beispiele bekommen</a> ]]></string>
   <string name="no_passes_empty_text"><![CDATA[No passes yet - you can <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a>]]></string>
+  <string name="no_passes_appendix"><![CDATA[<br/><br/>Dein <b>Pass</b> funktioniert nicht? <a href=\"mailto:ligi@ligi.de?subject=my%20pass%20is%20not%20working\">Schreib mir!</a> ]]></string>
   <string name="boarding_pass">boardkarte</string>
   <string name="category_event">Event</string>
   <string name="category_coupon">Gutschein</string>
@@ -63,10 +81,14 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
   <string name="pass_to_calendar">zum Kalender</string>
   <string name="invalid_passbook_title">Ungültiger Pass</string>
   <string name="searching_in">suche in %s</string>
+  <string name="preparing_pass">Bereite Pass vor</string>
+  <string name="please_wait">Bitte warten, sollte nicht lange dauern</string>
+  <string name="passbook_is_shared_subject">Ein Pass wurde mit dir geteilt</string>
   <string name="passbook_share_chooser_title">Wie soll der Pass gesendet werden?</string>
   <string name="dialog_delete_confirm_text">Wollen Sie diesen Pass wirklich löschen?</string>
   <string name="dialog_delete_title">Sicher?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">auch die Quelle entfernen?</string>
+  <string name="nav_add">Hinzufügen</string>
   <string name="more">MEHR</string>
   <string name="less">WENIGER</string>
   <string name="select_picture">Wähle Bild</string>
@@ -74,4 +96,13 @@ Es währ toll zu erfahren wie ihr die Anwendung benutzt - was ihr toll - oder wa
   <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
   <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
   <string name="fab_choice_create_pass">Erstelle Pass</string>
+  <string name="empty_text_view"><big><b>Noch kein Pass geladen</b></big>
+\n\n\n Du kannst dein Gerät nach Pässen durchsuchen
+\n\n\n oder einen eigenen erstellen
+\n\n\n oder einen der Demo-Pässe verwenden.
+\n\n Einfach auf das Plus-Zeichen (+) klicken!</string>
+  <string name="downloading_new_pass_version">Lade neue Pass-Version herunter</string>
+  <string name="unzip_pass_dialog_title">Öffne Pass</string>
+  <string name="unzip_pass_dialog_message">Bitte warten...</string>
+  <string name="action_update">Aktualisiere</string>
 </resources>
