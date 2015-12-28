@@ -77,6 +77,10 @@ public class PassViewActivityBase extends PassAndroidActivity {
             tracker.trackException("pass not present in " + this, false);
             finish();
         }
+
+        if (optionalPass.getOrganisation() != null && optionalPass.getOrganisation().equals("32c3")) {
+            setToFullBrightness();
+        }
     }
 
     protected void refresh() {
@@ -93,6 +97,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(shouldAllowEdit());
+        menu.findItem(R.id.menu_light).setVisible(!fullBrightnessSet);
         return res;
     }
 
@@ -138,7 +143,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
                 finish();
                 return true;
             case R.id.menu_light:
-                item.setVisible(false);
                 setToFullBrightness();
                 return true;
 
@@ -258,10 +262,14 @@ public class PassViewActivityBase extends PassAndroidActivity {
         }
     }
 
+    private boolean fullBrightnessSet = false;
+
     private void setToFullBrightness() {
         final Window win = getWindow();
         final WindowManager.LayoutParams params = win.getAttributes();
         params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
         win.setAttributes(params);
+        fullBrightnessSet = true;
+        invalidateOptionsMenu();
     }
 }
