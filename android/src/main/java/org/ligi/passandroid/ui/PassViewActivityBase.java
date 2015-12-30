@@ -77,10 +77,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
             tracker.trackException("pass not present in " + this, false);
             finish();
         }
-
-        if (optionalPass.getOrganisation() != null && optionalPass.getOrganisation().equals("32c3")) {
-            setToFullBrightness();
-        }
     }
 
     protected void refresh() {
