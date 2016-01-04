@@ -1,6 +1,5 @@
 package org.ligi.passandroid.model.comparator;
 
-import org.ligi.passandroid.model.AndroidFileSystemPassStore;
 import org.ligi.passandroid.model.Pass;
 
 import java.util.Comparator;

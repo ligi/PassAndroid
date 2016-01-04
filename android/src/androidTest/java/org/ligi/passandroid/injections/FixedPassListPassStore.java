@@ -2,8 +2,8 @@ package org.ligi.passandroid.injections;
 
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.comparator.PassSortOrder;
 
 import java.util.List;
 

@@ -4,8 +4,7 @@ import android.content.Context;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
-import org.ligi.passandroid.model.comparator.PassByTimeComparator;
-import org.ligi.passandroid.model.comparator.PassByTypeFirstAndTimeSecondComparator;
+import org.ligi.passandroid.model.comparator.PassSortOrder;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.reader.PassReader;
 import org.ligi.tracedroid.logging.Log;
@@ -127,16 +126,7 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     @Override
     public void sort(final PassSortOrder order) {
-        switch (order) {
-            case TYPE:
-                Collections.sort(passList, new PassByTypeFirstAndTimeSecondComparator());
-                break;
-
-            case DATE:
-                Collections.sort(passList, new PassByTimeComparator());
-                break;
-        }
-
+        Collections.sort(passList, order.toComparator());
     }
 
     @Override

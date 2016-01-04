@@ -7,9 +7,9 @@ import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.BarCode;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.comparator.PassSortOrder;
 
 import java.util.ArrayList;
 import java.util.List;
