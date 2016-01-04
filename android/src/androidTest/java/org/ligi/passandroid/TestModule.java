@@ -5,7 +5,7 @@ import com.squareup.otto.Bus;
 
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @Module
 public class TestModule {
 
-    private final List<Pass> passList;
+    private final List<FiledPass> passList;
 
     public TestModule() {
         passList = new ArrayList<>();
@@ -35,7 +35,7 @@ public class TestModule {
         passList.add(object);
 
     }
-    public TestModule(List<Pass> passList) {
+    public TestModule(List<FiledPass> passList) {
         this.passList = passList;
     }
 

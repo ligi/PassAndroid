@@ -23,6 +23,7 @@ import org.ligi.passandroid.events.NavigationOpenedEvent;
 import org.ligi.passandroid.events.SortOrderChangeEvent;
 import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
+import org.ligi.passandroid.helper.PassTypeCounter;
 import org.ligi.passandroid.model.CountedType;
 import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
@@ -142,7 +143,7 @@ public class NavigationFragment extends Fragment {
     }
 
     private boolean shouldDisplaySort() {
-        return passStore.getCountedTypes().size() >= 2;
+        return PassTypeCounter.count(passStore.getPassList()).size() >= 2;
     }
 
     private void setCategoryNavVisibilityByCurrentConditions() {
@@ -154,7 +155,7 @@ public class NavigationFragment extends Fragment {
 
     private void createCategoryJumpMarks(LayoutInflater inflater) {
 
-        final Set<CountedType> countedTypes = passStore.getCountedTypes();
+        final Set<CountedType> countedTypes = PassTypeCounter.count(passStore.getPassList());
 
         setCategoryNavVisibilityByCurrentConditions();
 

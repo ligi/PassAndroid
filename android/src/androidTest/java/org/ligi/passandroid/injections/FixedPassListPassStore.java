@@ -1,21 +1,24 @@
 package org.ligi.passandroid.injections;
 
-import org.ligi.passandroid.model.CountedType;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class FixedPassListPassStore implements PassStore {
 
-    private final List<Pass> passes;
+    private final List<FiledPass> passes;
     private Pass actPass;
 
-    public FixedPassListPassStore(List<Pass> passes) {
+    public FixedPassListPassStore(List<FiledPass> passes) {
         this.passes = passes;
+    }
+
+    @Override
+    public List<FiledPass> getPassList() {
+        return passes;
     }
 
     @Override
@@ -34,16 +37,6 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public int passCount() {
-        return passes.size();
-    }
-
-    @Override
-    public Pass getPassbookAt(int pos) {
-        return passes.get(pos);
-    }
-
-    @Override
     public Pass getPassbookForId(String id) {
         for (Pass pass : passes) {
             if (pass.getId().equals(id)) {
@@ -55,11 +48,6 @@ public class FixedPassListPassStore implements PassStore {
 
     @Override
     public void sort(PassSortOrder order) {
-    }
-
-    @Override
-    public Set<CountedType> getCountedTypes() {
-        return new TreeSet<>();
     }
 
     @Override

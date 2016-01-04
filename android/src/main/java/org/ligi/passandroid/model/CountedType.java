@@ -15,4 +15,15 @@ public class CountedType implements Comparable<CountedType> {
     public int compareTo(@NonNull CountedType another) {
         return another.count - count;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof CountedType)) {
+            return false;
+        }
+
+        CountedType other = (CountedType) o;
+
+        return type.equals(other.type) && count.equals(other.count);
+    }
 }
