@@ -185,7 +185,7 @@ public class PassListActivity extends PassAndroidActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        passAdapter = new PassAdapter(PassListActivity.this);
+        passAdapter = new PassAdapter(this);
         recyclerView.setAdapter(passAdapter);
     }
 
