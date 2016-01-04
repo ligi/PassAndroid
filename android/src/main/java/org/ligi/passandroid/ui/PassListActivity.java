@@ -208,8 +208,7 @@ public class PassListActivity extends PassAndroidActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_help:
-                Intent intent = new Intent(this, HelpActivity.class);
-                startActivity(intent);
+                AXT.at(this).startCommonIntent().activityFromClass(HelpActivity.class);
                 return true;
 
         }
