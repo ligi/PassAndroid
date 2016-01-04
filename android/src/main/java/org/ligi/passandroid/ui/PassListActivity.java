@@ -98,7 +98,7 @@ public class PassListActivity extends PassAndroidActivity {
             intent.setType("*/*"); // tried with octet stream - no use
             startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
-            Snackbar.make(floatingActionsMenu,"Unavailable",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(floatingActionsMenu, "Unavailable", Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -133,7 +133,7 @@ public class PassListActivity extends PassAndroidActivity {
                 passStore.refreshPassesList();
                 passStore.sort(settings.getSortOrder());
 
-                AXT.at(emptyView).setVisibility(passStore.passCount() == 0);
+                AXT.at(emptyView).setVisibility(passStore.getPassList().isEmpty());
 
                 passAdapter.notifyDataSetChanged();
 
@@ -190,8 +190,9 @@ public class PassListActivity extends PassAndroidActivity {
     }
 
     private void scrollToType(String type) {
+
         for (int i = 0; i < passAdapter.getItemCount(); i++) {
-            if (passStore.getPassbookAt(i).getTypeNotNull().equals(type)) {
+            if (passStore.getPassList().get(i).getTypeNotNull().equals(type)) {
                 recyclerView.scrollToPosition(i);
                 return; // we are done
             }

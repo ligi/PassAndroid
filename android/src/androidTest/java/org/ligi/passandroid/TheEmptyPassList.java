@@ -4,7 +4,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 
 import com.squareup.spoon.Spoon;
 
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.ui.PassListActivity;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
     public void setUp() throws Exception {
         super.setUp();
 
-        App.setComponent(DaggerTestComponent.builder().testModule(new TestModule(new ArrayList<Pass>())).build());
+        App.setComponent(DaggerTestComponent.builder().testModule(new TestModule(new ArrayList<FiledPass>())).build());
         getActivity();
     }
 

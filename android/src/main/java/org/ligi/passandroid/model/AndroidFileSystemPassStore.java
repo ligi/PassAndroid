@@ -14,11 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class AndroidFileSystemPassStore implements PassStore {
 
@@ -28,7 +24,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     private List<FiledPass> passList = new ArrayList<>();
     private Pass actPass;
 
-    public AndroidFileSystemPassStore(final Context context,final Settings settings) {
+    public AndroidFileSystemPassStore(final Context context, final Settings settings) {
         this.context = context;
         path = settings.getPassesDir();
 
@@ -42,6 +38,11 @@ public class AndroidFileSystemPassStore implements PassStore {
 
     private File getCacheFile(String id) {
         return new File(getPathForID(id) + "/base_cache.obj");
+    }
+
+    @Override
+    public List<FiledPass> getPassList() {
+        return passList;
     }
 
     @Override
@@ -114,16 +115,6 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public int passCount() {
-        return passList.size();
-    }
-
-    @Override
-    public Pass getPassbookAt(final int pos) {
-        return passList.get(pos);
-    }
-
-    @Override
     public Pass getPassbookForId(final String id) {
         for (Pass pass : passList) {
             if (pass.getId().equals(id)) {
@@ -146,29 +137,6 @@ public class AndroidFileSystemPassStore implements PassStore {
                 break;
         }
 
-    }
-
-    @Override
-    public Set<CountedType> getCountedTypes() {
-        // TODO - some sort of caching
-        final Map<String, Integer> tempMap = new HashMap<>();
-
-        for (Pass info : passList) {
-            if (tempMap.containsKey(info.getTypeNotNull())) {
-                final Integer i = tempMap.get(info.getTypeNotNull());
-                tempMap.put(info.getTypeNotNull(), i + 1);
-            } else {
-                tempMap.put(info.getTypeNotNull(), 1);
-            }
-        }
-
-        final Set<CountedType> result = new TreeSet<>();
-
-        for (String type : tempMap.keySet()) {
-            result.add(new CountedType(type, tempMap.get(type)));
-        }
-
-        return result;
     }
 
     @Override
