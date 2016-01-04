@@ -25,9 +25,9 @@ import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.helper.PassTypeCounter;
 import org.ligi.passandroid.model.CountedType;
-import org.ligi.passandroid.model.PassSortOrder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.comparator.PassSortOrder;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 import org.ligi.tracedroid.logging.Log;
 

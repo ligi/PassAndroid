@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
+import org.ligi.passandroid.model.comparator.PassSortOrder;
+
 public class Settings {
     public static final String ORDER_KEY = "order";
     public final Context context;
