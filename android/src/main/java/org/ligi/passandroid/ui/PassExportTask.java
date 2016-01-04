@@ -18,9 +18,6 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
     private boolean share_after_export;
     protected PassExporter passExporter;
 
-    @PassExporter.PassFormat
-    private final int passFormat;
-
     public PassExportTask(final Activity activity,
                           final String inputPath,
                           final String zipPath,
@@ -28,8 +25,7 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
                           final boolean share_after_export,
                           @PassExporter.PassFormat final int passFormat) {
         this.activity = activity;
-        this.passFormat = passFormat;
-        passExporter = new PassExporter(this.passFormat, inputPath, zipPath + "/" + zipFileName);
+        passExporter = new PassExporter(passFormat, inputPath, zipPath + "/" + zipFileName);
         this.share_after_export = share_after_export;
         progress_dialog = new ProgressDialog(activity);
     }
