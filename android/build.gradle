@@ -148,7 +148,7 @@ dependencies {
     testCompile 'com.squareup.assertj:assertj-android:1.1.1'
     testCompile 'com.android.support:support-annotations:23.1.1'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.0.31-beta'
+    testCompile 'org.mockito:mockito-core:2.0.36-beta'
 
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
