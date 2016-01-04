@@ -3,13 +3,13 @@ package org.ligi.passandroid.ui;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -218,9 +218,8 @@ public class PassViewActivityBase extends PassAndroidActivity {
                                         passStore.setCurrentPass(newPass);
                                         optionalPass = passStore.getCurrentPass();
                                         refresh();
-                                        Toast.makeText(PassViewActivityBase.this,
-                                                "Pass Updated",
-                                                Toast.LENGTH_LONG).show();
+
+                                        Snackbar.make(getWindow().getDecorView(), R.string.pass_updated,Snackbar.LENGTH_LONG).show();
                                     }
                                 });
 

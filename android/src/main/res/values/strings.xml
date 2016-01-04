@@ -120,4 +120,5 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="unzip_pass_dialog_message">Please wait...</string>
     <string name="action_update">update</string>
     <string name="no_calendar_app_found">No Calendar-App found</string>
+    <string name="pass_updated">Pass Updated</string>
 </resources>
