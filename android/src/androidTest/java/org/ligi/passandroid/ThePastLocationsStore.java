@@ -16,6 +16,8 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
     @Inject
     Tracker tracker;
 
+    private SharedPreferences sharedPreferences;
+
     public ThePastLocationsStore() {
         super(Activity.class);
     }
@@ -23,22 +25,20 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        App.setComponent(DaggerTestComponent.builder().testModule(new TestModule()).build());
+        sharedPreferences = getInstrumentation().getContext().getSharedPreferences("" + (System.currentTimeMillis() / 100000), Context.MODE_PRIVATE);
         ((TestComponent) App.component()).inject(this);
     }
 
     @Override
     protected void tearDown() throws Exception {
+        sharedPreferences.edit().clear().apply();
         super.tearDown();
-        getSharedPrefs().edit().clear();
-    }
-
-    private SharedPreferences getSharedPrefs() {
-        return getInstrumentation().getContext().getSharedPreferences("" + (System.currentTimeMillis() / 100000), Context.MODE_PRIVATE);
     }
 
     @SmallTest
     public void testPastLocationsStoreShouldNeverContainMoreThanMaxElements() {
-        PastLocationsStore tested = new PastLocationsStore(getSharedPrefs(), tracker);
+        PastLocationsStore tested = new PastLocationsStore(sharedPreferences, tracker);
 
         for (int i = 0; i < PastLocationsStore.MAX_ELEMENTS * 2; i++) {
             tested.putLocation("" + i);
@@ -50,7 +50,7 @@ public class ThePastLocationsStore extends BaseIntegration<Activity> {
 
     @SmallTest
     public void testPastLocationsStoreShouldStoreOnlyOneOfAKind() {
-        PastLocationsStore tested = new PastLocationsStore(getSharedPrefs(), tracker);
+        PastLocationsStore tested = new PastLocationsStore(sharedPreferences, tracker);
 
         for (int i = 0; i < 3; i++) {
             tested.putLocation("foo");
