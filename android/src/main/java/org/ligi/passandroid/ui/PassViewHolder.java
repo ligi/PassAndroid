@@ -1,14 +1,10 @@
 package org.ligi.passandroid.ui;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
-import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -18,6 +14,7 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.actions.AddToCalendar;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
@@ -61,17 +58,7 @@ public class PassViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.addCalendar)
     void onCalendarClick() {
-        try {
-            final Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, getDate().getMillis());
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, getDate().getMillis() + 60 * 60 * 1000);
-            intent.putExtra("title", pass.getDescription());
-            activity.startActivity(intent);
-        } catch (ActivityNotFoundException exception) {
-            // TODO maybe action to install calendar app
-            Snackbar.make(addCalendar, R.string.no_calendar_app_found, Snackbar.LENGTH_LONG).show();
-        }
+        AddToCalendar.tryAddDateToCalendar(pass,activity,getDate());
     }
 
     private Pass pass;
