@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -41,7 +42,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         newComponent.inject(this);
         App.setComponent(newComponent);
 
-        act_pass= (PassImpl) passStore.getCurrentPass();
+        act_pass = (PassImpl) passStore.getCurrentPass();
     }
 
     @MediumTest
@@ -76,6 +77,24 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));
     }
 
+    @MediumTest
+    public void testClickOnCalendarWithExpirationDateGivesWarning() {
+        act_pass.setExpirationDate(new DateTime().minusHours(12));
+        getActivity();
+
+        onView(withId(R.id.addCalendar)).perform(click());
+
+        onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(matches(isDisplayed()));
+    }
+
+    @MediumTest
+    public void testThatTheDialogCanBeDismissed() {
+        testClickOnCalendarWithExpirationDateGivesWarning();
+
+        onView(withText(android.R.string.cancel)).perform(click());
+
+        onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(doesNotExist());
+    }
 
     @MediumTest
     public void testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
@@ -95,7 +114,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
     @MediumTest
     public void testZoomControlsAreThereWithBarcode() {
-        act_pass.setBarCode(new BarCode(BarcodeFormat.AZTEC,"foo"));
+        act_pass.setBarCode(new BarCode(BarcodeFormat.AZTEC, "foo"));
         getActivity();
 
         onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));
