@@ -121,4 +121,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="action_update">update</string>
     <string name="no_calendar_app_found">No Calendar-App found</string>
     <string name="pass_updated">Pass Updated</string>
+    <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
+    <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
 </resources>
