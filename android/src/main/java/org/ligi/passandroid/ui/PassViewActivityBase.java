@@ -264,6 +264,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
         params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
         win.setAttributes(params);
         fullBrightnessSet = true;
-        invalidateOptionsMenu();
+        supportInvalidateOptionsMenu();
     }
 }
