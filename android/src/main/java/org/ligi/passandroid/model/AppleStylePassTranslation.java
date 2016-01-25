@@ -3,8 +3,12 @@ package org.ligi.passandroid.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
+
+import org.ligi.passandroid.App;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,7 +70,8 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
             } catch (UnsupportedEncodingException ignored) {
             }
             return new String(fileData);
-        } catch (Exception e) {
+        } catch (Throwable e) {
+            App.component().tracker().trackException("problem_reading_translation", e, false);
             e.printStackTrace();
             return null;
         }
