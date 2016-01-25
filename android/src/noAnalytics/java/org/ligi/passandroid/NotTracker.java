@@ -5,7 +5,7 @@ import org.ligi.tracedroid.logging.Log;
 public class NotTracker implements Tracker {
 
     @Override
-    public void trackException(String s, Exception e, boolean fatal) {
+    public void trackException(String s, Throwable e, boolean fatal) {
         if (fatal) {
             Log.w("Fatal Exception " + s + " " + e);
         } else {

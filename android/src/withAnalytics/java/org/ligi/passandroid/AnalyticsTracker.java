@@ -23,7 +23,7 @@ public class AnalyticsTracker implements Tracker {
     }
 
     @Override
-    public void trackException(String s, Exception e, boolean fatal) {
+    public void trackException(String s, Throwable e, boolean fatal) {
         final String description = new StandardExceptionParser(ctx, null).getDescription(Thread.currentThread().getName(), e);
 
         final Map<String, String> exceptionMap = new HitBuilders.ExceptionBuilder().setDescription(s + " " + description).setFatal(fatal).build();
