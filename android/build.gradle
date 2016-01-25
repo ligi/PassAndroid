@@ -88,6 +88,14 @@ android {
         warning 'MissingTranslation'
         warning 'InvalidPackage'
     }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFile 'proguard-project.txt'
+        }
+    }
 }
 
 final DAGGER_VERSION = '2.0.2'
