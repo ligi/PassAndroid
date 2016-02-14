@@ -1,12 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">PassAndroid</string>
-  <string name="menu_settings">Einstellungen</string>
   <string name="logo">Logo</string>
   <string name="menu_map">zeige auf Karte</string>
   <string name="menu_delete">löschen</string>
   <string name="menu_share">teilen</string>
-  <string name="menu_refresh">aktualisieren</string>
   <string name="barcode">barcode</string>
   <string name="help_label">Hilfe</string>
   <string name="help_content"><![CDATA[
@@ -61,9 +59,6 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="send">senden</string>
   <string name="delete">Löschen!</string>
   <string name="choose_location">wähle den Ort</string>
-  <string name="scan_empty_text"><![CDATA[suche nach Pässen - Du kannst <a href=\'http://ligi.de/passandroid_samples/index.html\'>hier Beispiele bekommen</a> ]]></string>
-  <string name="no_passes_empty_text"><![CDATA[No passes yet - you can <a href=\'http://ligi.de/passandroid_samples/index.html\'>download example passes from here</a>]]></string>
-  <string name="no_passes_appendix"><![CDATA[<br/><br/>Dein <b>Pass</b> funktioniert nicht? <a href=\"mailto:ligi@ligi.de?subject=my%20pass%20is%20not%20working\">Schreib mir!</a> ]]></string>
   <string name="boarding_pass">boardkarte</string>
   <string name="category_event">Event</string>
   <string name="category_coupon">Gutschein</string>
@@ -80,7 +75,6 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="pass_directions">Navigation</string>
   <string name="pass_to_calendar">zum Kalender</string>
   <string name="invalid_passbook_title">Ungültiger Pass</string>
-  <string name="searching_in">suche in %s</string>
   <string name="preparing_pass">Bereite Pass vor</string>
   <string name="please_wait">Bitte warten, sollte nicht lange dauern</string>
   <string name="passbook_is_shared_subject">Ein Pass wurde mit dir geteilt</string>
@@ -88,10 +82,8 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="dialog_delete_confirm_text">Wollen Sie diesen Pass wirklich löschen?</string>
   <string name="dialog_delete_title">Sicher?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">auch die Quelle entfernen?</string>
-  <string name="nav_add">Hinzufügen</string>
   <string name="more">MEHR</string>
   <string name="less">WENIGER</string>
-  <string name="select_picture">Wähle Bild</string>
   <string name="scanning_for_passes">Suche nach Pässen</string>
   <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
   <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
