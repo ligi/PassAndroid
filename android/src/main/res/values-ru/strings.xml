@@ -1,12 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">PassAndroid</string>
-  <string name="menu_settings">Настройки</string>
   <string name="logo">логотип</string>
   <string name="menu_map">показать на карте</string>
   <string name="menu_delete">удалить</string>
   <string name="menu_share">поделиться</string>
-  <string name="menu_refresh">обновить список</string>
   <string name="barcode">штрих-код</string>
   <string name="help_label">Справка</string>
   <string name="help_content"><![CDATA[
@@ -58,9 +56,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="send">Отправить</string>
   <string name="delete">Удалить!</string>
   <string name="choose_location">Выберите адрес</string>
-  <string name="scan_empty_text"><![CDATA[ищу карточки - вы можете <a href=\'http://ligi.de/passandroid_samples/index.html\'>загрузить примеры карточек здесь</a> ]]></string>
-  <string name="no_passes_empty_text"><![CDATA[Нет карточек? -> вы можете <a href=\'http://ligi.de/passandroid_samples/index.html\'>загрузить примеры карточек здесь</a> ]]>javascript:;</string>
-  <string name="no_passes_appendix"><![CDATA[<br/><br/>С <b>Вашей карточкой</b> что то не так? -><a href=\"mailto:ligi@ligi.de?subject=my%20pass%20is%20not%20working\"> Напишите мне!</a> ]]></string>
   <string name="boarding_pass">Посадочные талоны</string>
   <string name="category_event">События</string>
   <string name="category_coupon">Купоны</string>
@@ -77,7 +72,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="pass_directions">Как проехать</string>
   <string name="pass_to_calendar">В календарь</string>
   <string name="invalid_passbook_title">Ошибка в файле карточки</string>
-  <string name="searching_in">ищу в %s</string>
   <string name="preparing_pass">Подготавливаю карточку</string>
   <string name="please_wait">пожалуйста подождите немного</string>
   <string name="passbook_is_shared_subject">Эту карточку вам прислали</string>
@@ -85,10 +79,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="dialog_delete_confirm_text">Вы правда хотите удалить эту карточку?</string>
   <string name="dialog_delete_title">Уверены?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">исходный файл тоже удалить?</string>
-  <string name="nav_add">Добавить</string>
   <string name="more">ПОДРОБНЕЕ</string>
   <string name="less">СКРЫТЬ ПОДРОБНОСТИ</string>
-  <string name="select_picture">Выберите изображение</string>
   <string name="scanning_for_passes">Ищу Карточки</string>
   <string name="fab_choice_scan_pkpass_files">Искать карточки на этом устройстве</string>
   <string name="fab_choice_add_demo_pass">Загрузить примеры карточек</string>

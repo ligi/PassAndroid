@@ -1,12 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">PassAndroid</string>
-  <string name="menu_settings">Opciones</string>
   <string name="logo">logo</string>
   <string name="menu_map">mostrar en mapa</string>
   <string name="menu_delete">eliminar</string>
   <string name="menu_share">compartir</string>
-  <string name="menu_refresh">actualizar</string>
   <string name="barcode">código de barras</string>
   <string name="help_label">Ayuda</string>
   <string name="help_content"><![CDATA[
@@ -61,9 +59,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="send">Enviar</string>
   <string name="delete">¡Eliminar!</string>
   <string name="choose_location">Seleccionar ubicación</string>
-  <string name="scan_empty_text"><![CDATA[Buscando pases - también puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a> ]]></string>
-  <string name="no_passes_empty_text"><![CDATA[No dispones de pases - puedes <a href=\'http://ligi.de/passandroid_samples/index.html\'>descargar ejemplos desde aquí</a>]]></string>
-  <string name="no_passes_appendix"><![CDATA[<br/><br/>¿<b>Su pase</b> no funciona? -><a href=\"mailto:ligi@ligi.de?subject=my%20pass%20is%20not%20working\">¡Escríbeme!</a> ]]></string>
   <string name="boarding_pass">Tarjeta de embarque</string>
   <string name="category_event">Evento</string>
   <string name="category_coupon">Cupón</string>
@@ -80,7 +75,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="pass_directions">Navegar</string>
   <string name="pass_to_calendar">al Calendario</string>
   <string name="invalid_passbook_title">Passbook no válido</string>
-  <string name="searching_in">buscando en %s</string>
   <string name="preparing_pass">Preparando el pase</string>
   <string name="please_wait">por favor, espere - no debería tardar mucho</string>
   <string name="passbook_is_shared_subject">un Passbook compartido con usted</string>
@@ -88,10 +82,8 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="dialog_delete_confirm_text">¿Realmente quiere eliminar este passbook?</string>
   <string name="dialog_delete_title">¿Seguro?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">¿eliminar la fuente también?</string>
-  <string name="nav_add">Añadir</string>
   <string name="more">MÁS</string>
   <string name="less">MENOS</string>
-  <string name="select_picture">Seleccione una imagen</string>
   <string name="scanning_for_passes">Buscando pases </string>
   <string name="fab_choice_scan_pkpass_files">Buscando archivos pkpass</string>
   <string name="fab_choice_add_demo_pass">Añadir un pase demo</string>
