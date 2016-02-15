@@ -63,7 +63,7 @@
             app:layout_behavior=".ui.MyShyFABBehavior"
             fab:fab_addButtonColorNormal="@color/accent"
             fab:fab_addButtonColorPressed="@color/icon_green"
-            fab:fab_addButtonPlusIconColor="@android:color/black"
+            fab:fab_addButtonPlusIconColor="@android:color/white"
             fab:fab_labelStyle="@style/menu_labels_style">
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
