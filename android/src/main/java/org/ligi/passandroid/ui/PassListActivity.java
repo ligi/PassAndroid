@@ -41,6 +41,8 @@ import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 
+import java.util.Collection;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -294,7 +296,8 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
         @Override
         public void notifyDataSetChanged() {
-            topic_array = passClassifier.getTopics();
+            final Collection<String> topics = passClassifier.getTopics();
+            topic_array = topics.toArray(new String[topics.size()]);
             super.notifyDataSetChanged();
         }
 

@@ -23,6 +23,8 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PassStoreProjection;
 import org.ligi.passandroid.model.Settings;
 
+import java.util.Collection;
+
 import javax.inject.Inject;
 
 import static android.support.v7.widget.helper.ItemTouchHelper.LEFT;
@@ -96,7 +98,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
             @Nullable
             private String calculateNextTopic(final int swipeDir, final FiledPass pass) {
-                final String[] topics = passStore.getClassifier().getTopics();
+                final Collection<String> topics = passStore.getClassifier().getTopics();
 
                 switch (swipeDir) {
                     case LEFT:
@@ -109,7 +111,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
             }
 
             @Nullable
-            private String getNextTopicRight(FiledPass pass, String[] topics) {
+            private String getNextTopicRight(FiledPass pass, Collection<String> topics) {
 
                 boolean nextIsCandidate = false;
 
@@ -126,7 +128,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
 
             @Nullable
-            private String getNextTopicLeft(FiledPass pass, String[] topics) {
+            private String getNextTopicLeft(FiledPass pass, Collection<String> topics) {
                 String prev = null;
 
                 for (String topic : topics) {

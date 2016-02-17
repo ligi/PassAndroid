@@ -10,6 +10,7 @@ public interface PassStore {
 
     void refreshPassesList();
 
+    @Nullable
     Pass getPassbookForId(String id);
 
     boolean deletePassWithId(String id);
