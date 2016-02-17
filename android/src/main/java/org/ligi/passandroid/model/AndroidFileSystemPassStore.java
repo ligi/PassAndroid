@@ -145,6 +145,8 @@ public class AndroidFileSystemPassStore implements PassStore {
         final boolean result = AXT.at(new File(getPathForID(id))).deleteRecursive();
         if (result) {
             refreshPassesList();
+            passClassifier.processDataChange();
+            passClassifier.notifyDataChange();
         }
         return result;
     }
