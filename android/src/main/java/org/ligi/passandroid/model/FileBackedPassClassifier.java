@@ -5,7 +5,6 @@ import com.squareup.moshi.Moshi;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +16,8 @@ public class FileBackedPassClassifier extends PassClassifier {
     private final JsonAdapter<Map> adapter;
     private final File backed_file;
 
-    public FileBackedPassClassifier(final File backed_file) {
-        super(getBase(backed_file));
+    public FileBackedPassClassifier(final File backed_file, final PassStore passStore) {
+        super(getBase(backed_file), passStore);
 
         this.backed_file = backed_file;
         adapter = getAdapter();
@@ -30,11 +29,11 @@ public class FileBackedPassClassifier extends PassClassifier {
     }
 
     @SuppressWarnings("unchecked")
-    private static Map<String, Collection<String>> getBase(final File backed_file) {
+    private static Map<String, String> getBase(final File backed_file) {
 
         if (backed_file.exists()) {
             try {
-                return (Map<String, Collection<String>>) getAdapter().fromJson(Okio.buffer(Okio.source(backed_file)));
+                return (Map<String, String>) getAdapter().fromJson(Okio.buffer(Okio.source(backed_file)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -71,7 +70,7 @@ public class FileBackedPassClassifier extends PassClassifier {
 
             if (buffer != null) {
                 try {
-                    adapter.toJson(buffer, pass_id_list_by_topic);
+                    adapter.toJson(buffer, topic_by_id);
                     buffer.close();
                 } catch (IOException e) {
                     e.printStackTrace();

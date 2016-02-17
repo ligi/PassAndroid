@@ -1,11 +1,12 @@
 package org.ligi.passandroid.injections;
 
+import android.support.annotation.Nullable;
+
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassStore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
+    @Nullable
     public Pass getPassbookForId(String id) {
         for (Pass pass : passes) {
             if (pass.getId().equals(id)) {
@@ -62,7 +64,7 @@ public class FixedPassListPassStore implements PassStore {
     @Override
     public PassClassifier getClassifier() {
         if (passClassifier == null) {
-            passClassifier = new PassClassifier(new HashMap<String, Collection<String>>());
+            passClassifier = new PassClassifier(new HashMap<String, String>(), this);
         }
         return passClassifier;
     }

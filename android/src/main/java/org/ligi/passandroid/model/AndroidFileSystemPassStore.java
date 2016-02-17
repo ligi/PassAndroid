@@ -27,8 +27,8 @@ public class AndroidFileSystemPassStore implements PassStore {
         path = settings.getPassesDir();
 
         refreshPassesList();
-        final File classificationFile = new File(settings.getStateDir(), "classification_state.json");
-        passClassifier = new FileBackedPassClassifier(classificationFile);
+        final File classificationFile = new File(settings.getStateDir(), "classifier_state.json");
+        passClassifier = new FileBackedPassClassifier(classificationFile, this);
     }
 
     @Override
