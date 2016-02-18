@@ -97,7 +97,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFile 'proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
 }
