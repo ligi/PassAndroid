@@ -35,8 +35,8 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        versionCode 265
-        versionName "2.6.5"
+        versionCode 271
+        versionName "2.7.1"
         minSdkVersion 9
         targetSdkVersion 22
         applicationId "org.ligi.passandroid"
@@ -97,7 +97,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFile 'proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
 }
