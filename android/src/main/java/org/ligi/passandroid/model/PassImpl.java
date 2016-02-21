@@ -4,20 +4,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
+
+import org.joda.time.DateTime;
+import org.ligi.axt.AXT;
+import org.ligi.tracedroid.logging.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.Data;
-import org.joda.time.DateTime;
-import org.ligi.axt.AXT;
-import org.ligi.tracedroid.logging.Log;
 
 @Data
 public class PassImpl implements FiledPass, Serializable {
@@ -91,6 +91,8 @@ public class PassImpl implements FiledPass, Serializable {
             final File file = new File(fileWithPathString);
             return BitmapFactory.decodeStream(new FileInputStream(file));
         } catch (FileNotFoundException expectedInSomeCases_willJustReturnNull) {
+            return null;
+        } catch (OutOfMemoryError e) {
             return null;
         }
     }
