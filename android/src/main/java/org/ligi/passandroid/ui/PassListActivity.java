@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,11 +78,13 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
     void onFABClick() {
         final FiledPass pass = PassUtil.createEmptyPass();
 
+
         passStore.setCurrentPass(pass);
         passStore.getClassifier().moveToTopic(pass,adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
         pass.save(passStore);
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
         floatingActionsMenu.collapse();
+
     }
 
     @OnClick(R.id.fab_action_scan)
@@ -198,6 +201,10 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        final boolean res = getDelegate().applyDayNight();
+
     }
 
 
