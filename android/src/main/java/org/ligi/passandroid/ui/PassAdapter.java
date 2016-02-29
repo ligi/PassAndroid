@@ -47,7 +47,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final PassViewHolder viewHolder,  int longClickedCardPosition) {
+    public void onBindViewHolder(final PassViewHolder viewHolder, int longClickedCardPosition) {
         final Pass pass = passStoreProjection.getPassList().get(longClickedCardPosition);
 
         viewHolder.apply(pass, passListActivity);
@@ -93,7 +93,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
                     @Override
                     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        if (new PassMenuOptions(passListActivity, getList().get(viewHolder.getAdapterPosition())).process(menuItem)) {
+                        if (new PassMenuOptions(passListActivity, viewHolder.pass).process(menuItem)) {
                             actionMode.finish();
                             return true;
                         }
