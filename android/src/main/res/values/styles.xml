@@ -6,7 +6,7 @@
     </style>
 
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/secondary</item>
