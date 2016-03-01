@@ -88,9 +88,9 @@ public class PassListFragment extends Fragment implements OnClassificationChange
                 final String nextTopic = calculateNextTopic(swipeDir, pass);
 
                 if (nextTopic != null) {
-                    MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(),pass,nextTopic,getActivity());
+                    MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
                 } else {
-                    new MoveToNewTopicUI(getActivity(),passStore, pass).showTopicMove();
+                    MoveToNewTopicUI.show(getActivity(), passStore, pass);
                 }
 
 

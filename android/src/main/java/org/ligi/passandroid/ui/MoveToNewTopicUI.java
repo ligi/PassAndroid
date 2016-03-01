@@ -41,14 +41,10 @@ class MoveToNewTopicUI {
         dialog.dismiss();
     }
 
-    MoveToNewTopicUI(Activity context, PassStore passStore, Pass pass) {
+    private MoveToNewTopicUI(final Activity context, final PassStore passStore, final Pass pass) {
         this.context = context;
         this.passStore = passStore;
         this.pass = pass;
-    }
-
-
-    public void showTopicMove() {
 
         dialog = new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.move_to_new_topic))
@@ -86,6 +82,10 @@ class MoveToNewTopicUI {
             }
         });
         ButterKnife.bind(this, dialog);
+
     }
 
+    public static void show(final Activity context, final PassStore passStore, final Pass pass) {
+        new MoveToNewTopicUI(context, passStore, pass);
+    }
 }
