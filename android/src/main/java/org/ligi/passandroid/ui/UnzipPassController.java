@@ -11,6 +11,7 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.helper.SafeJSONReader;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.tracedroid.logging.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,8 +88,7 @@ public class UnzipPassController {
             if (!rename_file.exists()) {
                 new File(path + "/").renameTo(rename_file);
             } else {
-                spec.failCallback.fail("Pass with same ID exists");
-                return;
+                Log.i("Pass with same ID exists");
             }
 
         } catch (JSONException e) {
