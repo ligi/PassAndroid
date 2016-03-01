@@ -143,7 +143,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         passStore.getClassifier().onClassificationChangeListeners.add(this);
