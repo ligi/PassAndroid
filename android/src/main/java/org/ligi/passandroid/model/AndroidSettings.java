@@ -3,6 +3,7 @@ package org.ligi.passandroid.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatDelegate;
 import java.io.File;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
@@ -57,5 +58,21 @@ public class AndroidSettings implements Settings {
     public boolean isAutomaticLightEnabled() {
         return sharedPreferences.getBoolean(context.getString(preference_key_autolight), true);
     }
+
+    @Override
+    public int getNightMode() {
+        final String key = sharedPreferences.getString(context.getString(R.string.preference_key_nightmode), "auto");
+        switch (key) {
+            case "day":
+                return AppCompatDelegate.MODE_NIGHT_NO;
+            case "night":
+                return AppCompatDelegate.MODE_NIGHT_YES;
+            case "auto":
+                return AppCompatDelegate.MODE_NIGHT_AUTO;
+
+        }
+        return AppCompatDelegate.MODE_NIGHT_AUTO;
+    }
+
 
 }

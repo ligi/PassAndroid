@@ -72,6 +72,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
                 messageInput.setText(UUID.randomUUID().toString().toUpperCase())
             }
 
+            refresh()
         })
 
 

@@ -44,7 +44,7 @@ android {
     defaultConfig {
         versionCode 320
         versionName "3.2.0"
-        minSdkVersion 9
+        minSdkVersion 10
         targetSdkVersion 24
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -108,6 +108,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
+}
+
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {

@@ -2,41 +2,44 @@ package org.ligi.passandroid;
 
 
 import android.graphics.Bitmap;
-import android.support.test.filters.SmallTest;
-import android.test.InstrumentationTestCase;
+import android.support.test.runner.AndroidJUnit4;
 import com.google.zxing.common.BitMatrix;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 
-public class TheBarcodeHelper extends InstrumentationTestCase {
+@RunWith(AndroidJUnit4.class)
+public class TheBarcodeHelper {
 
-    @SmallTest
+    @Test
     public void testQRBitMatrixHasCorrectSize() throws Exception {
         testBitMatrixSizeIsSane(PassBarCodeFormat.QR_CODE);
     }
 
-    @SmallTest
+    @Test
     public void testQRBitmapHasCorrectSize() throws Exception {
         testBitmapSizeIsSane(PassBarCodeFormat.QR_CODE);
     }
 
-    @SmallTest
+    @Test
     public void testPDF417BitmapHasCorrectSize() {
         testBitmapSizeIsSane(PassBarCodeFormat.PDF_417);
     }
 
-    @SmallTest
+    @Test
     public void testPDF417BitMatrixHasCorrectSize() {
         testBitMatrixSizeIsSane(PassBarCodeFormat.PDF_417);
     }
 
-    @SmallTest
+    @Test
     public void testAZTECBitmapHasCorrectSize() {
         testBitmapSizeIsSane(PassBarCodeFormat.AZTEC);
     }
 
-    @SmallTest
+    @Test
     public void testAZTECBitMatrixHasCorrectSize() {
         testBitMatrixSizeIsSane(PassBarCodeFormat.AZTEC);
     }
@@ -47,7 +50,7 @@ public class TheBarcodeHelper extends InstrumentationTestCase {
 
             assertThat(tested.getWidth()).isGreaterThan(3);
         } catch (Exception e) {
-            fail("could not create barcode " + e);
+            fail("could not create barcode", e);
         }
 
     }
@@ -56,10 +59,10 @@ public class TheBarcodeHelper extends InstrumentationTestCase {
         try {
             Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format);
 
-            assertNotNull(tested2);
+            assert tested2 != null;
             assertThat(tested2.getWidth()).isGreaterThan(3);
         } catch (Exception e) {
-            fail("could not create barcode " + e);
+            fail("could not create barcode" ,e);
         }
 
     }

@@ -3,9 +3,7 @@ package org.ligi.passandroid;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.WindowManager;
-
 import org.ligi.passandroid.reporting.SpooningFailureHandler;
-
 import static android.support.test.espresso.Espresso.setFailureHandler;
 
 
@@ -18,7 +16,7 @@ public abstract class BaseIntegration<T extends Activity> extends ActivityInstru
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        setFailureHandler(new SpooningFailureHandler(this));
+        setFailureHandler(new SpooningFailureHandler(getInstrumentation()));
 
     }
 

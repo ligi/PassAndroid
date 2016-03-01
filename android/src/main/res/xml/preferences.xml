@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <CheckBoxPreference
-        android:key="@string/preference_key_autolight"
-        android:summary="Increase brightness when showing barcode"
-        android:defaultValue="true"
-        android:title="Automatic light" />
+            android:key="@string/preference_key_autolight"
+            android:summary="Increase brightness when showing barcode"
+            android:defaultValue="true"
+            android:title="Automatic light"/>
 
     <CheckBoxPreference
-        android:key="@string/preference_key_condensed"
-        android:summary="Show more detail in List"
-        android:title="Condensed mode" />
+            android:key="@string/preference_key_condensed"
+            android:summary="Show more detail in List"
+            android:title="Condensed mode"/>
 
     <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/sort_orders"
-        android:entryValues="@array/sort_order_keys"
-        android:key="@string/preference_key_sort"
-        android:summary="how to sort the passes"
-        android:title="Sort order" />
+            android:defaultValue="0"
+            android:entries="@array/sort_orders"
+            android:entryValues="@array/sort_order_keys"
+            android:key="@string/preference_key_sort"
+            android:summary="how to sort the passes"
+            android:title="Sort order"/>
+
+    <ListPreference
+            android:defaultValue="auto"
+            android:entries="@array/night_modes"
+            android:entryValues="@array/nightmode_keys"
+            android:key="@string/preference_key_nightmode"
+            android:summary="adapts some colors"
+            android:title="Day/Night theme"/>
+
 </PreferenceScreen>

@@ -1,5 +1,6 @@
 package org.ligi.passandroid.model;
 
+import android.support.v7.app.AppCompatDelegate;
 import java.io.File;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
 
@@ -17,4 +18,6 @@ public interface Settings {
 
     boolean isAutomaticLightEnabled();
 
+    @AppCompatDelegate.NightMode
+    int getNightMode();
 }

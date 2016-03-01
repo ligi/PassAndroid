@@ -27,6 +27,8 @@ public class App extends Application {
         AndroidThreeTen.init(this);
         Kotpref.INSTANCE.init(this);
         initTraceDroid();
+
+        AppCompatDelegate.setDefaultNightMode(component.settings().getNightMode());
     }
 
     private void initTraceDroid() {

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_bg">#dfdfdf</color>
     <color name="highlight_color">#FF4eacc6</color>
     <color name="dividing_color">#ff0099cc</color>
     <color name="primary">#ff366ce8</color>
     <color name="accent">#ffe91e63</color>
     <color name="secondary">#ff2c51a7</color>
+
+    <color name="card_view_background">#f9f9f9</color>
 
     <color name="icon_green">#ffbfdf00</color>
 </resources>
