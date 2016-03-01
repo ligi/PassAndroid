@@ -36,7 +36,7 @@ class MoveToNewTopicUI {
     }
 
     private void move(String topic) {
-        MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(),pass,topic,context);
+        MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, topic, context);
 
         dialog.dismiss();
     }
@@ -65,8 +65,15 @@ class MoveToNewTopicUI {
                         passStore.getClassifier().notifyDataChange();
                     }
                 })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        passStore.getClassifier().notifyDataChange();
+                    }
+                })
                 .show();
 
+        // we need to do this here so the dialog does not get dismissed
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
