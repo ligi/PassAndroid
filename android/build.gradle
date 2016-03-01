@@ -117,14 +117,14 @@ dependencies {
     androidTestCompile "com.android.support:support-v4:${SUPPORT_VERSION}"
     androidTestCompile "com.android.support:support-annotations:${SUPPORT_VERSION}"
 
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
         // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
 
-    androidTestCompile('com.android.support.test.espresso:espresso-web:2.2.1')
+    androidTestCompile('com.android.support.test.espresso:espresso-web:2.2.2')
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.3.2'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
@@ -143,6 +143,9 @@ dependencies {
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile "com.android.support:cardview-v7:${SUPPORT_VERSION}"
     compile "com.android.support:design:${SUPPORT_VERSION}"
+
+    androidTestCompile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    androidTestCompile "com.android.support:design:${SUPPORT_VERSION}"
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
