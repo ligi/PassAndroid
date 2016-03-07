@@ -20,11 +20,15 @@ import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.edit_fragments.BarcodeEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ImageEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
+import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
+import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
+import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
 
 import javax.inject.Inject;
 
@@ -35,6 +39,9 @@ public class PassEditActivity extends AppCompatActivity {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Settings settings;
 
     @Inject
     Bus bus;
@@ -62,7 +69,7 @@ public class PassEditActivity extends AppCompatActivity {
             finish();
         }
 
-        if (getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -128,7 +135,14 @@ public class PassEditActivity extends AppCompatActivity {
     }
 
     private void refresh(Pass pass) {
-        new PassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card)).apply(pass, this);
+        final PassViewHolder passViewHolder;
+        if (settings.isCondensedModeEnabled()) {
+            passViewHolder = new CondensedPassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
+        } else {
+            passViewHolder = new VerbosePassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
+        }
+
+        passViewHolder.apply(pass, this);
     }
 
     @Override

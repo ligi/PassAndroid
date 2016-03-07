@@ -15,16 +15,19 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 public class PassViewActivityBase extends PassAndroidActivity {
 
@@ -32,6 +35,9 @@ public class PassViewActivityBase extends PassAndroidActivity {
 
     @Nullable
     public Pass optionalPass;
+
+    @Inject
+    Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,8 @@ public class PassViewActivityBase extends PassAndroidActivity {
         } catch (Exception ex) {
             // Ignore - but at least we tried ;-)
         }
+
+        App.component().inject(this);
     }
 
     @Override
@@ -73,6 +81,9 @@ public class PassViewActivityBase extends PassAndroidActivity {
 
         configureActionBar();
 
+        if (settings.isAutomaticLightEnabled()) {
+            setToFullBrightness();
+        }
     }
 
     protected void configureActionBar() {

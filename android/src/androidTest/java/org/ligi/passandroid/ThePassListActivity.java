@@ -48,7 +48,7 @@ public class ThePassListActivity extends BaseIntegration<PassListActivity> {
 
     @MediumTest
     public void testNavigationDrawerIsUsuallyNotShown() {
-        onView(withId(R.id.left_drawer)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.navigationView)).check(matches(not(isDisplayed())));
     }
 
 
@@ -56,7 +56,7 @@ public class ThePassListActivity extends BaseIntegration<PassListActivity> {
     public void testThatNavigationDrawerOpens() {
 
         onView(withId(R.id.drawer_layout)).perform(open());
-        onView(withId(R.id.left_drawer)).check(matches(isDisplayed()));
+        onView(withId(R.id.navigationView)).check(matches(isDisplayed()));
 
         Spoon.screenshot(getActivity(), "open_drawer");
     }

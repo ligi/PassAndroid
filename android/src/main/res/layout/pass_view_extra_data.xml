@@ -35,7 +35,7 @@
         <TextView
                 android:id="@+id/zoomOut"
                 android:background="@drawable/clickable_bg"
-                android:drawableRight="@drawable/ic_action_zoom_out"
+                android:drawableRight="@drawable/ic_action_zoom_out_wrapped"
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:minWidth="@dimen/finger"
@@ -55,7 +55,7 @@
 
         <TextView
                 android:id="@+id/zoomIn"
-                android:drawableLeft="@drawable/ic_action_zoom_in"
+                android:drawableLeft="@drawable/ic_action_zoom_in_wrapped"
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:minWidth="@dimen/finger"

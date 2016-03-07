@@ -4,5 +4,5 @@
         android:id="@+id/menu_map"
         yourapp:showAsAction="ifRoom"
         android:title="@string/menu_map"
-        android:icon="@drawable/ic_action_map" />
+        android:icon="@drawable/ic_maps_map" />
 </menu>

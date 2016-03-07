@@ -13,6 +13,6 @@
         android:id="@+id/menu_share"
         yourapp:showAsAction="ifRoom"
         android:title="@string/menu_share"
-        android:icon="@drawable/ic_action_share" />
+        android:icon="@drawable/ic_social_share" />
 
 </menu>

@@ -80,7 +80,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
 
         passStore.setCurrentPass(pass);
-        passStore.getClassifier().moveToTopic(pass,adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
+        passStore.getClassifier().moveToTopic(pass, adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
         pass.save(passStore);
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
         floatingActionsMenu.collapse();
@@ -164,7 +164,6 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.left_drawer, new NavigationFragment()).commitAllowingStateLoss();
 
         ButterKnife.bind(this);
 
@@ -191,7 +190,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             }
         };
 
-        drawer.setDrawerListener(drawerToggle);
+        drawer.addDrawerListener(drawerToggle);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -206,7 +205,6 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         final boolean res = getDelegate().applyDayNight();
 
     }
-
 
 
     @Override
@@ -279,7 +277,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     private boolean areTabLayoutAndViewPagerInSync() {
         if (adapter.getCount() == tabLayout.getTabCount()) {
-            for (int i=0;i<adapter.getCount();i++) {
+            for (int i = 0; i < adapter.getCount(); i++) {
                 if (!adapter.getPageTitle(i).equals(tabLayout.getTabAt(i).getText())) {
                     return false;
                 }
@@ -328,7 +326,5 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             return topic_array[position];
         }
     }
-
-
 
 }

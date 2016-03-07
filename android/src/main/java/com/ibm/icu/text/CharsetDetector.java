@@ -224,7 +224,7 @@ public class CharsetDetector {
      * @param in The source of the byte data in the unknown charset.
      *
      * @param declaredEncoding  A declared encoding for the data, if available,
-     *           or null or an empty string if none is available.
+     *           or null or an navigation_drawer_header string if none is available.
      *
      * @stable ICU 3.4
      */
@@ -258,7 +258,7 @@ public class CharsetDetector {
      * @param in The source of the byte data in the unknown charset.
      *
      * @param declaredEncoding  A declared encoding for the data, if available,
-     *           or null or an empty string if none is available.
+     *           or null or an navigation_drawer_header string if none is available.
      *
      * @stable ICU 3.4
      */

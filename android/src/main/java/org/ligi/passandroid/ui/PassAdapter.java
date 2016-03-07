@@ -17,6 +17,10 @@ import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PassStoreProjection;
+import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
+import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
+import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
 
 import java.util.List;
 
@@ -26,6 +30,9 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
     @Inject
     PassStore passStore;
+
+    @Inject
+    Settings settings;
 
     protected final AppCompatActivity passListActivity;
     private final PassStoreProjection passStoreProjection;
@@ -43,7 +50,12 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
         final LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
         final View res = inflater.inflate(R.layout.pass_list_item, viewGroup, false);
-        return new PassViewHolder(res);
+        if (settings.isCondensedModeEnabled()) {
+            return new CondensedPassViewHolder(res);
+        } else {
+            return new VerbosePassViewHolder(res);
+        }
+
     }
 
     @Override

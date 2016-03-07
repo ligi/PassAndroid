@@ -50,7 +50,7 @@ public class PassMenuOptions {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage(activity.getString(R.string.dialog_delete_confirm_text));
                 builder.setTitle(activity.getString(org.ligi.passandroid.R.string.dialog_delete_title));
-                builder.setIcon(R.drawable.ic_warning_amber_36dp);
+                builder.setIcon(R.drawable.ic_alert_warning);
 
                 final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
 

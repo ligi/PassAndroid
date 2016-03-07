@@ -18,4 +18,8 @@ public interface Settings {
 
     String getShareDir();
 
+    boolean isCondensedModeEnabled();
+
+    boolean isAutomaticLightEnabled();
+
 }

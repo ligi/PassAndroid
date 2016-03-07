@@ -70,7 +70,7 @@
                 android:id="@+id/fab_action_open_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fam_open"
+                android:src="@drawable/ic_file_folder_open_wrapped"
                 android:visibility="gone"
 
                 fab:fab_colorNormal="@color/secondary"
@@ -82,7 +82,7 @@
                 android:id="@+id/fab_action_demo_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fam_giftcard"
+                android:src="@drawable/ic_action_card_giftcard_wrapped"
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
@@ -93,7 +93,7 @@
                 android:id="@+id/fab_action_scan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fam_find"
+                android:src="@drawable/ic_action_find_in_page_wrapped"
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
@@ -105,7 +105,7 @@
                 android:id="@+id/fab_action_create_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fam_add"
+                android:src="@drawable/ic_editor_mode_edit_wrapped"
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
@@ -116,11 +116,12 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <FrameLayout
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
+    <org.ligi.passandroid.ui.PassNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white" />
+        app:headerLayout="@layout/navigation_drawer_header"
+        app:menu="@menu/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

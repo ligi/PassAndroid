@@ -52,7 +52,7 @@ class MoveToNewTopicUI {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // empty but needed
+                        // navigation_drawer_header but needed
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -74,7 +74,7 @@ class MoveToNewTopicUI {
             @Override
             public void onClick(View v) {
                 if (newTopicEditText.getText().toString().isEmpty()) {
-                    newTopicEditText.setError("cannot be empty");
+                    newTopicEditText.setError("cannot be navigation_drawer_header");
                     newTopicEditText.requestFocus();
                 } else {
                     move(newTopicEditText.getText().toString());

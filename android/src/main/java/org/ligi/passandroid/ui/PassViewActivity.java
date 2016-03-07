@@ -28,6 +28,8 @@ import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassField;
 import org.ligi.passandroid.model.PassFieldList;
+import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
+import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -197,7 +199,9 @@ public class PassViewActivity extends PassViewActivityBase {
 
         Linkify.addLinks(back_tv, Linkify.ALL);
 
-        new PassViewHolder(findViewById(R.id.pass_card)).apply(pass, this);
+        final PassViewHolder passViewHolder = new VerbosePassViewHolder(findViewById(R.id.pass_card));
+        passViewHolder.apply(pass, this);
+
         super.onPostResume();
     }
 

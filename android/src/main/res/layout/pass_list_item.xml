@@ -87,7 +87,7 @@
             android:layout_gravity="center_vertical"
             android:background="@drawable/clickable_bg"
             android:clickable="true"
-            android:drawableLeft="@drawable/ic_place_grey600_18dp"
+            android:drawableLeft="@drawable/ic_maps_place_wrapped"
             android:padding="8dp"
             android:text="@string/pass_directions" />
 
@@ -101,7 +101,7 @@
             android:layout_gravity="center_vertical"
             android:background="@drawable/clickable_bg"
             android:clickable="true"
-            android:drawableRight="@drawable/ic_today_grey600_18dp"
+            android:drawableRight="@drawable/ic_action_perm_contact_calendar_wrapped"
             android:padding="8dp"
             android:text="@string/pass_to_calendar" />
 

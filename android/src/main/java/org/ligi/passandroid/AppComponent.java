@@ -2,7 +2,6 @@ package org.ligi.passandroid;
 
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
-import org.ligi.passandroid.ui.NavigationFragment;
 import org.ligi.passandroid.ui.PassAdapter;
 import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassEditActivity;
@@ -10,6 +9,7 @@ import org.ligi.passandroid.ui.PassImportActivity;
 import org.ligi.passandroid.ui.PassListActivity;
 import org.ligi.passandroid.ui.PassListFragment;
 import org.ligi.passandroid.ui.PassMenuOptions;
+import org.ligi.passandroid.ui.PassNavigationView;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 import org.ligi.passandroid.ui.SearchPassesIntentService;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
@@ -27,8 +27,6 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(PassViewActivityBase passViewActivityBase);
-
-    void inject(NavigationFragment passListActivity);
 
     void inject(PassListActivity passListActivity);
 
@@ -55,6 +53,8 @@ public interface AppComponent {
     void inject(PassAndroidActivity passAndroidActivity);
 
     void inject(PassListFragment passListFragment);
+
+    void inject(PassNavigationView passNavigationView);
 
     PassStore passStore();
 

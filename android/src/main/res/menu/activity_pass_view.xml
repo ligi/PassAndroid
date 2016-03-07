@@ -13,19 +13,19 @@
         android:id="@+id/menu_share"
         yourapp:showAsAction="ifRoom"
         android:title="@string/menu_share"
-        android:icon="@drawable/ic_action_share" />
+        android:icon="@drawable/ic_social_share" />
 
 
     <item
         android:id="@+id/menu_light"
         yourapp:showAsAction="ifRoom"
         android:title="light"
-        android:icon="@drawable/ic_action_wb_incandescent" />
+        android:icon="@drawable/ic_device_brightness_high" />
 
     <item
         android:id="@+id/menu_edit"
         yourapp:showAsAction="ifRoom"
         android:title="edit"
-        android:icon="@drawable/ic_action_create" />
+        android:icon="@drawable/ic_editor_mode_edit" />
 
 </menu>

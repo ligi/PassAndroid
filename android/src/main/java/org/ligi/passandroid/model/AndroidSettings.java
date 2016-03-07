@@ -58,4 +58,14 @@ public class AndroidSettings implements Settings {
         return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
     }
 
+    @Override
+    public boolean isCondensedModeEnabled() {
+        return sharedPreferences.getBoolean("CONDENSED", false);
+    }
+
+    @Override
+    public boolean isAutomaticLightEnabled() {
+        return sharedPreferences.getBoolean("AUTOLIGHT", true);
+    }
+
 }
