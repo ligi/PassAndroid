@@ -1,14 +1,128 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">PassAndroid</string>
-  <string name="logo">Logo</string>
+    <string name="app_name">PassAndroid</string>
+    
+    <!-- Actions -->
+    <string name="action_show_map">Auf Karte anzeigen</string>
+    <string name="action_delete">Entfernen</string>
+    <string name="action_share">Teilen</string>
+    <string name="action_edit">Bearbeiten</string>
+    <string name="action_light">Helligkeit erhöhen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_update">Aktualisieren</string>
+    <string name="action_undo">Rückgängig</string>
+    <string name="action_open">Öffnen</string>
+    <string name="action_close">Schließen</string>
+    <string name="action_send">Senden</string>
+    <string name="action_choose_location">Standort auswählen</string>
+    <string name="action_pass_directions">Navigation</string>
+    <string name="action_pass_to_calendar">Kalendereintrag erstellen</string>
+    
+    <!-- Exceptions -->
+    <string name="exception">Fehler</string>
+    <string name="exception_opening_pass">Beim Öffnen des Passes ist ein Fehler aufgetreten. Es währ hilfreich wenn Du den Pass beim Entwicklerteam einreichst, damit diese das Problem analysieren können.</string>
+    <string name="exception_invalid_passbook_title">Ungültiger Pass</string>
+    <string name="exception_no_calendar_app_found">Es ist keine Kalender-App verfügbar</string>
+    <string name="exception_no_update">Pass konnte nicht aktualisiert werden.</string>
+    <string name="exception_empty_string">Darf nicht leer sein</string>
+    <string name="exception_no_export">Pass konnte nicht exportiert werden</string>
+    <string name="exception_intent_unavailable">Nicht verfügbar</string>
 
-  <string name="menu_map">Auf Karte anzeigen</string>
-  <string name="menu_delete">Entfernen</string>
-  <string name="menu_share">Teilen</string>
-  <string name="barcode">Barcode</string>
-  <string name="help_label">Hilfe</string>
-  <string name="help_content"><![CDATA[
+    <!-- Categories -->
+    <string name="category_boarding_pass">Boardkarte</string>
+    <string name="category_event">Event</string>
+    <string name="category_coupon">Gutschein</string>
+    <string name="category_storecard">Treuekarte</string>
+    <string name="category_generic">Allgemein</string>
+    <string name="category_none">Kategorielos</string>
+    
+    <!-- Main Navigation -->
+    <string name="nav_main_more">MEHR</string>
+    <string name="nav_main_sort">SORTIEREN</string>
+    <string name="nav_main_sort_category">Kategorie</string>
+    <string name="nav_main_sort_date">Datum</string>
+    <string name="nav_main_categories">KATEGORIEN</string>
+    <string name="nav_main_community">Community</string>
+    <string name="nav_main_share">Teilen</string>
+    <string name="nav_main_less">WENIGER</string>
+    <string name="nav_main_choice_scan_pkpass_files">Nach Passbook-Dateien suchen</string>
+    <string name="nav_main_choice_add_demo_pass">Demo-Pässe</string>
+    <string name="nav_main_choice_create_pass">Pass erstellen</string>
+    <string name="nav_main_choice_open_file">Datei öffnen</string>
+    
+    <!-- Edit Navigation -->
+    <string name="nav_edit_category">Kategorie</string>
+    <string name="nav_edit_metadata">Metadaten</string>
+    <string name="nav_edit_images">Bilder</string>
+    <string name="nav_edit_color">Farben</string>
+    <string name="nav_edit_barcode">Barcodes</string>
+    
+    <!-- Main -->
+    <string name="main_label_logo">Logo</string>
+    <string name="main_label_barcode">Barcode</string>
+    <string name="main_label_help">Hilfe</string>
+    <string name="main_no_data"><big><b>Keine Pässe verfügbar</b></big>
+\n\n\n Füge einen Pass mithilfe einer Passbook-Datei hinzu,
+\n verwende einen der Demo-Pässe oder
+\n erstelle einen neuen Pass.</string>
+    
+    <!-- Edit -->
+    <string name="edit_default_title">Unbenannter Pass</string>
+    <string name="edit_label_add_barcode">Barcode hinzufügen</string>
+    <string name="edit_label_barcode_message">Inhalt</string>
+    <string name="edit_label_barcode_scan">Scan</string>
+    <string name="edit_label_barcode_random">Zufällig</string>
+    <string name="edit_label_barcode_alternative_message">Alternativer Inhalt</string>
+    <string name="edit_label_images_icon">Symbol auswählen</string>
+    <string name="edit_label_images_logo">Logo auswählen</string>
+    <string name="edit_label_images_strip">Strip auswählen</string>
+    <string name="edit_label_images_thumbnail">Thumbnail auswählen</string>
+    <string name="edit_label_metadata_title">Titel</string>
+    <string name="edit_label_metadata_pick_time">Zeit wählen</string>
+    <string name="edit_label_metadata_pick_date">Datum wählen</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_spinner_loading">Lade...</string>
+    <string name="dialog_preparing_pass">Pass wird vorbereitet</string>
+    <string name="dialog_please_wait">Bitte warten...</string>
+    <string name="dialog_delete_confirm_title">Sind Sie sicher?</string>
+    <string name="dialog_delete_confirm_text">Möchten Sie diesen Pass wirklich entfernen?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">Auch Quelle löschen?</string>
+    <string name="dialog_scanning_for_passes">Es wird nach Pässen gesucht...</string>
+    <string name="dialog_downloading_new_pass_version">Neue Pass-Version wird heruntergeladen</string>
+    <string name="dialog_unzip_pass_title">Passbook wird geöffnet</string>
+    <string name="dialog_unzip_pass_message">Bitte warten...</string>
+    <string name="dialog_pass_updated">Pass wurde aktualisiert</string>
+    <string name="dialog_expiration_date_to_calendar_warning_title">Ablaufdatum hinzufügen</string>
+    <string name="dialog_expiration_date_to_calendar_warning_message">Sie haben ausgewählt, dass das Ablaufdatum zum Kalendereintrag hinzugefügt werden soll. Falls Sie der Meinung sind, dass es für diese Funktion ein besseres Datum gibt, sollten Sie den Pass einreichen, damit PassAndroid diesbezüglich weiterentwickelt werden kann.</string>
+    <string name="dialog_move_to_new_topic">In neue Kategorie verschieben</string>
+    <string name="dialog_move_to_new_topic_title">Kategoriename</string>
+    <string name="dialog_move_to_new_topic_suggestions">Vorschläge:</string>
+    <string name="dialog_workaround_title">Workaround funktionslos</string>
+    <string name="dialog_workaround_description"><![CDATA[
+    Der PassAndroid-URL-Workaround ist fehlgeschlagen. Einige Firmen senden Passbook-Dateien nur an Apple-Geräte - auch der Versuch dies zu umgehen ist gescheitert. \n Sie können versuchen, die Datei im Browser zu öffnen oder alternativ den Pass einreichen.]]></string>
+
+    <!-- Notifications -->
+    <string name="notification_moved_to">Pass wurde in %1$s verschoben.</string>
+    <string name="notification_search_found">Gefunden: %1$s</string>
+    <string name="notification_search_found_more">Und %1$d weitere.</string>
+
+    <!-- Topics -->
+    <string name="topic_active">Aktiv</string>
+    <string name="topic_trash">Papierkorb</string>
+    <string name="topic_archive">Archiv</string>
+    
+    <!-- Intents -->
+    <string name="intent_share_passbook_subject">Ein Passbook wurde mit Ihnen geteilt</string>
+    <string name="intent_share_passbook_chooser_title">Wie soll der Pass geteilt werden?</string>
+    <string name="intent_share_email_export_problem_title">Wie soll der Pass verschickt werden?</string>
+    <string name="intent_choose_picture">Bild auswählen</string>
+    <string name="intent_browser">Browser</string>
+    <string name="intent_open_link">Wie soll der Link geöffnet werden?</string>
+
+    <!-- Help -->
+    <string name="help"><![CDATA[
 <h1>Wozu dient PassAndroid?</h1>
 
 Diese Anwendung ist zur Darstellung von Pässen gedacht. Dies können Eintrittskarten für z.B. Kinos oder Konzerte sein. Oder auch Boardingkarten für Bus, Zug und Flug. Die Möglichkeiten sind vielfältig.
@@ -53,95 +167,4 @@ Es wäre schön zu erfahren, wie du die Anwendung benutzt, was du gut oder was d
 <H1>Rechtliches</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>  THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 
 ]]></string>
-  <string name="drawer_open">Öffnen</string>
-  <string name="drawer_close">Schließen</string>
-  <string name="pass_problem">Beim Öffnen des Passes ist ein Fehler aufgetreten. Es währ hilfreich wenn Du den Pass beim Entwicklerteam einreichst, damit diese das Problem analysieren können.</string>
-  <string name="problem">Problem</string>
-  <string name="send">Senden</string>
-  <string name="delete">Entfernen</string>
-  <string name="choose_location">Ort auswählen</string>
-  <string name="boarding_pass">Boardkarte</string>
-  <string name="category_event">Event</string>
-  <string name="category_coupon">Gutschein</string>
-  <string name="category_storecard">Treuekarte</string>
-  <string name="category_generic">Allgemein</string>
-  <string name="category_none">Kategorielos</string>
-  <string name="nav_more">Mehr</string>
-  <string name="nav_sort">Sortierung</string>
-  <string name="nav_sort_category">Kategorie</string>
-  <string name="nav_sort_date">Datum</string>
-  <string name="nav_categories">Kategorien</string>
-  <string name="nav_comunity">Community</string>
-  <string name="nav_share">Teilen</string>
-  <string name="pass_directions">Navigation</string>
-  <string name="pass_to_calendar">Kalendereintrag erstellen</string>
-  <string name="invalid_passbook_title">Ungültiger Pass</string>
-  <string name="preparing_pass">Pass wird vorbereitet...</string>
-  <string name="please_wait">Bitte warten...</string>
-  <string name="passbook_is_shared_subject">Ein Pass wurde mit dir geteilt</string>
-  <string name="passbook_share_chooser_title">Wie soll der Pass gesendet werden?</string>
-  <string name="dialog_delete_confirm_text">Wollen Sie diesen Pass wirklich entfernen?</string>
-  <string name="dialog_delete_title">Pass wirklich entfernen?</string>
-  <string name="dialog_delete_confirm_delete_source_checkbox">auch die Quelle entfernen?</string>
-  <string name="more">MEHR</string>
-  <string name="less">WENIGER</string>
-  <string name="scanning_for_passes">Suche nach Pässen</string>
-  <string name="fab_choice_open_file">Datei öffnen</string>
-  <string name="fab_choice_scan_pkpass_files">Suche nach Passbook-Dateien</string>
-  <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
-  <string name="fab_choice_create_pass">Pass erstellen</string>
-  <string name="empty_text_view"><big><b>Keine Pässe verfügbar</b></big>
-\n\n\n Füge einen Pass mithilfe einer Passbook-Datei hinzu,
-\n verwende einen der Demo-Pässe oder
-\n erstelle einen neuen Pass.</string>
-  <string name="downloading_new_pass_version">Lade neue Pass-Version herunter</string>
-  <string name="unzip_pass_dialog_title">Öffne Pass</string>
-  <string name="unzip_pass_dialog_message">Bitte warten...</string>
-    <string name="action_update">Aktualisieren</string>
-    <string name="no_calendar_app_found">Es ist keine Kalender-App verfügbar</string>
-    <string name="pass_updated">Pass wurde aktualisiert</string>
-    <string name="expiration_date_to_calendar_warning_message">Sie haben ausgewählt, dass das Ablaufdatum zum Kalendereintrag hinzugefügt werden soll. Falls Sie der Meinung sind, dass es für diese Funktion ein besseres Datum gibt, sollten Sie den Pass einreichen, damit PassAndroid diesbezüglich weiterentwickelt werden kann.</string>
-    <string name="expiration_date_to_calendar_warning_title">Ablaufdatum hinzufügen</string>
-    <string name="notification_moved_to">Pass wurde nach %1$s verschoben.</string>
-    <string name="topic_trash">Mülleimer</string>
-    <string name="topic_archive">Archiv</string>
-    <string name="topic_active">Aktiv</string>
-    <string name="action_undo">Rückgängig</string>
-    <string name="edit_nav_category">Kategorie</string>
-    <string name="edit_nav_metadata">Metadaten</string>
-    <string name="edit_nav_images">Bilder</string>
-    <string name="edit_nav_color">Farben</string>
-    <string name="edit_nav_barcode">Barcodes</string>
-    <string name="exception_no_update">Pass konnte nicht aktualisiert werden.</string>
-    <string name="dialog_move_to_new_topic">In Kategorie verschieben</string>
-    <string name="dialog_move_to_new_topic_title">Kategoriename</string>
-    <string name="dialog_move_to_new_topic_suggestions">Vorschläge:</string>
-    <string name="edit_default_title">Unbenannter Pass</string>
-    <string name="edit_barcode_message">Inhalt</string>
-    <string name="edit_barcode_scan">Scan</string>
-    <string name="edit_barcode_random">Zufall</string>
-    <string name="edit_barcode_alternative_message">Alternativer Inhalt</string>
-    <string name="edit_images_icon">Symbol auswählen</string>
-    <string name="edit_images_logo">Logo auswählen</string>
-    <string name="edit_images_strip">Strip auswählen</string>
-    <string name="edit_images_thumbnail">Thumbnail auswählen</string>
-    <string name="edit_metadata_title">Titel</string>
-    <string name="edit_metadata_pick_time">Zeit auswählen</string>
-    <string name="edit_metadata_pick_date">Datum auswählen</string>
-    <string name="menu_edit">Bearbeiten</string>
-    <string name="menu_light">Displayhelligkeit maximieren</string>
-    <string name="action_save">Speichern</string>
-    <string name="notification_search_found">Gefunden: %1$s</string>
-    <string name="notification_search_found_more">Und %1$d weitere.</string>
-    <string name="email_export_problem_title">Wie soll der Pass verschickt werden?</string>
-    <string name="exception_empty_string">Darf nicht leer sein</string>
-    <string name="exception_no_export">Pass konnte nicht exportiert werden.</string>
-    <string name="intent_picture">Bild auswählen</string>
-    <string name="spinner_loading">Lade</string>
-    <string name="alert_workaround_title">Workaround fehlgeschlagen</string>
-    <string name="alert_workaround_description"><![CDATA[
-    Der PassAndroid-URL-Workaround ist fehlgeschlagen. Einige Firmen senden Passbook-Dateien nur an Apple-Geräte - auch der Versuch dies zu umgehen ist gescheitert. \n Sie können versuchen, die Datei im Browser zu öffnen oder alternativ den Pass einreichen.]]></string>
-    <string name="intent_browser">Browser</string>
-    <string name="intent_link">Wie soll der Link geöffnet werden?</string>
-    <string name="action_cancel">Abbrechen</string>
 </resources>
