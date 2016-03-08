@@ -11,7 +11,7 @@ public class CategoryHelper {
     public static int getHumanCategoryString(String fromPass) {
         switch (fromPass) {
             case "boardingPass":
-                return R.string.boarding_pass;
+                return R.string.category_boarding_pass;
 
             case "eventTicket":
                 return R.string.category_event;

@@ -18,8 +18,8 @@ public class AddToCalendar {
 
         if (pass.getRelevantDate() == null) {
             new AlertDialog.Builder(activity)
-                    .setMessage(R.string.expiration_date_to_calendar_warning_message)
-                    .setTitle(R.string.expiration_date_to_calendar_warning_title)
+                    .setMessage(R.string.dialog_expiration_date_to_calendar_warning_message)
+                    .setTitle(R.string.dialog_expiration_date_to_calendar_warning_title)
                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -50,7 +50,7 @@ public class AddToCalendar {
             activity.startActivity(intent);
         } catch (ActivityNotFoundException exception) {
             // TODO maybe action to install calendar app
-            Snackbar.make(activity.getWindow().getDecorView(), R.string.no_calendar_app_found, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(activity.getWindow().getDecorView(), R.string.exception_no_calendar_app_found, Snackbar.LENGTH_LONG).show();
         }
     }
 

@@ -84,7 +84,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
         onView(withId(R.id.addCalendar)).perform(click());
 
-        onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(matches(isDisplayed()));
+        onView(withText(R.string.dialog_expiration_date_to_calendar_warning_message)).check(matches(isDisplayed()));
     }
 
     @MediumTest
@@ -93,7 +93,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
         onView(withText(android.R.string.cancel)).perform(click());
 
-        onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(doesNotExist());
+        onView(withText(R.string.dialog_expiration_date_to_calendar_warning_message)).check(doesNotExist());
     }
 
     @MediumTest

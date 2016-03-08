@@ -84,17 +84,17 @@ public class PassEditActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Category";
+                    return getString(R.string.nav_edit_category);
                 case 1:
-                    return "MetaData";
+                    return getString(R.string.nav_edit_metadata);
                 case 2:
-                    return "Images";
+                    return getString(R.string.nav_edit_images);
                 case 3:
-                    return "Color";
+                    return getString(R.string.nav_edit_color);
 
                 case 4:
                 default:
-                    return "BarCode";
+                    return getString(R.string.nav_edit_barcode);
             }
         }
 

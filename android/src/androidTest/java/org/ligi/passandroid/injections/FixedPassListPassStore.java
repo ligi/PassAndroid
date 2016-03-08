@@ -1,6 +1,7 @@
 package org.ligi.passandroid.injections;
 
 import android.support.annotation.Nullable;
+import android.content.Context;
 
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.Pass;
@@ -62,9 +63,9 @@ public class FixedPassListPassStore implements PassStore {
     }
 
     @Override
-    public PassClassifier getClassifier() {
+    public PassClassifier getClassifier(Context context) {
         if (passClassifier == null) {
-            passClassifier = new PassClassifier(new HashMap<String, String>(), this);
+            passClassifier = new PassClassifier(new HashMap<String, String>(), this, context.getString(R.string.topic_active));
         }
         return passClassifier;
     }

@@ -30,8 +30,8 @@ public class UnzipPassDialog {
         }
 
         final ProgressDialog dialog = ProgressDialog.show(activity,
-                                                          activity.getString(R.string.unzip_pass_dialog_title),
-                                                          activity.getString(R.string.unzip_pass_dialog_message),
+                                                          activity.getString(R.string.dialog_unzip_pass_title),
+                                                          activity.getString(R.string.dialog_unzip_pass_message),
                                                           true);
         dialog.setCancelable(false);
 
@@ -69,7 +69,7 @@ public class UnzipPassDialog {
                                     return;
                                 }
 
-                                DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
+                                DisplayError(activity, activity.getString(R.string.exception_invalid_passbook_title), reason);
                             }
                         });
                     }

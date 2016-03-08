@@ -31,7 +31,7 @@ public class NavigateToLocationsDialog {
             for (PassLocation loc : locations) {
                 locationDescriptions[i++] = loc.getDescription();
             }
-            new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.choose_location))
+            new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.action_choose_location))
                                              .setItems(locationDescriptions, new DialogInterface.OnClickListener() {
                                                  @Override
                                                  public void onClick(DialogInterface dialog, int which) {

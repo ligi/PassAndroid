@@ -9,7 +9,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/logo"
+            android:contentDescription="@string/main_label_logo"
             android:paddingBottom="10dp"/>
 
 
@@ -51,7 +51,7 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
 
-                android:contentDescription="@string/barcode"/>
+                android:contentDescription="@string/main_label_barcode"/>
 
         <TextView
                 android:id="@+id/zoomIn"
@@ -78,7 +78,7 @@
             android:layout_gravity="center"
             android:fontFamily="sans-serif"
             android:padding="10dp"
-            android:text="@string/more"
+            android:text="@string/nav_main_more"
             android:textSize="21sp"/>
 
     <LinearLayout
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/logo"
+            android:contentDescription="@string/main_label_logo"
             android:padding="8dp"/>
 
 
@@ -115,6 +115,6 @@
             android:layout_height="148dp"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/logo"
+            android:contentDescription="@string/main_label_logo"
             android:padding="8dp"/>
 </LinearLayout>

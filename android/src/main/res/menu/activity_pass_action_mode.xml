@@ -5,14 +5,14 @@
     <item
         android:id="@+id/menu_delete"
         yourapp:showAsAction="ifRoom"
-        android:title="@string/menu_delete"
+        android:title="@string/action_delete"
         android:icon="@drawable/ic_action_delete" />
 
 
     <item
         android:id="@+id/menu_share"
         yourapp:showAsAction="ifRoom"
-        android:title="@string/menu_share"
+        android:title="@string/action_share"
         android:icon="@drawable/ic_action_share" />
 
 </menu>

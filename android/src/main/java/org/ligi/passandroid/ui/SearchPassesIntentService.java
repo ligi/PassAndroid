@@ -29,6 +29,7 @@ import org.ligi.tracedroid.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 import javax.inject.Inject;
 
@@ -73,7 +74,7 @@ public class SearchPassesIntentService extends IntentService {
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0);
-        progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
+        progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.dialog_scanning_for_passes))
                                                                           .setSmallIcon(R.drawable.ic_action_refresh)
                                                                           .setOngoing(true)
                                                                           .setContentIntent(pendingIntent)
@@ -164,9 +165,9 @@ public class SearchPassesIntentService extends IntentService {
                     final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
                     findNotificationBuilder.setLargeIcon(bitmap);
                 }
-                findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
+                findNotificationBuilder.setContentTitle(String.format(getString(R.string.notification_search_found), pass.getDescription()));
                 if (foundList.size() > 1) {
-                    findNotificationBuilder.setContentText("And " + (foundList.size() - 1) + " more ");
+                    findNotificationBuilder.setContentText(String.format(getString(R.string.notification_search_found_more), (foundList.size() - 1)));
                 } else {
                     findNotificationBuilder.setContentText(file.getAbsolutePath());
                 }

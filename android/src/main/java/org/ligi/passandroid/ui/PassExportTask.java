@@ -32,8 +32,8 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute() {
-        progress_dialog.setTitle(activity.getString(R.string.preparing_pass));
-        progress_dialog.setMessage(activity.getString(R.string.please_wait));
+        progress_dialog.setTitle(activity.getString(R.string.dialog_preparing_pass));
+        progress_dialog.setMessage(activity.getString(R.string.dialog_please_wait));
         progress_dialog.show();
         super.onPreExecute();
     }
@@ -54,16 +54,17 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
 
         if (passExporter.exception != null) {
             App.component().tracker().trackException("passExporterException", passExporter.exception, false);
-            Toast.makeText(activity, "could not export pass " + passExporter.exception, Toast.LENGTH_LONG).show();
+            //Not translatable exception passExporter.exception should be logged
+            Toast.makeText(activity, activity.getString(R.string.exception_no_export), Toast.LENGTH_LONG).show();
             return;
         }
 
         if (share_after_export) {
             final Intent it = new Intent(Intent.ACTION_SEND);
-            it.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.passbook_is_shared_subject));
+            it.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.intent_share_passbook_subject));
             it.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + passExporter.fullZipFileName));
             it.setType("application/vnd.apple.pkpass");
-            activity.startActivity(Intent.createChooser(it, activity.getString(R.string.passbook_share_chooser_title)));
+            activity.startActivity(Intent.createChooser(it, activity.getString(R.string.intent_share_passbook_chooser_title)));
         }
     }
 

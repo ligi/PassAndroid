@@ -89,7 +89,7 @@
             android:clickable="true"
             android:drawableLeft="@drawable/ic_place_grey600_18dp"
             android:padding="8dp"
-            android:text="@string/pass_directions" />
+            android:text="@string/action_pass_directions" />
 
 
         <TextView
@@ -103,7 +103,7 @@
             android:clickable="true"
             android:drawableRight="@drawable/ic_today_grey600_18dp"
             android:padding="8dp"
-            android:text="@string/pass_to_calendar" />
+            android:text="@string/action_pass_to_calendar" />
 
         <LinearLayout
             android:id="@+id/passExtrasContainer"

@@ -1,13 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">"PassAndroid"</string>
-    <string name="logo">"logo"</string>
-    <string name="menu_map">"show on map"</string>
-    <string name="menu_delete">"delete"</string>
-    <string name="menu_share">"share"</string>
-    <string name="barcode">"barcode"</string>
-    <string name="help_label">"Help"</string>
-<string name="help_content"><![CDATA[
+    
+    <!-- Actions -->
+    <string name="action_show_map">show on map</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_share">share</string>
+    <string name="action_edit">edit</string>
+    <string name="action_light">light</string>
+    <string name="action_cancel">cancel</string>
+    <string name="action_save">save</string>
+    <string name="action_update">update</string>
+    <string name="action_undo">undo</string>
+    <string name="action_open">open</string>
+    <string name="action_close">close</string>
+    <string name="action_send">Send</string>
+    <string name="action_choose_location">Choose Location</string>
+    <string name="action_pass_directions">Navigate</string>
+    <string name="action_pass_to_calendar">to Calendar</string>
+    
+    <!-- Exceptions -->
+    <string name="exception">Problem</string>
+    <string name="exception_opening_pass">"Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software."</string>
+    <string name="exception_invalid_passbook_title">Invalid Passbook</string>
+    <string name="exception_no_calendar_app_found">No Calendar-App found</string>
+    <string name="exception_no_update">Could not update pass.</string>
+    <string name="exception_empty_string">cannot be empty</string>
+    <string name="exception_no_export">Could not export pass</string>
+    <string name="exception_intent_unavailable">Unavailable</string>
+
+    <!-- Categories -->
+    <string name="category_boarding_pass">Boarding Pass</string>
+    <string name="category_event">Event</string>
+    <string name="category_coupon">Coupon</string>
+    <string name="category_storecard">Store Card</string>
+    <string name="category_generic">Generic</string>
+    <string name="category_none">No Category</string>
+    
+    <!-- Main Navigation -->
+    <string name="nav_main_more">MORE</string>
+    <string name="nav_main_sort">SORT</string>
+    <string name="nav_main_sort_category">Category</string>
+    <string name="nav_main_sort_date">Date</string>
+    <string name="nav_main_categories">CATEGORIES</string>
+    <string name="nav_main_community">Community</string>
+    <string name="nav_main_share">Share</string>
+    <string name="nav_main_less">LESS</string>
+    <string name="nav_main_choice_scan_pkpass_files">Scan for pkpass files</string>
+    <string name="nav_main_choice_add_demo_pass">Add Demo-Pass</string>
+    <string name="nav_main_choice_create_pass">Create Pass (experimental)</string>
+    <string name="nav_main_choice_open_file">Open File</string>
+    
+    <!-- Edit Navigation -->
+    <string name="nav_edit_category">Category</string>
+    <string name="nav_edit_metadata">Metadata</string>
+    <string name="nav_edit_images">Images</string>
+    <string name="nav_edit_color">Color</string>
+    <string name="nav_edit_barcode">Barcode</string>
+    
+    <!-- Main -->
+    <string name="main_label_logo">logo</string>
+    <string name="main_label_barcode">barcode</string>
+    <string name="main_label_help">Help</string>
+    <string name="main_no_data"><big><b>No pass yet</b></big>
+    \n\n\n You can search your phone for passes
+    \n\n or create your own
+    \n\n or try a demo pass
+    \n\n just press + down below
+    </string>
+    
+    <!-- Edit -->
+    <string name="edit_default_title">Custom Pass</string>
+    <string name="edit_label_add_barcode">Add Barcode</string>
+    <string name="edit_label_barcode_message">Message</string>
+    <string name="edit_label_barcode_scan">Scan</string>
+    <string name="edit_label_barcode_random">Random</string>
+    <string name="edit_label_barcode_alternative_message">Alternative Message</string>
+    <string name="edit_label_images_icon">Pick icon</string>
+    <string name="edit_label_images_logo">Pick logo</string>
+    <string name="edit_label_images_strip">Pick strip</string>
+    <string name="edit_label_images_thumbnail">Pick thumbnail</string>
+    <string name="edit_label_metadata_title">Title</string>
+    <string name="edit_label_metadata_pick_time">Pick time</string>
+    <string name="edit_label_metadata_pick_date">Pick date</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_spinner_loading">Loading</string>
+    <string name="dialog_preparing_pass">Preparing Pass</string>
+    <string name="dialog_please_wait">please wait - shouldn\'t be long</string>
+    <string name="dialog_delete_confirm_title">Sure?</string>
+    <string name="dialog_delete_confirm_text">Do you really want to delete this passbook?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
+    <string name="dialog_scanning_for_passes" >Scanning for Passes</string>
+    <string name="dialog_downloading_new_pass_version">downloading new pass version</string>
+    <string name="dialog_unzip_pass_title">Opening Passbook</string>
+    <string name="dialog_unzip_pass_message">Please wait...</string>
+    <string name="dialog_pass_updated">Pass Updated</string>
+    <string name="dialog_expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
+    <string name="dialog_expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
+    <string name="dialog_move_to_new_topic">Move to new Topic</string>
+    <string name="dialog_move_to_new_topic_title">Title for new topic</string>
+    <string name="dialog_move_to_new_topic_suggestions">Suggestions:</string>
+    <string name="dialog_workaround_title">Workaround failed</string>
+    <string name="dialog_workaround_description"><![CDATA[
+    The URL PassAndroid tried to work around failed. some companies just send PassBooks to Apple Devices - this was an attempt to workaround this. \n Unfortunately it failed - perhaps there where changes on the serverside - you can open the site with your browser now - to see it in PassAndroid in future again it would help if you can send me the pass.]]></string>
+
+    <!-- Notifications -->
+    <string name="notification_moved_to">Pass moved to %1$s.</string>
+    <string name="notification_search_found">Found: %1$s</string>
+    <string name="notification_search_found_more">And %1$d more.</string>
+
+    <!-- Topics -->
+    <string name="topic_active">active</string>
+    <string name="topic_trash">trash</string>
+    <string name="topic_archive">archive</string>
+    
+    <!-- Intents -->
+    <string name="intent_share_passbook_subject">a Passbook is shared with you</string>
+    <string name="intent_share_passbook_chooser_title">How to send Pass?</string>
+    <string name="intent_share_email_export_problem_title">How to send Pass?</string>
+    <string name="intent_choose_picture">Select Picture</string>
+    <string name="intent_browser">Browser</string>
+    <string name="intent_open_link">How to send Link?</string>
+
+    <!-- Help -->
+    <string name="help"><![CDATA[
 <h1>What is it?</h1>
 
 This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight, a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
@@ -60,57 +177,4 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     ]]></string>
-    <string name="drawer_open">"open"</string>
-    <string name="drawer_close">"close"</string>
-    <string name="pass_problem">"Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software."</string>
-    <string name="problem">"Problem"</string>
-    <string name="send">"Send"</string>
-    <string name="delete">"Delete!"</string>
-    <string name="choose_location">"Choose Location"</string>
-    <string name="boarding_pass">"Boarding Pass"</string>
-    <string name="category_event">"Event"</string>
-    <string name="category_coupon">"Coupon"</string>
-    <string name="category_storecard">"Store Card"</string>
-    <string name="category_generic">"generic"</string>
-    <string name="category_none">"no Category"</string>
-    <string name="nav_more">"MORE"</string>
-    <string name="nav_sort">"SORT"</string>
-    <string name="nav_sort_category">"Category"</string>
-    <string name="nav_sort_date">"Date"</string>
-    <string name="nav_categories">"CATEGORIES"</string>
-    <string name="nav_comunity">"Community"</string>
-    <string name="nav_share">"Share"</string>
-    <string name="pass_directions">"Navigate"</string>
-    <string name="pass_to_calendar">"to Calendar"</string>
-    <string name="invalid_passbook_title">Invalid Passbook</string>
-    <string name="preparing_pass">Preparing Pass</string>
-    <string name="please_wait">please wait - shouldn\'t be long</string>
-    <string name="passbook_is_shared_subject">a Passbook is shared with you</string>
-    <string name="passbook_share_chooser_title">How to send Pass?</string>
-    <string name="dialog_delete_confirm_text">Do you really want to delete this passbook?</string>
-    <string name="dialog_delete_title">Sure?</string>
-    <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
-    <string name="more">MORE</string>
-    <string name="less">LESS</string>
-    <string name="scanning_for_passes" >Scanning for Passes</string>
-    <string name="fab_choice_scan_pkpass_files">Scan for pkpass files</string>
-    <string name="fab_choice_add_demo_pass">Add Demo-Pass</string>
-    <string name="fab_choice_create_pass">Create Pass (experimental)</string>
-    <string name="empty_text_view"><big><b>No pass yet</b></big>
-    \n\n\n You can search your phone for passes
-    \n\n or create your own
-    \n\n or try a demo pass
-    \n\n just press + down below
-    </string>
-    <string name="downloading_new_pass_version">downloading new pass version</string>
-    <string name="unzip_pass_dialog_title">Opening Passbook</string>
-    <string name="unzip_pass_dialog_message">Please wait...</string>
-    <string name="action_update">update</string>
-    <string name="no_calendar_app_found">No Calendar-App found</string>
-    <string name="pass_updated">Pass Updated</string>
-    <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
-    <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
-    <string name="topic_trash">trash</string>
-    <string name="topic_archive">archive</string>
-    <string name="move_to_new_topic">Move to new Topic</string>
 </resources>

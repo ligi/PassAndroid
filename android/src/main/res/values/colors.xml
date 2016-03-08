@@ -6,6 +6,6 @@
     <color name="primary">#ff366ce8</color>
     <color name="accent">#ffe91e63</color>
     <color name="secondary">#ff2c51a7</color>
-
     <color name="icon_green">#ffbfdf00</color>
+    <color name="edit_default_background">#ff366ce8</color>
 </resources>

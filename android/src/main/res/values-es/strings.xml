@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">PassAndroid</string>
-  <string name="logo">logo</string>
-  <string name="menu_map">mostrar en mapa</string>
-  <string name="menu_delete">eliminar</string>
-  <string name="menu_share">compartir</string>
-  <string name="barcode">código de barras</string>
-  <string name="help_label">Ayuda</string>
-  <string name="help_content"><![CDATA[
+  <string name="main_label_logo">logo</string>
+  <string name="action_show_map">mostrar en mapa</string>
+  <string name="action_delete">eliminar</string>
+  <string name="action_share">compartir</string>
+  <string name="main_label_barcode">código de barras</string>
+  <string name="main_label_help">Ayuda</string>
+  <string name="help"><![CDATA[
 <h1>¿Qué es esto?</h1> 
 
 Esta aplicación es un visor de passbook - un passbook puedes ser p. ej. una <b>tarjeta de embarque</b> para tu próximo vuelo, un cupón para una deliciosa bebida en tu próxima visita, una entrada de cine, una tarjeta de socio, hay un motón de posibilidades. Básicamente es el reemplazo de un trozo de papel o plástico que puedes llevar normalmente contigo - salvemos unos cuantos árboles <b>¡reduce desperdicios!</b> 
@@ -52,50 +52,47 @@ Esta aplicación se abre mejor con <a href=\'https://play.google.com/store/apps/
 ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
 
 ]]></string>
-  <string name="drawer_open">abrir</string>
-  <string name="drawer_close">cerrar</string>
-  <string name="pass_problem">Lo sentimos, ha ocurrido un problema procesando este Passbook. Si lo deseas puedes enviarnos dicho Passbook para comprobar cual es el problema y mejorar el software</string>
-  <string name="problem">Problema</string>
-  <string name="send">Enviar</string>
-  <string name="delete">¡Eliminar!</string>
-  <string name="choose_location">Seleccionar ubicación</string>
-  <string name="boarding_pass">Tarjeta de embarque</string>
+  <string name="action_open">abrir</string>
+  <string name="action_close">cerrar</string>
+  <string name="exception_opening_pass">Lo sentimos, ha ocurrido un problema procesando este Passbook. Si lo deseas puedes enviarnos dicho Passbook para comprobar cual es el problema y mejorar el software</string>
+  <string name="exception">Problema</string>
+  <string name="action_send">Enviar</string>
+  <string name="action_choose_location">Seleccionar ubicación</string>
+  <string name="category_boarding_pass">Tarjeta de embarque</string>
   <string name="category_event">Evento</string>
   <string name="category_coupon">Cupón</string>
   <string name="category_storecard">Tarjeta de compra</string>
   <string name="category_generic">Generico</string>
   <string name="category_none">sin Categoría</string>
-  <string name="nav_more">MAS</string>
-  <string name="nav_sort">ORDENAR</string>
-  <string name="nav_sort_category">Categoría</string>
-  <string name="nav_sort_date">Fecha</string>
-  <string name="nav_categories">CATEGORÍAS</string>
-  <string name="nav_comunity">Comunidad</string>
-  <string name="nav_share">Compartir</string>
-  <string name="pass_directions">Navegar</string>
-  <string name="pass_to_calendar">al Calendario</string>
-  <string name="invalid_passbook_title">Passbook no válido</string>
-  <string name="preparing_pass">Preparando el pase</string>
-  <string name="please_wait">por favor, espere - no debería tardar mucho</string>
-  <string name="passbook_is_shared_subject">un Passbook compartido con usted</string>
-  <string name="passbook_share_chooser_title">¿Cómo enviar este pase?</string>
+  <string name="nav_main_more">MAS</string>
+  <string name="nav_main_sort">ORDENAR</string>
+  <string name="nav_main_sort_category">Categoría</string>
+  <string name="nav_main_sort_date">Fecha</string>
+  <string name="nav_main_categories">CATEGORÍAS</string>
+  <string name="nav_main_community">Comunidad</string>
+  <string name="action_pass_directions">Navegar</string>
+  <string name="action_pass_to_calendar">al Calendario</string>
+  <string name="exception_invalid_passbook_title">Passbook no válido</string>
+  <string name="dialog_preparing_pass">Preparando el pase</string>
+  <string name="dialog_please_wait">por favor, espere - no debería tardar mucho</string>
+  <string name="intent_share_passbook_subject">un Passbook compartido con usted</string>
+  <string name="intent_share_passbook_chooser_title">¿Cómo enviar este pase?</string>
   <string name="dialog_delete_confirm_text">¿Realmente quiere eliminar este passbook?</string>
-  <string name="dialog_delete_title">¿Seguro?</string>
+  <string name="dialog_delete_confirm_title">¿Seguro?</string>
   <string name="dialog_delete_confirm_delete_source_checkbox">¿eliminar la fuente también?</string>
-  <string name="more">MÁS</string>
-  <string name="less">MENOS</string>
-  <string name="scanning_for_passes">Buscando pases </string>
-  <string name="fab_choice_scan_pkpass_files">Buscando archivos pkpass</string>
-  <string name="fab_choice_add_demo_pass">Añadir un pase demo</string>
-  <string name="fab_choice_create_pass">Crear un pase (experimental)</string>
-  <string name="empty_text_view"><big><b>Ningún pase todavía</b></big>
+  <string name="nav_main_less">MENOS</string>
+  <string name="dialog_scanning_for_passes">Buscando pases </string>
+  <string name="nav_main_choice_scan_pkpass_files">Buscando archivos pkpass</string>
+  <string name="nav_main_choice_add_demo_pass">Añadir un pase demo</string>
+  <string name="nav_main_choice_create_pass">Crear un pase (experimental)</string>
+  <string name="main_no_data"><big><b>Ningún pase todavía</b></big>
     \n\n\n Usted puede buscar pases en su teléfono
     \n\n o crear el suyo propio
     \n\n o probar un pase de demostración
     \n\n sólo tiene que pulsar + de abajo
     </string>
-  <string name="downloading_new_pass_version">descargando nueva versión del pase</string>
-  <string name="unzip_pass_dialog_title">Abriendo Passbook</string>
-  <string name="unzip_pass_dialog_message">Por favor, espere...</string>
+  <string name="dialog_downloading_new_pass_version">descargando nueva versión del pase</string>
+  <string name="dialog_unzip_pass_title">Abriendo Passbook</string>
+  <string name="dialog_unzip_pass_message">Por favor, espere...</string>
   <string name="action_update">actualizado</string>
 </resources>

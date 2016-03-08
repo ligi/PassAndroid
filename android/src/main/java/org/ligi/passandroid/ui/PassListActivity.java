@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -76,11 +77,11 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
-        final FiledPass pass = PassUtil.createEmptyPass();
+        final FiledPass pass = PassUtil.createEmptyPass((Context) this);
 
 
         passStore.setCurrentPass(pass);
-        passStore.getClassifier().moveToTopic(pass,adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
+        passStore.getClassifier(this).moveToTopic(pass,adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
         pass.save(passStore);
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
         floatingActionsMenu.collapse();
@@ -115,7 +116,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             intent.setType("*/*"); // tried with octet stream - no use
             startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
-            Snackbar.make(floatingActionsMenu, "Unavailable", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(floatingActionsMenu, getString(R.string.exception_intent_unavailable), Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -184,7 +185,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             SnackEngage.from(floatingActionsMenu).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.action_open, R.string.action_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 bus.post(new NavigationOpenedEvent());
@@ -197,7 +198,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        adapter = new PassTopicFragmentPagerAdapter(passStore.getClassifier(), getSupportFragmentManager());
+        adapter = new PassTopicFragmentPagerAdapter(passStore.getClassifier(this), getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -233,7 +234,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         refreshPasses();
 
         adapter.notifyDataSetChanged();
-        passStore.getClassifier().onClassificationChangeListeners.add(this);
+        passStore.getClassifier(this).onClassificationChangeListeners.add(this);
     }
 
     @Override
@@ -257,7 +258,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     @Override
     protected void onPause() {
-        passStore.getClassifier().onClassificationChangeListeners.remove(this);
+        passStore.getClassifier(this).onClassificationChangeListeners.remove(this);
         bus.unregister(this);
         super.onPause();
     }

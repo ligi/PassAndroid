@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model;
 
 import android.content.Context;
+import org.ligi.passandroid.R;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.helper.DirectoryFileFilter;
@@ -28,7 +29,7 @@ public class AndroidFileSystemPassStore implements PassStore {
 
         refreshPassesList();
         final File classificationFile = new File(settings.getStateDir(), "classifier_state.json");
-        passClassifier = new FileBackedPassClassifier(classificationFile, this);
+        passClassifier = new FileBackedPassClassifier(classificationFile, this, context.getString(R.string.topic_active));
     }
 
     @Override
@@ -136,7 +137,7 @@ public class AndroidFileSystemPassStore implements PassStore {
     }
 
     @Override
-    public PassClassifier getClassifier() {
+    public PassClassifier getClassifier(Context context) {
         return passClassifier;
     }
 
