@@ -25,7 +25,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"  + passExporter.fullZipFileName));
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "reason: " + reason);
-        activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.email_export_problem_title)));
+        activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.intent_share_email_export_problem_title)));
         activity.finish();
 
     }

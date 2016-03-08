@@ -23,7 +23,7 @@ public class OpenIphoneWebView extends Activity {
         setContentView(webView);
 
         final LoadToast loadToast = new LoadToast(this)
-                .setText(getString(R.string.spinner_loading))
+                .setText(getString(R.string.dialog_spinner_loading))
                 .setBackgroundColor(getResources().getColor(R.color.dividing_color)).show();
 
 

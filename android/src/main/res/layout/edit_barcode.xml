@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add Barcode" />
+        android:text="@string/edit_label_add_barcode" />
 
     <ScrollView
         android:id="@+id/barcodeMainContainer"
@@ -86,19 +86,19 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="@string/edit_barcode_message" />
+                    android:hint="@string/edit_label_barcode_message" />
 
                 <Button
                     android:id="@+id/scanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/edit_barcode_scan" />
+                    android:text="@string/edit_label_barcode_scan" />
 
                 <Button
                     android:id="@+id/randomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/edit_barcode_random" />
+                    android:text="@string/edit_label_barcode_random" />
 
             </LinearLayout>
 
@@ -106,14 +106,14 @@
                 android:id="@+id/alternativeMessageInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_barcode_alternative_message" />
+                android:hint="@string/edit_label_barcode_alternative_message" />
 
 
             <Button
                 android:id="@+id/deleteButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/delete" />
+                android:text="@string/action_delete" />
 
 
         </LinearLayout>

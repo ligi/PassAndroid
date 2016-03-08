@@ -3,7 +3,7 @@
     <item
         android:id="@+id/menu_help"
         yourapp:showAsAction="ifRoom"
-        android:title="@string/help_label"
+        android:title="@string/main_help_label"
         android:icon="@drawable/ic_action_help" />
 
 </menu>

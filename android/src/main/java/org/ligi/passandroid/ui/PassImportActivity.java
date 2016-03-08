@@ -37,7 +37,7 @@ public class PassImportActivity extends AppCompatActivity {
 
         public ImportAndShowAsyncTask(final Activity passImportActivity, final Uri intent_uri) {
             progressDialog = new ProgressDialog(passImportActivity);
-            progressDialog.setMessage(getString(R.string.please_wait));
+            progressDialog.setMessage(getString(R.string.dialog_please_wait));
             progressDialog.setCancelable(false);
             this.intent_uri = intent_uri;
             this.passImportActivity = passImportActivity;

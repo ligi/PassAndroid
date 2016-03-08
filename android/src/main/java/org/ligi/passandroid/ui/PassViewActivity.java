@@ -44,10 +44,10 @@ public class PassViewActivity extends PassViewActivityBase {
     void onMoreClick() {
         if (back_tv.getVisibility() == View.VISIBLE) {
             back_tv.setVisibility(View.GONE);
-            moreTextView.setText(R.string.more);
+            moreTextView.setText(R.string.nav_main_more);
         } else {
             back_tv.setVisibility(View.VISIBLE);
-            moreTextView.setText(R.string.less);
+            moreTextView.setText(R.string.nav_main_less);
         }
     }
 

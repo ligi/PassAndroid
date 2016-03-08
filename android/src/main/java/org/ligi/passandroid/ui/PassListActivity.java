@@ -185,7 +185,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             SnackEngage.from(floatingActionsMenu).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.action_open, R.string.action_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 bus.post(new NavigationOpenedEvent());

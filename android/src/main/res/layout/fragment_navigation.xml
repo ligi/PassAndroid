@@ -18,26 +18,26 @@
 
             <TextView
                     style="@style/nav_topic"
-                    android:text="@string/nav_sort"/>
+                    android:text="@string/nav_main_sort"/>
 
             <RadioButton
                     android:id="@+id/categoryRadioButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/nav_sort_category"/>
+                    android:text="@string/nav_main_sort_category"/>
 
             <RadioButton
                     android:id="@+id/dateRadioButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nav_sort_date"/>
+                    android:text="@string/nav_main_sort_date"/>
         </RadioGroup>
 
         <TextView
                 android:id="@+id/navCategoriesOuter"
                 style="@style/nav_topic"
-                android:text="@string/nav_categories"/>
+                android:text="@string/nav_main_categories"/>
 
         <LinearLayout
                 android:id="@+id/navCategoriesInner"
@@ -47,7 +47,7 @@
 
         <TextView
                 style="@style/nav_topic"
-                android:text="@string/nav_more"/>
+                android:text="@string/nav_main_more"/>
 
 
         <TextView
@@ -57,7 +57,7 @@
                 android:drawableLeft="@drawable/ic_action_gplus"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
-                android:text="@string/nav_comunity"/>
+                android:text="@string/nav_main_community"/>
 
 
         <TextView
@@ -67,7 +67,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/ic_nav_share"
-                android:text="@string/nav_share"/>
+                android:text="@string/action_share"/>
 
 
     </LinearLayout>

@@ -101,15 +101,15 @@ public class PassViewActivityBase extends PassAndroidActivity {
     }
 
     protected void showPassProblemDialog(final Pass pass, final String reason) {
-        new AlertDialog.Builder(this).setMessage(getString(R.string.pass_problem))
-                .setTitle(getString(R.string.problem))
+        new AlertDialog.Builder(this).setMessage(getString(R.string.exception_opening_pass))
+                .setTitle(getString(R.string.exception))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
+                .setNeutralButton(getString(R.string.action_send), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
@@ -172,7 +172,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
                 @Override
                 public void run() {
                     dlg = new ProgressDialog(PassViewActivityBase.this);
-                    dlg.setMessage(getString(R.string.downloading_new_pass_version));
+                    dlg.setMessage(getString(R.string.dialog_downloading_new_pass_version));
                     dlg.show();
                 }
             });
@@ -223,7 +223,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
                                         optionalPass = passStore.getCurrentPass();
                                         refresh();
 
-                                        Snackbar.make(getWindow().getDecorView(), R.string.pass_updated,Snackbar.LENGTH_LONG).show();
+                                        Snackbar.make(getWindow().getDecorView(), R.string.dialog_pass_updated,Snackbar.LENGTH_LONG).show();
                                     }
                                 });
 

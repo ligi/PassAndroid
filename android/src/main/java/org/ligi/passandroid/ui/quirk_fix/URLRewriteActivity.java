@@ -20,8 +20,8 @@ public class URLRewriteActivity extends PassAndroidActivity {
         final String url = new URLRewriteController(tracker).getUrlByUri(getIntent().getData());
 
         if (url == null) {
-            new AlertDialog.Builder(this).setTitle(getString(R.string.alert_workaround_title))
-                    .setMessage(getString(R.string.alert_workaround_description))
+            new AlertDialog.Builder(this).setTitle(getString(R.string.dialog_workaround_title))
+                    .setMessage(getString(R.string.dialog_workaround_description))
                     .setPositiveButton(getString(R.string.intent_browser), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -32,7 +32,7 @@ public class URLRewriteActivity extends PassAndroidActivity {
 
                         }
                     })
-                    .setNeutralButton("send", new DialogInterface.OnClickListener() {
+                    .setNeutralButton(getString(R.string.action_send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -42,7 +42,7 @@ public class URLRewriteActivity extends PassAndroidActivity {
                             intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
                             intent.setType("text/plain");
 
-                            startActivity(Intent.createChooser(intent, getString(R.string.intent_link)));
+                            startActivity(Intent.createChooser(intent, getString(R.string.intent_open_link)));
                             finish();
                         }
                     })

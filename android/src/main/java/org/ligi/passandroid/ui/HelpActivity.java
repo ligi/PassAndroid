@@ -30,7 +30,7 @@ public class HelpActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setStandardFontFamily("Sans-Serif");
 
-        helpWebView.loadData(getString(R.string.help_content),"text/html","utf-8");
+        helpWebView.loadData(getString(R.string.help),"text/html","utf-8");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

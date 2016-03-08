@@ -74,7 +74,7 @@ public class SearchPassesIntentService extends IntentService {
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0);
-        progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
+        progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.dialog_scanning_for_passes))
                                                                           .setSmallIcon(R.drawable.ic_action_refresh)
                                                                           .setOngoing(true)
                                                                           .setContentIntent(pendingIntent)

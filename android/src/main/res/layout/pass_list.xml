@@ -46,7 +46,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:singleLine="false"
-            android:text="@string/empty_text_view" />
+            android:text="@string/main_no_data" />
 
 
         <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
@@ -76,7 +76,7 @@
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
-                fab:fab_title="@string/fab_choice_open_file" />
+                fab:fab_title="@string/nav_main_choice_open_file" />
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_action_demo_pass"
@@ -86,7 +86,7 @@
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
-                fab:fab_title="@string/fab_choice_add_demo_pass" />
+                fab:fab_title="@string/nav_main_choice_add_demo_pass" />
 
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
@@ -97,7 +97,7 @@
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
-                fab:fab_title="@string/fab_choice_scan_pkpass_files" />
+                fab:fab_title="@string/nav_main_choice_scan_pkpass_files" />
 
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
@@ -109,7 +109,7 @@
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
-                fab:fab_title="@string/fab_choice_create_pass" />
+                fab:fab_title="@string/nav_main_choice_create_pass" />
 
 
         </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
