@@ -76,7 +76,7 @@
                 fab:fab_colorNormal="@color/secondary"
                 fab:fab_colorPressed="@color/icon_green"
                 fab:fab_size="mini"
-                fab:fab_title="Open File" />
+                fab:fab_title="@string/fab_choice_open_file" />
 
             <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_action_demo_pass"
