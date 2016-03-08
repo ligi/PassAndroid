@@ -18,6 +18,7 @@ public class ThePassClassifier {
 
     public static final String ID_1 = "ID1";
     public static final String TOPIC_1 = "topic1";
+    public static final String DEFAULT_TOPIC = "active";
 
     private PassStore getMockedPassStore() {
         final PassStore mock = mock(PassStore.class);
@@ -30,9 +31,9 @@ public class ThePassClassifier {
     @Test
     public void testThatPassIsInactiveByDefault() {
 
-        final PassClassifier tested = new PassClassifier(new HashMap<String, String>(), getMockedPassStore());
+        final PassClassifier tested = new PassClassifier(new HashMap<String, String>(), getMockedPassStore(), DEFAULT_TOPIC);
 
-        assertThat(tested.getTopic(getPassWithId(ID_1)).equals(PassClassifier.DEFAULT_TOPIC));
+        assertThat(tested.getTopic(getPassWithId(ID_1)).equals(DEFAULT_TOPIC));
     }
 
     @Test
@@ -41,7 +42,7 @@ public class ThePassClassifier {
             {
                 put(ID_1, TOPIC_1);
             }
-        }, getMockedPassStore());
+        }, getMockedPassStore(), DEFAULT_TOPIC);
 
         assertThat(tested.getTopics()).containsExactly(TOPIC_1);
     }
@@ -52,10 +53,10 @@ public class ThePassClassifier {
             {
                 put(ID_1, TOPIC_1);
             }
-        }, getMockedPassStore());
+        }, getMockedPassStore(), DEFAULT_TOPIC);
 
-        tested.moveToTopic(getPassWithId(ID_1), PassClassifier.DEFAULT_TOPIC);
-        assertThat(tested.getTopics()).containsExactly(PassClassifier.DEFAULT_TOPIC);
+        tested.moveToTopic(getPassWithId(ID_1), DEFAULT_TOPIC);
+        assertThat(tested.getTopics()).containsExactly(DEFAULT_TOPIC);
     }
 
 
@@ -65,10 +66,10 @@ public class ThePassClassifier {
             {
                 put(ID_1, TOPIC_1);
             }
-        }, getMockedPassStore());
+        }, getMockedPassStore(), DEFAULT_TOPIC);
 
-        tested.moveToTopic(getPassWithId(ID_1), PassClassifier.DEFAULT_TOPIC);
-        assertThat(tested.getTopics()).containsExactly(PassClassifier.DEFAULT_TOPIC);
+        tested.moveToTopic(getPassWithId(ID_1), DEFAULT_TOPIC);
+        assertThat(tested.getTopics()).containsExactly(DEFAULT_TOPIC);
     }
 
     @Test
@@ -77,17 +78,17 @@ public class ThePassClassifier {
             {
                 put(ID_1, TOPIC_1);
             }
-        }, getMockedPassStore());
+        }, getMockedPassStore(), DEFAULT_TOPIC);
 
-        assertThat(tested.getTopic(getPassWithId(ID_1)).equals(PassClassifier.DEFAULT_TOPIC));
+        assertThat(tested.getTopic(getPassWithId(ID_1)).equals(DEFAULT_TOPIC));
     }
 
 
     @Test
     public void testHasAtLeastOneTopic() {
-        final PassClassifier tested = new PassClassifier(new HashMap<String, String>(), getMockedPassStore());
+        final PassClassifier tested = new PassClassifier(new HashMap<String, String>(), getMockedPassStore(), DEFAULT_TOPIC);
 
-        assertThat(tested.getTopics()).containsExactly(PassClassifier.DEFAULT_TOPIC);
+        assertThat(tested.getTopics()).containsExactly(DEFAULT_TOPIC);
     }
 
     public FiledPass getPassWithId(String id) {

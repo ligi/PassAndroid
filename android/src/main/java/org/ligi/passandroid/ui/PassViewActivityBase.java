@@ -232,6 +232,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
                         new UnzipPassController.FailCallback() {
                             @Override
                             public void fail(final String reason) {
+                            //@todo Log reason in ADB, since we do not want to have untranslated strings passed to the user
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -240,9 +241,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
                                         }
                                         dlg.dismiss();
                                         new AlertDialog.Builder(PassViewActivityBase.this)
-                                                .setMessage("Could not update pass :( " +
-                                                        reason +
-                                                        ")")
+                                                .setMessage(getApplicationContext().getString(R.string.exception_no_update))
                                                 .setPositiveButton(android.R.string.ok,
                                                         null)
                                                 .show();

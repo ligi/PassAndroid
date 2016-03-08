@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model;
 
 import android.support.annotation.Nullable;
+import android.content.Context;
 
 import java.util.List;
 
@@ -26,5 +27,5 @@ public interface PassStore {
 
     void setCurrentPass(@Nullable Pass pass);
 
-    PassClassifier getClassifier();
+    PassClassifier getClassifier(Context context);
 }

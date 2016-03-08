@@ -13,25 +13,25 @@
             android:id="@+id/pickIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick icon" />
+            android:text="@string/edit_images_icon" />
 
 
         <Button
             android:id="@+id/pickLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick logo" />
+            android:text="@string/edit_images_logo" />
 
         <Button
             android:id="@+id/pickStrip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick strip" />
+            android:text="@string/edit_images_strip" />
 
         <Button
             android:id="@+id/pickThumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick thumbnail" />
+            android:text="@string/edit_images_thumbnail" />
     </LinearLayout>
 </ScrollView>

@@ -51,7 +51,7 @@ public class ThePassListSwiping extends BaseIntegration<PassListActivity> {
         onView(withId(R.id.suggestion_button_trash)).perform(click());
 
         onView(withText(R.string.topic_trash)).check(matches(isDisplayed()));
-        assertThat(passStore.getClassifier().getTopics()).containsExactly(getActivity().getString(R.string.topic_trash));
+        assertThat(passStore.getClassifier(this).getTopics()).containsExactly(getActivity().getString(R.string.topic_trash));
     }
 
 
@@ -63,7 +63,7 @@ public class ThePassListSwiping extends BaseIntegration<PassListActivity> {
         onView(withId(R.id.suggestion_button_archive)).perform(click());
 
         onView(withText(R.string.topic_archive)).check(matches(isDisplayed()));
-        assertThat(passStore.getClassifier().getTopics()).containsExactly(getActivity().getString(R.string.topic_archive));
+        assertThat(passStore.getClassifier(this).getTopics()).containsExactly(getActivity().getString(R.string.topic_archive));
     }
 
 
@@ -76,7 +76,7 @@ public class ThePassListSwiping extends BaseIntegration<PassListActivity> {
 
         onView(withText(android.R.string.ok)).perform(click());
 
-        assertThat(passStore.getClassifier().getTopics()).containsExactly(CUSTOM_PROBE);
+        assertThat(passStore.getClassifier(this).getTopics()).containsExactly(CUSTOM_PROBE);
     }
 
 

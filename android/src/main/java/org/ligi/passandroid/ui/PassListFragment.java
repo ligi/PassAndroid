@@ -66,7 +66,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
         App.component().inject(this);
 
-        passStoreProjection = new PassStoreProjection(passStore, getArguments().getString(BUNDLE_KEY_TOPIC), settings.getSortOrder());
+        passStoreProjection = new PassStoreProjection(passStore, getArguments().getString(BUNDLE_KEY_TOPIC), settings.getSortOrder(), getContext());
         adapter = new PassAdapter((AppCompatActivity) getActivity(), passStoreProjection);
 
         recyclerView.setAdapter(adapter);
@@ -88,7 +88,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
                 final String nextTopic = calculateNextTopic(swipeDir, pass);
 
                 if (nextTopic != null) {
-                    MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
+                    MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(getContext()), pass, nextTopic, getActivity());
                 } else {
                     MoveToNewTopicUI.show(getActivity(), passStore, pass);
                 }
@@ -98,7 +98,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
 
             @Nullable
             private String calculateNextTopic(final int swipeDir, final FiledPass pass) {
-                final Collection<String> topics = passStore.getClassifier().getTopics();
+                final Collection<String> topics = passStore.getClassifier(getContext()).getTopics();
 
                 switch (swipeDir) {
                     case LEFT:
@@ -119,7 +119,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
                     if (nextIsCandidate) {
                         return topic;
                     }
-                    if (passStore.getClassifier().getTopic(pass).equals(topic)) {
+                    if (passStore.getClassifier(getContext()).getTopic(pass).equals(topic)) {
                         nextIsCandidate = true;
                     }
                 }
@@ -132,7 +132,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
                 String prev = null;
 
                 for (String topic : topics) {
-                    if (passStore.getClassifier().getTopic(pass).equals(topic)) {
+                    if (passStore.getClassifier(getContext()).getTopic(pass).equals(topic)) {
                         return prev;
                     }
                     prev = topic;
@@ -146,7 +146,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        passStore.getClassifier().onClassificationChangeListeners.add(this);
+        passStore.getClassifier(getContext()).onClassificationChangeListeners.add(this);
 
         bus.register(this);
         return inflate;
@@ -156,7 +156,7 @@ public class PassListFragment extends Fragment implements OnClassificationChange
     public void onDestroyView() {
         super.onDestroyView();
         bus.unregister(this);
-        passStore.getClassifier().onClassificationChangeListeners.remove(this);
+        passStore.getClassifier(getContext()).onClassificationChangeListeners.remove(this);
     }
 
     @Override

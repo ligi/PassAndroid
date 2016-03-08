@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
@@ -36,7 +37,7 @@ class MoveToNewTopicUI {
     }
 
     private void move(String topic) {
-        MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, topic, context);
+        MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(context), pass, topic, context);
 
         dialog.dismiss();
     }
@@ -47,7 +48,7 @@ class MoveToNewTopicUI {
         this.pass = pass;
 
         dialog = new AlertDialog.Builder(context)
-                .setTitle(context.getString(R.string.move_to_new_topic))
+                .setTitle(context.getString(R.string.dialog_move_to_new_topic))
                 .setView(R.layout.dialog_move_to_new_topic)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -58,13 +59,13 @@ class MoveToNewTopicUI {
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        passStore.getClassifier().notifyDataChange();
+                        passStore.getClassifier(context).notifyDataChange();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        passStore.getClassifier().notifyDataChange();
+                        passStore.getClassifier(context).notifyDataChange();
                     }
                 })
                 .show();
@@ -74,7 +75,7 @@ class MoveToNewTopicUI {
             @Override
             public void onClick(View v) {
                 if (newTopicEditText.getText().toString().isEmpty()) {
-                    newTopicEditText.setError("cannot be empty");
+                    newTopicEditText.setError(context.getString(R.string.exception_empty_string));
                     newTopicEditText.requestFocus();
                 } else {
                     move(newTopicEditText.getText().toString());

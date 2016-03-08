@@ -14,15 +14,16 @@ public class PassClassifier {
 
     public Set<OnClassificationChangeListener> onClassificationChangeListeners = new CopyOnWriteArraySet<>();
 
-    public final static String DEFAULT_TOPIC = "active";
+    public String DEFAULT_TOPIC;
 
     protected final Map<String, String> topic_by_id;
 
     private final PassStore passStore;
 
-    public PassClassifier(Map<String, String> topic_by_id, PassStore passStore) {
+    public PassClassifier(Map<String, String> topic_by_id, PassStore passStore, String defaultTopic) {
         this.topic_by_id = topic_by_id;
         this.passStore = passStore;
+        this.DEFAULT_TOPIC = defaultTopic;
 
         processDataChange();
     }

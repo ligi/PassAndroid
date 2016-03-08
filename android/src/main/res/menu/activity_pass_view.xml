@@ -19,13 +19,13 @@
     <item
         android:id="@+id/menu_light"
         yourapp:showAsAction="ifRoom"
-        android:title="light"
+        android:title="@string/menu_light"
         android:icon="@drawable/ic_action_wb_incandescent" />
 
     <item
         android:id="@+id/menu_edit"
         yourapp:showAsAction="ifRoom"
-        android:title="edit"
+        android:title="@string/menu_edit"
         android:icon="@drawable/ic_action_create" />
 
 </menu>

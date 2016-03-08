@@ -48,7 +48,7 @@ public class ImageEditFragment extends PassandroidFragment {
         final Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), reqCodePickLogo);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.intent_picture)), reqCodePickLogo);
     }
 
     @Override

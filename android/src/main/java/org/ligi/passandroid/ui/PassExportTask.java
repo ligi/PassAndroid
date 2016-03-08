@@ -54,7 +54,8 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
 
         if (passExporter.exception != null) {
             App.component().tracker().trackException("passExporterException", passExporter.exception, false);
-            Toast.makeText(activity, "could not export pass " + passExporter.exception, Toast.LENGTH_LONG).show();
+            //Not translatable exception passExporter.exception should be logged
+            Toast.makeText(activity, activity.getString(R.string.exception_no_export), Toast.LENGTH_LONG).show();
             return;
         }
 

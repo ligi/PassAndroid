@@ -1,5 +1,7 @@
 package org.ligi.passandroid.ui;
 
+import org.ligi.passandroid.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,7 +25,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"  + passExporter.fullZipFileName));
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "reason: " + reason);
-        activity.startActivity(Intent.createChooser(intent, "How to send Pass?"));
+        activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.email_export_problem_title)));
         activity.finish();
 
     }

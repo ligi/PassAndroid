@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassImportActivity;
 
+import org.ligi.passandroid.R;
+
 public class URLRewriteActivity extends PassAndroidActivity {
 
     @Override
@@ -18,11 +20,9 @@ public class URLRewriteActivity extends PassAndroidActivity {
         final String url = new URLRewriteController(tracker).getUrlByUri(getIntent().getData());
 
         if (url == null) {
-            new AlertDialog.Builder(this).setTitle("Workaround failed")
-                    .setMessage(
-                            "The URL PassAndroid tried to work around failed :-( some companies just send PassBooks to Apple Devices - this was an attempt to workaround this." +
-                                    "Unfortunately it failed - perhaps there where changes on the serverside - you can open the site with your browser now - to see it in PassAndroid in future again it would help if you can send me the pass")
-                    .setPositiveButton("Browser", new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(this).setTitle(getString(R.string.alert_workaround_title))
+                    .setMessage(getString(R.string.alert_workaround_description))
+                    .setPositiveButton(getString(R.string.intent_browser), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             tracker.trackException("URLRewrite with invalid activity", false);
@@ -42,11 +42,11 @@ public class URLRewriteActivity extends PassAndroidActivity {
                             intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
                             intent.setType("text/plain");
 
-                            startActivity(Intent.createChooser(intent, "How to send Link?"));
+                            startActivity(Intent.createChooser(intent, getString(R.string.intent_link)));
                             finish();
                         }
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             URLRewriteActivity.this.finish();

@@ -16,8 +16,8 @@ public class FileBackedPassClassifier extends PassClassifier {
     private final JsonAdapter<Map> adapter;
     private final File backed_file;
 
-    public FileBackedPassClassifier(final File backed_file, final PassStore passStore) {
-        super(getBase(backed_file), passStore);
+    public FileBackedPassClassifier(final File backed_file, final PassStore passStore, String defaultTopic) {
+        super(getBase(backed_file), passStore, defaultTopic);
 
         this.backed_file = backed_file;
         adapter = getAdapter();

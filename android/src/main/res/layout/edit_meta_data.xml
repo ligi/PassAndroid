@@ -17,21 +17,21 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="enter description"
+            android:hint="@string/edit_metadata_title"
             android:id="@+id/descriptionEdit" />
 
         <Button
             android:id="@+id/pickTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick time" />
+            android:text="@string/edit_metadata_pick_time" />
 
 
         <Button
             android:id="@+id/pickDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick date" />
+            android:text="@string/edit_metadata_pick_date" />
 
     </LinearLayout>
 </ScrollView>
