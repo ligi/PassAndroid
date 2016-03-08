@@ -4,7 +4,7 @@
     
     <!-- Actions -->
     <string name="action_show_map">show on map</string>
-    <string name="action_delete">delete</string>
+    <string name="action_delete">Delete</string>
     <string name="action_share">share</string>
     <string name="action_edit">edit</string>
     <string name="action_light">light</string>
@@ -15,7 +15,6 @@
     <string name="action_open">open</string>
     <string name="action_close">close</string>
     <string name="action_send">Send</string>
-    <string name="action_delete">Delete!</string>
     <string name="action_choose_location">Choose Location</string>
     <string name="action_pass_directions">Navigate</string>
     <string name="action_pass_to_calendar">to Calendar</string>
@@ -44,9 +43,8 @@
     <string name="nav_main_sort_category">Category</string>
     <string name="nav_main_sort_date">Date</string>
     <string name="nav_main_categories">CATEGORIES</string>
-    <string name="nav_main_comunity">Community</string>
+    <string name="nav_main_community">Community</string>
     <string name="nav_main_share">Share</string>
-    <string name="nav_main_more">MORE</string>
     <string name="nav_main_less">LESS</string>
     <string name="nav_main_choice_scan_pkpass_files">Scan for pkpass files</string>
     <string name="nav_main_choice_add_demo_pass">Add Demo-Pass</string>
@@ -54,7 +52,7 @@
     <string name="nav_main_choice_open_file">Open File</string>
     
     <!-- Edit Navigation -->
-    <string name="navedit__category">Category</string>
+    <string name="nav_edit_category">Category</string>
     <string name="nav_edit_metadata">Metadata</string>
     <string name="nav_edit_images">Images</string>
     <string name="nav_edit_color">Color</string>
@@ -73,6 +71,7 @@
     
     <!-- Edit -->
     <string name="edit_default_title">Custom Pass</string>
+    <string name="edit_label_add_barcode">Add Barcode</string>
     <string name="edit_label_barcode_message">Message</string>
     <string name="edit_label_barcode_scan">Scan</string>
     <string name="edit_label_barcode_random">Random</string>
@@ -94,8 +93,8 @@
     <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
     <string name="dialog_scanning_for_passes" >Scanning for Passes</string>
     <string name="dialog_downloading_new_pass_version">downloading new pass version</string>
-    <string name="dialog_unzip_pass_dialog_title">Opening Passbook</string>
-    <string name="dialog_unzip_pass_dialog_message">Please wait...</string>
+    <string name="dialog_unzip_pass_title">Opening Passbook</string>
+    <string name="dialog_unzip_pass_message">Please wait...</string>
     <string name="dialog_pass_updated">Pass Updated</string>
     <string name="dialog_expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
     <string name="dialog_expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>

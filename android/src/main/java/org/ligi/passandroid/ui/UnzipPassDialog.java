@@ -30,7 +30,7 @@ public class UnzipPassDialog {
         }
 
         final ProgressDialog dialog = ProgressDialog.show(activity,
-                                                          activity.getString(R.string.dialog_unzip_pass_dialog_title),
+                                                          activity.getString(R.string.dialog_unzip_pass_title),
                                                           activity.getString(R.string.dialog_unzip_pass_message),
                                                           true);
         dialog.setCancelable(false);

@@ -116,7 +116,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             intent.setType("*/*"); // tried with octet stream - no use
             startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
-            Snackbar.make(floatingActionsMenu, getString(R.string.exception_intend_unavailable), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(floatingActionsMenu, getString(R.string.exception_intent_unavailable), Snackbar.LENGTH_LONG).show();
         }
     }
 
