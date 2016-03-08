@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">PassAndroid</string>
   <string name="logo">Logo</string>
+
   <string name="menu_map">Auf Karte anzeigen</string>
   <string name="menu_delete">Entfernen</string>
   <string name="menu_share">Teilen</string>
@@ -85,7 +86,8 @@ Es wäre schön zu erfahren, wie du die Anwendung benutzt, was du gut oder was d
   <string name="more">MEHR</string>
   <string name="less">WENIGER</string>
   <string name="scanning_for_passes">Suche nach Pässen</string>
-  <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
+  <string name="fab_choice_open_file">Datei öffnen</string>
+  <string name="fab_choice_scan_pkpass_files">Suche nach Passbook-Dateien</string>
   <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
   <string name="fab_choice_create_pass">Pass erstellen</string>
   <string name="empty_text_view"><big><b>Keine Pässe verfügbar</b></big>
