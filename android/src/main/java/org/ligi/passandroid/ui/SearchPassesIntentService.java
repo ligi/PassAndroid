@@ -73,10 +73,10 @@ public class SearchPassesIntentService extends IntentService {
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0);
         progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
-                                                                          .setSmallIcon(R.drawable.ic_navigation_refresh)
-                                                                          .setOngoing(true)
-                                                                          .setContentIntent(pendingIntent)
-                                                                          .setProgress(1, 1, true);
+                .setSmallIcon(R.drawable.ic_navigation_refresh)
+                .setOngoing(true)
+                .setContentIntent(pendingIntent)
+                .setProgress(1, 1, true);
 
         findNotificationBuilder = new NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher);
 
@@ -137,14 +137,14 @@ public class SearchPassesIntentService extends IntentService {
 
                 final InputStreamWithSource ins = InputStreamProvider.fromURI(getBaseContext(), Uri.parse("file://" + file.getAbsolutePath()));
                 final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins,
-                                                                                               getBaseContext(),
-                                                                                               getOnSuccessCallback(file),
-                                                                                               new UnzipPassController.FailCallback() {
-                                                                                                   @Override
-                                                                                                   public void fail(String reason) {
-                                                                                                       Log.i("fail", reason);
-                                                                                                   }
-                                                                                               });
+                        getBaseContext(),
+                        getOnSuccessCallback(file),
+                        new UnzipPassController.FailCallback() {
+                            @Override
+                            public void fail(String reason) {
+                                Log.i("fail", reason);
+                            }
+                        });
                 UnzipPassController.processInputStream(spec);
             }
         }
@@ -158,16 +158,22 @@ public class SearchPassesIntentService extends IntentService {
                 final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
                 final FiledPass pass = AppleStylePassReader.read(passStore.getPathForID(uuid), language);
                 final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
+
                 if (iconBitmap != null) {
                     final Bitmap bitmap = scale2maxSize(iconBitmap, getResources().getDimensionPixelSize(R.dimen.finger));
                     findNotificationBuilder.setLargeIcon(bitmap);
                 }
-                findNotificationBuilder.setContentTitle("found: " + pass.getDescription());
+
+                final String foundString = getString(R.string.found_pass, pass.getDescription());
+                findNotificationBuilder.setContentTitle(foundString);
+
                 if (foundList.size() > 1) {
-                    findNotificationBuilder.setContentText("And " + (foundList.size() - 1) + " more ");
+                    final String foundMoreString = getString(R.string.found__pass, foundList.size() - 1);
+                    findNotificationBuilder.setContentText(foundMoreString);
                 } else {
                     findNotificationBuilder.setContentText(file.getAbsolutePath());
                 }
+
                 final Intent intent = new Intent(getBaseContext(), PassViewActivity.class);
                 intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid);
                 findNotificationBuilder.setContentIntent(PendingIntent.getActivity(getBaseContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT));

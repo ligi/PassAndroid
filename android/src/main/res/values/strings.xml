@@ -115,6 +115,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="move_to_new_topic">Move to new Topic</string>
     <string name="categories_nav">%d Categories</string>
     <string name="passes_nav">%d Passes</string>
+    <string name="found_pass">found: %s</string>
+    <string name="found__pass">And %d more</string>
     <string-array name="sort_orders">
         <item>Date</item>
         <item>Type</item>
