@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
+import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
 
 import java.io.File;
 
+import static org.ligi.passandroid.R.string.preference_key_autolight;
+import static org.ligi.passandroid.R.string.preference_key_condensed;
+
 public class AndroidSettings implements Settings {
-    public static final String ORDER_KEY = "order";
     public final Context context;
 
     final SharedPreferences sharedPreferences;
@@ -21,13 +24,10 @@ public class AndroidSettings implements Settings {
     }
 
     @Override
-    public void setSortOrder(PassSortOrder order) {
-        sharedPreferences.edit().putInt(ORDER_KEY, order.getInt()).apply();
-    }
-
-    @Override
     public PassSortOrder getSortOrder() {
-        int id = sharedPreferences.getInt(ORDER_KEY, 0);
+        final String key = context.getString(R.string.preference_key_sort);
+        final String stringValue = sharedPreferences.getString(key, "0");
+        final int id = Integer.valueOf(stringValue);
         for (PassSortOrder order : PassSortOrder.values()) {
             if (order.getInt() == id) {
                 return order;
@@ -60,12 +60,12 @@ public class AndroidSettings implements Settings {
 
     @Override
     public boolean isCondensedModeEnabled() {
-        return sharedPreferences.getBoolean("CONDENSED", false);
+        return sharedPreferences.getBoolean(context.getString(preference_key_condensed), false);
     }
 
     @Override
     public boolean isAutomaticLightEnabled() {
-        return sharedPreferences.getBoolean("AUTOLIGHT", true);
+        return sharedPreferences.getBoolean(context.getString(preference_key_autolight), true);
     }
 
 }

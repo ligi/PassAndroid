@@ -19,11 +19,8 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
-import com.squareup.otto.Subscribe;
 
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
@@ -31,9 +28,6 @@ import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.events.NavigationOpenedEvent;
-import org.ligi.passandroid.events.SortOrderChangeEvent;
-import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassClassifier;
@@ -130,16 +124,6 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
         }
     }
 
-    @Subscribe
-    public void sortOrderChange(SortOrderChangeEvent orderChangeEvent) {
-        refreshPasses();
-    }
-
-    @Subscribe
-    public void typeFocus(TypeFocusEvent typeFocusEvent) {
-        drawer.closeDrawers();
-    }
-
     public void refreshPasses() {
         passStore.preCachePassesList();
         runOnUiThread(new Runnable() {
@@ -183,12 +167,7 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             SnackEngage.from(floatingActionsMenu).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
         }
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                bus.post(new NavigationOpenedEvent());
-            }
-        };
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close);
 
         drawer.addDrawerListener(drawerToggle);
 

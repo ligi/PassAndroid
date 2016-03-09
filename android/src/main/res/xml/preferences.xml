@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <CheckBoxPreference
-        android:key="AUTOLIGHT"
+        android:key="@string/preference_key_autolight"
         android:summary="Increase brightness when showing barcode"
         android:title="Automatic light" />
 
     <CheckBoxPreference
-        android:key="CONDENSED"
+        android:key="@string/preference_key_condensed"
         android:summary="Show more detail in List"
         android:title="Condensed mode" />
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/sort_orders"
+        android:entryValues="@array/sort_order_keys"
+        android:key="@string/preference_key_sort"
+        android:summary="how to sort the passes"
+        android:title="Sort order" />
 </PreferenceScreen>

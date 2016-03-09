@@ -6,8 +6,6 @@ import java.io.File;
 
 public interface Settings {
 
-    void setSortOrder(PassSortOrder order);
-
     PassSortOrder getSortOrder();
 
     boolean doTraceDroidEmailSend();

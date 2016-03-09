@@ -12,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.events.TypeFocusEvent;
 import org.ligi.passandroid.helper.MoveHelper;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassStore;
@@ -165,19 +163,4 @@ public class PassListFragment extends Fragment implements OnClassificationChange
         adapter.notifyDataSetChanged();
     }
 
-    @Subscribe
-    public void typeFocus(TypeFocusEvent typeFocusEvent) {
-        scrollToType(typeFocusEvent.type);
-    }
-
-
-    private void scrollToType(String type) {
-
-        for (int i = 0; i < adapter.getItemCount(); i++) {
-            if (passStoreProjection.getPassList().get(i).getTypeNotNull().equals(type)) {
-                recyclerView.scrollToPosition(i);
-                return; // we are done
-            }
-        }
-    }
 }

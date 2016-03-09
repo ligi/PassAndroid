@@ -92,7 +92,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
     <string name="more">MORE</string>
     <string name="less">LESS</string>
-    <string name="scanning_for_passes" >Scanning for Passes</string>
+    <string name="scanning_for_passes">Scanning for Passes</string>
     <string name="fab_choice_scan_pkpass_files">Scan for pkpass files</string>
     <string name="fab_choice_add_demo_pass">Add Demo-Pass</string>
     <string name="fab_choice_create_pass">Create Pass (experimental)</string>
@@ -115,4 +115,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="move_to_new_topic">Move to new Topic</string>
     <string name="categories_nav">%d Categories</string>
     <string name="passes_nav">%d Passes</string>
+    <string-array name="sort_orders">
+        <item>Date</item>
+        <item>Type</item>
+    </string-array>
 </resources>
