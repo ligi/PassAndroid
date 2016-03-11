@@ -6,6 +6,8 @@ PassAndroid
 
 Android App to view Passbook files
 
+<img src="http://ligi.de/img/passandroid_screenshots.jpg"/>
+
 Displays Passbook ( *.pkpass ) files & shows the Barcode ( QR, PDF417 and AZTEC format ). It useable offline.
 When preparing for the Chaos Communication Congress 2012 ( #29c3 ) I stumbled upon a passbook file for the first time. As I really like the idea of paperless tickets as it saves time and trees which both are very valuable to me. The problem was that I found no app with which I could use the downloaded passbook file. I found 2 apps which promised to do it, but both failed and judging by the comments: not only for me. Badly written intent-filters where one of the problems, but as both apps where closed source there was no option to submit a fix. After reading a bit I realized that this app can be written within one hour. the passbook format is just a zip container with some Json encoded data and some images. the essential thing is the Barcode message which is included in the json.
 It is not pretty at the moment, but functional ..
