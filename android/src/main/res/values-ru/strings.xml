@@ -91,4 +91,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 \n\n или скачать пример
 \n\n просто нажмите на \"+\" ниже</string>
   <string name="downloading_new_pass_version">скачать обновленную карточку</string>
+  <string name="unzip_pass_dialog_title">Открываю карточку</string>
+  <string name="unzip_pass_dialog_message">Пожалуйста подождите ...</string>
+  <string name="action_update">обновить</string>
 </resources>
