@@ -1,13 +1,17 @@
 package org.ligi.passandroid.steps;
 
-import android.support.test.espresso.web.assertion.WebViewAssertions;
+import org.ligi.passandroid.R;
 
-import static android.support.test.espresso.web.matcher.DomMatchers.containingTextInBody;
-import static android.support.test.espresso.web.sugar.Web.onWebView;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 public class HelpSteps {
+
     public static void checkThatHelpIsThere() {
-        onWebView().check(WebViewAssertions.webContent(containingTextInBody("Example passes")));
+        onView(withId(R.id.help_text)).check(matches(isDisplayed()));
     }
+
 
 }

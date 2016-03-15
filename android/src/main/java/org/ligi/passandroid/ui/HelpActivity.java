@@ -3,19 +3,23 @@ package org.ligi.passandroid.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 import org.ligi.passandroid.R;
+import org.xml.sax.XMLReader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class HelpActivity extends AppCompatActivity {
 
-    @Bind(R.id.help_webview)
-    WebView helpWebView;
+    @Bind(R.id.help_text)
+    TextView helpText;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -26,16 +30,30 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
         ButterKnife.bind(this);
 
-        WebSettings webSettings = helpWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setStandardFontFamily("Sans-Serif");
+        final Spanned html = Html.fromHtml(getString(R.string.help_content), null, new ListTagHandler());
 
-        helpWebView.loadData(getString(R.string.help_content),"text/html","utf-8");
+        helpText.setText(html);
+        helpText.setMovementMethod(new LinkMovementMethod());
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
+    class ListTagHandler implements Html.TagHandler {
+
+        @Override
+        public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+            if (tag.equalsIgnoreCase("li")) {
+                if (opening) {
+                    output.append("\u2022 ");
+                } else {
+                    output.append("\n");
+                }
+            }
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
