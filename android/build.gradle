@@ -104,7 +104,7 @@ android {
 }
 
 final DAGGER_VERSION = '2.0.2'
-final SUPPORT_VERSION = '23.2.0'
+final SUPPORT_VERSION = '23.2.1'
 
 dependencies {
     apt 'org.projectlombok:lombok:1.16.6'
