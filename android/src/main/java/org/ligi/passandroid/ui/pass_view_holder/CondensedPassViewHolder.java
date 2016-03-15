@@ -5,6 +5,7 @@ import android.view.View;
 
 import org.ligi.passandroid.model.Pass;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class CondensedPassViewHolder extends PassViewHolder {
@@ -21,6 +22,8 @@ public class CondensedPassViewHolder extends PassViewHolder {
         if (extraString != null) {
             dateOrExtraText.setText(extraString);
             dateOrExtraText.setVisibility(VISIBLE);
+        } else {
+            dateOrExtraText.setVisibility(GONE);
         }
 
         addCalendar.setText(getTimeInfoString());
