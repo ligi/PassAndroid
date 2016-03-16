@@ -8,10 +8,7 @@ import org.ligi.passandroid.ui.HelpActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.Matchers.allOf;
 import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 
 
@@ -37,7 +34,7 @@ public class TheHelpActivity extends BaseIntegration<HelpActivity> {
 
     @SmallTest
     public void test_that_help_finishes_on_home() {
-        onView(allOf(withContentDescription(containsString("Navigate up")), isClickable())).perform(click());
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click());
         assertTrue(getActivity().isFinishing());
     }
 }

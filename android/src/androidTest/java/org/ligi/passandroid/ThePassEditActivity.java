@@ -45,7 +45,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testSetToEventWorks() {
-        onView(withText("Event")).perform(click());
+        onView(withText(R.string.category_event)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo("eventTicket");
 
         Spoon.screenshot(getActivity(), "edit_set_event");
@@ -53,7 +53,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testSetToCouponWorks() {
-        onView(withText("Coupon")).perform(click());
+        onView(withText(R.string.category_coupon)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo("coupon");
 
         Spoon.screenshot(getActivity(), "edit_set_coupon");
