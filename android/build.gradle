@@ -103,7 +103,7 @@ android {
     }
 }
 
-final DAGGER_VERSION = '2.0.2'
+final DAGGER_VERSION = '2.1'
 final SUPPORT_VERSION = '23.2.1'
 
 dependencies {
