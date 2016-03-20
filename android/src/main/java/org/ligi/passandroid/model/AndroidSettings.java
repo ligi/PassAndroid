@@ -33,7 +33,7 @@ public class AndroidSettings implements Settings {
                 return order;
             }
         }
-        return PassSortOrder.DATE;
+        return PassSortOrder.DATE_ASC;
     }
 
     @Override

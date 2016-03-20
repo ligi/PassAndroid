@@ -118,7 +118,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="found_pass">found: %s</string>
     <string name="found__pass">And %d more</string>
     <string-array name="sort_orders">
-        <item>Date</item>
+        <item>Date Ascending</item>
+        <item>Date Descending</item>
         <item>Type</item>
     </string-array>
 </resources>
