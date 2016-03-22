@@ -108,3 +108,10 @@
 -keep public class com.google.android.gms.**
 -dontwarn com.google.android.gms.**
 
+##### for otto
+
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}
