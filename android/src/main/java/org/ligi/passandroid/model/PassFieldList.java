@@ -1,11 +1,13 @@
 package org.ligi.passandroid.model;
 
 import android.support.annotation.Nullable;
-import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ligi.tracedroid.logging.Log;
+
+import java.util.ArrayList;
 
 public class PassFieldList extends ArrayList<PassField> {
 
@@ -55,8 +57,16 @@ public class PassFieldList extends ArrayList<PassField> {
     public String toHTMLString() {
         final StringBuilder result = new StringBuilder();
         for (PassField f : this) {
-            result.append("<b>").append(f.label).append("</b>: ").append(f.value);
-            result.append("<br/>");
+            if (f.label != null) {
+                result.append("<b>").append(f.label).append("</b> ");
+            }
+            if (f.value != null) {
+                result.append(f.value);
+            }
+
+            if ((f.label != null) || (f.value != null)) {
+                result.append("<br/>");
+            }
         }
         return result.toString();
     }
