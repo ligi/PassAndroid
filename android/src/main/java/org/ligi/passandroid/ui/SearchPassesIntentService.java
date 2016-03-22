@@ -17,6 +17,8 @@ import com.squareup.otto.Bus;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.Tracker;
+import org.ligi.passandroid.events.ScanFinishedEvent;
+import org.ligi.passandroid.events.ScanProgressEvent;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Pass;
@@ -44,7 +46,7 @@ public class SearchPassesIntentService extends IntentService {
     private NotificationCompat.Builder progressNotificationBuilder;
     private NotificationCompat.Builder findNotificationBuilder;
 
-    private List<String> foundList;
+    private List<Pass> foundList;
 
 
     private long lastProgressUpdate = 0;
@@ -108,6 +110,8 @@ public class SearchPassesIntentService extends IntentService {
         // | /data
         search_in(Environment.getDataDirectory(), true);
         notifyManager.cancel(PROGRESS_NOTIFICATION_ID);
+
+        bus.post(new ScanFinishedEvent(foundList));
     }
 
     /**
@@ -117,7 +121,9 @@ public class SearchPassesIntentService extends IntentService {
 
         if (System.currentTimeMillis() - lastProgressUpdate > 1000) {
             lastProgressUpdate = System.currentTimeMillis();
-            progressNotificationBuilder.setContentText(path.toString());
+            final String msg = path.toString();
+            bus.post(new ScanProgressEvent(msg));
+            progressNotificationBuilder.setContentText(msg);
             notifyManager.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder.build());
         }
 
@@ -154,9 +160,11 @@ public class SearchPassesIntentService extends IntentService {
         return new UnzipPassController.SuccessCallback() {
             @Override
             public void call(String uuid) {
-                foundList.add(uuid);
+
                 final String language = getBaseContext().getResources().getConfiguration().locale.getLanguage();
                 final FiledPass pass = AppleStylePassReader.read(passStore.getPathForID(uuid), language);
+
+                foundList.add(pass);
                 final Bitmap iconBitmap = pass.getBitmap(Pass.BITMAP_ICON);
 
                 if (iconBitmap != null) {

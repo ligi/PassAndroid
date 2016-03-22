@@ -117,6 +117,11 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="passes_nav">%d Passes</string>
     <string name="found_pass">found: %s</string>
     <string name="found__pass">And %d more</string>
+    <string name="scan_finished_dialog_title">Scan finished.</string>
+    <string name="scan_finished_dialog_text">found %d passes</string>
+    <string name="scan_progressdialog_title">Searching ...</string>
+    <string name="scan_progressdialog_message">Please wait.</string>
+    <string name="scan_dialog_send_background_button">background</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>

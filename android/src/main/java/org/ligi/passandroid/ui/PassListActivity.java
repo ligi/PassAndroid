@@ -2,7 +2,10 @@ package org.ligi.passandroid.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -22,12 +25,17 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 
 import org.ligi.axt.AXT;
+import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.ScanFinishedEvent;
+import org.ligi.passandroid.events.ScanProgressEvent;
 import org.ligi.passandroid.helper.PassUtil;
 import org.ligi.passandroid.model.FiledPass;
 import org.ligi.passandroid.model.PassClassifier;
@@ -81,10 +89,53 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
 
     }
 
+
+    ProgressDialog pd;
+
+    @Subscribe
+    public void onScanProgress(final ScanProgressEvent event) {
+        if (pd != null && pd.isShowing()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    pd.setMessage(event.message);
+                }
+            });
+        }
+    }
+
+    @Subscribe
+    public void onScanFinished(final ScanFinishedEvent event) {
+        if (pd != null && pd.isShowing()) {
+            final String message = getString(R.string.scan_finished_dialog_text, event.foundPasses.size());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    pd.dismiss();
+                    OnClassificationChange();
+                    new AlertDialog.Builder(PassListActivity.this)
+                            .setTitle(R.string.scan_finished_dialog_title)
+                            .setMessage(message)
+                            .setPositiveButton(android.R.string.ok,null)
+                            .show();
+                }
+            });
+        }
+    }
+
     @OnClick(R.id.fab_action_scan)
     void onScanClick() {
         final Intent intent = new Intent(this, SearchPassesIntentService.class);
         startService(intent);
+
+        pd = new ProgressDialog(this);
+        pd.setTitle(R.string.scan_progressdialog_title);
+        pd.setMessage(getString(R.string.scan_progressdialog_message));
+        pd.setCancelable(false);
+        pd.setIndeterminate(true);
+        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.scan_dialog_send_background_button), new ActivityFinishingOnClickListener(this));
+        pd.show();
+
         floatingActionsMenu.collapse();
     }
 
