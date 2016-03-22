@@ -111,8 +111,8 @@ public class PassListActivity extends PassAndroidActivity implements PassClassif
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    pd.dismiss();
                     OnClassificationChange();
+                    pd.dismiss();
                     new AlertDialog.Builder(PassListActivity.this)
                             .setTitle(R.string.scan_finished_dialog_title)
                             .setMessage(message)
