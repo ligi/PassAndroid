@@ -3,6 +3,7 @@
     <CheckBoxPreference
         android:key="@string/preference_key_autolight"
         android:summary="Increase brightness when showing barcode"
+        android:defaultValue="true"
         android:title="Automatic light" />
 
     <CheckBoxPreference
