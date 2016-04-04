@@ -32,9 +32,6 @@ import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import net.steamcrafted.loadtoast.LoadToast;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.App;
@@ -216,6 +213,7 @@ public class PassListActivity extends PassAndroidActivity {
         });
         onPassStoreChangeEvent(null);
 
+        passStore.syncPassStoreWithClassifier();
     }
 
 

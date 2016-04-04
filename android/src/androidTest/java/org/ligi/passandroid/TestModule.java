@@ -3,6 +3,7 @@ package org.ligi.passandroid;
 import com.google.zxing.BarcodeFormat;
 import dagger.Module;
 import dagger.Provides;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -51,7 +52,7 @@ public class TestModule {
     Settings provideSettings() {
         final Settings mock = mock(Settings.class);
         when(mock.getSortOrder()).thenReturn(PassSortOrder.DATE_ASC);
-        when(mock.getPassesDir()).thenReturn("");
+        when(mock.getPassesDir()).thenReturn(new File(""));
         when(mock.doTraceDroidEmailSend()).thenReturn(false);
         return mock;
     }

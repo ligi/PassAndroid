@@ -67,7 +67,7 @@ public class FileBackedPassClassifier extends PassClassifier {
 
             if (buffer != null) {
                 try {
-                    adapter.toJson(buffer, getTopic_by_id());
+                    adapter.toJson(buffer, getTopicByIdMap());
                     buffer.close();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -32,8 +32,8 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
 
     }
 
-    private String getTestTargetPath(final Context context) {
-        return context.getCacheDir() + "/test_passes";
+    private File getTestTargetPath(final Context context) {
+        return new File(context.getCacheDir() , "test_passes");
     }
 
     void loadPassFromAsset(final String asset, final OnPassLoadCallback callback) {

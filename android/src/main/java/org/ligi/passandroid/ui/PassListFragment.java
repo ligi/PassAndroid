@@ -94,6 +94,7 @@ public class PassListFragment extends Fragment {
 
             @Nullable
             private String calculateNextTopic(final int swipeDir, final Pass pass) {
+
                 final Collection<String> topics = passStore.getClassifier().getTopics();
 
                 switch (swipeDir) {

@@ -17,7 +17,7 @@ class FixedPassListPassStore(private val passes: List<Pass>) : PassStore {
     }
 
     override fun deleteCacheForId(id: String) {
-        // no effect in this impl
+
     }
 
     override fun getPassbookForId(id: String): Pass? {
@@ -41,6 +41,11 @@ class FixedPassListPassStore(private val passes: List<Pass>) : PassStore {
     }
 
     override fun notifyChange() {
-
+        // no effect in this impl
     }
+
+    override fun syncPassStoreWithClassifier() {
+        // no effect in this impl
+    }
+
 }

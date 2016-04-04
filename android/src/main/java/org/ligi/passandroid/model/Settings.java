@@ -1,8 +1,7 @@
 package org.ligi.passandroid.model;
 
-import org.ligi.passandroid.model.comparator.PassSortOrder;
-
 import java.io.File;
+import org.ligi.passandroid.model.comparator.PassSortOrder;
 
 public interface Settings {
 
@@ -10,7 +9,7 @@ public interface Settings {
 
     boolean doTraceDroidEmailSend();
 
-    String getPassesDir();
+    File getPassesDir();
 
     File getStateDir();
 

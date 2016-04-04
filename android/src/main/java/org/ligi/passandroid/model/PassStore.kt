@@ -21,4 +21,5 @@ interface PassStore {
     val classifier: PassClassifier
 
     fun notifyChange()
+    open fun syncPassStoreWithClassifier()
 }

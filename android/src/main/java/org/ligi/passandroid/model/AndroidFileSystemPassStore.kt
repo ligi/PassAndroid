@@ -12,7 +12,7 @@ import java.io.File
 import java.util.*
 
 class AndroidFileSystemPassStore(private val context: Context, settings: Settings, private val moshi: Moshi, private val bus: EventBus) : PassStore {
-    private val path: String = settings.passesDir
+    private val path: File = settings.passesDir
 
     override val passMap = HashMap<String, Pass>()
 
@@ -22,7 +22,6 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         val classificationFile = File(settings.stateDir, "classifier_state.json")
         FileBackedPassClassifier(classificationFile, this, moshi)
     }
-
 
     override fun deleteCacheForId(id: String) {
 
@@ -50,7 +49,6 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         }
 
     }
-
 
     private fun readPass(id: String): Pass? {
         val pathForID = getPathForID(id)
@@ -85,21 +83,9 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         return result
     }
 
-    private val passesDirSafely: File
-        get() {
-            val passes_dir = File(path)
-
-            if (!passes_dir.exists()) {
-                passes_dir.mkdirs()
-            }
-
-            return passes_dir
-        }
-
     override fun getPassbookForId(id: String): Pass? {
         return passMap[id] ?: readPass(id)
     }
-
 
     override fun deletePassWithId(id: String): Boolean {
         val result = AXT.at(getPathForID(id)).deleteRecursive()
@@ -117,5 +103,18 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
 
     override fun notifyChange() {
         bus.post(PassStoreChangeEvent)
+    }
+
+    override fun syncPassStoreWithClassifier() {
+        val keysToRemove = classifier.topicByIdMap.keys.filter { getPassbookForId(it) == null }
+
+        for (key in keysToRemove) {
+            classifier.topicByIdMap.remove(key)
+        }
+
+        val allPasses = path.listFiles()
+        allPasses?.forEach {
+            classifier.getTopic(it.name)
+        }
     }
 }

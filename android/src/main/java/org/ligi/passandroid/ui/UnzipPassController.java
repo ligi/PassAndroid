@@ -85,7 +85,7 @@ public class UnzipPassController {
 
 
         final String rename_str = spec.getTargetPath() + "/" + uuid;
-        new File(spec.getTargetPath()).mkdirs();
+        spec.getTargetPath().mkdirs();
         final File rename_file = new File(rename_str);
 
         if (spec.getOverwrite() && rename_file.exists()) {
@@ -93,14 +93,12 @@ public class UnzipPassController {
         }
 
         if (!rename_file.exists()) {
-            new File(path + "/").renameTo(rename_file);
+            path.renameTo(rename_file);
         } else {
             Log.i("Pass with same ID exists");
         }
 
-
         spec.getOnSuccessCallback().call(uuid);
-
     }
 
     public static class InputStreamUnzipControllerSpec extends UnzipControllerSpec {

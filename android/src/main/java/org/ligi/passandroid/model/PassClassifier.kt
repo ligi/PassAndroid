@@ -1,56 +1,43 @@
 package org.ligi.passandroid.model
 
-import java.util.*
-
-open class PassClassifier(protected val topic_by_id: MutableMap<String, String>, private val passStore: PassStore) {
-
-    init {
-        processDataChange()
-    }
+open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private val passStore: PassStore) {
 
     open fun processDataChange() {
+        passStore.notifyChange()
 
-        val keysToRemove = topic_by_id.keys.filter { passStore.getPassbookForId(it) == null }
+        val topicsToRemove = topicByIdMap.filter { it.value.isEmpty() }.map { it.value }
 
-        for (key in keysToRemove) {
-            topic_by_id.remove(key)
+        topicsToRemove.forEach {
+            topicByIdMap.remove(it)
         }
-
     }
 
     fun moveToTopic(pass: Pass, newTopic: String) {
-        topic_by_id.put(pass.id, newTopic)
+        topicByIdMap.put(pass.id, newTopic)
 
         processDataChange()
-
-        passStore.notifyChange()
     }
 
-    val topics: Collection<String>
-        get() {
-            val res = HashSet<String>()
+    fun getTopics(): Set<String> {
+        return topicByIdMap.values.toSet()
+    }
 
-            res.addAll(topic_by_id.values)
-
-            if (res.isEmpty()) {
-                res.add(DEFAULT_TOPIC)
-            }
-
-            return res
-        }
-
-    fun getPassListByTopic(topic: String):List<Pass> {
-        return topic_by_id.filter { it.value.equals(topic) }.map { passStore.getPassbookForId(it.key)!! }
+    fun getPassListByTopic(topic: String): List<Pass> {
+        return topicByIdMap.filter { it.value.equals(topic) }.map { passStore.getPassbookForId(it.key) }.filterNotNull()
     }
 
     fun getTopic(pass: Pass): String {
-        val s = topic_by_id[pass.id]
+        return getTopic(pass.id)
+    }
+
+    fun getTopic(id: String): String {
+        val s = topicByIdMap[id]
         if (s != null) {
             return s
         }
 
-        topic_by_id.put(pass.id, DEFAULT_TOPIC)
-
+        topicByIdMap.put(id, DEFAULT_TOPIC)
+        processDataChange()
         return DEFAULT_TOPIC
     }
 

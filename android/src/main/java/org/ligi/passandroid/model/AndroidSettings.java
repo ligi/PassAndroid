@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-
+import java.io.File;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
-
-import java.io.File;
-
 import static org.ligi.passandroid.R.string.preference_key_autolight;
 import static org.ligi.passandroid.R.string.preference_key_condensed;
 
@@ -43,8 +40,8 @@ public class AndroidSettings implements Settings {
     }
 
     @Override
-    public String getPassesDir() {
-        return context.getFilesDir().getAbsolutePath() + "/passes";
+    public File getPassesDir() {
+        return new File(context.getFilesDir().getAbsolutePath() , "passes");
     }
 
     @Override
