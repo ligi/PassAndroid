@@ -17,11 +17,15 @@ public class PassEditSteps {
 
     }
 
-    public static void goToColor() {
+    public static void goToFields() {
         goToImages();
         onView(withId(R.id.passEditPager)).perform(swipeLeft());
     }
 
+    public static void goToColor() {
+        goToFields();
+        onView(withId(R.id.passEditPager)).perform(swipeLeft());
+    }
 
     public static void goToBarCode() {
         goToColor();

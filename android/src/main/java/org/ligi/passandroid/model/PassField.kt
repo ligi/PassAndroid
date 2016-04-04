@@ -1,6 +1,6 @@
 package org.ligi.passandroid.model
 
-class PassField(val key: String?, val label: String?, val value: String?,val hide:Boolean) {
+class PassField(var key: String?, var label: String?, var value: String?,var hide:Boolean) {
 
     fun toHtmlSnippet(): String {
         val result=StringBuilder()

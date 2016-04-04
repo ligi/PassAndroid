@@ -22,7 +22,10 @@ object ApplePassbookQuirkCorrector {
     }
 
     fun getPassFieldThatMatchesLabel(pass: PassImpl, matcher: String): PassField? {
-        return pass.fields.firstOrNull() { it.label != null && it.label.matches(matcher.toRegex()) }
+        return pass.fields.firstOrNull() {
+            val label = it.label
+            label != null && label.matches(matcher.toRegex())
+        }
     }
 
     private fun careForRenfe(pass: PassImpl) {
@@ -133,9 +136,12 @@ object ApplePassbookQuirkCorrector {
 
         var description = "WESTbahn"
 
-        if (originField != null && originField.value != null) {
-            App.component().tracker().trackEvent("quirk_fix", "description_replace", "westbahn", 1L)
-            description = originField.value
+        if (originField != null ) {
+            val value = originField.value
+            if (value != null) {
+                App.component().tracker().trackEvent("quirk_fix", "description_replace", "westbahn", 1L)
+                description = value
+            }
         }
 
         if (destinationField != null) {

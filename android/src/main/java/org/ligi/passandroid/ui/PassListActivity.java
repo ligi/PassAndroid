@@ -267,8 +267,7 @@ public class PassListActivity extends PassAndroidActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
-        menu.findItem(R.id.menu_emptytrash).setVisible(adapter.getPageTitle(viewPager.getCurrentItem()).equals(getString(R.string.topic_trash)));
+        menu.findItem(R.id.menu_emptytrash).setVisible((adapter.getCount()>0) && adapter.getPageTitle(viewPager.getCurrentItem()).equals(getString(R.string.topic_trash)));
         return true;
     }
 

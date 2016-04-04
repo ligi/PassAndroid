@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fields_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/delete_button"
+            android:src="@drawable/ic_action_delete"/>
+
+    <android.support.v7.widget.SwitchCompat
+            android:id="@+id/hide_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hide"
+            android:layout_gravity="center_vertical"
+            />
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/label_field_edit"
+                android:minWidth="64dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:hint="label"
+                />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/value_field_edit"
+                android:minWidth="64dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:hint="value"
+                />
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

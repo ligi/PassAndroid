@@ -25,6 +25,7 @@ import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.edit_fragments.BarcodeEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
 import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
+import org.ligi.passandroid.ui.edit_fragments.FieldsEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.ImageEditFragment;
 import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
 import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
@@ -93,9 +94,11 @@ public class PassEditActivity extends AppCompatActivity {
                 case 2:
                     return "Images";
                 case 3:
+                    return "Fields";
+                case 4:
                     return "Color";
 
-                case 4:
+                case 5:
                 default:
                     return "BarCode";
             }
@@ -111,9 +114,11 @@ public class PassEditActivity extends AppCompatActivity {
                 case 2:
                     return new ImageEditFragment();
                 case 3:
+                    return new FieldsEditFragment();
+                case 4:
                     return new ColorPickFragment();
 
-                case 4:
+                case 5:
                 default:
                     return new BarcodeEditFragment();
             }
@@ -121,7 +126,7 @@ public class PassEditActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
     }
 
