@@ -3,11 +3,10 @@ package org.ligi.passandroid;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.squareup.moshi.Moshi;
-import com.squareup.otto.Bus;
-import com.squareup.otto.ThreadEnforcer;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
+import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.json_adapter.ColorAdapter;
 import org.ligi.passandroid.json_adapter.ZonedTimeAdapter;
 import org.ligi.passandroid.model.AndroidFileSystemPassStore;
@@ -26,7 +25,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    PassStore providePassStore(Settings settings, Moshi moshi,Bus bus) {
+    PassStore providePassStore(Settings settings, Moshi moshi,EventBus bus) {
         return new AndroidFileSystemPassStore(app, settings, moshi,bus);
     }
 
@@ -53,7 +52,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    Bus provideBus() {
-        return new Bus(ThreadEnforcer.ANY);
+    EventBus provideBus() {
+        return EventBus.getDefault();
     }
 }

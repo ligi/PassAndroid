@@ -33,6 +33,8 @@ import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import net.steamcrafted.loadtoast.LoadToast;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.ligi.axt.AXT;
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.App;
@@ -86,35 +88,25 @@ public class PassListActivity extends PassAndroidActivity {
         passStore.getClassifier().moveToTopic(pass, adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
     }
 
-    @Subscribe()
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onScanProgress(final ScanProgressEvent event) {
         if (pd != null && pd.isShowing()) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    pd.setMessage(event.message);
-                }
-            });
+            pd.setMessage(event.message);
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onScanFinished(final ScanFinishedEvent event) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                if (pd != null && pd.isShowing()) {
-                    final String message = getString(R.string.scan_finished_dialog_text, event.getFoundPasses().size());
-                    pd.dismiss();
-                    new AlertDialog.Builder(PassListActivity.this).setTitle(R.string.scan_finished_dialog_title)
-                                                                  .setMessage(message)
-                                                                  .setPositiveButton(android.R.string.ok, null)
-                                                                  .show();
-                }
+        if (pd != null && pd.isShowing()) {
+            final String message = getString(R.string.scan_finished_dialog_text, event.getFoundPasses().size());
+            pd.dismiss();
+            new AlertDialog.Builder(PassListActivity.this).setTitle(R.string.scan_finished_dialog_title)
+                                                          .setMessage(message)
+                                                          .setPositiveButton(android.R.string.ok, null)
+                                                          .show();
+        }
 
-            }
-        });
     }
 
     @OnClick(R.id.fab_action_scan)
@@ -306,23 +298,17 @@ public class PassListActivity extends PassAndroidActivity {
         super.onPause();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
+        adapter.notifyDataSetChanged();
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
+        setupWithViewPagerIfNeeded();
 
-                setupWithViewPagerIfNeeded();
+        supportInvalidateOptionsMenu();
 
-                supportInvalidateOptionsMenu();
-
-                final boolean empty = passStore.getPassMap().isEmpty();
-                emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
-                tabLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
-            }
-        });
+        final boolean empty = passStore.getPassMap().isEmpty();
+        emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
+        tabLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
     }
 
     private void setupWithViewPagerIfNeeded() {

@@ -10,10 +10,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import java.util.Collection;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassStoreChangeEvent;
@@ -51,7 +52,7 @@ public class PassListFragment extends Fragment {
     Settings settings;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     @Nullable
     @Override
@@ -151,27 +152,17 @@ public class PassListFragment extends Fragment {
         bus.unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                passStoreProjection.refresh();
-                adapter.notifyDataSetChanged();
-            }
-        });
+        passStoreProjection.refresh();
+        adapter.notifyDataSetChanged();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onScanFinishedEvent(ScanFinishedEvent scanFinishedEvent) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                passStoreProjection.refresh();
-                adapter.notifyDataSetChanged();
+        passStoreProjection.refresh();
+        adapter.notifyDataSetChanged();
 
-            }
-        });
     }
 
 }

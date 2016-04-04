@@ -2,8 +2,8 @@ package org.ligi.passandroid.model
 
 import android.content.Context
 import com.squareup.moshi.Moshi
-import com.squareup.otto.Bus
 import okio.Okio
+import org.greenrobot.eventbus.EventBus
 import org.ligi.axt.AXT
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.reader.AppleStylePassReader
@@ -11,7 +11,7 @@ import org.ligi.passandroid.reader.PassReader
 import java.io.File
 import java.util.*
 
-class AndroidFileSystemPassStore(private val context: Context, settings: Settings, private val moshi: Moshi, private val bus: Bus) : PassStore {
+class AndroidFileSystemPassStore(private val context: Context, settings: Settings, private val moshi: Moshi, private val bus: EventBus) : PassStore {
     private val path: String = settings.passesDir
 
     override val passMap = HashMap<String, Pass>()

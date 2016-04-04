@@ -1,7 +1,6 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.NavigationView;
 import android.util.AttributeSet;
@@ -10,9 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -31,7 +31,7 @@ public class PassNavigationView extends NavigationView {
     PassStore passStore;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     public PassNavigationView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -89,14 +89,13 @@ public class PassNavigationView extends NavigationView {
         return getContext().getString(R.string.market_url, getContext().getPackageName());
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPassStoreChangeEvent(PassStoreChangeEvent passStoreChangeEvent) {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            final int passCount = passStore.getPassMap().size();
-            passCountTextView.setText(getContext().getString(R.string.passes_nav, passCount));
+        final int passCount = passStore.getPassMap().size();
+        passCountTextView.setText(getContext().getString(R.string.passes_nav, passCount));
 
-            final int topicCount = passStore.getClassifier().getTopics().size();
-            topicCountTextView.setText(getContext().getString(R.string.categories_nav, topicCount));
-        }
+        final int topicCount = passStore.getClassifier().getTopics().size();
+        topicCountTextView.setText(getContext().getString(R.string.categories_nav, topicCount));
+
     }
 }

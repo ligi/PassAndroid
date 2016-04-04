@@ -11,9 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -40,7 +40,7 @@ public class PassEditActivity extends AppCompatActivity {
     Settings settings;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     @Bind(R.id.passEditPager)
     ViewPager viewPager;

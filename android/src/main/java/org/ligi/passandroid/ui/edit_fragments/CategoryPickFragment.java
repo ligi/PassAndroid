@@ -9,9 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.squareup.otto.Bus;
-
+import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
@@ -21,15 +20,13 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PassType;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
-import javax.inject.Inject;
-
 public class CategoryPickFragment extends ListFragment {
 
     @Inject
     PassStore passStore;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     private final PassImpl pass;
     private final PassType[] passTypes= {PassType.BOARDING,PassType.EVENT,PassType.GENERIC,PassType.LOYALTY,PassType.VOUCHER,PassType.COUPON};

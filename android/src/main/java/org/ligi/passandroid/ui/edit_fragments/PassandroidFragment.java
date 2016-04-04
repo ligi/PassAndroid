@@ -1,14 +1,11 @@
 package org.ligi.passandroid.ui.edit_fragments;
 
 import android.support.v4.app.Fragment;
-
-import com.squareup.otto.Bus;
-
+import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
-
-import javax.inject.Inject;
 
 public class PassandroidFragment extends Fragment {
 
@@ -16,7 +13,7 @@ public class PassandroidFragment extends Fragment {
     PassStore passStore;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     protected PassImpl getPass() {
         return (PassImpl) passStore.getCurrentPass();

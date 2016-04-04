@@ -7,9 +7,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import com.squareup.otto.Bus;
 import java.io.File;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -31,7 +31,7 @@ public class PassMenuOptions {
     Settings settings;
 
     @Inject
-    Bus bus;
+    EventBus bus;
 
     public final Activity activity;
     public final Pass pass;
