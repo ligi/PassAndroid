@@ -44,7 +44,7 @@ android {
     defaultConfig {
         versionCode 300
         versionName "3.0.0"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 22
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
