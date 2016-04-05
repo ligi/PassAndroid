@@ -32,33 +32,22 @@ class BarCode(val format: BarcodeFormat?, val message: String?) {
     companion object {
 
         fun getFormatFromString(format: String): BarcodeFormat {
-            if (format.contains("417")) {
-                return BarcodeFormat.PDF_417
+            return when {
+                format.contains("417") -> BarcodeFormat.PDF_417
+                format.toUpperCase(Locale.ENGLISH).contains("AZTEC") -> return BarcodeFormat.AZTEC
+                format.toUpperCase(Locale.ENGLISH).contains("128") -> return BarcodeFormat.CODE_128
+                format.toUpperCase(Locale.ENGLISH).contains("39") -> return BarcodeFormat.CODE_39
+
+                 /*
+                 requested but not supported by xing (yet)   https://github.com/ligi/PassAndroid/issues/43
+                 format.toUpperCase(Locale.ENGLISH).contains("93")->return BarcodeFormat.CODE_93;
+                 */
+
+
+                else -> BarcodeFormat.QR_CODE
+
             }
 
-            if (format.toUpperCase(Locale.ENGLISH).contains("AZTEC")) {
-                return BarcodeFormat.AZTEC
-            }
-
-
-            if (format.toUpperCase(Locale.ENGLISH).contains("128")) {
-                return BarcodeFormat.CODE_128
-            }
-
-            /*
-        requested but not supported by xing (yet)
-        https://github.com/ligi/PassAndroid/issues/43
-
-        if (format.toUpperCase(Locale.ENGLISH).contains("93")) {
-            return BarcodeFormat.CODE_93;
-        }
-
-        */
-            if (format.toUpperCase(Locale.ENGLISH).contains("39")) {
-                return BarcodeFormat.CODE_39
-            }
-
-            return BarcodeFormat.QR_CODE
 
         }
     }
