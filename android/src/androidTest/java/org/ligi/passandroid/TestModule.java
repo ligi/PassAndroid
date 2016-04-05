@@ -44,6 +44,10 @@ public class TestModule {
         if (!passList.isEmpty()) {
             fixedPassListPassStore.setCurrentPass(passList.get(0));
         }
+
+        for (final Pass pass : passList) {
+            fixedPassListPassStore.getClassifier().moveToTopic(pass,"test");
+        }
         return fixedPassListPassStore;
     }
 
