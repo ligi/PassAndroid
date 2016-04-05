@@ -2,11 +2,11 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
-import com.google.zxing.BarcodeFormat;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.PassViewActivity;
 import org.threeten.bp.ZonedDateTime;
@@ -17,6 +17,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.IsNot.not;
 
 @TargetApi(14)
 public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
@@ -113,7 +114,7 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
 
     @MediumTest
     public void testZoomControlsAreThereWithBarcode() {
-        act_pass.setBarCode(new BarCode(BarcodeFormat.AZTEC, "foo"));
+        act_pass.setBarCode(new BarCode(PassBarCodeFormat.AZTEC, "foo"));
         getActivity();
 
         onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));

@@ -5,13 +5,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.ImageView;
 import butterknife.ButterKnife;
-import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
 import java.util.UUID;
 import javax.inject.Inject;
 import org.ligi.passandroid.helper.BarcodeDecoder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
@@ -47,7 +47,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
     @MediumTest
     public void testPDF417BarcodeIsShown() {
-        testWithBarcodeFormat(BarcodeFormat.PDF_417);
+        testWithBarcodeFormat(PassBarCodeFormat.PDF_417);
 
         Spoon.screenshot(getActivity(), "pdf417_barcode");
     }
@@ -55,7 +55,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
     @MediumTest
     public void testAztecBarcodeIsShown() {
-        testWithBarcodeFormat(BarcodeFormat.AZTEC);
+        testWithBarcodeFormat(PassBarCodeFormat.AZTEC);
 
         Spoon.screenshot(getActivity(), "aztec_barcode");
     }
@@ -63,14 +63,14 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
     @MediumTest
     public void testQRCodeIsShown() {
-        testWithBarcodeFormat(BarcodeFormat.QR_CODE);
+        testWithBarcodeFormat(PassBarCodeFormat.QR_CODE);
 
         Spoon.screenshot(getActivity(), "qr_barcode");
     }
 
     @MediumTest
     public void testCode128CodeIsShown() {
-        testWithBarcodeFormat(BarcodeFormat.CODE_128);
+        testWithBarcodeFormat(PassBarCodeFormat.CODE_128);
 
         Spoon.screenshot(getActivity(), "code128_barcode");
     }
@@ -78,14 +78,14 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
 
     @MediumTest
     public void testCode39CodeIsShown() {
-        testWithBarcodeFormat(BarcodeFormat.CODE_39);
+        testWithBarcodeFormat(PassBarCodeFormat.CODE_39);
 
         Spoon.screenshot(getActivity(), "code39_barcode");
     }
 
 
 
-    private void testWithBarcodeFormat(final BarcodeFormat format) {
+    private void testWithBarcodeFormat(final PassBarCodeFormat format) {
         final PassImpl pass = new PassImpl(UUID.randomUUID().toString());
         pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
 
@@ -98,7 +98,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         final Bitmap bitmap = bitmapDrawable.getBitmap();
 
         final Bitmap bitmapToTest;
-        if (format == BarcodeFormat.AZTEC) {
+        if (format == PassBarCodeFormat.AZTEC) {
             // not sure why - but for the decoder to pick up AZTEC it must have moar pixelz - smells like a zxing bug
             bitmapToTest = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() * 2, bitmap.getHeight() * 2, false);
         } else {

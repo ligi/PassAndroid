@@ -8,7 +8,7 @@ import org.ligi.passandroid.helper.BarcodeHelper
 import org.ligi.tracedroid.logging.Log
 import java.util.*
 
-class BarCode(val format: BarcodeFormat?, val message: String?) {
+class BarCode(val format: PassBarCodeFormat?, val message: String?) {
 
     var alternativeText: String? = null
 
@@ -22,7 +22,7 @@ class BarCode(val format: BarcodeFormat?, val message: String?) {
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR")
             App.component().tracker().trackException("Barcode format is null - fallback to QR", false)
-            return BarcodeHelper.generateBitmapDrawable(resources, message, BarcodeFormat.QR_CODE)
+            return BarcodeHelper.generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
         }
 
         return BarcodeHelper.generateBitmapDrawable(resources, message, format)
@@ -31,20 +31,19 @@ class BarCode(val format: BarcodeFormat?, val message: String?) {
 
     companion object {
 
-        fun getFormatFromString(format: String): BarcodeFormat {
+        fun getFormatFromString(format: String): PassBarCodeFormat {
             return when {
-                format.contains("417") -> BarcodeFormat.PDF_417
-                format.toUpperCase(Locale.ENGLISH).contains("AZTEC") -> return BarcodeFormat.AZTEC
-                format.toUpperCase(Locale.ENGLISH).contains("128") -> return BarcodeFormat.CODE_128
-                format.toUpperCase(Locale.ENGLISH).contains("39") -> return BarcodeFormat.CODE_39
+                format.contains("417") -> PassBarCodeFormat.PDF_417
+                format.toUpperCase(Locale.ENGLISH).contains("AZTEC") -> return PassBarCodeFormat.AZTEC
+                format.toUpperCase(Locale.ENGLISH).contains("128") -> return PassBarCodeFormat.CODE_128
+                format.toUpperCase(Locale.ENGLISH).contains("39") -> return PassBarCodeFormat.CODE_39
 
                  /*
                  requested but not supported by xing (yet)   https://github.com/ligi/PassAndroid/issues/43
                  format.toUpperCase(Locale.ENGLISH).contains("93")->return BarcodeFormat.CODE_93;
                  */
 
-
-                else -> BarcodeFormat.QR_CODE
+                else -> PassBarCodeFormat.QR_CODE
 
             }
 

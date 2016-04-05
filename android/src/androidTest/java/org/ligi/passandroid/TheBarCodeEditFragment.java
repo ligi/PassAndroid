@@ -2,10 +2,10 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
-import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
 import javax.inject.Inject;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.PassEditActivity;
 import static android.support.test.espresso.Espresso.onView;
@@ -66,7 +66,7 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         onView(withId(R.id.barcodeAddButton)).perform(click());
 
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
+        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
     }
 
 
@@ -77,7 +77,7 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         onView(withText("QR")).perform(click());
 
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(BarcodeFormat.QR_CODE);
+        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
         Spoon.screenshot(getActivity(), "edit_set_qr");
     }
 
@@ -89,7 +89,7 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         onView(withText("PDF417")).perform(click());
 
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(BarcodeFormat.PDF_417);
+        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.PDF_417);
         Spoon.screenshot(getActivity(), "edit_set_pdf417");
     }
 
@@ -101,7 +101,7 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         onView(withText("AZTEC")).perform(click());
 
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(BarcodeFormat.AZTEC);
+        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.AZTEC);
         Spoon.screenshot(getActivity(), "edit_set_aztec");
     }
 

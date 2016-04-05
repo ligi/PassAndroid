@@ -4,47 +4,44 @@ package org.ligi.passandroid;
 import android.graphics.Bitmap;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
-
 import org.ligi.passandroid.helper.BarcodeHelper;
-
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TheBarcodeHelper extends InstrumentationTestCase {
 
     @SmallTest
     public void testQRBitMatrixHasCorrectSize() throws Exception {
-        testBitMatrixSizeIsSane(BarcodeFormat.QR_CODE);
+        testBitMatrixSizeIsSane(PassBarCodeFormat.QR_CODE);
     }
 
     @SmallTest
     public void testQRBitmapHasCorrectSize() throws Exception {
-        testBitmapSizeIsSane(BarcodeFormat.QR_CODE);
+        testBitmapSizeIsSane(PassBarCodeFormat.QR_CODE);
     }
 
     @SmallTest
     public void testPDF417BitmapHasCorrectSize() {
-        testBitmapSizeIsSane(BarcodeFormat.PDF_417);
+        testBitmapSizeIsSane(PassBarCodeFormat.PDF_417);
     }
 
     @SmallTest
     public void testPDF417BitMatrixHasCorrectSize() {
-        testBitMatrixSizeIsSane(BarcodeFormat.PDF_417);
+        testBitMatrixSizeIsSane(PassBarCodeFormat.PDF_417);
     }
 
     @SmallTest
     public void testAZTECBitmapHasCorrectSize() {
-        testBitmapSizeIsSane(BarcodeFormat.AZTEC);
+        testBitmapSizeIsSane(PassBarCodeFormat.AZTEC);
     }
 
     @SmallTest
     public void testAZTECBitMatrixHasCorrectSize() {
-        testBitMatrixSizeIsSane(BarcodeFormat.AZTEC);
+        testBitMatrixSizeIsSane(PassBarCodeFormat.AZTEC);
     }
 
-    public void testBitMatrixSizeIsSane(final BarcodeFormat format) {
+    public void testBitMatrixSizeIsSane(final PassBarCodeFormat format) {
         try {
             BitMatrix tested = BarcodeHelper.getBitMatrix("foo-data", format);
 
@@ -55,7 +52,7 @@ public class TheBarcodeHelper extends InstrumentationTestCase {
 
     }
 
-    public void testBitmapSizeIsSane(final BarcodeFormat format) {
+    public void testBitmapSizeIsSane(final PassBarCodeFormat format) {
         try {
             Bitmap tested2 = BarcodeHelper.generateBarCodeBitmap("foo-data", format);
 

@@ -21,6 +21,7 @@ import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.Strings;
 import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
 import static android.text.TextUtils.isEmpty;
 
@@ -95,7 +96,7 @@ public class BarcodeEditFragment extends PassandroidFragment {
 
     @OnClick(R.id.barcodeAddButton)
     void onBarCodeAdd() {
-        final BarCode newBarCode = new BarCode(BarcodeFormat.QR_CODE, UUID.randomUUID().toString());
+        final BarCode newBarCode = new BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString());
         getPass().setBarCode(newBarCode);
         modelToUI();
     }
@@ -160,7 +161,7 @@ public class BarcodeEditFragment extends PassandroidFragment {
             message = " ";
         }
 
-        final BarcodeFormat format = getBarcodeFormatFromCheckedState();
+        final PassBarCodeFormat format = getBarcodeFormatFromCheckedState();
 
         final BarCode newBarCode = new BarCode(format, message);
         newBarCode.setAlternativeText(alternativeMessageInput.getText().toString());
@@ -173,19 +174,19 @@ public class BarcodeEditFragment extends PassandroidFragment {
     private void refreshImages() {
         final String message = getPass().getBarCode().getMessage();
 
-        new AsyncSetBarCodeImageTask(selectorQR).execute(new BarCode(BarcodeFormat.QR_CODE, message));
-        new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(BarcodeFormat.PDF_417, message));
-        new AsyncSetBarCodeImageTask(selectorAztec).execute(new BarCode(BarcodeFormat.AZTEC, message));
+        new AsyncSetBarCodeImageTask(selectorQR).execute(new BarCode(PassBarCodeFormat.QR_CODE, message));
+        new AsyncSetBarCodeImageTask(selectorPDF417).execute(new BarCode(PassBarCodeFormat.PDF_417, message));
+        new AsyncSetBarCodeImageTask(selectorAztec).execute(new BarCode(PassBarCodeFormat.AZTEC, message));
     }
 
 
-    private BarcodeFormat getBarcodeFormatFromCheckedState() {
+    private PassBarCodeFormat getBarcodeFormatFromCheckedState() {
         if (pdfCheck.isChecked()) {
-            return BarcodeFormat.PDF_417;
+            return PassBarCodeFormat.PDF_417;
         } else if (aztecCheck.isChecked()) {
-            return BarcodeFormat.AZTEC;
+            return PassBarCodeFormat.AZTEC;
         }
-        return BarcodeFormat.QR_CODE; // default/fallback
+        return PassBarCodeFormat.QR_CODE; // default/fallback
     }
 
     private RadioButton getCheckboxForBarcodeType(BarCode barCode) {

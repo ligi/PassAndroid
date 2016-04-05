@@ -7,6 +7,4 @@ public enum  PassType {
     BOARDING,
     LOYALTY,
     VOUCHER
-
-
 }

@@ -12,6 +12,7 @@ import com.google.zxing.BarcodeFormat;
 
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.tracedroid.logging.Log;
 
 import butterknife.Bind;
@@ -65,7 +66,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (optionalPass.getBarCode().getFormat() == BarcodeFormat.PDF_417) {
+        if (optionalPass.getBarCode().getFormat() == PassBarCodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

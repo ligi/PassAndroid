@@ -1,6 +1,5 @@
 package org.ligi.passandroid;
 
-import com.google.zxing.BarcodeFormat;
 import dagger.Module;
 import dagger.Provides;
 import java.io.File;
@@ -15,6 +14,7 @@ import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,7 +28,7 @@ public class TestModule {
         passList = new ArrayList<>();
         final PassImpl pass = new PassImpl(UUID.randomUUID().toString());
         pass.setDescription("description");
-        pass.setBarCode(new BarCode(BarcodeFormat.AZTEC, "messageprobe"));
+        pass.setBarCode(new BarCode(PassBarCodeFormat.AZTEC, "messageprobe"));
         passList.add(pass);
 
     }

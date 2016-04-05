@@ -12,12 +12,13 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.tracedroid.logging.Log;
 
 public class BarcodeHelper {
 
     @Nullable
-    public static BitmapDrawable generateBitmapDrawable(@NonNull Resources resources, @NonNull String data, @NonNull BarcodeFormat type) {
+    public static BitmapDrawable generateBitmapDrawable(@NonNull Resources resources, @NonNull String data, @NonNull PassBarCodeFormat type) {
         final Bitmap bitmap = generateBarCodeBitmap(data, type);
         if (bitmap == null) {
             return null;
@@ -29,7 +30,7 @@ public class BarcodeHelper {
     }
 
     @Nullable
-    public static Bitmap generateBarCodeBitmap(@NonNull String data, @NonNull BarcodeFormat type) {
+    public static Bitmap generateBarCodeBitmap(@NonNull String data, @NonNull PassBarCodeFormat type) {
 
         if (data.isEmpty()) {
             return null;
@@ -70,12 +71,12 @@ public class BarcodeHelper {
 
     }
 
-    public static BitMatrix getBitMatrix(String data, BarcodeFormat type) throws WriterException {
+    public static BitMatrix getBitMatrix(String data, PassBarCodeFormat type) throws WriterException {
         final Writer writer = new MultiFormatWriter();
-        return writer.encode(data, type, 0, 0);
+        return writer.encode(data, getZxingBarCodeFormat(type), 0, 0);
     }
 
-    public static boolean isBarcodeFormatQuadratic(BarcodeFormat format) {
+    public static boolean isBarcodeFormatQuadratic(PassBarCodeFormat format) {
         switch (format) {
             case QR_CODE:
             case AZTEC:
@@ -83,6 +84,25 @@ public class BarcodeHelper {
 
             default:
                 return false;
+        }
+    }
+
+    public static BarcodeFormat getZxingBarCodeFormat(PassBarCodeFormat format) {
+        switch (format) {
+            case QR_CODE:
+                return BarcodeFormat.QR_CODE;
+            case AZTEC:
+                return BarcodeFormat.AZTEC;
+            case CODE_39:
+                return BarcodeFormat.CODE_39;
+            case CODE_128:
+                return BarcodeFormat.CODE_128;
+            case PDF_417:
+                return BarcodeFormat.PDF_417;
+
+
+            default:
+                return BarcodeFormat.QR_CODE;
         }
     }
 }
