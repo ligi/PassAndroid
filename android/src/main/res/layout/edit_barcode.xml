@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add Barcode" />
+        android:text="@string/barcode_edit_button_add_barcode" />
 
     <ScrollView
         android:id="@+id/barcodeMainContainer"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="QR" />
+                    android:text="@string/barcode_edit_qr" />
 
                 <RadioButton
                     android:id="@+id/PDFCheck"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="PDF417" />
+                    android:text="@string/barcode_edit_pdf417" />
 
                 <RadioButton
                     android:id="@+id/AZTecCheck"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="AZTEC" />
+                    android:text="@string/barcode_edit_aztec" />
 
 
             </RadioGroup>
@@ -86,19 +86,19 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="Message" />
+                    android:hint="@string/barcode_edit_message" />
 
                 <Button
                     android:id="@+id/scanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="scan" />
+                    android:text="@string/barcode_edit_scan" />
 
                 <Button
                     android:id="@+id/randomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="random" />
+                    android:text="@string/barcode_edit_random" />
 
             </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:id="@+id/alternativeMessageInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="alternative Message" />
+                android:hint="@string/barcode_edit_hint_alternative_message" />
 
 
             <Button
