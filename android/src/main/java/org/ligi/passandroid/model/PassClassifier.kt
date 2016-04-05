@@ -26,22 +26,21 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
         return topicByIdMap.filter { it.value.equals(topic) }.map { passStore.getPassbookForId(it.key) }.filterNotNull()
     }
 
-    fun getTopic(pass: Pass): String {
-        return getTopic(pass.id)
+    fun getTopic(pass: Pass, default: String): String {
+        return getTopic(pass.id, default)
     }
 
-    fun getTopic(id: String): String {
+    fun getTopic(id: String, default: String): String {
         val s = topicByIdMap[id]
         if (s != null) {
             return s
         }
 
-        topicByIdMap.put(id, DEFAULT_TOPIC)
-        processDataChange()
-        return DEFAULT_TOPIC
+        if (!default.isEmpty()) {
+            topicByIdMap.put(id, default)
+            processDataChange()
+        }
+        return default
     }
 
-    companion object {
-        val DEFAULT_TOPIC = "active"
-    }
 }

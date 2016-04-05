@@ -116,7 +116,7 @@ public class PassListFragment extends Fragment {
                     if (nextIsCandidate) {
                         return topic;
                     }
-                    if (passStore.getClassifier().getTopic(pass).equals(topic)) {
+                    if (passStore.getClassifier().getTopic(pass,"").equals(topic)) {
                         nextIsCandidate = true;
                     }
                 }
@@ -129,7 +129,7 @@ public class PassListFragment extends Fragment {
                 String prev = null;
 
                 for (String topic : topics) {
-                    if (passStore.getClassifier().getTopic(pass).equals(topic)) {
+                    if (passStore.getClassifier().getTopic(pass,"").equals(topic)) {
                         return prev;
                     }
                     prev = topic;

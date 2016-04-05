@@ -105,7 +105,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         bus.post(PassStoreChangeEvent)
     }
 
-    override fun syncPassStoreWithClassifier() {
+    override fun syncPassStoreWithClassifier(defaultTopic: String) {
         val keysToRemove = classifier.topicByIdMap.keys.filter { getPassbookForId(it) == null }
 
         for (key in keysToRemove) {
@@ -114,7 +114,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
 
         val allPasses = path.listFiles()
         allPasses?.forEach {
-            classifier.getTopic(it.name)
+            classifier.getTopic(it.name, defaultTopic)
         }
     }
 }
