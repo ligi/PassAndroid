@@ -1,8 +1,8 @@
 package org.ligi.passandroid.injections
 
-import org.ligi.passandroid.model.Pass
 import org.ligi.passandroid.model.PassClassifier
 import org.ligi.passandroid.model.PassStore
+import org.ligi.passandroid.model.pass.Pass
 import java.io.File
 import java.util.*
 

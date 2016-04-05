@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassClassifier;
+import org.ligi.passandroid.model.pass.Pass;
 
 public class MoveHelper {
     public static void moveWithUndoSnackbar(final PassClassifier passClassifier, final Pass pass, String topic, final Activity activity) {

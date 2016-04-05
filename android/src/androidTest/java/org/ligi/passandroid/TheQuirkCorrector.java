@@ -1,9 +1,7 @@
 package org.ligi.passandroid;
 
 import android.test.suitebuilder.annotation.SmallTest;
-
-import org.ligi.passandroid.model.Pass;
-
+import org.ligi.passandroid.model.pass.Pass;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TheQuirkCorrector extends TheAppleStyleBarcodeReaderBase {

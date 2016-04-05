@@ -7,9 +7,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.support.v4.app.NotificationCompat
 import org.ligi.passandroid.R
-import org.ligi.passandroid.model.Pass
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
+import org.ligi.passandroid.model.pass.Pass
 import java.io.File
 
 internal class SearchSuccessCallback(private val context: Context, private val passStore: PassStore, private val foundList: MutableList<Pass>, private val findNotificationBuilder: NotificationCompat.Builder, private val file: File, private val notifyManager: NotificationManager) : UnzipPassController.SuccessCallback {

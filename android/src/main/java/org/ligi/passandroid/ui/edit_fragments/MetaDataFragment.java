@@ -11,16 +11,14 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-
-import org.ligi.axt.simplifications.SimpleTextWatcher;
-import org.ligi.passandroid.R;
-import org.ligi.passandroid.events.PassRefreshEvent;
-import org.ligi.passandroid.model.PassImpl;
-import org.threeten.bp.ZonedDateTime;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import org.ligi.axt.simplifications.SimpleTextWatcher;
+import org.ligi.passandroid.R;
+import org.ligi.passandroid.events.PassRefreshEvent;
+import org.ligi.passandroid.model.pass.PassImpl;
+import org.threeten.bp.ZonedDateTime;
 
 public class MetaDataFragment extends PassandroidFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 

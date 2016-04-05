@@ -3,14 +3,11 @@ package org.ligi.passandroid;
 
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-
-import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.model.PassDefinitions;
-import org.ligi.passandroid.model.PassType;
-
 import java.util.HashSet;
 import java.util.Set;
-
+import org.ligi.passandroid.helper.CategoryHelper;
+import org.ligi.passandroid.model.PassDefinitions;
+import org.ligi.passandroid.model.pass.PassType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TheCategoryHelper extends InstrumentationTestCase {

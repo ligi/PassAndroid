@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.App;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.PassImpl;
 
 public class PassandroidFragment extends Fragment {
 

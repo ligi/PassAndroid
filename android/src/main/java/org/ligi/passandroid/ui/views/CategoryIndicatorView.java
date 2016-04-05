@@ -6,12 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+import butterknife.ButterKnife;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.model.PassType;
-
-import butterknife.ButterKnife;
+import org.ligi.passandroid.model.pass.PassType;
 
 public class CategoryIndicatorView extends LinearLayout {
 

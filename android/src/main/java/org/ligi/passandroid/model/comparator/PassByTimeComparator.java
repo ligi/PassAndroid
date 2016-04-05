@@ -1,8 +1,7 @@
 package org.ligi.passandroid.model.comparator;
 
-import org.ligi.passandroid.model.Pass;
-
 import java.util.Comparator;
+import org.ligi.passandroid.model.pass.Pass;
 
 public class PassByTimeComparator implements Comparator<Pass> {
 

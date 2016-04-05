@@ -10,12 +10,12 @@ import java.util.UUID;
 import javax.inject.Singleton;
 import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
+import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassImpl;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

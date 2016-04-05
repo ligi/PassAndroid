@@ -23,7 +23,7 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.helper.Files;
-import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.pass.PassImpl;
 import static android.app.Activity.RESULT_OK;
 
 public class ImageEditFragment extends PassandroidFragment {

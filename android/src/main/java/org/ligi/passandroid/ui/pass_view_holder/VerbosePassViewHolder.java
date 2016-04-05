@@ -2,8 +2,8 @@ package org.ligi.passandroid.ui.pass_view_holder;
 
 import android.app.Activity;
 import android.view.View;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.Pass;
 import static android.view.View.GONE;
 
 public class VerbosePassViewHolder extends PassViewHolder {

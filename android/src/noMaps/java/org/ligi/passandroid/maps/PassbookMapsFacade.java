@@ -1,8 +1,7 @@
 package org.ligi.passandroid.maps;
 
 import android.content.Context;
-
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.pass.Pass;
 
 public class PassbookMapsFacade {
 

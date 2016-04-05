@@ -11,22 +11,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import com.google.zxing.BarcodeFormat;
-
-import org.ligi.axt.simplifications.SimpleTextWatcher;
-import org.ligi.passandroid.R;
-import org.ligi.passandroid.helper.Strings;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
-
-import java.util.Collections;
-import java.util.UUID;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+import com.google.zxing.BarcodeFormat;
+import java.util.Collections;
+import java.util.UUID;
+import org.ligi.axt.simplifications.SimpleTextWatcher;
+import org.ligi.passandroid.R;
+import org.ligi.passandroid.helper.Strings;
+import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.ui.AsyncSetBarCodeImageTask;
 import static android.text.TextUtils.isEmpty;
 
 public class BarcodeEditFragment extends PassandroidFragment {

@@ -1,5 +1,6 @@
 package org.ligi.passandroid.model
 
+import org.ligi.passandroid.model.pass.Pass
 import java.io.File
 
 interface PassStore {
@@ -14,7 +15,7 @@ interface PassStore {
 
     fun getPathForID(id: String): File
 
-    val passMap: Map<String,Pass>
+    val passMap: Map<String, Pass>
 
     var currentPass: Pass?
 

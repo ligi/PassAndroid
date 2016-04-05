@@ -5,7 +5,7 @@ import android.test.InstrumentationTestCase;
 import java.io.File;
 import java.io.InputStream;
 import org.ligi.passandroid.model.InputStreamWithSource;
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.ui.UnzipPassController;
 import org.mockito.Mock;

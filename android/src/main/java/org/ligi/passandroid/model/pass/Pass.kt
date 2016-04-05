@@ -1,8 +1,9 @@
-package org.ligi.passandroid.model
+package org.ligi.passandroid.model.pass
 
 import android.graphics.Bitmap
 import android.support.annotation.StringDef
 import org.ligi.passandroid.model.PassBitmapDefinitions.*
+import org.ligi.passandroid.model.PassStore
 
 
 interface Pass {

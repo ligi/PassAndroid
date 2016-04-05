@@ -1,11 +1,9 @@
 package org.ligi.passandroid.json_adapter;
 
 import android.graphics.Color;
-
 import com.squareup.moshi.FromJson;
 import com.squareup.moshi.ToJson;
-
-import org.ligi.passandroid.model.PassImpl;
+import org.ligi.passandroid.model.pass.PassImpl;
 
 public class ColorAdapter {
     @ToJson

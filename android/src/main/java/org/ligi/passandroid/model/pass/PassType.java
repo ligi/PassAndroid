@@ -1,4 +1,4 @@
-package org.ligi.passandroid.model;
+package org.ligi.passandroid.model.pass;
 
 public enum  PassType {
     GENERIC,

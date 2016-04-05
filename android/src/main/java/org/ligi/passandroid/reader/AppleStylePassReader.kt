@@ -7,7 +7,11 @@ import org.json.JSONObject
 import org.ligi.axt.AXT
 import org.ligi.passandroid.App
 import org.ligi.passandroid.helper.SafeJSONReader
-import org.ligi.passandroid.model.*
+import org.ligi.passandroid.model.ApplePassbookQuirkCorrector
+import org.ligi.passandroid.model.AppleStylePassTranslation
+import org.ligi.passandroid.model.PassBitmapDefinitions
+import org.ligi.passandroid.model.PassDefinitions
+import org.ligi.passandroid.model.pass.*
 import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.DateTimeException
 import org.threeten.bp.ZonedDateTime

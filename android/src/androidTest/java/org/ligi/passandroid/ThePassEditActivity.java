@@ -2,15 +2,11 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.test.suitebuilder.annotation.MediumTest;
-
 import com.squareup.spoon.Spoon;
-
-import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.PassType;
-import org.ligi.passandroid.ui.PassEditActivity;
-
 import javax.inject.Inject;
-
+import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.PassType;
+import org.ligi.passandroid.ui.PassEditActivity;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;

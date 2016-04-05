@@ -2,6 +2,8 @@ package org.ligi.passandroid.model
 
 import org.ligi.passandroid.App
 import org.ligi.passandroid.helper.Strings
+import org.ligi.passandroid.model.pass.PassField
+import org.ligi.passandroid.model.pass.PassImpl
 
 object ApplePassbookQuirkCorrector {
 

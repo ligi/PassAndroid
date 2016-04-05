@@ -1,9 +1,9 @@
 package org.ligi.passandroid.helper;
 
 import java.util.UUID;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassType;
+import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassImpl;
+import org.ligi.passandroid.model.pass.PassType;
 
 public class PassUtil {
 

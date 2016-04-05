@@ -20,8 +20,8 @@ import javax.inject.Inject;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
 public class PassViewActivityBase extends PassAndroidActivity {

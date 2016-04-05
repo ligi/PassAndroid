@@ -4,9 +4,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
-
 import org.ligi.passandroid.helper.BarcodeHelper;
-import org.ligi.passandroid.model.BarCode;
+import org.ligi.passandroid.model.pass.BarCode;
 
 public class AsyncSetBarCodeImageTask extends AsyncTask<BarCode, Void, BitmapDrawable> {
 

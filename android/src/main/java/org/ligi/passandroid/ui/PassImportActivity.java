@@ -12,8 +12,8 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.Pass;
 
 public class PassImportActivity extends AppCompatActivity {
 

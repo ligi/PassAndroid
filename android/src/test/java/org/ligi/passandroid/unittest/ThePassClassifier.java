@@ -1,13 +1,11 @@
 package org.ligi.passandroid.unittest;
 
-import org.junit.Test;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassClassifier;
-import org.ligi.passandroid.model.PassImpl;
-import org.ligi.passandroid.model.PassStore;
-
 import java.util.HashMap;
-
+import org.junit.Test;
+import org.ligi.passandroid.model.PassClassifier;
+import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;

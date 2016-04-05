@@ -6,6 +6,8 @@ import okio.Okio
 import org.greenrobot.eventbus.EventBus
 import org.ligi.axt.AXT
 import org.ligi.passandroid.events.PassStoreChangeEvent
+import org.ligi.passandroid.model.pass.Pass
+import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.reader.AppleStylePassReader
 import org.ligi.passandroid.reader.PassReader
 import java.io.File

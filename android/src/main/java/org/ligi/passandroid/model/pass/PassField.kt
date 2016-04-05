@@ -1,4 +1,4 @@
-package org.ligi.passandroid.model
+package org.ligi.passandroid.model.pass
 
 class PassField(var key: String?, var label: String?, var value: String?,var hide:Boolean) {
 

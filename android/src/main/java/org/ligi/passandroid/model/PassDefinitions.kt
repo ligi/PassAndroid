@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model
 
-import org.ligi.passandroid.model.PassType.*
+import org.ligi.passandroid.model.pass.PassType
+import org.ligi.passandroid.model.pass.PassType.*
 
 object PassDefinitions {
 

@@ -1,9 +1,8 @@
 package org.ligi.passandroid.helper;
 
 import android.graphics.Color;
-
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.PassType;
+import org.ligi.passandroid.model.pass.PassType;
 
 public class CategoryHelper {
 

@@ -40,9 +40,9 @@ import org.ligi.passandroid.events.PassStoreChangeEvent;
 import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.events.ScanProgressEvent;
 import org.ligi.passandroid.helper.PassUtil;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassStoreProjection;
+import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.snackengage.SnackEngage;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
@@ -82,7 +82,15 @@ public class PassListActivity extends PassAndroidActivity {
         passStore.save(pass);
         floatingActionsMenu.collapse();
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
-        passStore.getClassifier().moveToTopic(pass, adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString());
+
+        final String newTitle;
+        if (tabLayout.getSelectedTabPosition() < 0) {
+            newTitle = getString(R.string.topic_new);
+        } else {
+            newTitle = adapter.getPageTitle(tabLayout.getSelectedTabPosition()).toString();
+        }
+
+        passStore.getClassifier().moveToTopic(pass, newTitle);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -267,7 +275,8 @@ public class PassListActivity extends PassAndroidActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_emptytrash).setVisible((adapter.getCount()>0) && adapter.getPageTitle(viewPager.getCurrentItem()).equals(getString(R.string.topic_trash)));
+        menu.findItem(R.id.menu_emptytrash)
+            .setVisible((adapter.getCount() > 0) && adapter.getPageTitle(viewPager.getCurrentItem()).equals(getString(R.string.topic_trash)));
         return true;
     }
 

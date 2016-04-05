@@ -3,10 +3,10 @@ package org.ligi.passandroid.reader
 import android.graphics.Color
 import org.ligi.axt.AXT
 import org.ligi.passandroid.helper.SafeJSONReader
-import org.ligi.passandroid.model.BarCode
-import org.ligi.passandroid.model.Pass
 import org.ligi.passandroid.model.PassDefinitions
-import org.ligi.passandroid.model.PassImpl
+import org.ligi.passandroid.model.pass.BarCode
+import org.ligi.passandroid.model.pass.Pass
+import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.ZonedDateTime
 import java.io.File

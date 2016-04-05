@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -16,12 +15,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.ligi.axt.AXT;
-import org.ligi.passandroid.model.PassLocation;
-import org.ligi.passandroid.ui.PassViewActivityBase;
-
 import java.util.List;
+import org.ligi.axt.AXT;
+import org.ligi.passandroid.model.pass.PassLocation;
+import org.ligi.passandroid.ui.PassViewActivityBase;
 
 public class LocationsMapFragment extends SupportMapFragment {
     private PassViewActivityBase base_activity;

@@ -10,8 +10,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.MoveHelper;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.Pass;
 
 class MoveToNewTopicUI {
 

@@ -6,16 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
-
-import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.Pass;
-import org.ligi.passandroid.model.PassLocation;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
-
 import javax.annotation.Nonnull;
+import org.ligi.passandroid.R;
+import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassLocation;
 
 public class NavigateToLocationsDialog {
 

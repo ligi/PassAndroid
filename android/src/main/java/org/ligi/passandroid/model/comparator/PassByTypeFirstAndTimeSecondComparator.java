@@ -1,9 +1,7 @@
 package org.ligi.passandroid.model.comparator;
 
-import org.ligi.passandroid.model.Pass;
-
 import java.util.Comparator;
-
+import org.ligi.passandroid.model.pass.Pass;
 import static org.ligi.passandroid.model.comparator.PassByTimeComparator.DIRECTION_ASC;
 
 public class PassByTypeFirstAndTimeSecondComparator implements Comparator<Pass> {

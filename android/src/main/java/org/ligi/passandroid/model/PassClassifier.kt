@@ -1,5 +1,7 @@
 package org.ligi.passandroid.model
 
+import org.ligi.passandroid.model.pass.Pass
+
 open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private val passStore: PassStore) {
 
     open fun processDataChange() {

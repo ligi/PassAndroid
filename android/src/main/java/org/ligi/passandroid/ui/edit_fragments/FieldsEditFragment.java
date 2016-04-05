@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import java.util.List;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.PassField;
+import org.ligi.passandroid.model.pass.PassField;
 
 public class FieldsEditFragment extends PassandroidFragment {
 

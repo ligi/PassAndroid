@@ -1,9 +1,10 @@
-package org.ligi.passandroid.model
+package org.ligi.passandroid.model.pass
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.squareup.moshi.JsonQualifier
 import org.ligi.axt.AXT
+import org.ligi.passandroid.model.PassStore
 import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.ZonedDateTime
 import java.io.File
@@ -62,7 +63,7 @@ class PassImpl(override val id: String) : Pass {
 
     override fun getBitmap(passStore: PassStore, @Pass.PassBitmap passBitmap: String): Bitmap? {
         try {
-            val file = File(passStore.getPathForID(id), passBitmap + PassImpl.FILETYPE_IMAGES)
+            val file = File(passStore.getPathForID(id), passBitmap + FILETYPE_IMAGES)
             return BitmapFactory.decodeStream(FileInputStream(file))
         } catch (expectedInSomeCases_willJustReturnNull: FileNotFoundException) {
             return null

@@ -15,9 +15,9 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.helper.CategoryHelper;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.PassType;
+import org.ligi.passandroid.model.pass.PassImpl;
+import org.ligi.passandroid.model.pass.PassType;
 import org.ligi.passandroid.ui.views.CategoryIndicatorView;
 
 public class CategoryPickFragment extends ListFragment {

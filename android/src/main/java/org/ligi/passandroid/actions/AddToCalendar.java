@@ -7,9 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.CalendarContract;
 import android.support.design.widget.Snackbar;
-
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.Pass;
+import org.ligi.passandroid.model.pass.Pass;
 import org.threeten.bp.ZonedDateTime;
 
 public class AddToCalendar {

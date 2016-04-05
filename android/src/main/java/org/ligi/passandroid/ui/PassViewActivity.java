@@ -27,9 +27,9 @@ import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.maps.PassbookMapsFacade;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassBitmapDefinitions;
-import org.ligi.passandroid.model.PassField;
+import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassField;
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
 

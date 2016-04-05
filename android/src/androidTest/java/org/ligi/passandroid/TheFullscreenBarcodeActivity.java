@@ -4,23 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.ImageView;
-
+import butterknife.ButterKnife;
 import com.google.zxing.BarcodeFormat;
 import com.squareup.spoon.Spoon;
-
+import java.util.UUID;
+import javax.inject.Inject;
 import org.ligi.passandroid.helper.BarcodeDecoder;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
 import org.ligi.tracedroid.TraceDroid;
-
-import java.util.UUID;
-
-import javax.inject.Inject;
-
-import butterknife.ButterKnife;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;

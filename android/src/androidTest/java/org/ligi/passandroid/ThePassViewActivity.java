@@ -5,9 +5,9 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.google.zxing.BarcodeFormat;
 import java.util.ArrayList;
 import javax.inject.Inject;
-import org.ligi.passandroid.model.BarCode;
-import org.ligi.passandroid.model.PassImpl;
 import org.ligi.passandroid.model.PassStore;
+import org.ligi.passandroid.model.pass.BarCode;
+import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.PassViewActivity;
 import org.threeten.bp.ZonedDateTime;
 import static android.support.test.espresso.Espresso.onView;
@@ -17,7 +17,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.not;
 
 @TargetApi(14)
 public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {

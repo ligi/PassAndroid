@@ -21,9 +21,9 @@ import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.events.ScanProgressEvent;
 import org.ligi.passandroid.model.InputStreamWithSource;
-import org.ligi.passandroid.model.Pass;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.PastLocationsStore;
+import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.tracedroid.logging.Log;
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 
