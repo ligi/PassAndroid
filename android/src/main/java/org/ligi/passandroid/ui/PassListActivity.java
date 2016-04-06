@@ -39,7 +39,7 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassStoreChangeEvent;
 import org.ligi.passandroid.events.ScanFinishedEvent;
 import org.ligi.passandroid.events.ScanProgressEvent;
-import org.ligi.passandroid.helper.PassUtil;
+import org.ligi.passandroid.helper.PassTemplates;
 import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassStoreProjection;
 import org.ligi.passandroid.model.pass.Pass;
@@ -77,7 +77,7 @@ public class PassListActivity extends PassAndroidActivity {
 
     @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
-        final Pass pass = PassUtil.createEmptyPass();
+        final Pass pass = PassTemplates.createEmptyPass();
         passStore.setCurrentPass(pass);
         passStore.save(pass);
         floatingActionsMenu.collapse();
@@ -206,7 +206,6 @@ public class PassListActivity extends PassAndroidActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-
             }
 
             @Override

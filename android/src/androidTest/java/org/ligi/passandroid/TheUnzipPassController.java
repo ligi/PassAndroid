@@ -2,14 +2,12 @@ package org.ligi.passandroid;
 
 import android.app.Activity;
 import android.test.suitebuilder.annotation.SmallTest;
-
+import java.io.InputStream;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.ui.UnzipPassController;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.io.InputStream;
-
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
@@ -22,6 +20,9 @@ public class TheUnzipPassController extends BaseIntegration<Activity> {
 
     @Mock
     UnzipPassController.SuccessCallback successCallback;
+
+    @Mock
+    PassStore passStore;
 
     @Override
     public void setUp() throws Exception {
@@ -40,8 +41,12 @@ public class TheUnzipPassController extends BaseIntegration<Activity> {
 
             final InputStream inputStream = getInstrumentation().getContext().getResources().getAssets().open("passes/broken/fail.pkpass");
             final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource("none", inputStream);
-            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, getInstrumentation().getTargetContext(), successCallback, failCallback);
-            UnzipPassController.processInputStream(spec);
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource,
+                                                                                           getInstrumentation().getTargetContext(),
+                                                                                           passStore,
+                                                                                           successCallback,
+                                                                                           failCallback);
+            UnzipPassController.INSTANCE.processInputStream(spec);
 
             verify(successCallback, never()).call(any(String.class));
             verify(failCallback).fail(any(String.class));

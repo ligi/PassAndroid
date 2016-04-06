@@ -6,14 +6,14 @@ import android.support.v7.app.AlertDialog;
 import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.passandroid.model.PassStore;
 import static org.ligi.passandroid.ui.UnzipPassController.FailCallback;
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.ligi.passandroid.ui.UnzipPassController.SuccessCallback;
-import static org.ligi.passandroid.ui.UnzipPassController.processInputStream;
 
 public class UnzipPassDialog {
 
-    public static void DisplayError(final Activity activity, final String title, final String err) {
+    public static void displayError(final Activity activity, final String title, final String err) {
         new AlertDialog.Builder(activity).setTitle(title)
                                          .setMessage(err)
                                          .setPositiveButton(android.R.string.ok, new ActivityFinishingOnClickListener(activity))
@@ -24,7 +24,10 @@ public class UnzipPassDialog {
         Void call(String path);
     }
 
-    public static void show(final InputStreamWithSource ins, final Activity activity, final FinishCallback callAfterFinishOnUIThread) {
+    public static void show(final InputStreamWithSource ins,
+                            final Activity activity,
+                            final PassStore passStore,
+                            final FinishCallback callAfterFinishOnUIThread) {
         if (activity.isFinishing()) {
             return; // no need to act any more ..
         }
@@ -44,7 +47,7 @@ public class UnzipPassDialog {
             }
 
             public void run() {
-                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, activity, new SuccessCallback() {
+                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins, activity, passStore, new SuccessCallback() {
 
                     @Override
                     public void call(final String uuid) {
@@ -69,12 +72,12 @@ public class UnzipPassDialog {
                                     return;
                                 }
 
-                                DisplayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
+                                displayError(activity, activity.getString(R.string.invalid_passbook_title), reason);
                             }
                         });
                     }
                 });
-                processInputStream(spec);
+                UnzipPassController.INSTANCE.processInputStream(spec);
             }
         }
 

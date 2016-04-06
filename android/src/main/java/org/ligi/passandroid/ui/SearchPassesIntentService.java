@@ -66,10 +66,10 @@ public class SearchPassesIntentService extends IntentService {
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, new Intent(getBaseContext(), PassListActivity.class), 0);
         progressNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
-                .setSmallIcon(R.drawable.ic_refresh)
-                .setOngoing(true)
-                .setContentIntent(pendingIntent)
-                .setProgress(1, 1, true);
+                                                                          .setSmallIcon(R.drawable.ic_refresh)
+                                                                          .setOngoing(true)
+                                                                          .setContentIntent(pendingIntent)
+                                                                          .setProgress(1, 1, true);
 
         findNotificationBuilder = new NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher);
 
@@ -133,20 +133,26 @@ public class SearchPassesIntentService extends IntentService {
                 Log.i("found" + file.getAbsolutePath());
 
                 final InputStreamWithSource ins = InputStreamProvider.fromURI(getBaseContext(), Uri.parse("file://" + file.getAbsolutePath()));
+                final SearchSuccessCallback onSuccessCallback = new SearchSuccessCallback(getBaseContext(),
+                                                                                          passStore,
+                                                                                          foundList,
+                                                                                          findNotificationBuilder,
+                                                                                          file,
+                                                                                          notifyManager);
                 final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(ins,
-                        getBaseContext(),
-                        new SearchSuccessCallback(getBaseContext(), passStore, foundList, findNotificationBuilder, file, notifyManager),
-                        new UnzipPassController.FailCallback() {
-                            @Override
-                            public void fail(String reason) {
-                                Log.i("fail", reason);
-                            }
-                        });
-                UnzipPassController.processInputStream(spec);
+                                                                                               getBaseContext(),
+                                                                                               passStore,
+                                                                                               onSuccessCallback,
+                                                                                               new UnzipPassController.FailCallback() {
+                                                                                                   @Override
+                                                                                                   public void fail(String reason) {
+                                                                                                       Log.i("fail", reason);
+                                                                                                   }
+                                                                                               });
+                UnzipPassController.INSTANCE.processInputStream(spec);
             }
         }
     }
-
 
 
 }

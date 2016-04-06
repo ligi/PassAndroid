@@ -76,12 +76,12 @@ public class PassImportActivity extends AppCompatActivity {
 
             if (isFinishing()) { // finish with no UI/Dialogs
                 // let's do it silently TODO check if we need to jump to a service here as the activity is dying
-                UnzipPassController.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(result, getApplication(), null, null));
+                UnzipPassController.INSTANCE.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(result, getApplication(), passStore, null, null));
                 return;
             }
 
 
-            UnzipPassDialog.show(result, PassImportActivity.this, new UnzipPassDialog.FinishCallback() {
+            UnzipPassDialog.show(result, PassImportActivity.this, passStore, new UnzipPassDialog.FinishCallback() {
                 @Override
                 public Void call(String path) {
 
@@ -91,7 +91,7 @@ public class PassImportActivity extends AppCompatActivity {
                     final Pass passbookForId = passStore.getPassbookForId(id);
                     passStore.setCurrentPass(passbookForId);
 
-                    passStore.getClassifier().moveToTopic(passbookForId,getString(R.string.topic_new));
+                    passStore.getClassifier().moveToTopic(passbookForId, getString(R.string.topic_new));
 
                     AXT.at(PassImportActivity.this).startCommonIntent().activityFromClass(PassViewActivity.class);
                     finish();

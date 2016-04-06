@@ -5,6 +5,7 @@ import android.test.InstrumentationTestCase;
 import java.io.File;
 import java.io.InputStream;
 import org.ligi.passandroid.model.InputStreamWithSource;
+import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.reader.AppleStylePassReader;
 import org.ligi.passandroid.ui.UnzipPassController;
@@ -19,6 +20,10 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
 
     @Mock
     UnzipPassController.FailCallback failCallback;
+
+
+    @Mock
+    PassStore passStore;
 
     @Override
     protected void setUp() throws Exception {
@@ -42,7 +47,7 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
             final InputStream inputStream = getInstrumentation().getContext().getResources().getAssets().open(asset);
             final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource("none", inputStream);
 
-            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, getInstrumentation().getTargetContext(),
+            final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, getInstrumentation().getTargetContext(),passStore,
                     new UnzipPassController.SuccessCallback() {
                         @Override
                         public void call(String uuid) {
@@ -54,7 +59,7 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
 
             spec.setOverwrite(true);
             spec.setTargetPath(getTestTargetPath(spec.getContext()));
-            UnzipPassController.processInputStream(spec);
+            UnzipPassController.INSTANCE.processInputStream(spec);
 
             verify(failCallback, never()).fail(any(String.class));
 
