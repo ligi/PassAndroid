@@ -29,7 +29,6 @@ object AppleStylePassReader {
         val pass = PassImpl(passFile.name)
 
         var pass_json: JSONObject? = null
-        var type_json: JSONObject? = null
 
         val localized_path = findLocalizedPath(passFile, language)
 
@@ -173,7 +172,7 @@ object AppleStylePassReader {
         }
 
         try {
-            type_json = pass_json.getJSONObject(PassDefinitions.TYPES.get(pass.type))
+            val type_json = pass_json.getJSONObject(PassDefinitions.TYPES[pass.type])
             if (type_json != null) {
                 val fieldList: ArrayList<PassField> = ArrayList()
 
