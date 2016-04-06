@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:animateLayoutChanges="true">
 
     <Button
-        android:id="@+id/barcodeAddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/barcode_edit_button_add_barcode" />
+            android:id="@+id/barcodeAddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/barcode_edit_button_add_barcode"/>
 
     <ScrollView
-        android:id="@+id/barcodeMainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:id="@+id/barcodeMainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 <ImageView
                         android:id="@+id/selectorQR"
@@ -46,77 +47,77 @@
             </LinearLayout>
 
             <RadioGroup
-                android:id="@+id/barcodeTypeRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    android:id="@+id/barcodeTypeRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
 
                 <RadioButton
-                    android:id="@+id/QRCheck"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="@string/barcode_edit_qr" />
+                        android:id="@+id/QRCheck"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/barcode_edit_qr"/>
 
                 <RadioButton
-                    android:id="@+id/PDFCheck"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="@string/barcode_edit_pdf417" />
+                        android:id="@+id/PDFCheck"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/barcode_edit_pdf417"/>
 
                 <RadioButton
-                    android:id="@+id/AZTecCheck"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="@string/barcode_edit_aztec" />
+                        android:id="@+id/AZTecCheck"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/barcode_edit_aztec"/>
 
 
             </RadioGroup>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/messageInput"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/barcode_edit_message" />
+                        android:id="@+id/messageInput"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/barcode_edit_message"/>
 
                 <Button
-                    android:id="@+id/scanButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/barcode_edit_scan" />
+                        android:id="@+id/scanButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/barcode_edit_scan"/>
 
                 <Button
-                    android:id="@+id/randomButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/barcode_edit_random" />
+                        android:id="@+id/randomButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/barcode_edit_random"/>
 
             </LinearLayout>
 
             <EditText
-                android:id="@+id/alternativeMessageInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/barcode_edit_hint_alternative_message" />
+                    android:id="@+id/alternativeMessageInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/barcode_edit_hint_alternative_message"/>
 
 
             <Button
-                android:id="@+id/deleteButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/delete" />
+                    android:id="@+id/deleteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"/>
 
 
         </LinearLayout>
