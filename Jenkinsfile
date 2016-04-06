@@ -8,9 +8,13 @@ node {
 
 stage 'lint'
 node {
- checkout scm
  sh "./gradlew lint${flavorCombination}Release"
  publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/outputs/', reportFiles: 'lint-results-${flavorCombination}Release.html', reportName: 'Lint reports'])
+}
+
+stage 'test'
+node {
+ sh "./gradlew test"
 }
 
 stage 'UITest'

@@ -82,10 +82,10 @@ public class ThePassClassifier {
 
 
     @Test
-    public void testHasAtLeastOneTopic() {
+    public void testHasNoTopicsByDefault() {
         final PassClassifier tested = new PassClassifier(new HashMap<String, String>(), getMockedPassStore());
 
-        assertThat(tested.getTopics()).containsExactly(DEFAULT_TOPIC);
+        assertThat(tested.getTopics()).isEmpty();
     }
 
     public Pass getPassWithId(String id) {
