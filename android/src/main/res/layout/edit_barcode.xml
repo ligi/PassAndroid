@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true">
 
@@ -28,17 +28,20 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/selectorQR"
-                    style="@style/barcode_edit_barcodes" />
+                        android:id="@+id/selectorQR"
+                        style="@style/barcode_edit_barcodes"
+                        tools:ignore="ContentDescription"/>
 
                 <ImageView
-                    android:id="@+id/selectorPDF417"
-                    style="@style/barcode_edit_barcodes" />
+                        android:id="@+id/selectorPDF417"
+                        style="@style/barcode_edit_barcodes"
+                        tools:ignore="ContentDescription"/>
 
                 <ImageView
-                    android:id="@+id/selectorAZTEC"
-                    style="@style/barcode_edit_barcodes"
-                    android:layout_margin="8dp" />
+                        android:id="@+id/selectorAZTEC"
+                        style="@style/barcode_edit_barcodes"
+                        android:layout_margin="8dp"
+                        tools:ignore="ContentDescription"/>
 
             </LinearLayout>
 
