@@ -22,11 +22,11 @@ class PassExportTask extends AsyncTask<Void, Void, Void> {
 
     public PassExportTask(final Activity activity,
                           final File inputPath,
-                          final String zipPath,
+                          final File zipPath,
                           final String zipFileName,
                           final boolean share_after_export) {
         this.activity = activity;
-        passExporter = new PassExporter( inputPath, zipPath + "/" + zipFileName);
+        passExporter = new PassExporter( inputPath, new File(zipPath, zipFileName).getAbsolutePath());
         this.share_after_export = share_after_export;
         progress_dialog = new ProgressDialog(activity);
     }

@@ -10,7 +10,7 @@ class ExportProblemPassToLigiAndFinishTask extends PassExportTask {
 
     private final String reason;
 
-    public ExportProblemPassToLigiAndFinishTask(Activity activity, File path, String zip_path, String zip_fname, final String reason) {
+    public ExportProblemPassToLigiAndFinishTask(Activity activity, File path, File zip_path, String zip_fname, final String reason) {
         super(activity, path, zip_path, zip_fname, false);
         this.reason = reason;
     }

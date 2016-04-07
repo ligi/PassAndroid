@@ -13,7 +13,7 @@ public interface Settings {
 
     File getStateDir();
 
-    String getShareDir();
+    File getShareDir();
 
     boolean isCondensedModeEnabled();
 

@@ -41,7 +41,7 @@ public class AndroidSettings implements Settings {
 
     @Override
     public File getPassesDir() {
-        return new File(context.getFilesDir().getAbsolutePath() , "passes");
+        return new File(context.getFilesDir().getAbsolutePath(), "passes");
     }
 
     @Override
@@ -51,8 +51,8 @@ public class AndroidSettings implements Settings {
 
 
     @Override
-    public String getShareDir() {
-        return Environment.getExternalStorageDirectory() + "/tmp/passbook_share_tmp/";
+    public File getShareDir() {
+        return new File(Environment.getExternalStorageDirectory(), "tmp/passbook_share_tmp/");
     }
 
     @Override
