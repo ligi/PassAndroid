@@ -2,14 +2,9 @@ package org.ligi.passandroid.ui;
 
 import android.content.Context;
 import android.net.Uri;
-
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import org.ligi.passandroid.App;
-import org.ligi.passandroid.model.InputStreamWithSource;
-
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,6 +13,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.ligi.passandroid.App;
+import org.ligi.passandroid.model.InputStreamWithSource;
 
 public class InputStreamProvider {
 
@@ -56,6 +53,7 @@ public class InputStreamProvider {
                 put("icelandair","//checkin.si.amadeus.net");
                 put("mbk","//mbk.thy.com/");
                 put("heathrow","//passbook.heathrow.com/");
+                put("eventbrite","//www.eventbrite.com/passes/order");
             }}.entrySet();
 
             for (Map.Entry<String, String> fakeConfig : iPhoneFakeMap) {

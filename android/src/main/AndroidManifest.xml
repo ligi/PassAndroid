@@ -973,6 +973,30 @@
                     android:scheme="content" />
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="www.eventbrite.com"
+                        android:pathPattern="/passes/order/.*"
+                        android:scheme="http" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="www.eventbrite.com"
+                        android:pathPattern="/passes/order/.*"
+                        android:scheme="https" />
+            </intent-filter>
+
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
