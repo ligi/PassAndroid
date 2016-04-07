@@ -305,12 +305,23 @@ object AppleStylePassReader {
         searchList.add((File(path, "bitmap@2x.png")))
 
         for (current in searchList) {
-            val res = BitmapFactory.decodeFile(current.absolutePath)
+
+            var res: Bitmap? = null
+
+            try {
+                res = BitmapFactory.decodeFile(current.absolutePath)
+            } catch (e: OutOfMemoryError) {
+                System.gc()
+                try {
+                    res = BitmapFactory.decodeFile(current.absolutePath)
+                } catch (e: OutOfMemoryError) {
+                }
+            }
+
             if (res != null) {
                 return res
             }
         }
-
         return null
     }
 
