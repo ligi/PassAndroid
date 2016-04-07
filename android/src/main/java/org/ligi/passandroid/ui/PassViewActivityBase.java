@@ -213,9 +213,8 @@ public class PassViewActivityBase extends PassAndroidActivity {
                                                                                                                }
                                                                                                                dlg.dismiss();
                                                                                                                if (!optionalPass.getId().equals(uuid)) {
-                                                                                                                   passStore.deletePassWithId(optionalPass.getId());
+                                                                                                                   passStore.deletePassWithId(uuid);
                                                                                                                }
-                                                                                                               passStore.deleteCacheForId(uuid);
                                                                                                                final Pass newPass = passStore.getPassbookForId(
                                                                                                                        uuid);
                                                                                                                passStore.setCurrentPass(newPass);

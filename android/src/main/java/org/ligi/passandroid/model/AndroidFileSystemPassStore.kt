@@ -25,10 +25,6 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         FileBackedPassClassifier(classificationFile, this, moshi)
     }
 
-    override fun deleteCacheForId(id: String) {
-
-    }
-
     override fun save(pass: Pass) {
         val jsonAdapter = moshi.adapter(PassImpl::class.java)
 

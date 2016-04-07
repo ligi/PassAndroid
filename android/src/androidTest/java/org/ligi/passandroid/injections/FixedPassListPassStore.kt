@@ -16,10 +16,6 @@ class FixedPassListPassStore(private val passes: List<Pass>) : PassStore {
         return@lazy hashMap
     }
 
-    override fun deleteCacheForId(id: String) {
-
-    }
-
     override fun getPassbookForId(id: String): Pass? {
         return passMap[id]
     }

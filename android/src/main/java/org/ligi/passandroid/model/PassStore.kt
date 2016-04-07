@@ -7,8 +7,6 @@ interface PassStore {
 
     fun save(pass: Pass)
 
-    fun deleteCacheForId(id: String)
-
     fun getPassbookForId(id: String): Pass?
 
     fun deletePassWithId(id: String): Boolean
