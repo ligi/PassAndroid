@@ -1,8 +1,7 @@
 package org.ligi.passandroid;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
+import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = { TestModule.class })
@@ -18,4 +17,6 @@ public interface TestComponent extends AppComponent {
     void inject(TheBarCodeEditFragment theBarCodeEditFragment);
 
     void inject(ThePassListSwiping thePassListSwiping);
+
+    void inject(TheFieldListEditFragment theFieldListEditFragment);
 }
