@@ -54,8 +54,7 @@ object PassReader {
             }
 
             if (pass_json.has("when")) {
-                val `when` = pass_json.getJSONObject("when")
-                val dateTime = `when`.getString("dateTime")
+                val dateTime = pass_json.getJSONObject("when").getString("dateTime")
 
                 pass.calendarTimespan = PassImpl.TimeSpan()
                 pass.calendarTimespan= PassImpl.TimeSpan(from = ZonedDateTime.parse(dateTime));
