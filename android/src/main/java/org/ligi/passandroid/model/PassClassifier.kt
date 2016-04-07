@@ -45,4 +45,9 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
         return default
     }
 
+    fun removePass(id: String) {
+        topicByIdMap.remove(id)
+        processDataChange()
+    }
+
 }

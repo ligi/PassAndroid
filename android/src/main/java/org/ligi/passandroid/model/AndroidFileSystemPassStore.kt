@@ -93,7 +93,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         val result = AXT.at(getPathForID(id)).deleteRecursive()
         if (result) {
             passMap.remove(id)
-            classifier.processDataChange()
+            classifier.removePass(id)
             notifyChange()
         }
         return result
