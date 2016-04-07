@@ -129,7 +129,7 @@ public class SearchPassesIntentService extends IntentService {
         for (final File file : files) {
             if (recursive && file.isDirectory()) {
                 search_in(file, true);
-            } else if (file.getName().endsWith(".pkpass")) {
+            } else if (file.getName().endsWith(".pkpass") || file.getName().endsWith(".espass")) {
                 Log.i("found" + file.getAbsolutePath());
 
                 final InputStreamWithSource ins = InputStreamProvider.fromURI(getBaseContext(), Uri.parse("file://" + file.getAbsolutePath()));
