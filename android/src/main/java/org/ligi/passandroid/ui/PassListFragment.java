@@ -10,7 +10,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import java.util.Collection;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -88,56 +87,20 @@ public class PassListFragment extends Fragment {
                 } else {
                     MoveToNewTopicUI.show(getActivity(), passStore, pass);
                 }
-
-
             }
 
             @Nullable
             private String calculateNextTopic(final int swipeDir, final Pass pass) {
 
-                final Collection<String> topics = passStore.getClassifier().getTopics();
-
                 switch (swipeDir) {
                     case LEFT:
-                        return getNextTopicLeft(pass, topics);
+                        return passStore.getClassifier().getTopicWithOffset(pass, -1);
                     case RIGHT:
-                        return getNextTopicRight(pass, topics);
+                        return passStore.getClassifier().getTopicWithOffset(pass, 1);
                 }
 
                 return null;
             }
-
-            @Nullable
-            private String getNextTopicRight(Pass pass, Collection<String> topics) {
-
-                boolean nextIsCandidate = false;
-
-                for (String topic : topics) {
-                    if (nextIsCandidate) {
-                        return topic;
-                    }
-                    if (passStore.getClassifier().getTopic(pass,"").equals(topic)) {
-                        nextIsCandidate = true;
-                    }
-                }
-                return null;
-            }
-
-
-            @Nullable
-            private String getNextTopicLeft(Pass pass, Collection<String> topics) {
-                String prev = null;
-
-                for (String topic : topics) {
-                    if (passStore.getClassifier().getTopic(pass,"").equals(topic)) {
-                        return prev;
-                    }
-                    prev = topic;
-                }
-
-                return null;
-            }
-
         };
 
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
