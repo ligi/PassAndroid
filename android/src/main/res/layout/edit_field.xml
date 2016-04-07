@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fields_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +14,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:id="@+id/delete_button"
-            android:src="@drawable/ic_action_delete"/>
+            tools:ignore="MissingPrefix"
+            app:srcCompat="@drawable/ic_action_delete"/>
 
     <android.support.v7.widget.SwitchCompat
             android:id="@+id/hide_switch"
