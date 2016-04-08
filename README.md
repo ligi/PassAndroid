@@ -4,7 +4,7 @@
 PassAndroid
 ===========
 
-Android App to view Passbook files
+Android App to view Passes ( e.g. event tickets, coupons, loyalty cards, boarding passes, .. )
 
 <img src="http://ligi.de/img/passandroid_screenshots.png"/>
 
