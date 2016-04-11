@@ -136,7 +136,6 @@ public class PassViewActivity extends PassViewActivityBase {
         final Pass pass = optionalPass;
 
         if (pass == null) { // don't deal with invalid passes
-            showPassProblemDialog(pass, "invalid");
             return;
         }
 
