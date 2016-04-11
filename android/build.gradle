@@ -157,7 +157,7 @@ dependencies {
 
     compile 'com.squareup.moshi:moshi:1.0.0'
 
-    compile 'org.ligi:AXT:0.36'
+    compile 'org.ligi:AXT:0.37'
     compile 'org.ligi:tracedroid:1.4'
     compile 'org.ligi:snackengage:0.4'
     compile 'com.squareup.okhttp:okhttp:2.7.5'
