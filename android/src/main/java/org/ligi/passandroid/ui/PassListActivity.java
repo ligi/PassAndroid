@@ -311,7 +311,7 @@ public class PassListActivity extends PassAndroidActivity {
 
         supportInvalidateOptionsMenu();
 
-        final boolean empty = passStore.getPassMap().isEmpty();
+        final boolean empty = passStore.getClassifier().getTopicByIdMap().isEmpty();
         emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
         tabLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
     }
