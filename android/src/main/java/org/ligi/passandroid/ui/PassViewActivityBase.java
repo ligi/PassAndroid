@@ -101,7 +101,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(shouldAllowEdit());
         menu.findItem(R.id.menu_light).setVisible(!fullBrightnessSet);
         return res;
     }
@@ -126,10 +125,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
                                          }
                                      })
                                      .show();
-    }
-
-    private boolean shouldAllowEdit() {
-        return optionalPass != null;
     }
 
     @Override
