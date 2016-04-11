@@ -218,9 +218,9 @@ public class PassListActivity extends PassAndroidActivity {
 
             }
         });
-        onPassStoreChangeEvent(null);
-
         passStore.syncPassStoreWithClassifier(getString(R.string.topic_new));
+
+        onPassStoreChangeEvent(null);
     }
 
 
