@@ -3,6 +3,7 @@ package org.ligi.passandroid.ui;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -206,7 +207,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
         }
 
         @Override
-        public void call(final String uuid) {
+        public void call(@NonNull final String uuid) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
