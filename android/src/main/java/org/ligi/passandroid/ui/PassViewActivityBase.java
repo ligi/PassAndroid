@@ -180,7 +180,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
         }
 
         @Override
-        public void fail(final String reason) {
+        public void fail(@NonNull final String reason) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
