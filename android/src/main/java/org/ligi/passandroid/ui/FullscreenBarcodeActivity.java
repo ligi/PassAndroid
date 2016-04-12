@@ -7,16 +7,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.zxing.BarcodeFormat;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.tracedroid.logging.Log;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
@@ -39,18 +35,18 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
     protected void onResume() {
         super.onResume();
 
-        if (optionalPass == null || optionalPass.getBarCode() == null) {
+        if (currentPass == null || currentPass.getBarCode() == null) {
             Log.w("FullscreenBarcodeActivity in bad state");
             finish(); // this should never happen, but better safe than sorry
             return;
         }
         setBestFittingOrientationForBarCode();
 
-        barcodeImageView.setImageDrawable(optionalPass.getBarCode().getBitmap(getResources()));
+        barcodeImageView.setImageDrawable(currentPass.getBarCode().getBitmap(getResources()));
 
-        if (optionalPass.getBarCode().getAlternativeText() != null) {
+        if (currentPass.getBarCode().getAlternativeText() != null) {
             alternativeBarcodeText.setVisibility(View.VISIBLE);
-            alternativeBarcodeText.setText(optionalPass.getBarCode().getAlternativeText());
+            alternativeBarcodeText.setText(currentPass.getBarCode().getAlternativeText());
         } else {
             alternativeBarcodeText.setVisibility(View.GONE);
         }
@@ -66,7 +62,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (optionalPass.getBarCode().getFormat() == PassBarCodeFormat.PDF_417) {
+        if (currentPass.getBarCode().getFormat() == PassBarCodeFormat.PDF_417) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:

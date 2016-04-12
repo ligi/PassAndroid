@@ -16,7 +16,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -29,8 +28,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
 
     public static final String EXTRA_KEY_UUID = "uuid";
 
-    @Nullable
-    public Pass optionalPass;
+    public Pass currentPass;
 
     @Inject
     Settings settings;
@@ -68,9 +66,9 @@ public class PassViewActivityBase extends PassAndroidActivity {
             final Pass passbookForId = passStore.getPassbookForId(uuid);
             passStore.setCurrentPass(passbookForId);
         }
-        optionalPass = passStore.getCurrentPass();
+        currentPass = passStore.getCurrentPass();
 
-        if (optionalPass == null) {
+        if (currentPass == null) {
             tracker.trackException("pass not present in " + this, false);
             finish();
         }
@@ -108,7 +106,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (new PassMenuOptions(this, optionalPass).process(item)) {
+        if (new PassMenuOptions(this, currentPass).process(item)) {
             return true;
         }
 
@@ -139,7 +137,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
 
         @Override
         public void run() {
-            final Pass pass = optionalPass;
+            final Pass pass = currentPass;
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -215,12 +213,12 @@ public class PassViewActivityBase extends PassAndroidActivity {
                         return;
                     }
                     dlg.dismiss();
-                    if (!optionalPass.getId().equals(uuid)) {
+                    if (!currentPass.getId().equals(uuid)) {
                         passStore.deletePassWithId(uuid);
                     }
                     final Pass newPass = passStore.getPassbookForId(uuid);
                     passStore.setCurrentPass(newPass);
-                    optionalPass = passStore.getCurrentPass();
+                    currentPass = passStore.getCurrentPass();
                     refresh();
 
                     Snackbar.make(getWindow().getDecorView(), R.string.pass_updated, Snackbar.LENGTH_LONG).show();

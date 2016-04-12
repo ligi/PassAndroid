@@ -111,8 +111,8 @@ public class PassViewActivity extends PassViewActivityBase {
         }
 
         currentBarcodeWidth = width;
-        assert (optionalPass.getBarCode() != null); // we will not setBarCodeSize otherwise
-        final boolean quadratic = BarcodeHelper.isBarcodeFormatQuadratic(optionalPass.getBarCode().getFormat());
+        assert (currentPass.getBarCode() != null); // we will not setBarCodeSize otherwise
+        final boolean quadratic = BarcodeHelper.isBarcodeFormatQuadratic(currentPass.getBarCode().getFormat());
         barcode_img.setLayoutParams(new LinearLayout.LayoutParams(width, quadratic ? width : ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
@@ -133,7 +133,7 @@ public class PassViewActivity extends PassViewActivityBase {
     protected void refresh() {
         super.refresh();
 
-        final Pass pass = optionalPass;
+        final Pass pass = currentPass;
 
         if (pass == null) { // don't deal with invalid passes
             return;
@@ -227,7 +227,7 @@ public class PassViewActivity extends PassViewActivityBase {
     protected void onResume() {
         super.onResume();
 
-        if (optionalPass == null) {
+        if (currentPass == null) {
             return;
         }
 
@@ -281,8 +281,8 @@ public class PassViewActivity extends PassViewActivityBase {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean res = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map).setVisible((optionalPass != null && !optionalPass.getLocations().isEmpty()));
-        menu.findItem(R.id.menu_update).setVisible(mightPassBeAbleToUpdate(optionalPass));
+        menu.findItem(R.id.menu_map).setVisible((currentPass != null && !currentPass.getLocations().isEmpty()));
+        menu.findItem(R.id.menu_update).setVisible(mightPassBeAbleToUpdate(currentPass));
         return res;
     }
 

@@ -71,7 +71,7 @@ public class LocationsMapFragment extends SupportMapFragment {
 
                     LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
-                    List<PassLocation> locations = base_activity.optionalPass.getLocations();
+                    List<PassLocation> locations = base_activity.currentPass.getLocations();
 
                     for (PassLocation l : locations) {
 
@@ -79,7 +79,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                         LatLng latLng = new LatLng(l.lat, l.lon);
                         map.addMarker(new MarkerOptions()
                                         .position(latLng)
-                                        .title(l.getName(base_activity.optionalPass))
+                                        .title(l.getName(base_activity.currentPass))
                                 //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
                         );
 
@@ -107,7 +107,7 @@ public class LocationsMapFragment extends SupportMapFragment {
                         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                             @Override
                             public void onMapClick(LatLng latLng) {
-                                App.component().passStore().setCurrentPass(base_activity.optionalPass);
+                                App.component().passStore().setCurrentPass(base_activity.currentPass);
                                 AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
                             }
                         });
