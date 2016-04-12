@@ -1,7 +1,6 @@
 package org.ligi.passandroid.ui;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -105,28 +104,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
         return res;
     }
 
-    protected void showPassProblemDialog(final Pass pass, final String reason) {
-        new AlertDialog.Builder(this).setMessage(getString(R.string.pass_problem))
-                                     .setTitle(getString(R.string.problem))
-                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                         @Override
-                                         public void onClick(DialogInterface dialog, int which) {
-                                             finish();
-                                         }
-                                     })
-                                     .setNeutralButton(getString(R.string.send), new DialogInterface.OnClickListener() {
-                                         @Override
-                                         public void onClick(DialogInterface dialog, int which) {
-                                             new ExportProblemPassToLigiAndFinishTask(PassViewActivityBase.this,
-                                                                                      passStore.getPathForID(pass.getId()),
-                                                                                      settings.getShareDir(),
-                                                                                      "share",
-                                                                                      reason).execute();
-                                         }
-                                     })
-                                     .show();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (new PassMenuOptions(this, optionalPass).process(item)) {
@@ -151,7 +128,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
     }
 
     public static boolean mightPassBeAbleToUpdate(Pass pass) {
-        return pass != null && pass.getWebServiceURL() != null && pass.getPassIdent() != null && pass.getSerial() != null;
+        return pass != null && pass.getId() != null && pass.getWebServiceURL() != null && pass.getPassIdent() != null && pass.getSerial() != null;
     }
 
     class UpdateAsync implements Runnable {
@@ -169,16 +146,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
                     dlg.show();
                 }
             });
-            if (!mightPassBeAbleToUpdate(pass)) {
-                //TODO: might be removed if not on path of user anymore
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showPassProblemDialog(pass, "cannot update");
-                    }
-                });
-                return;
-            }
 
             final OkHttpClient client = new OkHttpClient();
 
