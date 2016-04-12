@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -128,7 +129,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
     }
 
     public static boolean mightPassBeAbleToUpdate(Pass pass) {
-        return pass != null && pass.getId() != null && pass.getWebServiceURL() != null && pass.getPassIdent() != null && pass.getSerial() != null;
+        return pass != null && pass.getWebServiceURL() != null && pass.getPassIdent() != null && pass.getSerial() != null;
     }
 
     class UpdateAsync implements Runnable {
@@ -158,68 +159,75 @@ public class PassViewActivityBase extends PassAndroidActivity {
             final Response response;
             try {
                 response = client.newCall(request).execute();
-
                 final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource(url, response.body().byteStream());
-
                 final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource,
                                                                                                PassViewActivityBase.this,
                                                                                                passStore,
-                                                                                               new UnzipPassController.SuccessCallback() {
-                                                                                                   @Override
-                                                                                                   public void call(final String uuid) {
-                                                                                                       runOnUiThread(new Runnable() {
-                                                                                                           @Override
-                                                                                                           public void run() {
-                                                                                                               if (isFinishing()) {
-                                                                                                                   return;
-                                                                                                               }
-                                                                                                               dlg.dismiss();
-                                                                                                               if (!optionalPass.getId().equals(uuid)) {
-                                                                                                                   passStore.deletePassWithId(uuid);
-                                                                                                               }
-                                                                                                               final Pass newPass = passStore.getPassbookForId(
-                                                                                                                       uuid);
-                                                                                                               passStore.setCurrentPass(newPass);
-                                                                                                               optionalPass = passStore.getCurrentPass();
-                                                                                                               refresh();
-
-                                                                                                               Snackbar.make(getWindow().getDecorView(),
-                                                                                                                             R.string.pass_updated,
-                                                                                                                             Snackbar.LENGTH_LONG).show();
-                                                                                                           }
-                                                                                                       });
-
-                                                                                                   }
-                                                                                               },
-                                                                                               new UnzipPassController.FailCallback() {
-                                                                                                   @Override
-                                                                                                   public void fail(final String reason) {
-                                                                                                       runOnUiThread(new Runnable() {
-                                                                                                           @Override
-                                                                                                           public void run() {
-                                                                                                               if (isFinishing()) {
-                                                                                                                   return;
-                                                                                                               }
-                                                                                                               dlg.dismiss();
-                                                                                                               new AlertDialog.Builder(PassViewActivityBase.this)
-                                                                                                                       .setMessage("Could not update pass :( " +
-                                                                                                                                   reason +
-                                                                                                                                   ")")
-                                                                                                                       .setPositiveButton(android.R.string.ok,
-                                                                                                                                          null)
-                                                                                                                       .show();
-                                                                                                           }
-                                                                                                       });
-
-                                                                                                   }
-                                                                                               });
+                                                                                               new MyUnzipSuccessCallback(dlg),
+                                                                                               new MyUnzipFailCallback(dlg));
                 spec.setOverwrite(true);
                 UnzipPassController.INSTANCE.processInputStream(spec);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private class MyUnzipFailCallback implements UnzipPassController.FailCallback {
+        private final Dialog dlg;
+
+        private MyUnzipFailCallback(final Dialog dlg) {
+            this.dlg = dlg;
+        }
+
+        @Override
+        public void fail(final String reason) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (!isFinishing()) {
+                        dlg.dismiss();
+                        new AlertDialog.Builder(PassViewActivityBase.this).setMessage("Could not update pass :( " + reason + ")")
+                                                                          .setPositiveButton(android.R.string.ok, null)
+                                                                          .show();
+                    }
+                }
+            });
+
+        }
+    }
+
+    private class MyUnzipSuccessCallback implements UnzipPassController.SuccessCallback {
+
+        private final Dialog dlg;
+
+        private MyUnzipSuccessCallback(final Dialog dlg) {
+            this.dlg = dlg;
+        }
+
+        @Override
+        public void call(final String uuid) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (isFinishing()) {
+                        return;
+                    }
+                    dlg.dismiss();
+                    if (!optionalPass.getId().equals(uuid)) {
+                        passStore.deletePassWithId(uuid);
+                    }
+                    final Pass newPass = passStore.getPassbookForId(uuid);
+                    passStore.setCurrentPass(newPass);
+                    optionalPass = passStore.getCurrentPass();
+                    refresh();
+
+                    Snackbar.make(getWindow().getDecorView(), R.string.pass_updated, Snackbar.LENGTH_LONG).show();
+                }
+            });
+
+        }
+
     }
 
     private boolean fullBrightnessSet = false;
