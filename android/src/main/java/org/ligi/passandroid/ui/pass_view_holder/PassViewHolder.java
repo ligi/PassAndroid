@@ -93,9 +93,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
             icon.setImageDrawable(colorDrawable);
         }
 
-        if (pass.getType() != null) {
-            category.setImageByCategory(pass.getType());
-        }
+        category.setImageByCategory(pass.getType());
 
         category.setAccentColor(pass.getAccentColor());
 
