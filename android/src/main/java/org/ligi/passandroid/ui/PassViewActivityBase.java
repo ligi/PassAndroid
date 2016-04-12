@@ -29,6 +29,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
     public static final String EXTRA_KEY_UUID = "uuid";
 
     public Pass currentPass;
+    private boolean fullBrightnessSet = false;
 
     @Inject
     Settings settings;
@@ -131,7 +132,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
         return pass != null && pass.getWebServiceURL() != null && pass.getPassIdent() != null && pass.getSerial() != null;
     }
 
-    class UpdateAsync implements Runnable {
+    private class UpdateAsync implements Runnable {
 
         private ProgressDialog dlg;
 
@@ -228,8 +229,6 @@ public class PassViewActivityBase extends PassAndroidActivity {
         }
 
     }
-
-    private boolean fullBrightnessSet = false;
 
     private void setToFullBrightness() {
         final Window win = getWindow();
