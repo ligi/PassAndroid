@@ -14,7 +14,7 @@ public interface TestComponent extends AppComponent {
 
     void inject(ThePastLocationsStore thePastLocationsStore);
 
-    void inject(TheBarCodeEditFragment theBarCodeEditFragment);
+    void inject(TheBarCodeEditing theBarCodeEditing);
 
     void inject(ThePassListSwiping thePassListSwiping);
 

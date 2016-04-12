@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/messageInput"
+                    android:hint="@string/barcode_edit_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageButton
+                android:id="@+id/scanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_image_photo_camera_wrapped"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="scan"/>
+
+        <ImageButton
+                android:id="@+id/randomButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_places_casino_wrapped"
+                android:contentDescription="random"
+                android:layout_gravity="center_vertical"
+                />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/alternativeMessageInput"
+                android:hint="@string/barcode_edit_hint_alternative_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <HorizontalScrollView
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+            <RadioButton
+                    android:id="@+id/radio_qr"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcode_edit_qr"/>
+
+            <RadioButton
+                    android:id="@+id/radio_aztec"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcode_edit_aztec"/>
+
+            <RadioButton
+                    android:id="@+id/radio_pdf417"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcode_edit_pdf417"/>
+
+
+            <RadioButton
+                    android:id="@+id/radio_code128"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcode_edit_code128"/>
+
+            <RadioButton
+                    android:id="@+id/radio_code39"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcode_edit_code39"/>
+
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <include layout="@layout/barcode"/>
+</LinearLayout>

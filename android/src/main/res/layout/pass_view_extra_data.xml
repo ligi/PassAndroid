@@ -29,49 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
 
-    <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <TextView
-                android:id="@+id/zoomOut"
-                android:background="@drawable/clickable_bg"
-                android:drawableRight="@drawable/ic_action_zoom_out_wrapped"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:minWidth="@dimen/finger"
-                android:layout_height="match_parent"/>
-
-        <ImageView
-                android:id="@+id/barcode_img"
-                tools:src="@drawable/ic_launcher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/accent"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true"
-
-                android:contentDescription="@string/barcode"/>
-
-        <TextView
-                android:id="@+id/zoomIn"
-                android:drawableLeft="@drawable/ic_action_zoom_in_wrapped"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:minWidth="@dimen/finger"
-                android:background="@drawable/clickable_bg"
-                android:clickable="true"
-                android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/barcode_alt_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="10dp"/>
+    <include layout="@layout/barcode"/>
 
     <TextView
             android:id="@+id/moreTextView"
@@ -114,7 +72,7 @@
             android:scaleType="fitXY"
             tools:src="@drawable/ic_launcher"
             android:layout_width="wrap_content"
-            android:layout_height="148dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             tools:ignore="ContentDescription"

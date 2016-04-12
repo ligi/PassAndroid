@@ -1,38 +1,46 @@
 package org.ligi.passandroid.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.annotation.IdRes;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import java.util.UUID;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.ligi.axt.AXT;
+import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
-import org.ligi.passandroid.ui.edit_fragments.BarcodeEditFragment;
-import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
-import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
-import org.ligi.passandroid.ui.edit_fragments.FieldsEditFragment;
-import org.ligi.passandroid.ui.edit_fragments.ImageEditFragment;
-import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
-import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder;
-import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder;
-import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder;
+import org.ligi.passandroid.ui.edit.BarcodePickDialog;
+import org.ligi.passandroid.ui.edit.CategoryPickDialog;
+import org.ligi.passandroid.ui.edit.FieldsEditFragment;
+import org.ligi.passandroid.ui.edit.ImageEditHelper;
+import org.ligi.passandroid.ui.pass_view_holder.EditViewHolder;
 
 public class PassEditActivity extends AppCompatActivity {
+
+    private PassImpl currentPass;
+    private ImageEditHelper imageEditHelper;
 
     @Inject
     PassStore passStore;
@@ -43,13 +51,24 @@ public class PassEditActivity extends AppCompatActivity {
     @Inject
     EventBus bus;
 
-    @Bind(R.id.passEditPager)
-    ViewPager viewPager;
+    @Bind(R.id.title)
+    EditText titleEdit;
 
-    @Bind(R.id.sliding_tabs)
-    TabLayout titlePageIndicator;
+    @Bind(R.id.add_barcode_button)
+    Button addBarcodeButton;
 
-    private PassImpl pass;
+    private PassViewHelper passViewHelper;
+
+    @OnClick(R.id.icon)
+    void pickIcon() {
+        imageEditHelper.startPick(ImageEditHelper.Companion.getREQ_CODE_PICK_ICON());
+    }
+
+    @OnClick(R.id.categoryView)
+    void pickCategory() {
+        CategoryPickDialog.show(bus, currentPass, this);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +78,16 @@ public class PassEditActivity extends AppCompatActivity {
         setContentView(R.layout.edit);
         ButterKnife.bind(this);
 
+        titleEdit.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(final Editable s) {
+                super.afterTextChanged(s);
+                currentPass.setDescription(s.toString());
+            }
+        });
         final Pass currentPass = passStore.getCurrentPass();
         if (currentPass != null) {
-            pass = (PassImpl) currentPass;
+            this.currentPass = (PassImpl) currentPass;
         } else {
             finish();
         }
@@ -70,87 +96,89 @@ public class PassEditActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        setupViewPager();
-    }
+        imageEditHelper = new ImageEditHelper(this, passStore);
 
-    private void setupViewPager() {
-        viewPager.setAdapter(new CreateFragmentPager(getSupportFragmentManager()));
+        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        titlePageIndicator.setupWithViewPager(viewPager);
-    }
+        fragmentTransaction.add(R.id.container_for_primary_fields, FieldsEditFragment.create(false));
+        fragmentTransaction.add(R.id.container_for_secondary_fields, FieldsEditFragment.create(true));
 
-    private class CreateFragmentPager extends FragmentPagerAdapter {
-        public CreateFragmentPager(FragmentManager fm) {
-            super(fm);
-        }
+        fragmentTransaction.commit();
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Category";
-                case 1:
-                    return "MetaData";
-                case 2:
-                    return "Images";
-                case 3:
-                    return "Fields";
-                case 4:
-                    return "Color";
+        passViewHelper = new PassViewHelper(this);
 
-                case 5:
-                default:
-                    return "BarCode";
+        addBarcodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                BarcodePickDialog.show(PassEditActivity.this,
+                                       bus,
+                                       PassEditActivity.this.currentPass,
+                                       new BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().toUpperCase()));
             }
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            switch (i) {
-                case 0:
-                    return new CategoryPickFragment();
-                case 1:
-                    return new MetaDataFragment();
-                case 2:
-                    return new ImageEditFragment();
-                case 3:
-                    return new FieldsEditFragment();
-                case 4:
-                    return new ColorPickFragment();
-
-                case 5:
-                default:
-                    return new BarcodeEditFragment();
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 6;
-        }
+        });
     }
+
 
     @Subscribe
     public void onPassRefresh(PassRefreshEvent event) {
-        refresh(event.pass);
+        refresh(currentPass);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        imageEditHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     private void refresh(Pass pass) {
-        final PassViewHolder passViewHolder;
-        if (settings.isCondensedModeEnabled()) {
-            passViewHolder = new CondensedPassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
-        } else {
-            passViewHolder = new VerbosePassViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
-        }
+        final EditViewHolder passViewHolder = new EditViewHolder(getWindow().getDecorView().findViewById(R.id.pass_card));
 
-        passViewHolder.apply(pass,passStore, this);
+        passViewHolder.apply(pass, passStore, this);
+
+        fooba(R.id.logo_img, R.id.add_logo, ImageEditHelper.Companion.getREQ_CODE_PICK_LOGO());
+        fooba(R.id.strip_img, R.id.add_strip, ImageEditHelper.Companion.getREQ_CODE_PICK_STRIP());
+        fooba(R.id.footer_img, R.id.add_footer, ImageEditHelper.Companion.getREQ_CODE_PICK_FOOTER());
+
+        addBarcodeButton.setVisibility(pass.getBarCode() == null ? View.VISIBLE : View.GONE);
+        final BarcodeUIController barcodeUIController = new BarcodeUIController(getWindow().getDecorView(), pass.getBarCode(), this, passViewHelper);
+        barcodeUIController.getBarcode_img().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                BarcodePickDialog.show(PassEditActivity.this, bus, currentPass, currentPass.getBarCode());
+            }
+        });
     }
+
+    @Pass.PassBitmap
+    private void fooba(@IdRes final int logo_img, @IdRes final int add_logo, final int requestCode) {
+        final String imageString = ImageEditHelper.Companion.getImageStringByRequestCode(requestCode);
+        assert (imageString != null);
+        final Bitmap bitmap = currentPass.getBitmap(passStore, imageString);
+
+        final View addButton = findViewById(add_logo);
+        assert (addButton != null);
+        addButton.setVisibility(bitmap == null ? View.VISIBLE : View.GONE);
+
+        final View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                imageEditHelper.startPick(requestCode);
+            }
+        };
+
+        final ImageView logoImage = (ImageView) findViewById(logo_img);
+        assert (logoImage != null);
+        passViewHelper.setBitmapSafe(logoImage, bitmap);
+        logoImage.setOnClickListener(listener);
+        addButton.setOnClickListener(listener);
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         bus.register(this);
-        refresh(pass);
+        refresh(currentPass);
     }
 
     @Override
@@ -173,14 +201,15 @@ public class PassEditActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_save:
-                passStore.setCurrentPass(pass);
+                passStore.setCurrentPass(currentPass);
 
-                passStore.save(pass);
+                passStore.save(currentPass);
                 AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

@@ -2,13 +2,12 @@ package org.ligi.passandroid.model.pass
 
 import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
-import com.google.zxing.BarcodeFormat
 import org.ligi.passandroid.App
 import org.ligi.passandroid.helper.BarcodeHelper
 import org.ligi.tracedroid.logging.Log
 import java.util.*
 
-class BarCode(val format: PassBarCodeFormat?, val message: String?) {
+class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.randomUUID().toString().toUpperCase()) {
 
     var alternativeText: String? = null
 

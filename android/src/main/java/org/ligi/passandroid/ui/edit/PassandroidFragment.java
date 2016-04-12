@@ -1,4 +1,4 @@
-package org.ligi.passandroid.ui.edit_fragments;
+package org.ligi.passandroid.ui.edit;
 
 import android.support.v4.app.Fragment;
 import javax.inject.Inject;

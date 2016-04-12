@@ -23,6 +23,9 @@ public class CategoryHelper {
             case GENERIC:
                 return R.string.category_generic;
 
+            case VOUCHER:
+                return R.string.categories_voucher;
+
             default:
                 return R.string.category_none;
         }
@@ -42,6 +45,9 @@ public class CategoryHelper {
 
             case LOYALTY:
                 return 0xFFf29b21;
+
+            case VOUCHER:
+                return 0xFF2A2727;
 
             case GENERIC:
                 return 0xFFea3c48;
@@ -65,6 +71,9 @@ public class CategoryHelper {
 
             case LOYALTY:
                 return R.drawable.cat_sc;
+
+            case VOUCHER:
+                return R.drawable.cat_ps;
 
             case GENERIC:
             default:

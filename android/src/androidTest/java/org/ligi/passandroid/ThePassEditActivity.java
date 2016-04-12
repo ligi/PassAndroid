@@ -16,8 +16,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.ligi.passandroid.steps.PassEditSteps.goToColor;
-import static org.ligi.passandroid.steps.PassEditSteps.goToMetaData;
 
 @TargetApi(14)
 public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
@@ -42,6 +40,9 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testSetToEventWorks() {
+
+        onView(withId(R.id.categoryView)).perform(click());
+
         onView(withText(R.string.category_event)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.EVENT);
 
@@ -50,6 +51,8 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testSetToCouponWorks() {
+        onView(withId(R.id.categoryView)).perform(click());
+
         onView(withText(R.string.category_coupon)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.COUPON);
 
@@ -58,9 +61,8 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testSetDescriptionWorks() {
-        goToMetaData();
 
-        onView(withId(R.id.descriptionEdit)).perform(clearText(),typeText("test description"));
+        onView(withId(R.id.title)).perform(clearText(),typeText("test description"));
         assertThat(passStore.getCurrentPass().getDescription()).isEqualTo("test description");
 
         Spoon.screenshot(getActivity(), "edit_set_description");
@@ -69,7 +71,9 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testColorWheelIsThere() {
-        goToColor();
+
+        onView(withId(R.id.categoryView)).perform(click());
+        onView(withText(R.string.button_text_change_color)).perform(click());
 
         onView(withId(R.id.colorPicker)).check(matches(isDisplayed()));
 

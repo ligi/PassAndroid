@@ -1,22 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:android.support.v7.cardview="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
 
-    <include layout="@layout/pass_list_item" />
+    <android.support.v7.widget.CardView
+            android:id="@+id/pass_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android.support.v7.cardview:cardMaxElevation="@dimen/card_longclick_elevation_half"
+            android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable" />
+        <ScrollView
+                android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/passEditPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:id="@+id/pass_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="@dimen/pass_icon_size"
+                            android:layout_height="@dimen/pass_icon_size"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_launcher"/>
+
+                    <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:paddingRight="4dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="?android:textColorSecondary"
+                                tools:text="12.10.2013 17:00"/>
+
+                        <EditText
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="4dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                tools:text="Title"/>
+
+                    </LinearLayout>
+
+                    <org.ligi.passandroid.ui.views.CategoryIndicatorView
+                            android:id="@+id/categoryView"
+                            android:layout_width="48dp"
+                            android:layout_height="74dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"/>
+                </LinearLayout>
+
+
+                <View
+                        android:id="@+id/actions_separator"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dip"
+                        android:layout_below="@id/pass_top"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#dfdfdf"
+                        android:padding="7dp"/>
+
+
+                <TextView
+                        android:id="@+id/navigateTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/actions_separator"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/clickable_bg"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/ic_maps_place_wrapped"
+                        android:padding="8dp"
+                        android:text="@string/edit_location"/>
+
+
+                <TextView
+                        android:id="@+id/addCalendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/actions_separator"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/clickable_bg"
+                        android:clickable="true"
+                        android:drawableRight="@drawable/ic_action_perm_contact_calendar_wrapped"
+                        android:padding="8dp"
+                        android:text="@string/edit_time"/>
+
+                <LinearLayout
+                        android:id="@+id/passExtrasContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/addCalendar"
+                        android:orientation="vertical">
+
+                    <ImageView
+                            android:id="@+id/strip_img"
+                            android:scaleType="fitXY"
+                            tools:src="@drawable/ic_launcher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            tools:ignore="ContentDescription"
+                            android:padding="8dp"/>
+
+
+                    <Button
+                            android:id="@+id/add_strip"
+                            android:text="@string/add_header_image"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <FrameLayout
+                            android:id="@+id/container_for_primary_fields"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                    <include layout="@layout/barcode"/>
+
+                    <Button
+                            android:id="@+id/add_barcode_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/add_barcode"
+                            />
+
+                    <FrameLayout
+                            android:id="@+id/container_for_secondary_fields"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+
+                    <ImageView
+                            android:id="@+id/logo_img"
+                            android:scaleType="fitXY"
+                            tools:src="@drawable/ic_launcher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            tools:ignore="ContentDescription"
+                            android:padding="8dp"/>
+
+                    <Button
+                            android:id="@+id/add_logo"
+                            android:text="@string/add_logo_image"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <ImageView
+                            android:id="@+id/footer_img"
+                            android:scaleType="fitXY"
+                            tools:src="@drawable/ic_launcher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            tools:ignore="ContentDescription"
+                            android:padding="8dp"/>
+
+
+                    <Button
+                            android:id="@+id/add_footer"
+                            android:text="@string/add_footer_image"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

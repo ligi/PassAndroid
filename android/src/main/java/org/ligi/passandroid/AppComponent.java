@@ -1,5 +1,7 @@
 package org.ligi.passandroid;
 
+import dagger.Component;
+import javax.inject.Singleton;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.PassAdapter;
@@ -12,15 +14,8 @@ import org.ligi.passandroid.ui.PassMenuOptions;
 import org.ligi.passandroid.ui.PassNavigationView;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 import org.ligi.passandroid.ui.SearchPassesIntentService;
-import org.ligi.passandroid.ui.edit_fragments.CategoryPickFragment;
-import org.ligi.passandroid.ui.edit_fragments.ColorPickFragment;
-import org.ligi.passandroid.ui.edit_fragments.MetaDataFragment;
-import org.ligi.passandroid.ui.edit_fragments.PassandroidFragment;
+import org.ligi.passandroid.ui.edit.PassandroidFragment;
 import org.ligi.passandroid.ui.quirk_fix.USAirwaysLoadActivity;
-
-import javax.inject.Singleton;
-
-import dagger.Component;
 
 @Singleton
 @Component(modules = {AppModule.class , TrackerModule.class})
@@ -32,13 +27,7 @@ public interface AppComponent {
 
     void inject(PassEditActivity passEditActivity);
 
-    void inject(ColorPickFragment colorPickFragment);
-
-    void inject(MetaDataFragment metaDataFragment);
-
     void inject(PassandroidFragment passandroidFragment);
-
-    void inject(CategoryPickFragment categoryPickFragment);
 
     void inject(PassAdapter passAdapter);
 

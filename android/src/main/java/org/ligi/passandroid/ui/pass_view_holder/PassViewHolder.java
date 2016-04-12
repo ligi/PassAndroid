@@ -65,6 +65,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
 
     public Pass pass;
     protected Activity activity;
+    protected PassStore passStore;
 
 
     public PassViewHolder(View view) {
@@ -76,11 +77,12 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     public void apply(final Pass pass, final PassStore passStore, final Activity activity) {
         this.pass = pass;
         this.activity = activity;
+        this.passStore = passStore;
 
         final boolean noButtons = getDateOrExtraText() == null && !(pass.getLocations().size() > 0);
 
         actionsSeparator.setVisibility(getVisibilityForGlobalAndLocal(noButtons, true));
-        navigateTo.setVisibility(getVisibilityForGlobalAndLocal(noButtons, (pass.getLocations().size() > 0)));
+        navigateTo.setVisibility(getVisibilityForGlobalAndLocal(noButtons, pass.getLocations().size() > 0));
         addCalendar.setVisibility(getVisibilityForGlobalAndLocal(noButtons, getDateOrExtraText() != null));
 
         final Bitmap iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON);
@@ -118,10 +120,10 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private String setDateTextFromDateAndPrefix(String prefix, @NonNull final ZonedDateTime relevantDate) {
         final CharSequence relativeDateTimeString = DateUtils.getRelativeDateTimeString(activity,
-                relevantDate.toEpochSecond() * 1000,
-                DateUtils.MINUTE_IN_MILLIS,
-                DateUtils.WEEK_IN_MILLIS,
-                0);
+                                                                                        relevantDate.toEpochSecond() * 1000,
+                                                                                        DateUtils.MINUTE_IN_MILLIS,
+                                                                                        DateUtils.WEEK_IN_MILLIS,
+                                                                                        0);
 
         return prefix + relativeDateTimeString;
     }
@@ -130,7 +132,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     protected String getTimeInfoString() {
         if (pass.getCalendarTimespan() != null && pass.getCalendarTimespan().getFrom() != null) {
             return setDateTextFromDateAndPrefix("", pass.getCalendarTimespan().getFrom());
-        } else if (pass.getValidTimespans().size() > 0 && pass.getValidTimespans().get(0).getTo()!=null) {
+        } else if (pass.getValidTimespans() != null && pass.getValidTimespans().size() > 0 && pass.getValidTimespans().get(0).getTo() != null) {
             final ZonedDateTime to = pass.getValidTimespans().get(0).getTo();
             return setDateTextFromDateAndPrefix(to.isAfter(ZonedDateTime.now()) ? "expires " : " expired ", to);
         } else {
@@ -143,14 +145,14 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
         if (pass.getCalendarTimespan() != null && pass.getCalendarTimespan().getFrom() != null) {
             return pass.getCalendarTimespan().getFrom();
         }
-        if (pass.getValidTimespans().size() > 0) {
+        if (pass.getValidTimespans() != null && pass.getValidTimespans().size() > 0) {
             return pass.getValidTimespans().get(0).getTo();
         }
         return null;
     }
 
     @Visibility
-    private int getVisibilityForGlobalAndLocal(final boolean global, final boolean local) {
+    protected int getVisibilityForGlobalAndLocal(final boolean global, final boolean local) {
         if (global) {
             return GONE;
         }

@@ -12,14 +12,12 @@ import org.ligi.passandroid.ui.PassEditActivity;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.ligi.passandroid.steps.PassEditSteps.goToFields;
 
 @TargetApi(14)
 public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> {
@@ -55,39 +53,25 @@ public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> 
     public void testFieldDetailsArePreFilled() {
 
         getActivity();
-        goToFields();
 
         Spoon.screenshot(getActivity(), "one_field");
 
+        onView(withId(R.id.label_field_edit)).perform(scrollTo());
         onView(withId(R.id.label_field_edit)).check(matches(isDisplayed()));
         onView(withId(R.id.label_field_edit)).check(matches(withText("labelfieldcontent")));
 
         onView(withId(R.id.value_field_edit)).check(matches(isDisplayed()));
         onView(withId(R.id.value_field_edit)).check(matches(withText("valuefieldcontent")));
 
-        onView(withId(R.id.hide_switch)).check(matches(isDisplayed()));
-        onView(withId(R.id.hide_switch)).check(matches(isChecked()));
     }
 
-    @MediumTest
-    public void testThatUnCheckedHideWorks() {
-
-        field.setHide(false);
-        getActivity();
-        goToFields();
-
-        Spoon.screenshot(getActivity(), "no_hide");
-
-        onView(withId(R.id.hide_switch)).check(matches(isDisplayed()));
-        onView(withId(R.id.hide_switch)).check(matches(isNotChecked()));
-    }
 
     @MediumTest
     public void testThatChangingLabelWorks() {
 
         getActivity();
-        goToFields();
 
+        onView(withId(R.id.label_field_edit)).perform(scrollTo());
         onView(withId(R.id.label_field_edit)).perform(click(),replaceText("newlabel"));
         assertThat(field.getLabel()).isEqualTo("newlabel");
     }
@@ -96,8 +80,8 @@ public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> 
     public void testThatChangingValueWorks() {
 
         getActivity();
-        goToFields();
 
+        onView(withId(R.id.label_field_edit)).perform(scrollTo());
         onView(withId(R.id.value_field_edit)).perform(click(),replaceText("newvalue"));
         assertThat(field.getValue()).isEqualTo("newvalue");
     }

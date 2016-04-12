@@ -14,13 +14,13 @@ interface Pass {
 
     val description: String?
 
-    val type: PassType
+    var type: PassType
 
     val fields: List<PassField>
 
     val locations: List<PassLocation>
 
-    val accentColor: Int
+    var accentColor: Int
 
     val id: String
 
@@ -28,7 +28,7 @@ interface Pass {
 
     fun getSource(passStore: PassStore): String?
 
-    val barCode: BarCode?
+    var barCode: BarCode?
 
     val webServiceURL: String?
 
@@ -40,8 +40,8 @@ interface Pass {
 
     val app: String?
 
-    val validTimespans: List<PassImpl.TimeSpan>
-    val calendarTimespan: PassImpl.TimeSpan?
+    val validTimespans: List<PassImpl.TimeSpan>?
+    var calendarTimespan: PassImpl.TimeSpan?
 
     fun getBitmap(passStore: PassStore, passBitmap: String): Bitmap?
 

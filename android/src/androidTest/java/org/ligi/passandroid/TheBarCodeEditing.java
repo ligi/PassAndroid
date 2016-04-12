@@ -8,6 +8,7 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.PassEditActivity;
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -18,17 +19,16 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.ligi.passandroid.steps.PassEditSteps.goToBarCode;
 
 @TargetApi(14)
-public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
+public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
 
     @Inject
     PassStore passStore;
 
     PassImpl currentPass;
 
-    public TheBarCodeEditFragment() {
+    public TheBarCodeEditing() {
         super(PassEditActivity.class);
     }
 
@@ -48,11 +48,11 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         currentPass.setBarCode(null);
         getActivity();
-        goToBarCode();
 
         Spoon.screenshot(getActivity(), "no_barcode");
 
-        onView(withId(R.id.barcodeAddButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.add_barcode_button)).perform(scrollTo());
+        onView(withId(R.id.add_barcode_button)).check(matches(isDisplayed()));
     }
 
 
@@ -61,10 +61,12 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
 
         currentPass.setBarCode(null);
         getActivity();
-        goToBarCode();
 
+        onView(withId(R.id.add_barcode_button)).perform(scrollTo(),click());
 
-        onView(withId(R.id.barcodeAddButton)).perform(click());
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
     }
@@ -73,9 +75,14 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testCanSetToQR() {
         getActivity();
-        goToBarCode();
 
-        onView(withText("QR")).perform(click());
+        onView(withId(R.id.barcode_img)).perform(click());
+
+        onView(withText(R.string.barcode_edit_qr)).perform(click());
+
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
         Spoon.screenshot(getActivity(), "edit_set_qr");
@@ -85,9 +92,14 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testCanSetToPDF417() {
         getActivity();
-        goToBarCode();
 
-        onView(withText("PDF417")).perform(click());
+        onView(withId(R.id.barcode_img)).perform(click());
+
+        onView(withText(R.string.barcode_edit_pdf417)).perform(click());
+
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.PDF_417);
         Spoon.screenshot(getActivity(), "edit_set_pdf417");
@@ -97,9 +109,10 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testCanSetToAZTEC() {
         getActivity();
-        goToBarCode();
 
-        onView(withText("AZTEC")).perform(click());
+        onView(withId(R.id.barcode_img)).perform(click());
+
+        onView(withText(R.string.barcode_edit_aztec)).perform(click());
 
         assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.AZTEC);
         Spoon.screenshot(getActivity(), "edit_set_aztec");
@@ -110,9 +123,15 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testCanSetMessage() {
         getActivity();
-        goToBarCode();
+
+        onView(withId(R.id.barcode_img)).perform(click());
+
         onView(withId(R.id.messageInput)).perform(clearText());
         onView(withId(R.id.messageInput)).perform(typeText("msg foo txt ;-)"));
+
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(passStore.getCurrentPass().getBarCode().getMessage()).isEqualTo("msg foo txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_msg");
@@ -122,10 +141,15 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testCanSetAltMessage() {
         getActivity();
-        goToBarCode();
 
-        onView(withId(R.id.alternativeMessageInput)).perform(scrollTo());
+        onView(withId(R.id.barcode_img)).perform(click());
+
+        onView(withId(R.id.alternativeMessageInput)).perform(clearText());
         onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"));
+
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(passStore.getCurrentPass().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
@@ -135,10 +159,15 @@ public class TheBarCodeEditFragment extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testThatRandomChangesMessage() {
         getActivity();
-        goToBarCode();
+
+        onView(withId(R.id.barcode_img)).perform(click());
 
         final String oldMessage = passStore.getCurrentPass().getBarCode().getMessage();
         onView(withId(R.id.randomButton)).perform(click());
+
+        closeSoftKeyboard();
+
+        onView(withText(android.R.string.ok)).perform(click());
 
         assertThat(oldMessage).isNotEqualTo(passStore.getCurrentPass().getBarCode().getMessage());
     }

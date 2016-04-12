@@ -5,13 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.tracedroid.logging.Log;
 
@@ -63,7 +61,7 @@ public class BarcodeHelper {
             }
 
             return barcode_image;
-        } catch (com.google.zxing.WriterException e) {
+        } catch (com.google.zxing.WriterException | IllegalArgumentException e) {
             Log.w("could not write image " + e);
             // TODO check if we should better return some rescue Image here
             return null;

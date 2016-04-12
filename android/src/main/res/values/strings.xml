@@ -132,6 +132,20 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="barcode_edit_pdf417">PDF417</string>
     <string name="barcode_edit_qr">QR</string>
     <string name="barcode_edit_button_add_barcode">Add Barcode</string>
+    <string name="categories_voucher">voucher</string>
+    <string name="edit_time">edit time</string>
+    <string name="edit_location">edit location</string>
+    <string name="add_front_field">Add front field</string>
+    <string name="add_back_fields">Add back field</string>
+    <string name="change_color_dialog_title">Select color</string>
+    <string name="select_category_dialog_title">Select category</string>
+    <string name="button_text_change_color">change color</string>
+    <string name="barcode_edit_code128">code 128</string>
+    <string name="barcode_edit_code39">code 39</string>
+    <string name="add_footer_image">add footer image</string>
+    <string name="add_logo_image">add logo image</string>
+    <string name="add_header_image">add header image</string>
+    <string name="add_barcode">add Barcode</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>

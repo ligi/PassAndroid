@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.view.View;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.Pass;
-import static android.view.View.GONE;
 
 public class VerbosePassViewHolder extends PassViewHolder {
-
 
     public VerbosePassViewHolder(View view) {
         super(view);
@@ -16,15 +14,19 @@ public class VerbosePassViewHolder extends PassViewHolder {
     public void apply(final Pass pass, final PassStore passStore, final Activity activity) {
         super.apply(pass, passStore, activity);
 
+        String stringToSetForDateOrExtraText = null;
+
         if (getTimeInfoString() != null) {
-            dateOrExtraText.setText(getTimeInfoString());
+            stringToSetForDateOrExtraText = getTimeInfoString();
         } else if (getExtraString() != null) {
-            dateOrExtraText.setText(getExtraString());
-        } else {
-            dateOrExtraText.setVisibility(GONE);
+            stringToSetForDateOrExtraText = getExtraString();
         }
 
+        if (stringToSetForDateOrExtraText != null) {
+            dateOrExtraText.setText(stringToSetForDateOrExtraText);
+            dateOrExtraText.setVisibility(View.VISIBLE);
+        } else {
+            dateOrExtraText.setVisibility(View.GONE);
+        }
     }
-
-
 }

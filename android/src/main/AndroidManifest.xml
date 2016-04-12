@@ -44,8 +44,7 @@
             android:name=".ui.HelpActivity"
             android:theme="@style/AppBaseThemeNoActionbar" />
         <activity
-            android:name=".ui.PassEditActivity"
-            android:screenOrientation="sensorPortrait" />
+            android:name=".ui.PassEditActivity"/>
         <activity
             android:name=".ui.PassImportActivity"
             tools:ignore="ExportedActivity">

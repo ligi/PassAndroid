@@ -1,4 +1,4 @@
-package org.ligi.passandroid.ui.edit_fragments;
+package org.ligi.passandroid.ui.edit;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
