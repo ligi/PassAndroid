@@ -237,9 +237,9 @@ public class PassListActivity extends PassAndroidActivity {
                 return true;
 
             case R.id.menu_emptytrash:
-                new AlertDialog.Builder(this).setMessage("Really empty trash? You cannot restore ")
+                new AlertDialog.Builder(this).setMessage(getString(R.string.empty_trash_dialog_message))
                                              .setIcon(R.drawable.ic_alert_warning)
-                                             .setTitle("warning")
+                                             .setTitle(getString(R.string.empty_trash_dialog_title))
                                              .setPositiveButton(R.string.emtytrash_label, new DialogInterface.OnClickListener() {
                                                  @Override
                                                  public void onClick(final DialogInterface dialog, final int which) {
