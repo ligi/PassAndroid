@@ -136,6 +136,9 @@
 -keep class org.ligi.passandroid.model.** { *; }
 -keepclassmembers class org.ligi.passandroid.model.** { *; }
 
+# the below line needs some investigation - was only needed after switching event classes to kotlin
+-keep class org.ligi.passandroid.events.** { *; }
+
 # Kotlin specific
 -dontwarn kotlin.**
 
