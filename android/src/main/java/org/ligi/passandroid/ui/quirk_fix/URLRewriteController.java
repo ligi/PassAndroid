@@ -1,10 +1,8 @@
 package org.ligi.passandroid.ui.quirk_fix;
 
 import android.net.Uri;
-
-import org.ligi.passandroid.Tracker;
-
 import java.net.URLEncoder;
+import org.ligi.passandroid.Tracker;
 
 public class URLRewriteController {
 
@@ -22,6 +20,7 @@ public class URLRewriteController {
 
         switch (uri.getHost()) {
             case "m.aircanada.ca":
+            case "services.aircanada.com":
                 return getAirCanada(uri);
             case "www.cathaypacific.com":
                 return getCathay(uri);

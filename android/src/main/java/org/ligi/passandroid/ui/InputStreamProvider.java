@@ -50,6 +50,7 @@ public class InputStreamProvider {
             // to android phones - but only do it then - we are proud to be Android ;-)
             final Set<Map.Entry<String, String>> iPhoneFakeMap = new HashMap<String, String>() {{
                 put("air_canada", "//m.aircanada.ca/ebp/");
+                put("air_canada2", "//services.aircanada.com/ebp/");
                 put("icelandair","//checkin.si.amadeus.net");
                 put("mbk","//mbk.thy.com/");
                 put("heathrow","//passbook.heathrow.com/");
