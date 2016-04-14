@@ -96,7 +96,7 @@ public class PassListActivity extends PassAndroidActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onScanProgress(final ScanProgressEvent event) {
         if (pd != null && pd.isShowing()) {
-            pd.setMessage(event.message);
+            pd.setMessage(event.getMessage());
         }
     }
 
