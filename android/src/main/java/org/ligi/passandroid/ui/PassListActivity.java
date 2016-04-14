@@ -77,9 +77,8 @@ public class PassListActivity extends PassAndroidActivity {
 
     @OnClick(R.id.fab_action_create_pass)
     void onFABClick() {
-        final Pass pass = PassTemplates.createEmptyPass();
-        passStore.setCurrentPass(pass);
-        passStore.save(pass);
+        final Pass pass = PassTemplates.createAndAddEmptyPass(passStore, getResources());
+
         floatingActionsMenu.collapse();
         AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity.class);
 
