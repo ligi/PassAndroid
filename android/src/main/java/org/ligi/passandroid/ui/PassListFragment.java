@@ -78,27 +78,13 @@ public class PassListFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 final Pass pass = passStoreProjection.getPassList().get(viewHolder.getAdapterPosition());
-
-                final String nextTopic = calculateNextTopic(swipeDir, pass);
+                final String nextTopic = passStore.getClassifier().getTopicWithOffset(pass, (swipeDir == LEFT) ? -1 : 1);
 
                 if (nextTopic != null) {
                     MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
                 } else {
                     MoveToNewTopicUI.show(getActivity(), passStore, pass);
                 }
-            }
-
-            @Nullable
-            private String calculateNextTopic(final int swipeDir, final Pass pass) {
-
-                switch (swipeDir) {
-                    case LEFT:
-                        return passStore.getClassifier().getTopicWithOffset(pass, -1);
-                    case RIGHT:
-                        return passStore.getClassifier().getTopicWithOffset(pass, 1);
-                }
-
-                return null;
             }
         };
 

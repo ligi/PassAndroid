@@ -7,7 +7,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import java.util.UUID;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.ligi.axt.AXT;
 import org.ligi.axt.simplifications.SimpleTextWatcher;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -180,13 +178,9 @@ public class PassEditActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         bus.unregister(this);
+        passStore.save(currentPass);
+        passStore.notifyChange();
         super.onPause();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.create, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -196,12 +190,7 @@ public class PassEditActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.menu_save:
-                passStore.setCurrentPass(currentPass);
 
-                passStore.save(currentPass);
-                AXT.at(this).startCommonIntent().activityFromClass(PassViewActivity.class);
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

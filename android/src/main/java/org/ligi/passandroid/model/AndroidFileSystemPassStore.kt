@@ -46,6 +46,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             buffer.close()
         }
 
+        passMap[pass.id]=pass
     }
 
     private fun readPass(id: String): Pass? {
