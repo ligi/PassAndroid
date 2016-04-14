@@ -26,7 +26,6 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.events.PassRefreshEvent;
 import org.ligi.passandroid.model.PassStore;
-import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
@@ -135,9 +134,9 @@ public class PassEditActivity extends AppCompatActivity {
 
         passViewHolder.apply(pass, passStore, this);
 
-        fooba(R.id.logo_img, R.id.add_logo, ImageEditHelper.Companion.getREQ_CODE_PICK_LOGO());
-        fooba(R.id.strip_img, R.id.add_strip, ImageEditHelper.Companion.getREQ_CODE_PICK_STRIP());
-        fooba(R.id.footer_img, R.id.add_footer, ImageEditHelper.Companion.getREQ_CODE_PICK_FOOTER());
+        prepareImageUI(R.id.logo_img, R.id.add_logo, ImageEditHelper.Companion.getREQ_CODE_PICK_LOGO());
+        prepareImageUI(R.id.strip_img, R.id.add_strip, ImageEditHelper.Companion.getREQ_CODE_PICK_STRIP());
+        prepareImageUI(R.id.footer_img, R.id.add_footer, ImageEditHelper.Companion.getREQ_CODE_PICK_FOOTER());
 
         addBarcodeButton.setVisibility(pass.getBarCode() == null ? View.VISIBLE : View.GONE);
         final BarcodeUIController barcodeUIController = new BarcodeUIController(getWindow().getDecorView(), pass.getBarCode(), this, passViewHelper);
@@ -150,7 +149,7 @@ public class PassEditActivity extends AppCompatActivity {
     }
 
     @Pass.PassBitmap
-    private void fooba(@IdRes final int logo_img, @IdRes final int add_logo, final int requestCode) {
+    private void prepareImageUI(@IdRes final int logo_img, @IdRes final int add_logo, final int requestCode) {
         final String imageString = ImageEditHelper.Companion.getImageStringByRequestCode(requestCode);
         assert (imageString != null);
         final Bitmap bitmap = currentPass.getBitmap(passStore, imageString);
