@@ -100,7 +100,7 @@ object UnzipPassController {
                 spec.passStore.classifier.moveToTopic(imagePass,"new")
                 spec.onSuccessCallback.call(imagePass.id)
             } else {
-                spec.failCallback.fail("Pass is not espass or pkpass format :-("!!)
+                spec.failCallback.fail("Pass is not espass or pkpass format :-(")
             }
             return
         }
