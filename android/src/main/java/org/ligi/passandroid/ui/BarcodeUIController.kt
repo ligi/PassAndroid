@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import org.ligi.axt.AXT
 import org.ligi.passandroid.R
-import org.ligi.passandroid.helper.BarcodeHelper
 import org.ligi.passandroid.model.pass.BarCode
 
 internal class BarcodeUIController(rootView: View, private val barCode: BarCode?, activity: Activity, private val passViewHelper: PassViewHelper) {
@@ -70,7 +69,7 @@ internal class BarcodeUIController(rootView: View, private val barCode: BarCode?
         }
 
         currentBarcodeWidth = width
-        val quadratic = BarcodeHelper.isBarcodeFormatQuadratic(barCode!!.format)
+        val quadratic = barCode!!.format!!.isQuadratic
         barcode_img.layoutParams = LinearLayout.LayoutParams(width, if (quadratic) width else ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 

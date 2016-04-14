@@ -146,6 +146,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="add_logo_image">add logo image</string>
     <string name="add_header_image">add header image</string>
     <string name="add_barcode">add Barcode</string>
+    <string name="edit_barcode_dialog_title">Edit BarCode</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>

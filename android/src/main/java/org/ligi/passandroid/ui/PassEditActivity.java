@@ -45,9 +45,6 @@ public class PassEditActivity extends AppCompatActivity {
     PassStore passStore;
 
     @Inject
-    Settings settings;
-
-    @Inject
     EventBus bus;
 
     @Bind(R.id.title)

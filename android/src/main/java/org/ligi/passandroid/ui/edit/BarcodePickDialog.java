@@ -19,7 +19,7 @@ public class BarcodePickDialog {
         final BarcodeEditController barcodeEditController = new BarcodeEditController(view, context, barCode);
 
         new AlertDialog.Builder(context).setView(view)
-                                        .setTitle("Edit BarCode")
+                                        .setTitle(R.string.edit_barcode_dialog_title)
                                         .setNegativeButton(android.R.string.cancel, null)
                                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override

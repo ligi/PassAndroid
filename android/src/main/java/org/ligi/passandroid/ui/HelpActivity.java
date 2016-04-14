@@ -9,12 +9,10 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import org.ligi.passandroid.R;
-import org.xml.sax.XMLReader;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import org.ligi.passandroid.R;
+import org.xml.sax.XMLReader;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -36,7 +34,7 @@ public class HelpActivity extends AppCompatActivity {
         helpText.setMovementMethod(new LinkMovementMethod());
 
         setSupportActionBar(toolbar);
-        if (getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -46,14 +44,11 @@ public class HelpActivity extends AppCompatActivity {
         @Override
         public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
             if (tag.equalsIgnoreCase("li")) {
-                if (opening) {
-                    output.append("\u2022 ");
-                } else {
-                    output.append("\n");
-                }
+                output.append(opening ? "\u2022 " : "\n");
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

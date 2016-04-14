@@ -32,7 +32,6 @@ public class PassListFragment extends Fragment {
     private static final String BUNDLE_KEY_TOPIC = "topic";
     private PassStoreProjection passStoreProjection;
     private PassAdapter adapter;
-    private RecyclerView recyclerView;
 
     public static PassListFragment newInstance(final String topic) {
         PassListFragment myFragment = new PassListFragment();
@@ -57,7 +56,7 @@ public class PassListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.pass_recycler, container, false);
-        recyclerView = (RecyclerView) inflate.findViewById(R.id.pass_recyclerview);
+        final RecyclerView recyclerView = (RecyclerView) inflate.findViewById(R.id.pass_recyclerview);
 
         App.component().inject(this);
 

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import java.io.File;
 import javax.inject.Inject;
-import org.greenrobot.eventbus.EventBus;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
@@ -29,9 +28,6 @@ public class PassMenuOptions {
 
     @Inject
     Settings settings;
-
-    @Inject
-    EventBus bus;
 
     public final Activity activity;
     public final Pass pass;
@@ -98,7 +94,6 @@ public class PassMenuOptions {
         }
         return false;
     }
-
 
 
 }
