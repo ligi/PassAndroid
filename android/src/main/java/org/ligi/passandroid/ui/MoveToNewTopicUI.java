@@ -65,7 +65,7 @@ class MoveToNewTopicUI {
             @Override
             public void onClick(View v) {
                 if (newTopicEditText.getText().toString().isEmpty()) {
-                    newTopicEditText.setError("cannot be empty");
+                    newTopicEditText.setError(context.getString(R.string.cannot_be_empty));
                     newTopicEditText.requestFocus();
                 } else {
                     move(newTopicEditText.getText().toString());
