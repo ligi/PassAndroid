@@ -15,13 +15,13 @@
                 android:id="@+id/new_topic_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title for new topic"/>
+                android:hint="@string/new_topic_input_hint"/>
     </android.support.design.widget.TextInputLayout>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suggestions:"/>
+            android:text="@string/new_topic_suggestions"/>
 
     <LinearLayout
             android:layout_width="match_parent"

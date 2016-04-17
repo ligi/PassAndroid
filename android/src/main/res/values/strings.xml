@@ -149,6 +149,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="edit_barcode_dialog_title">Edit BarCode</string>
     <string name="empty_trash_dialog_message">"Really empty trash? You cannot restore "</string>
     <string name="empty_trash_dialog_title">warning</string>
+    <string name="new_topic_input_hint">Title for new topic</string>
+    <string name="new_topic_suggestions">Suggestions:</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>
