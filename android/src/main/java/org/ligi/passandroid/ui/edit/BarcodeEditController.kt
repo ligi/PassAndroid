@@ -1,7 +1,6 @@
 package org.ligi.passandroid.ui.edit
 
 import android.content.Intent
-import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -9,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import org.ligi.axt.simplifications.SimpleTextWatcher
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.BarCode
@@ -22,9 +22,9 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
 
     val alternativeMessageInput: EditText by lazy { rootView.findViewById(R.id.alternativeMessageInput) as EditText }
     val messageInput: EditText by lazy { rootView.findViewById(R.id.messageInput) as EditText }
-
     val scanButton: ImageButton by lazy { rootView.findViewById(R.id.scanButton) as ImageButton }
     val randomButton: ImageButton by lazy { rootView.findViewById(R.id.randomButton) as ImageButton }
+    val radioGroup: RadioGroup by lazy { rootView.findViewById(R.id.barcodeRadioGroup) as RadioGroup }
 
     var barcodeFormat: PassBarCodeFormat?
 
@@ -41,18 +41,22 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         }
     }
 
-    private fun bindRadio(@IdRes res: Int, format: PassBarCodeFormat) {
-        val viewById = rootView.findViewById(res) as RadioButton
-        viewById.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                barcodeFormat = format
-                refresh()
+    private fun bindRadio(formats: Array<PassBarCodeFormat>) {
+        formats.forEach {
+            val radioButton = RadioButton(context)
+            radioGroup.addView(radioButton)
+            
+            radioButton.text = it.name
+            radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    barcodeFormat = it
+                    refresh()
+                }
             }
+
+            radioButton.isChecked = barcodeFormat == it
         }
 
-        if (barcodeFormat == format) {
-            viewById.isChecked = true
-        }
     }
 
 
@@ -87,13 +91,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         }
         context.supportFragmentManager.beginTransaction().add(intentFragment, "intent_fragment").commit()
 
-
-
-        bindRadio(R.id.radio_aztec, AZTEC)
-        bindRadio(R.id.radio_qr, QR_CODE)
-        bindRadio(R.id.radio_pdf417, PDF_417)
-        bindRadio(R.id.radio_code39, CODE_39)
-        bindRadio(R.id.radio_code128, CODE_128)
+        bindRadio(arrayOf(AZTEC, QR_CODE, PDF_417, CODE_39, CODE_128))
 
         messageInput.setText(barCode.message)
         messageInput.addTextChangedListener(object : SimpleTextWatcher() {

@@ -62,7 +62,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
         currentPass.setBarCode(null);
         getActivity();
 
-        onView(withId(R.id.add_barcode_button)).perform(scrollTo(),click());
+        onView(withId(R.id.add_barcode_button)).perform(scrollTo(), click());
 
         closeSoftKeyboard();
 
@@ -71,54 +71,25 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
         assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
     }
 
-
     @MediumTest
-    public void testCanSetToQR() {
+    public void testCanSetToAllBarcodeTypes() {
         getActivity();
 
-        onView(withId(R.id.barcode_img)).perform(click());
+        for (final PassBarCodeFormat passBarCodeFormat : PassBarCodeFormat.values()) {
+            onView(withId(R.id.barcode_img)).perform(scrollTo(), click());
 
-        onView(withText(R.string.barcode_edit_qr)).perform(click());
+            onView(withText(passBarCodeFormat.name())).perform(scrollTo(), click());
 
-        closeSoftKeyboard();
+            closeSoftKeyboard();
 
-        onView(withText(android.R.string.ok)).perform(click());
+            onView(withText(android.R.string.ok)).perform(click());
 
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.QR_CODE);
-        Spoon.screenshot(getActivity(), "edit_set_qr");
+            assertThat(currentPass.getBarCode().getFormat()).isEqualTo(passBarCodeFormat);
+            Spoon.screenshot(getActivity(), "edit_set_" + passBarCodeFormat.name());
+        }
+
+
     }
-
-
-    @MediumTest
-    public void testCanSetToPDF417() {
-        getActivity();
-
-        onView(withId(R.id.barcode_img)).perform(click());
-
-        onView(withText(R.string.barcode_edit_pdf417)).perform(click());
-
-        closeSoftKeyboard();
-
-        onView(withText(android.R.string.ok)).perform(click());
-
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.PDF_417);
-        Spoon.screenshot(getActivity(), "edit_set_pdf417");
-    }
-
-
-    @MediumTest
-    public void testCanSetToAZTEC() {
-        getActivity();
-
-        onView(withId(R.id.barcode_img)).perform(click());
-
-        onView(withText(R.string.barcode_edit_aztec)).perform(click());
-
-        assertThat(currentPass.getBarCode().getFormat()).isEqualTo(PassBarCodeFormat.AZTEC);
-        Spoon.screenshot(getActivity(), "edit_set_aztec");
-    }
-
-
 
     @MediumTest
     public void testCanSetMessage() {
