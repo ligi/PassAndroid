@@ -91,7 +91,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         }
         context.supportFragmentManager.beginTransaction().add(intentFragment, "intent_fragment").commit()
 
-        bindRadio(arrayOf(AZTEC, QR_CODE, PDF_417, CODE_39, CODE_128))
+        bindRadio(PassBarCodeFormat.values())
 
         messageInput.setText(barCode.message)
         messageInput.addTextChangedListener(object : SimpleTextWatcher() {

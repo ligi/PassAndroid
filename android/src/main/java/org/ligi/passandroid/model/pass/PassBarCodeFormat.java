@@ -7,7 +7,8 @@ public enum PassBarCodeFormat {
     AZTEC,
     CODE_39,
     CODE_128,
-    QR_CODE;
+    QR_CODE,
+    EAN_13;
 
     public boolean isQuadratic() {
         switch (this) {
@@ -32,6 +33,8 @@ public enum PassBarCodeFormat {
                 return BarcodeFormat.CODE_128;
             case PDF_417:
                 return BarcodeFormat.PDF_417;
+            case EAN_13:
+                return BarcodeFormat.EAN_13;
 
             default:
                 return BarcodeFormat.QR_CODE;
