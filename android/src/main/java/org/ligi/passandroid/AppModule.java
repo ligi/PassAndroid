@@ -13,6 +13,7 @@ import org.ligi.passandroid.model.AndroidFileSystemPassStore;
 import org.ligi.passandroid.model.AndroidSettings;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.State;
 
 @Module
 public class AppModule {
@@ -54,5 +55,11 @@ public class AppModule {
     @Provides
     EventBus provideBus() {
         return EventBus.getDefault();
+    }
+
+    @Singleton
+    @Provides
+    State provideState() {
+        return new State();
     }
 }

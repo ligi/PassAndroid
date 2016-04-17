@@ -8,6 +8,7 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.State;
 
 public class PassAndroidActivity extends AppCompatActivity {
 
@@ -19,6 +20,9 @@ public class PassAndroidActivity extends AppCompatActivity {
 
     @Inject
     EventBus bus;
+
+    @Inject
+    State state;
 
     @Inject
     protected Tracker tracker;

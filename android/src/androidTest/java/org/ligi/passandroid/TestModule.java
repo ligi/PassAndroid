@@ -11,6 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.ligi.passandroid.injections.FixedPassListPassStore;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
+import org.ligi.passandroid.model.State;
 import org.ligi.passandroid.model.comparator.PassSortOrder;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.Pass;
@@ -73,5 +74,11 @@ public class TestModule {
     @Provides
     Tracker provideTracker() {
         return mock(Tracker.class);
+    }
+
+    @Singleton
+    @Provides
+    State provideState() {
+        return new State();
     }
 }

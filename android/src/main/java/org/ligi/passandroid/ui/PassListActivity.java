@@ -201,6 +201,9 @@ public class PassListActivity extends PassAndroidActivity {
         adapter = new PassTopicFragmentPagerAdapter(passStore.getClassifier(), getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
+        if (adapter.getCount() > 0) {
+            viewPager.setCurrentItem(state.getLastSelectedTab());
+        }
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -209,6 +212,7 @@ public class PassListActivity extends PassAndroidActivity {
 
             @Override
             public void onPageSelected(final int position) {
+                state.setLastSelectedTab(position);
                 supportInvalidateOptionsMenu();
             }
 
