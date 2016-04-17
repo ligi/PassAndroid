@@ -24,22 +24,9 @@
             android:text="@string/new_topic_suggestions"/>
 
     <LinearLayout
+            android:id="@+id/topic_suggestions_button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"/>
 
-        <Button
-                android:id="@+id/suggestion_button_trash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TRASH"
-                />
-
-        <Button
-                android:id="@+id/suggestion_button_archive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ARCHIVE"
-                />
-    </LinearLayout>
 </LinearLayout>
