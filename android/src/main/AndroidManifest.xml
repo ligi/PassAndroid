@@ -1109,54 +1109,6 @@
                     android:scheme="https" />
             </intent-filter>
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="mobile.virginaustralia.com"
-                    android:pathPattern="/virginaustralia/.*"
-                    android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="mobile.virginaustralia.com"
-                    android:pathPattern="/virginaustralia/.*"
-                    android:scheme="http" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="check-in.virginaustralia.com"
-                    android:pathPattern="/checkin/CheckInApiIntegration/.*"
-                    android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="check-in.virginaustralia.com"
-                    android:pathPattern="/checkin/CheckInApiIntegration/.*"
-                    android:scheme="http" />
-            </intent-filter>
-
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -1257,6 +1209,55 @@
                     android:pathPattern="/mbp.do.*"
                     android:scheme="https" />
             </intent-filter>
+
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="mobile.virginaustralia.com"
+                        android:pathPattern="/virginaustralia/.*"
+                        android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="mobile.virginaustralia.com"
+                        android:pathPattern="/virginaustralia/.*"
+                        android:scheme="http" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="check-in.virginaustralia.com"
+                        android:pathPattern="/checkin/CheckInApiIntegration/.*"
+                        android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="check-in.virginaustralia.com"
+                        android:pathPattern="/checkin/CheckInApiIntegration/.*"
+                        android:scheme="http" />
+            </intent-filter>
+
         </activity>
 
 
