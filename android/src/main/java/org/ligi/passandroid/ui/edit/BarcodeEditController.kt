@@ -108,7 +108,14 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
     }
 
     fun refresh() {
-        BarcodeUIController(rootView, barCode, context, PassViewHelper(context))
+        val barcodeUIController = BarcodeUIController(rootView, barCode, context, PassViewHelper(context))
+        val isBarcodeShown = barcodeUIController.barcode_img.visibility == View.VISIBLE
+
+        if (!isBarcodeShown) {
+            messageInput.error = "Invalid message"
+        } else {
+            messageInput.error = null
+        }
     }
 
     val barCode: BarCode
