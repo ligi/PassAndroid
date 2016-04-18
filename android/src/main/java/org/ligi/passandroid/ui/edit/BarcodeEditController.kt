@@ -13,7 +13,8 @@ import org.ligi.axt.simplifications.SimpleTextWatcher
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
-import org.ligi.passandroid.model.pass.PassBarCodeFormat.*
+import org.ligi.passandroid.model.pass.PassBarCodeFormat.EAN_13
+import org.ligi.passandroid.model.pass.PassBarCodeFormat.QR_CODE
 import org.ligi.passandroid.ui.BarcodeUIController
 import org.ligi.passandroid.ui.PassViewHelper
 import java.util.*
@@ -45,7 +46,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         formats.forEach {
             val radioButton = RadioButton(context)
             radioGroup.addView(radioButton)
-            
+
             radioButton.text = it.name
             radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
@@ -61,26 +62,27 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
 
 
     init {
-        randomButton.setOnClickListener({
-            messageInput.setText(UUID.randomUUID().toString().toUpperCase())
-        })
-
         intentFragment = IntentFragment()
         barcodeFormat = barCode.format
+
+        randomButton.setOnClickListener({
+            if (barcodeFormat == EAN_13) {
+                messageInput.setText(EANHelper.getRandomEAN13())
+            } else {
+                messageInput.setText(UUID.randomUUID().toString().toUpperCase())
+            }
+
+        })
+
+
 
         scanButton.setOnClickListener({
             val barCodeIntentIntegrator = BarCodeIntentIntegrator(intentFragment)
 
             if (barcodeFormat == QR_CODE) {
                 barCodeIntentIntegrator.initiateScan(BarCodeIntentIntegrator.QR_CODE_TYPES)
-            } else if (barcodeFormat == AZTEC) {
-                barCodeIntentIntegrator.initiateScan(setOf("AZTEC"))
-            } else if (barcodeFormat == PDF_417) {
-                barCodeIntentIntegrator.initiateScan(setOf("PDF417"))
-            } else if (barcodeFormat == CODE_39) {
-                barCodeIntentIntegrator.initiateScan(setOf("CODE_39"))
-            } else if (barcodeFormat == CODE_128) {
-                barCodeIntentIntegrator.initiateScan(setOf("CODE_128"))
+            } else {
+                barCodeIntentIntegrator.initiateScan(setOf(barcodeFormat!!.name))
             }
 
         })
