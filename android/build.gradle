@@ -155,8 +155,6 @@ dependencies {
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
-    compile 'com.squareup.moshi:moshi:1.0.0'
-
     compile 'org.ligi:AXT:0.37'
     compile 'org.ligi:tracedroid:1.4'
     compile 'org.ligi:snackengage:0.4'
