@@ -1,10 +1,12 @@
 package org.ligi.passandroid.model
 
 import android.content.Context
+import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import okio.Okio
 import org.greenrobot.eventbus.EventBus
 import org.ligi.axt.AXT
+import org.ligi.passandroid.App
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
@@ -46,7 +48,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             buffer.close()
         }
 
-        passMap[pass.id]=pass
+        passMap[pass.id] = pass
     }
 
     private fun readPass(id: String): Pass? {
@@ -58,13 +60,19 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         }
 
         val file = File(pathForID, "main.json")
-        val result: Pass?
+        var result: Pass? = null
         var dirty = true
         if (file.exists()) {
             val jsonAdapter = moshi.adapter(PassImpl::class.java)
             dirty = false
-            result = jsonAdapter.fromJson(Okio.buffer(Okio.source(file)))
-        } else if (File(pathForID, "data.json").exists()) {
+            try {
+                result = jsonAdapter.fromJson(Okio.buffer(Okio.source(file)))
+            } catch (ignored : JsonDataException) {
+                App.component().tracker().trackException("invalid main.json",false)
+            }
+        }
+
+        if (result == null && File(pathForID, "data.json").exists()) {
             result = PassReader.read(pathForID)
             File(pathForID, "data.json").delete()
         } else {
