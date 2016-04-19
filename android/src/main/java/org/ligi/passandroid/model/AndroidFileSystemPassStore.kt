@@ -67,15 +67,17 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             dirty = false
             try {
                 result = jsonAdapter.fromJson(Okio.buffer(Okio.source(file)))
-            } catch (ignored : JsonDataException) {
-                App.component().tracker().trackException("invalid main.json",false)
+            } catch (ignored: JsonDataException) {
+                App.component().tracker().trackException("invalid main.json", false)
             }
         }
 
         if (result == null && File(pathForID, "data.json").exists()) {
             result = PassReader.read(pathForID)
             File(pathForID, "data.json").delete()
-        } else {
+        }
+
+        if (result == null && File(pathForID, "pass.json").exists()) {
             result = AppleStylePassReader.read(pathForID, language)
         }
 

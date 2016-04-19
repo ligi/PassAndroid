@@ -45,33 +45,32 @@ object AppleStylePassReader {
 
         val file = File(passFile, "pass.json")
 
-        if (file.exists()) {
-            try {
-                val plainJsonString = AppleStylePassTranslation.readFileAsStringGuessEncoding(file)
-                pass_json = SafeJSONReader.readJSONSafely(plainJsonString)
-            } catch (e: Exception) {
-                Log.i("PassParse Exception " + e)
-            }
+        try {
+            val plainJsonString = AppleStylePassTranslation.readFileAsStringGuessEncoding(file)
+            pass_json = SafeJSONReader.readJSONSafely(plainJsonString)
+        } catch (e: Exception) {
+            Log.i("PassParse Exception " + e)
+        }
 
-            if (pass_json == null) {
-                // I had got a strange passbook with UCS-2 which could not be parsed before
-                // was searching for a auto-detection, but could not find one with support for this encoding
-                // and the right license
+        if (pass_json == null) {
+            // I had got a strange passbook with UCS-2 which could not be parsed before
+            // was searching for a auto-detection, but could not find one with support for this encoding
+            // and the right license
 
-                for (charset in Charset.availableCharsets().values) {
-                    try {
-                        val json_str = AXT.at(file).readToString(charset)
-                        pass_json = SafeJSONReader.readJSONSafely(json_str)
-                    } catch (ignored: Exception) {
-                        // we try with next charset
-                    }
+            for (charset in Charset.availableCharsets().values) {
+                try {
+                    val json_str = AXT.at(file).readToString(charset)
+                    pass_json = SafeJSONReader.readJSONSafely(json_str)
+                } catch (ignored: Exception) {
+                    // we try with next charset
+                }
 
-                    if (pass_json != null) {
-                        break
-                    }
+                if (pass_json != null) {
+                    break
                 }
             }
         }
+
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ")
             App.component().tracker().trackEvent("problem_event", "pass", "without_pass_json", null)
