@@ -6,7 +6,8 @@ import org.ligi.passandroid.model.pass.Pass;
 public enum PassSortOrder {
     DATE_DESC(-1),
     DATE_ASC(0),
-    TYPE(1);
+    TYPE(1),
+    DATE_DIFF(2);
 
     private final int i;
 
@@ -23,10 +24,14 @@ public enum PassSortOrder {
             case TYPE:
                 return new PassByTypeFirstAndTimeSecondComparator();
             case DATE_DESC:
-                return new PassByTimeComparator(-1);
+                return new DirectionAwarePassByTimeComparator(DirectionAwarePassByTimeComparator.DIRECTION_DESC);
+
+            case DATE_DIFF:
+                return new PassTemporalDistanceComparator();
+
             default:
             case DATE_ASC:
-                return new PassByTimeComparator(1);
+                return new DirectionAwarePassByTimeComparator(DirectionAwarePassByTimeComparator.DIRECTION_ASC);
         }
     }
 }

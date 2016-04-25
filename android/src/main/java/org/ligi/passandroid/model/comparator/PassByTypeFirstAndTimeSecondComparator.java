@@ -2,11 +2,11 @@ package org.ligi.passandroid.model.comparator;
 
 import java.util.Comparator;
 import org.ligi.passandroid.model.pass.Pass;
-import static org.ligi.passandroid.model.comparator.PassByTimeComparator.DIRECTION_ASC;
+import static org.ligi.passandroid.model.comparator.DirectionAwarePassByTimeComparator.DIRECTION_ASC;
 
 public class PassByTypeFirstAndTimeSecondComparator implements Comparator<Pass> {
 
-    private final PassByTimeComparator passByTimeComparator = new PassByTimeComparator(DIRECTION_ASC);
+    private final DirectionAwarePassByTimeComparator passByTimeComparator = new DirectionAwarePassByTimeComparator(DIRECTION_ASC);
 
     @Override
     public int compare(Pass lhs, Pass rhs) {

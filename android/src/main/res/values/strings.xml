@@ -156,5 +156,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
         <item>Date Ascending</item>
         <item>Date Descending</item>
         <item>Type</item>
+        <item>Temporal distance</item>
     </string-array>
 </resources>
