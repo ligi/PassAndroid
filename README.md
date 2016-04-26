@@ -8,7 +8,7 @@ Android App to view Passes ( e.g. event tickets, coupons, loyalty cards, boardin
 
 <img src="http://ligi.de/img/passandroid_screenshots.png"/>
 
-Displays [esPass (*.esPass)](http://espass.it) and Passbook ( *.pkpass ) files & shows the Barcode ( QR, PDF417, AZTEC, Code 39 and COde 128 format ). It useable offline.
+Displays [esPass (*.esPass)](http://espass.it) and Passbook ( *.pkpass ) files & shows the Barcode ( QR, PDF417, AZTEC, Code 39 and Code 128 format ). It useable offline.
 When preparing for the Chaos Communication Congress 2012 ( #29c3 ) I stumbled upon a passbook file for the first time. As I really like the idea of paperless tickets as it saves time and trees which both are very valuable to me. The problem was that I found no app with which I could use the downloaded passbook file.
 
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
