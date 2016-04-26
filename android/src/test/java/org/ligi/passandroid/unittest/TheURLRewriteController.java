@@ -1,11 +1,9 @@
 package org.ligi.passandroid.unittest;
 
 import android.net.Uri;
-
 import org.junit.Test;
 import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.ui.quirk_fix.URLRewriteController;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -14,7 +12,7 @@ public class TheURLRewriteController {
     private URLRewriteController tested = new URLRewriteController(mock(Tracker.class));
 
     @Test
-    public void tesRejection() {
+    public void testRejection() {
         final String res = tested.getUrlByUri(Uri.parse("http://foo.bar"));
 
         assertThat(res).isNull();
