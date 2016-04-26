@@ -4,8 +4,8 @@ import org.ligi.passandroid.model.pass.Pass;
 
 public class DirectionAwarePassByTimeComparator extends PassByTimeComparator {
 
-    public final static int DIRECTION_DESC = 1;
-    public final static int DIRECTION_ASC = -1;
+    public final static int DIRECTION_DESC = -1;
+    public final static int DIRECTION_ASC = 1;
 
     private final int direction;
 
