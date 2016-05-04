@@ -22,7 +22,7 @@ public class VerbosePassViewHolder extends PassViewHolder {
             stringToSetForDateOrExtraText = getExtraString();
         }
 
-        if (stringToSetForDateOrExtraText != null) {
+        if (stringToSetForDateOrExtraText != null && !stringToSetForDateOrExtraText.isEmpty()) {
             dateOrExtraText.setText(stringToSetForDateOrExtraText);
             dateOrExtraText.setVisibility(View.VISIBLE);
         } else {

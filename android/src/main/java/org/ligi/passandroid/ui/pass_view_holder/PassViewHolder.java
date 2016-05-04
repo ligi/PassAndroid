@@ -114,7 +114,21 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     }
 
     private String getExtraStringForField(final PassField passField) {
-        return (passField.getLabel() + ": " + passField.getValue());
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        if (passField.getLabel()!=null) {
+            stringBuilder.append(passField.getLabel());
+
+            if (passField.getValue()!=null) {
+                stringBuilder.append(": ");
+            }
+        }
+
+        if (passField.getValue()!=null) {
+            stringBuilder.append(passField.getValue());
+        }
+
+        return stringBuilder.toString();
     }
 
     @NonNull

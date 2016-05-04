@@ -18,7 +18,7 @@ public class CondensedPassViewHolder extends PassViewHolder {
         super.apply(pass, passStore, activity);
 
         final String extraString = getExtraString();
-        if (extraString != null) {
+        if (extraString != null && !extraString.isEmpty()) {
             dateOrExtraText.setText(extraString);
             dateOrExtraText.setVisibility(VISIBLE);
         } else {
