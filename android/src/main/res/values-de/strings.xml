@@ -97,4 +97,55 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="unzip_pass_dialog_title">Öffne Pass</string>
   <string name="unzip_pass_dialog_message">Bitte warten...</string>
   <string name="action_update">Aktualisiere</string>
+  <string name="no_calendar_app_found">Keine Kalender-App gefunden</string>
+  <string name="pass_updated">Pass aktualisiert</string>
+  <string name="expiration_date_to_calendar_warning_message">Du möchtest ein Ablaufdatum zum Kalender hinzufügen. Wenn du denkst, ein besseres Datum ist auf dem Pass vorhanden, bitte sag mir Bescheid! PassAndroid sollte es automatisch erkennen.</string>
+  <string name="expiration_date_to_calendar_warning_title">Füge Ablaufdatum hinzu</string>
+  <string name="topic_trash">Papierkorb</string>
+  <string name="topic_new">Neu</string>
+  <string name="topic_archive">Archiv</string>
+  <string name="move_to_new_topic">Sortiere in neue Kategory ein</string>
+  <string name="categories_nav">%d Kategorien</string>
+  <string name="passes_nav">%d Pässe</string>
+  <string name="found_pass">Gefunden: %s</string>
+  <string name="found__pass">Und %d mehr</string>
+  <string name="scan_finished_dialog_title">Suche abgeschlossen</string>
+  <string name="scan_finished_dialog_text">%d Pässe gefunden</string>
+  <string name="scan_progressdialog_title">Suche...</string>
+  <string name="scan_progressdialog_message">Bitte warten.</string>
+  <string name="scan_dialog_send_background_button">Hintergrund</string>
+  <string name="emtytrash_label">Leere Papierkorb</string>
+  <string name="barcode_edit_hint_alternative_message">Alternative Nachricht</string>
+  <string name="barcode_edit_random">Zufällig</string>
+  <string name="barcode_edit_scan">Suche</string>
+  <string name="barcode_edit_message">Nachricht</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">Füge Barcode hinzu</string>
+  <string name="categories_voucher">Voucher</string>
+  <string name="edit_time">Bearbeite Zeit</string>
+  <string name="edit_location">Bearbeite Ort</string>
+  <string name="add_front_field">Füge Vorderseitenfeld hinzu</string>
+  <string name="add_back_fields">Füge Rückseitenfeld hinzu</string>
+  <string name="change_color_dialog_title">Wähle Farbe aus</string>
+  <string name="select_category_dialog_title">Wähle eine Kategory aus</string>
+  <string name="button_text_change_color">Ändere Farbe</string>
+  <string name="barcode_edit_code128">Code 128</string>
+  <string name="barcode_edit_code39">Code 39</string>
+  <string name="add_footer_image">Füge Fußzeilenbild hinzu</string>
+  <string name="add_logo_image">Füge Logo hinzu</string>
+  <string name="add_header_image">Füge Kopfzeilenbild hinzu</string>
+  <string name="add_barcode">Füge Barcode hinzu</string>
+  <string name="edit_barcode_dialog_title">Bearbeite Barcode</string>
+  <string name="empty_trash_dialog_message">Wirklich den Papierkorb leeren? Du kannst die Pässe nicht wiederherstellen.</string>
+  <string name="empty_trash_dialog_title">Warnung</string>
+  <string name="new_topic_input_hint">Titel für die neue Kategory</string>
+  <string name="new_topic_suggestions">Vorschläge:</string>
+  <string name="cannot_be_empty">Darf nicht leer sein</string>
+  <string-array name="sort_orders">
+    <item>Datum aufsteigend</item>
+    <item>Datum absteigend</item>
+    <item>Typ</item>
+  </string-array>
 </resources>

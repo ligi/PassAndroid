@@ -76,9 +76,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="please_wait">пожалуйста подождите немного</string>
   <string name="passbook_is_shared_subject">Эту карточку вам прислали</string>
   <string name="passbook_share_chooser_title">Как отправить карточку?</string>
-  <string name="dialog_delete_confirm_text">Вы правда хотите удалить эту карточку?</string>
+  <string name="dialog_delete_confirm_text">Вы правда хотите удалить эту карточку из списка?</string>
   <string name="dialog_delete_title">Уверены?</string>
-  <string name="dialog_delete_confirm_delete_source_checkbox">исходный файл тоже удалить?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">удалить так же файл карточки?</string>
   <string name="more">ПОДРОБНЕЕ</string>
   <string name="less">СКРЫТЬ ПОДРОБНОСТИ</string>
   <string name="scanning_for_passes">Ищу Карточки</string>
@@ -94,4 +94,55 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="unzip_pass_dialog_title">Открываю карточку</string>
   <string name="unzip_pass_dialog_message">Пожалуйста подождите ...</string>
   <string name="action_update">обновить</string>
+  <string name="no_calendar_app_found">Не найдено приложение-календарь</string>
+  <string name="pass_updated">Карточка обновлена</string>
+  <string name="expiration_date_to_calendar_warning_message">Сейчас вы добавите дату окончания действия карточки в календарь, если эта дата не верна, но в карточке есть правильная дата, пожалуйста отправьте карточку мне, я исправлю PassAndroid.</string>
+  <string name="expiration_date_to_calendar_warning_title">Добавить дату окончания действия</string>
+  <string name="topic_trash">корзина</string>
+  <string name="topic_new">создать</string>
+  <string name="topic_archive">архив</string>
+  <string name="move_to_new_topic">Переместить в новую Категорию</string>
+  <string name="categories_nav">Категорий: %d</string>
+  <string name="passes_nav">Карточек: %d</string>
+  <string name="found_pass">найдено: %s</string>
+  <string name="found__pass">Еще %d</string>
+  <string name="scan_finished_dialog_title">Поиск завершен.</string>
+  <string name="scan_finished_dialog_text">найдено %d карточек</string>
+  <string name="scan_progressdialog_title">Поиск ...</string>
+  <string name="scan_progressdialog_message">Пожалуйста подождите.</string>
+  <string name="scan_dialog_send_background_button">фон</string>
+  <string name="emtytrash_label">очистить корзину</string>
+  <string name="barcode_edit_hint_alternative_message">альтернативное Сообщение</string>
+  <string name="barcode_edit_random">случайный</string>
+  <string name="barcode_edit_scan">скан</string>
+  <string name="barcode_edit_message">Сообщение</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">Добавить Штрих-код</string>
+  <string name="categories_voucher">ваучер</string>
+  <string name="edit_time">изменить время</string>
+  <string name="edit_location">изменить место</string>
+  <string name="add_front_field">Добавить первое поле</string>
+  <string name="add_back_fields">Добавить второе поле</string>
+  <string name="change_color_dialog_title">Выбрать цвет</string>
+  <string name="select_category_dialog_title">Выбрать категорию</string>
+  <string name="button_text_change_color">изменить цвет</string>
+  <string name="barcode_edit_code128">code 128</string>
+  <string name="barcode_edit_code39">code 39</string>
+  <string name="add_footer_image">добавить нижнее изображение</string>
+  <string name="add_logo_image">добавить логотип</string>
+  <string name="add_header_image">добавить заглавное изображение</string>
+  <string name="add_barcode">добавить Штрих-код</string>
+  <string name="edit_barcode_dialog_title">Редактировать Штрих-код</string>
+  <string name="empty_trash_dialog_message">Действительно очистить корзину? Восстановить уже будет нельзя</string>
+  <string name="empty_trash_dialog_title">предупреждение</string>
+  <string name="new_topic_input_hint">Заголовок для новой темы</string>
+  <string name="new_topic_suggestions">Предложения:</string>
+  <string name="cannot_be_empty">не может быть пустым</string>
+  <string-array name="sort_orders">
+    <item>Дата по возрастанию</item>
+    <item>Дата по убыванию</item>
+    <item>Тип</item>
+  </string-array>
 </resources>
