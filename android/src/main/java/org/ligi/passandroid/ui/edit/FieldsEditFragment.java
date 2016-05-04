@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import java.util.List;
@@ -30,10 +30,10 @@ public class FieldsEditFragment extends PassandroidFragment {
         return fieldsEditFragment;
     }
 
-    @Bind(R.id.fields_container)
+    @BindView(R.id.fields_container)
     ViewGroup viewGroup;
 
-    @Bind(R.id.add_field)
+    @BindView(R.id.add_field)
     Button addFieldButton;
 
     @OnClick(R.id.add_field)
@@ -75,13 +75,13 @@ public class FieldsEditFragment extends PassandroidFragment {
     }
 
     class FieldView {
-        @Bind(R.id.label_field_edit)
+        @BindView(R.id.label_field_edit)
         TextInputEditText labelEdit;
 
-        @Bind(R.id.value_field_edit)
+        @BindView(R.id.value_field_edit)
         TextInputEditText valueEdit;
 
-        @Bind(R.id.delete_button)
+        @BindView(R.id.delete_button)
         ImageButton deleteButton;
 
         FieldView(final ViewGroup container) {

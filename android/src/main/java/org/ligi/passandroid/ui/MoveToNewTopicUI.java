@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.MoveHelper;
@@ -21,10 +21,10 @@ class MoveToNewTopicUI {
     private final Pass pass;
     private AlertDialog dialog;
 
-    @Bind(R.id.new_topic_edit)
+    @BindView(R.id.new_topic_edit)
     EditText newTopicEditText;
 
-    @Bind(R.id.topic_suggestions_button_container)
+    @BindView(R.id.topic_suggestions_button_container)
     ViewGroup suggestionButtonContainer;
 
     private void move(String topic) {

@@ -9,17 +9,17 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.ligi.passandroid.R;
 import org.xml.sax.XMLReader;
 
 public class HelpActivity extends AppCompatActivity {
 
-    @Bind(R.id.help_text)
+    @BindView(R.id.help_text)
     TextView helpText;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Override

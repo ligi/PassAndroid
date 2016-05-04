@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import java.util.UUID;
@@ -45,10 +45,10 @@ public class PassEditActivity extends AppCompatActivity {
     @Inject
     EventBus bus;
 
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     EditText titleEdit;
 
-    @Bind(R.id.add_barcode_button)
+    @BindView(R.id.add_barcode_button)
     Button addBarcodeButton;
 
     private PassViewHelper passViewHelper;

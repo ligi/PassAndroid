@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.ligi.axt.AXT;
@@ -44,28 +44,28 @@ public class PassViewActivity extends PassViewActivityBase {
         }
     }
 
-    @Bind(R.id.moreTextView)
+    @BindView(R.id.moreTextView)
     TextView moreTextView;
 
-    @Bind(R.id.logo_img)
+    @BindView(R.id.logo_img)
     ImageView logo_img;
 
-    @Bind(R.id.footer_img)
+    @BindView(R.id.footer_img)
     ImageView footer_img;
 
-    @Bind(R.id.thumbnail_img)
+    @BindView(R.id.thumbnail_img)
     ImageView thumbnail_img;
 
-    @Bind(R.id.strip_img)
+    @BindView(R.id.strip_img)
     ImageView strip_img;
 
-    @Bind(R.id.back_fields)
+    @BindView(R.id.back_fields)
     TextView back_tv;
 
-    @Bind(R.id.front_field_container)
+    @BindView(R.id.front_field_container)
     ViewGroup frontFieldsContainer;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
 

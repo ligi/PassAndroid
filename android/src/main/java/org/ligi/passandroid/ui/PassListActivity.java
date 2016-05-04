@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import java.util.Collection;
@@ -54,22 +54,22 @@ public class PassListActivity extends PassAndroidActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
-    @Bind(R.id.view_pager)
+    @BindView(R.id.view_pager)
     ViewPager viewPager;
 
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @Bind(R.id.emptyView)
+    @BindView(R.id.emptyView)
     TextView emptyView;
 
-    @Bind(R.id.fam)
+    @BindView(R.id.fam)
     FloatingActionsMenu floatingActionsMenu;
 
     private PassTopicFragmentPagerAdapter adapter;
@@ -135,7 +135,7 @@ public class PassListActivity extends PassAndroidActivity {
         floatingActionsMenu.collapse();
     }
 
-    @Bind(R.id.fab_action_open_file)
+    @BindView(R.id.fab_action_open_file)
     FloatingActionButton openFileFAB;
     public final static int VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19;
 

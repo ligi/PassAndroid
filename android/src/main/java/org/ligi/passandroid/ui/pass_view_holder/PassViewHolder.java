@@ -11,7 +11,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.ligi.passandroid.R;
@@ -32,22 +32,22 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
 
     public final CardView root;
 
-    @Bind(R.id.icon)
+    @BindView(R.id.icon)
     ImageView icon;
 
-    @Bind(R.id.date)
+    @BindView(R.id.date)
     TextView dateOrExtraText;
 
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView title;
 
-    @Bind(R.id.categoryView)
+    @BindView(R.id.categoryView)
     CategoryIndicatorView category;
 
-    @Bind(R.id.actions_separator)
+    @BindView(R.id.actions_separator)
     View actionsSeparator;
 
-    @Bind(R.id.navigateTo)
+    @BindView(R.id.navigateTo)
     TextView navigateTo;
 
     @OnClick(R.id.navigateTo)
@@ -55,7 +55,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
         NavigateToLocationsDialog.perform(activity, pass, false);
     }
 
-    @Bind(R.id.addCalendar)
+    @BindView(R.id.addCalendar)
     TextView addCalendar;
 
     @OnClick(R.id.addCalendar)

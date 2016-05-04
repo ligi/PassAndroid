@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
@@ -21,10 +21,10 @@ import org.ligi.passandroid.model.PassStore;
 
 public class PassNavigationView extends NavigationView {
 
-    @Bind(R.id.pass_count_header)
+    @BindView(R.id.pass_count_header)
     TextView passCountTextView;
 
-    @Bind(R.id.topic_count_header)
+    @BindView(R.id.topic_count_header)
     TextView topicCountTextView;
 
     @Inject
