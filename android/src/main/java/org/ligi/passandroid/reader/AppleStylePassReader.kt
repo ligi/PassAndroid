@@ -280,11 +280,11 @@ object AppleStylePassReader {
         }
     }
 
-    private fun copyBitmapFile(path: File, localizedPath: String?, bitmap: String) {
-        val bitmap1 = findBitmap(path, localizedPath)
-        if (bitmap1 != null) {
+    private fun copyBitmapFile(path: File, localizedPath: String?, bitmapString: String) {
+        val bitmap = findBitmap(path, localizedPath, bitmapString)
+        if (bitmap != null) {
             try {
-                bitmap1.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(path, bitmap + PassImpl.FILETYPE_IMAGES)))
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(path, bitmapString + PassImpl.FILETYPE_IMAGES)))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -292,16 +292,16 @@ object AppleStylePassReader {
         }
     }
 
-    private fun findBitmap(path: File, localizedPath: String?): Bitmap? {
+    private fun findBitmap(path: File, localizedPath: String?, bitmap : String): Bitmap? {
 
         val searchList = ArrayList<File>()
         if (localizedPath != null) {
-            searchList.add(File(localizedPath, "bitmap@2x.png"))
-            searchList.add(File(localizedPath, "bitmap.png"))
+            searchList.add(File(localizedPath, "$bitmap@2x.png"))
+            searchList.add(File(localizedPath, "$bitmap.png"))
         }
 
-        searchList.add((File(path, "bitmap@2x.png")))
-        searchList.add((File(path, "bitmap@2x.png")))
+        searchList.add((File(path, "$bitmap@2x.png")))
+        searchList.add((File(path, "$bitmap@2x.png")))
 
         for (current in searchList) {
 
