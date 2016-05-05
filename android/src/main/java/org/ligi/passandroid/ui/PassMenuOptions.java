@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import java.io.File;
 import javax.inject.Inject;
@@ -49,11 +51,13 @@ public class PassMenuOptions {
                 builder.setTitle(activity.getString(org.ligi.passandroid.R.string.dialog_delete_title));
                 builder.setIcon(R.drawable.ic_alert_warning);
 
-                final CheckBox sourceDeleteCheckBox = new CheckBox(activity);
+                final View sourceDeleteCheckBoxView = LayoutInflater.from(activity).inflate(R.layout.delete_dialog_layout, null);
+                final CheckBox sourceDeleteCheckBox = (CheckBox) sourceDeleteCheckBoxView.findViewById(R.id.sourceDeleteCheckbox);
 
                 if (pass.getSource(passStore) != null && pass.getSource(passStore).startsWith("file://")) {
+
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
-                    builder.setView(sourceDeleteCheckBox);
+                    builder.setView(sourceDeleteCheckBoxView);
                 }
 
                 builder.setPositiveButton(activity.getString(R.string.delete), new DialogInterface.OnClickListener() {

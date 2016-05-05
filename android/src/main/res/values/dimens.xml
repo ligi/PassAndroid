@@ -5,4 +5,6 @@
     <dimen name="card_longclick_elevation_half">4dp</dimen>
 
     <dimen name="finger">48dp</dimen>
+    <dimen name="rhythm">8dp</dimen>
+    <dimen name="rhythm2">16dp</dimen>
 </resources>
