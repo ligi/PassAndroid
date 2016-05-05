@@ -11,7 +11,7 @@ public class InstallListener extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String rawReferrerString = intent.getStringExtra("referrer");
-        if (rawReferrerString != null && rawReferrerString.endsWith(".pkpass")) {
+        if (rawReferrerString != null) {
 
             final Intent newIntent = new Intent(context, PassImportActivity.class);
             newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
