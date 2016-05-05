@@ -17,7 +17,7 @@ public class InstallListener extends BroadcastReceiver {
             newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             newIntent.setData(Uri.parse(rawReferrerString));
 
-            context.startActivity(intent);
+            context.startActivity(newIntent);
         }
     }
 
