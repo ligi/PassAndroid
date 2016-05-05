@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
+import org.ligi.passandroid.Tracker;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.Pass;
@@ -20,13 +21,20 @@ public class PassImportActivity extends AppCompatActivity {
     @Inject
     PassStore passStore;
 
+    @Inject
+    Tracker tracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         App.component().inject(this);
-
-        new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
+        if (getIntent().getData() == null || getIntent().getData().getScheme() == null) {
+            tracker.trackException("invalid_import_uri", false);
+            finish();
+        } else {
+            new ImportAndShowAsyncTask(this, getIntent().getData()).execute();
+        }
     }
 
     class ImportAndShowAsyncTask extends AsyncTask<Void, Void, InputStreamWithSource> {
@@ -76,7 +84,11 @@ public class PassImportActivity extends AppCompatActivity {
 
             if (isFinishing()) { // finish with no UI/Dialogs
                 // let's do it silently TODO check if we need to jump to a service here as the activity is dying
-                UnzipPassController.INSTANCE.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(result, getApplication(), passStore, null, null));
+                UnzipPassController.INSTANCE.processInputStream(new UnzipPassController.InputStreamUnzipControllerSpec(result,
+                                                                                                                       getApplication(),
+                                                                                                                       passStore,
+                                                                                                                       null,
+                                                                                                                       null));
                 return;
             }
 
