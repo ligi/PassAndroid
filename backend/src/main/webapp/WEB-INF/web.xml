@@ -16,9 +16,19 @@
             <param-value>org.ligi.passandroid.backend.RegistrationEndpoint, org.ligi.passandroid.backend.MessagingEndpoint</param-value>
         </init-param>
     </servlet>
+
+    <servlet>
+        <servlet-name>OpenOrInstall</servlet-name>
+        <servlet-class>org.ligi.passandroid.backend.OpenOrInstallServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SystemServiceServlet</servlet-name>
         <url-pattern>/_ah/spi/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>OpenOrInstall</servlet-name>
+        <url-pattern>/open_or_install</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
