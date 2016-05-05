@@ -11,6 +11,14 @@ public class TheURLRewriteController {
 
     private URLRewriteController tested = new URLRewriteController(mock(Tracker.class));
 
+
+    @Test
+    public void testAppspotRewrite() {
+        final String res = tested.getUrlByUri(Uri.parse("http://pass-cloud.appspot.com/open_or_install?url=http://espass.it/assets/download/pass/movie.espass"));
+
+        assertThat(res).isEqualTo("http://espass.it/assets/download/pass/movie.espass");
+    }
+
     @Test
     public void testPass2URewrite() {
         final String res = tested.getUrlByUri(Uri.parse("pass2u://import/https://api.passdock.com/passes/17969/e5dfb0afff61b1294235918a6a9ac75255daa89f.pkpass"));

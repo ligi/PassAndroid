@@ -24,6 +24,10 @@ public class URLRewriteController {
         }
 
         if (uri.getHost()!=null) {
+            if (uri.getHost().equals("pass-cloud.appspot.com")) {
+                return uri.getQueryParameter("url");
+            }
+
             if (uri.getHost().endsWith(".virginaustralia.com")) { // mobile. or checkin.
                 return getVirginAustraliaURL(uri);
             }
