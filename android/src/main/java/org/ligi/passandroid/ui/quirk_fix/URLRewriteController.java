@@ -14,6 +14,10 @@ public class URLRewriteController {
 
     public String getUrlByUri(final Uri uri) {
 
+        if (uri.getScheme().equals("pass2u") && uri.getAuthority().equals("import")) {
+            return uri.toString().substring("pass2u://import/".length());
+        }
+
         if (uri.getHost().endsWith(".virginaustralia.com")) { // mobile. or checkin.
             return getVirginAustraliaURL(uri);
         }

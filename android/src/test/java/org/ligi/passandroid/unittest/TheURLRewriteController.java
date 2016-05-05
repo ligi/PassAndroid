@@ -12,6 +12,14 @@ public class TheURLRewriteController {
     private URLRewriteController tested = new URLRewriteController(mock(Tracker.class));
 
     @Test
+    public void testPass2URewrite() {
+        final String res = tested.getUrlByUri(Uri.parse("pass2u://import/https://api.passdock.com/passes/17969/e5dfb0afff61b1294235918a6a9ac75255daa89f.pkpass"));
+
+        assertThat(res).isEqualTo("https://api.passdock.com/passes/17969/e5dfb0afff61b1294235918a6a9ac75255daa89f.pkpass");
+    }
+
+
+    @Test
     public void testRejection() {
         final String res = tested.getUrlByUri(Uri.parse("http://foo.bar"));
 
