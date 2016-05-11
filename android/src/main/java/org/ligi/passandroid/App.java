@@ -2,6 +2,7 @@ package org.ligi.passandroid;
 
 import android.app.Application;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.app.AppCompatDelegate;
 import com.chibatching.kotpref.Kotpref;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.squareup.leakcanary.LeakCanary;
@@ -21,6 +22,7 @@ public class App extends Application {
                 .trackerModule(new TrackerModule(this))
                 .build();
 
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         LeakCanary.install(this);
         AndroidThreeTen.init(this);
         Kotpref.INSTANCE.init(this);
