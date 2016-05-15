@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlin_version = '1.0.1-2'
+        kotlin_version = '1.0.2'
         support_version = '23.4.0'
         dagger_version = '2.4'
         butterknife_version = '8.0.1'
