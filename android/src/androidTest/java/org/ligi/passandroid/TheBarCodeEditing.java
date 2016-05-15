@@ -14,6 +14,7 @@ import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -104,6 +105,8 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
 
         onView(withText(android.R.string.ok)).perform(click());
 
+        onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist());
+
         assertThat(passStore.getCurrentPass().getBarCode().getMessage()).isEqualTo("msg foo txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_msg");
     }
@@ -121,6 +124,8 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
         closeSoftKeyboard();
 
         onView(withText(android.R.string.ok)).perform(click());
+
+        onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist());
 
         assertThat(passStore.getCurrentPass().getBarCode().getAlternativeText()).isEqualTo("alt bar txt ;-)");
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
