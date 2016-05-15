@@ -47,7 +47,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
     public void testNullBarcodeShowButtonAppears() {
 
         currentPass.setBarCode(null);
-        getActivity();
+        start();
 
         Spoon.screenshot(getActivity(), "no_barcode");
 
@@ -60,7 +60,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
     public void testCreateBarcodeDefaultsToQR() {
 
         currentPass.setBarCode(null);
-        getActivity();
+        start();
 
         onView(withId(R.id.add_barcode_button)).perform(scrollTo(), click());
 
@@ -73,7 +73,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testCanSetToAllBarcodeTypes() {
-        getActivity();
+        start();
 
         for (final PassBarCodeFormat passBarCodeFormat : PassBarCodeFormat.values()) {
             onView(withId(R.id.barcode_img)).perform(scrollTo(), click());
@@ -93,7 +93,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testCanSetMessage() {
-        getActivity();
+        start();
 
         onView(withId(R.id.barcode_img)).perform(click());
 
@@ -111,7 +111,7 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
 
     @MediumTest
     public void testCanSetAltMessage() {
-        getActivity();
+        start();
 
         onView(withId(R.id.barcode_img)).perform(click());
 
@@ -126,10 +126,9 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
         Spoon.screenshot(getActivity(), "edit_set_altmsg");
     }
 
-
     @MediumTest
     public void testThatRandomChangesMessage() {
-        getActivity();
+        start();
 
         onView(withId(R.id.barcode_img)).perform(click());
 
@@ -143,5 +142,9 @@ public class TheBarCodeEditing extends BaseIntegration<PassEditActivity> {
         assertThat(oldMessage).isNotEqualTo(passStore.getCurrentPass().getBarCode().getMessage());
     }
 
+    private void start() {
+        getActivity();
+        closeSoftKeyboard();
+    }
 
 }
