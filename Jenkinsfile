@@ -19,6 +19,8 @@ node {
 
 stage 'UITest'
 node {
-  sh "./gradlew spoon${flavorCombination}"
+  lock('adb') {
+    sh "./gradlew spoon${flavorCombination}"
+  }
   publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/spoon-output/${flavorCombination}DebugAndroidTest/', reportFiles: 'index.html', reportName: 'Spoon reports'])
 }
