@@ -1,12 +1,12 @@
 package org.ligi.passandroid.actions;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.CalendarContract;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.pass.Pass;
 import org.threeten.bp.ZonedDateTime;
