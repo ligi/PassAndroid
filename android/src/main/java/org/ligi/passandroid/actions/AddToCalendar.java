@@ -18,12 +18,7 @@ public class AddToCalendar {
         if (pass.getCalendarTimespan() == null) {
             new AlertDialog.Builder(activity).setMessage(R.string.expiration_date_to_calendar_warning_message)
                                              .setTitle(R.string.expiration_date_to_calendar_warning_title)
-                                             .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(DialogInterface dialog, int which) {
-
-                                                 }
-                                             })
+                                             .setNegativeButton(android.R.string.cancel, null)
                                              .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                                  @Override
                                                  public void onClick(DialogInterface dialog, int which) {
