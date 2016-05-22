@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import org.ligi.axt.AXT
-import org.ligi.passandroid.helper.Files
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
@@ -36,11 +35,10 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
         val pass = passStore.currentPass
         if (extractedFile != null && pass != null) {
             try {
-                Files.copy(extractedFile, File(passStore.getPathForID(pass.id), name + PassImpl.FILETYPE_IMAGES))
+                extractedFile.copyTo(File(passStore.getPathForID(pass.id), name + PassImpl.FILETYPE_IMAGES))
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
         }
     }
 
