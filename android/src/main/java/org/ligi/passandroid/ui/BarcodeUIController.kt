@@ -69,7 +69,7 @@ internal class BarcodeUIController(rootView: View, private val barCode: BarCode?
         }
 
         currentBarcodeWidth = width
-        val quadratic = barCode!!.format!!.isQuadratic
+        val quadratic = barCode!!.format!!.isQuadratic()
         barcode_img.layoutParams = LinearLayout.LayoutParams(width, if (quadratic) width else ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 

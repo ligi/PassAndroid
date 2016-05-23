@@ -63,7 +63,7 @@ public class BarcodeHelper {
 
     public static BitMatrix getBitMatrix(String data, PassBarCodeFormat type) throws WriterException {
         final Writer writer = new MultiFormatWriter();
-        return writer.encode(data, type.getZxingBarCodeFormat(), 0, 0);
+        return writer.encode(data, type.zxingBarCodeFormat(), 0, 0);
     }
 
 }
