@@ -46,7 +46,7 @@ android {
         versionCode 316
         versionName "3.1.6"
         minSdkVersion 11
-        targetSdkVersion 22
+        targetSdkVersion 23
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         archivesBaseName = "PassAndroid-$versionName"
@@ -189,6 +189,9 @@ dependencies {
 
     withAnalyticsCompile 'com.google.android.gms:play-services-analytics:9.0.0'
     withMapsCompile 'com.google.android.gms:play-services-maps:9.0.0'
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.1.3'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
 }
 
 spoon {

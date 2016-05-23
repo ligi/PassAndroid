@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -47,7 +48,12 @@ import org.ligi.snackengage.SnackEngage;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class PassListActivity extends PassAndroidActivity {
 
     private static final int OPEN_FILE_READ_REQUEST_CODE = 1000;
@@ -113,8 +119,20 @@ public class PassListActivity extends PassAndroidActivity {
 
     }
 
+    @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
+    @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void showDeniedFor() {
+        Snackbar.make(floatingActionsMenu,"no permission to scan",Snackbar.LENGTH_INDEFINITE).show();
+    }
+
     @OnClick(R.id.fab_action_scan)
     void onScanClick() {
+        PassListActivityPermissionsDispatcher.scanWithCheck(this);
+        floatingActionsMenu.collapse();
+    }
+
+    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void scan() {
         final Intent intent = new Intent(this, SearchPassesIntentService.class);
         startService(intent);
 
@@ -125,8 +143,12 @@ public class PassListActivity extends PassAndroidActivity {
         pd.setIndeterminate(true);
         pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.scan_dialog_send_background_button), new ActivityFinishingOnClickListener(this));
         pd.show();
+    }
 
-        floatingActionsMenu.collapse();
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PassListActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     @OnClick(R.id.fab_action_demo_pass)
