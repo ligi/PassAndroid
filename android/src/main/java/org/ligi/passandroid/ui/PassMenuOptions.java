@@ -89,7 +89,7 @@ public class PassMenuOptions {
 
             case R.id.menu_share:
                 tracker.trackEvent("ui_action", "share", "shared", null);
-                new PassExportTask(activity, passStore.getPathForID(pass.getId()), settings.getShareDir(), "share", true).execute();
+                new PassExportTaskAndShare(activity, passStore.getPathForID(pass.getId())).execute();
                 return true;
 
             case R.id.menu_edit:

@@ -3,4 +3,6 @@
     <string name="preference_key_sort">SORT</string>
     <string name="preference_key_autolight">AUTOLIGHT</string>
     <string name="preference_key_condensed">CONDENSED</string>
+
+    <string name="authority_fileprovider">org.ligi.passandroid.fileprovider</string>
 </resources>

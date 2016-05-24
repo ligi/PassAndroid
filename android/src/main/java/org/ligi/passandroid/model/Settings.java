@@ -13,8 +13,6 @@ public interface Settings {
 
     File getStateDir();
 
-    File getShareDir();
-
     boolean isCondensedModeEnabled();
 
     boolean isAutomaticLightEnabled();

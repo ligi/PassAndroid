@@ -32,6 +32,15 @@
             </intent-filter>
         </receiver>
 
+        <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="@string/authority_fileprovider"
+                android:grantUriPermissions="true"
+                android:exported="false">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/filepaths" />
+        </provider>
 
         <service android:name=".ui.SearchPassesIntentService"/>
 
@@ -110,7 +119,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/vnd.apple.espass"/>
+                <data android:mimeType="application/vnd.espass-espass"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -118,7 +127,15 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/vnd-com.apple.espass"/>
+                <data android:mimeType="application/vnd.apple.pkpass"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:mimeType="application/vnd-com.apple.pkpass"/>
             </intent-filter>
 
             <intent-filter>

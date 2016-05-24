@@ -2,7 +2,6 @@ package org.ligi.passandroid.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import java.io.File;
 import org.ligi.passandroid.R;
@@ -47,12 +46,6 @@ public class AndroidSettings implements Settings {
     @Override
     public File getStateDir() {
         return new File(context.getFilesDir(), "state");
-    }
-
-
-    @Override
-    public File getShareDir() {
-        return new File(Environment.getExternalStorageDirectory(), "tmp/passbook_share_tmp/");
     }
 
     @Override
