@@ -54,7 +54,8 @@ public class PassMenuOptions {
                 final View sourceDeleteCheckBoxView = LayoutInflater.from(activity).inflate(R.layout.delete_dialog_layout, null);
                 final CheckBox sourceDeleteCheckBox = (CheckBox) sourceDeleteCheckBoxView.findViewById(R.id.sourceDeleteCheckbox);
 
-                if (pass.getSource(passStore) != null && pass.getSource(passStore).startsWith("file://")) {
+                final String source = pass.getSource(passStore);
+                if (source != null && source.startsWith("file://")) {
 
                     sourceDeleteCheckBox.setText(activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox));
                     builder.setView(sourceDeleteCheckBoxView);
@@ -65,7 +66,8 @@ public class PassMenuOptions {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (sourceDeleteCheckBox.isChecked()) {
-                            new File(pass.getSource(passStore).replace("file://", "")).delete();
+                            //noinspection ConstantConditions - we are sure source is not null - as only then sourceDeleteCheckBox
+                            new File(source.replace("file://", "")).delete();
                         }
                         passStore.deletePassWithId(pass.getId());
                         if (activity instanceof PassViewActivityBase) {
