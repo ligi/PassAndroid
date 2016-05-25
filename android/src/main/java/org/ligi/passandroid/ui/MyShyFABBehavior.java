@@ -8,9 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
-
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
-
 import org.ligi.passandroid.R;
 
 public class MyShyFABBehavior extends CoordinatorLayout.Behavior<FloatingActionsMenu> {
@@ -47,6 +45,12 @@ public class MyShyFABBehavior extends CoordinatorLayout.Behavior<FloatingActions
             ViewCompat.setTranslationY(child, -distanceToScroll * ratio);
         }
         return false;
+    }
+
+    @Override
+    public void onDependentViewRemoved(final CoordinatorLayout parent, final FloatingActionsMenu child, final View dependency) {
+        super.onDependentViewRemoved(parent, child, dependency);
+        onDependentViewChanged(parent,child,dependency);
     }
 
     private void updateFabTranslationForSnackbar(FloatingActionsMenu child, View dependency) {
