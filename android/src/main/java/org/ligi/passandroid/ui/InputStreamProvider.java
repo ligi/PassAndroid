@@ -2,9 +2,6 @@ package org.ligi.passandroid.ui;
 
 import android.content.Context;
 import android.net.Uri;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +10,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.model.InputStreamWithSource;
 
