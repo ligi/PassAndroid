@@ -165,7 +165,7 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
     compile 'com.squareup.moshi:moshi:1.2.0'
-    compile 'com.chibatching:kotpref:1.3.0'
+    compile 'com.chibatching:kotpref:1.3.1'
 
     compile 'net.steamcrafted:load-toast:1.0.10'
 
