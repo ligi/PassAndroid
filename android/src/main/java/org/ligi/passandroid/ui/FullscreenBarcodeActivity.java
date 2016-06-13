@@ -11,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.R;
-import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.tracedroid.logging.Log;
 
 public class FullscreenBarcodeActivity extends PassViewActivityBase {
@@ -62,20 +61,7 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
      */
     private void setBestFittingOrientationForBarCode() {
 
-        if (currentPass.getBarCode().getFormat() == PassBarCodeFormat.PDF_417) {
-            switch (getRequestedOrientation()) {
-
-                case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
-                case ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE:
-                case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
-                case ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE:
-                    return; // do nothing
-
-                default:
-                    AXT.at(this).lockOrientation(Configuration.ORIENTATION_LANDSCAPE);
-            }
-
-        } else { // QR and AZTEC are square -> best fit is portrait
+        if (currentPass.getBarCode().getFormat().isQuadratic()) {
             switch (getRequestedOrientation()) {
 
                 case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
@@ -86,6 +72,19 @@ public class FullscreenBarcodeActivity extends PassViewActivityBase {
 
                 default:
                     AXT.at(this).lockOrientation(Configuration.ORIENTATION_PORTRAIT);
+            }
+
+        } else {
+            switch (getRequestedOrientation()) {
+
+                case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
+                case ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE:
+                    return; // do nothing
+
+                default:
+                    AXT.at(this).lockOrientation(Configuration.ORIENTATION_LANDSCAPE);
             }
 
         }
