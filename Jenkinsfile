@@ -1,26 +1,27 @@
-def flavorCombination='WithMapsWithAnalyticsForPlay'
-
-stage 'assemble'
 node {
+ def flavorCombination='WithMapsWithAnalyticsForPlay'
+
+ stage 'checkout'
  checkout scm
- sh "./gradlew clean assemble${flavorCombination}"
-}
 
-stage 'lint'
-node {
+ stage 'assemble'
+ sh "./gradlew clean assemble${flavorCombination}Release"
+ archive 'android/build/outputs/apk/*'
+
+ stage 'lint'
  sh "./gradlew lint${flavorCombination}Release"
- publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/outputs/', reportFiles: 'lint-results-${flavorCombination}Release.html', reportName: 'Lint reports'])
-}
+publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/outputs/', reportFiles: "lint-results-*Release.html", reportName: 'Lint'])
 
-stage 'test'
-node {
- sh "./gradlew test"
-}
+ stage 'test'
+ sh "./gradlew test${flavorCombination}DebugUnitTest"
+ publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/reports/tests/', reportFiles: "*/index.html", reportName: 'UnitTest'])
 
-stage 'UITest'
-node {
-  lock('adb') {
-    sh "./gradlew spoon${flavorCombination}"
-  }
-  publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/spoon-output/${flavorCombination}DebugAndroidTest/', reportFiles: 'index.html', reportName: 'Spoon reports'])
+ stage 'UITest'
+ lock('adb') {
+   sh "./gradlew spoon${flavorCombination}"
+ }
+
+ publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "android/build/spoon-output/${flavorCombination}DebugAndroidTest", reportFiles: 'index.html', reportName: 'Spoon'])
+
+
 }
