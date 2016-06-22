@@ -2,14 +2,12 @@ package org.ligi.passandroid.ui.pass_view_holder;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +20,7 @@ import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.model.pass.PassField;
 import org.ligi.passandroid.ui.NavigateToLocationsDialog;
 import org.ligi.passandroid.ui.Visibility;
-import org.ligi.passandroid.ui.views.CategoryIndicatorView;
+import org.ligi.passandroid.ui.views.CategoryIndicatorViewWithIcon;
 import org.threeten.bp.ZonedDateTime;
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
@@ -32,9 +30,6 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
 
     public final CardView root;
 
-    @BindView(R.id.icon)
-    ImageView icon;
-
     @BindView(R.id.date)
     TextView dateOrExtraText;
 
@@ -42,7 +37,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     TextView title;
 
     @BindView(R.id.categoryView)
-    CategoryIndicatorView category;
+    CategoryIndicatorViewWithIcon category;
 
     @BindView(R.id.actions_separator)
     View actionsSeparator;
@@ -88,11 +83,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
         final Bitmap iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON);
 
         if (iconBitmap != null) {
-            final int size = (int) root.getResources().getDimension(R.dimen.pass_icon_size);
-            icon.setImageBitmap(Bitmap.createScaledBitmap(iconBitmap, size, size, false));
-        } else {
-            final ColorDrawable colorDrawable = new ColorDrawable(pass.getAccentColor());
-            icon.setImageDrawable(colorDrawable);
+            category.setIcon(iconBitmap);
         }
 
         category.setImageByCategory(pass.getType());

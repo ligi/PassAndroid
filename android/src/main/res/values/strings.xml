@@ -139,7 +139,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="add_back_fields">Add back field</string>
     <string name="change_color_dialog_title">Select color</string>
     <string name="select_category_dialog_title">Select category</string>
-    <string name="button_text_change_color">change color</string>
     <string name="barcode_edit_code128">code 128</string>
     <string name="barcode_edit_code39">code 39</string>
     <string name="add_footer_image">add footer image</string>
@@ -160,5 +159,11 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
         <item>Date Descending</item>
         <item>Type</item>
         <item>Temporal distance</item>
+    </string-array>
+
+    <string-array name="category_edit_options">
+        <item>@string/select_category_dialog_title</item>
+        <item>@string/change_color_dialog_title</item>
+        <item>Select Icon</item>
     </string-array>
 </resources>

@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui.views;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,17 @@ import org.ligi.passandroid.R;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.pass.PassType;
 
-public class CategoryIndicatorView extends LinearLayout {
+public class BaseCategoryIndicatorView extends LinearLayout {
 
     private ImageView topImageView;
 
-    public CategoryIndicatorView(Context context) {
-        super(context);
+    public BaseCategoryIndicatorView(Context context, AttributeSet attrs) {
+        this(context,attrs,R.layout.category_indicator_base);
     }
 
-    public CategoryIndicatorView(Context context, AttributeSet attrs) {
+    public BaseCategoryIndicatorView(Context context, AttributeSet attrs, @LayoutRes final int layout) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.category_indicator, this, true);
+        LayoutInflater.from(context).inflate(layout, this, true);
         topImageView = ButterKnife.findById(this,R.id.topImageView);
     }
 

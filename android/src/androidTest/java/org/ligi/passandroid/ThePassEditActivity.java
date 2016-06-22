@@ -43,6 +43,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
 
         onView(withId(R.id.categoryView)).perform(click());
 
+        onView(withText(R.string.select_category_dialog_title)).perform(click());
         onView(withText(R.string.category_event)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.EVENT);
 
@@ -53,6 +54,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     public void testSetToCouponWorks() {
         onView(withId(R.id.categoryView)).perform(click());
 
+        onView(withText(R.string.select_category_dialog_title)).perform(click());
         onView(withText(R.string.category_coupon)).perform(click());
         assertThat(passStore.getCurrentPass().getType()).isEqualTo(PassType.COUPON);
 
@@ -73,7 +75,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     public void testColorWheelIsThere() {
 
         onView(withId(R.id.categoryView)).perform(click());
-        onView(withText(R.string.button_text_change_color)).perform(click());
+        onView(withText(R.string.change_color_dialog_title)).perform(click());
 
         onView(withId(R.id.colorPicker)).check(matches(isDisplayed()));
 

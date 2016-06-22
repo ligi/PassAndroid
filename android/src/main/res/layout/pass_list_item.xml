@@ -20,27 +20,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="@dimen/pass_icon_size"
-                android:layout_height="@dimen/pass_icon_size"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_launcher" />
+
 
             <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-
+                android:padding="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:paddingRight="4dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="?android:textColorSecondary"
                     tools:text="12.10.2013 17:00" />
@@ -54,14 +47,12 @@
                     tools:text="Title" />
 
             </LinearLayout>
-
-            <org.ligi.passandroid.ui.views.CategoryIndicatorView
-                android:id="@+id/categoryView"
-                android:layout_width="48dp"
-                android:layout_height="74dp"
-                android:layout_gravity="center"
-                android:layout_margin="8dp" />
-            <!-- <include layout="@layout/category_indicator" /> -->
+            <org.ligi.passandroid.ui.views.CategoryIndicatorViewWithIcon
+                    android:id="@+id/categoryView"
+                    android:layout_width="48dp"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp" />
         </LinearLayout>
 
 

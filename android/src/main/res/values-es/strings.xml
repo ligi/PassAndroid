@@ -87,7 +87,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="scanning_for_passes">Buscando pases </string>
   <string name="fab_choice_scan_pkpass_files">Buscando archivos pkpass</string>
   <string name="fab_choice_add_demo_pass">Añadir un pase demo</string>
-  <string name="fab_choice_create_pass">Crear un pase (experimental)</string>
   <string name="empty_text_view"><big><b>Ningún pase todavía</b></big>
     \n\n\n Usted puede buscar pases en su teléfono
     \n\n o crear el suyo propio

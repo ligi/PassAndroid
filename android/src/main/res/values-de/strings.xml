@@ -130,7 +130,6 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="add_back_fields">Füge Rückseitenfeld hinzu</string>
   <string name="change_color_dialog_title">Wähle Farbe aus</string>
   <string name="select_category_dialog_title">Wähle eine Kategory aus</string>
-  <string name="button_text_change_color">Ändere Farbe</string>
   <string name="barcode_edit_code128">Code 128</string>
   <string name="barcode_edit_code39">Code 39</string>
   <string name="add_footer_image">Füge Fußzeilenbild hinzu</string>
@@ -143,9 +142,11 @@ Es wäre toll zu erfahren, wie ihr die Anwendung benutzt, was ihr toll oder was 
   <string name="new_topic_input_hint">Titel für die neue Kategory</string>
   <string name="new_topic_suggestions">Vorschläge:</string>
   <string name="cannot_be_empty">Darf nicht leer sein</string>
+  <string name="please_use_the_swipe_feature">Bitte nutze die Wischfunktion</string>
   <string-array name="sort_orders">
     <item>Datum aufsteigend</item>
     <item>Datum absteigend</item>
     <item>Typ</item>
+    <item>Zeitlicher Abstand</item>
   </string-array>
 </resources>

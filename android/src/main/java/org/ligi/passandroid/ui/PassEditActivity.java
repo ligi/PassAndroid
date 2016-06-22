@@ -1,12 +1,14 @@
 package org.ligi.passandroid.ui;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.edit.BarcodePickDialog;
 import org.ligi.passandroid.ui.edit.CategoryPickDialog;
+import org.ligi.passandroid.ui.edit.ColorPickDialog;
 import org.ligi.passandroid.ui.edit.FieldsEditFragment;
 import org.ligi.passandroid.ui.edit.ImageEditHelper;
 import org.ligi.passandroid.ui.pass_view_holder.EditViewHolder;
@@ -58,12 +61,6 @@ public class PassEditActivity extends AppCompatActivity {
 
     private PassViewHelper passViewHelper;
 
-    @OnClick(R.id.icon)
-    void pickIcon() {
-        PassEditActivityPermissionsDispatcher.pickImageWithCheck(this,ImageEditHelper.Companion.getREQ_CODE_PICK_ICON());
-    }
-
-
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     void pickImage(final int req_code_pick_icon) {
         imageEditHelper.startPick(req_code_pick_icon);
@@ -71,7 +68,23 @@ public class PassEditActivity extends AppCompatActivity {
 
     @OnClick(R.id.categoryView)
     void pickCategory() {
-        CategoryPickDialog.show(bus, currentPass, this);
+        new AlertDialog.Builder(this).setItems(R.array.category_edit_options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialogInterface, final int i) {
+                switch (i) {
+                    case 0:
+                        CategoryPickDialog.show(PassEditActivity.this, currentPass, bus);
+                        break;
+                    case 1:
+                        ColorPickDialog.showColorDialog(PassEditActivity.this, currentPass, bus);
+                        break;
+                    case 2:
+                        PassEditActivityPermissionsDispatcher.pickImageWithCheck(PassEditActivity.this, ImageEditHelper.Companion.getREQ_CODE_PICK_ICON());
+                        break;
+                }
+            }
+        }).show();
+
     }
 
 
@@ -138,7 +151,7 @@ public class PassEditActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PassEditActivityPermissionsDispatcher.onRequestPermissionsResult(this,requestCode, grantResults);
+        PassEditActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     private void refresh(Pass pass) {
@@ -173,7 +186,7 @@ public class PassEditActivity extends AppCompatActivity {
         final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                pickImage(requestCode);
+                PassEditActivityPermissionsDispatcher.pickImageWithCheck(PassEditActivity.this, requestCode);
             }
         };
 

@@ -2,8 +2,8 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_gravity="center"
-        android:layout_width="48dp"
-        android:layout_height="74dp">
+        android:layout_width="20dp"
+        android:layout_height="30dp">
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -13,10 +13,4 @@
             android:id="@+id/topImageView"
             android:orientation="vertical"/>
 
-    <ImageView
-            android:layout_gravity="bottom|center"
-            android:layout_margin="8dp"
-            android:id="@+id/iconImageView"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="32dp" android:layout_height="32dp"/>
 </FrameLayout>

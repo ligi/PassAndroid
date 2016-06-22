@@ -7,7 +7,7 @@
               android:background="@drawable/clickable_bg">
 
 
-    <org.ligi.passandroid.ui.views.CategoryIndicatorView
+    <org.ligi.passandroid.ui.views.BaseCategoryIndicatorView
             android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_margin="8dp"
