@@ -18,10 +18,17 @@ publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: tr
 
  stage 'UITest'
  lock('adb') {
-   sh "./gradlew spoon${flavorCombination}"
- }
+   try {
+    sh "./gradlew spoon${flavorCombination}"
+   } catch(err) {
+    currentBuild.result = FAILURE
+   } finally {
+     publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "android/build/spoon-output/${flavorCombination}DebugAndroidTest", reportFiles: 'index.html', reportName: 'Spoon'])
+   }
 
- publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "android/build/spoon-output/${flavorCombination}DebugAndroidTest", reportFiles: 'index.html', reportName: 'Spoon'])
+}
+
+
 
 
 }
