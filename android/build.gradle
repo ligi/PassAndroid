@@ -44,7 +44,7 @@ android {
     defaultConfig {
         versionCode 319
         versionName "3.1.9"
-        minSdkVersion 10
+        minSdkVersion 9
         targetSdkVersion 23
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
