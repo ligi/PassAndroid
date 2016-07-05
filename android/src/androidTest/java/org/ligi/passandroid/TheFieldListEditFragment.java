@@ -25,9 +25,7 @@ public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> 
     @Inject
     PassStore passStore;
 
-    PassImpl currentPass;
     private PassField field;
-    private ArrayList<PassField> fieldList;
 
     public TheFieldListEditFragment() {
         super(PassEditActivity.class);
@@ -41,9 +39,9 @@ public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> 
         build.inject(this);
         App.setComponent(build);
 
-        currentPass = (PassImpl) (passStore.getCurrentPass());
+        PassImpl currentPass = (PassImpl) (passStore.getCurrentPass());
 
-        fieldList = new ArrayList<>();
+        final ArrayList<PassField> fieldList = new ArrayList<>();
         field = new PassField(null, "labelfieldcontent", "valuefieldcontent", true);
         fieldList.add(field);
         currentPass.setFields(fieldList);
@@ -81,7 +79,7 @@ public class TheFieldListEditFragment extends BaseIntegration<PassEditActivity> 
 
         getActivity();
 
-        onView(withId(R.id.label_field_edit)).perform(scrollTo());
+        onView(withId(R.id.value_field_edit)).perform(scrollTo());
         onView(withId(R.id.value_field_edit)).perform(click(),replaceText("newvalue"));
         assertThat(field.getValue()).isEqualTo("newvalue");
     }
