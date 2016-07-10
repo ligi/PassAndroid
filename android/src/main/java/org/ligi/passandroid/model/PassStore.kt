@@ -21,5 +21,5 @@ interface PassStore {
 
     fun notifyChange()
 
-    open fun syncPassStoreWithClassifier(defaultTopic: String)
+    fun syncPassStoreWithClassifier(defaultTopic: String)
 }
