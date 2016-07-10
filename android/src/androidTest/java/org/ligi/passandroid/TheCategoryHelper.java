@@ -18,7 +18,7 @@ public class TheCategoryHelper extends InstrumentationTestCase {
         final Set<Integer> probe = new HashSet<>();
 
         for (PassType type : PassDefinitions.INSTANCE.getTYPES().keySet()) {
-            probe.add(CategoryHelper.getHumanCategoryString(type));
+            probe.add(CategoryHelper.INSTANCE.getHumanCategoryString(type));
         }
 
         assertThat(probe.size()).isEqualTo(PassDefinitions.INSTANCE.getTYPES().keySet().size());

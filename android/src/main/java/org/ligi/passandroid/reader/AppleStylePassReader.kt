@@ -1,11 +1,14 @@
 package org.ligi.passandroid.reader
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import org.json.JSONException
 import org.json.JSONObject
 import org.ligi.axt.AXT
 import org.ligi.passandroid.App
+import org.ligi.passandroid.R
+import org.ligi.passandroid.helper.CategoryHelper
 import org.ligi.passandroid.helper.SafeJSONReader
 import org.ligi.passandroid.model.ApplePassbookQuirkCorrector
 import org.ligi.passandroid.model.AppleStylePassTranslation
@@ -22,7 +25,7 @@ import java.util.*
 
 object AppleStylePassReader {
 
-    fun read(passFile: File, language: String): Pass? {
+    fun read(passFile: File, language: String, context: Context): Pass? {
 
         val translation = AppleStylePassTranslation()
 
@@ -171,7 +174,8 @@ object AppleStylePassReader {
         }
 
         try {
-            val type_json = pass_json.getJSONObject(PassDefinitions.TYPES[pass.type])
+            val type = PassDefinitions.TYPES[pass.type]
+            val type_json = pass_json.getJSONObject(type)
             if (type_json != null) {
                 val fieldList: ArrayList<PassField> = ArrayList()
 
@@ -181,6 +185,7 @@ object AppleStylePassReader {
                 addFields(fieldList, type_json, "auxiliaryFields", translation)
                 addFields(fieldList, type_json, "backFields", translation, hide = true)
 
+                fieldList.add(PassField("",context.getString(R.string.type),context.getString(CategoryHelper.getHumanCategoryString(pass.type)),false))
                 pass.fields = fieldList
             }
 

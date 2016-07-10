@@ -153,6 +153,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="new_topic_suggestions">Suggestions:</string>
     <string name="cannot_be_empty">cannot be empty</string>
     <string name="please_use_the_swipe_feature">Please use the swipe feature</string>
+    <string name="type">Type</string>
     <string-array name="sort_orders">
         <item>Date Ascending</item>
         <item>Date Descending</item>

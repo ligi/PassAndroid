@@ -56,7 +56,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         val language = context.resources.configuration.locale.language
 
         if (!pathForID.exists() || !pathForID.isDirectory) {
-            return null;
+            return null
         }
 
         val file = File(pathForID, "main.json")
@@ -78,7 +78,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         }
 
         if (result == null && File(pathForID, "pass.json").exists()) {
-            result = AppleStylePassReader.read(pathForID, language)
+            result = AppleStylePassReader.read(pathForID, language, context)
         }
 
         if (result != null) {

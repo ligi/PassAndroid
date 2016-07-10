@@ -30,7 +30,7 @@ public class CategoryIndicatorView extends LinearLayout {
             topImageView.setVisibility(View.GONE);
         } else {
             topImageView.setVisibility(View.VISIBLE);
-            topImageView.setImageResource(CategoryHelper.getCategoryTopImageRes(category));
+            topImageView.setImageResource(CategoryHelper.INSTANCE.getCategoryTopImageRes(category));
         }
     }
 

@@ -50,9 +50,9 @@ public class CategoryPickDialog {
 
                 final PassType type = getItem(position);
                 categoryIndicatorView.setImageByCategory(type);
-                categoryIndicatorView.setAccentColor(CategoryHelper.getCategoryDefaultBG(type));
+                categoryIndicatorView.setAccentColor(CategoryHelper.INSTANCE.getCategoryDefaultBG(type));
                 final TextView tv = (TextView) inflate.findViewById(R.id.navCategoryLabel);
-                tv.setText(CategoryHelper.getHumanCategoryString(type));
+                tv.setText(CategoryHelper.INSTANCE.getHumanCategoryString(type));
 
                 return inflate;
             }
@@ -90,7 +90,5 @@ public class CategoryPickDialog {
                 bus.post(new PassRefreshEvent(pass));
             }
         }).setNegativeButton(android.R.string.cancel, null).setTitle(R.string.change_color_dialog_title).show();
-
-
     }
 }
