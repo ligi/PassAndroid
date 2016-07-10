@@ -139,6 +139,7 @@
 # http://stackoverflow.com/questions/37431372/cant-find-referenced-class-with-proguard-and-kotlin
 -keep class org.ligi.passandroid.model.InputStreamWithSource
 -keep class org.ligi.passandroid.ui.PassExporter
+-keep class org.ligi.passandroid.helper.CategoryHelper
 -keep enum org.ligi.passandroid.model.pass.PassBarCodeFormat
 
 # the below line needs some investigation - was only needed after switching event classes to kotlin

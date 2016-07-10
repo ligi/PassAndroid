@@ -21,7 +21,6 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
     @Mock
     UnzipPassController.FailCallback failCallback;
 
-
     @Mock
     PassStore passStore;
 
@@ -51,7 +50,8 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
                     new UnzipPassController.SuccessCallback() {
                         @Override
                         public void call(String uuid) {
-                            callback.onPassLoad(AppleStylePassReader.INSTANCE.read(new File(getTestTargetPath(getInstrumentation().getTargetContext()), uuid), "en"));
+                            callback.onPassLoad(AppleStylePassReader.INSTANCE.read(new File(getTestTargetPath(getInstrumentation().getTargetContext()), uuid), "en",
+                                                                                   getInstrumentation().getTargetContext()));
                         }
                     }
                     , failCallback
@@ -67,7 +67,6 @@ public class TheAppleStyleBarcodeReaderBase extends InstrumentationTestCase {
             fail("should be able to load file " + e);
         }
     }
-
 
     interface OnPassLoadCallback {
         void onPassLoad(Pass pass);
