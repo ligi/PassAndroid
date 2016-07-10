@@ -175,11 +175,11 @@ object AppleStylePassReader {
             if (type_json != null) {
                 val fieldList: ArrayList<PassField> = ArrayList()
 
-                addFields(fieldList, type_json, "primaryFields", translation);
-                addFields(fieldList, type_json, "headerFields", translation);
-                addFields(fieldList, type_json, "secondaryFields", translation);
-                addFields(fieldList, type_json, "auxiliaryFields", translation);
-                addFields(fieldList, type_json, "backFields", translation, hide = true);
+                addFields(fieldList, type_json, "primaryFields", translation)
+                addFields(fieldList, type_json, "headerFields", translation)
+                addFields(fieldList, type_json, "secondaryFields", translation)
+                addFields(fieldList, type_json, "auxiliaryFields", translation)
+                addFields(fieldList, type_json, "backFields", translation, hide = true)
 
                 pass.fields = fieldList
             }
@@ -220,8 +220,8 @@ object AppleStylePassReader {
                     val field = PassField(key = getField(jsonObject, "key", translation),
                             label = getField(jsonObject, "label", translation),
                             value = getField(jsonObject, "value", translation),
-                            hide = hide);
-                    list.add(field);
+                            hide = hide)
+                    list.add(field)
 
                 } catch (e: JSONException) {
                     Log.w("could not process PassField from JSON for $fieldsName cause:$e")
