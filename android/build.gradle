@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlin_version = '1.0.3'
-        support_version = '23.4.0'
+        support_version = '24.0.0'
         dagger_version = '2.5'
         butterknife_version = '8.1.0'
         play_version = '9.2.0'
@@ -38,14 +38,14 @@ repositories {
 
 android {
 
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
     defaultConfig {
         versionCode 319
         versionName "3.1.9"
         minSdkVersion 9
-        targetSdkVersion 23
+        targetSdkVersion 24
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         archivesBaseName = "PassAndroid-$versionName"
