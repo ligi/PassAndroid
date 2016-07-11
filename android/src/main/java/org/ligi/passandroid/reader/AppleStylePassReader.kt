@@ -185,7 +185,7 @@ object AppleStylePassReader {
                 addFields(fieldList, type_json, "auxiliaryFields", translation)
                 addFields(fieldList, type_json, "backFields", translation, hide = true)
 
-                fieldList.add(PassField("",context.getString(R.string.type),context.getString(CategoryHelper.getHumanCategoryString(pass.type)),false))
+                fieldList.add(PassField("", context.getString(R.string.type), context.getString(CategoryHelper.getHumanCategoryString(pass.type)), false))
                 pass.fields = fieldList
             }
 
@@ -200,7 +200,7 @@ object AppleStylePassReader {
             // ok - we have no organisation - big deal ..-)
         }
 
-        ApplePassbookQuirkCorrector.correctQuirks(pass)
+        ApplePassbookQuirkCorrector(App.component().tracker()).correctQuirks(pass)
 
         return pass
     }
@@ -297,7 +297,7 @@ object AppleStylePassReader {
         }
     }
 
-    private fun findBitmap(path: File, localizedPath: String?, bitmap : String): Bitmap? {
+    private fun findBitmap(path: File, localizedPath: String?, bitmap: String): Bitmap? {
 
         val searchList = ArrayList<File>()
         if (localizedPath != null) {
