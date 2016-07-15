@@ -12,7 +12,7 @@ public class MoveHelper {
         final String oldTopic = passClassifier.getTopic(pass, "");
 
         Snackbar.make(activity.getWindow().getDecorView().findViewById(R.id.fam), "Pass moved to " + topic, Snackbar.LENGTH_LONG)
-                .setAction("undo", new View.OnClickListener() {
+                .setAction(R.string.undo, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         passClassifier.moveToTopic(pass, oldTopic);
