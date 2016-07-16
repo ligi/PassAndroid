@@ -50,6 +50,9 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
         processDataChange()
     }
 
+    /*
+    useful offsets are -1 and 1 to find the topic right and left from the pass
+     */
     fun getTopicWithOffset(pass: Pass, offset: Int): String? {
         val indexOf = getTopics().indexOf(getTopic(pass, ""))
         return getTopics().elementAtOrNull(indexOf + offset)
