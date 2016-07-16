@@ -141,6 +141,8 @@
 -keep class org.ligi.passandroid.ui.PassExporter
 -keep class org.ligi.passandroid.helper.CategoryHelper
 -keep enum org.ligi.passandroid.model.pass.PassBarCodeFormat
+-keep class org.ligi.passandroid.helper.CategoryHelper
+-keep class org.ligi.passandroid.ui.MoveToNewTopicUI
 
 # the below line needs some investigation - was only needed after switching event classes to kotlin
 -keep class org.ligi.passandroid.events.** { *; }

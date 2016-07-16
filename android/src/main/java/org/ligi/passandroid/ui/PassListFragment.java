@@ -83,7 +83,7 @@ public class PassListFragment extends Fragment {
                 if (nextTopic != null) {
                     MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
                 } else {
-                    MoveToNewTopicUI.show(getActivity(), passStore, pass);
+                    new MoveToNewTopicUI(getActivity(), passStore, pass).show();
                 }
             }
         };
