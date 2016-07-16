@@ -4,7 +4,7 @@ buildscript {
         support_version = '24.0.0'
         dagger_version = '2.5'
         butterknife_version = '8.2.1'
-        play_version = '9.2.0'
+        play_version = '9.2.1'
     }
 
     repositories {
