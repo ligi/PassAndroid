@@ -7,6 +7,7 @@ import okio.Okio
 import org.greenrobot.eventbus.EventBus
 import org.ligi.axt.AXT
 import org.ligi.passandroid.App
+import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
@@ -38,10 +39,11 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
 
         val buffer = Okio.buffer(Okio.sink(File(pathForID, "main.json")))
 
-        if (false) {
+        if (BuildConfig.DEBUG) {
             val of = com.squareup.moshi.JsonWriter.of(buffer)
             of.setIndent("  ")
             jsonAdapter.toJson(of, pass as PassImpl)
+            buffer.close()
             of.close()
         } else {
             jsonAdapter.toJson(buffer, pass as PassImpl)
