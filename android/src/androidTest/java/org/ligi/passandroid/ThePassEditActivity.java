@@ -1,7 +1,7 @@
 package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
-import android.test.suitebuilder.annotation.MediumTest;
+import android.support.test.filters.MediumTest;
 import com.squareup.spoon.Spoon;
 import javax.inject.Inject;
 import org.ligi.passandroid.model.PassStore;

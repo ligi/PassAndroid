@@ -1,6 +1,6 @@
 package org.ligi.passandroid;
 
-import android.test.suitebuilder.annotation.SmallTest;
+import android.support.test.filters.SmallTest;
 import org.ligi.passandroid.model.pass.Pass;
 import static org.assertj.core.api.Assertions.assertThat;
 

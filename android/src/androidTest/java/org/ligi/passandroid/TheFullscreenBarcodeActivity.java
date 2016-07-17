@@ -2,7 +2,7 @@ package org.ligi.passandroid;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.test.suitebuilder.annotation.MediumTest;
+import android.support.test.filters.MediumTest;
 import android.widget.ImageView;
 import butterknife.ButterKnife;
 import com.squareup.spoon.Spoon;

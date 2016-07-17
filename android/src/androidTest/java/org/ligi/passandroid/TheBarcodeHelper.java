@@ -2,8 +2,8 @@ package org.ligi.passandroid;
 
 
 import android.graphics.Bitmap;
+import android.support.test.filters.SmallTest;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 import com.google.zxing.common.BitMatrix;
 import org.ligi.passandroid.helper.BarcodeHelper;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;

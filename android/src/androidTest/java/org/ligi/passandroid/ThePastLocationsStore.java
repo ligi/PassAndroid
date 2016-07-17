@@ -3,12 +3,9 @@ package org.ligi.passandroid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.test.suitebuilder.annotation.SmallTest;
-
-import org.ligi.passandroid.model.PastLocationsStore;
-
+import android.support.test.filters.SmallTest;
 import javax.inject.Inject;
-
+import org.ligi.passandroid.model.PastLocationsStore;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ThePastLocationsStore extends BaseIntegration<Activity> {

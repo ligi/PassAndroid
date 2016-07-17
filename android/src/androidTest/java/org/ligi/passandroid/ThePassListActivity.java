@@ -1,12 +1,9 @@
 package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
-import android.test.suitebuilder.annotation.MediumTest;
-
+import android.support.test.filters.MediumTest;
 import com.squareup.spoon.Spoon;
-
 import org.ligi.passandroid.ui.PassListActivity;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;

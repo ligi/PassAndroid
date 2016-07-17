@@ -1,6 +1,6 @@
 package org.ligi.passandroid;
 
-import android.test.suitebuilder.annotation.MediumTest;
+import android.support.test.filters.MediumTest;
 import com.squareup.spoon.Spoon;
 import java.util.ArrayList;
 import org.ligi.passandroid.model.pass.Pass;

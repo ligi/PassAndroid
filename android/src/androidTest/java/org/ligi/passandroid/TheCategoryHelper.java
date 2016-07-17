@@ -1,8 +1,8 @@
 package org.ligi.passandroid;
 
 
+import android.support.test.filters.SmallTest;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 import java.util.HashSet;
 import java.util.Set;
 import org.ligi.passandroid.helper.CategoryHelper;

@@ -1,7 +1,7 @@
 package org.ligi.passandroid;
 
 import android.app.Activity;
-import android.test.suitebuilder.annotation.SmallTest;
+import android.support.test.filters.SmallTest;
 import java.io.InputStream;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;

@@ -1,11 +1,8 @@
 package org.ligi.passandroid;
 
-import android.test.suitebuilder.annotation.SmallTest;
-
+import android.support.test.filters.SmallTest;
 import com.squareup.spoon.Spoon;
-
 import org.ligi.passandroid.ui.HelpActivity;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
