@@ -33,9 +33,11 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
     private fun extractImage(imageReturnedIntent: Intent, name: String) {
         val extractedFile = AXT.at(imageReturnedIntent.data).loadImage(context)
         val pass = passStore.currentPass
-        if (extractedFile != null && pass != null) {
+        if (extractedFile != null && pass != null && extractedFile.exists()) {
             try {
-                extractedFile.copyTo(File(passStore.getPathForID(pass.id), name + PassImpl.FILETYPE_IMAGES))
+                val destinationFile = File(passStore.getPathForID(pass.id), name + PassImpl.FILETYPE_IMAGES)
+                destinationFile.delete()
+                extractedFile.copyTo(destinationFile)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
