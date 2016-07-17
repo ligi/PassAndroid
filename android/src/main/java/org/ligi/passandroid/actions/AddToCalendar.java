@@ -38,7 +38,7 @@ public class AddToCalendar {
             final Intent intent = new Intent(Intent.ACTION_EDIT);
             intent.setType("vnd.android.cursor.item/event");
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date.toEpochSecond() * 1000);
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, date.toEpochSecond() * 1000 + 60 * 60 * 1000);
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, date.plusHours(1).toEpochSecond() * 1000);
             intent.putExtra("title", pass.getDescription());
             activity.startActivity(intent);
         } catch (ActivityNotFoundException exception) {
