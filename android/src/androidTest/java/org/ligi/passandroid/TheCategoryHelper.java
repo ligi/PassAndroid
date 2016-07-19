@@ -1,18 +1,16 @@
 package org.ligi.passandroid;
 
-
-import android.support.test.filters.SmallTest;
-import android.test.InstrumentationTestCase;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.Test;
 import org.ligi.passandroid.helper.CategoryHelper;
 import org.ligi.passandroid.model.PassDefinitions;
 import org.ligi.passandroid.model.pass.PassType;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TheCategoryHelper extends InstrumentationTestCase {
+public class TheCategoryHelper {
 
-    @SmallTest
+    @Test
     public void testAllCategoriesAreTranslated() {
 
         final Set<Integer> probe = new HashSet<>();
