@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
+       xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
        tools:showIn="@layout/pass_view_extra_data">
 
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content">
 
-        <TextView
+        <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/zoomOut"
                 android:background="@drawable/clickable_bg"
-                android:drawableRight="@drawable/ic_action_zoom_out_wrapped"
-                android:layout_width="0dip"
-                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_zoom_out"
+                android:layout_width="wrap_content"
                 android:minWidth="@dimen/finger"
-                android:layout_height="match_parent"/>
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
 
         <ImageView
                 android:id="@+id/barcode_img"
@@ -22,20 +24,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/accent"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/barcode"/>
 
-        <TextView
+        <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/zoomIn"
-                android:drawableLeft="@drawable/ic_action_zoom_in_wrapped"
-                android:layout_width="0dip"
-                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_zoom_in"
+                android:layout_width="wrap_content"
                 android:minWidth="@dimen/finger"
                 android:background="@drawable/clickable_bg"
                 android:clickable="true"
-                android:layout_height="match_parent"/>
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <TextView
