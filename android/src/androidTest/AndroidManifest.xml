@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest
+        xmlns:tools="http://schemas.android.com/tools"
+        package="org.ligi.passandroid">
+
+    <uses-sdk tools:overrideLibrary="com.jraska.falcon.spooncompat , com.jraska.falcon"/>
+
+</manifest>
