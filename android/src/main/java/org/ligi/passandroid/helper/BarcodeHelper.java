@@ -23,6 +23,7 @@ public class BarcodeHelper {
 
         final BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmap);
         bitmapDrawable.setFilterBitmap(false);
+        bitmapDrawable.setAntiAlias(false);
         return bitmapDrawable;
     }
 
