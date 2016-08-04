@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,14 +78,7 @@ public class PassListFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                final Pass pass = passStoreProjection.getPassList().get(viewHolder.getAdapterPosition());
-                final String nextTopic = passStore.getClassifier().getTopicWithOffset(pass, (swipeDir == LEFT) ? -1 : 1);
-
-                if (nextTopic != null) {
-                    MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
-                } else {
-                    new MoveToNewTopicUI(getActivity(), passStore, pass).show();
-                }
+                PassListFragment.this.onSwiped(viewHolder.getAdapterPosition(), swipeDir);
             }
         };
 
@@ -93,6 +87,18 @@ public class PassListFragment extends Fragment {
 
         bus.register(this);
         return inflate;
+    }
+
+    @VisibleForTesting
+    public void onSwiped(final int pos, final int swipeDir) {
+        final Pass pass = passStoreProjection.getPassList().get(pos);
+        final String nextTopic = passStore.getClassifier().getTopicWithOffset(pass, (swipeDir == LEFT) ? -1 : 1);
+
+        if (nextTopic != null) {
+            MoveHelper.moveWithUndoSnackbar(passStore.getClassifier(), pass, nextTopic, getActivity());
+        } else {
+            new MoveToNewTopicUI(getActivity(), passStore, pass).show();
+        }
     }
 
     @Override
