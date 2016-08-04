@@ -21,19 +21,19 @@ import org.ligi.passandroid.ui.PassEditActivity
 import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
-class TheBarCodeEditing {
+class TheBarCodeEditing : BaseUnitTest() {
 
     @get:Rule
-    val rule = ActivityTestRule(PassEditActivity::class.java, true, false)
+    val rule: ActivityTestRule<PassEditActivity> = ActivityTestRule(PassEditActivity::class.java, true, false)
 
     @Inject
     lateinit var passStore: PassStore
 
     lateinit var currentPass: PassImpl
 
-    private var passEditActivity: PassEditActivity? = null
+    private val passEditActivity by lazy { rule.launchActivity(null) }
 
-    fun start(f: (pass: PassImpl) -> Unit) {
+    fun start(setupPass: (pass: PassImpl) -> Unit) {
 
         val build = DaggerTestComponent.create()
         build.inject(this)
@@ -41,9 +41,9 @@ class TheBarCodeEditing {
 
         currentPass = passStore.currentPass as PassImpl
 
-        f(currentPass)
+        setupPass(currentPass)
 
-        passEditActivity = rule.launchActivity(null)
+        setUp(passEditActivity)
 
         closeSoftKeyboard()
     }

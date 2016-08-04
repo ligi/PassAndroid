@@ -40,7 +40,7 @@ class FixedPassListPassStore(private val passes: List<Pass>) : PassStore {
         // no effect in this impl
     }
 
-    override fun syncPassStoreWithClassifier(default: String) {
+    override fun syncPassStoreWithClassifier(defaultTopic: String) {
         // no effect in this impl
     }
 

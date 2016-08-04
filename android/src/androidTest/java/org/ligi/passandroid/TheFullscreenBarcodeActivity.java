@@ -105,7 +105,7 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
             bitmapToTest = bitmap;
         }
 
-        assertThat(BarcodeDecoder.decodeBitmap(bitmapToTest)).isEqualTo(BARCODE_MESSAGE);
+        assertThat(BarcodeDecoder.INSTANCE.decodeBitmap(bitmapToTest)).isEqualTo(BARCODE_MESSAGE);
     }
 
 }

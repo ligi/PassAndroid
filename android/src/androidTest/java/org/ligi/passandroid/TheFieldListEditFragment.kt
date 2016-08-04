@@ -22,7 +22,7 @@ import javax.inject.Inject
 class TheFieldListEditFragment : BaseUnitTest(){
 
     @get:Rule
-    val rule = ActivityTestRule(PassEditActivity::class.java, true, false)
+    val rule: ActivityTestRule<PassEditActivity> = ActivityTestRule(PassEditActivity::class.java, true, false)
 
     @Inject
     lateinit var passStore: PassStore
@@ -30,7 +30,6 @@ class TheFieldListEditFragment : BaseUnitTest(){
     private val field: PassField = PassField(null, "labelfieldcontent", "valuefieldcontent", false)
 
     fun start(): Activity {
-        super.setUp()
         val build = DaggerTestComponent.create()
         build.inject(this)
         App.setComponent(build)
@@ -39,7 +38,11 @@ class TheFieldListEditFragment : BaseUnitTest(){
 
         currentPass.fields = arrayListOf(field)
 
-        return rule.launchActivity(null)
+        val activity = rule.launchActivity(null)
+
+        setUp(activity)
+
+        return activity
     }
 
     @Test
