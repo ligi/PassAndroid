@@ -15,7 +15,7 @@ public class FileBackedPassClassifier extends PassClassifier {
     private final File backed_file;
 
     public FileBackedPassClassifier(final File backed_file, final PassStore passStore, final Moshi moshi) {
-        super(getBase(backed_file, moshi), passStore);
+        super(loadMap(backed_file, moshi), passStore);
 
         this.backed_file = backed_file;
         adapter = getAdapter(moshi);
@@ -26,7 +26,7 @@ public class FileBackedPassClassifier extends PassClassifier {
     }
 
     @SuppressWarnings("unchecked")
-    private static Map<String, String> getBase(final File backed_file, final Moshi moshi) {
+    private static Map<String, String> loadMap(final File backed_file, final Moshi moshi) {
 
         if (backed_file.exists()) {
             try {
