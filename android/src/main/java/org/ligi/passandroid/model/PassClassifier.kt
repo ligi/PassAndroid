@@ -5,13 +5,12 @@ import org.ligi.passandroid.model.pass.Pass
 open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private val passStore: PassStore) {
 
     open fun processDataChange() {
-        passStore.notifyChange()
-
         val topicsToRemove = topicByIdMap.filter { it.value.isEmpty() }.map { it.value }
 
         topicsToRemove.forEach {
             topicByIdMap.remove(it)
         }
+        passStore.notifyChange()
     }
 
     fun moveToTopic(pass: Pass, newTopic: String) {
