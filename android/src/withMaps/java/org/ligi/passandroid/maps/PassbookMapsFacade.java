@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.FullscreenMapActivity;
 import org.ligi.passandroid.LocationsMapFragment;
@@ -15,8 +15,8 @@ import org.ligi.passandroid.model.pass.Pass;
 public class PassbookMapsFacade {
 
     public static boolean init(FragmentActivity context) {
-
-        final boolean isGooglePlayServicesAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
+        final GoogleApiAvailability gapi = GoogleApiAvailability.getInstance();
+        final boolean isGooglePlayServicesAvailable = gapi.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
 
         if (!isGooglePlayServicesAvailable) {
             return false;
