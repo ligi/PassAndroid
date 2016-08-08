@@ -16,10 +16,6 @@ node {
    }
   }
 
- stage 'assemble'
-  sh "./gradlew clean assemble${flavorCombination}Release"
-  archive 'android/build/outputs/apk/*'
-
  stage 'lint'
   try {
    sh "./gradlew clean lint${flavorCombination}Release"
@@ -34,4 +30,9 @@ node {
   publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/reports/tests/', reportFiles: "*/index.html", reportName: 'UnitTest'])
   step([$class: 'JUnitResultArchiver', testResults: 'android/build/test-results/*/*.xml'])
 
+ stage 'assemble'
+  sh "./gradlew clean assemble${flavorCombination}Release"
+  archive 'android/build/outputs/apk/*'
+  archive 'android/build/outputs/mapping/*/release/mapping.txt'
+     
 }
