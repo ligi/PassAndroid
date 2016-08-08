@@ -2,7 +2,8 @@ package org.ligi.passandroid
 
 import android.app.Activity
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.*
+import android.support.test.espresso.action.ViewActions.replaceText
+import android.support.test.espresso.action.ViewActions.scrollTo
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
@@ -65,7 +66,7 @@ class TheFieldListEditFragment : BaseUnitTest(){
         start()
 
         onView(withId(R.id.label_field_edit)).perform(scrollTo())
-        onView(withId(R.id.label_field_edit)).perform(click(), replaceText("newlabel"))
+        onView(withId(R.id.label_field_edit)).perform(replaceText("newlabel"))
         assertThat(field.label).isEqualTo("newlabel")
     }
 
@@ -75,7 +76,7 @@ class TheFieldListEditFragment : BaseUnitTest(){
         start()
 
         onView(withId(R.id.value_field_edit)).perform(scrollTo())
-        onView(withId(R.id.value_field_edit)).perform(click(), replaceText("newvalue"))
+        onView(withId(R.id.value_field_edit)).perform(replaceText("newvalue"))
         assertThat(field.value).isEqualTo("newvalue")
     }
 
