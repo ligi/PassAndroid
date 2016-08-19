@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlin_version = '1.0.3'
-        support_version = '24.1.1'
+        support_version = '24.2.0'
         dagger_version = '2.6'
         butterknife_version = '8.2.1'
         play_version = '9.4.0'
@@ -121,7 +121,6 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
-    androidTestCompile "com.android.support:support-v4:$support_version"
     androidTestCompile "com.android.support:support-annotations:$support_version"
 
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
@@ -150,7 +149,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
 
     compile "com.android.support:support-annotations:$support_version"
-    compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support:cardview-v7:$support_version"
@@ -174,7 +172,6 @@ dependencies {
     compile 'net.steamcrafted:load-toast:1.0.10'
 
     compile "com.google.dagger:dagger:$dagger_version"
-
 
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
 
