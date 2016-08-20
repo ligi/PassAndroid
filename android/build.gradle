@@ -107,8 +107,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
-}
 
+    dexOptions {
+        incremental true
+    }
+}
 
 kapt {
     generateStubs = true
