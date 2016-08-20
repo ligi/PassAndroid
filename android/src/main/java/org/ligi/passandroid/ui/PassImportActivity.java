@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import javax.inject.Inject;
 import org.ligi.axt.AXT;
 import org.ligi.passandroid.App;
@@ -113,14 +112,5 @@ public class PassImportActivity extends AppCompatActivity {
 
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_pass_view, menu);
-
-        return true;
-    }
-
 
 }
