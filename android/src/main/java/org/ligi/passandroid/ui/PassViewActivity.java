@@ -129,7 +129,6 @@ public class PassViewActivity extends PassViewActivityBase {
         final PassViewHolder passViewHolder = new VerbosePassViewHolder(findViewById(R.id.pass_card));
         passViewHolder.apply(pass, passStore, this);
 
-        super.onPostResume();
     }
 
     @Override
@@ -142,8 +141,8 @@ public class PassViewActivity extends PassViewActivityBase {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onResumeFragments() {
+        super.onResumeFragments();
 
         if (currentPass == null) {
             return;
