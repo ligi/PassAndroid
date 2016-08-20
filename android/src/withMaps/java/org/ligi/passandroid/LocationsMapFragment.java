@@ -10,7 +10,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -27,7 +26,7 @@ public class LocationsMapFragment extends SupportMapFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = super.onCreateView(inflater, container, savedInstanceState);
+        final View root = super.onCreateView(inflater, container, savedInstanceState);
 
         base_activity = (PassViewActivityBase) getActivity();
 
@@ -39,16 +38,17 @@ public class LocationsMapFragment extends SupportMapFragment {
             @Override
             public void onMapReady(final GoogleMap map) {
 
-                map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-
-                    boolean initDone;
-
+                map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
-                    public void onCameraChange(CameraPosition cameraPosition) {
-                        if (initDone) {
-                            return; // all done - not again
-                        }
-                        initDone = true;
+                    public void onMapLoaded() {
+                        if (click_to_fullscreen) map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                            @Override
+                            public void onMapClick(final LatLng latLng) {
+                                App.component().passStore().setCurrentPass(base_activity.currentPass);
+                                AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
+                            }
+                        });
+
 
                         LatLngBounds.Builder boundBuilder = new LatLngBounds.Builder();
 
@@ -57,10 +57,8 @@ public class LocationsMapFragment extends SupportMapFragment {
                         for (PassLocation l : locations) {
 
                             // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
-                            LatLng latLng = new LatLng(l.lat, l.lon);
-                            map.addMarker(new MarkerOptions()
-                                                  .position(latLng)
-                                                  .title(l.getName(base_activity.currentPass))
+                            final LatLng latLng = new LatLng(l.lat, l.lon);
+                            map.addMarker(new MarkerOptions().position(latLng).title(l.getName(base_activity.currentPass))
                                           //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
                             );
 
@@ -81,18 +79,9 @@ public class LocationsMapFragment extends SupportMapFragment {
                         // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
                         map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.getCameraPosition().zoom)));
 
-                        // Remove listener to prevent position reset on camera move.
-                        map.setOnCameraChangeListener(null);
-                        if (click_to_fullscreen)
-                            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                                @Override
-                                public void onMapClick(LatLng latLng) {
-                                    App.component().passStore().setCurrentPass(base_activity.currentPass);
-                                    AXT.at(getActivity()).startCommonIntent().activityFromClass(FullscreenMapActivity.class);
-                                }
-                            });
                     }
                 });
+
             }
         });
 
