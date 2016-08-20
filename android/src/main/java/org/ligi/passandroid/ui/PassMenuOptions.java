@@ -84,7 +84,7 @@ public class PassMenuOptions {
                 return true;
 
             case R.id.menu_map:
-                PassbookMapsFacade.startFullscreenMap(activity, pass);
+                PassbookMapsFacade.startFullscreenMap(activity);
                 return true;
 
             case R.id.menu_share:

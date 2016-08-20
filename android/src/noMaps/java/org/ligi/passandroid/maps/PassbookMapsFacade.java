@@ -9,6 +9,6 @@ public class PassbookMapsFacade {
         return false;
     }
 
-    public static void startFullscreenMap(Context context,Pass pass) {
+    public static void startFullscreenMap(Context context) {
     }
 }
