@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -102,6 +103,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean res = super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_light).setVisible(!fullBrightnessSet);
+        menu.findItem(R.id.menu_print).setVisible(Build.VERSION.SDK_INT >= 19);
         return res;
     }
 

@@ -1,31 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
-
-
-    <item
-        android:id="@+id/menu_delete"
-        yourapp:showAsAction="ifRoom"
-        android:title="@string/menu_delete"
-        android:icon="@drawable/ic_action_delete" />
-
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_share"
-        yourapp:showAsAction="ifRoom"
-        android:title="@string/menu_share"
-        android:icon="@drawable/ic_social_share" />
-
-
-    <item
-        android:id="@+id/menu_light"
-        yourapp:showAsAction="ifRoom"
-        android:title="light"
-        android:icon="@drawable/ic_device_brightness_high" />
+            android:id="@+id/menu_share"
+            yourapp:showAsAction="ifRoom"
+            android:title="@string/menu_share"
+            android:icon="@drawable/ic_social_share"/>
 
     <item
-        android:id="@+id/menu_edit"
-        yourapp:showAsAction="ifRoom"
-        android:title="edit"
-        android:icon="@drawable/ic_editor_mode_edit" />
+            android:id="@+id/menu_light"
+            yourapp:showAsAction="ifRoom"
+            android:title="light"
+            android:icon="@drawable/ic_device_brightness_high"/>
 
+    <item
+            android:id="@+id/menu_edit"
+            yourapp:showAsAction="ifRoom"
+            android:title="edit"
+            android:icon="@drawable/ic_editor_mode_edit"/>
+
+    <item
+            android:id="@+id/menu_print"
+            yourapp:showAsAction="ifRoom"
+            android:title="print"
+            android:icon="@drawable/ic_action_print"/>
+
+    <item
+            android:id="@+id/menu_delete"
+            yourapp:showAsAction="ifRoom"
+            android:title="@string/menu_delete"
+            android:icon="@drawable/ic_action_delete"/>
 </menu>

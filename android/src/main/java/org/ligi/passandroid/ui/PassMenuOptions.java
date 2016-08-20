@@ -19,6 +19,7 @@ import org.ligi.passandroid.maps.PassbookMapsFacade;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.passandroid.printing.PrintHelper;
 
 public class PassMenuOptions {
 
@@ -97,9 +98,12 @@ public class PassMenuOptions {
                 passStore.setCurrentPass(pass);
                 AXT.at(activity).startCommonIntent().activityFromClass(PassEditActivity.class);
                 return true;
+
+            case R.id.menu_print:
+                PrintHelper.doPrint(activity, pass);
+                return true;
         }
         return false;
     }
-
 
 }
