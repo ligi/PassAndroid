@@ -57,10 +57,10 @@ public class LocationsMapFragment extends SupportMapFragment {
                         for (PassLocation l : locations) {
 
                             // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
-                            final LatLng latLng = new LatLng(l.lat, l.lon);
-                            map.addMarker(new MarkerOptions().position(latLng).title(l.getName(base_activity.currentPass))
-                                          //.icon(BitmapDescriptorFactory.fromBitmap(base_activity.passbook.getIconBitmap())));
-                            );
+                            final LatLng latLng = new LatLng(l.getLat(), l.getLon());
+                            final MarkerOptions marker = new MarkerOptions().position(latLng).title(l.getNameWithFallback(base_activity.currentPass));
+                            map.addMarker(marker);
+
 
                             boundBuilder = boundBuilder.include(latLng);
                         }

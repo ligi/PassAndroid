@@ -29,7 +29,7 @@ public class NavigateToLocationsDialog {
 
             int i = 0;
             for (PassLocation loc : locations) {
-                locationDescriptions[i++] = loc.getName(pass);
+                locationDescriptions[i++] = loc.getNameWithFallback(pass);
             }
             new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.choose_location))
                     .setItems(locationDescriptions, new DialogInterface.OnClickListener() {
@@ -55,12 +55,12 @@ public class NavigateToLocationsDialog {
 
         final String description = getEncodedDescription(location, pass);
 
-        final String latAndLonStr = location.lat + "," + location.lon;
+        final String latAndLonStr = location.getLat() + "," + location.getLon();
         i.setData(Uri.parse("geo:" + latAndLonStr + "?q=" + latAndLonStr + "(" + description + ")"));
         try {
             activity.startActivity(i);
         } catch (ActivityNotFoundException e) {
-            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + location.lat + "," + location.lon));
+            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + location.getLat() + "," + location.getLon()));
             activity.startActivity(i);
             // TODO also the browser could not be found -> handle
         }
@@ -68,7 +68,7 @@ public class NavigateToLocationsDialog {
 
     private static String getEncodedDescription(final PassLocation location, @Nonnull final Pass pass) {
         try {
-            return URLEncoder.encode(location.getName(pass), "UTF-8");
+            return URLEncoder.encode(location.getNameWithFallback(pass), "UTF-8");
         } catch (UnsupportedEncodingException e1) {
             // OK - no description
             return "";

@@ -141,7 +141,7 @@ object AppleStylePassReader {
                 location.lon = obj.getDouble("longitude")
 
                 if (obj.has("relevantText")) {
-                    location.setName(translation.translate(obj.getString("relevantText")))
+                    location.name = translation.translate(obj.getString("relevantText"))
                 }
 
                 locations.add(location)
