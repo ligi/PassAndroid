@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import org.ligi.passandroid.BuildConfig;
 import org.ligi.passandroid.R;
 import org.xml.sax.XMLReader;
 
@@ -36,6 +37,7 @@ public class HelpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setSubtitle("v" + BuildConfig.VERSION_NAME);
         }
     }
 
