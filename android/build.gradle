@@ -3,7 +3,7 @@ buildscript {
         kotlin_version = '1.0.3'
         support_version = '24.2.0'
         dagger_version = '2.6'
-        butterknife_version = '8.2.1'
+        butterknife_version = '8.4.0'
         play_version = '9.4.0'
     }
 
