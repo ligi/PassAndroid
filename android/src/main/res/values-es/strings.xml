@@ -87,6 +87,7 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="scanning_for_passes">Buscando pases </string>
   <string name="fab_choice_scan_pkpass_files">Buscando archivos pkpass</string>
   <string name="fab_choice_add_demo_pass">Añadir un pase demo</string>
+  <string name="fab_choice_create_pass">Crear Passbook</string>
   <string name="empty_text_view"><big><b>Ningún pase todavía</b></big>
     \n\n\n Usted puede buscar pases en su teléfono
     \n\n o crear el suyo propio
@@ -97,4 +98,63 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="unzip_pass_dialog_title">Abriendo Passbook</string>
   <string name="unzip_pass_dialog_message">Por favor, espere...</string>
   <string name="action_update">actualizado</string>
+  <string name="no_calendar_app_found">Ninguna app de Calendario encontrada</string>
+  <string name="pass_updated">Passbook actualizado</string>
+  <string name="expiration_date_to_calendar_warning_message">Está a punto de añadir la fecha de expiración al calendario - Si cree que existe una fecha de expiración en este Passbook - envíemelo por favor - PassAndroid necesita saber dónde está</string>
+  <string name="expiration_date_to_calendar_warning_title">Añadir fecha de expiración</string>
+  <string name="topic_trash">Papelera</string>
+  <string name="topic_new">nuevo</string>
+  <string name="topic_archive">guardar</string>
+  <string name="move_to_new_topic">mover a un nuevo Tema</string>
+  <string name="categories_nav">%d Categorías</string>
+  <string name="passes_nav">%d Passbook</string>
+  <string name="found_pass">encontrados: %s</string>
+  <string name="found__pass">Y %d más</string>
+  <string name="scan_finished_dialog_title">Búsqueda terminada</string>
+  <string name="scan_finished_dialog_text">encontrados %d Passbooks</string>
+  <string name="scan_progressdialog_title">Buscando ...</string>
+  <string name="scan_progressdialog_message">Por favor, espere</string>
+  <string name="scan_dialog_send_background_button">fondo</string>
+  <string name="emtytrash_label">Vaciar papelera</string>
+  <string name="barcode_edit_hint_alternative_message">mensaje alternativo</string>
+  <string name="barcode_edit_random">aleatorio</string>
+  <string name="barcode_edit_scan">escanear</string>
+  <string name="barcode_edit_message">Mensaje</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">Añadir código de barras</string>
+  <string name="categories_voucher">vale</string>
+  <string name="edit_time">editar hora</string>
+  <string name="edit_location">editar ubicación</string>
+  <string name="add_front_field">Añadir campo en el anverso</string>
+  <string name="add_back_fields">Añadir campo en el reverso</string>
+  <string name="change_color_dialog_title">Seleccionar color</string>
+  <string name="select_category_dialog_title">Seleccionar Categoría</string>
+  <string name="barcode_edit_code128">Código 128</string>
+  <string name="barcode_edit_code39">Código 39</string>
+  <string name="add_footer_image">Añadir imagen en el pié de página</string>
+  <string name="add_logo_image">añadir logo</string>
+  <string name="add_header_image">añadir imagen en el encabezamiento</string>
+  <string name="add_barcode">Añadir código de barras</string>
+  <string name="edit_barcode_dialog_title">Editar código de barras</string>
+  <string name="empty_trash_dialog_message">Verdaderamente quiere vaciar la papelera? No podrá recuperar esta acción</string>
+  <string name="empty_trash_dialog_title">atención</string>
+  <string name="new_topic_input_hint">Título del tema nuevo</string>
+  <string name="new_topic_suggestions">Sugerencias</string>
+  <string name="cannot_be_empty">No puede estar vacío</string>
+  <string name="please_use_the_swipe_feature">Por favor, utilice la  función de deslizar</string>
+  <string name="type">Tipo</string>
+  <string name="undo">Deshacer</string>
+  <string-array name="sort_orders">
+    <item>Fecha ascendente</item>
+    <item>Fecha descendente</item>
+    <item>Tipo</item>
+    <item>Distancia en el tiempo</item>
+  </string-array>
+  <string-array name="category_edit_options">
+    <item>@string/select_category_dialog_title</item>
+    <item>@string/change_color_dialog_title</item>
+    <item>Seleccione Icono</item>
+  </string-array>
 </resources>
