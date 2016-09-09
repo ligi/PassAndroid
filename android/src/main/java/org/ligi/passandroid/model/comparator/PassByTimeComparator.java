@@ -17,7 +17,7 @@ public class PassByTimeComparator implements Comparator<Pass> {
         }
     }
 
-    public int calculateCompareForNullValues(final Pass lhs, final Pass rhs) {
+    protected int calculateCompareForNullValues(final Pass lhs, final Pass rhs) {
         if ((lhs.getCalendarTimespan() == null || lhs.getCalendarTimespan().getFrom() == null) &&
             (rhs.getCalendarTimespan() == null || rhs.getCalendarTimespan().getFrom() == null)) {
             return 0;
