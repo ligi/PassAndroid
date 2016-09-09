@@ -3,7 +3,6 @@ package org.ligi.passandroid;
 import android.app.Application;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatDelegate;
-import com.chibatching.kotpref.Kotpref;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.squareup.leakcanary.LeakCanary;
 import org.ligi.tracedroid.TraceDroid;
@@ -25,7 +24,6 @@ public class App extends Application {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         LeakCanary.install(this);
         AndroidThreeTen.init(this);
-        Kotpref.INSTANCE.init(this);
         initTraceDroid();
 
         AppCompatDelegate.setDefaultNightMode(component.settings().getNightMode());
