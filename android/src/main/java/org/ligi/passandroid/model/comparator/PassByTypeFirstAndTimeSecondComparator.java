@@ -10,16 +10,6 @@ public class PassByTypeFirstAndTimeSecondComparator implements Comparator<Pass> 
 
     @Override
     public int compare(Pass lhs, Pass rhs) {
-        if (lhs.getType() == rhs.getType()) { // that looks bad but makes sense for both being null
-            return 0;
-        }
-
-        if (lhs.getType() == null) {
-            return 1;
-        }
-        if (rhs.getType() == null) {
-            return -1;
-        }
         final int compareResult = lhs.getType().compareTo(rhs.getType());
 
         if (compareResult != 0) {
