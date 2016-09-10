@@ -89,6 +89,9 @@ class PassImpl(override val id: String) : Pass {
         return null
     }
 
+    override fun toString(): String {
+        return "ID=$id"
+    }
 
     companion object {
         val FILETYPE_IMAGES = ".png"
