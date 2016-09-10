@@ -26,10 +26,15 @@ node {
   }
 
  stage 'test'
-  sh "./gradlew clean test${flavorCombination}DebugUnitTest"
-  publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/reports/tests/', reportFiles: "*/index.html", reportName: 'UnitTest'])
-  step([$class: 'JUnitResultArchiver', testResults: 'android/build/test-results/*/*.xml'])
-
+  try {
+   sh "./gradlew clean test${flavorCombination}DebugUnitTest"
+   step([$class: 'JUnitResultArchiver', testResults: 'android/build/test-results/*/*.xml'])
+  } catch(err) {
+   currentBuild.result = FAILURE
+  } finally {
+   publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'android/build/reports/tests/', reportFiles: "*/index.html", reportName: 'UnitTest'])
+  }
+  
  stage 'assemble'
   sh "./gradlew clean assemble${flavorCombination}Release"
   archive 'android/build/outputs/apk/*'
