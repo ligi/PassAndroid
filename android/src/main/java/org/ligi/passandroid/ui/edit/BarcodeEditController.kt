@@ -37,7 +37,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (data != null && data.hasExtra("SCAN_RESULT")) {
-                scanCallback(data.getStringExtra("SCAN_RESULT"));
+                scanCallback(data.getStringExtra("SCAN_RESULT"))
             }
         }
     }
