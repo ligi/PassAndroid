@@ -1,8 +1,9 @@
 buildscript {
     ext {
-        kotlin_version = '1.0.3'
         support_version = '24.2.1'
         dagger_version = '2.7'
+        kotlin_version = '1.0.4'
+
         butterknife_version = '8.4.0'
         play_version = '9.4.0'
     }
@@ -14,7 +15,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'de.felixschulze.gradle:gradle-spoon-plugin:2.7.3'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.5.0'
@@ -28,6 +29,7 @@ apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'de.felixschulze.gradle.spoon'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
 apply plugin: 'com.github.ben-manes.versions'
 
@@ -39,7 +41,7 @@ repositories {
 android {
 
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         versionCode 323
@@ -98,6 +100,9 @@ android {
     lintOptions {
         warning 'MissingTranslation'
         warning 'InvalidPackage'
+
+        // TODO: remove when this is solved: http://stackoverflow.com/questions/39714487/kapt2-and-butterknife-produce-lint-error-expected-resource-of-type-id
+        warning 'ResourceType'
     }
 
     buildTypes {
@@ -107,14 +112,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
-
-    dexOptions {
-        incremental true
-    }
-}
-
-kapt {
-    generateStubs = true
 }
 
 dependencies {
@@ -130,10 +127,14 @@ dependencies {
         // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'javax.inject'
         exclude module: 'recyclerview-v7'
     }
 
-    androidTestCompile('com.android.support.test.espresso:espresso-web:2.2.2')
+    androidTestCompile('com.android.support.test.espresso:espresso-web:2.2.2') {
+        // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
+        exclude group: 'javax.inject'
+    }
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.6.4'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
