@@ -197,8 +197,8 @@ dependencies {
     withAnalyticsCompile "com.google.android.gms:play-services-analytics:$play_version"
     withMapsCompile "com.google.android.gms:play-services-maps:$play_version"
 
-    compile 'com.github.hotchemi:permissionsdispatcher:2.1.3'
-    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
+    compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
 }
 
 spoon {
