@@ -36,6 +36,7 @@ apply plugin: 'com.github.ben-manes.versions'
 repositories {
     jcenter()
     mavenLocal()
+    maven { url 'https://jitpack.io' }
 }
 
 android {
@@ -166,7 +167,7 @@ dependencies {
 
     compile 'org.ligi:AXT:0.37'
     compile 'org.ligi:tracedroid:1.4'
-    compile 'org.ligi:snackengage:0.5'
+    compile 'com.github.ligi:snackengage:0.6'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'

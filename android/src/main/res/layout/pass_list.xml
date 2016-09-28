@@ -45,8 +45,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:singleLine="false"
-                android:text="@string/empty_text_view"/>
+                android:singleLine="false" android:text="@string/empty_text_view"/>
 
 
         <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu

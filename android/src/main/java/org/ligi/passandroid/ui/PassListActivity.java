@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -44,8 +45,13 @@ import org.ligi.passandroid.helper.PassTemplates;
 import org.ligi.passandroid.model.PassClassifier;
 import org.ligi.passandroid.model.PassStoreProjection;
 import org.ligi.passandroid.model.pass.Pass;
+import org.ligi.snackengage.SnackContext;
 import org.ligi.snackengage.SnackEngage;
+import org.ligi.snackengage.conditions.AfterNumberOfOpportunities;
+import org.ligi.snackengage.conditions.connectivity.IsConnectedViaWiFiOrUnknown;
+import org.ligi.snackengage.snacks.BaseSnack;
 import org.ligi.snackengage.snacks.DefaultRateSnack;
+import org.ligi.snackengage.snacks.OpenURLSnack;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import permissions.dispatcher.NeedsPermission;
@@ -122,7 +128,7 @@ public class PassListActivity extends PassAndroidActivity {
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
     void showDeniedFor() {
-        Snackbar.make(floatingActionsMenu,"no permission to scan",Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(floatingActionsMenu, "no permission to scan", Snackbar.LENGTH_INDEFINITE).show();
     }
 
     @OnClick(R.id.fab_action_scan)
@@ -209,7 +215,26 @@ public class PassListActivity extends PassAndroidActivity {
         } else { // if no error - check if there is a new version of the app
             tracker.trackEvent("ui_event", "processFile", "updatenotice", null);
 
-            SnackEngage.from(floatingActionsMenu).withSnack(new DefaultRateSnack()).build().engageWhenAppropriate();
+            SnackEngage.from(floatingActionsMenu)
+                       .withSnack(new DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE))
+                       .withSnack(new OpenURLSnack("market://details?id=org.ligi.survivalmanual", "survival") {
+
+                           @NonNull
+                           @Override
+                           protected Snackbar createSnackBar(final SnackContext snackContext) {
+                               Snackbar snackbar = super.createSnackBar(snackContext);
+
+                               final TextView textView = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+                               textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.survival, 0, 0, 0);
+                               textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.rhythm));
+
+                               return snackbar;
+                           }
+
+                       }.withConditions(new AfterNumberOfOpportunities(7), new IsConnectedViaWiFiOrUnknown()))
+                       .build()
+
+                       .engageWhenAppropriate();
         }
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close);
