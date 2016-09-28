@@ -18,7 +18,7 @@ node {
 
  stage 'lint'
   try {
-   sh "./gradlew clean lint${flavorCombination}Release"
+   sh "./gradlew lint${flavorCombination}Release"
   } catch(err) {
    currentBuild.result = FAILURE
   } finally {
@@ -28,7 +28,7 @@ node {
 
  stage 'test'
   try {
-   sh "./gradlew clean test${flavorCombination}DebugUnitTest"
+   sh "./gradlew test${flavorCombination}DebugUnitTest"
   } catch(err) {
    currentBuild.result = FAILURE
   } finally {
@@ -37,7 +37,7 @@ node {
   }
   
  stage 'assemble'
-  sh "./gradlew clean assemble${flavorCombination}Release"
+  sh "./gradlew assemble${flavorCombination}Release"
   archive 'android/build/outputs/apk/*'
   archive 'android/build/outputs/mapping/*/release/mapping.txt'
      
