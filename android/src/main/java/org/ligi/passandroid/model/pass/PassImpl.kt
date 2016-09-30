@@ -15,7 +15,6 @@ import java.util.*
 
 class PassImpl(override val id: String) : Pass {
 
-
     @Retention(AnnotationRetention.RUNTIME)
     @JsonQualifier
     annotation class HexColor
@@ -60,6 +59,11 @@ class PassImpl(override val id: String) : Pass {
     override var serial: String? = null
 
     override var passIdent: String? = null
+
+    override fun isExpired(): Boolean {
+        val to = validTimespans.get(0).to
+        return to!!.isBefore(ZonedDateTime.now())
+    }
 
     override fun getBitmap(passStore: PassStore, @Pass.PassBitmap passBitmap: String): Bitmap? {
         try {
