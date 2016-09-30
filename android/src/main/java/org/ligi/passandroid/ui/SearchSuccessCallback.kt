@@ -10,6 +10,7 @@ import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
+import org.threeten.bp.ZonedDateTime
 import java.io.File
 
 internal class SearchSuccessCallback(private val context: Context, private val passStore: PassStore, private val foundList: MutableList<Pass>, private val findNotificationBuilder: NotificationCompat.Builder, private val file: File, private val notifyManager: NotificationManager) : UnzipPassController.SuccessCallback {
@@ -22,7 +23,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
         if (pass != null && !isDuplicate) {
             foundList.add(pass)
             val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
-            passStore.classifier.moveToTopic(pass, context.getString(R.string.topic_new))
+            passStore.classifier.moveToTopic(pass, getInitialTopic(pass))
             if (iconBitmap != null) {
                 val bitmap = scale2maxSize(iconBitmap, context.resources.getDimensionPixelSize(R.dimen.finger))
                 findNotificationBuilder.setLargeIcon(bitmap)
@@ -43,6 +44,13 @@ internal class SearchSuccessCallback(private val context: Context, private val p
             findNotificationBuilder.setContentIntent(PendingIntent.getActivity(context, SearchPassesIntentService.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT))
             notifyManager.notify(SearchPassesIntentService.FOUND_NOTIFICATION_ID, findNotificationBuilder.build())
         }
+    }
+
+    private fun getInitialTopic(pass: Pass): String {
+        if (pass.isExpired()) {
+            return context.getString(R.string.topic_archive)
+        }
+        return context.getString(R.string.topic_new)
     }
 
     private fun scale2maxSize(bitmap: Bitmap, dimensionPixelSize: Int): Bitmap {

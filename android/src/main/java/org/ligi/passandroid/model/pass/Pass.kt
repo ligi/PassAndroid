@@ -45,4 +45,5 @@ interface Pass {
 
     fun getBitmap(passStore: PassStore, passBitmap: String): Bitmap?
 
+    fun isExpired(): Boolean
 }
