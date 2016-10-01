@@ -139,7 +139,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
             return setDateTextFromDateAndPrefix("", pass.getCalendarTimespan().getFrom());
         } else if (pass.getValidTimespans() != null && pass.getValidTimespans().size() > 0 && pass.getValidTimespans().get(0).getTo() != null) {
             final ZonedDateTime to = pass.getValidTimespans().get(0).getTo();
-            return setDateTextFromDateAndPrefix(pass.isExpired() ? " expired " : "expires ", to);
+            return setDateTextFromDateAndPrefix(to.isAfter(ZonedDateTime.now()) ? "expires " : " expired ", to);
         } else {
             return null;
         }
