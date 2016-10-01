@@ -24,7 +24,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -197,7 +196,6 @@ public class PassListActivity extends PassAndroidActivity {
 
         App.component().inject(this);
 
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.pass_list);
 
         ButterKnife.bind(this);
@@ -231,7 +229,10 @@ public class PassListActivity extends PassAndroidActivity {
                                return snackbar;
                            }
 
-                       }.withConditions(new AfterNumberOfOpportunities(7), new IsConnectedViaWiFiOrUnknown()))
+                       }.overrideTitleText("Other App by ligi:\nFree Offline Survival Guide")
+                        .overrideActionText("Get It!")
+                        .withDuration(BaseSnack.DURATION_INDEFINITE)
+                        .withConditions(new AfterNumberOfOpportunities(7), new IsConnectedViaWiFiOrUnknown()))
                        .build()
 
                        .engageWhenAppropriate();
