@@ -53,7 +53,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
 
     private fun getInitialTopic(pass: Pass): String {
         val passDate = getDateOfPassForComparison(pass)
-        if (passDate!!.isBefore(ZonedDateTime.now())) {
+        if (passDate != null && passDate.isBefore(ZonedDateTime.now())) {
             return context.getString(R.string.topic_archive)
         }
         return context.getString(R.string.topic_new)
