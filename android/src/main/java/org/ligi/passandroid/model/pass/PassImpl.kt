@@ -15,7 +15,6 @@ import java.util.*
 
 class PassImpl(override val id: String) : Pass {
 
-
     @Retention(AnnotationRetention.RUNTIME)
     @JsonQualifier
     annotation class HexColor

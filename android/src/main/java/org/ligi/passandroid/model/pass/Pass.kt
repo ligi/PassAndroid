@@ -44,5 +44,4 @@ interface Pass {
     var calendarTimespan: PassImpl.TimeSpan?
 
     fun getBitmap(passStore: PassStore, passBitmap: String): Bitmap?
-
 }
