@@ -47,10 +47,20 @@ internal class SearchSuccessCallback(private val context: Context, private val p
     }
 
     private fun getInitialTopic(pass: Pass): String {
-        if (pass.isExpired()) {
+        val passDate = getDateOfPassForComparison(pass)
+        if (passDate!!.isBefore(ZonedDateTime.now())) {
             return context.getString(R.string.topic_archive)
         }
         return context.getString(R.string.topic_new)
+    }
+
+    private fun getDateOfPassForComparison(pass: Pass): ZonedDateTime? {
+        if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
+            return pass.calendarTimespan!!.from
+        } else if (pass.validTimespans != null && pass.validTimespans!!.size > 0 && pass.validTimespans!![0].to != null) {
+            return pass.validTimespans!![0].to
+        }
+        return null
     }
 
     private fun scale2maxSize(bitmap: Bitmap, dimensionPixelSize: Int): Bitmap {
