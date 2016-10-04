@@ -10,6 +10,7 @@ import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
+import org.threeten.bp.ZonedDateTime
 import java.io.File
 
 internal class SearchSuccessCallback(private val context: Context, private val passStore: PassStore, private val foundList: MutableList<Pass>, private val findNotificationBuilder: NotificationCompat.Builder, private val file: File, private val notifyManager: NotificationManager) : UnzipPassController.SuccessCallback {
@@ -22,7 +23,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
         if (pass != null && !isDuplicate) {
             foundList.add(pass)
             val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
-            passStore.classifier.moveToTopic(pass, context.getString(R.string.topic_new))
+            passStore.classifier.moveToTopic(pass, getInitialTopic(pass))
             if (iconBitmap != null) {
                 val bitmap = scale2maxSize(iconBitmap, context.resources.getDimensionPixelSize(R.dimen.finger))
                 findNotificationBuilder.setLargeIcon(bitmap)
@@ -48,5 +49,22 @@ internal class SearchSuccessCallback(private val context: Context, private val p
     private fun scale2maxSize(bitmap: Bitmap, dimensionPixelSize: Int): Bitmap {
         val scale = dimensionPixelSize.toFloat() / if (bitmap.width > bitmap.height) bitmap.width else bitmap.height
         return Bitmap.createScaledBitmap(bitmap, (bitmap.width * scale).toInt(), (bitmap.height * scale).toInt(), false)
+    }
+
+    private fun getInitialTopic(pass: Pass): String {
+        val passDate = getDateOfPassForComparison(pass)
+        if (passDate!!.isBefore(ZonedDateTime.now())) {
+            return context.getString(R.string.topic_archive)
+        }
+        return context.getString(R.string.topic_new)
+    }
+
+    private fun getDateOfPassForComparison(pass: Pass): ZonedDateTime? {
+        if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
+            return pass.calendarTimespan!!.from
+        } else if (pass.validTimespans != null && pass.validTimespans!!.size > 0 && pass.validTimespans!![0].to != null) {
+            return pass.validTimespans!![0].to
+        }
+        return null;
     }
 }
