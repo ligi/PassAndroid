@@ -167,7 +167,7 @@ dependencies {
 
     compile 'org.ligi:AXT:0.37'
     compile 'org.ligi:tracedroid:1.4'
-    compile 'com.github.ligi:snackengage:0.7'
+    compile 'com.github.ligi:snackengage:0.8'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
