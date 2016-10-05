@@ -33,7 +33,7 @@ object UnzipPassController {
             tempFile.delete()
         } catch (e: Exception) {
             App.component().tracker().trackException("problem processing InputStream", e, false)
-            spec.failCallback.fail("problem with temp file" + e)
+            spec.failCallback?.fail("problem with temp file" + e)
         }
 
     }
@@ -46,7 +46,7 @@ object UnzipPassController {
         path.mkdirs()
 
         if (!path.exists()) {
-            spec.failCallback.fail("Problem creating the temp dir: " + path)
+            spec.failCallback?.fail("Problem creating the temp dir: " + path)
             return
         }
 
@@ -70,7 +70,7 @@ object UnzipPassController {
                 manifest_json = SafeJSONReader.readJSONSafely(readToString)
                 uuid = manifest_json.getString("pass.json")
             } catch (e: Exception) {
-                spec.failCallback.fail("Problem with manifest.json: " + e)
+                spec.failCallback?.fail("Problem with manifest.json: " + e)
                 return
             }
 
@@ -80,7 +80,7 @@ object UnzipPassController {
                 manifest_json = SafeJSONReader.readJSONSafely(readToString)
                 uuid = manifest_json.getString("id")
             } catch (e: Exception) {
-                spec.failCallback.fail("Problem with manifest.json: " + e)
+                spec.failCallback?.fail("Problem with manifest.json: " + e)
                 return
             }
 
@@ -90,7 +90,7 @@ object UnzipPassController {
             val bitmap = BitmapFactory.decodeFile(spec.zipFileString)
 
             if (bitmap != null) {
-                val imagePass = PassTemplates.createPassForImageImport();
+                val imagePass = PassTemplates.createPassForImageImport()
                 val pathForID = spec.passStore.getPathForID(imagePass.id)
                 pathForID.mkdir()
 
@@ -98,9 +98,9 @@ object UnzipPassController {
 
                 spec.passStore.save(imagePass)
                 spec.passStore.classifier.moveToTopic(imagePass,"new")
-                spec.onSuccessCallback.call(imagePass.id)
+                spec.onSuccessCallback?.call(imagePass.id)
             } else {
-                spec.failCallback.fail("Pass is not espass or pkpass format :-(")
+                spec.failCallback?.fail("Pass is not espass or pkpass format :-(")
             }
             return
         }
@@ -118,10 +118,10 @@ object UnzipPassController {
             Log.i("Pass with same ID exists")
         }
 
-        spec.onSuccessCallback.call(uuid)
+        spec.onSuccessCallback?.call(uuid)
     }
 
     class InputStreamUnzipControllerSpec(internal val inputStreamWithSource: InputStreamWithSource, context: Context, passStore: PassStore,
-                                         onSuccessCallback: SuccessCallback, failCallback: FailCallback) : UnzipControllerSpec(context, passStore, onSuccessCallback, failCallback)
+                                         onSuccessCallback: SuccessCallback?, failCallback: FailCallback?) : UnzipControllerSpec(context, passStore, onSuccessCallback, failCallback)
 
 }
