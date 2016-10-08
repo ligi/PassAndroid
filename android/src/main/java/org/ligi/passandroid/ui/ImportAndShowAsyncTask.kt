@@ -54,7 +54,7 @@ internal class ImportAndShowAsyncTask(val passImportActivity: PassImportActivity
 
         UnzipPassDialog.show(result, passImportActivity, passImportActivity.passStore) { path ->
             // TODO this is kind of a hack - there should be a better way
-            val id = AXT.at(path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray()).last()
+            val id = path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray().last()
 
             val passbookForId = passImportActivity.passStore.getPassbookForId(id)
             passImportActivity.passStore.currentPass = passbookForId
