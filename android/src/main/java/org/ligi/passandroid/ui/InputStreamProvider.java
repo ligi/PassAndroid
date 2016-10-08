@@ -40,7 +40,7 @@ public class InputStreamProvider {
 
     }
 
-    public static InputStreamWithSource fromOKHttp(final Uri uri) {
+    private static InputStreamWithSource fromOKHttp(final Uri uri) {
         try {
             final OkHttpClient client = new OkHttpClient();
             final URL url = new URL(uri.toString());
@@ -77,7 +77,7 @@ public class InputStreamProvider {
         return null;
     }
 
-    public static InputStreamWithSource fromContent(final Context ctx, final Uri uri) {
+    private static InputStreamWithSource fromContent(final Context ctx, final Uri uri) {
         try {
             return new InputStreamWithSource(uri.toString(), ctx.getContentResolver().openInputStream(uri));
         } catch (FileNotFoundException e) {
@@ -88,7 +88,7 @@ public class InputStreamProvider {
     }
 
 
-    public static InputStreamWithSource getDefaultInputStreamForUri(final Uri uri) {
+    private static InputStreamWithSource getDefaultInputStreamForUri(final Uri uri) {
         try {
             return new InputStreamWithSource(uri.toString(), new BufferedInputStream(new URL(uri.toString()).openStream(), 4096));
         } catch (IOException e) {
