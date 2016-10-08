@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         versionCode 325
-        versionName "3.2.5"
+        versionName "3.2.6"
         minSdkVersion 9
         targetSdkVersion 24
         applicationId "org.ligi.passandroid"
