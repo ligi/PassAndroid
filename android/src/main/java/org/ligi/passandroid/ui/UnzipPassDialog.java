@@ -13,15 +13,15 @@ import static org.ligi.passandroid.ui.UnzipPassController.SuccessCallback;
 
 public class UnzipPassDialog {
 
-    public static void displayError(final Activity activity, final String title, final String err) {
+    static void displayError(final Activity activity, final String title, final String err) {
         new AlertDialog.Builder(activity).setTitle(title)
                                          .setMessage(err)
                                          .setPositiveButton(android.R.string.ok, new ActivityFinishingOnClickListener(activity))
                                          .show();
     }
 
-    public interface FinishCallback {
-        Void call(String path);
+    interface FinishCallback {
+        void call(String path);
     }
 
     public static void show(final InputStreamWithSource ins,
@@ -42,7 +42,7 @@ public class UnzipPassDialog {
 
             private final FinishCallback call_after_finish;
 
-            public AlertDialogUpdater(FinishCallback call_after_finish) {
+            AlertDialogUpdater(FinishCallback call_after_finish) {
                 this.call_after_finish = call_after_finish;
             }
 

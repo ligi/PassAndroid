@@ -63,7 +63,6 @@ internal class ImportAndShowAsyncTask(val passImportActivity: PassImportActivity
 
             AXT.at(passImportActivity).startCommonIntent().activityFromClass(PassViewActivity::class.java)
             passImportActivity.finish()
-            null
         }
 
     }
