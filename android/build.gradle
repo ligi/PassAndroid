@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        support_version = '24.2.1'
+        support_version = '25.0.0'
         dagger_version = '2.7'
         kotlin_version = '1.0.4'
 
@@ -15,7 +15,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'de.felixschulze.gradle:gradle-spoon-plugin:2.7.3'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.5.0'
@@ -41,14 +41,14 @@ repositories {
 
 android {
 
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25"
 
     defaultConfig {
         versionCode 326
         versionName "3.2.6"
         minSdkVersion 9
-        targetSdkVersion 24
+        targetSdkVersion 25
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         archivesBaseName = "PassAndroid-$versionName"
