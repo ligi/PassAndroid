@@ -173,5 +173,19 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
         <item>auto</item>
     </string-array>
 
+    <string name="preference_autolight_title">Automatic light</string>
+    <string name="preference_autolight_summary">Should I increase brightness when showing barcode?</string>
+
+    <string name="preference_condensed_title">Condensed mode</string>
+    <string name="preference_condensed_summary">Should I show more detail and less clutter?</string>
+
+
+    <string name="preference_sort_title">Sort order</string>
+    <string name="preference_sort_summary">How should I sort the passes?</string>
+
+
+    <string name="preference_daynight_title">Day/Night theme</string>
+    <string name="preference_daynight_summary">Should I be dark or light?</string>
+
 
 </resources>
