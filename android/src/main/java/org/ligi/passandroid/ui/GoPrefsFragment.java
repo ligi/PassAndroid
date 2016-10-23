@@ -11,7 +11,7 @@ import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
-import static android.app.UiModeManager.MODE_NIGHT_AUTO;
+import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO;
 
 @RuntimePermissions
 public class GoPrefsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
