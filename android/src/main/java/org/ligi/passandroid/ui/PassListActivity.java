@@ -124,6 +124,7 @@ public class PassListActivity extends PassAndroidActivity {
 
     }
 
+    @TargetApi(16)
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
     void showDeniedFor() {
@@ -136,6 +137,7 @@ public class PassListActivity extends PassAndroidActivity {
         floatingActionsMenu.collapse();
     }
 
+    @TargetApi(16)
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     void scan() {
         final Intent intent = new Intent(this, SearchPassesIntentService.class);
@@ -151,7 +153,7 @@ public class PassListActivity extends PassAndroidActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PassListActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
