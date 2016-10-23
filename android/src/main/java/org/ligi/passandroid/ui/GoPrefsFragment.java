@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import org.jetbrains.annotations.NotNull;
 import org.ligi.passandroid.App;
 import org.ligi.passandroid.R;
 import permissions.dispatcher.NeedsPermission;
@@ -62,7 +63,7 @@ public class GoPrefsFragment extends PreferenceFragmentCompat implements SharedP
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         GoPrefsFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
