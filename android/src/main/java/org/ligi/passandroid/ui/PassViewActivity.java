@@ -95,34 +95,32 @@ public class PassViewActivity extends PassViewActivityBase {
             }
         }
 
-        if (pass.getType() != null) {
-            final StringBuilder back_str = new StringBuilder();
+        final StringBuilder back_str = new StringBuilder();
 
-            frontFieldsContainer.removeAllViews();
+        frontFieldsContainer.removeAllViews();
 
-            for (PassField field : pass.getFields()) {
-                if (field.getHide()) {
-                    back_str.append(field.toHtmlSnippet());
-                } else {
-                    final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer, false);
-                    final TextView key = (TextView) v.findViewById(R.id.key);
-                    key.setText(field.getLabel());
-                    final TextView value = (TextView) v.findViewById(R.id.value);
-                    value.setText(field.getValue());
-
-                    frontFieldsContainer.addView(v);
-                }
-            }
-
-
-            if (back_str.length() > 0) {
-                back_tv.setText(Html.fromHtml(back_str.toString()));
-                moreTextView.setVisibility(View.VISIBLE);
+        for (PassField field : pass.getFields()) {
+            if (field.getHide()) {
+                back_str.append(field.toHtmlSnippet());
             } else {
-                moreTextView.setVisibility(View.GONE);
-            }
+                final View v = getLayoutInflater().inflate(R.layout.main_field_item, frontFieldsContainer, false);
+                final TextView key = (TextView) v.findViewById(R.id.key);
+                key.setText(field.getLabel());
+                final TextView value = (TextView) v.findViewById(R.id.value);
+                value.setText(field.getValue());
 
+                frontFieldsContainer.addView(v);
+            }
         }
+
+
+        if (back_str.length() > 0) {
+            back_tv.setText(Html.fromHtml(back_str.toString()));
+            moreTextView.setVisibility(View.VISIBLE);
+        } else {
+            moreTextView.setVisibility(View.GONE);
+        }
+
 
         Linkify.addLinks(back_tv, Linkify.ALL);
 

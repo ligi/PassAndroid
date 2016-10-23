@@ -65,6 +65,6 @@ internal class SearchSuccessCallback(private val context: Context, private val p
         } else if (pass.validTimespans != null && pass.validTimespans!!.size > 0 && pass.validTimespans!![0].to != null) {
             return pass.validTimespans!![0].to
         }
-        return null;
+        return null
     }
 }
