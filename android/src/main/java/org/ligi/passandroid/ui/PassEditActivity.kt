@@ -41,7 +41,7 @@ class PassEditActivity : AppCompatActivity() {
     @Inject
     lateinit internal var bus: EventBus
 
-    private var passViewHelper: PassViewHelper? = null
+    private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun pickImage(req_code_pick_icon: Int) {
@@ -85,8 +85,6 @@ class PassEditActivity : AppCompatActivity() {
 
         fragmentTransaction.commit()
 
-        passViewHelper = PassViewHelper(this)
-
         add_barcode_button.setOnClickListener {
             BarcodePickDialog.show(this@PassEditActivity,
                     bus,
@@ -101,7 +99,7 @@ class PassEditActivity : AppCompatActivity() {
         refresh(currentPass)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         imageEditHelper.onActivityResult(requestCode, resultCode, data)
     }
@@ -121,7 +119,7 @@ class PassEditActivity : AppCompatActivity() {
         prepareImageUI(R.id.footer_img, R.id.add_footer, ImageEditHelper.REQ_CODE_PICK_FOOTER)
 
         add_barcode_button.visibility = if (pass.barCode == null) View.VISIBLE else View.GONE
-        val barcodeUIController = BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper!!)
+        val barcodeUIController = BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
         barcodeUIController.barcode_img.setOnClickListener { BarcodePickDialog.show(this@PassEditActivity, bus, currentPass, currentPass.barCode) }
     }
 
@@ -139,7 +137,7 @@ class PassEditActivity : AppCompatActivity() {
         }
 
         val logoImage = findViewById(logo_img) as ImageView
-        passViewHelper!!.setBitmapSafe(logoImage, bitmap)
+        passViewHelper.setBitmapSafe(logoImage, bitmap)
         logoImage.setOnClickListener(listener)
         addButton.setOnClickListener(listener)
     }

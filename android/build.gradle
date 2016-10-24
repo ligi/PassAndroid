@@ -138,6 +138,8 @@ dependencies {
         exclude group: 'javax.inject'
     }
 
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+
     androidTestCompile 'com.squareup.spoon:spoon-client:1.7.0'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 
