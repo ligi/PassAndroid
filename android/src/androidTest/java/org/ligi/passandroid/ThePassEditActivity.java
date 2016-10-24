@@ -64,7 +64,7 @@ public class ThePassEditActivity extends BaseIntegration<PassEditActivity> {
     @MediumTest
     public void testSetDescriptionWorks() {
 
-        onView(withId(R.id.title)).perform(clearText(),typeText("test description"));
+        onView(withId(R.id.passTitle)).perform(clearText(), typeText("test description"));
         assertThat(passStore.getCurrentPass().getDescription()).isEqualTo("test description");
 
         Spoon.screenshot(getActivity(), "edit_set_description");

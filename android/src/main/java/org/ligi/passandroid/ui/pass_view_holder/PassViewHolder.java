@@ -33,7 +33,7 @@ public abstract class PassViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.date)
     TextView dateOrExtraText;
 
-    @BindView(R.id.title)
+    @BindView(R.id.passTitle)
     TextView title;
 
     @BindView(R.id.categoryView)
