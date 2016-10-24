@@ -16,10 +16,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .trackerModule(new TrackerModule(this))
-                .build();
+        component = createComponent();
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         LeakCanary.install(this);
@@ -27,6 +24,10 @@ public class App extends Application {
         initTraceDroid();
 
         AppCompatDelegate.setDefaultNightMode(component.settings().getNightMode());
+    }
+
+    public AppComponent createComponent() {
+        return DaggerAppComponent.builder().appModule(new AppModule(this)).trackerModule(new TrackerModule(this)).build();
     }
 
     private void initTraceDroid() {

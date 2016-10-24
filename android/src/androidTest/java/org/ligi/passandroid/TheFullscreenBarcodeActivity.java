@@ -2,87 +2,78 @@ package org.ligi.passandroid;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.test.filters.MediumTest;
 import android.widget.ImageView;
 import butterknife.ButterKnife;
 import com.squareup.spoon.Spoon;
 import java.util.UUID;
 import javax.inject.Inject;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.ligi.gobandroid_hd.base.PassandroidTestRule;
 import org.ligi.passandroid.helper.BarcodeDecoder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
-import org.ligi.tracedroid.TraceDroid;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarcodeActivity> {
+public class TheFullscreenBarcodeActivity {
+
+    @Rule
+    public PassandroidTestRule<FullscreenBarcodeActivity> rule = new PassandroidTestRule<>(FullscreenBarcodeActivity.class, false);
 
     @Inject
     PassStore passStore;
 
-    public static final String BARCODE_MESSAGE = "2323";
+    private static final String BARCODE_MESSAGE = "2323";
 
-    public TheFullscreenBarcodeActivity() {
-        super(FullscreenBarcodeActivity.class);
+    @Before
+    public void setUp() {
+        TestApp.component().inject(this);
     }
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-
-        TestComponent component = DaggerTestComponent.create();
-
-        component.inject(this);
-
-        App.setComponent(component);
-
-        TraceDroid.deleteStacktraceFiles();
-    }
-
-    @MediumTest
+    @Test
     public void testPDF417BarcodeIsShown() {
         testWithBarcodeFormat(PassBarCodeFormat.PDF_417);
 
-        Spoon.screenshot(getActivity(), "pdf417_barcode");
+        Spoon.screenshot(rule.getActivity(), "pdf417_barcode");
     }
 
-
-    @MediumTest
+    @Test
     public void testAztecBarcodeIsShown() {
         testWithBarcodeFormat(PassBarCodeFormat.AZTEC);
 
-        Spoon.screenshot(getActivity(), "aztec_barcode");
+        Spoon.screenshot(rule.getActivity(), "aztec_barcode");
     }
 
 
-    @MediumTest
+    @Test
     public void testQRCodeIsShown() {
         testWithBarcodeFormat(PassBarCodeFormat.QR_CODE);
 
-        Spoon.screenshot(getActivity(), "qr_barcode");
+        Spoon.screenshot(rule.getActivity(), "qr_barcode");
     }
 
-    @MediumTest
+    @Test
     public void testCode128CodeIsShown() {
         testWithBarcodeFormat(PassBarCodeFormat.CODE_128);
 
-        Spoon.screenshot(getActivity(), "code128_barcode");
+        Spoon.screenshot(rule.getActivity(), "code128_barcode");
     }
 
 
-    @MediumTest
+    @Test
     public void testCode39CodeIsShown() {
         testWithBarcodeFormat(PassBarCodeFormat.CODE_39);
 
-        Spoon.screenshot(getActivity(), "code39_barcode");
+        Spoon.screenshot(rule.getActivity(), "code39_barcode");
     }
-
 
 
     private void testWithBarcodeFormat(final PassBarCodeFormat format) {
@@ -90,10 +81,11 @@ public class TheFullscreenBarcodeActivity extends BaseIntegration<FullscreenBarc
         pass.setBarCode(new BarCode(format, BARCODE_MESSAGE));
 
         passStore.setCurrentPass(pass);
-        getActivity();
+
+        rule.launchActivity(null);
         onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
 
-        final ImageView viewById = ButterKnife.findById(getActivity(), R.id.fullscreen_barcode);
+        final ImageView viewById = ButterKnife.findById(rule.getActivity(), R.id.fullscreen_barcode);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
         final Bitmap bitmap = bitmapDrawable.getBitmap();
 

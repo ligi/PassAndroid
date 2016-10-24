@@ -1,8 +1,11 @@
 package org.ligi.passandroid;
 
-import android.support.test.filters.MediumTest;
 import com.squareup.spoon.Spoon;
 import java.util.ArrayList;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.ligi.gobandroid_hd.base.PassandroidTestRule;
 import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.ui.PassListActivity;
 import static android.support.test.espresso.Espresso.onView;
@@ -12,27 +15,25 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 
-public class TheEmptyPassList extends BaseIntegration<PassListActivity> {
 
-    public TheEmptyPassList() {
-        super(PassListActivity.class);
-    }
+public class TheEmptyPassList {
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    @Rule
+    public PassandroidTestRule<PassListActivity> rule = new PassandroidTestRule<>(PassListActivity.class, false);
 
+    @Before
+    public void setUp() {
         App.setComponent(DaggerTestComponent.builder().testModule(new TestModule(new ArrayList<Pass>())).build());
-        getActivity();
+        rule.launchActivity(null);
     }
 
-    @MediumTest
+    @Test
     public void testEmptyViewIsThereWhenThereAreNoPasses() {
-        Spoon.screenshot(getActivity(), "empty_view");
+        Spoon.screenshot(rule.getActivity(), "empty_view");
         onView(withId(R.id.emptyView)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testHelpGoesToHelp() {
         onView(withId(R.id.menu_help)).perform(click());
 

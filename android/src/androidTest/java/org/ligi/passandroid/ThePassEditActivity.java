@@ -39,9 +39,7 @@ public class ThePassEditActivity {
 
     @Before
     public void setUp() {
-        final TestComponent build = DaggerTestComponent.create();
-        build.inject(this);
-        App.setComponent(build);
+        TestApp.component().inject(this);
 
         rule.launchActivity(null);
     }
@@ -92,18 +90,31 @@ public class ThePassEditActivity {
 
 
     @Test
-    public void testAddAbortImagePick() {
+    public void testAddAbortFooterImagePick() {
+        intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null));
 
-        int[] add_image_views = {R.id.add_footer, R.id.add_logo, R.id.add_strip};
+        onView(withId(R.id.add_footer)).perform(scrollTo(), click());
 
-        for (final int res : add_image_views) {
-            intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null));
+        intended(hasAction(Intent.ACTION_CHOOSER));
+    }
 
-            onView(withId(res)).perform(scrollTo(), click());
+    @Test
+    public void testAddAbortStripImagePick() {
+        intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null));
 
-            intended(hasAction(Intent.ACTION_CHOOSER));
+        onView(withId(R.id.add_strip)).perform(scrollTo(), click());
 
-        }
+        intended(hasAction(Intent.ACTION_CHOOSER));
+    }
+
+    @Test
+    public void testAddAbortLogoImagePick() {
+
+        intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null));
+
+        onView(withId(R.id.add_logo)).perform(scrollTo(), click());
+
+        intended(hasAction(Intent.ACTION_CHOOSER));
     }
 
 }

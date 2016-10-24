@@ -5,21 +5,21 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.typeText
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import android.support.v7.widget.helper.ItemTouchHelper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.ligi.gobandroid_hd.base.PassandroidTestRule
 import org.ligi.passandroid.helper.ScreenshotTaker
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.PassListFragment
 import javax.inject.Inject
 
-class ThePassListSwiping : BaseUnitTest() {
+class ThePassListSwiping {
 
     @get:Rule
-    val rule: ActivityTestRule<PassListActivity> = ActivityTestRule(PassListActivity::class.java, true, false)
+    val rule: PassandroidTestRule<PassListActivity> = PassandroidTestRule(PassListActivity::class.java, false)
 
     @Inject
     lateinit var passStore: PassStore

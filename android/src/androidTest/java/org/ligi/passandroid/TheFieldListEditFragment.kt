@@ -6,13 +6,13 @@ import android.support.test.espresso.action.ViewActions.replaceText
 import android.support.test.espresso.action.ViewActions.scrollTo
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.squareup.spoon.Spoon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.ligi.gobandroid_hd.base.PassandroidTestRule
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.PassField
 import org.ligi.passandroid.model.pass.PassImpl
@@ -20,10 +20,10 @@ import org.ligi.passandroid.ui.PassEditActivity
 import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
-class TheFieldListEditFragment : BaseUnitTest(){
+class TheFieldListEditFragment {
 
     @get:Rule
-    val rule: ActivityTestRule<PassEditActivity> = ActivityTestRule(PassEditActivity::class.java, true, false)
+    val rule: PassandroidTestRule<PassEditActivity> = PassandroidTestRule(PassEditActivity::class.java, false)
 
     @Inject
     lateinit var passStore: PassStore
@@ -40,8 +40,6 @@ class TheFieldListEditFragment : BaseUnitTest(){
         currentPass.fields = arrayListOf(field)
 
         val activity = rule.launchActivity(null)
-
-        setUp(activity)
 
         return activity
     }

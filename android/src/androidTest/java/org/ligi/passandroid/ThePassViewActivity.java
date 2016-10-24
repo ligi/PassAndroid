@@ -2,8 +2,12 @@ package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
 import android.support.test.filters.MediumTest;
+import android.support.test.rule.ActivityTestRule;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
@@ -20,48 +24,42 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 
 @TargetApi(14)
-public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
+public class ThePassViewActivity {
 
     @Inject
     PassStore passStore;
 
     PassImpl act_pass;
 
-    public ThePassViewActivity() {
-        super(PassViewActivity.class);
-    }
+    @Rule
+    public ActivityTestRule<PassViewActivity> rule = new ActivityTestRule<>(PassViewActivity.class, false, false);
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-
-        final TestComponent newComponent = DaggerTestComponent.create();
-        newComponent.inject(this);
-        App.setComponent(newComponent);
-
+    @Before
+    public void setUp() {
+        TestApp.component().inject(this);
         act_pass = (PassImpl) passStore.getCurrentPass();
     }
 
-    @MediumTest
+    @Test
     public void testThatDescriptionIsThere() {
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withText(act_pass.getDescription())).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testDateIsGoneWhenPassbookHasNoDate() {
-
-        getActivity();
+        act_pass.setValidTimespans(new ArrayList<PassImpl.TimeSpan>());
+        rule.launchActivity(null);
 
         onView(withId(R.id.date)).check(matches(not(isDisplayed())));
     }
 
 
-    @MediumTest
+    @Test
     public void testDateIsThereWhenPassbookHasDate() {
         act_pass.setCalendarTimespan(new PassImpl.TimeSpan(ZonedDateTime.now(), null, null));
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withId(R.id.date)).check(matches(isDisplayed()));
     }
@@ -69,25 +67,25 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
     @MediumTest
     public void testLinkToCalendarIsThereWhenPassbookHasDate() {
         act_pass.setCalendarTimespan(new PassImpl.TimeSpan(ZonedDateTime.now(), null, null));
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testClickOnCalendarWithExpirationDateGivesWarning() {
         final ArrayList<PassImpl.TimeSpan> validTimespans = new ArrayList<>();
         validTimespans.add(new PassImpl.TimeSpan(null, ZonedDateTime.now().minusHours(12), null));
         act_pass.setValidTimespans(validTimespans);
         act_pass.setCalendarTimespan(null);
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withId(R.id.addCalendar)).perform(click());
 
         onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testThatTheDialogCanBeDismissed() {
         testClickOnCalendarWithExpirationDateGivesWarning();
 
@@ -96,35 +94,37 @@ public class ThePassViewActivity extends BaseIntegration<PassViewActivity> {
         onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(doesNotExist());
     }
 
-    @MediumTest
+    @Test
     public void testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
-        getActivity();
+        act_pass.setValidTimespans(new ArrayList<PassImpl.TimeSpan>());
+        rule.launchActivity(null);
 
         onView(withId(R.id.addCalendar)).check(matches(not(isDisplayed())));
     }
 
-    @MediumTest
+    @Test
     public void testClickOnBarcodeOpensFullscreenImage() {
-        getActivity();
+        act_pass.setBarCode(new BarCode(PassBarCodeFormat.QR_CODE, "foo"));
+        rule.launchActivity(null);
         onView(withId(R.id.barcode_img)).perform(click());
 
         onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
     }
 
 
-    @MediumTest
+    @Test
     public void testZoomControlsAreThereWithBarcode() {
         act_pass.setBarCode(new BarCode(PassBarCodeFormat.AZTEC, "foo"));
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));
         onView(withId(R.id.zoomIn)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testZoomControlsAreGoneWithoutBarcode() {
         act_pass.setBarCode(null);
-        getActivity();
+        rule.launchActivity(null);
 
         onView(withId(R.id.zoomIn)).check(matches(not(isDisplayed())));
         onView(withId(R.id.zoomIn)).check(matches(not(isDisplayed())));

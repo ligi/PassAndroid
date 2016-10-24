@@ -7,13 +7,13 @@ import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.SdkSuppress
-import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.squareup.spoon.Spoon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.ligi.gobandroid_hd.base.PassandroidTestRule
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import org.ligi.passandroid.model.pass.PassImpl
@@ -21,30 +21,27 @@ import org.ligi.passandroid.ui.PassEditActivity
 import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
-class TheBarCodeEditing : BaseUnitTest() {
+class TheBarCodeEditing {
 
     @get:Rule
-    val rule: ActivityTestRule<PassEditActivity> = ActivityTestRule(PassEditActivity::class.java, true, false)
+    val rule: PassandroidTestRule<PassEditActivity> = PassandroidTestRule(PassEditActivity::class.java, false)
 
     @Inject
     lateinit var passStore: PassStore
 
     lateinit var currentPass: PassImpl
 
-    private val passEditActivity by lazy { rule.launchActivity(null) }
+    private val passEditActivity by lazy { rule.activity }
 
     fun start(setupPass: (pass: PassImpl) -> Unit) {
 
-        val build = DaggerTestComponent.create()
-        build.inject(this)
-        App.setComponent(build)
+        TestApp.component().inject(this)
 
         currentPass = passStore.currentPass as PassImpl
 
         setupPass(currentPass)
 
-        setUp(passEditActivity)
-
+        rule.launchActivity(null)
         closeSoftKeyboard()
     }
 
@@ -55,7 +52,7 @@ class TheBarCodeEditing : BaseUnitTest() {
             it.barCode = null
         }
 
-        Spoon.screenshot(passEditActivity!!, "no_barcode")
+        Spoon.screenshot(passEditActivity, "no_barcode")
 
         onView(withId(R.id.add_barcode_button)).perform(scrollTo())
         onView(withId(R.id.add_barcode_button)).check(matches(isDisplayed()))
@@ -113,7 +110,7 @@ class TheBarCodeEditing : BaseUnitTest() {
         onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist())
 
         assertThat(passStore.currentPass!!.barCode!!.message).isEqualTo("msg foo txt ;-)")
-        Spoon.screenshot(passEditActivity!!, "edit_set_msg")
+        Spoon.screenshot(passEditActivity, "edit_set_msg")
     }
 
 
@@ -133,7 +130,7 @@ class TheBarCodeEditing : BaseUnitTest() {
         onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist())
 
         assertThat(passStore.currentPass!!.barCode!!.alternativeText).isEqualTo("alt bar txt ;-)")
-        Spoon.screenshot(passEditActivity!!, "edit_set_altmsg")
+        Spoon.screenshot(passEditActivity, "edit_set_altmsg")
     }
 
     @Test

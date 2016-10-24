@@ -4,10 +4,10 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import junit.framework.Assert
 import org.junit.Rule
 import org.junit.Test
+import org.ligi.gobandroid_hd.base.PassandroidTestRule
 import org.ligi.passandroid.helper.ScreenshotTaker
 import org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere
 import org.ligi.passandroid.ui.HelpActivity
@@ -15,7 +15,7 @@ import org.ligi.passandroid.ui.HelpActivity
 class TheHelpActivity {
 
     @get:Rule
-    val rule: ActivityTestRule<HelpActivity> = ActivityTestRule(HelpActivity::class.java)
+    val rule: PassandroidTestRule<HelpActivity> = PassandroidTestRule(HelpActivity::class.java)
 
     @Test
     fun testHelpIsThere() {

@@ -51,7 +51,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         applicationId "org.ligi.passandroid"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "org.ligi.passandroid.AppReplacingRunner"
         archivesBaseName = "PassAndroid-$versionName"
         vectorDrawables.useSupportLibrary = true
     }
@@ -138,7 +138,10 @@ dependencies {
         exclude group: 'javax.inject'
     }
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2') {
+        // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
+        exclude group: 'javax.inject'
+    }
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.7.0'
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
@@ -191,9 +194,9 @@ dependencies {
 
     // cannot use this new version: https://github.com/zxing/zxing/issues/165
     // WARNING: might work on some devices or the emulator - but fails on others
-    // compile 'com.google.zxing:core:3.1.0'
+    compile 'com.google.zxing:core:3.3.0'
 
-    compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
+    //compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
