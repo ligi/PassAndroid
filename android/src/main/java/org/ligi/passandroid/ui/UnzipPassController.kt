@@ -1,9 +1,14 @@
 package org.ligi.passandroid.ui
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.pdf.PdfRenderer
+import android.os.Build
+import android.os.ParcelFileDescriptor
 import net.lingala.zip4j.core.ZipFile
 import net.lingala.zip4j.exception.ZipException
+import okio.Okio
 import org.json.JSONObject
 import org.ligi.axt.AXT
 import org.ligi.passandroid.App
@@ -13,6 +18,7 @@ import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
 import org.ligi.tracedroid.logging.Log
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 object UnzipPassController {
@@ -94,19 +100,55 @@ object UnzipPassController {
                 val pathForID = spec.passStore.getPathForID(imagePass.id)
                 pathForID.mkdir()
 
-                File(spec.zipFileString).copyTo(File(pathForID,"strip.png"))
+                File(spec.zipFileString).copyTo(File(pathForID, "strip.png"))
 
                 spec.passStore.save(imagePass)
-                spec.passStore.classifier.moveToTopic(imagePass,"new")
+                spec.passStore.classifier.moveToTopic(imagePass, "new")
                 spec.onSuccessCallback?.call(imagePass.id)
-            } else {
-                spec.failCallback?.fail("Pass is not espass or pkpass format :-(")
+                return
             }
+
+
+
+            if (Build.VERSION.SDK_INT >= 21) {
+                try {
+                    val file = File(spec.zipFileString)
+                    val readUtf8 = Okio.buffer(Okio.source(file)).readUtf8(4)
+                    if (readUtf8 == "%PDF") {
+                        val open = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+                        val pdfRenderer = PdfRenderer(open)
+
+                        val page = pdfRenderer.openPage(0)
+                        val ratio = page.height.toFloat() / page.width
+
+
+                        val widthPixels = spec.context.resources.displayMetrics.widthPixels
+                        val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
+                        page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+
+
+                        val imagePass = PassTemplates.createPassForImageImport()
+                        val pathForID = spec.passStore.getPathForID(imagePass.id)
+                        pathForID.mkdir()
+
+                        createBitmap.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(pathForID, "strip.png")))
+
+                        spec.passStore.save(imagePass)
+                        spec.passStore.classifier.moveToTopic(imagePass, "new")
+                        spec.onSuccessCallback?.call(imagePass.id)
+                        return
+                    }
+                } catch (e: Exception) {
+                }
+
+            }
+
+            spec.failCallback?.fail("Pass is not espass or pkpass format :-(")
             return
         }
 
         spec.targetPath.mkdirs()
-        val rename_file = File(spec.targetPath,uuid)
+        val rename_file = File(spec.targetPath, uuid)
 
         if (spec.overwrite && rename_file.exists()) {
             AXT.at(rename_file).deleteRecursive()
