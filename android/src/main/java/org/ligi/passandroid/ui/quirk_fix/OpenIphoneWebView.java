@@ -2,6 +2,9 @@ package org.ligi.passandroid.ui.quirk_fix;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import net.steamcrafted.loadtoast.LoadToast;
@@ -22,11 +25,8 @@ public class OpenIphoneWebView extends Activity {
         webView.loadUrl(getIntent().getData().toString());
         setContentView(webView);
 
-        final LoadToast loadToast = new LoadToast(this)
-                .setText("Loading")
-                .setBackgroundColor(getResources().getColor(R.color.dividing_color)).show();
-
-
+        final int backgroundColor = ContextCompat.getColor(this, R.color.dividing_color);
+        final LoadToast loadToast = new LoadToast(this).setText("Loading").setBackgroundColor(backgroundColor).show();
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -36,8 +36,8 @@ public class OpenIphoneWebView extends Activity {
             }
 
             @Override
-            public void onReceivedError(final WebView view, final int errorCode, final String description, final String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
+            public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
+                super.onReceivedError(view, request, error);
                 loadToast.error();
             }
         });
