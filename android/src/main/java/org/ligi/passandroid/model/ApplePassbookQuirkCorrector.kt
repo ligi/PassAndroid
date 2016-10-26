@@ -1,7 +1,6 @@
 package org.ligi.passandroid.model
 
 import org.ligi.passandroid.Tracker
-import org.ligi.passandroid.helper.Strings
 import org.ligi.passandroid.model.pass.PassField
 import org.ligi.passandroid.model.pass.PassImpl
 import org.threeten.bp.DateTimeException
@@ -152,7 +151,7 @@ class ApplePassbookQuirkCorrector(val tracker: Tracker) {
     }
 
     private fun careForWestbahn(pass: PassImpl) {
-        if (pass.calendarTimespan != null || Strings.nullToEmpty(pass.creator) != "WESTbahn") {
+        if (pass.calendarTimespan != null || (pass.creator ?: "") != "WESTbahn") {
             return
         }
 
