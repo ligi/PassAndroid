@@ -1242,6 +1242,7 @@
         </activity>
 
         <activity android:name=".ui.quirk_fix.OpenIphoneWebView"/>
+        <activity android:name=".ui.TouchImageActivity"/>
 
         <activity android:name=".ui.quirk_fix.USAirwaysLoadActivity">
             <intent-filter>

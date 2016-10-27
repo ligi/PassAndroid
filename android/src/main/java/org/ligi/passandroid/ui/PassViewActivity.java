@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -50,6 +51,11 @@ public class PassViewActivity extends PassViewActivityBase {
     @BindView(R.id.logo_img)
     ImageView logo_img;
 
+    @OnClick(R.id.strip_img)
+    void onLogoClick() {
+        startActivity(new Intent(this, TouchImageActivity.class));
+    }
+
     @BindView(R.id.footer_img)
     ImageView footer_img;
 
@@ -68,6 +74,20 @@ public class PassViewActivity extends PassViewActivityBase {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    void processImage(PassViewHelper helper, ImageView view, final String name, Pass pass) {
+        final Bitmap bitmap = pass.getBitmap(passStore, name);
+        if (bitmap != null && bitmap.getWidth() > 300) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    final Intent intent = new Intent(PassViewActivity.this, TouchImageActivity.class);
+                    intent.putExtra("IMAGE", name);
+                    startActivity(intent);
+                }
+            });
+        }
+        helper.setBitmapSafe(view, bitmap);
+    }
 
     @Override
     protected void refresh() {
@@ -83,11 +103,11 @@ public class PassViewActivity extends PassViewActivityBase {
 
         new BarcodeUIController(getWindow().getDecorView(), pass.getBarCode(), this, passViewHelper);
 
-        passViewHelper.setBitmapSafe(logo_img, pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_LOGO));
-        passViewHelper.setBitmapSafe(footer_img, pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_FOOTER));
+        processImage(passViewHelper, logo_img, PassBitmapDefinitions.BITMAP_LOGO, pass);
+        processImage(passViewHelper, footer_img, PassBitmapDefinitions.BITMAP_FOOTER, pass);
 
-        passViewHelper.setBitmapSafe(thumbnail_img, pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_THUMBNAIL));
-        passViewHelper.setBitmapSafe(strip_img, pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_STRIP));
+        processImage(passViewHelper, thumbnail_img, PassBitmapDefinitions.BITMAP_THUMBNAIL, pass);
+        processImage(passViewHelper, strip_img, PassBitmapDefinitions.BITMAP_STRIP, pass);
 
         if (findViewById(R.id.map_container) != null) {
             if (!(pass.getLocations().size() > 0 && PassbookMapsFacade.init(this))) {

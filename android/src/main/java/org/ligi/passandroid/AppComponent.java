@@ -14,6 +14,7 @@ import org.ligi.passandroid.ui.PassMenuOptions;
 import org.ligi.passandroid.ui.PassNavigationView;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 import org.ligi.passandroid.ui.SearchPassesIntentService;
+import org.ligi.passandroid.ui.TouchImageActivity;
 import org.ligi.passandroid.ui.edit.PassandroidFragment;
 import org.ligi.passandroid.ui.quirk_fix.USAirwaysLoadActivity;
 
@@ -44,6 +45,8 @@ public interface AppComponent {
     void inject(PassListFragment passListFragment);
 
     void inject(PassNavigationView passNavigationView);
+
+    void inject(TouchImageActivity touchImageActivity);
 
     PassStore passStore();
 
