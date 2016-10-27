@@ -5,7 +5,7 @@ buildscript {
         kotlin_version = '1.0.4'
 
         butterknife_version = '8.4.0'
-        play_version = '9.8.00'
+        play_version = '9.8.0'
     }
 
     repositories {
