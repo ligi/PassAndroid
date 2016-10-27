@@ -4,16 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.app.TaskStackBuilder
-import android.text.Html
 import android.text.util.Linkify
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_pass_view.*
 import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import kotlinx.android.synthetic.main.barcode.*
+import kotlinx.android.synthetic.main.edit.*
 import kotlinx.android.synthetic.main.pass_view_extra_data.*
 import org.ligi.axt.AXT
+import org.ligi.compat.HtmlCompat
 import org.ligi.passandroid.R
 import org.ligi.passandroid.maps.PassbookMapsFacade
 import org.ligi.passandroid.model.PassBitmapDefinitions
@@ -44,10 +48,10 @@ class PassViewActivity : PassViewActivityBase() {
 
         BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
 
-        processImage(logo_img, PassBitmapDefinitions.BITMAP_LOGO, pass)
-        processImage(footer_img, PassBitmapDefinitions.BITMAP_FOOTER, pass)
-        processImage(thumbnail_img, PassBitmapDefinitions.BITMAP_THUMBNAIL, pass)
-        processImage(strip_img, PassBitmapDefinitions.BITMAP_STRIP, pass)
+        processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, pass)
+        processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, pass)
+        processImage(thumbnail_img_view, PassBitmapDefinitions.BITMAP_THUMBNAIL, pass)
+        processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, pass)
 
         if (map_container != null) {
             if (!(pass.locations.size > 0 && PassbookMapsFacade.init(this))) {
@@ -75,7 +79,7 @@ class PassViewActivity : PassViewActivityBase() {
 
 
         if (back_str.length > 0) {
-            back_fields.text = Html.fromHtml(back_str.toString())
+            back_fields.text = HtmlCompat.fromHtml(back_str.toString())
             moreTextView.visibility = View.VISIBLE
         } else {
             moreTextView.visibility = View.GONE
@@ -106,12 +110,10 @@ class PassViewActivity : PassViewActivityBase() {
 
         AXT.at(this).disableRotation()
 
-        val contentView = layoutInflater.inflate(R.layout.activity_pass_view, null)
-        setContentView(contentView)
+        setContentView(R.layout.activity_pass_view)
 
-        val extraViewContainer = contentView.findViewById(R.id.passExtrasContainer) as ViewGroup
-        val passExtrasView = layoutInflater.inflate(R.layout.pass_view_extra_data, extraViewContainer, false)
-        extraViewContainer.addView(passExtrasView)
+        val passExtrasView = layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
+        passExtrasContainer.addView(passExtrasView)
 
         moreTextView.setOnClickListener {
             if (back_fields.visibility == View.VISIBLE) {
@@ -121,7 +123,6 @@ class PassViewActivity : PassViewActivityBase() {
                 back_fields.visibility = View.VISIBLE
                 moreTextView.setText(R.string.less)
             }
-
         }
 
         barcode_img.setOnClickListener {
@@ -146,8 +147,8 @@ class PassViewActivity : PassViewActivityBase() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
             val upIntent = NavUtils.getParentActivityIntent(this)
             if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
                 TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities()
@@ -155,10 +156,10 @@ class PassViewActivity : PassViewActivityBase() {
             } else {
                 NavUtils.navigateUpTo(this, upIntent)
             }
-            return true
+            true
         }
 
-        return super.onOptionsItemSelected(item)
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onAttachedToWindow() {

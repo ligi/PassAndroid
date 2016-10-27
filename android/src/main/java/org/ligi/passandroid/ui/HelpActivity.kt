@@ -7,6 +7,7 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_help.*
+import org.ligi.compat.HtmlCompat
 import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.R
 import org.xml.sax.XMLReader
@@ -17,7 +18,7 @@ class HelpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help)
 
-        val html = Html.fromHtml(getString(R.string.help_content), null, ListTagHandler())
+        val html = HtmlCompat.fromHtml(getString(R.string.help_content), null, ListTagHandler())
 
         help_text.text = html
         help_text.movementMethod = LinkMovementMethod()
