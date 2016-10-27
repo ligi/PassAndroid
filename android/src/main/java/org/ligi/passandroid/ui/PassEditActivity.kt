@@ -142,12 +142,12 @@ class PassEditActivity : AppCompatActivity() {
         addButton.setOnClickListener(listener)
     }
 
-
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragments() {
+        super.onResumeFragments()
         bus.register(this)
         refresh(currentPass)
     }
+
 
     override fun onPause() {
         bus.unregister(this)
