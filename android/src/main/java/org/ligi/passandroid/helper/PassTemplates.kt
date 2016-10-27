@@ -37,13 +37,24 @@ object PassTemplates {
         return pass
     }
 
-    fun createPassForImageImport(): Pass {
+    fun createPassForImageImport(resources: Resources): Pass {
         return createBasePass().apply {
-            description = "image import"
+            description = resources.getString(R.string.image_import)
 
             fields = mutableListOf(
-                    PassField(null, "source", "image", false),
-                    PassField(null, "note", "This is imported from image - not a real pass", false)
+                    PassField.create(R.string.field_source, R.string.field_source_image, resources),
+                    PassField.create(R.string.field_note, R.string.field_note_image, resources)
+            )
+        }
+    }
+
+    fun createPassForPDFImport(resources: Resources): Pass {
+        return createBasePass().apply {
+            description = resources.getString(R.string.pdf_import)
+
+            fields = mutableListOf(
+                    PassField.create(R.string.field_source, R.string.field_source_pdf, resources),
+                    PassField.create(R.string.field_note, R.string.field_note_pdf, resources)
             )
         }
     }

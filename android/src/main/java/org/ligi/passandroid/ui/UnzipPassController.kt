@@ -95,8 +95,9 @@ object UnzipPassController {
 
             val bitmap = BitmapFactory.decodeFile(spec.zipFileString)
 
+            val resources = spec.context.resources
             if (bitmap != null) {
-                val imagePass = PassTemplates.createPassForImageImport()
+                val imagePass = PassTemplates.createPassForImageImport(resources)
                 val pathForID = spec.passStore.getPathForID(imagePass.id)
                 pathForID.mkdir()
 
@@ -107,8 +108,6 @@ object UnzipPassController {
                 spec.onSuccessCallback?.call(imagePass.id)
                 return
             }
-
-
 
             if (Build.VERSION.SDK_INT >= 21) {
                 try {
@@ -121,13 +120,11 @@ object UnzipPassController {
                         val page = pdfRenderer.openPage(0)
                         val ratio = page.height.toFloat() / page.width
 
-
-                        val widthPixels = spec.context.resources.displayMetrics.widthPixels
+                        val widthPixels = resources.displayMetrics.widthPixels
                         val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
                         page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
 
-
-                        val imagePass = PassTemplates.createPassForImageImport()
+                        val imagePass = PassTemplates.createPassForPDFImport(resources)
                         val pathForID = spec.passStore.getPathForID(imagePass.id)
                         pathForID.mkdir()
 

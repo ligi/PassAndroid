@@ -185,5 +185,17 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="preference_daynight_title">Day/Night theme</string>
     <string name="preference_daynight_summary">Should I be dark or light?</string>
 
+    <string name="image_import">Image Import</string>
+    <string name="pdf_import">PDF Import</string>
+
+    <string name="field_source">source</string>
+    <string name="field_note">note</string>
+
+    <string name="field_source_image">Image</string>
+    <string name="field_note_image">This is imported from a image - not a real pass</string>
+
+    <string name="field_source_pdf">PDF</string>
+    <string name="field_note_pdf">This is imported from a PDF - not a real pass</string>
+
 
 </resources>

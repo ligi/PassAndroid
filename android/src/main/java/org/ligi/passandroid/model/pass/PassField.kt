@@ -1,5 +1,8 @@
 package org.ligi.passandroid.model.pass
 
+import android.content.res.Resources
+import android.support.annotation.StringRes
+
 class PassField(var key: String?, var label: String?, var value: String?, var hide: Boolean) {
 
     fun toHtmlSnippet(): String {
@@ -12,5 +15,9 @@ class PassField(var key: String?, var label: String?, var value: String?, var hi
             result.append("<br/>")
         }
         return result.toString()
+    }
+
+    companion object {
+        fun create(@StringRes label: Int, @StringRes value: Int, res: Resources) = PassField(null, res.getString(label), res.getString(value), false)
     }
 }
