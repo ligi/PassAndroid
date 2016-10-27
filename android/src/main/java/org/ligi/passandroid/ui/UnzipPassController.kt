@@ -99,7 +99,7 @@ object UnzipPassController {
             if (bitmap != null) {
                 val imagePass = PassTemplates.createPassForImageImport(resources)
                 val pathForID = spec.passStore.getPathForID(imagePass.id)
-                pathForID.mkdir()
+                pathForID.mkdirs()
 
                 File(spec.zipFileString).copyTo(File(pathForID, "strip.png"))
 
@@ -126,7 +126,7 @@ object UnzipPassController {
 
                         val imagePass = PassTemplates.createPassForPDFImport(resources)
                         val pathForID = spec.passStore.getPathForID(imagePass.id)
-                        pathForID.mkdir()
+                        pathForID.mkdirs()
 
                         createBitmap.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(pathForID, "strip.png")))
 
@@ -136,6 +136,7 @@ object UnzipPassController {
                         return
                     }
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 }
 
             }
