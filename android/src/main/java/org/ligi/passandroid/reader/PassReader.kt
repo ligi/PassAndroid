@@ -7,6 +7,7 @@ import org.ligi.passandroid.model.PassDefinitions
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
+import org.ligi.passandroid.model.pass.PassType
 import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.ZonedDateTime
 import java.io.File
@@ -30,7 +31,7 @@ object PassReader {
 
             if (pass_json.has("meta")) {
                 val meta_json = pass_json.getJSONObject("meta")
-                pass.type = PassDefinitions.getTypeForString(meta_json.getString("type"))
+                pass.type = PassDefinitions.NAME_TO_TYPE[meta_json.getString("type")] ?: PassType.GENERIC
                 pass.creator = meta_json.getString("organisation")
                 pass.app = meta_json.getString("app")
             }
@@ -57,7 +58,7 @@ object PassReader {
                 val dateTime = pass_json.getJSONObject("when").getString("dateTime")
 
                 pass.calendarTimespan = PassImpl.TimeSpan()
-                pass.calendarTimespan= PassImpl.TimeSpan(from = ZonedDateTime.parse(dateTime));
+                pass.calendarTimespan = PassImpl.TimeSpan(from = ZonedDateTime.parse(dateTime))
             }
 
         } catch (e: Exception) {

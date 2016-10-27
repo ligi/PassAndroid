@@ -167,14 +167,14 @@ object AppleStylePassReader {
 
         // try to find in a predefined set of tickets
 
-        PassDefinitions.TYPES.forEach {
+        PassDefinitions.TYPE_TO_NAME.forEach {
             if (pass_json!!.has(it.value)) {
                 pass.type = it.key
             }
         }
 
         try {
-            val type = PassDefinitions.TYPES[pass.type]
+            val type = PassDefinitions.TYPE_TO_NAME[pass.type]
             val type_json = pass_json.getJSONObject(type)
             if (type_json != null) {
                 val fieldList: ArrayList<PassField> = ArrayList()

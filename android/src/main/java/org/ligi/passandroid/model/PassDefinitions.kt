@@ -1,24 +1,15 @@
 package org.ligi.passandroid.model
 
-import org.ligi.passandroid.model.pass.PassType
 import org.ligi.passandroid.model.pass.PassType.*
 
 object PassDefinitions {
 
-    val TYPES = mapOf(COUPON to "coupon",
+    val TYPE_TO_NAME = mapOf(COUPON to "coupon",
             EVENT to "eventTicket",
             BOARDING to "boardingPass",
             GENERIC to "generic",
             LOYALTY to "storeCard")
 
-    fun getTypeForString(str:String) : PassType {
-        TYPES.forEach {
-            if (it.value.equals(str)) {
-                return it.key
-            }
-        }
-
-        return GENERIC
-    }
+    val NAME_TO_TYPE = TYPE_TO_NAME.entries.associate { it.value to it.key }
 
 }
