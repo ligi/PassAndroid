@@ -3,7 +3,6 @@ package org.ligi.passandroid;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
-import butterknife.ButterKnife;
 import com.squareup.spoon.Spoon;
 import java.util.UUID;
 import javax.inject.Inject;
@@ -85,7 +84,7 @@ public class TheFullscreenBarcodeActivity {
         rule.launchActivity(null);
         onView(withId(R.id.fullscreen_barcode)).check(matches(isDisplayed()));
 
-        final ImageView viewById = ButterKnife.findById(rule.getActivity(), R.id.fullscreen_barcode);
+        final ImageView viewById = (ImageView) rule.getActivity().findViewById(R.id.fullscreen_barcode);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) viewById.getDrawable();
         final Bitmap bitmap = bitmapDrawable.getBitmap();
 

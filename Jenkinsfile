@@ -1,3 +1,4 @@
+
 node {
  def flavorCombination='WithMapsWithAnalyticsForPlay'
 
@@ -11,8 +12,8 @@ node {
    } catch(err) {
     currentBuild.result = FAILURE
    } finally {
-     publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "android/build/spoon-output/${flavorCombination}DebugAndroidTest", reportFiles: 'index.html', reportName: 'Spoon'])
-     step([$class: 'JUnitResultArchiver', testResults: 'android/build/spoon-output/*/junit-reports/*.xml'])
+    publishHTML(target:[allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "android/build/spoon", reportFiles: '*/debug/index.html', reportName: 'Spoon'])
+    step([$class: 'JUnitResultArchiver', testResults: 'android/build/spoon/*/debug/junit-reports/*.xml'])   
    }
   }
 

@@ -47,7 +47,7 @@ class PassImpl(override val id: String) : Pass {
 
     override var calendarTimespan: TimeSpan? = null
 
-    override var fields: List<PassField> = ArrayList()
+    override var fields: MutableList<PassField> = ArrayList()
 
     override var locations: List<PassLocation> = ArrayList()
 

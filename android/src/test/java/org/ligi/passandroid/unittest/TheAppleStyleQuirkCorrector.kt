@@ -30,7 +30,7 @@ class TheAppleStyleQuirkCorrector {
     fun testThatDateIsExtracted() {
         val pass = PassImpl(UUID.randomUUID().toString())
 
-        pass.fields = listOf(PassField("date", "foo", DATE_PROBE, false))
+        pass.fields = mutableListOf(PassField("date", "foo", DATE_PROBE, false))
 
         tested.correctQuirks(pass)
 
@@ -41,7 +41,7 @@ class TheAppleStyleQuirkCorrector {
     fun testThatInvalidDateIsIgnored() {
         val pass = PassImpl(UUID.randomUUID().toString())
 
-        pass.fields = listOf(PassField("date", "foo", "invalid", false))
+        pass.fields = mutableListOf(PassField("date", "foo", "invalid", false))
 
         tested.correctQuirks(pass)
 
@@ -52,7 +52,7 @@ class TheAppleStyleQuirkCorrector {
     fun testThatDateIsExtractedAfterWrongDatesBefore() {
         val pass = PassImpl(UUID.randomUUID().toString())
 
-        pass.fields = listOf(PassField("date", "foo", "invalid", false),PassField("date", "foo", DATE_PROBE, false))
+        pass.fields = mutableListOf(PassField("date", "foo", "invalid", false), PassField("date", "foo", DATE_PROBE, false))
 
         tested.correctQuirks(pass)
 

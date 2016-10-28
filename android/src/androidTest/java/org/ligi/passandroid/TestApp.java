@@ -11,4 +11,8 @@ public class TestApp extends App {
         return (TestComponent) App.component();
     }
 
+    @Override
+    public void installLeakCanary() {
+
+    }
 }

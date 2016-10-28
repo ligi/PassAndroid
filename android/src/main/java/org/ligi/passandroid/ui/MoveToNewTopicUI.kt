@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import butterknife.ButterKnife
 import org.ligi.passandroid.R
 import org.ligi.passandroid.helper.MoveHelper
 import org.ligi.passandroid.model.PassStore
@@ -39,7 +38,6 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
                 move(newTopicEditText.text.toString())
             }
         }
-        ButterKnife.bind(this, dialog)
 
         val oldTopic = passStore.classifier.getTopic(pass, "")
 

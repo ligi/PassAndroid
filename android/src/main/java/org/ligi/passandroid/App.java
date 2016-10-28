@@ -19,11 +19,15 @@ public class App extends Application {
         component = createComponent();
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        LeakCanary.install(this);
+        installLeakCanary();
         AndroidThreeTen.init(this);
         initTraceDroid();
 
         AppCompatDelegate.setDefaultNightMode(component.settings().getNightMode());
+    }
+
+    public void installLeakCanary() {
+        LeakCanary.install(this);
     }
 
     public AppComponent createComponent() {

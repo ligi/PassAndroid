@@ -1,7 +1,6 @@
 package org.ligi.passandroid;
 
 import android.annotation.TargetApi;
-import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -75,7 +74,7 @@ public class ThePassViewActivity {
         onView(withId(R.id.date)).check(matches(isDisplayed()));
     }
 
-    @MediumTest
+    @Test
     public void testLinkToCalendarIsThereWhenPassbookHasDate() {
         act_pass.setCalendarTimespan(new PassImpl.TimeSpan(ZonedDateTime.now(), null, null));
         rule.launchActivity(null);
