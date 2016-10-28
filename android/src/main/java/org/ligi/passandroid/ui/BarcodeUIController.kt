@@ -58,7 +58,7 @@ internal class BarcodeUIController(rootView: View, private val barCode: BarCode?
     }
 
 
-    fun setBarCodeSize(width: Int) {
+    private fun setBarCodeSize(width: Int) {
 
         zoomOut.visibility = if (width < passViewHelper.fingerSize * 2) INVISIBLE else VISIBLE
 

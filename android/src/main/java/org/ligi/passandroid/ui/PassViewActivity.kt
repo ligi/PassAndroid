@@ -46,7 +46,7 @@ class PassViewActivity : PassViewActivityBase() {
         val pass = currentPass ?: // don't deal with invalid passes
                 return
 
-        BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
+        BarcodeUIController(findViewById(android.R.id.content), pass.barCode, this, passViewHelper)
 
         processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, pass)
         processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, pass)
@@ -99,6 +99,10 @@ class PassViewActivity : PassViewActivityBase() {
         AXT.at(this).disableRotation()
 
         setContentView(R.layout.activity_pass_view)
+
+        val passExtrasView = layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
+        passExtrasContainer.addView(passExtrasView)
+
     }
 
     override fun onResumeFragments() {
@@ -107,13 +111,6 @@ class PassViewActivity : PassViewActivityBase() {
         if (currentPass == null) {
             return
         }
-
-        AXT.at(this).disableRotation()
-
-        setContentView(R.layout.activity_pass_view)
-
-        val passExtrasView = layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
-        passExtrasContainer.addView(passExtrasView)
 
         moreTextView.setOnClickListener {
             if (back_fields.visibility == View.VISIBLE) {
