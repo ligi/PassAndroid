@@ -12,6 +12,7 @@ import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
+import org.ligi.passandroid.model.pass.PassLocation;
 import org.ligi.passandroid.ui.PassViewActivity;
 import org.threeten.bp.ZonedDateTime;
 import static android.support.test.espresso.Espresso.onView;
@@ -50,6 +51,16 @@ public class ThePassViewActivity {
     @Test
     public void testDateIsGoneWhenPassbookHasNoDate() {
         act_pass.setValidTimespans(new ArrayList<PassImpl.TimeSpan>());
+        rule.launchActivity(null);
+
+        onView(withId(R.id.date)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void testEverythingWorksWhenWeHaveSomeLocation() {
+        final ArrayList<PassLocation> timeSpen = new ArrayList<>();
+        timeSpen.add(new PassLocation());
+        act_pass.setLocations(timeSpen);
         rule.launchActivity(null);
 
         onView(withId(R.id.date)).check(matches(not(isDisplayed())));
