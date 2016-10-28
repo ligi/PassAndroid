@@ -59,45 +59,45 @@
 
 
         <View
-            android:id="@+id/actions_separator"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_below="@id/pass_top"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="#dfdfdf"
-            android:padding="7dp" />
+                android:id="@+id/actionsSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/pass_top"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#dfdfdf"
+                android:padding="7dp" />
 
 
         <TextView
 
-            android:id="@+id/navigateTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/actions_separator"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/clickable_bg"
-            android:clickable="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:drawableLeft="@drawable/ic_maps_place_wrapped"
-            android:padding="8dp"
-            android:text="@string/pass_directions" />
+                android:id="@+id/navigateTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/actionsSeparator"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/clickable_bg"
+                android:clickable="true"
+                android:textColor="?android:attr/textColorPrimary"
+                android:drawableLeft="@drawable/ic_maps_place_wrapped"
+                android:padding="8dp"
+                android:text="@string/pass_directions" />
 
 
         <TextView
-            android:id="@+id/addCalendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/actions_separator"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/clickable_bg"
-            android:clickable="true"
-            android:drawableRight="@drawable/ic_action_perm_contact_calendar_wrapped"
-            android:padding="8dp"
-            android:text="@string/pass_to_calendar" />
+                android:id="@+id/addCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/actionsSeparator"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/clickable_bg"
+                android:clickable="true"
+                android:drawableRight="@drawable/ic_action_perm_contact_calendar_wrapped"
+                android:padding="8dp"
+                android:text="@string/pass_to_calendar" />
 
         <LinearLayout
             android:id="@+id/passExtrasContainer"

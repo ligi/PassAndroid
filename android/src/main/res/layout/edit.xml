@@ -66,7 +66,7 @@
 
 
                 <View
-                        android:id="@+id/actions_separator"
+                        android:id="@+id/actionsSeparator"
                         android:layout_width="match_parent"
                         android:layout_height="2dip"
                         android:layout_below="@id/pass_top"
@@ -82,7 +82,7 @@
                         android:id="@+id/navigateTo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/actions_separator"
+                        android:layout_below="@id/actionsSeparator"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/clickable_bg"
                         android:clickable="true"
@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_below="@id/actions_separator"
+                        android:layout_below="@id/actionsSeparator"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/clickable_bg"
                         android:clickable="true"

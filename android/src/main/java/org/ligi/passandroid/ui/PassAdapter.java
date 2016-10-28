@@ -41,7 +41,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
     public PassViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
-        final View res = inflater.inflate(R.layout.pass_list_item, viewGroup, false);
+        final CardView res = (CardView) inflater.inflate(R.layout.pass_list_item, viewGroup, false);
         if (settings.isCondensedModeEnabled()) {
             return new CondensedPassViewHolder(res);
         } else {
@@ -56,7 +56,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassViewHolder> {
 
         viewHolder.apply(pass, passStore, passListActivity);
 
-        final CardView root = viewHolder.root;
+        final CardView root = viewHolder.getView();
 
         root.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -88,7 +88,7 @@ class PassViewActivity : PassViewActivityBase() {
 
         Linkify.addLinks(back_fields, Linkify.ALL)
 
-        val passViewHolder = VerbosePassViewHolder(findViewById(R.id.pass_card))
+        val passViewHolder = VerbosePassViewHolder(pass_card)
         passViewHolder.apply(pass, passStore, this)
 
     }
