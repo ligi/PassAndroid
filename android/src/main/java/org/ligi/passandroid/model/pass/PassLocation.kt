@@ -13,4 +13,6 @@ class PassLocation {
     } else {
         name
     }
+
+    fun getCommaSeparated() = "$lat,$lon"
 }

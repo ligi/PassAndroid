@@ -55,12 +55,12 @@ public class NavigateToLocationsDialog {
 
         final String description = getEncodedDescription(location, pass);
 
-        final String latAndLonStr = location.getLat() + "," + location.getLon();
+        final String latAndLonStr = location.getCommaSeparated();
         i.setData(Uri.parse("geo:" + latAndLonStr + "?q=" + latAndLonStr + "(" + description + ")"));
         try {
             activity.startActivity(i);
         } catch (ActivityNotFoundException e) {
-            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + location.getLat() + "," + location.getLon()));
+            i.setData(Uri.parse("http://maps.google.com/?q=" + description + "@" + latAndLonStr));
             activity.startActivity(i);
             // TODO also the browser could not be found -> handle
         }
