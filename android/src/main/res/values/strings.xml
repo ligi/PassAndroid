@@ -202,6 +202,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="nav_github">Github</string>
     <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
     <string name="nav_community_on_google">Community on google+</string>
+    <string name="nav_improve_translation">Improve translation</string>
 
 
 </resources>
