@@ -70,7 +70,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="nav_sort_category">Categoría</string>
   <string name="nav_sort_date">Fecha</string>
   <string name="nav_categories">CATEGORÍAS</string>
-  <string name="nav_comunity">Comunidad</string>
   <string name="nav_share">Compartir</string>
   <string name="pass_directions">Navegar</string>
   <string name="pass_to_calendar">al Calendario</string>
@@ -146,12 +145,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="please_use_the_swipe_feature">Por favor, utilice la  función de deslizar</string>
   <string name="type">Tipo</string>
   <string name="undo">Deshacer</string>
-  <string-array name="sort_orders">
-    <item>Fecha ascendente</item>
-    <item>Fecha descendente</item>
-    <item>Tipo</item>
-    <item>Distancia en el tiempo</item>
-  </string-array>
   <string-array name="category_edit_options">
     <item>@string/select_category_dialog_title</item>
     <item>@string/change_color_dialog_title</item>

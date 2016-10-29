@@ -67,7 +67,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_sort_category">По категориям</string>
   <string name="nav_sort_date">По датам</string>
   <string name="nav_categories">КАТЕГОРИИ</string>
-  <string name="nav_comunity">Сообщество</string>
   <string name="nav_share">Поделиться</string>
   <string name="pass_directions">Как проехать</string>
   <string name="pass_to_calendar">В календарь</string>
@@ -139,10 +138,4 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="new_topic_input_hint">Заголовок для новой темы</string>
   <string name="new_topic_suggestions">Предложения:</string>
   <string name="cannot_be_empty">не может быть пустым</string>
-  <string-array name="sort_orders">
-    <item>Дата по возрастанию</item>
-    <item>Дата по убыванию</item>
-    <item>Тип</item>
-    <item>By temporal distance</item>
-  </string-array>
 </resources>
