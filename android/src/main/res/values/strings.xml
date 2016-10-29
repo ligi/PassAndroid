@@ -198,6 +198,10 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 
     <string name="field_source_pdf">PDF</string>
     <string name="field_note_pdf">This is imported from a PDF - not a real pass</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_github">Github</string>
+    <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
+    <string name="nav_community_on_google">Community on google+</string>
 
 
 </resources>

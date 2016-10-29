@@ -1,35 +1,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <group android:title="foo">
-    <item
-        android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_action_settings"
-        android:title="Settings"
-        app:showAsAction="ifRoom" />
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_github"
-        android:icon="@drawable/ic_github"
-        android:title="Github"
-        app:showAsAction="ifRoom" />
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="@string/nav_settings"
+            app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_plus"
-        android:icon="@drawable/ic_social_plus_one"
-        android:title="Google+"
-        app:showAsAction="ifRoom" />
+            android:id="@+id/menu_github"
+            android:icon="@drawable/ic_github"
+            android:title="@string/nav_github"
+            app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/ic_social_share"
-        android:title="Share"
-        app:showAsAction="ifRoom" />
+            android:id="@+id/menu_share"
+            android:icon="@drawable/ic_social_share"
+            android:title="@string/nav_share"
+            app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_beta"
-        android:icon="@drawable/ic_action_bug_report"
-        android:title="Betatest opt-in/out"
-        app:showAsAction="ifRoom" />
-    </group>
+            android:id="@+id/menu_beta"
+            android:icon="@drawable/ic_action_bug_report"
+            android:title="@string/nav_betatest_opt_in_out"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menu_plus"
+            android:icon="@drawable/ic_social_people"
+            android:title="@string/nav_community_on_google"
+            app:showAsAction="ifRoom"/>
+
 </menu>
