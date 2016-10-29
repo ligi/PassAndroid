@@ -190,6 +190,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 
     <string name="field_source">source</string>
     <string name="field_note">note</string>
+    <string name="field_advice_label">advice</string>
+    <string name="field_advice_text">demand esPass or Passbook from your vendor</string>
 
     <string name="field_source_image">Image</string>
     <string name="field_note_image">This is imported from a image - not a real pass</string>

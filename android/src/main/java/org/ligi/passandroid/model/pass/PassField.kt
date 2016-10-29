@@ -18,6 +18,6 @@ class PassField(var key: String?, var label: String?, var value: String?, var hi
     }
 
     companion object {
-        fun create(@StringRes label: Int, @StringRes value: Int, res: Resources) = PassField(null, res.getString(label), res.getString(value), false)
+        fun create(@StringRes label: Int, @StringRes value: Int, res: Resources, hide: Boolean = false) = PassField(null, res.getString(label), res.getString(value), hide)
     }
 }

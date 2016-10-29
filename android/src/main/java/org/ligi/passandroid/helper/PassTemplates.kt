@@ -43,7 +43,8 @@ object PassTemplates {
 
             fields = mutableListOf(
                     PassField.create(R.string.field_source, R.string.field_source_image, resources),
-                    PassField.create(R.string.field_note, R.string.field_note_image, resources)
+                    PassField.create(R.string.field_advice_label, R.string.field_advice_text, resources),
+                    PassField.create(R.string.field_note, R.string.field_note_image, resources, true)
             )
         }
     }
@@ -54,7 +55,8 @@ object PassTemplates {
 
             fields = mutableListOf(
                     PassField.create(R.string.field_source, R.string.field_source_pdf, resources),
-                    PassField.create(R.string.field_note, R.string.field_note_pdf, resources)
+                    PassField.create(R.string.field_advice_label, R.string.field_advice_text, resources),
+                    PassField.create(R.string.field_note, R.string.field_note_pdf, resources, true)
             )
         }
     }
