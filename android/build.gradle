@@ -75,9 +75,6 @@ android {
     lintOptions {
         warning 'MissingTranslation'
         warning 'InvalidPackage'
-
-        // TODO: remove when this is solved: http://stackoverflow.com/questions/39714487/kapt2-and-butterknife-produce-lint-error-expected-resource-of-type-id
-        warning 'ResourceType'
     }
 
     buildTypes {
