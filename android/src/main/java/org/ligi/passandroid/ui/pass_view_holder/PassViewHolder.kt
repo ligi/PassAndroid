@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
 import android.view.View.*
 import kotlinx.android.synthetic.main.pass_list_item.view.*
+import org.ligi.passandroid.R
 import org.ligi.passandroid.actions.AddToCalendar
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
@@ -18,14 +19,23 @@ import org.threeten.bp.ZonedDateTime
 abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view) {
 
     open fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
-        view.addCalendar.setOnClickListener {
-            clickAddToCalendar(pass)
-        }
-        view.navigateTo.setOnClickListener {
-            performNavigate(activity, pass)
-        }
+        setupButtons(activity, pass)
 
         refresh(pass, passStore)
+    }
+
+    open fun setupButtons(activity: Activity, pass: Pass) {
+        view.timeAndNavBar.timeTextView.text = view.context.getString(R.string.pass_to_calendar)
+        view.timeAndNavBar.navTextView.text = view.context.getString(R.string.pass_directions)
+
+        view.timeAndNavBar.timeTextView.setOnClickListener {
+            val dateOrExtraText = getDateOrExtraText(pass)
+            AddToCalendar.tryAddDateToCalendar(pass, view, dateOrExtraText)
+        }
+
+        view.timeAndNavBar.navTextView.setOnClickListener {
+            NavigateToLocationsDialog.perform(activity, pass, false)
+        }
     }
 
     protected fun refresh(pass: Pass, passStore: PassStore) {
@@ -34,9 +44,9 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         val noButtons = dateOrExtraText == null && pass.locations.size <= 0
 
         view.actionsSeparator.visibility = getVisibilityForGlobalAndLocal(noButtons, true)
-        view.navigateTo.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.size > 0)
+        view.timeAndNavBar.navTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.size > 0)
 
-        view.addCalendar.visibility = getVisibilityForGlobalAndLocal(noButtons, dateOrExtraText != null)
+        view.timeAndNavBar.timeTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, dateOrExtraText != null)
 
         val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
 
@@ -47,15 +57,6 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         view.categoryView.setAccentColor(pass.accentColor)
 
         view.passTitle.text = pass.description
-    }
-
-    protected open fun performNavigate(activity: Activity, pass: Pass) {
-        NavigateToLocationsDialog.perform(activity, pass, false)
-    }
-
-    protected open fun clickAddToCalendar(pass: Pass) {
-        val dateOrExtraText = getDateOrExtraText(pass)
-        AddToCalendar.tryAddDateToCalendar(pass, view, dateOrExtraText)
     }
 
     fun getExtraString(pass: Pass) = pass.fields.firstOrNull()?.let { getExtraStringForField(it) }

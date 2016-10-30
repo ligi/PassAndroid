@@ -79,7 +79,7 @@ public class ThePassViewActivity {
         act_pass.setCalendarTimespan(new PassImpl.TimeSpan(ZonedDateTime.now(), null, null));
         rule.launchActivity(null);
 
-        onView(withId(R.id.addCalendar)).check(matches(isDisplayed()));
+        onView(withText(R.string.pass_to_calendar)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ThePassViewActivity {
         act_pass.setCalendarTimespan(null);
         rule.launchActivity(null);
 
-        onView(withId(R.id.addCalendar)).perform(click());
+        onView(withText(R.string.pass_to_calendar)).perform(click());
 
         onView(withText(R.string.expiration_date_to_calendar_warning_message)).check(matches(isDisplayed()));
     }
@@ -109,7 +109,7 @@ public class ThePassViewActivity {
         act_pass.setValidTimespans(new ArrayList<PassImpl.TimeSpan>());
         rule.launchActivity(null);
 
-        onView(withId(R.id.addCalendar)).check(matches(not(isDisplayed())));
+        onView(withText(R.string.pass_to_calendar)).check(matches(not(isDisplayed())));
     }
 
     @Test

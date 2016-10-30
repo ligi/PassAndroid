@@ -8,6 +8,8 @@ import android.support.v7.widget.CardView
 import android.view.View.VISIBLE
 import android.widget.DatePicker
 import android.widget.TimePicker
+import kotlinx.android.synthetic.main.edit.view.*
+import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
@@ -19,14 +21,6 @@ class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDi
     lateinit private var time: ZonedDateTime
     lateinit private var pass: PassImpl
     lateinit private var passStore: PassStore
-
-    override fun clickAddToCalendar(pass: Pass) {
-        DatePickerDialog(view.context, this, time.year, time.month.value - 1, time.dayOfMonth).show()
-    }
-
-    override fun performNavigate(activity: Activity, pass: Pass) {
-        AlertDialog.Builder(view.context).setMessage("Not yet available").setPositiveButton(android.R.string.ok, null).show()
-    }
 
     override fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
         super.apply(pass, passStore, activity)
@@ -40,6 +34,21 @@ class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDi
         } else {
             ZonedDateTime.now()
         }
+    }
+
+    override fun setupButtons(activity: Activity, pass: Pass) {
+
+        view.timeAndNavBar.timeTextView.text = view.context.getString(R.string.edit_time)
+        view.timeAndNavBar.navTextView.text = view.context.getString(R.string.edit_location)
+
+        view.timeAndNavBar.timeTextView.setOnClickListener {
+            DatePickerDialog(view.context, this, time.year, time.month.value - 1, time.dayOfMonth).show()
+        }
+
+        view.timeAndNavBar.navTextView.setOnClickListener {
+            AlertDialog.Builder(view.context).setMessage("Not yet available").setPositiveButton(android.R.string.ok, null).show()
+        }
+
     }
 
     @Visibility

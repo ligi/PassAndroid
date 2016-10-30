@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android.support.v7.cardview="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pass_card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android.support.v7.cardview:cardMaxElevation="@dimen/card_longclick_elevation_half"
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android.support.v7.cardview="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pass_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android.support.v7.cardview:cardMaxElevation="@dimen/card_longclick_elevation_half"
+        android:orientation="vertical">
 
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:background="@color/card_view_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+            android:background="@color/card_view_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+    >
 
         <LinearLayout
-            android:id="@+id/pass_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+                android:id="@+id/pass_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
             <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:orientation="vertical">
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?android:attr/textColorPrimary"
-                    tools:text="12.10.2013 17:00" />
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="?android:attr/textColorPrimary"
+                        tools:text="12.10.2013 17:00"/>
 
                 <TextView
                         android:id="@+id/passTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="4dp"
+
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="?android:attr/textColorPrimary"
-                        tools:text="Title" />
+                        tools:text="Title"/>
 
             </LinearLayout>
             <org.ligi.passandroid.ui.views.CategoryIndicatorViewWithIcon
@@ -54,7 +56,7 @@
                     android:layout_width="48dp"
                     android:layout_height="74dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp" />
+                    android:layout_margin="8dp"/>
         </LinearLayout>
 
 
@@ -62,51 +64,26 @@
                 android:id="@+id/actionsSeparator"
                 android:layout_width="match_parent"
                 android:layout_height="2dip"
-                android:layout_below="@id/pass_top"
+
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:background="#dfdfdf"
-                android:padding="7dp" />
+                android:padding="7dp"/>
 
-
-        <TextView
-
-                android:id="@+id/navigateTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/actionsSeparator"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/clickable_bg"
-                android:clickable="true"
-                android:textColor="?android:attr/textColorPrimary"
-                android:drawableLeft="@drawable/ic_maps_place_wrapped"
-                android:padding="8dp"
-                android:text="@string/pass_directions" />
-
-
-        <TextView
-                android:id="@+id/addCalendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/actionsSeparator"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/clickable_bg"
-                android:clickable="true"
-                android:drawableRight="@drawable/ic_action_perm_contact_calendar_wrapped"
-                android:padding="8dp"
-                android:text="@string/pass_to_calendar" />
+        <org.ligi.passandroid.ui.views.TimeAndNavBar
+                android:id="@+id/timeAndNavBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:id="@+id/passExtrasContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/addCalendar"
-            android:orientation="vertical" />
+                android:id="@+id/passExtrasContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

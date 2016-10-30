@@ -21,7 +21,7 @@ class CondensedPassViewHolder(view: CardView) : PassViewHolder(view) {
             view.date.visibility = View.GONE
         }
 
-        view.addCalendar.text = getTimeInfoString(pass)
+        view.timeAndNavBar.timeTextView.text = getTimeInfoString(pass)
 
     }
 }
