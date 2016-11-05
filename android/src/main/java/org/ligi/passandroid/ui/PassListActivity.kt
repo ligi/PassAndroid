@@ -34,6 +34,7 @@ import org.ligi.snackengage.SnackContext
 import org.ligi.snackengage.SnackEngage
 import org.ligi.snackengage.conditions.AfterNumberOfOpportunities
 import org.ligi.snackengage.conditions.connectivity.IsConnectedViaWiFiOrUnknown
+import org.ligi.snackengage.conditions.locale.IsOneOfTheseLocales
 import org.ligi.snackengage.snacks.BaseSnack
 import org.ligi.snackengage.snacks.DefaultRateSnack
 import org.ligi.snackengage.snacks.OpenURLSnack
@@ -43,6 +44,7 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
+import java.util.*
 
 @RuntimePermissions
 class PassListActivity : PassAndroidActivity() {
@@ -145,7 +147,7 @@ class PassListActivity : PassAndroidActivity() {
         } else { // if no error - check if there is a new version of the app
             tracker.trackEvent("ui_event", "processFile", "updatenotice", null)
 
-            SnackEngage.from(fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE)).withSnack(object : OpenURLSnack("market://details?id=org.ligi.survivalmanual", "survival") {
+            SnackEngage.from(fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE)).withSnack(object : OpenURLSnack("https://play.google.com/store/apps/details?id=org.ligi.survivalmanual&referrer=utm_source%3Dpassandroid", "survival") {
 
                 override fun createSnackBar(snackContext: SnackContext): Snackbar {
                     val snackbar = super.createSnackBar(snackContext)
@@ -157,7 +159,7 @@ class PassListActivity : PassAndroidActivity() {
                     return snackbar
                 }
 
-            }.overrideTitleText("Other App by ligi:\nFree Offline Survival Guide").overrideActionText("Get It!").withDuration(BaseSnack.DURATION_INDEFINITE).withConditions(AfterNumberOfOpportunities(7), IsConnectedViaWiFiOrUnknown())).build().engageWhenAppropriate()
+            }.overrideTitleText("Other App by ligi:\nFree Offline Survival Guide").overrideActionText("Get It!").withDuration(BaseSnack.DURATION_INDEFINITE).withConditions(IsOneOfTheseLocales(Locale.ENGLISH), AfterNumberOfOpportunities(7), IsConnectedViaWiFiOrUnknown())).build().engageWhenAppropriate()
         }
 
 
