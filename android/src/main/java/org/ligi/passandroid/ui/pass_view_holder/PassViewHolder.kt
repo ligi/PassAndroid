@@ -101,22 +101,17 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
             }
 
 
-    private fun getDateOrExtraText(pass: Pass): ZonedDateTime? {
-        if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
-            return pass.calendarTimespan!!.from
-        }
-        if (pass.validTimespans.orEmpty().isNotEmpty()) {
-            return pass.validTimespans!![0].to
-        }
-        return null
+    private fun getDateOrExtraText(pass: Pass) = when {
+        pass.calendarTimespan?.from != null -> pass.calendarTimespan!!.from
+        pass.validTimespans.orEmpty().isNotEmpty() -> pass.validTimespans!![0].to
+        else -> null
     }
 
     @Visibility
-    protected open fun getVisibilityForGlobalAndLocal(global: Boolean, local: Boolean): Int {
-        if (global) {
-            return GONE
-        }
-
-        return if (local) VISIBLE else INVISIBLE
+    protected open fun getVisibilityForGlobalAndLocal(global: Boolean, local: Boolean) = when {
+        global -> GONE
+        local -> VISIBLE
+        else -> INVISIBLE
     }
+
 }
