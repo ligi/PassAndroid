@@ -41,10 +41,10 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
     protected fun refresh(pass: Pass, passStore: PassStore) {
         val dateOrExtraText = getDateOrExtraText(pass)
 
-        val noButtons = dateOrExtraText == null && pass.locations.size <= 0
+        val noButtons = dateOrExtraText == null && pass.locations.isEmpty()
 
         view.actionsSeparator.visibility = getVisibilityForGlobalAndLocal(noButtons, true)
-        view.timeAndNavBar.navTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.size > 0)
+        view.timeAndNavBar.navTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.isNotEmpty())
 
         view.timeAndNavBar.timeTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, dateOrExtraText != null)
 
@@ -105,7 +105,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
             return pass.calendarTimespan!!.from
         }
-        if (pass.validTimespans != null && pass.validTimespans!!.size > 0) {
+        if (pass.validTimespans.orEmpty().isNotEmpty()) {
             return pass.validTimespans!![0].to
         }
         return null
