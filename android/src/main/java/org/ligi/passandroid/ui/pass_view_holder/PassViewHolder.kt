@@ -29,8 +29,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         view.timeAndNavBar.navTextView.text = view.context.getString(R.string.pass_directions)
 
         view.timeAndNavBar.timeTextView.setOnClickListener {
-            val dateOrExtraText = getDateOrExtraText(pass)
-            AddToCalendar.tryAddDateToCalendar(pass, view, dateOrExtraText)
+            getDateOrExtraText(pass)?.let { AddToCalendar.tryAddDateToCalendar(pass, view, it) }
         }
 
         view.timeAndNavBar.navTextView.setOnClickListener {
@@ -90,20 +89,19 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         return prefix + relativeDateTimeString
     }
 
-    protected fun getTimeInfoString(pass: Pass) =
-            if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
-                setDateTextFromDateAndPrefix("", pass.calendarTimespan!!.from!!)
-            } else if (pass.validTimespans.orEmpty().isNotEmpty() && pass.validTimespans!![0].to != null) {
-                val to = pass.validTimespans!![0].to
-                setDateTextFromDateAndPrefix(if (to!!.isAfter(ZonedDateTime.now())) "expires " else " expired ", to)
-            } else {
-                null
-            }
+    protected fun getTimeInfoString(pass: Pass) = when {
+        pass.calendarTimespan?.from != null -> setDateTextFromDateAndPrefix("", pass.calendarTimespan!!.from!!)
 
+        pass.validTimespans.orEmpty().isNotEmpty() && pass.validTimespans!![0].to != null -> {
+            val to = pass.validTimespans!![0].to
+            setDateTextFromDateAndPrefix(if (to!!.isAfter(ZonedDateTime.now())) "expires " else " expired ", to)
+        }
+        else -> null
+    }
 
     private fun getDateOrExtraText(pass: Pass) = when {
-        pass.calendarTimespan?.from != null -> pass.calendarTimespan!!.from
-        pass.validTimespans.orEmpty().isNotEmpty() -> pass.validTimespans!![0].to
+        pass.calendarTimespan != null -> pass.calendarTimespan
+        pass.validTimespans.orEmpty().isNotEmpty() -> pass.validTimespans!![0]
         else -> null
     }
 
