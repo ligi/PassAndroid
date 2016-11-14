@@ -93,7 +93,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
     protected fun getTimeInfoString(pass: Pass) =
             if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
                 setDateTextFromDateAndPrefix("", pass.calendarTimespan!!.from!!)
-            } else if (pass.validTimespans != null && pass.validTimespans!!.size > 0 && pass.validTimespans!![0].to != null) {
+            } else if (pass.validTimespans.orEmpty().isNotEmpty() && pass.validTimespans!![0].to != null) {
                 val to = pass.validTimespans!![0].to
                 setDateTextFromDateAndPrefix(if (to!!.isAfter(ZonedDateTime.now())) "expires " else " expired ", to)
             } else {
