@@ -3,9 +3,10 @@ package org.ligi.passandroid.reader
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import org.json.JSONException
 import org.json.JSONObject
-import org.ligi.axt.AXT
+import org.ligi.kaxt.parseColor
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.helper.CategoryHelper
@@ -62,7 +63,7 @@ object AppleStylePassReader {
 
             for (charset in Charset.availableCharsets().values) {
                 try {
-                    val json_str = AXT.at(file).readToString(charset)
+                    val json_str = file.bufferedReader(charset).readText()
                     pass_json = SafeJSONReader.readJSONSafely(json_str)
                 } catch (ignored: Exception) {
                     // we try with next charset
@@ -154,7 +155,7 @@ object AppleStylePassReader {
 
         readJsonSafe(pass_json, "backgroundColor", object : JsonStringReadCallback {
             override fun onString(string: String) {
-                pass.accentColor = AXT.at(string).parseColor(0)
+                pass.accentColor = string.parseColor(Color.BLACK)
             }
         })
 

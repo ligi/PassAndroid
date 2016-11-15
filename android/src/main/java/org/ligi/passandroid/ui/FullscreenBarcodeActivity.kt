@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.fullscreen_image.*
-import org.ligi.axt.AXT
+import org.ligi.kaxt.lockOrientation
 import org.ligi.passandroid.R
 import org.ligi.tracedroid.logging.Log
 
@@ -56,7 +56,7 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
                 ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT,
                 ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT -> return  // do nothing
 
-                else -> AXT.at(this).lockOrientation(Configuration.ORIENTATION_PORTRAIT)
+                else -> lockOrientation(Configuration.ORIENTATION_PORTRAIT)
             }
 
         } else {
@@ -67,7 +67,7 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
                 ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
                 ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE -> return  // do nothing
 
-                else -> AXT.at(this).lockOrientation(Configuration.ORIENTATION_LANDSCAPE)
+                else -> lockOrientation(Configuration.ORIENTATION_LANDSCAPE)
             }
 
         }

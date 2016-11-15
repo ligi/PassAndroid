@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import org.ligi.axt.AXT
+import org.ligi.kaxt.getSmallestSide
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.BarCode
 
@@ -31,7 +31,7 @@ internal class BarcodeUIController(rootView: View, private val barCode: BarCode?
         }
 
         if (barCode != null) {
-            val smallestSide = AXT.at(activity.windowManager).smallestSide
+            val smallestSide = activity.windowManager.getSmallestSide()
 
             val bitmapDrawable = barCode.getBitmap(activity.resources)
 

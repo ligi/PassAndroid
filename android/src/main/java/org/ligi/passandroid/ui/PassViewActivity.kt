@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import kotlinx.android.synthetic.main.barcode.*
 import kotlinx.android.synthetic.main.edit.*
 import kotlinx.android.synthetic.main.pass_view_extra_data.*
-import org.ligi.axt.AXT
 import org.ligi.compat.HtmlCompat
+import org.ligi.kaxt.disableRotation
+import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.R
 import org.ligi.passandroid.maps.PassbookMapsFacade
 import org.ligi.passandroid.model.PassBitmapDefinitions
@@ -96,7 +97,7 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        AXT.at(this).disableRotation()
+        disableRotation()
 
         setContentView(R.layout.activity_pass_view)
 
@@ -123,7 +124,7 @@ class PassViewActivity : PassViewActivityBase() {
         }
 
         barcode_img.setOnClickListener {
-            AXT.at(this).startCommonIntent().activityFromClass(FullscreenBarcodeActivity::class.java)
+            startActivityFromClass(FullscreenBarcodeActivity::class.java)
         }
 
         setSupportActionBar(toolbar)

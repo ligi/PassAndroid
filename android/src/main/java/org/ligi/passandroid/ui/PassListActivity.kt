@@ -21,8 +21,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.ligi.axt.AXT
-import org.ligi.axt.listeners.ActivityFinishingOnClickListener
+import org.ligi.kaxt.setVisibility
+import org.ligi.kaxt.startActivityFromClass
+import org.ligi.kaxt.startActivityFromURL
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
@@ -95,7 +96,9 @@ class PassListActivity : PassAndroidActivity() {
         pd.setMessage(getString(R.string.scan_progressdialog_message))
         pd.setCancelable(false)
         pd.isIndeterminate = true
-        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.scan_dialog_send_background_button), ActivityFinishingOnClickListener(this))
+        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.scan_dialog_send_background_button), { dialogInterface: DialogInterface, i: Int ->
+            this@PassListActivity.finish()
+        })
         pd.show()
     }
 
@@ -136,7 +139,7 @@ class PassListActivity : PassAndroidActivity() {
 
         setSupportActionBar(toolbar)
 
-        AXT.at(fab_action_open_file).setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
+        fab_action_open_file.setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().size > 0) {
@@ -194,7 +197,7 @@ class PassListActivity : PassAndroidActivity() {
             val pass = PassTemplates.createAndAddEmptyPass(passStore, resources)
 
             fam.collapse()
-            AXT.at(this).startCommonIntent().activityFromClass(PassEditActivity::class.java)
+            startActivityFromClass(PassEditActivity::class.java)
 
             val newTitle: String
             if (tab_layout.selectedTabPosition < 0) {
@@ -212,7 +215,7 @@ class PassListActivity : PassAndroidActivity() {
         }
 
         fab_action_demo_pass.setOnClickListener {
-            AXT.at(this).startCommonIntent().openUrl("http://espass.it/examples")
+            startActivityFromURL("http://espass.it/examples")
             fam.collapse()
         }
 
@@ -224,7 +227,7 @@ class PassListActivity : PassAndroidActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.menu_help -> {
-            AXT.at(this).startCommonIntent().activityFromClass(HelpActivity::class.java)
+            startActivityFromClass(HelpActivity::class.java)
             true
         }
 

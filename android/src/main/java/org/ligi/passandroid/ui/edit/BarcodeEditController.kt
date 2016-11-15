@@ -3,13 +3,12 @@ package org.ligi.passandroid.ui.edit
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import org.ligi.axt.simplifications.SimpleTextWatcher
+import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
@@ -97,11 +96,9 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         bindRadio(PassBarCodeFormat.values())
 
         messageInput.setText(barCode.message)
-        messageInput.addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                refresh()
-            }
-        })
+        messageInput.doAfterEdit {
+            refresh()
+        }
 
         alternativeMessageInput.setText(barCode.alternativeText)
 

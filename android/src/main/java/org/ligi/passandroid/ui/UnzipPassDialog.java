@@ -2,11 +2,13 @@ package org.ligi.passandroid.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import org.ligi.axt.listeners.ActivityFinishingOnClickListener;
+
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.PassStore;
+
 import static org.ligi.passandroid.ui.UnzipPassController.FailCallback;
 import static org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
 import static org.ligi.passandroid.ui.UnzipPassController.SuccessCallback;
@@ -16,7 +18,12 @@ public class UnzipPassDialog {
     static void displayError(final Activity activity, final String title, final String err) {
         new AlertDialog.Builder(activity).setTitle(title)
                                          .setMessage(err)
-                                         .setPositiveButton(android.R.string.ok, new ActivityFinishingOnClickListener(activity))
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        activity.finish();
+                    }
+                })
                                          .show();
     }
 

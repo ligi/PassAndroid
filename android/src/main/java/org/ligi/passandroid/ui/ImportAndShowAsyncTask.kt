@@ -3,7 +3,7 @@ package org.ligi.passandroid.ui
 import android.app.ProgressDialog
 import android.net.Uri
 import android.os.AsyncTask
-import org.ligi.axt.AXT
+import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec
@@ -61,7 +61,7 @@ internal class ImportAndShowAsyncTask(val passImportActivity: PassImportActivity
 
             passImportActivity.passStore.classifier.moveToTopic(passbookForId!!, passImportActivity.getString(R.string.topic_new))
 
-            AXT.at(passImportActivity).startCommonIntent().activityFromClass(PassViewActivity::class.java)
+            passImportActivity.startActivityFromClass(PassViewActivity::class.java)
             passImportActivity.finish()
         }
 

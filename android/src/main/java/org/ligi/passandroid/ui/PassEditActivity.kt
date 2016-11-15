@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.edit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.ligi.axt.simplifications.SimpleTextWatcher
+import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassRefreshEvent
@@ -63,12 +62,10 @@ class PassEditActivity : AppCompatActivity() {
                 }
             }.show()
         }
-        passTitle.addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                super.afterTextChanged(s)
-                currentPass.description = s!!.toString()
-            }
-        })
+        passTitle.doAfterEdit {
+            currentPass.description = it.toString()
+        }
+
         val currentPass = passStore.currentPass
         if (currentPass != null) {
             this.currentPass = currentPass as PassImpl

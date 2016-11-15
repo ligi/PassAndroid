@@ -1,13 +1,12 @@
 package org.ligi.passandroid.ui.edit
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.edit_field.view.*
 import kotlinx.android.synthetic.main.edit_fields.view.*
-import org.ligi.axt.simplifications.SimpleTextWatcher
+import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.PassField
 
@@ -58,17 +57,13 @@ class FieldsEditFragment : PassandroidFragment() {
                 fields.remove(passField)
             }
 
-            container.value_field_edit.addTextChangedListener(object : SimpleTextWatcher() {
-                override fun afterTextChanged(s: Editable) {
-                    passField.value = s.toString()
-                }
-            })
+            container.value_field_edit.doAfterEdit {
+                passField.value = it.toString()
+            }
 
-            container.label_field_edit.addTextChangedListener(object : SimpleTextWatcher() {
-                override fun afterTextChanged(s: Editable) {
-                    passField.label = s.toString()
-                }
-            })
+            container.label_field_edit.doAfterEdit {
+                passField.label = it.toString()
+            }
         }
     }
 

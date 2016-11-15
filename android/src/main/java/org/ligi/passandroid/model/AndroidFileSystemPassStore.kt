@@ -5,7 +5,6 @@ import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import okio.Okio
 import org.greenrobot.eventbus.EventBus
-import org.ligi.axt.AXT
 import org.ligi.passandroid.App
 import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.events.PassStoreChangeEvent
@@ -99,7 +98,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
     }
 
     override fun deletePassWithId(id: String): Boolean {
-        val result = AXT.at(getPathForID(id)).deleteRecursive()
+        val result = getPathForID(id).deleteRecursively()
         if (result) {
             passMap.remove(id)
             classifier.removePass(id)

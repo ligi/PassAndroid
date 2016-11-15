@@ -3,14 +3,11 @@ package org.ligi.passandroid.model.pass
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.squareup.moshi.JsonQualifier
-import org.ligi.axt.AXT
 import org.ligi.passandroid.model.PassStore
-import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.ZonedDateTime
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
-import java.io.IOException
 import java.util.*
 
 class PassImpl(override val id: String) : Pass {
@@ -74,17 +71,10 @@ class PassImpl(override val id: String) : Pass {
     }
 
     override fun getSource(passStore: PassStore): String? {
-        val file = File(passStore.getPathForID(id), "source.obj")
-        if (file.exists()) {
-            try {
-                return AXT.at(file).loadToObject()
-            } catch (e: IOException) {
-                // OK no source info - no big deal - but log
-                Log.w("pass source info file exists but not readable" + e)
-            } catch (e: ClassNotFoundException) {
-                Log.w("pass source info file exists but not readable" + e)
-            }
+        val file = File(passStore.getPathForID(id), "source.txt")
 
+        if (file.exists()) {
+            return file.bufferedReader().readText()
         }
         return null
     }

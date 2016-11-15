@@ -10,7 +10,6 @@ import net.lingala.zip4j.core.ZipFile
 import net.lingala.zip4j.exception.ZipException
 import okio.Okio
 import org.json.JSONObject
-import org.ligi.axt.AXT
 import org.ligi.passandroid.App
 import org.ligi.passandroid.helper.PassTemplates
 import org.ligi.passandroid.helper.SafeJSONReader
@@ -34,7 +33,7 @@ object UnzipPassController {
     fun processInputStream(spec: InputStreamUnzipControllerSpec) {
         try {
             val tempFile = File.createTempFile("ins", "pass")
-            AXT.at(spec.inputStreamWithSource.inputStream).toFile(tempFile)
+            spec.inputStreamWithSource.inputStream.copyTo(FileOutputStream(tempFile))
             processFile(FileUnzipControllerSpec(tempFile.absolutePath, spec))
             tempFile.delete()
         } catch (e: Exception) {
@@ -56,7 +55,7 @@ object UnzipPassController {
             return
         }
 
-        AXT.at(File(path, "source.obj")).writeObject(spec.source)
+        File(path, "source.obj").bufferedWriter().write(spec.source)
 
         try {
             val zipFile = ZipFile(spec.zipFileString)
@@ -72,7 +71,7 @@ object UnzipPassController {
 
         if (manifestFile.exists()) {
             try {
-                val readToString = AXT.at(manifestFile).readToString()
+                val readToString = manifestFile.bufferedReader().readText()
                 manifest_json = SafeJSONReader.readJSONSafely(readToString)
                 uuid = manifest_json.getString("pass.json")
             } catch (e: Exception) {
@@ -82,7 +81,7 @@ object UnzipPassController {
 
         } else if (espassFile.exists()) {
             try {
-                val readToString = AXT.at(espassFile).readToString()
+                val readToString = espassFile.bufferedReader().readText()
                 manifest_json = SafeJSONReader.readJSONSafely(readToString)
                 uuid = manifest_json.getString("id")
             } catch (e: Exception) {
@@ -149,7 +148,7 @@ object UnzipPassController {
         val rename_file = File(spec.targetPath, uuid)
 
         if (spec.overwrite && rename_file.exists()) {
-            AXT.at(rename_file).deleteRecursive()
+            rename_file.deleteRecursively()
         }
 
         if (!rename_file.exists()) {

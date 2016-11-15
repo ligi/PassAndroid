@@ -3,7 +3,7 @@ package org.ligi.passandroid.ui.edit
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import org.ligi.axt.AXT
+import org.ligi.kaxt.loadImage
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
@@ -31,7 +31,7 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
     }
 
     private fun extractImage(imageReturnedIntent: Intent, name: String) {
-        val extractedFile = AXT.at(imageReturnedIntent.data).loadImage(context)
+        val extractedFile = imageReturnedIntent.data.loadImage(context)
         val pass = passStore.currentPass
         if (extractedFile != null && pass != null && extractedFile.exists()) {
             try {
