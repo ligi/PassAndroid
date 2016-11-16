@@ -138,4 +138,25 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="new_topic_input_hint">Заголовок для новой темы</string>
   <string name="new_topic_suggestions">Предложения:</string>
   <string name="cannot_be_empty">не может быть пустым</string>
+  <string name="type">Тип</string>
+  <string name="undo">отменить</string>
+  <string name="sort_order_date_asc">Дата по возрастанию</string>
+  <string name="sort_order_date_desc">Дата по убыванию</string>
+  <string name="sort_order_date_type">Тип</string>
+  <string name="sort_order_date_temporaldistance">Время до события</string>
+  <string name="night_mode_night">Ночь</string>
+  <string name="night_mode_day">День</string>
+  <string name="night_mode_auto">Автоматически</string>
+  <string name="preference_autolight_title">Автоматическая яркость</string>
+  <string name="preference_autolight_summary">Увеличивать яркость при показе штрих-кода?</string>
+  <string name="preference_condensed_title">Сжатый вид</string>
+  <string name="preference_condensed_summary">Показывать больше деталей и меньше лишнего?</string>
+  <string name="preference_sort_title">Порядок сортировки</string>
+  <string name="image_import">Импорт изображения</string>
+  <string name="pdf_import">Импорт PDF</string>
+  <string name="field_source_image">Изображение</string>
+  <string name="field_source_pdf">PDF</string>
+  <string name="nav_settings">Настройки</string>
+  <string name="nav_github">Github</string>
+  <string name="nav_improve_translation">Улучшить перевод</string>
 </resources>
