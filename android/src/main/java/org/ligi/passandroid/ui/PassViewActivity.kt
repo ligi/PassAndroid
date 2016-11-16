@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.app.TaskStackBuilder
@@ -55,7 +56,7 @@ class PassViewActivity : PassViewActivityBase() {
         processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, pass)
 
         if (map_container != null) {
-            if (!(pass.locations.size > 0 && PassbookMapsFacade.init(this))) {
+            if (!(pass.locations.isNotEmpty() && PassbookMapsFacade.init(this))) {
                 map_container.visibility = View.GONE
             }
         }
@@ -79,7 +80,7 @@ class PassViewActivity : PassViewActivityBase() {
         }
 
 
-        if (back_str.length > 0) {
+        if (back_str.isNotEmpty()) {
             back_fields.text = HtmlCompat.fromHtml(back_str.toString())
             moreTextView.visibility = View.VISIBLE
         } else {
@@ -142,6 +143,9 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.map_item, menu)
         menuInflater.inflate(R.menu.update, menu)
+        if (Build.VERSION.SDK_INT >= 23) {
+            menuInflater.inflate(R.menu.shortcut, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

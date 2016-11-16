@@ -2,6 +2,9 @@ package org.ligi.passandroid.ui;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,12 +22,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.ligi.passandroid.App;
+import org.ligi.passandroid.BuildConfig;
 import org.ligi.passandroid.R;
 import org.ligi.passandroid.model.InputStreamWithSource;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+import static org.ligi.passandroid.model.PassBitmapDefinitions.BITMAP_ICON;
 
+@RuntimePermissions
 public class PassViewActivityBase extends PassAndroidActivity {
 
     public static final String EXTRA_KEY_UUID = "uuid";
@@ -122,12 +130,37 @@ public class PassViewActivityBase extends PassAndroidActivity {
                 setToFullBrightness();
                 return true;
 
+            case R.id.install_shortcut:
+                PassViewActivityBasePermissionsDispatcher.createShortcutWithCheck(this);
+
+                return true;
+
+
             case R.id.menu_update:
                 new Thread(new UpdateAsync()).start();
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PassViewActivityBasePermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @NeedsPermission("com.android.launcher.permission.INSTALL_SHORTCUT")
+    public void createShortcut() {
+        final Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        final Intent shortcutIntent = new Intent();
+        shortcutIntent.putExtra(EXTRA_KEY_UUID, currentPass.getId());
+        final ComponentName component = new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".ui.PassViewActivity");
+        shortcutIntent.setComponent(component);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.getDescription());
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(currentPass.getBitmap(passStore, BITMAP_ICON), 128, 128, true));
+        sendBroadcast(intent);
     }
 
     public static boolean mightPassBeAbleToUpdate(Pass pass) {

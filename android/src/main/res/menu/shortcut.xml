@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/install_shortcut"
+            yourapp:showAsAction="never"
+            android:title="@string/launcher_shortcut"/>
+</menu>
