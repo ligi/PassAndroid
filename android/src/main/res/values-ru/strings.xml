@@ -158,7 +158,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="image_import">Импорт изображения</string>
   <string name="pdf_import">Импорт PDF</string>
   <string name="field_source_image">Изображение</string>
+  <string name="field_note_image">Это импортированное изображение, не настоящий билет</string>
   <string name="field_source_pdf">PDF</string>
+  <string name="field_note_pdf">Это импортированный PDF, не настоящий билет</string>
   <string name="nav_settings">Настройки</string>
   <string name="nav_github">Github</string>
   <string name="nav_betatest_opt_in_out">Участие в бета-тестировании</string>
