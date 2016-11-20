@@ -98,7 +98,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="expiration_date_to_calendar_warning_message">Сейчас вы добавите дату окончания действия карточки в календарь, если эта дата не верна, но в карточке есть правильная дата, пожалуйста отправьте карточку мне, я исправлю PassAndroid.</string>
   <string name="expiration_date_to_calendar_warning_title">Добавить дату окончания действия</string>
   <string name="topic_trash">корзина</string>
-  <string name="topic_new">создать</string>
+  <string name="topic_new">новые</string>
   <string name="topic_archive">архив</string>
   <string name="move_to_new_topic">Переместить в новую Категорию</string>
   <string name="categories_nav">Категорий: %d</string>
@@ -109,7 +109,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="scan_finished_dialog_text">найдено %d карточек</string>
   <string name="scan_progressdialog_title">Поиск ...</string>
   <string name="scan_progressdialog_message">Пожалуйста подождите.</string>
-  <string name="scan_dialog_send_background_button">фон</string>
+  <string name="scan_dialog_send_background_button">в фоне</string>
   <string name="emtytrash_label">очистить корзину</string>
   <string name="barcode_edit_hint_alternative_message">альтернативное Сообщение</string>
   <string name="barcode_edit_random">случайный</string>
@@ -152,11 +152,16 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="preference_condensed_title">Сжатый вид</string>
   <string name="preference_condensed_summary">Показывать больше деталей и меньше лишнего?</string>
   <string name="preference_sort_title">Порядок сортировки</string>
+  <string name="preference_sort_summary">Как сортировать карточки?</string>
+  <string name="preference_daynight_title">Дневная/ночная тема</string>
+  <string name="preference_daynight_summary">Показывать темный или светлый фон?</string>
   <string name="image_import">Импорт изображения</string>
   <string name="pdf_import">Импорт PDF</string>
   <string name="field_source_image">Изображение</string>
   <string name="field_source_pdf">PDF</string>
   <string name="nav_settings">Настройки</string>
   <string name="nav_github">Github</string>
+  <string name="nav_betatest_opt_in_out">Участие в бета-тестировании</string>
+  <string name="nav_community_on_google">Сообщество Google+</string>
   <string name="nav_improve_translation">Улучшить перевод</string>
 </resources>
