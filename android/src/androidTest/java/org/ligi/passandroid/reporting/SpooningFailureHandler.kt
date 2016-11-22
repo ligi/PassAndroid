@@ -34,7 +34,7 @@ class SpooningFailureHandler(private val instrumentation: Instrumentation) : Fai
             val activity = arrayOfNulls<Activity>(1)
             instrumentation.runOnMainSync {
                 val activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
-                activity[0] = activities.iterator().next()
+                activity[0] = activities.first()
             }
             return activity[0]!!
         }
