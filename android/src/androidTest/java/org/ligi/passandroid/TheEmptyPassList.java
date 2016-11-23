@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.ligi.gobandroid_hd.base.PassandroidTestRule;
 import org.ligi.passandroid.model.pass.Pass;
 import org.ligi.passandroid.ui.PassListActivity;
+import org.ligi.trulesk.TruleskIntentRule;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -19,7 +19,7 @@ import static org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere;
 public class TheEmptyPassList {
 
     @Rule
-    public PassandroidTestRule<PassListActivity> rule = new PassandroidTestRule<>(PassListActivity.class, false);
+    public TruleskIntentRule<PassListActivity> rule = new TruleskIntentRule<>(PassListActivity.class, false);
 
     @Before
     public void setUp() {

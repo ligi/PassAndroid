@@ -9,13 +9,13 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.ligi.gobandroid_hd.base.PassandroidTestRule;
 import org.ligi.passandroid.helper.BarcodeDecoder;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.pass.BarCode;
 import org.ligi.passandroid.model.pass.PassBarCodeFormat;
 import org.ligi.passandroid.model.pass.PassImpl;
 import org.ligi.passandroid.ui.FullscreenBarcodeActivity;
+import org.ligi.trulesk.TruleskIntentRule;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TheFullscreenBarcodeActivity {
 
     @Rule
-    public PassandroidTestRule<FullscreenBarcodeActivity> rule = new PassandroidTestRule<>(FullscreenBarcodeActivity.class, false);
+    public TruleskIntentRule<FullscreenBarcodeActivity> rule = new TruleskIntentRule<>(FullscreenBarcodeActivity.class, false);
 
     @Inject
     PassStore passStore;

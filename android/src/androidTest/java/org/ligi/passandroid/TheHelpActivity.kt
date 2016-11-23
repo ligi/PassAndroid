@@ -7,19 +7,19 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.gobandroid_hd.base.PassandroidTestRule
-import org.ligi.passandroid.helper.ScreenshotTaker
 import org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere
 import org.ligi.passandroid.ui.HelpActivity
+import org.ligi.trulesk.TruleskIntentRule
+
 class TheHelpActivity {
 
     @get:Rule
-    val rule: PassandroidTestRule<HelpActivity> = PassandroidTestRule(HelpActivity::class.java)
+    val rule = TruleskIntentRule(HelpActivity::class.java)
 
     @Test
     fun testHelpIsThere() {
         checkThatHelpIsThere()
-        ScreenshotTaker.takeScreenshot(rule.activity, "help")
+        rule.screenShot("help")
     }
 
     @Test

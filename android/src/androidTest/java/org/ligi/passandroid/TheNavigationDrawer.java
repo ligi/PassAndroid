@@ -7,9 +7,9 @@ import android.content.Intent;
 import com.squareup.spoon.Spoon;
 import org.junit.Rule;
 import org.junit.Test;
-import org.ligi.gobandroid_hd.base.PassandroidTestRule;
 import org.ligi.passandroid.ui.PassListActivity;
 import org.ligi.passandroid.ui.PreferenceActivity;
+import org.ligi.trulesk.TruleskIntentRule;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.not;
 public class TheNavigationDrawer {
 
     @Rule
-    public PassandroidTestRule<PassListActivity> rule = new PassandroidTestRule<>(PassListActivity.class, true);
+    public TruleskIntentRule<PassListActivity> rule = new TruleskIntentRule<>(PassListActivity.class, true);
 
     @Test
     public void testNavigationDrawerIsUsuallyNotShown() {

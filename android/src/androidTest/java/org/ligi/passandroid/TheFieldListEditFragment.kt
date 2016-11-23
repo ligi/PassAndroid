@@ -12,18 +12,18 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.ligi.gobandroid_hd.base.PassandroidTestRule
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.PassField
 import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.ui.PassEditActivity
+import org.ligi.trulesk.TruleskIntentRule
 import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 class TheFieldListEditFragment {
 
     @get:Rule
-    val rule: PassandroidTestRule<PassEditActivity> = PassandroidTestRule(PassEditActivity::class.java, false)
+    val rule = TruleskIntentRule(PassEditActivity::class.java, false)
 
     @Inject
     lateinit var passStore: PassStore
