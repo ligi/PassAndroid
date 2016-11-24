@@ -19,8 +19,8 @@ android {
     buildToolsVersion "25.0.1"
 
     defaultConfig {
-        versionCode 329
-        versionName "3.2.9"
+        versionCode 330
+        versionName "3.3.0"
         minSdkVersion 9
         targetSdkVersion 25
         applicationId "org.ligi.passandroid"
