@@ -39,11 +39,11 @@ public class ThePastLocationsStore {
     public void testPastLocationsStoreShouldNeverContainMoreThanMaxElements() {
         PastLocationsStore tested = new PastLocationsStore(sharedPreferences, tracker);
 
-        for (int i = 0; i < PastLocationsStore.MAX_ELEMENTS * 2; i++) {
+        for (int i = 0; i < PastLocationsStore.Companion.getMAX_ELEMENTS() * 2; i++) {
             tested.putLocation("" + i);
         }
 
-        assertThat(tested.getLocations().size()).isEqualTo(PastLocationsStore.MAX_ELEMENTS);
+        assertThat(tested.getLocations().size()).isEqualTo(PastLocationsStore.Companion.getMAX_ELEMENTS());
 
     }
 

@@ -15,7 +15,7 @@ import org.ligi.passandroid.maps.PassbookMapsFacade
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings
 import org.ligi.passandroid.model.pass.Pass
-import org.ligi.passandroid.printing.PrintHelper
+import org.ligi.passandroid.printing.doPrint
 import java.io.File
 import javax.inject.Inject
 
@@ -92,7 +92,7 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) {
             }
 
             R.id.menu_print -> {
-                PrintHelper.doPrint(activity, pass)
+                doPrint(activity, pass)
                 return true
             }
         }

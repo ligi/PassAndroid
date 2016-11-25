@@ -3,7 +3,6 @@ package org.ligi.passandroid;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
-import com.squareup.spoon.Spoon;
 import java.util.UUID;
 import javax.inject.Inject;
 import org.junit.Before;
@@ -21,6 +20,11 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.ligi.passandroid.model.pass.PassBarCodeFormat.AZTEC;
+import static org.ligi.passandroid.model.pass.PassBarCodeFormat.CODE_128;
+import static org.ligi.passandroid.model.pass.PassBarCodeFormat.CODE_39;
+import static org.ligi.passandroid.model.pass.PassBarCodeFormat.PDF_417;
+import static org.ligi.passandroid.model.pass.PassBarCodeFormat.QR_CODE;
 
 public class TheFullscreenBarcodeActivity {
 
@@ -39,39 +43,39 @@ public class TheFullscreenBarcodeActivity {
 
     @Test
     public void testPDF417BarcodeIsShown() {
-        testWithBarcodeFormat(PassBarCodeFormat.PDF_417);
+        testWithBarcodeFormat(PDF_417);
 
-        Spoon.screenshot(rule.getActivity(), "pdf417_barcode");
+        rule.screenShot("pdf417_barcode");
     }
 
     @Test
     public void testAztecBarcodeIsShown() {
-        testWithBarcodeFormat(PassBarCodeFormat.AZTEC);
+        testWithBarcodeFormat(AZTEC);
 
-        Spoon.screenshot(rule.getActivity(), "aztec_barcode");
+        rule.screenShot("aztec_barcode");
     }
 
 
     @Test
     public void testQRCodeIsShown() {
-        testWithBarcodeFormat(PassBarCodeFormat.QR_CODE);
+        testWithBarcodeFormat(QR_CODE);
 
-        Spoon.screenshot(rule.getActivity(), "qr_barcode");
+        rule.screenShot("qr_barcode");
     }
 
     @Test
     public void testCode128CodeIsShown() {
-        testWithBarcodeFormat(PassBarCodeFormat.CODE_128);
+        testWithBarcodeFormat(CODE_128);
 
-        Spoon.screenshot(rule.getActivity(), "code128_barcode");
+        rule.screenShot("code128_barcode");
     }
 
 
     @Test
     public void testCode39CodeIsShown() {
-        testWithBarcodeFormat(PassBarCodeFormat.CODE_39);
+        testWithBarcodeFormat(CODE_39);
 
-        Spoon.screenshot(rule.getActivity(), "code39_barcode");
+        rule.screenShot("code39_barcode");
     }
 
 
