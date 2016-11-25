@@ -4,28 +4,27 @@ import android.os.Build
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.rule.ActivityTestRule
 import android.support.v7.app.AppCompatDelegate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.passandroid.helper.ScreenshotTaker
 import org.ligi.passandroid.model.AndroidSettings
 import org.ligi.passandroid.model.comparator.PassByTimeComparator
 import org.ligi.passandroid.model.comparator.PassByTypeFirstAndTimeSecondComparator
 import org.ligi.passandroid.model.comparator.PassTemporalDistanceComparator
 import org.ligi.passandroid.ui.PreferenceActivity
+import org.ligi.trulesk.TruleskActivityRule
 
 class ThePreferenceActivity {
 
     @get:Rule
-    val rule: ActivityTestRule<PreferenceActivity> = ActivityTestRule(PreferenceActivity::class.java)
+    val rule = TruleskActivityRule(PreferenceActivity::class.java)
 
     val androidSettings by lazy { AndroidSettings(rule.activity) }
 
     @Test
     fun autoLightToggles() {
-        ScreenshotTaker.takeScreenshot(rule.activity, "preferences")
+        rule.screenShot("preferences")
 
         val automaticLightEnabled = androidSettings.isAutomaticLightEnabled
 

@@ -1,17 +1,15 @@
 package org.ligi.passandroid
 
-import android.support.test.runner.AndroidJUnit4
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
+import org.ligi.passandroid.helper.loadPassFromAsset
 
-@RunWith(AndroidJUnit4::class)
-class TheQuirkCorrector : TheAppleStyleBarcodeReaderBase() {
+class TheQuirkCorrector {
 
     @Test
     fun testWestbahnDescriptionIsFixed() {
         loadPassFromAsset("passes/workarounds/westbahn/special.pkpass") {
-            assertThat(it.description).isEqualTo("Wien Westbahnhof->Amstetten")
+            assertThat(it!!.description).isEqualTo("Wien Westbahnhof->Amstetten")
         }
     }
 

@@ -6,19 +6,17 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 
-object BarcodeDecoder {
+fun Bitmap.decodeBarCode(): String {
+    val intArray = IntArray(this.width * this.height)
+    this.getPixels(intArray, 0, this.width, 0, 0, this.width, this.height)
 
-    fun decodeBitmap(bMap: Bitmap): String {
-        val intArray = IntArray(bMap.width * bMap.height)
-        bMap.getPixels(intArray, 0, bMap.width, 0, 0, bMap.width, bMap.height)
+    val source = RGBLuminanceSource(this.width, this.height, intArray)
+    val bitmap = BinaryBitmap(HybridBinarizer(source))
 
-        val source = RGBLuminanceSource(bMap.width, bMap.height, intArray)
-        val bitmap = BinaryBitmap(HybridBinarizer(source))
+    val reader = MultiFormatReader()// use this otherwise ChecksumException
 
-        val reader = MultiFormatReader()// use this otherwise ChecksumException
-
-        val result = reader.decode(bitmap)
-        return result.text
-    }
-
+    val result = reader.decode(bitmap)
+    return result.text
 }
+
+

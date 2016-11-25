@@ -9,27 +9,18 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.passandroid.helper.ScreenshotTaker
-import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.PassListFragment
 import org.ligi.trulesk.TruleskIntentRule
-import javax.inject.Inject
 
 class ThePassListSwiping {
 
     @get:Rule
-    val rule: TruleskIntentRule<PassListActivity> = TruleskIntentRule(PassListActivity::class.java, false)
-
-    @Inject
-    lateinit var passStore: PassStore
-
-    private val activity by lazy {
-        val build = DaggerTestComponent.create()
-        build.inject(this)
-        App.setComponent(build)
-        rule.launchActivity(null)
+    val rule = TruleskIntentRule(PassListActivity::class.java) {
+        TestApp.reset()
     }
+
+    val passStore by lazy { TestApp.getPassStore() }
 
     @Test
     fun testWeCanMoveToTrash() {
@@ -37,7 +28,7 @@ class ThePassListSwiping {
 
         onView(withText(R.string.topic_trash)).perform(click())
 
-        assertThat(passStore.classifier.getTopics()).containsExactly(activity.getString(R.string.topic_trash))
+        assertThat(passStore.classifier.getTopics()).containsExactly(rule.activity.getString(R.string.topic_trash))
     }
 
 
@@ -47,7 +38,7 @@ class ThePassListSwiping {
 
         onView(withText(R.string.topic_archive)).perform(click())
 
-        assertThat(passStore.classifier.getTopics()).containsExactly(activity.getString(R.string.topic_archive))
+        assertThat(passStore.classifier.getTopics()).containsExactly(rule.activity.getString(R.string.topic_archive))
     }
 
     @Test
@@ -75,7 +66,7 @@ class ThePassListSwiping {
 
         fakeSwipeRight()
 
-        ScreenshotTaker.takeScreenshot(activity, "move_to_new_topic_dialog")
+        rule.screenShot("move_to_new_topic_dialog")
 
         onView(withText(R.string.move_to_new_topic)).check(matches(isDisplayed()))
     }
@@ -86,8 +77,8 @@ class ThePassListSwiping {
       http://stackoverflow.com/questions/35397439/swipe-tests-flaky-on-recyclerview
      */
     private fun fakeSwipe(dir: Int) {
-        activity.runOnUiThread {
-            val fragment = activity.supportFragmentManager.fragments.firstOrNull { it is PassListFragment } as PassListFragment
+        rule.activity.runOnUiThread {
+            val fragment = rule.activity.supportFragmentManager.fragments.firstOrNull { it is PassListFragment } as PassListFragment
             fragment.onSwiped(0, dir)
         }
     }

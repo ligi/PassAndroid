@@ -7,7 +7,7 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.passandroid.steps.HelpSteps.checkThatHelpIsThere
+import org.ligi.passandroid.helper.checkThatHelpIsThere
 import org.ligi.passandroid.ui.HelpActivity
 import org.ligi.trulesk.TruleskIntentRule
 

@@ -1,5 +1,7 @@
 package org.ligi.passandroid;
 
+import org.ligi.passandroid.model.PassStore;
+
 public class TestApp extends App {
 
     @Override
@@ -14,5 +16,13 @@ public class TestApp extends App {
     @Override
     public void installLeakCanary() {
 
+    }
+
+    public static PassStore getPassStore() {
+        return component().passStore();
+    }
+
+    public static void reset() {
+        setComponent(DaggerTestComponent.builder().testModule(new TestModule()).build());
     }
 }
