@@ -34,7 +34,7 @@ class PassAdapter(private val passListActivity: AppCompatActivity, private val p
         val inflater = LayoutInflater.from(viewGroup.context)
 
         val res = inflater.inflate(R.layout.pass_list_item, viewGroup, false) as CardView
-        if (settings.isCondensedModeEnabled) {
+        if (settings.isCondensedModeEnabled()) {
             return CondensedPassViewHolder(res)
         } else {
             return VerbosePassViewHolder(res)

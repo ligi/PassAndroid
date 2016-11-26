@@ -16,14 +16,14 @@ import java.io.File
 import java.util.*
 
 class AndroidFileSystemPassStore(private val context: Context, settings: Settings, private val moshi: Moshi, private val bus: EventBus) : PassStore {
-    private val path: File = settings.passesDir
+    private val path: File = settings.getPassesDir()
 
     override val passMap = HashMap<String, Pass>()
 
     override var currentPass: Pass? = null
 
     override val classifier: PassClassifier by lazy {
-        val classificationFile = File(settings.stateDir, "classifier_state.json")
+        val classificationFile = File(settings.getStateDir(), "classifier_state.json")
         FileBackedPassClassifier(classificationFile, this, moshi)
     }
 

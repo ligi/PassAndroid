@@ -18,7 +18,7 @@ class AndroidSettings(val context: Context) : Settings {
         val stringValue = sharedPreferences.getString(key, "0")
         val id = Integer.valueOf(stringValue)!!
 
-        return PassSortOrder.values().first() { it.int == id }
+        return PassSortOrder.values().first { it.int == id }
     }
 
     override fun doTraceDroidEmailSend() = true

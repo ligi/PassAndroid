@@ -93,7 +93,7 @@ class TheBarCodeEditing {
 
     @Test
     fun testCanSetMessage() {
-        start {}
+        start()
 
         onView(withId(R.id.barcode_img)).perform(click())
 
@@ -113,7 +113,7 @@ class TheBarCodeEditing {
 
     @Test
     fun testCanSetAltMessage() {
-        start {}
+        start()
 
         onView(withId(R.id.barcode_img)).perform(click())
 

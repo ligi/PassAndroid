@@ -43,7 +43,7 @@ class PassListFragment : Fragment() {
 
         App.component().inject(this)
 
-        passStoreProjection = PassStoreProjection(passStore, arguments.getString(BUNDLE_KEY_TOPIC)!!, settings.sortOrder)
+        passStoreProjection = PassStoreProjection(passStore, arguments.getString(BUNDLE_KEY_TOPIC)!!, settings.getSortOrder())
         adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection!!)
 
         recyclerView.adapter = adapter

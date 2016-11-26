@@ -55,8 +55,8 @@ class TestModule {
     @Provides
     fun provideSettings(): Settings {
         val mock = mock(Settings::class.java)
-        `when`(mock.sortOrder).thenReturn(PassSortOrder.DATE_ASC)
-        `when`(mock.passesDir).thenReturn(File(""))
+        `when`(mock.getSortOrder()).thenReturn(PassSortOrder.DATE_ASC)
+        `when`(mock.getPassesDir()).thenReturn(File(""))
         `when`(mock.doTraceDroidEmailSend()).thenReturn(false)
         return mock
     }
