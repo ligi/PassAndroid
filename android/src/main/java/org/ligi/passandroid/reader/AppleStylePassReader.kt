@@ -9,8 +9,8 @@ import org.json.JSONObject
 import org.ligi.kaxt.parseColor
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
-import org.ligi.passandroid.helper.CategoryHelper
-import org.ligi.passandroid.helper.SafeJSONReader
+import org.ligi.passandroid.functions.getHumanCategoryString
+import org.ligi.passandroid.functions.readJSONSafely
 import org.ligi.passandroid.model.ApplePassbookQuirkCorrector
 import org.ligi.passandroid.model.AppleStylePassTranslation
 import org.ligi.passandroid.model.PassBitmapDefinitions
@@ -51,7 +51,7 @@ object AppleStylePassReader {
 
         try {
             val plainJsonString = AppleStylePassTranslation.readFileAsStringGuessEncoding(file)
-            pass_json = SafeJSONReader.readJSONSafely(plainJsonString)
+            pass_json = readJSONSafely(plainJsonString)
         } catch (e: Exception) {
             Log.i("PassParse Exception " + e)
         }
@@ -64,7 +64,7 @@ object AppleStylePassReader {
             for (charset in Charset.availableCharsets().values) {
                 try {
                     val json_str = file.bufferedReader(charset).readText()
-                    pass_json = SafeJSONReader.readJSONSafely(json_str)
+                    pass_json = readJSONSafely(json_str)
                 } catch (ignored: Exception) {
                     // we try with next charset
                 }
@@ -186,7 +186,7 @@ object AppleStylePassReader {
                 addFields(fieldList, type_json, "auxiliaryFields", translation)
                 addFields(fieldList, type_json, "backFields", translation, hide = true)
 
-                fieldList.add(PassField("", context.getString(R.string.type), context.getString(CategoryHelper.getHumanCategoryString(pass.type)), false))
+                fieldList.add(PassField("", context.getString(R.string.type), context.getString(getHumanCategoryString(pass.type)), false))
                 pass.fields = fieldList
             }
 

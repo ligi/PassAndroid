@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.R
+import org.ligi.passandroid.functions.fromURI
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec
 
@@ -18,7 +19,7 @@ internal class ImportAndShowAsyncTask(val passImportActivity: PassImportActivity
     }
 
     override fun doInBackground(vararg params: Void): InputStreamWithSource? {
-        return InputStreamProvider.fromURI(passImportActivity, intent_uri)
+        return fromURI(passImportActivity, intent_uri)
     }
 
     override fun onPreExecute() {

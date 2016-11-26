@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.R.id.emptyView
-import org.ligi.passandroid.helper.checkThatHelpIsThere
+import org.ligi.passandroid.functions.checkThatHelpIsThere
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.trulesk.TruleskIntentRule

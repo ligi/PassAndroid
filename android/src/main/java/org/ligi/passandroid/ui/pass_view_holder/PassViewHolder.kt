@@ -12,8 +12,8 @@ import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassField
-import org.ligi.passandroid.ui.NavigateToLocationsDialog
 import org.ligi.passandroid.ui.Visibility
+import org.ligi.passandroid.ui.showNavigateToLocationsDialog
 import org.threeten.bp.ZonedDateTime
 
 abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view) {
@@ -33,7 +33,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         }
 
         view.timeAndNavBar.navTextView.setOnClickListener {
-            NavigateToLocationsDialog.perform(activity, pass, false)
+            activity.showNavigateToLocationsDialog(pass, false)
         }
     }
 

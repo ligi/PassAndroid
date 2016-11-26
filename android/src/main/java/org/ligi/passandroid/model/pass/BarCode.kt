@@ -3,7 +3,7 @@ package org.ligi.passandroid.model.pass
 import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
 import org.ligi.passandroid.App
-import org.ligi.passandroid.helper.BarcodeHelper
+import org.ligi.passandroid.functions.generateBitmapDrawable
 import org.ligi.tracedroid.logging.Log
 import java.util.*
 
@@ -21,10 +21,10 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR")
             App.component().tracker().trackException("Barcode format is null - fallback to QR", false)
-            return BarcodeHelper.generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
+            return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
         }
 
-        return BarcodeHelper.generateBitmapDrawable(resources, message, format)
+        return generateBitmapDrawable(resources, message, format)
 
     }
 

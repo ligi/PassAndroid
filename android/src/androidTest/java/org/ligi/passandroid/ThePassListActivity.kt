@@ -9,7 +9,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.R.id.pass_recyclerview
-import org.ligi.passandroid.helper.checkThatHelpIsThere
+import org.ligi.passandroid.functions.checkThatHelpIsThere
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.trulesk.TruleskActivityRule
 

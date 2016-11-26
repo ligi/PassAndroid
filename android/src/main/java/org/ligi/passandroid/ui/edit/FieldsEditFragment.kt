@@ -1,16 +1,23 @@
 package org.ligi.passandroid.ui.edit
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.edit_field.view.*
 import kotlinx.android.synthetic.main.edit_fields.view.*
 import org.ligi.kaxt.doAfterEdit
+import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.PassField
+import org.ligi.passandroid.model.pass.PassImpl
 
-class FieldsEditFragment : PassandroidFragment() {
+
+class FieldsEditFragment : Fragment() {
+
+    fun getPass(): PassImpl = App.component().passStore().currentPass as PassImpl
+
     private var isEditingHiddenFields: Boolean = false
 
     private lateinit var inflater: LayoutInflater
@@ -26,7 +33,7 @@ class FieldsEditFragment : PassandroidFragment() {
         } else {
             inflate.add_field.setText(R.string.add_front_field)
         }
-        for (passField in pass.fields) {
+        for (passField in getPass().fields) {
             if (passField.hide == isEditingHiddenFields) {
                 addField(passField, inflate.fields_container)
             }
@@ -35,14 +42,14 @@ class FieldsEditFragment : PassandroidFragment() {
         inflate.add_field.setOnClickListener {
             val passField = PassField(null, null, null, isEditingHiddenFields)
             addField(passField, inflate.fields_container)
-            pass.fields.add(passField)
+            getPass().fields.add(passField)
         }
         return inflate
     }
 
     fun addField(passField: PassField, viewGroup: ViewGroup) {
         val child = inflater.inflate(R.layout.edit_field, viewGroup, false) as ViewGroup
-        FieldView(child).apply(passField, pass.fields)
+        FieldView(child).apply(passField, getPass().fields)
         viewGroup.addView(child)
     }
 

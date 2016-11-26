@@ -8,7 +8,6 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.SdkSuppress
 import android.support.test.runner.AndroidJUnit4
-import com.squareup.spoon.Spoon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -31,9 +30,7 @@ class TheBarCodeEditing {
 
     lateinit var currentPass: PassImpl
 
-    private val passEditActivity by lazy { rule.activity }
-
-    fun start(setupPass: (pass: PassImpl) -> Unit) {
+    fun start(setupPass: (pass: PassImpl) -> Unit = {}) {
 
         TestApp.component().inject(this)
 
@@ -52,7 +49,7 @@ class TheBarCodeEditing {
             it.barCode = null
         }
 
-        Spoon.screenshot(passEditActivity, "no_barcode")
+        rule.screenShot("no_barcode")
 
         onView(withId(R.id.add_barcode_button)).perform(scrollTo())
         onView(withId(R.id.add_barcode_button)).check(matches(isDisplayed()))
@@ -78,7 +75,7 @@ class TheBarCodeEditing {
     @SdkSuppress(minSdkVersion = 14)
     @Test
     fun testCanSetToAllBarcodeTypes() {
-        start {}
+        start()
         for (passBarCodeFormat in PassBarCodeFormat.values()) {
             onView(withId(R.id.barcode_img)).perform(scrollTo(), click())
 
@@ -89,7 +86,7 @@ class TheBarCodeEditing {
             onView(withText(android.R.string.ok)).perform(click())
 
             assertThat(currentPass.barCode!!.format).isEqualTo(passBarCodeFormat)
-            Spoon.screenshot(passEditActivity!!, "edit_set_" + passBarCodeFormat.name)
+            rule.screenShot("edit_set_" + passBarCodeFormat.name)
         }
     }
 
@@ -110,7 +107,7 @@ class TheBarCodeEditing {
         onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist())
 
         assertThat(passStore.currentPass!!.barCode!!.message).isEqualTo("msg foo txt ;-)")
-        Spoon.screenshot(passEditActivity, "edit_set_msg")
+        rule.screenShot("edit_set_msg")
     }
 
 
@@ -130,12 +127,12 @@ class TheBarCodeEditing {
         onView(withText(R.string.edit_barcode_dialog_title)).check(doesNotExist())
 
         assertThat(passStore.currentPass!!.barCode!!.alternativeText).isEqualTo("alt bar txt ;-)")
-        Spoon.screenshot(passEditActivity, "edit_set_altmsg")
+        rule.screenShot("edit_set_altmsg")
     }
 
     @Test
     fun testThatRandomChangesMessage() {
-        start {}
+        start()
 
         onView(withId(R.id.barcode_img)).perform(click())
 
@@ -148,6 +145,5 @@ class TheBarCodeEditing {
 
         assertThat(oldMessage).isNotEqualTo(passStore.currentPass!!.barCode!!.message)
     }
-
 
 }

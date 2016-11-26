@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model;
 
 public class PassBitmapDefinitions {
+
     public final static String BITMAP_ICON = "icon";
     public final static String BITMAP_THUMBNAIL = "thumbnail";
     public final static String BITMAP_STRIP = "strip";

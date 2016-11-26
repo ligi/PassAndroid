@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.category_indicator_base.view.*
 import org.ligi.passandroid.R
-import org.ligi.passandroid.helper.CategoryHelper
+import org.ligi.passandroid.functions.getCategoryTopImageRes
 import org.ligi.passandroid.model.pass.PassType
 
 open class BaseCategoryIndicatorView @JvmOverloads constructor(context: Context, attrs: AttributeSet, @LayoutRes val layoutRes: Int = R.layout.category_indicator_base) : LinearLayout(context, attrs) {
@@ -24,7 +24,7 @@ open class BaseCategoryIndicatorView @JvmOverloads constructor(context: Context,
             topImageView.visibility = View.GONE
         } else {
             topImageView.visibility = View.VISIBLE
-            topImageView.setImageResource(CategoryHelper.getCategoryTopImageRes(category))
+            topImageView.setImageResource(getCategoryTopImageRes(category))
         }
     }
 

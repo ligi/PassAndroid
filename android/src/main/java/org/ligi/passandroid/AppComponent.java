@@ -2,6 +2,7 @@ package org.ligi.passandroid;
 
 import dagger.Component;
 import javax.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import org.ligi.passandroid.model.PassStore;
 import org.ligi.passandroid.model.Settings;
 import org.ligi.passandroid.ui.PassAdapter;
@@ -15,6 +16,7 @@ import org.ligi.passandroid.ui.PassNavigationView;
 import org.ligi.passandroid.ui.PassViewActivityBase;
 import org.ligi.passandroid.ui.SearchPassesIntentService;
 import org.ligi.passandroid.ui.TouchImageActivity;
+import org.ligi.passandroid.ui.edit.FieldsEditFragment;
 import org.ligi.passandroid.ui.edit.PassandroidFragment;
 import org.ligi.passandroid.ui.quirk_fix.USAirwaysLoadActivity;
 
@@ -48,9 +50,13 @@ public interface AppComponent {
 
     void inject(TouchImageActivity touchImageActivity);
 
+    void inject(@NotNull final FieldsEditFragment fieldsEditFragment);
+
     PassStore passStore();
 
     Tracker tracker();
 
     Settings settings();
+
+
 }

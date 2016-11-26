@@ -29,7 +29,7 @@ import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.events.ScanFinishedEvent
 import org.ligi.passandroid.events.ScanProgressEvent
-import org.ligi.passandroid.helper.PassTemplates
+import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.snackengage.SnackContext
 import org.ligi.snackengage.SnackEngage
@@ -194,7 +194,7 @@ class PassListActivity : PassAndroidActivity() {
         onPassStoreChangeEvent(null)
 
         fab_action_create_pass.setOnClickListener {
-            val pass = PassTemplates.createAndAddEmptyPass(passStore, resources)
+            val pass = createAndAddEmptyPass(passStore, resources)
 
             fam.collapse()
             startActivityFromClass(PassEditActivity::class.java)

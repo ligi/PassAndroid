@@ -1,7 +1,7 @@
 package org.ligi.passandroid.reader
 
 import android.graphics.Color
-import org.ligi.passandroid.helper.SafeJSONReader
+import org.ligi.passandroid.functions.readJSONSafely
 import org.ligi.passandroid.model.PassDefinitions
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
@@ -21,7 +21,7 @@ object PassReader {
 
         try {
             val plainJsonString = file.bufferedReader().readText()
-            val pass_json = SafeJSONReader.readJSONSafely(plainJsonString)
+            val pass_json = readJSONSafely(plainJsonString)!!
 
             if (pass_json.has("what")) {
                 val what_json = pass_json.getJSONObject("what")

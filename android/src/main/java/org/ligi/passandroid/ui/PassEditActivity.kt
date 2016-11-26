@@ -21,7 +21,11 @@ import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import org.ligi.passandroid.model.pass.PassImpl
-import org.ligi.passandroid.ui.edit.*
+import org.ligi.passandroid.ui.edit.FieldsEditFragment
+import org.ligi.passandroid.ui.edit.ImageEditHelper
+import org.ligi.passandroid.ui.edit.dialogs.showBarcodeEditDialog
+import org.ligi.passandroid.ui.edit.dialogs.showCategoryPickDialog
+import org.ligi.passandroid.ui.edit.dialogs.showColorPickDialog
 import org.ligi.passandroid.ui.pass_view_holder.EditViewHolder
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
@@ -56,8 +60,8 @@ class PassEditActivity : AppCompatActivity() {
         categoryView.setOnClickListener {
             AlertDialog.Builder(this).setItems(R.array.category_edit_options) { dialogInterface, i ->
                 when (i) {
-                    0 -> CategoryPickDialog.show(this@PassEditActivity, currentPass, bus)
-                    1 -> ColorPickDialog.showColorDialog(this@PassEditActivity, currentPass, bus)
+                    0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, bus)
+                    1 -> showColorPickDialog(this@PassEditActivity, currentPass, bus)
                     2 -> PassEditActivityPermissionsDispatcher.pickImageWithCheck(this@PassEditActivity, ImageEditHelper.REQ_CODE_PICK_ICON)
                 }
             }.show()
@@ -83,7 +87,7 @@ class PassEditActivity : AppCompatActivity() {
         fragmentTransaction.commit()
 
         add_barcode_button.setOnClickListener {
-            BarcodePickDialog.show(this@PassEditActivity,
+            showBarcodeEditDialog(this@PassEditActivity,
                     bus,
                     this@PassEditActivity.currentPass,
                     BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().toUpperCase()))
@@ -117,7 +121,7 @@ class PassEditActivity : AppCompatActivity() {
 
         add_barcode_button.visibility = if (pass.barCode == null) View.VISIBLE else View.GONE
         val barcodeUIController = BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
-        barcodeUIController.barcode_img.setOnClickListener { BarcodePickDialog.show(this@PassEditActivity, bus, currentPass, currentPass.barCode) }
+        barcodeUIController.barcode_img.setOnClickListener { showBarcodeEditDialog(this@PassEditActivity, bus, currentPass, currentPass.barCode!!) }
     }
 
     @Pass.PassBitmap

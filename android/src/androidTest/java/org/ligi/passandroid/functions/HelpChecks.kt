@@ -1,4 +1,4 @@
-package org.ligi.passandroid.helper
+package org.ligi.passandroid.functions
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches

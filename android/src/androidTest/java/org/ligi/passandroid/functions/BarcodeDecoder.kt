@@ -1,4 +1,4 @@
-package org.ligi.passandroid.helper
+package org.ligi.passandroid.functions
 
 import android.graphics.Bitmap
 import com.google.zxing.BinaryBitmap

@@ -10,7 +10,7 @@ import android.widget.ImageView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.passandroid.helper.decodeBarCode
+import org.ligi.passandroid.functions.decodeBarCode
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import org.ligi.passandroid.model.pass.PassBarCodeFormat.*

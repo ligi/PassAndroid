@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import org.ligi.passandroid.R
-import org.ligi.passandroid.helper.MoveHelper
+import org.ligi.passandroid.functions.moveWithUndoSnackbar
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 
@@ -22,7 +22,7 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
                 .show()
 
         val move: (topic: String) -> Any = { topic ->
-            MoveHelper.moveWithUndoSnackbar(passStore.classifier, pass, topic, context)
+            moveWithUndoSnackbar(passStore.classifier, pass, topic, context)
             dialog.dismiss()
         }
 

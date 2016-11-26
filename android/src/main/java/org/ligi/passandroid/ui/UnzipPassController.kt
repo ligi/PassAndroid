@@ -11,8 +11,9 @@ import net.lingala.zip4j.exception.ZipException
 import okio.Okio
 import org.json.JSONObject
 import org.ligi.passandroid.App
-import org.ligi.passandroid.helper.PassTemplates
-import org.ligi.passandroid.helper.SafeJSONReader
+import org.ligi.passandroid.functions.createPassForImageImport
+import org.ligi.passandroid.functions.createPassForPDFImport
+import org.ligi.passandroid.functions.readJSONSafely
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
 import org.ligi.tracedroid.logging.Log
@@ -72,7 +73,7 @@ object UnzipPassController {
         if (manifestFile.exists()) {
             try {
                 val readToString = manifestFile.bufferedReader().readText()
-                manifest_json = SafeJSONReader.readJSONSafely(readToString)
+                manifest_json = readJSONSafely(readToString)!!
                 uuid = manifest_json.getString("pass.json")
             } catch (e: Exception) {
                 spec.failCallback?.fail("Problem with manifest.json: " + e)
@@ -82,7 +83,7 @@ object UnzipPassController {
         } else if (espassFile.exists()) {
             try {
                 val readToString = espassFile.bufferedReader().readText()
-                manifest_json = SafeJSONReader.readJSONSafely(readToString)
+                manifest_json = readJSONSafely(readToString)!!
                 uuid = manifest_json.getString("id")
             } catch (e: Exception) {
                 spec.failCallback?.fail("Problem with manifest.json: " + e)
@@ -96,7 +97,7 @@ object UnzipPassController {
 
             val resources = spec.context.resources
             if (bitmap != null) {
-                val imagePass = PassTemplates.createPassForImageImport(resources)
+                val imagePass = createPassForImageImport(resources)
                 val pathForID = spec.passStore.getPathForID(imagePass.id)
                 pathForID.mkdirs()
 
@@ -123,7 +124,7 @@ object UnzipPassController {
                         val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
                         page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
 
-                        val imagePass = PassTemplates.createPassForPDFImport(resources)
+                        val imagePass = createPassForPDFImport(resources)
                         val pathForID = spec.passStore.getPathForID(imagePass.id)
                         pathForID.mkdirs()
 

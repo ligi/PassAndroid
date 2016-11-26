@@ -1,4 +1,4 @@
-package org.ligi.passandroid.helper
+package org.ligi.passandroid.functions
 
 import android.content.Context
 import android.support.test.InstrumentationRegistry

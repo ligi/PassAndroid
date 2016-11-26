@@ -1,6 +1,6 @@
-package org.ligi.passandroid.model.pass;
+package org.ligi.passandroid.model.pass
 
-public enum  PassType {
+enum class PassType {
     GENERIC,
     EVENT,
     COUPON,

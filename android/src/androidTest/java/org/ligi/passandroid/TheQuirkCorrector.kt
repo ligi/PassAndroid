@@ -2,7 +2,7 @@ package org.ligi.passandroid
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.ligi.passandroid.helper.loadPassFromAsset
+import org.ligi.passandroid.functions.loadPassFromAsset
 
 class TheQuirkCorrector {
 
