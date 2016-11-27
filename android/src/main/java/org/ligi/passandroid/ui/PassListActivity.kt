@@ -96,8 +96,11 @@ class PassListActivity : PassAndroidActivity() {
         pd.setMessage(getString(R.string.scan_progressdialog_message))
         pd.setCancelable(false)
         pd.isIndeterminate = true
-        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.scan_dialog_send_background_button), { dialogInterface: DialogInterface, i: Int ->
+        pd.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.scan_dialog_send_background_button), { dialogInterface: DialogInterface, i: Int ->
             this@PassListActivity.finish()
+        })
+        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(android.R.string.cancel), { dialogInterface: DialogInterface, i: Int ->
+            stopService(intent)
         })
         pd.show()
     }

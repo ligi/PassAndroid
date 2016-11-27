@@ -27,6 +27,7 @@ import javax.inject.Inject
 
 class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
+    private var shouldFinish: Boolean = false
     private var notifyManager: NotificationManager? = null
     private var progressNotificationBuilder: NotificationCompat.Builder? = null
     private var findNotificationBuilder: NotificationCompat.Builder? = null
@@ -43,6 +44,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     @Inject
     lateinit var tracker: Tracker
+
 
     override fun onHandleIntent(intent: Intent?) {
 
@@ -115,6 +117,10 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
 
         for (file in files) {
+            if (shouldFinish) {
+                return
+            }
+            Log.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
                 search_in(file, true)
             } else if (file.name.endsWith(".pkpass") || file.name.endsWith(".espass")) {
@@ -141,6 +147,11 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
         }
     }
 
+    override fun onDestroy() {
+        shouldFinish = true
+        super.onDestroy()
+    }
+
     companion object {
 
         val PROGRESS_NOTIFICATION_ID = 1
@@ -148,6 +159,4 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
         val REQUEST_CODE = 1
     }
-
-
 }
