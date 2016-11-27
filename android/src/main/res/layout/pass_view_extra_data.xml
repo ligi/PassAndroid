@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="10dp"
             android:text="@string/more"
             android:textSize="21sp"/>
