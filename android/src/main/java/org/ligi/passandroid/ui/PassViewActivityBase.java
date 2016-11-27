@@ -73,13 +73,13 @@ public class PassViewActivityBase extends PassAndroidActivity {
         final String uuid = getIntent().getStringExtra(EXTRA_KEY_UUID);
 
         if (uuid != null) {
-            final Pass passbookForId = passStore.getPassbookForId(uuid);
-            passStore.setCurrentPass(passbookForId);
+            final Pass passbookForId = getPassStore().getPassbookForId(uuid);
+            getPassStore().setCurrentPass(passbookForId);
         }
-        currentPass = passStore.getCurrentPass();
+        currentPass = getPassStore().getCurrentPass();
 
         if (currentPass == null) {
-            tracker.trackException("pass not present in " + this, false);
+            getTracker().trackException("pass not present in " + this, false);
             finish();
         }
 
@@ -159,7 +159,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
         shortcutIntent.setComponent(component);
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.getDescription());
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(currentPass.getBitmap(passStore, BITMAP_ICON), 128, 128, true));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(currentPass.getBitmap(getPassStore(), BITMAP_ICON), 128, 128, true));
         sendBroadcast(intent);
     }
 
@@ -195,9 +195,7 @@ public class PassViewActivityBase extends PassAndroidActivity {
             try {
                 response = client.newCall(request).execute();
                 final InputStreamWithSource inputStreamWithSource = new InputStreamWithSource(url, response.body().byteStream());
-                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource,
-                                                                                               PassViewActivityBase.this,
-                                                                                               passStore,
+                final InputStreamUnzipControllerSpec spec = new InputStreamUnzipControllerSpec(inputStreamWithSource, PassViewActivityBase.this, getPassStore(),
                                                                                                new MyUnzipSuccessCallback(dlg),
                                                                                                new MyUnzipFailCallback(dlg));
                 spec.setOverwrite(true);
@@ -250,11 +248,11 @@ public class PassViewActivityBase extends PassAndroidActivity {
                     }
                     dlg.dismiss();
                     if (!currentPass.getId().equals(uuid)) {
-                        passStore.deletePassWithId(currentPass.getId());
+                        getPassStore().deletePassWithId(currentPass.getId());
                     }
-                    final Pass newPass = passStore.getPassbookForId(uuid);
-                    passStore.setCurrentPass(newPass);
-                    currentPass = passStore.getCurrentPass();
+                    final Pass newPass = getPassStore().getPassbookForId(uuid);
+                    getPassStore().setCurrentPass(newPass);
+                    currentPass = getPassStore().getCurrentPass();
                     refresh();
 
                     Snackbar.make(getWindow().getDecorView(), R.string.pass_updated, Snackbar.LENGTH_LONG).show();
