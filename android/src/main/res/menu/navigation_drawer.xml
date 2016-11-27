@@ -27,7 +27,7 @@
 
     <item
             android:id="@+id/menu_language"
-            android:icon="@drawable/ic_action_language"
+            android:icon="@drawable/ic_action_translate"
             android:title="@string/nav_improve_translation"
             app:showAsAction="ifRoom"/>
 
