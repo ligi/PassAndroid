@@ -21,6 +21,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.ligi.kaxt.setButton
 import org.ligi.kaxt.setVisibility
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
@@ -96,12 +97,12 @@ class PassListActivity : PassAndroidActivity() {
         pd.setMessage(getString(R.string.scan_progressdialog_message))
         pd.setCancelable(false)
         pd.isIndeterminate = true
-        pd.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.scan_dialog_send_background_button), { dialogInterface: DialogInterface, i: Int ->
+        pd.setButton(DialogInterface.BUTTON_NEUTRAL, R.string.scan_dialog_send_background_button) {
             this@PassListActivity.finish()
-        })
-        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(android.R.string.cancel), { dialogInterface: DialogInterface, i: Int ->
+        }
+        pd.setButton(DialogInterface.BUTTON_POSITIVE, android.R.string.cancel) {
             stopService(intent)
-        })
+        }
         pd.show()
     }
 
