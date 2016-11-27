@@ -11,7 +11,7 @@
 
         <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/zoomOut"
-                android:background="@drawable/clickable_bg"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_action_zoom_out"
                 android:layout_width="wrap_content"
                 android:minWidth="@dimen/finger"
@@ -33,7 +33,7 @@
                 app:srcCompat="@drawable/ic_action_zoom_in"
                 android:layout_width="wrap_content"
                 android:minWidth="@dimen/finger"
-                android:background="@drawable/clickable_bg"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"/>

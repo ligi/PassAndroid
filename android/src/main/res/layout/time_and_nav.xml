@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/pass_view_extra_data">
+
+    <TextView
+            android:id="@+id/locationButton"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/rhythm"
+            android:fontFamily="sans-serif"
+            android:background="?attr/selectableItemBackground"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/timeButton"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/rhythm"
+            android:layout_gravity="right"
+            android:fontFamily="sans-serif"
+            android:background="?attr/selectableItemBackground"
+            android:layout_height="wrap_content"/>
+
+</merge>
