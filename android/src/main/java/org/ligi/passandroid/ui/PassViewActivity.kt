@@ -76,6 +76,8 @@ class PassViewActivity : PassViewActivityBase() {
                 value.text = field.value
 
                 front_field_container.addView(v)
+                Linkify.addLinks(key, Linkify.ALL)
+                Linkify.addLinks(value, Linkify.ALL)
             }
         }
 
