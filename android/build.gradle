@@ -98,7 +98,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
     androidTestCompile "com.android.support:support-annotations:$support_version"
 
-    androidTestCompile('com.github.ligi:trulesk:0.8') {
+    androidTestCompile('com.github.ligi:trulesk:0.9') {
         // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
         exclude group: 'javax.inject'
     }
@@ -142,7 +142,6 @@ dependencies {
     compile "com.android.support:cardview-v7:$support_version"
     compile "com.android.support:design:$support_version"
     compile "com.android.support:preference-v7:$support_version"
-
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
