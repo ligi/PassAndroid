@@ -4,6 +4,7 @@ import android.app.Activity
 import android.support.v7.widget.CardView
 import android.view.View
 import kotlinx.android.synthetic.main.pass_list_item.view.*
+import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 
@@ -21,7 +22,7 @@ class CondensedPassViewHolder(view: CardView) : PassViewHolder(view) {
             view.date.visibility = View.GONE
         }
 
-        view.timeAndNavBar.timeTextView.text = getTimeInfoString(pass)
+        view.timeAndNavBar.timeButton.text = getTimeInfoString(pass)
 
     }
 }

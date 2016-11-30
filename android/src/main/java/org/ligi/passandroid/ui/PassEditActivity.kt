@@ -121,7 +121,7 @@ class PassEditActivity : AppCompatActivity() {
 
         add_barcode_button.visibility = if (pass.barCode == null) View.VISIBLE else View.GONE
         val barcodeUIController = BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
-        barcodeUIController.barcode_img.setOnClickListener { showBarcodeEditDialog(this@PassEditActivity, bus, currentPass, currentPass.barCode!!) }
+        barcodeUIController.getBarcodeView().setOnClickListener { showBarcodeEditDialog(this@PassEditActivity, bus, currentPass, currentPass.barCode!!) }
     }
 
     @Pass.PassBitmap

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
 import android.view.View.*
 import kotlinx.android.synthetic.main.pass_list_item.view.*
+import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.R
 import org.ligi.passandroid.functions.tryAddDateToCalendar
 import org.ligi.passandroid.model.PassBitmapDefinitions
@@ -25,14 +26,14 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
     }
 
     open fun setupButtons(activity: Activity, pass: Pass) {
-        view.timeAndNavBar.timeTextView.text = view.context.getString(R.string.pass_to_calendar)
-        view.timeAndNavBar.navTextView.text = view.context.getString(R.string.pass_directions)
+        view.timeAndNavBar.timeButton.text = view.context.getString(R.string.pass_to_calendar)
+        view.timeAndNavBar.locationButton.text = view.context.getString(R.string.pass_directions)
 
-        view.timeAndNavBar.timeTextView.setOnClickListener {
+        view.timeAndNavBar.timeButton.setOnClickListener {
             getDateOrExtraText(pass)?.let { tryAddDateToCalendar(pass, view, it) }
         }
 
-        view.timeAndNavBar.navTextView.setOnClickListener {
+        view.timeAndNavBar.locationButton.setOnClickListener {
             activity.showNavigateToLocationsDialog(pass, false)
         }
     }
@@ -43,9 +44,9 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         val noButtons = dateOrExtraText == null && pass.locations.isEmpty()
 
         view.actionsSeparator.visibility = getVisibilityForGlobalAndLocal(noButtons, true)
-        view.timeAndNavBar.navTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.isNotEmpty())
+        view.timeAndNavBar.locationButton.visibility = getVisibilityForGlobalAndLocal(noButtons, pass.locations.isNotEmpty())
 
-        view.timeAndNavBar.timeTextView.visibility = getVisibilityForGlobalAndLocal(noButtons, dateOrExtraText != null)
+        view.timeAndNavBar.timeButton.visibility = getVisibilityForGlobalAndLocal(noButtons, dateOrExtraText != null)
 
         val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
 

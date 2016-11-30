@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.widget.DatePicker
 import android.widget.TimePicker
 import kotlinx.android.synthetic.main.edit.view.*
+import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
@@ -38,14 +39,14 @@ class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDi
 
     override fun setupButtons(activity: Activity, pass: Pass) {
 
-        view.timeAndNavBar.timeTextView.text = view.context.getString(R.string.edit_time)
-        view.timeAndNavBar.navTextView.text = view.context.getString(R.string.edit_location)
+        view.timeAndNavBar.timeButton.text = view.context.getString(R.string.edit_time)
+        view.timeAndNavBar.locationButton.text = view.context.getString(R.string.edit_location)
 
-        view.timeAndNavBar.timeTextView.setOnClickListener {
+        view.timeAndNavBar.timeButton.setOnClickListener {
             DatePickerDialog(view.context, this, time.year, time.month.value - 1, time.dayOfMonth).show()
         }
 
-        view.timeAndNavBar.navTextView.setOnClickListener {
+        view.timeAndNavBar.locationButton.setOnClickListener {
             AlertDialog.Builder(view.context).setMessage("Not yet available").setPositiveButton(android.R.string.ok, null).show()
         }
 

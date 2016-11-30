@@ -6,7 +6,7 @@ import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.widget.CheckBox
+import kotlinx.android.synthetic.main.delete_dialog_layout.view.*
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
@@ -46,17 +46,16 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) {
                 builder.setIcon(R.drawable.ic_alert_warning)
 
                 val sourceDeleteCheckBoxView = LayoutInflater.from(activity).inflate(R.layout.delete_dialog_layout, null)
-                val sourceDeleteCheckBox = sourceDeleteCheckBoxView.findViewById(R.id.sourceDeleteCheckbox) as CheckBox
 
                 val source = pass.getSource(passStore)
                 if (source != null && source.startsWith("file://")) {
 
-                    sourceDeleteCheckBox.text = activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox)
+                    sourceDeleteCheckBoxView.sourceDeleteCheckbox.text = activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox)
                     builder.setView(sourceDeleteCheckBoxView)
                 }
 
                 builder.setPositiveButton(activity.getString(R.string.delete)) { dialog, which ->
-                    if (sourceDeleteCheckBox.isChecked) {
+                    if (sourceDeleteCheckBoxView.sourceDeleteCheckbox.isChecked) {
 
                         File(source!!.replace("file://", "")).delete()
                     }

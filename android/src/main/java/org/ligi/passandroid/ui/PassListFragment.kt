@@ -11,6 +11,7 @@ import android.support.v7.widget.helper.ItemTouchHelper.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.pass_recycler.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -37,18 +38,17 @@ class PassListFragment : Fragment() {
     @Inject
     lateinit var bus: EventBus
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val inflate = inflater!!.inflate(R.layout.pass_recycler, container, false)
-        val recyclerView = inflate.findViewById(R.id.pass_recyclerview) as RecyclerView
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val inflate = inflater.inflate(R.layout.pass_recycler, container, false)
 
         App.component().inject(this)
 
         passStoreProjection = PassStoreProjection(passStore, arguments.getString(BUNDLE_KEY_TOPIC)!!, settings.getSortOrder())
         adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection!!)
 
-        recyclerView.adapter = adapter
+        inflate.pass_recyclerview.adapter = adapter
 
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        inflate.pass_recyclerview.layoutManager = LinearLayoutManager(activity)
 
         val simpleItemTouchCallback = object : SimpleCallback(0, LEFT or RIGHT) {
 
@@ -63,7 +63,7 @@ class PassListFragment : Fragment() {
         }
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper.attachToRecyclerView(inflate.pass_recyclerview)
 
         bus.register(this)
         return inflate
