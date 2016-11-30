@@ -139,7 +139,7 @@ class PassListActivity : PassAndroidActivity() {
         fab_action_open_file.setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
 
         // don't want too many windows in worst case - so check for errors first
-        if (TraceDroid.getStackTraceFiles().size > 0) {
+        if (TraceDroid.getStackTraceFiles().isNotEmpty()) {
             tracker.trackEvent("ui_event", "send", "stacktraces", null)
             if (settings.doTraceDroidEmailSend()) {
                 TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this)
