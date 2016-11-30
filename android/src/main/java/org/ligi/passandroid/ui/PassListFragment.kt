@@ -26,8 +26,10 @@ import org.ligi.passandroid.model.Settings
 import javax.inject.Inject
 
 class PassListFragment : Fragment() {
-    private var passStoreProjection: PassStoreProjection? = null
-    private var adapter: PassAdapter? = null
+
+
+    private lateinit var passStoreProjection: PassStoreProjection
+    private lateinit var adapter: PassAdapter
 
     @Inject
     lateinit var passStore: PassStore
@@ -44,7 +46,7 @@ class PassListFragment : Fragment() {
         App.component().inject(this)
 
         passStoreProjection = PassStoreProjection(passStore, arguments.getString(BUNDLE_KEY_TOPIC)!!, settings.getSortOrder())
-        adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection!!)
+        adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection)
 
         inflate.pass_recyclerview.adapter = adapter
 
@@ -71,7 +73,7 @@ class PassListFragment : Fragment() {
 
     @VisibleForTesting
     fun onSwiped(pos: Int, swipeDir: Int) {
-        val pass = passStoreProjection!!.passList[pos]
+        val pass = passStoreProjection.passList[pos]
         val nextTopic = passStore.classifier.getTopicWithOffset(pass, if (swipeDir == LEFT) -1 else 1)
 
         if (nextTopic != null) {
@@ -88,14 +90,14 @@ class PassListFragment : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onPassStoreChangeEvent(passStoreChangeEvent: PassStoreChangeEvent) {
-        passStoreProjection!!.refresh()
-        adapter!!.notifyDataSetChanged()
+        passStoreProjection.refresh()
+        adapter.notifyDataSetChanged()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onScanFinishedEvent(scanFinishedEvent: ScanFinishedEvent) {
-        passStoreProjection!!.refresh()
-        adapter!!.notifyDataSetChanged()
+        passStoreProjection.refresh()
+        adapter.notifyDataSetChanged()
 
     }
 
