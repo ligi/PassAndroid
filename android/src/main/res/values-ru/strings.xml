@@ -138,6 +138,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="new_topic_input_hint">Заголовок для новой темы</string>
   <string name="new_topic_suggestions">Предложения:</string>
   <string name="cannot_be_empty">не может быть пустым</string>
+  <string name="please_use_the_swipe_feature">Используйте пожалуйста Свайп</string>
   <string name="type">Тип</string>
   <string name="undo">отменить</string>
   <string name="sort_order_date_asc">Дата по возрастанию</string>
@@ -157,6 +158,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="preference_daynight_summary">Показывать темный или светлый фон?</string>
   <string name="image_import">Импорт изображения</string>
   <string name="pdf_import">Импорт PDF</string>
+  <string name="field_source">источник</string>
+  <string name="field_note">заметка</string>
+  <string name="field_advice_label">совет</string>
   <string name="field_source_image">Изображение</string>
   <string name="field_note_image">Это импортированное изображение, не настоящий билет</string>
   <string name="field_source_pdf">PDF</string>
@@ -166,4 +170,5 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_betatest_opt_in_out">Участие в бета-тестировании</string>
   <string name="nav_community_on_google">Сообщество Google+</string>
   <string name="nav_improve_translation">Улучшить перевод</string>
+  <string name="launcher_shortcut">Ярлык для лаунчера</string>
 </resources>
