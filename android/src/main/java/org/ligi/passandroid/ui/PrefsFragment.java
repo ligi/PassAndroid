@@ -15,7 +15,7 @@ import permissions.dispatcher.RuntimePermissions;
 import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO;
 
 @RuntimePermissions
-public class GoPrefsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PrefsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
     public void onResume() {
@@ -36,7 +36,7 @@ public class GoPrefsFragment extends PreferenceFragmentCompat implements SharedP
             @AppCompatDelegate.NightMode final int nightMode = App.component().settings().getNightMode();
 
             if (nightMode == MODE_NIGHT_AUTO) {
-                GoPrefsFragmentPermissionsDispatcher.ensureDayNightWithCheck(this);
+                PrefsFragmentPermissionsDispatcher.ensureDayNightWithCheck(this);
             }
 
             AppCompatDelegate.setDefaultNightMode(nightMode);
@@ -65,7 +65,7 @@ public class GoPrefsFragment extends PreferenceFragmentCompat implements SharedP
     @Override
     public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        GoPrefsFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        PrefsFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
 }
