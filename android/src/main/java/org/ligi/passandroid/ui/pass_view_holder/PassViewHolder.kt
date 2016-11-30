@@ -7,7 +7,7 @@ import android.text.format.DateUtils
 import android.view.View.*
 import kotlinx.android.synthetic.main.pass_list_item.view.*
 import org.ligi.passandroid.R
-import org.ligi.passandroid.actions.AddToCalendar
+import org.ligi.passandroid.functions.tryAddDateToCalendar
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
@@ -29,7 +29,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         view.timeAndNavBar.navTextView.text = view.context.getString(R.string.pass_directions)
 
         view.timeAndNavBar.timeTextView.setOnClickListener {
-            getDateOrExtraText(pass)?.let { AddToCalendar.tryAddDateToCalendar(pass, view, it) }
+            getDateOrExtraText(pass)?.let { tryAddDateToCalendar(pass, view, it) }
         }
 
         view.timeAndNavBar.navTextView.setOnClickListener {
