@@ -17,7 +17,6 @@ import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -32,21 +31,15 @@ import org.ligi.passandroid.events.ScanFinishedEvent
 import org.ligi.passandroid.events.ScanProgressEvent
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
-import org.ligi.snackengage.SnackContext
 import org.ligi.snackengage.SnackEngage
-import org.ligi.snackengage.conditions.AfterNumberOfOpportunities
-import org.ligi.snackengage.conditions.connectivity.IsConnectedViaWiFiOrUnknown
-import org.ligi.snackengage.conditions.locale.IsOneOfTheseLocales
 import org.ligi.snackengage.snacks.BaseSnack
 import org.ligi.snackengage.snacks.DefaultRateSnack
-import org.ligi.snackengage.snacks.OpenURLSnack
 import org.ligi.tracedroid.TraceDroid
 import org.ligi.tracedroid.sending.TraceDroidEmailSender
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
-import java.util.*
 
 @RuntimePermissions
 class PassListActivity : PassAndroidActivity() {
@@ -154,21 +147,9 @@ class PassListActivity : PassAndroidActivity() {
         } else { // if no error - check if there is a new version of the app
             tracker.trackEvent("ui_event", "processFile", "updatenotice", null)
 
-            SnackEngage.from(fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE)).withSnack(object : OpenURLSnack("https://play.google.com/store/apps/details?id=org.ligi.survivalmanual&referrer=utm_source%3Dpassandroid", "survival") {
-
-                override fun createSnackBar(snackContext: SnackContext): Snackbar {
-                    val snackbar = super.createSnackBar(snackContext)
-
-                    val textView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
-                    textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.survival, 0, 0, 0)
-                    textView.compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.rhythm)
-
-                    return snackbar
-                }
-
-            }.overrideTitleText("Other App by ligi:\nFree Offline Survival Guide").overrideActionText("Get It!").withDuration(BaseSnack.DURATION_INDEFINITE).withConditions(IsOneOfTheseLocales(Locale.ENGLISH), AfterNumberOfOpportunities(7), IsConnectedViaWiFiOrUnknown())).build().engageWhenAppropriate()
+            SnackEngage.from(fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE))
+                    .build().engageWhenAppropriate()
         }
-
 
         drawer_layout.addDrawerListener(drawerToggle)
 
