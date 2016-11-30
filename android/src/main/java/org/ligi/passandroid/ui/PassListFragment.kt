@@ -103,14 +103,9 @@ class PassListFragment : Fragment() {
 
         private val BUNDLE_KEY_TOPIC = "topic"
 
-        fun newInstance(topic: String): PassListFragment {
-            val myFragment = PassListFragment()
-
-            val args = Bundle()
-            args.putString(BUNDLE_KEY_TOPIC, topic)
-            myFragment.arguments = args
-
-            return myFragment
+        fun newInstance(topic: String) = PassListFragment().apply {
+            arguments = Bundle()
+            arguments.putString(BUNDLE_KEY_TOPIC, topic)
         }
     }
 
