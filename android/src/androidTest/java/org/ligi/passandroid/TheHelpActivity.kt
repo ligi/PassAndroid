@@ -9,12 +9,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.functions.checkThatHelpIsThere
 import org.ligi.passandroid.ui.HelpActivity
-import org.ligi.trulesk.TruleskIntentRule
+import org.ligi.trulesk.TruleskActivityRule
 
 class TheHelpActivity {
 
     @get:Rule
-    val rule = TruleskIntentRule(HelpActivity::class.java)
+    val rule = TruleskActivityRule(HelpActivity::class.java)
 
     @Test
     fun testHelpIsThere() {
