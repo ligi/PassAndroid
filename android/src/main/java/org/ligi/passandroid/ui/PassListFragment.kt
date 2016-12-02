@@ -54,10 +54,8 @@ class PassListFragment : Fragment() {
 
         val simpleItemTouchCallback = object : SimpleCallback(0, LEFT or RIGHT) {
 
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                return false
-            }
-
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder)
+                    = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
                 this@PassListFragment.onSwiped(viewHolder.adapterPosition, swipeDir)
