@@ -167,7 +167,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="field_note_pdf">Это импортированный PDF, не настоящий билет</string>
   <string name="nav_settings">Настройки</string>
   <string name="nav_github">Github</string>
-  <string name="nav_betatest_opt_in_out">Участие в бета-тестировании</string>
+  <string name="nav_betatest_opt_in_out">Бета тестирование</string>
   <string name="nav_community_on_google">Сообщество Google+</string>
   <string name="nav_improve_translation">Улучшить перевод</string>
   <string name="launcher_shortcut">Ярлык для лаунчера</string>
