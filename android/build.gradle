@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.github.triplet.play'
 
 repositories {
     jcenter()
@@ -180,4 +181,7 @@ spoon {
     grantAllPermissions = true
 }
 
-
+play {
+    jsonFile = file('/media/ligi/USBCRED/play.json')
+    uploadImages = true
+}
