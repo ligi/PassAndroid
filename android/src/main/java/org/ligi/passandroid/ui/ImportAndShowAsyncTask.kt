@@ -12,15 +12,13 @@ import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpe
 internal class ImportAndShowAsyncTask(val passImportActivity: PassImportActivity, val intent_uri: Uri) : AsyncTask<Void, Void, InputStreamWithSource?>() {
 
     private val progressDialog by lazy {
-        val progressDialog = ProgressDialog(passImportActivity)
-        progressDialog.setMessage(passImportActivity.getString(R.string.please_wait))
-        progressDialog.setCancelable(false)
-        progressDialog
+        ProgressDialog(passImportActivity).apply {
+            setMessage(passImportActivity.getString(R.string.please_wait))
+            setCancelable(false)
+        }
     }
 
-    override fun doInBackground(vararg params: Void): InputStreamWithSource? {
-        return fromURI(passImportActivity, intent_uri)
-    }
+    override fun doInBackground(vararg params: Void) = fromURI(passImportActivity, intent_uri)
 
     override fun onPreExecute() {
         progressDialog.show()
