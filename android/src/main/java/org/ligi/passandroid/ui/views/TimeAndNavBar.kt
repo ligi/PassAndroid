@@ -15,10 +15,10 @@ class TimeAndNavBar constructor(context: Context, attrs: AttributeSet) : FrameLa
         AppCompatDrawableManager.get().apply {
 
             val timeDrawable = getDrawable(context, R.drawable.ic_action_today)
-            timeButton.setCompoundDrawablesWithIntrinsicBounds(timeDrawable, null, null, null)
+            timeButton.setCompoundDrawablesWithIntrinsicBounds(null, null, timeDrawable, null)
 
             val navDrawable = getDrawable(context, R.drawable.ic_maps_place)
-            locationButton.setCompoundDrawablesWithIntrinsicBounds(null, null, navDrawable, null)
+            locationButton.setCompoundDrawablesWithIntrinsicBounds(navDrawable, null, null, null)
         }
     }
 
