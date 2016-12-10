@@ -7,6 +7,7 @@
             android:id="@+id/locationButton"
             android:layout_width="wrap_content"
             android:padding="@dimen/rhythm"
+            android:drawablePadding="4dp"
             android:fontFamily="sans-serif"
             android:background="?attr/selectableItemBackground"
             android:layout_height="wrap_content"/>
@@ -15,7 +16,8 @@
             android:id="@+id/timeButton"
             android:layout_width="wrap_content"
             android:padding="@dimen/rhythm"
-            android:layout_gravity="right"
+            android:drawablePadding="4dp"
+            android:layout_gravity="end"
             android:fontFamily="sans-serif"
             android:background="?attr/selectableItemBackground"
             android:layout_height="wrap_content"/>
