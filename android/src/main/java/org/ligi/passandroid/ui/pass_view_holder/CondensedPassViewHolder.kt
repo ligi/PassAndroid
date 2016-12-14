@@ -16,10 +16,10 @@ class CondensedPassViewHolder(view: CardView) : PassViewHolder(view) {
         val extraString = getExtraString(pass)
 
         if (extraString.isNullOrBlank()) {
+            view.date.visibility = View.GONE
+        } else {
             view.date.text = extraString
             view.date.visibility = View.VISIBLE
-        } else {
-            view.date.visibility = View.GONE
         }
 
         view.timeAndNavBar.timeButton.text = getTimeInfoString(pass)
