@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.app.TaskStackBuilder
+import android.support.v4.text.util.LinkifyCompat
 import android.text.util.Linkify
 import android.view.Menu
 import android.view.MenuItem
@@ -76,8 +77,8 @@ class PassViewActivity : PassViewActivityBase() {
                 value.text = field.value
 
                 front_field_container.addView(v)
-                Linkify.addLinks(key, Linkify.ALL)
-                Linkify.addLinks(value, Linkify.ALL)
+                LinkifyCompat.addLinks(key, Linkify.ALL)
+                LinkifyCompat.addLinks(value, Linkify.ALL)
             }
         }
 
@@ -90,7 +91,7 @@ class PassViewActivity : PassViewActivityBase() {
         }
 
 
-        Linkify.addLinks(back_fields, Linkify.ALL)
+        LinkifyCompat.addLinks(back_fields, Linkify.ALL)
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
         passViewHolder.apply(pass, passStore, this)
