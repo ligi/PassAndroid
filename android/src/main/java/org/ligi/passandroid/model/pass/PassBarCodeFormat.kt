@@ -10,23 +10,19 @@ enum class PassBarCodeFormat {
     QR_CODE,
     EAN_13;
 
-    fun isQuadratic(): Boolean {
-        when (this) {
-            QR_CODE, AZTEC -> return true
-            else -> return false
-        }
+    fun isQuadratic() = when (this) {
+        QR_CODE, AZTEC -> true
+        else -> false
     }
 
-    fun zxingBarCodeFormat(): BarcodeFormat {
-        when (this) {
-            QR_CODE -> return BarcodeFormat.QR_CODE
-            AZTEC -> return BarcodeFormat.AZTEC
-            CODE_39 -> return BarcodeFormat.CODE_39
-            CODE_128 -> return BarcodeFormat.CODE_128
-            PDF_417 -> return BarcodeFormat.PDF_417
-            EAN_13 -> return BarcodeFormat.EAN_13
+    fun zxingBarCodeFormat() = when (this) {
+        QR_CODE -> BarcodeFormat.QR_CODE
+        AZTEC -> BarcodeFormat.AZTEC
+        CODE_39 -> BarcodeFormat.CODE_39
+        CODE_128 -> BarcodeFormat.CODE_128
+        PDF_417 -> BarcodeFormat.PDF_417
+        EAN_13 -> BarcodeFormat.EAN_13
 
-            else -> return BarcodeFormat.QR_CODE
-        }
+        else -> BarcodeFormat.QR_CODE
     }
 }
