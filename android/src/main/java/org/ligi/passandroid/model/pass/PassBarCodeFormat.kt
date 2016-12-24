@@ -8,7 +8,8 @@ enum class PassBarCodeFormat {
     CODE_39,
     CODE_128,
     QR_CODE,
-    EAN_13;
+    EAN_13,
+    ITF;
 
     fun isQuadratic() = when (this) {
         QR_CODE, AZTEC -> true
@@ -22,6 +23,7 @@ enum class PassBarCodeFormat {
         CODE_128 -> BarcodeFormat.CODE_128
         PDF_417 -> BarcodeFormat.PDF_417
         EAN_13 -> BarcodeFormat.EAN_13
+        ITF -> BarcodeFormat.ITF
 
         else -> BarcodeFormat.QR_CODE
     }

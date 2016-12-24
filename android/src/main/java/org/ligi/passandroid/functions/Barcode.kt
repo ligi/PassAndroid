@@ -50,6 +50,10 @@ fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
     } catch (e: IllegalArgumentException) {
         Log.w("could not write image " + e)
         return null
+    } catch (e: ArrayIndexOutOfBoundsException) {
+        // happens for ITF barcode on certain inputs
+        Log.w("could not write image " + e)
+        return null
     }
 
 }

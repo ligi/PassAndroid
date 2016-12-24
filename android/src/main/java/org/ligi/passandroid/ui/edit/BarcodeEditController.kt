@@ -55,8 +55,11 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         barcodeFormat = barCode.format
 
         rootView.randomButton.setOnClickListener({
+            //rootView.messageInput.setText(when())
             if (barcodeFormat == EAN_13) {
                 rootView.messageInput.setText(getRandomEAN13())
+            } else if (barcodeFormat == PassBarCodeFormat.ITF) {
+                rootView.messageInput.setText(getRandomITF())
             } else {
                 rootView.messageInput.setText(UUID.randomUUID().toString().toUpperCase())
             }
