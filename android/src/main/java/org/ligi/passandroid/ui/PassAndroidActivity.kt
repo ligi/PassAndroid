@@ -8,7 +8,6 @@ import org.ligi.passandroid.App
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings
-import org.ligi.passandroid.model.State
 import javax.inject.Inject
 
 open class PassAndroidActivity : AppCompatActivity() {
@@ -21,9 +20,6 @@ open class PassAndroidActivity : AppCompatActivity() {
 
     @Inject
     lateinit var bus: EventBus
-
-    @Inject
-    lateinit var state: State
 
     @Inject
     lateinit var tracker: Tracker

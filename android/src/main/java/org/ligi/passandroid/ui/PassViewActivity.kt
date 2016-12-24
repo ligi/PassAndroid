@@ -35,7 +35,7 @@ class PassViewActivity : PassViewActivityBase() {
         val bitmap = pass.getBitmap(passStore, name)
         if (bitmap != null && bitmap.width > 300) {
             view.setOnClickListener {
-                val intent = Intent(this@PassViewActivity, TouchImageActivity::class.java)
+                val intent = Intent(view.context, TouchImageActivity::class.java)
                 intent.putExtra("IMAGE", name)
                 startActivity(intent)
             }
@@ -46,18 +46,15 @@ class PassViewActivity : PassViewActivityBase() {
     override fun refresh() {
         super.refresh()
 
-        val pass = currentPass ?: // don't deal with invalid passes
-                return
+        BarcodeUIController(findViewById(android.R.id.content), currentPass.barCode, this, passViewHelper)
 
-        BarcodeUIController(findViewById(android.R.id.content), pass.barCode, this, passViewHelper)
-
-        processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, pass)
-        processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, pass)
-        processImage(thumbnail_img_view, PassBitmapDefinitions.BITMAP_THUMBNAIL, pass)
-        processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, pass)
+        processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, currentPass)
+        processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, currentPass)
+        processImage(thumbnail_img_view, PassBitmapDefinitions.BITMAP_THUMBNAIL, currentPass)
+        processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, currentPass)
 
         if (map_container != null) {
-            if (!(pass.locations.isNotEmpty() && PassbookMapsFacade.init(this))) {
+            if (!(currentPass.locations.isNotEmpty() && PassbookMapsFacade.init(this))) {
                 map_container.visibility = View.GONE
             }
         }
@@ -66,7 +63,7 @@ class PassViewActivity : PassViewActivityBase() {
 
         front_field_container.removeAllViews()
 
-        for (field in pass.fields) {
+        for (field in currentPass.fields) {
             if (field.hide) {
                 back_str.append(field.toHtmlSnippet())
             } else {
@@ -94,7 +91,7 @@ class PassViewActivity : PassViewActivityBase() {
         LinkifyCompat.addLinks(back_fields, Linkify.ALL)
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
-        passViewHolder.apply(pass, passStore, this)
+        passViewHolder.apply(currentPass, passStore, this)
 
     }
 
@@ -112,10 +109,6 @@ class PassViewActivity : PassViewActivityBase() {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-
-        if (currentPass == null) {
-            return
-        }
 
         moreTextView.setOnClickListener {
             if (back_fields.visibility == View.VISIBLE) {
@@ -138,7 +131,7 @@ class PassViewActivity : PassViewActivityBase() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.findItem(R.id.menu_map).isVisible = currentPass != null && !currentPass.locations.isEmpty()
+        menu.findItem(R.id.menu_map).isVisible = !currentPass.locations.isEmpty()
         menu.findItem(R.id.menu_update).isVisible = PassViewActivityBase.mightPassBeAbleToUpdate(currentPass)
         return super.onPrepareOptionsMenu(menu)
     }
@@ -167,8 +160,6 @@ class PassViewActivity : PassViewActivityBase() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun onAttachedToWindow() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-    }
+    override fun onAttachedToWindow() = window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
 
 }

@@ -19,6 +19,7 @@ import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassBitmapDefinitions.BITMAP_ICON
+import org.ligi.passandroid.model.State
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec
 import permissions.dispatcher.NeedsPermission
@@ -52,6 +53,11 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        State.lastSelectedPassUUID = currentPass.id
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -62,6 +68,10 @@ open class PassViewActivityBase : PassAndroidActivity() {
             passStore.currentPass = passbookForId
         }
 
+        if (passStore.currentPass == null) {
+            val passbookForId = passStore.getPassbookForId(State.lastSelectedPassUUID)
+            passStore.currentPass = passbookForId
+        }
 
         if (passStore.currentPass == null) {
             tracker.trackException("pass not present in " + this, false)

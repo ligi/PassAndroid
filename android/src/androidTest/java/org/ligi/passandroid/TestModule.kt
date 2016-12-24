@@ -6,7 +6,6 @@ import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.injections.FixedPassListPassStore
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings
-import org.ligi.passandroid.model.State
 import org.ligi.passandroid.model.comparator.PassSortOrder
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
@@ -75,9 +74,4 @@ class TestModule {
         return mock(Tracker::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideState(): State {
-        return State()
-    }
 }

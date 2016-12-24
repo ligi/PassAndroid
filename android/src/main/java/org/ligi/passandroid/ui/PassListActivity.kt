@@ -31,6 +31,7 @@ import org.ligi.passandroid.events.ScanFinishedEvent
 import org.ligi.passandroid.events.ScanProgressEvent
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
+import org.ligi.passandroid.model.State
 import org.ligi.snackengage.SnackEngage
 import org.ligi.snackengage.snacks.BaseSnack
 import org.ligi.snackengage.snacks.DefaultRateSnack
@@ -158,7 +159,7 @@ class PassListActivity : PassAndroidActivity() {
         view_pager.adapter = adapter
 
         if (adapter.count > 0) {
-            view_pager.currentItem = state.lastSelectedTab
+            view_pager.currentItem = State.lastSelectedTab
         }
 
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -166,7 +167,7 @@ class PassListActivity : PassAndroidActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                state.lastSelectedTab = position
+                State.lastSelectedTab = position
                 supportInvalidateOptionsMenu()
             }
 

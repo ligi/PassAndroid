@@ -8,7 +8,10 @@ import dagger.Provides
 import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.json_adapter.ColorAdapter
 import org.ligi.passandroid.json_adapter.ZonedTimeAdapter
-import org.ligi.passandroid.model.*
+import org.ligi.passandroid.model.AndroidFileSystemPassStore
+import org.ligi.passandroid.model.AndroidSettings
+import org.ligi.passandroid.model.PassStore
+import org.ligi.passandroid.model.Settings
 import javax.inject.Singleton
 
 @Module
@@ -47,9 +50,4 @@ class AppModule(private val app: App) {
         return EventBus.getDefault()
     }
 
-    @Singleton
-    @Provides
-    internal fun provideState(): State {
-        return State()
-    }
 }
