@@ -145,9 +145,29 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="please_use_the_swipe_feature">Por favor, utilice la  función de deslizar</string>
   <string name="type">Tipo</string>
   <string name="undo">Deshacer</string>
+  <string name="sort_order_date_asc">Fecha Ascendente</string>
+  <string name="sort_order_date_desc">Fecha Descendente</string>
+  <string name="sort_order_date_type">Tipo</string>
+  <string name="sort_order_date_temporaldistance">Distancia temporal</string>
   <string-array name="category_edit_options">
     <item>@string/select_category_dialog_title</item>
     <item>@string/change_color_dialog_title</item>
     <item>Seleccione Icono</item>
   </string-array>
+  <string name="night_mode_night">Noche</string>
+  <string name="night_mode_day">Día</string>
+  <string name="night_mode_auto">Auto </string>
+  <string name="preference_autolight_title">Brillo automático </string>
+  <string name="preference_autolight_summary">¿Debo aumentar el brillo cuando muestro el código de barras? </string>
+  <string name="preference_condensed_title">Modo condensado</string>
+  <string name="preference_condensed_summary">¿Debería mostrar más detalles y menos desorden? </string>
+  <string name="preference_sort_title">Orden</string>
+  <string name="preference_sort_summary">¿Cómo debería ordenar los pases? </string>
+  <string name="preference_daynight_title">Tema Diurno/Nocturno </string>
+  <string name="preference_daynight_summary">¿Debería ser oscuro o claro? </string>
+  <string name="image_import">Importar imagen</string>
+  <string name="pdf_import">Importar PDF</string>
+  <string name="field_source">fuente</string>
+  <string name="field_note">nota</string>
+  <string name="field_advice_label">aviso</string>
 </resources>
