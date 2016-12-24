@@ -93,7 +93,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
     }
 
     fun refresh() {
-        val barcodeUIController = BarcodeUIController(rootView, barCode, context, PassViewHelper(context))
+        val barcodeUIController = BarcodeUIController(rootView, getBarCode(), context, PassViewHelper(context))
         val isBarcodeShown = barcodeUIController.getBarcodeView().visibility == View.VISIBLE
 
         if (!isBarcodeShown) {
@@ -103,13 +103,10 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         }
     }
 
-    val barCode: BarCode
-        get() {
-            val barCode = BarCode(barcodeFormat, rootView.messageInput.text.toString())
-            val alternativeText = rootView.alternativeMessageInput.text.toString()
-            if (!alternativeText.isEmpty()) {
-                barCode.alternativeText = alternativeText
-            }
-            return barCode
+    fun getBarCode() = BarCode(barcodeFormat, rootView.messageInput.text.toString()).apply {
+        val newAlternativeText = rootView.alternativeMessageInput.text.toString()
+        if (!newAlternativeText.isEmpty()) {
+            alternativeText = newAlternativeText
         }
+    }
 }
