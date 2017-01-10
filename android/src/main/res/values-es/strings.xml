@@ -170,4 +170,15 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="field_source">fuente</string>
   <string name="field_note">nota</string>
   <string name="field_advice_label">aviso</string>
+  <string name="field_advice_text">solicita esPass o Passbook de tu vendedor</string>
+  <string name="field_source_image">Imagen</string>
+  <string name="field_note_image">Esto fue importado de una imagen - no es un pass real</string>
+  <string name="field_source_pdf">PDF</string>
+  <string name="field_note_pdf">Esto fue importado de un PDF - no es un pass real</string>
+  <string name="nav_settings">Opciones</string>
+  <string name="nav_github">Github</string>
+  <string name="nav_betatest_opt_in_out">Testeador opt-in/out</string>
+  <string name="nav_community_on_google">Comunidad en google+</string>
+  <string name="nav_improve_translation">Mejora la traducción</string>
+  <string name="launcher_shortcut">Enlace lanzador</string>
 </resources>
