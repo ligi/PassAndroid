@@ -82,20 +82,20 @@ object AppleStylePassReader {
         }
 
         try {
-            val barcode_json = pass_json.getJSONObject("barcode")
-            val barcodeFormatString = barcode_json.getString("format")
+            val barcode_json = pass_json.getBarcodeJson()
+            if (barcode_json != null) {
+                val barcodeFormatString = barcode_json.getString("format")
 
-            App.component().tracker().trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
-            val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
-            val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
-            pass.barCode = barCode
+                App.component().tracker().trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
+                val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
+                val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
+                pass.barCode = barCode
 
-            if (barcode_json.has("altText")) {
-                pass.barCode!!.alternativeText = barcode_json.getString("altText")
+                if (barcode_json.has("altText")) {
+                    pass.barCode!!.alternativeText = barcode_json.getString("altText")
+                }
             }
-
             // TODO should check a bit more with barcode here - this can be dangerous
-
         } catch (ignored: Exception) {
         }
 
