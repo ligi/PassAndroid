@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">PassAndroid</string>
+  <string name="logo">ロゴ</string>
+  <string name="menu_map">地図に表示</string>
+  <string name="menu_delete">削除</string>
+  <string name="menu_share">共有</string>
+  <string name="barcode">バーコード</string>
+  <string name="help_label">ヘルプ</string>
+  <string name="help_content"><![CDATA[
+<h1>何をするアプリですか?</h1>
+
+このアプリは Passbook のビューアです - Passbook は例えば、次回のフライトの <b>搭乗券</b>、目的地にある素敵なホットドリンクのクーポン、映画のチケット、会員カードなど - さまざまな可能性があります。
+基本的には、通常持ち歩く必要のある紙やプラスチックを置き換えるものです - そのため、いくつかの木を節約し、<b>無駄を減らすことができます!</b>
+
+<h1>チケットの例</h1>
+
+行動して周りで遊んだり、観光するためにいくつかのチケットが必要ですか? <a href=\'http://espass.it/examples/\'>ここにあります</a>!
+
+<h1>動作する仕組みは?</h1>
+
+pkpass ファイルと呼ばれるものがあります。 このアプリで開くことができます。 例えば、メールでそれを受け取ったとき、またはダウンロードで入手するなど。 最も重要な内容はバーコードです (QR、AZTEC & PDF417 大部分は証明ですが、説明のような興味深い内容もあります)。多くの場合、時間 (あなたのカレンダーに追加できます)、場所 (行き方がわかります) - お試しください!
+チケットをダウンロードしたら、アプリはオフラインで使用できます!
+
+<h1>FAQ</h1>
+
+<h2>iPhone から PassAndroid に Passbook を転送する方法は?</h2>
+<ol>
+<li>iPhone で Passbook を開きます。</li>
+<li>左下隅の共有アイコンをクリックします。</li>
+<li>お使いの Android デバイスで受信できるメールに Passbook を添付して送信します。</li>
+<li>お使いの Android デバイスで新しいメールを開き、添付ファイルを保存します。</li>
+<li>PassAndroid に Passbook をスキャンさせます。</li>
+<li>PassAndroid で 新しい Passbook が表示されます。</li>
+</ol>
+
+<H1>クレジット</H1>
+Big thanks to <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> for the Design & <a href=\"https://github.com/cketti\">Cketti</a> for pull-requests!
+
+<H1>フィードバック</H1>
+Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
+
+<h1>履歴</h1>
+
+I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
+One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
+ - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
+ - I got a mail from a nice designer who did a nice redesign
+This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
+
+<H1>さらに</H1>
+This app ist best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
+
+<H1>法的事項</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
+
+THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+    ]]></string>
+  <string name="drawer_open">開く</string>
+  <string name="drawer_close">閉じる</string>
+  <string name="pass_problem">申し訳ありません。この Passbook を処理する際に問題がありました。 もしこの Passbook を送って頂ければ、問題の内容を確認してソフトウェアを改善することができます。</string>
+  <string name="problem">問題</string>
+  <string name="send">送信</string>
+  <string name="delete">削除!</string>
+  <string name="choose_location">場所を選択</string>
+  <string name="boarding_pass">搭乗券</string>
+  <string name="category_event">イベント</string>
+  <string name="category_coupon">クーポン</string>
+  <string name="category_storecard">店舗カード</string>
+  <string name="category_generic">全般</string>
+  <string name="category_none">カテゴリーなし</string>
+  <string name="nav_more">さらに</string>
+  <string name="nav_sort">並び替え</string>
+  <string name="nav_sort_category">カテゴリー</string>
+  <string name="nav_sort_date">日付</string>
+  <string name="nav_categories">カテゴリー</string>
+  <string name="nav_share">共有</string>
+  <string name="pass_directions">ナビゲート</string>
+  <string name="pass_to_calendar">カレンダーに</string>
+  <string name="invalid_passbook_title">無効な Passbook</string>
+  <string name="preparing_pass">Pass の準備中</string>
+  <string name="please_wait">しばらくお待ちください</string>
+  <string name="passbook_is_shared_subject">Passbook はあなたと共有されます</string>
+  <string name="passbook_share_chooser_title">チケットを送る方法は?</string>
+  <string name="dialog_delete_confirm_text">この Passbook を削除してもよろしいですか?</string>
+  <string name="dialog_delete_title">よろしいですか?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">ソースも削除しますか?</string>
+  <string name="more">さらに</string>
+  <string name="less">減らす</string>
+  <string name="scanning_for_passes">チケットのスキャン中</string>
+  <string name="fab_choice_scan_pkpass_files">pkpass ファイルのスキャン</string>
+  <string name="fab_choice_add_demo_pass">デモチケットを追加</string>
+  <string name="fab_choice_create_pass">チケットを作成</string>
+  <string name="empty_text_view"><big><b>まだチケットはありません</b></big>
+    \n\n\n お使いの電話でチケットを検索
+    \n\n または自分で作成
+    \n\n またはデモチケットを試すことができます
+    \n\n 下の + を押してください
+    </string>
+  <string name="downloading_new_pass_version">新しい Pass バージョンをダウンロード中</string>
+  <string name="unzip_pass_dialog_title">Passbook を開いています</string>
+  <string name="unzip_pass_dialog_message">しばらくお待ちください...</string>
+  <string name="action_update">更新</string>
+  <string name="no_calendar_app_found">カレンダーアプリが見つかりません</string>
+  <string name="pass_updated">Pass を更新しました</string>
+  <string name="expiration_date_to_calendar_warning_message">カレンダーに有効期限を追加しようとしています - このチケットの日付が良いと思われる場合は - お知らせてください - PassAndroid はこれが必要です</string>
+  <string name="expiration_date_to_calendar_warning_title">有効期限を追加</string>
+  <string name="topic_trash">ゴミ箱</string>
+  <string name="topic_new">新規</string>
+  <string name="topic_archive">アーカイブ</string>
+  <string name="move_to_new_topic">新しいトピックに移動</string>
+  <string name="categories_nav">%d カテゴリー</string>
+  <string name="passes_nav">%d チケット</string>
+  <string name="found_pass">見つかりました: %s</string>
+  <string name="found__pass">および %d 以上</string>
+  <string name="scan_finished_dialog_title">スキャンが終了しました。</string>
+  <string name="scan_finished_dialog_text">%d チケットが見つかりました</string>
+  <string name="scan_progressdialog_title">検索中...</string>
+  <string name="scan_progressdialog_message">しばらくお待ちください。</string>
+  <string name="scan_dialog_send_background_button">バックグラウンド</string>
+  <string name="emtytrash_label">ゴミ箱を空にする</string>
+  <string name="barcode_edit_hint_alternative_message">代りのメッセージ</string>
+  <string name="barcode_edit_random">ランダム</string>
+  <string name="barcode_edit_scan">スキャン</string>
+  <string name="barcode_edit_message">メッセージ</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">バーコードを追加</string>
+  <string name="categories_voucher">バウチャー</string>
+  <string name="edit_time">時間を編集</string>
+  <string name="edit_location">場所を編集</string>
+  <string name="add_front_field">前面フィールドを追加</string>
+  <string name="add_back_fields">背面フィールドを追加</string>
+  <string name="change_color_dialog_title">色を選択</string>
+  <string name="select_category_dialog_title">カテゴリーを選択</string>
+  <string name="barcode_edit_code128">code 128</string>
+  <string name="barcode_edit_code39">code 39</string>
+  <string name="add_footer_image">フッター画像を追加</string>
+  <string name="add_logo_image">ロゴ画像を追加</string>
+  <string name="add_header_image">ヘッダー画像を追加</string>
+  <string name="add_barcode">バーコードを追加</string>
+  <string name="edit_barcode_dialog_title">バーコードを編集</string>
+  <string name="empty_trash_dialog_message">ゴミ箱を空にしてもよろしいですか? 元に戻すことはできません</string>
+  <string name="empty_trash_dialog_title">警告</string>
+  <string name="new_topic_input_hint">新しいトピックのタイトル</string>
+  <string name="new_topic_suggestions">提案:</string>
+  <string name="cannot_be_empty">空にできません</string>
+  <string name="please_use_the_swipe_feature">スワイプ機能を使用してください</string>
+  <string name="type">種類</string>
+  <string name="undo">元に戻す</string>
+  <string name="sort_order_date_asc">日付の昇順</string>
+  <string name="sort_order_date_desc">日付の降順</string>
+  <string name="sort_order_date_type">種類</string>
+  <string name="sort_order_date_temporaldistance">時間の間隔</string>
+  <string-array name="category_edit_options">
+    <item>@string/select_category_dialog_title</item>
+    <item>@string/change_color_dialog_title</item>
+    <item>アイコンを選択</item>
+  </string-array>
+  <string name="night_mode_night">夜間</string>
+  <string name="night_mode_day">日中</string>
+  <string name="night_mode_auto">自動</string>
+  <string name="preference_autolight_title">自動ライト</string>
+  <string name="preference_autolight_summary">バーコードを表示する際に明るさを上げますか?</string>
+  <string name="preference_condensed_title">短縮モード</string>
+  <string name="preference_condensed_summary">詳細を表示して明確にする必要がありますか?</string>
+  <string name="preference_sort_title">並び順</string>
+  <string name="preference_sort_summary">チケットを並び替える方法は?</string>
+  <string name="preference_daynight_title">日中/夜間テーマ</string>
+  <string name="preference_daynight_summary">ダークまたはライトにしますか?</string>
+  <string name="image_import">画像インポート</string>
+  <string name="pdf_import">PDF インポート</string>
+  <string name="field_source">ソース</string>
+  <string name="field_note">メモ</string>
+  <string name="field_advice_label">アドバイス</string>
+  <string name="field_advice_text">購入先から esPass または Passbook を要求</string>
+  <string name="field_source_image">画像</string>
+  <string name="field_note_image">これは画像からインポートされたものです - 実際のチケットではありません</string>
+  <string name="field_source_pdf">PDF</string>
+  <string name="field_note_pdf">これは PDF からインポートされたものです - 実際のチケットではありません</string>
+  <string name="nav_settings">設定</string>
+  <string name="nav_github">Github</string>
+  <string name="nav_betatest_opt_in_out">ベータテスト参加/退会</string>
+  <string name="nav_community_on_google">google+ のコミュニティ</string>
+  <string name="nav_improve_translation">翻訳の改善</string>
+  <string name="launcher_shortcut">ランチャーショートカット</string>
+</resources>

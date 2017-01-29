@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">패스안드로이드</string>
+  <string name="logo">로고</string>
+  <string name="menu_map">지도에 표시</string>
+  <string name="menu_delete">삭제</string>
+  <string name="menu_share">공유</string>
+  <string name="barcode">바코드</string>
+  <string name="help_label">도움말</string>
+  <string name="drawer_open">열기</string>
+  <string name="drawer_close">닫기</string>
+  <string name="pass_problem">죄송합니다, 패스북 처리 도중에 오류가 발생했습니다. 괜찮으시다면, 이 패스북을 제작자에게 보내시면 문제를 파악하고 앱을 향상시키는데 도움이 될 수 있습니다.</string>
+  <string name="problem">문제점</string>
+  <string name="send">전송</string>
+  <string name="delete">삭제!</string>
+  <string name="choose_location">위치 선택</string>
+  <string name="boarding_pass">탑승권</string>
+  <string name="category_event">행사 입장권</string>
+  <string name="category_coupon">쿠폰</string>
+  <string name="category_storecard">상점 카드</string>
+  <string name="category_generic">일반</string>
+  <string name="category_none">카테고리 없음</string>
+  <string name="nav_more">더 보기</string>
+  <string name="nav_sort">정렬</string>
+  <string name="nav_sort_category">카테고리</string>
+  <string name="nav_sort_date">날짜</string>
+  <string name="nav_categories">카테고리</string>
+  <string name="nav_share">공유</string>
+  <string name="pass_directions">탐색</string>
+  <string name="pass_to_calendar">캘린더로</string>
+  <string name="invalid_passbook_title">올바르지 않은 패스북</string>
+  <string name="preparing_pass">패스 준비 중</string>
+  <string name="please_wait">잠시만 기다리세요 - 오래 걸리지 않을겁니다</string>
+  <string name="passbook_is_shared_subject">패스북이 공유되었습니다</string>
+  <string name="passbook_share_chooser_title">패스를 어떻게 보낼까요?</string>
+  <string name="dialog_delete_confirm_text">패스북을 정말로 삭제하시겠습니까?</string>
+  <string name="dialog_delete_title">확실합니까?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">원본도 같이 삭제할까요?</string>
+  <string name="more">더 보기</string>
+  <string name="less">적게 보기</string>
+  <string name="scanning_for_passes">패스 스캔 중</string>
+  <string name="fab_choice_scan_pkpass_files">pkpass 파일 스캔</string>
+  <string name="fab_choice_add_demo_pass">데모 패스 추가</string>
+  <string name="empty_text_view"><big><b>아직 패스가 없습니다</b></big>
+    \n\n\n 기기에 있는 패스를 검색하거나
+    \n\n 새로 만들거나
+    \n\n 데모 패스를 시도해볼 수 있습니다
+    \n\n 아래의 + 를 누르세요
+    </string>
+  <string name="downloading_new_pass_version">새로운 패스 버전 다운로드 중</string>
+  <string name="unzip_pass_dialog_title">패스북 여는 중</string>
+  <string name="unzip_pass_dialog_message">잠시만 기다리세요...</string>
+  <string name="action_update">업데이트</string>
+</resources>
