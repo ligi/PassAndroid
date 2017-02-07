@@ -83,12 +83,7 @@ class ThePassListSwiping {
         }
     }
 
-    private fun fakeSwipeRight() {
-        fakeSwipe(ItemTouchHelper.RIGHT)
-    }
-
-    private fun fakeSwipeLeft() {
-        fakeSwipe(ItemTouchHelper.LEFT)
-    }
+    private fun fakeSwipeRight() = fakeSwipe(ItemTouchHelper.RIGHT)
+    private fun fakeSwipeLeft() = fakeSwipe(ItemTouchHelper.LEFT)
 
 }
