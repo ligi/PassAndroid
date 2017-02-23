@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        support_version = '25.1.1'
+        support_version = '25.2.0'
         dagger_version = '2.7'
         kotlin_version = '1.0.5-3'
         mockito_version = '2.7.9'
