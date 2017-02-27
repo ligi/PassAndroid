@@ -155,7 +155,14 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
     compile 'com.squareup.moshi:moshi:1.2.0'
-    compile 'com.chibatching:kotpref:1.6.0'
+
+    compile("com.chibatching.kotpref:kotpref:2.0.0") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    compile("com.chibatching.kotpref:initializer:2.0.0") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
 
     testCompile "com.android.support:support-annotations:$support_version"
     testCompile 'com.squareup.assertj:assertj-android:1.1.1'

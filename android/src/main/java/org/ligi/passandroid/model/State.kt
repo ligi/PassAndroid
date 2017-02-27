@@ -4,7 +4,7 @@ import com.chibatching.kotpref.KotprefModel
 
 object State : KotprefModel() {
 
-    var lastSelectedTab: Int by intPrefVar()
-    var lastSelectedPassUUID: String by stringPrefVar()
+    var lastSelectedTab: Int by intPref()
+    var lastSelectedPassUUID: String by stringPref()
 
 }

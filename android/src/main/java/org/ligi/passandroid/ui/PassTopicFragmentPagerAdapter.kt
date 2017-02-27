@@ -1,6 +1,5 @@
 package org.ligi.passandroid.ui
 
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
@@ -20,19 +19,11 @@ class PassTopicFragmentPagerAdapter(private val passClassifier: PassClassifier, 
         super.notifyDataSetChanged()
     }
 
-    override fun getItem(position: Int): Fragment {
-        return PassListFragment.newInstance(topic_array[position])
-    }
+    override fun getItem(position: Int) = PassListFragment.newInstance(topic_array[position])
 
-    override fun getItemPosition(`object`: Any?): Int {
-        return PagerAdapter.POSITION_NONE // TODO - return POSITION_UNCHANGED in some cases
-    }
+    override fun getItemPosition(`object`: Any?) = PagerAdapter.POSITION_NONE // TODO - return POSITION_UNCHANGED in some cases
 
-    override fun getCount(): Int {
-        return topic_array.size
-    }
+    override fun getCount() = topic_array.size
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return topic_array[position]
-    }
+    override fun getPageTitle(position: Int) = topic_array[position]
 }
