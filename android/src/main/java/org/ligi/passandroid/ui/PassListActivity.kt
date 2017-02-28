@@ -302,4 +302,9 @@ class PassListActivity : PassAndroidActivity() {
 
     }
 
+    override fun onBackPressed() {
+        if (fam.isExpanded) fam.collapse()
+        else super.onBackPressed()
+    }
+
 }
