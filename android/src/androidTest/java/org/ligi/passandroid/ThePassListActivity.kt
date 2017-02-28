@@ -2,6 +2,7 @@ package org.ligi.passandroid
 
 import android.annotation.TargetApi
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -10,6 +11,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.R.id.pass_recyclerview
 import org.ligi.passandroid.functions.checkThatHelpIsThere
+import org.ligi.passandroid.functions.expand
+import org.ligi.passandroid.functions.isCollapsed
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.trulesk.TruleskActivityRule
 
@@ -35,5 +38,15 @@ class ThePassListActivity {
         checkThatHelpIsThere()
     }
 
+    @Test
+    fun testCloseFabOnBackPressed() {
+        onView(withId(R.id.fam)).perform(expand())
+
+        pressBack()
+
+        onView(withId(R.id.fam))
+                .check(matches(isDisplayed()))
+                .check(matches(isCollapsed()))
+    }
 
 }
