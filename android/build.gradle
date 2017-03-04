@@ -98,7 +98,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
     androidTestCompile "com.android.support:support-annotations:$support_version"
 
-    androidTestCompile('com.github.ligi:trulesk:0.12') {
+    androidTestCompile('com.github.ligi:trulesk:0.16') {
         // http://stackoverflow.com/questions/30578243/why-would-adding-espresso-contrib-cause-an-inflateexception
         exclude group: 'javax.inject'
     }
@@ -134,7 +134,6 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
 
     compile "com.android.support:support-annotations:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
@@ -145,7 +144,7 @@ dependencies {
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
-    compile 'com.github.ligi:KAXT:0.12'
+    compile 'com.github.ligi:KAXT:0.15'
     compile 'com.github.ligi:loadtoast:1.10.11'
     compile 'com.github.ligi:tracedroid:1.4'
     compile 'com.github.ligi:snackengage:0.9'
