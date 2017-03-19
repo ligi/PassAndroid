@@ -90,8 +90,8 @@ dependencies {
     compile "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    compile 'com.github.hotchemi:permissionsdispatcher:2.3.1'
-    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
+    compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
+    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
 
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
