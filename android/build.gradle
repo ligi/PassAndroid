@@ -152,7 +152,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
-    compile 'com.squareup.moshi:moshi:1.2.0'
+    compile 'com.squareup.moshi:moshi:1.4.0'
 
     compile("com.chibatching.kotpref:kotpref:2.1.0") {
         exclude group: 'org.jetbrains.kotlin'
