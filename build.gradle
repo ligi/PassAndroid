@@ -3,7 +3,7 @@ buildscript {
         support_version = '25.3.0'
         dagger_version = '2.10'
         kotlin_version = '1.1.1'
-        mockito_version = '2.7.18'
+        mockito_version = '2.7.19'
         play_version = '10.0.1'
     }
 
