@@ -56,6 +56,10 @@ android {
         forPlay {
             dimension "distribution"
         }
+        forAmazon {
+            dimension "distribution"
+        }
+
     }
 
     packagingOptions {
@@ -142,8 +146,11 @@ dependencies {
     compile 'com.github.ligi:KAXT:0.15'
     compile 'com.github.ligi:loadtoast:1.10.11'
     compile 'com.github.ligi:tracedroid:1.4'
-    compile 'com.github.ligi:snackengage:0.9'
 
+    forPlayCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
+    forFDroidCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
+    forAmazonCompile 'com.github.ligi.snackengage:snackengage-amazonrate:0.10'
+	    
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
