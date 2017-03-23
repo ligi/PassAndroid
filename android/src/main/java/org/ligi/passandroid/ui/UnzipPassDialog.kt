@@ -15,7 +15,7 @@ object UnzipPassDialog {
     private fun displayError(activity: Activity, title: String, err: String) {
         AlertDialog.Builder(activity).setTitle(title)
                 .setMessage(err)
-                .setPositiveButton(android.R.string.ok) { dialogInterface, i -> activity.finish() }
+                .setPositiveButton(android.R.string.ok) { _, _ -> activity.finish() }
                 .show()
     }
 

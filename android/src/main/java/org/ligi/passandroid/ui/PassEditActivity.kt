@@ -58,7 +58,7 @@ class PassEditActivity : AppCompatActivity() {
         setContentView(R.layout.edit)
 
         categoryView.setOnClickListener {
-            AlertDialog.Builder(this).setItems(R.array.category_edit_options) { dialogInterface, i ->
+            AlertDialog.Builder(this).setItems(R.array.category_edit_options) { _, i ->
                 when (i) {
                     0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, bus)
                     1 -> showColorPickDialog(this@PassEditActivity, currentPass, bus)

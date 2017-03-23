@@ -17,7 +17,7 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
                 .setTitle(context.getString(R.string.move_to_new_topic))
                 .setView(R.layout.dialog_move_to_new_topic)
                 .setPositiveButton(android.R.string.ok, null)
-                .setNegativeButton(android.R.string.cancel) { dialog, which -> passStore.notifyChange() }
+                .setNegativeButton(android.R.string.cancel) { _, _ -> passStore.notifyChange() }
                 .setOnCancelListener { passStore.notifyChange() }
                 .show()
 
@@ -48,7 +48,7 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
                 val button = Button(context)
                 button.text = it
                 suggestionButtonContainer.addView(button)
-                button.setOnClickListener { view -> move(it) }
+                button.setOnClickListener { _ -> move(it) }
             }
         }
     }

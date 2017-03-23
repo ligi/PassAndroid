@@ -45,7 +45,7 @@ fun showCategoryPickDialog(context: Context, pass: Pass, bus: EventBus) {
     }
 
     val builder = AlertDialog.Builder(context)
-    builder.setAdapter(adapter) { dialog, position ->
+    builder.setAdapter(adapter) { _, position ->
         pass.type = passTypes[position]
         bus.post(PassRefreshEvent(pass))
     }

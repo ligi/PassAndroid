@@ -17,11 +17,11 @@ import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.ligi.kaxt.setButton
-import org.ligi.kaxt.setVisibility
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
 import org.ligi.passandroid.App
@@ -137,7 +137,6 @@ class PassListActivity : PassAndroidActivity() {
 
         setSupportActionBar(toolbar)
 
-        fab_action_open_file.setVisibility(Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
 
         // don't want too many windows in worst case - so check for errors first
         if (TraceDroid.getStackTraceFiles().isNotEmpty()) {
@@ -189,7 +188,7 @@ class PassListActivity : PassAndroidActivity() {
             if (tab_layout.selectedTabPosition < 0) {
                 newTitle = getString(R.string.topic_new)
             } else {
-                newTitle = adapter.getPageTitle(tab_layout.selectedTabPosition).toString()
+                newTitle = adapter.getPageTitle(tab_layout.selectedTabPosition)
             }
 
             passStore.classifier.moveToTopic(pass, newTitle)
@@ -205,8 +204,12 @@ class PassListActivity : PassAndroidActivity() {
             fam.collapse()
         }
 
-        fab_action_open_file.setOnClickListener {
-            onAddOpenFileClick()
+        if (Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK) {
+            fab_action_open_file.setOnClickListener {
+                onAddOpenFileClick()
+            }
+        } else {
+            fab_action_open_file.visibility = GONE
         }
     }
 

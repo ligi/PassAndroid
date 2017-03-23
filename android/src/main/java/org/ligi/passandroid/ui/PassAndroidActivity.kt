@@ -35,7 +35,7 @@ open class PassAndroidActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (lastSetNightMode != null && lastSetNightMode !== settings.getNightMode()) {
+        if (lastSetNightMode != null && lastSetNightMode != settings.getNightMode()) {
             recreateWhenPossible()
         }
         lastSetNightMode = settings.getNightMode()

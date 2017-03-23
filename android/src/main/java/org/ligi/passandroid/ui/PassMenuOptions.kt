@@ -54,7 +54,7 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) {
                     builder.setView(sourceDeleteCheckBoxView)
                 }
 
-                builder.setPositiveButton(activity.getString(R.string.delete)) { dialog, which ->
+                builder.setPositiveButton(activity.getString(R.string.delete)) { _, _ ->
                     if (sourceDeleteCheckBoxView.sourceDeleteCheckbox.isChecked) {
 
                         File(source!!.replace("file://", "")).delete()

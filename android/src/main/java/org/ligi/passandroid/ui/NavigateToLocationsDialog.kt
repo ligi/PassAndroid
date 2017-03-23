@@ -28,7 +28,7 @@ fun Activity.showNavigateToLocationsDialog(pass: Pass, finishOnDone: Boolean) {
             locationDescriptions[i++] = loc.getNameWithFallback(pass)
         }
         AlertDialog.Builder(this).setTitle(this.getString(R.string.choose_location))
-                .setItems(locationDescriptions) { dialog, which ->
+                .setItems(locationDescriptions) { _, which ->
                     startIntentForLocation(this, locations[which], pass)
                     done(this, finishOnDone)
                 }
@@ -60,13 +60,10 @@ private fun startIntentForLocation(activity: Activity, location: PassLocation, p
 
 }
 
-private fun getEncodedDescription(location: PassLocation, pass: Pass): String {
-    try {
-        return URLEncoder.encode(location.getNameWithFallback(pass), "UTF-8")
-    } catch (e1: UnsupportedEncodingException) {
-        // OK - no description
-        return ""
-    }
-
+private fun getEncodedDescription(location: PassLocation, pass: Pass) = try {
+    URLEncoder.encode(location.getNameWithFallback(pass), "UTF-8")
+} catch (e1: UnsupportedEncodingException) {
+    // OK - no description
+    ""
 }
 

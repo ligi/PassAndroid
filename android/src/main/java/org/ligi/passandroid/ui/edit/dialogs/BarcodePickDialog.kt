@@ -18,7 +18,7 @@ fun showBarcodeEditDialog(context: AppCompatActivity, bus: EventBus, pass: Pass,
     AlertDialog.Builder(context).setView(view)
             .setTitle(R.string.edit_barcode_dialog_title)
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(android.R.string.ok) { dialog, which ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 pass.barCode = barcodeEditController.getBarCode()
                 bus.post(PassRefreshEvent(pass))
             }

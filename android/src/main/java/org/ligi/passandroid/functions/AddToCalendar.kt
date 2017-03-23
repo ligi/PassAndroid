@@ -18,7 +18,7 @@ fun tryAddDateToCalendar(pass: Pass, contextView: View, timeSpan: PassImpl.TimeS
         AlertDialog.Builder(contextView.context).setMessage(R.string.expiration_date_to_calendar_warning_message)
                 .setTitle(R.string.expiration_date_to_calendar_warning_title)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok) { dialog, which -> reallyAddToCalendar(pass, contextView, timeSpan) }
+                .setPositiveButton(android.R.string.ok) { _, _ -> reallyAddToCalendar(pass, contextView, timeSpan) }
                 .show()
     } else {
         reallyAddToCalendar(pass, contextView, timeSpan)
