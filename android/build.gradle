@@ -61,6 +61,18 @@ android {
         }
 
     }
+    android.variantFilter { variant ->
+        def maps = variant.getFlavors().get(0).name
+        def analytics = variant.getFlavors().get(1).name
+        def distribution = variant.getFlavors().get(2).name
+
+        if (((distribution == 'forAmazon' || distribution == 'forPlay') && analytics == 'noAnalytics')
+                || ((distribution == 'forAmazon' || distribution == 'forPlay') && maps == 'noMaps')
+                || (distribution == 'forFDroid' && analytics == 'withAnalytics')
+                || (distribution == 'forFDroid' && maps == 'withMaps')){
+            variant.setIgnore(true)
+        }
+    }
 
     packagingOptions {
         // needed for assertJ
