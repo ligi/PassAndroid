@@ -181,8 +181,6 @@ dependencies {
     // WARNING: might work on some devices or the emulator - but fails on others
     compile 'com.google.zxing:core:3.3.0'
 
-    //compile fileTree(dir: 'libs', include: 'zxing-core-2.3.0-SNAPSHOT.jar')
-
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
 
