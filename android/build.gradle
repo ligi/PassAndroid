@@ -66,12 +66,11 @@ android {
         def analytics = variant.getFlavors().get(1).name
         def distribution = variant.getFlavors().get(2).name
 
-        if (((distribution == 'forAmazon' || distribution == 'forPlay') && analytics == 'noAnalytics')
+        variant.setIgnore((project.hasProperty("singleFlavor") && (distribution != 'forPlay'))
+                || ((distribution == 'forAmazon' || distribution == 'forPlay') && analytics == 'noAnalytics')
                 || ((distribution == 'forAmazon' || distribution == 'forPlay') && maps == 'noMaps')
                 || (distribution == 'forFDroid' && analytics == 'withAnalytics')
-                || (distribution == 'forFDroid' && maps == 'withMaps')){
-            variant.setIgnore(true)
-        }
+                || (distribution == 'forFDroid' && maps == 'withMaps'))
     }
 
     packagingOptions {
@@ -133,7 +132,7 @@ dependencies {
     androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
 
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.2'
-    
+
     androidTestCompile "com.android.support:appcompat-v7:$support_version"
     androidTestCompile "com.android.support:design:$support_version"
 
@@ -162,7 +161,7 @@ dependencies {
     forPlayCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
     forFDroidCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
     forAmazonCompile 'com.github.ligi.snackengage:snackengage-amazonrate:0.10'
-	    
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.2'
