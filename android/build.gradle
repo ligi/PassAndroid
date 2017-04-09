@@ -190,6 +190,8 @@ dependencies {
 spoon {
     debug = true
     grantAllPermissions = true
+    // TODO - http://stackoverflow.com/questions/43308368/app-had-used-a-different-appcomponent-during-pre-verification
+    skipDevices = ['3200d5cd47677000']
 }
 
 play {
