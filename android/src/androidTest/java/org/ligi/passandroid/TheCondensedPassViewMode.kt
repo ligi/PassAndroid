@@ -19,14 +19,14 @@ class TheCondensedPassViewMode {
 
     @get:Rule
     var rule = TruleskActivityRule(PassListActivity::class.java, false) {
-        val currentPass = TestApp.component().passStore().currentPass as PassImpl
+        val currentPass = TestApp.component.passStore().currentPass as PassImpl
         currentPass.calendarTimespan = PassImpl.TimeSpan(ZonedDateTime.of(2016, 11, 23, 20, 42, 42, 5, ZoneId.systemDefault()))
         currentPass.fields = mutableListOf(PassField("textprobe", "bar", "yo", false))
     }
 
     @Test
     fun testDateShowsForCondensedOff() {
-        `when`(TestApp.component().settings().isCondensedModeEnabled()).thenReturn(false)
+        `when`(TestApp.component.settings().isCondensedModeEnabled()).thenReturn(false)
 
         rule.launchActivity()
 
@@ -40,7 +40,7 @@ class TheCondensedPassViewMode {
     @Test
     fun testFieldShowsForCondensedOn() {
 
-        `when`(TestApp.component().settings().isCondensedModeEnabled()).thenReturn(true)
+        `when`(TestApp.component.settings().isCondensedModeEnabled()).thenReturn(true)
 
         rule.launchActivity()
 

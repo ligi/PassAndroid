@@ -41,7 +41,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        App.component().inject(this)
+        App.component.inject(this)
 
         bus.register(this)
 

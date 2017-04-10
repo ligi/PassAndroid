@@ -38,7 +38,7 @@ object UnzipPassController {
             processFile(FileUnzipControllerSpec(tempFile.absolutePath, spec))
             tempFile.delete()
         } catch (e: Exception) {
-            App.component().tracker().trackException("problem processing InputStream", e, false)
+            App.component.tracker().trackException("problem processing InputStream", e, false)
             spec.failCallback?.fail("problem with temp file" + e)
         }
 

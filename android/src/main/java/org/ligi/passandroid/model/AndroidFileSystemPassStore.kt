@@ -69,7 +69,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             try {
                 result = jsonAdapter.fromJson(Okio.buffer(Okio.source(file)))
             } catch (ignored: JsonDataException) {
-                App.component().tracker().trackException("invalid main.json", false)
+                App.component.tracker().trackException("invalid main.json", false)
             }
         }
 

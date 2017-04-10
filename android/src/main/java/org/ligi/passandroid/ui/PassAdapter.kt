@@ -27,7 +27,7 @@ class PassAdapter(private val passListActivity: AppCompatActivity, private val p
     lateinit var settings: Settings
 
     init {
-        App.component().inject(this)
+        App.component.inject(this)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PassViewHolder {

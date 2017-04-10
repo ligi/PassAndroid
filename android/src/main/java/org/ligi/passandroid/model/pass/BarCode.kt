@@ -14,13 +14,13 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
     fun getBitmap(resources: Resources): BitmapDrawable? {
         if (message == null) {
             // no message -> no barcode
-            App.component().tracker().trackException("No Barcode in pass - strange", false)
+            App.component.tracker().trackException("No Barcode in pass - strange", false)
             return null
         }
 
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR")
-            App.component().tracker().trackException("Barcode format is null - fallback to QR", false)
+            App.component.tracker().trackException("Barcode format is null - fallback to QR", false)
             return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
         }
 

@@ -131,7 +131,7 @@ class PassListActivity : PassAndroidActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component().inject(this)
+        App.component.inject(this)
 
         setContentView(R.layout.pass_list)
 

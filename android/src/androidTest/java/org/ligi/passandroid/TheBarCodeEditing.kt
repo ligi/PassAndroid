@@ -32,7 +32,7 @@ class TheBarCodeEditing {
 
     fun start(setupPass: (pass: PassImpl) -> Unit = {}) {
 
-        TestApp.component().inject(this)
+        TestApp.component.inject(this)
 
         currentPass = passStore.currentPass as PassImpl
 

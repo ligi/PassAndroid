@@ -54,7 +54,7 @@ class PassEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component().inject(this)
+        App.component.inject(this)
         setContentView(R.layout.edit)
 
         categoryView.setOnClickListener {

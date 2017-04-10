@@ -16,7 +16,7 @@ class TouchImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component().inject(this)
+        App.component.inject(this)
         val webView = TouchImageView(this)
 
         setContentView(webView)

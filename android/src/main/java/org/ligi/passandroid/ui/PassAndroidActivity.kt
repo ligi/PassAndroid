@@ -29,7 +29,7 @@ open class PassAndroidActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component().inject(this)
+        App.component.inject(this)
     }
 
     override fun onResume() {

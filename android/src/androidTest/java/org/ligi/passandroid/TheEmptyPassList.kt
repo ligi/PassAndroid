@@ -23,7 +23,7 @@ class TheEmptyPassList {
 
     @Before
     fun setUp() {
-        App.setComponent(DaggerTestComponent.builder().testModule(TestModule(ArrayList<Pass>())).build())
+        App.component = DaggerTestComponent.builder().testModule(TestModule(ArrayList<Pass>())).build()
         rule.launchActivity(null)
     }
 

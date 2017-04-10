@@ -74,7 +74,7 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
             }
             return new String(fileData);
         } catch (Throwable e) {
-            App.component().tracker().trackException("problem_reading_translation", e, false);
+            App.Companion.getComponent().tracker().trackException("problem_reading_translation", e, false);
             e.printStackTrace();
             return null;
         }

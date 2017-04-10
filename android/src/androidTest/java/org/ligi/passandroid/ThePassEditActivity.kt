@@ -31,7 +31,7 @@ class ThePassEditActivity {
 
     @get:Rule
     var rule = TruleskIntentRule(PassEditActivity::class.java) {
-        TestApp.component().inject(this)
+        TestApp.component.inject(this)
     }
 
     @Test

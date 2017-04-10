@@ -20,7 +20,7 @@ class ThePassListSwiping {
         TestApp.reset()
     }
 
-    val passStore by lazy { TestApp.getPassStore() }
+    val passStore by lazy { TestApp.passStore }
 
     @Test
     fun testWeCanMoveToTrash() {

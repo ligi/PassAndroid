@@ -18,7 +18,7 @@ class PassImportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component().inject(this)
+        App.component.inject(this)
 
         if (intent.data == null || intent.data.scheme == null) {
             tracker.trackException("invalid_import_uri", false)

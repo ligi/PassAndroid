@@ -27,7 +27,7 @@ class PassExporter(private val inputPath: File, val file: File) {
 
         } catch (exception: Exception) {
             exception.printStackTrace()
-            App.component().tracker().trackException("when exporting pass to zip", exception, false)
+            App.component.tracker().trackException("when exporting pass to zip", exception, false)
             this.exception = exception // we need to take action on the main thread later
             file.delete() // prevent zombies from taking over
         }

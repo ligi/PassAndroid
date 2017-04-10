@@ -15,7 +15,7 @@ import java.net.URL
 val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53"
 
 fun fromURI(context: Context, uri: Uri): InputStreamWithSource? {
-    App.component().tracker().trackEvent("protocol", "to_inputstream", uri.scheme, null)
+    App.component.tracker().trackEvent("protocol", "to_inputstream", uri.scheme, null)
     when (uri.scheme) {
         "content" ->
 
@@ -27,7 +27,7 @@ fun fromURI(context: Context, uri: Uri): InputStreamWithSource? {
 
         "file" -> return getDefaultInputStreamForUri(uri)
         else -> {
-            App.component().tracker().trackException("unknown scheme in ImportAsyncTask" + uri.scheme, false)
+            App.component.tracker().trackException("unknown scheme in ImportAsyncTask" + uri.scheme, false)
             return getDefaultInputStreamForUri(uri)
         }
 
@@ -54,7 +54,7 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
 
         for ((key, value) in iPhoneFakeMap) {
             if (uri.toString().contains(value)) {
-                App.component().tracker().trackEvent("quirk_fix", "ua_fake", key, null)
+                App.component.tracker().trackEvent("quirk_fix", "ua_fake", key, null)
                 requestBuilder.header("User-Agent", IPHONE_USER_AGENT)
             }
         }
@@ -65,9 +65,9 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
 
         return InputStreamWithSource(uri.toString(), response.body().byteStream())
     } catch (e: MalformedURLException) {
-        App.component().tracker().trackException("MalformedURLException in ImportAsyncTask", e, false)
+        App.component.tracker().trackException("MalformedURLException in ImportAsyncTask", e, false)
     } catch (e: IOException) {
-        App.component().tracker().trackException("IOException in ImportAsyncTask", e, false)
+        App.component.tracker().trackException("IOException in ImportAsyncTask", e, false)
     }
 
     return null
@@ -77,7 +77,7 @@ private fun fromContent(ctx: Context, uri: Uri): InputStreamWithSource? {
     try {
         return InputStreamWithSource(uri.toString(), ctx.contentResolver.openInputStream(uri)!!)
     } catch (e: FileNotFoundException) {
-        App.component().tracker().trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false)
+        App.component.tracker().trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false)
         return null
     }
 
@@ -88,7 +88,7 @@ private fun getDefaultInputStreamForUri(uri: Uri): InputStreamWithSource? {
     try {
         return InputStreamWithSource(uri.toString(), BufferedInputStream(URL(uri.toString()).openStream(), 4096))
     } catch (e: IOException) {
-        App.component().tracker().trackException("IOException in passImportActivity/ImportAsyncTask", e, false)
+        App.component.tracker().trackException("IOException in passImportActivity/ImportAsyncTask", e, false)
         return null
     }
 

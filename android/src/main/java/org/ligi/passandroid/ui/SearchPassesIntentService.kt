@@ -48,7 +48,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
 
-        App.component().inject(this)
+        App.component.inject(this)
 
         foundList = ArrayList<Pass>()
 

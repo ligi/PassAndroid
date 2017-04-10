@@ -16,7 +16,7 @@ import org.ligi.passandroid.model.pass.PassImpl
 
 class FieldsEditFragment : Fragment() {
 
-    fun getPass(): PassImpl = App.component().passStore().currentPass as PassImpl
+    fun getPass(): PassImpl = App.component.passStore().currentPass as PassImpl
 
     private var isEditingHiddenFields: Boolean = false
 

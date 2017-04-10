@@ -31,7 +31,7 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) {
     lateinit var settings: Settings
 
     init {
-        App.component().inject(this)
+        App.component.inject(this)
     }
 
     fun process(item: MenuItem): Boolean {
