@@ -8,6 +8,7 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.SdkSuppress
 import android.support.test.runner.AndroidJUnit4
+import com.github.salomonbrys.kodein.instance
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -17,7 +18,6 @@ import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.ui.PassEditActivity
 import org.ligi.trulesk.TruleskActivityRule
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 class TheBarCodeEditing {
@@ -25,14 +25,11 @@ class TheBarCodeEditing {
     @get:Rule
     val rule = TruleskActivityRule(PassEditActivity::class.java, false)
 
-    @Inject
-    lateinit var passStore: PassStore
+    val passStore: PassStore = App.kodein.instance()
 
     lateinit var currentPass: PassImpl
 
     fun start(setupPass: (pass: PassImpl) -> Unit = {}) {
-
-        TestApp.component.inject(this)
 
         currentPass = passStore.currentPass as PassImpl
 

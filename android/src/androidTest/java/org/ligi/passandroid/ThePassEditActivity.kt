@@ -16,23 +16,18 @@ import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.R.id.*
 import org.ligi.passandroid.R.string.*
-import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.PassType.COUPON
 import org.ligi.passandroid.model.pass.PassType.EVENT
 import org.ligi.passandroid.ui.PassEditActivity
 import org.ligi.trulesk.TruleskIntentRule
-import javax.inject.Inject
 
 @TargetApi(14)
 class ThePassEditActivity {
 
-    @Inject
-    lateinit var passStore: PassStore
+    val passStore = TestApp.passStore()
 
     @get:Rule
-    var rule = TruleskIntentRule(PassEditActivity::class.java) {
-        TestApp.component.inject(this)
-    }
+    var rule = TruleskIntentRule(PassEditActivity::class.java)
 
     @Test
     fun testSetToEventWorks() {

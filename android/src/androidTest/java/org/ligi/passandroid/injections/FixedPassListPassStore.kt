@@ -4,25 +4,41 @@ import org.ligi.passandroid.model.PassClassifier
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 import java.io.File
-import java.util.*
 
-class FixedPassListPassStore(private val passes: List<Pass>) : PassStore {
+class FixedPassListPassStore(private var passes: List<Pass>) : PassStore {
+
+    override lateinit var classifier: PassClassifier
+
+    init {
+        classifier = PassClassifier(HashMap<String, String>(), this)
+    }
+
+    fun setList(newPasses: List<Pass>, newCurrentPass: Pass? = newPasses.firstOrNull()) {
+        currentPass = newCurrentPass
+        passes = newPasses
+        passMap.clear()
+        passMap.putAll(createHashMap())
+
+        classifier = PassClassifier(HashMap<String, String>(), this)
+    }
+
     override var currentPass: Pass? = null
 
-    override val passMap: Map<String, Pass> by lazy {
+    override val passMap: HashMap<String, Pass> by lazy {
+        return@lazy createHashMap()
+    }
+
+    private fun createHashMap(): HashMap<String, Pass> {
         val hashMap = HashMap<String, Pass>()
 
         passes.forEach { hashMap.put(it.id, it) }
-        return@lazy hashMap
+        return hashMap
     }
 
     override fun getPassbookForId(id: String): Pass? {
         return passMap[id]
     }
 
-    override val classifier: PassClassifier by lazy {
-        PassClassifier(HashMap<String, String>(), this)
-    }
 
     override fun deletePassWithId(id: String): Boolean {
         return false

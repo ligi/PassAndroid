@@ -6,29 +6,21 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.github.salomonbrys.kodein.instance
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.Settings
-import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
-import javax.inject.Inject
 
 class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : RecyclerView.Adapter<PassViewHolder>() {
 
-    @Inject
-    lateinit var passStore: PassStore
-
-    @Inject
-    lateinit var settings: Settings
-
-    init {
-        App.component.inject(this)
-    }
+    val passStore: PassStore = App.kodein.instance()
+    val settings: Settings = App.kodein.instance()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PassViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
@@ -60,15 +52,8 @@ class PassAdapter(private val passListActivity: AppCompatActivity, private val p
         }
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    private val list: List<Pass>
-        get() = passStoreProjection.passList
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemId(position: Int) = position.toLong()
+    private val list = passStoreProjection.passList
+    override fun getItemCount() = list.size
 
 }

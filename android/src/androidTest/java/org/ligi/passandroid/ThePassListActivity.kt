@@ -21,7 +21,7 @@ class ThePassListActivity {
 
     @get:Rule
     var rule = TruleskActivityRule(PassListActivity::class.java) {
-        TestApp.reset()
+        TestApp.populatePassStoreWithSinglePass()
     }
 
     @Test

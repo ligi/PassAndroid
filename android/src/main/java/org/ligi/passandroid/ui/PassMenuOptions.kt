@@ -6,6 +6,7 @@ import android.support.v4.app.NavUtils
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.MenuItem
+import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.delete_dialog_layout.view.*
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.App
@@ -17,22 +18,12 @@ import org.ligi.passandroid.model.Settings
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.printing.doPrint
 import java.io.File
-import javax.inject.Inject
 
 class PassMenuOptions(val activity: Activity, val pass: Pass) {
 
-    @Inject
-    lateinit var passStore: PassStore
-
-    @Inject
-    lateinit var tracker: Tracker
-
-    @Inject
-    lateinit var settings: Settings
-
-    init {
-        App.component.inject(this)
-    }
+    var passStore: PassStore = App.kodein.instance()
+    var tracker: Tracker = App.kodein.instance()
+    var settings: Settings = App.kodein.instance()
 
     fun process(item: MenuItem): Boolean {
         when (item.itemId) {

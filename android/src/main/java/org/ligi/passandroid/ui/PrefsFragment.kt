@@ -28,7 +28,7 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == getString(R.string.preference_key_nightmode)) {
 
-            @AppCompatDelegate.NightMode val nightMode = App.component.settings().getNightMode()
+            @AppCompatDelegate.NightMode val nightMode = App.settings.getNightMode()
 
             if (nightMode == MODE_NIGHT_AUTO) {
                 PrefsFragmentPermissionsDispatcher.ensureDayNightWithCheck(this)

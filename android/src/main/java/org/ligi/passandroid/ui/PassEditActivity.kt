@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.edit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -30,7 +31,6 @@ import org.ligi.passandroid.ui.pass_view_holder.EditViewHolder
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.util.*
-import javax.inject.Inject
 
 @RuntimePermissions
 class PassEditActivity : AppCompatActivity() {
@@ -38,11 +38,8 @@ class PassEditActivity : AppCompatActivity() {
     private lateinit var currentPass: PassImpl
     private val imageEditHelper by lazy { ImageEditHelper(this, passStore) }
 
-    @Inject
-    lateinit internal var passStore: PassStore
-
-    @Inject
-    lateinit internal var bus: EventBus
+    internal val passStore: PassStore = App.kodein.instance()
+    internal val bus: EventBus = App.kodein.instance()
 
     private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 
@@ -54,7 +51,6 @@ class PassEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.component.inject(this)
         setContentView(R.layout.edit)
 
         categoryView.setOnClickListener {

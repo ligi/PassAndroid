@@ -33,7 +33,7 @@ class LocationsMapFragment : SupportMapFragment() {
             map.setOnMapLoadedCallback {
                 if (click_to_fullscreen)
                     map.setOnMapClickListener {
-                        App.component.passStore().currentPass = base_activity!!.currentPass
+                        App.passStore.currentPass = base_activity!!.currentPass
                         activity.startActivityFromClass(FullscreenMapActivity::class.java)
                     }
 

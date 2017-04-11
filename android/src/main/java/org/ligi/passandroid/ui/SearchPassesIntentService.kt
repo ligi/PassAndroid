@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Environment
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
+import com.github.salomonbrys.kodein.instance
 import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
@@ -23,7 +24,6 @@ import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpe
 import org.ligi.tracedroid.logging.Log
 import java.io.File
 import java.util.*
-import javax.inject.Inject
 
 class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
@@ -36,19 +36,11 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     private var lastProgressUpdate: Long = 0
 
-    @Inject
-    lateinit var passStore: PassStore
-
-    @Inject
-    lateinit var bus: EventBus
-
-    @Inject
-    lateinit var tracker: Tracker
-
+    val passStore: PassStore = App.kodein.instance()
+    val bus: EventBus = App.kodein.instance()
+    val tracker: Tracker = App.kodein.instance()
 
     override fun onHandleIntent(intent: Intent?) {
-
-        App.component.inject(this)
 
         foundList = ArrayList<Pass>()
 

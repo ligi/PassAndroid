@@ -9,6 +9,7 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.ligi.passandroid.App.Companion.passStore
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.PassListFragment
 import org.ligi.trulesk.TruleskIntentRule
@@ -17,10 +18,8 @@ class ThePassListSwiping {
 
     @get:Rule
     val rule = TruleskIntentRule(PassListActivity::class.java) {
-        TestApp.reset()
+        TestApp.populatePassStoreWithSinglePass()
     }
-
-    val passStore by lazy { TestApp.passStore }
 
     @Test
     fun testWeCanMoveToTrash() {

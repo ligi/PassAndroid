@@ -5,13 +5,9 @@ import android.content.SharedPreferences
 import android.os.Build
 import org.ligi.passandroid.Tracker
 import java.util.*
-import javax.inject.Inject
 
-class PastLocationsStore
-@Inject
-constructor(private val sharedPreferences: SharedPreferences, private val tracker: Tracker) {
+class PastLocationsStore constructor(private val sharedPreferences: SharedPreferences, private val tracker: Tracker) {
 
-    @TargetApi(11)
     fun putLocation(path: String) {
         if (Build.VERSION.SDK_INT < 11) {
             // feature not available for these versions

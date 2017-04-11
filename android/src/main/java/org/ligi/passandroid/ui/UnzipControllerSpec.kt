@@ -15,6 +15,6 @@ open class UnzipControllerSpec(var targetPath: File,
     var overwrite = false
 
     constructor(context: Context, passStore: PassStore, onSuccessCallback: SuccessCallback?, failCallback: FailCallback?)
-            : this(App.component.settings().getPassesDir(), context, passStore, onSuccessCallback, failCallback)
+            : this(App.settings.getPassesDir(), context, passStore, onSuccessCallback, failCallback)
 
 }

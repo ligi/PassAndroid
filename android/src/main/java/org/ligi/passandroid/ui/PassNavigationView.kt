@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.design.widget.NavigationView
 import android.util.AttributeSet
+import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -13,15 +14,11 @@ import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.PassStore
-import javax.inject.Inject
 
 class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView(context, attrs) {
 
-    @Inject
-    lateinit internal var passStore: PassStore
-
-    @Inject
-    lateinit internal var bus: EventBus
+    val passStore: PassStore = App.kodein.instance()
+    val bus: EventBus = App.kodein.instance()
 
     fun getIntent(id: Int) = when (id) {
         R.id.menu_settings -> Intent(context, PreferenceActivity::class.java)
@@ -40,8 +37,6 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-
-        App.component.inject(this)
 
         bus.register(this)
 

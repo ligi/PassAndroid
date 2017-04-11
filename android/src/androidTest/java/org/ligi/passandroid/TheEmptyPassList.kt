@@ -5,26 +5,19 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.R.id.emptyView
 import org.ligi.passandroid.functions.checkThatHelpIsThere
-import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.trulesk.TruleskIntentRule
-import java.util.*
 
 
 class TheEmptyPassList {
 
     @get:Rule
-    var rule = TruleskIntentRule(PassListActivity::class.java, false)
-
-    @Before
-    fun setUp() {
-        App.component = DaggerTestComponent.builder().testModule(TestModule(ArrayList<Pass>())).build()
-        rule.launchActivity(null)
+    var rule = TruleskIntentRule(PassListActivity::class.java) {
+        TestApp.emptyPassStore()
     }
 
     @Test

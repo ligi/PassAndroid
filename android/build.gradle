@@ -114,16 +114,12 @@ configurations {
 }
 
 dependencies {
-    compile "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
     compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
 
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.github.salomonbrys.kodein:kodein:3.3.0'
 
-    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
-    androidTestCompile "com.android.support:support-annotations:$support_version"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 
     androidTestCompile 'com.github.ligi:trulesk:0.19'
 
@@ -194,7 +190,6 @@ spoon {
     debug = true
     grantAllPermissions = true
     // TODO - http://stackoverflow.com/questions/43308368/app-had-used-a-different-appcomponent-during-pre-verification
-    skipDevices = ['3200d5cd47677000']
 }
 
 play {

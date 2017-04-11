@@ -77,7 +77,7 @@ object AppleStylePassReader {
 
         if (pass_json == null) {
             Log.w("could not load pass.json from passcode ")
-            App.component.tracker().trackEvent("problem_event", "pass", "without_pass_json", null)
+            App.tracker.trackEvent("problem_event", "pass", "without_pass_json", null)
             return null
         }
 
@@ -86,7 +86,7 @@ object AppleStylePassReader {
             if (barcode_json != null) {
                 val barcodeFormatString = barcode_json.getString("format")
 
-                App.component.tracker().trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
+                App.tracker.trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
                 val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
                 val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
                 pass.barCode = barCode
@@ -105,9 +105,9 @@ object AppleStylePassReader {
             } catch (e: JSONException) {
                 // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                 // OK then we just have no date here
-                App.component.tracker().trackException("problem parsing relevant date", e, false)
+                App.tracker.trackException("problem parsing relevant date", e, false)
             } catch (e: DateTimeException) {
-                App.component.tracker().trackException("problem parsing relevant date", e, false)
+                App.tracker.trackException("problem parsing relevant date", e, false)
             }
 
         }
@@ -118,9 +118,9 @@ object AppleStylePassReader {
             } catch (e: JSONException) {
                 // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                 // OK then we just have no date here
-                App.component.tracker().trackException("problem parsing expiration date", e, false)
+                App.tracker.trackException("problem parsing expiration date", e, false)
             } catch (e: DateTimeException) {
-                App.component.tracker().trackException("problem parsing expiration date", e, false)
+                App.tracker.trackException("problem parsing expiration date", e, false)
             }
 
         }
@@ -196,12 +196,12 @@ object AppleStylePassReader {
 
         try {
             pass.creator = pass_json.getString("organizationName")
-            App.component.tracker().trackEvent("measure_event", "organisation_parse", pass.creator, 1L)
+            App.tracker.trackEvent("measure_event", "organisation_parse", pass.creator, 1L)
         } catch (ignored: JSONException) {
             // ok - we have no organisation - big deal ..-)
         }
 
-        ApplePassbookQuirkCorrector(App.component.tracker()).correctQuirks(pass)
+        ApplePassbookQuirkCorrector(App.tracker).correctQuirks(pass)
 
         return pass
     }
@@ -245,14 +245,14 @@ object AppleStylePassReader {
         val localized = File(path, language + ".lproj")
 
         if (localized.exists() && localized.isDirectory) {
-            App.component.tracker().trackEvent("measure_event", "pass", language + "_native_lproj", null)
+            App.tracker.trackEvent("measure_event", "pass", language + "_native_lproj", null)
             return localized.path
         }
 
         val fallback = File(path, "en.lproj")
 
         if (fallback.exists() && fallback.isDirectory) {
-            App.component.tracker().trackEvent("measure_event", "pass", "en_lproj", null)
+            App.tracker.trackEvent("measure_event", "pass", "en_lproj", null)
             return fallback.path
         }
 

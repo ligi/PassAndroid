@@ -2,7 +2,9 @@ package org.ligi.passandroid.model.pass
 
 import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
+import com.github.salomonbrys.kodein.instance
 import org.ligi.passandroid.App
+import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.generateBitmapDrawable
 import org.ligi.tracedroid.logging.Log
 import java.util.*
@@ -12,15 +14,16 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
     var alternativeText: String? = null
 
     fun getBitmap(resources: Resources): BitmapDrawable? {
+        val tracker: Tracker = App.kodein.instance()
         if (message == null) {
             // no message -> no barcode
-            App.component.tracker().trackException("No Barcode in pass - strange", false)
+            tracker.trackException("No Barcode in pass - strange", false)
             return null
         }
 
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR")
-            App.component.tracker().trackException("Barcode format is null - fallback to QR", false)
+            tracker.trackException("Barcode format is null - fallback to QR", false)
             return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
         }
 

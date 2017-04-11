@@ -11,6 +11,7 @@ import android.support.v7.widget.helper.ItemTouchHelper.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.pass_recycler.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -23,7 +24,6 @@ import org.ligi.passandroid.functions.moveWithUndoSnackbar
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.Settings
-import javax.inject.Inject
 
 class PassListFragment : Fragment() {
 
@@ -31,19 +31,12 @@ class PassListFragment : Fragment() {
     private lateinit var passStoreProjection: PassStoreProjection
     private lateinit var adapter: PassAdapter
 
-    @Inject
-    lateinit var passStore: PassStore
-
-    @Inject
-    lateinit var settings: Settings
-
-    @Inject
-    lateinit var bus: EventBus
+    val passStore: PassStore = App.kodein.instance()
+    val settings: Settings = App.kodein.instance()
+    val bus: EventBus = App.kodein.instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val inflate = inflater.inflate(R.layout.pass_recycler, container, false)
-
-        App.component.inject(this)
 
         passStoreProjection = PassStoreProjection(passStore, arguments.getString(BUNDLE_KEY_TOPIC)!!, settings.getSortOrder())
         adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection)

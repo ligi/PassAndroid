@@ -24,7 +24,6 @@ import org.greenrobot.eventbus.ThreadMode
 import org.ligi.kaxt.setButton
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.events.ScanFinishedEvent
@@ -130,8 +129,6 @@ class PassListActivity : PassAndroidActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        App.component.inject(this)
 
         setContentView(R.layout.pass_list)
 
