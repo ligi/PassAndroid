@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">PassAndroid</string>
+  <string name="logo">logo</string>
+  <string name="menu_map">Toon op kaart</string>
+  <string name="menu_delete">verwijder</string>
+  <string name="menu_share">deel</string>
+  <string name="barcode">barcode</string>
+  <string name="help_label">Help</string>
+  <string name="help_content"><![CDATA[
+<h1>Wat is PassAndroid?</h1>
+
+Deze app is een viewer voor passbooks. Een passbook kan een boarding-pass zijn voor je volgende vlucht, een bon voor een een lekker warm drankje op je bestemming, een filmticket, een klantenkaart,...
+
+In essentie vervangt het een stuk papier of plastiek dat je normaal mee zou moeten nemen - dus laat ons samen wat bomen redden en de afvalberg verkleinen!
+
+Bovendien is deze app Free Software. En niet alleen \"Free\" zoals \"Gratis bier\", maar vooral zoals in het concept van Richard Stallmans: vrije en open software voor een betere wereld.
+
+<h1>Voorbeeld passen</h1>
+
+Heb je een aantal passen nodig om wat mee te experimenteren? <a href=\'http://espass.it/examples/\'>Hier</a> zijn er een aantal te vinden!
+
+<h1>Hoe werkt het?</h1>
+
+Om te beginnen kan je met deze app pkpass bestanden openen, bv. wanneer je ze via email of via een download-optie ontvangt. De belangrijkste inhoud hiervan is de barcode (er is ondersteuning voor verschillende types zoals QR , AZTEC & PDF417), maar het bevat ook andere interessante informatie zoals een beschrijving, de datum en tijd (die je bovendien makkelijk in je agenda kan plaatsen) en vaak ook de locatie. Probeer het! Daarnaast kan je ook manueel bv. klantenkaarten,... toevoegen.
+
+De app kan bovendien offline gebruikt worden vanaf de pass gedownload werd!
+
+<h1>FAQ</h1>
+
+<h2>Hoe kan ik passbooks van iPhone naar PassAndroid overzetten?</h2>
+<ol>
+<li>Open de passbook op de iPhone</li>
+<li>Klik op het \"deel\" ikoon in de hoek linksonder.</li>
+<li>Zend een email met de passbook die een Android toestel kan ontvangen.</li>
+<li>Open de nieuwe email op je Android toestel en sla de bijlage op.</li>
+<li>Laat PassAndroid zoeken naar passbooks.</li>
+<li>De nieuwe passbook zal zichtbaar zijn in PassAndroid.</li>
+</ol>
+
+<H1>Credits</H1>
+Veel dank aan <a href="http://ltorrecilla.com/">Luis Torrecilla</a> voor het design & <a href="https://github.com/cketti">Cketti</a> voor verbeteringen in het algemeen!
+
+<H1>Feedback</H1>
+Geef feedback in de <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> of je kan een <a href=\'mailto:ligi@ligi.de\'>email</a> naar de maker sturen. Als je de app leuk vindt, kan je dit hier laten weten: <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Ik ben ook altijd benieuwd om te weten op welke manier je de app gebruikt.
+
+<h1>Geschiedenis</h1>
+
+Ik kwam de eerste keer in aanraking met Passbook bestanden toen ik m\'n ticket voor de 29c3 ontving. Ik vond het een leuk idee, maar er was geen Android app die voor me werkte. Ik zag dat de implementatie eenvoudig was (gewoon een zip bestand met wat json en wat afbeeldingen). De eerste versie was heel snel ontwikkeld en werkte (ik geraakte binnen op 29c3). Het jaar nadien heb ik niet veel gewerkt aan de app vermits ik niet veel concrete wensen had, maar er waren veel mensen die de app gebruikten en regelmatig deed ik verbeteringen als mensen me een pass doorstuurden die niet bleek te werken (sommige passes bevatten ongeldige json inhoud...).
+
+Een jaar later - net voor 30c3 - begon ik terug wat te werken aan de app, voor 2 redenen:
+- een vriend is ernstig bezig met BTLE en locatie gevoeligheid zou erg interessant kunnen zijn voor Passbook - maar er is nog niets afgewerkt
+- ik ontving een email van Luis Torrecilla, en goede designer die een fantastische redesign voorstelde
+
+Dit heeft geleid tot PassAndroid - een volledig nieuwe versie - met een nieuwe look en nieuwe functionaliteiten.
+
+<H1>Meer</H1>
+This app is best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
+
+<H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
+
+THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+    ]]></string>
+  <string name="drawer_open">open</string>
+  <string name="drawer_close">sluit</string>
+  <string name="pass_problem">Sorry, er was een probleem bij het verwerken van deze Passbook. Als je dit wenst, kan je me deze passbook toesturen zodat ik kan kijken wat het probleem is en de app kan verbeteren.</string>
+  <string name="problem">Probleem</string>
+  <string name="send">Verzenden</string>
+  <string name="delete">Verwijder!</string>
+  <string name="choose_location">Kies locatie</string>
+  <string name="boarding_pass">Boarding pass</string>
+  <string name="category_event">Evenement</string>
+  <string name="category_coupon">Bon</string>
+  <string name="category_storecard">Klantenkaart</string>
+  <string name="category_generic">algemeen</string>
+  <string name="category_none">Geen categorie</string>
+  <string name="nav_more">MEER</string>
+  <string name="nav_sort">SORTEREN</string>
+  <string name="nav_sort_category">Categorie</string>
+  <string name="nav_sort_date">Datum</string>
+  <string name="nav_categories">CATEGORIEEN</string>
+  <string name="nav_share">Deel</string>
+  <string name="pass_directions">Navigeer</string>
+  <string name="pass_to_calendar">Naar kalender</string>
+  <string name="invalid_passbook_title">Ongeldige Passbook</string>
+  <string name="preparing_pass">Pass aan het voorbereiden</string>
+  <string name="please_wait">Even wachten, het duurt niet lang</string>
+  <string name="passbook_is_shared_subject">Een Passbook is met je gedeeld</string>
+  <string name="passbook_share_chooser_title">Hoe een Pass verzenden?</string>
+  <string name="dialog_delete_confirm_text">Ben je zeker dat je deze Passbook wil verwijderen?</string>
+  <string name="dialog_delete_title">Zeker?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">ook de bron verwijderen?</string>
+  <string name="more">MEER</string>
+  <string name="less">MINDER</string>
+  <string name="scanning_for_passes">Aan het zoeken naar Passen</string>
+  <string name="fab_choice_scan_pkpass_files">Zoek naar pkpass bestanden</string>
+  <string name="fab_choice_add_demo_pass">Voeg demo-pas toe</string>
+  <string name="fab_choice_create_pass">Maak pas</string>
+  <string name="empty_text_view"><big><b>Nog geen pas</b></big>
+    \n\n\n Je kan je telefoon doorzoeken naar passen
+    \n\n of maak je eigen pas
+    \n\n of probeer een demo pas
+    \n\n druk \"+\" onderaan
+    </string>
+  <string name="downloading_new_pass_version">Nieuwe pas versie aan het downloaden</string>
+  <string name="unzip_pass_dialog_title">Passbook aan het openen</string>
+  <string name="unzip_pass_dialog_message">Even geduld...</string>
+  <string name="action_update">update</string>
+  <string name="no_calendar_app_found">Geen kalender app gevonden</string>
+  <string name="pass_updated">Pas geupdated</string>
+  <string name="expiration_date_to_calendar_warning_message">Je staat op het punt om de vervaldatum aan de kalender toe te voegen. Als je denkt dat er een betere datum in deze pas aanwezig is, gelieve het naar me te zenden, PassAndroid moet weten waar het is.</string>
+  <string name="expiration_date_to_calendar_warning_title">Voeg vervaldatum toe</string>
+  <string name="topic_trash">prullenbak</string>
+  <string name="topic_new">nieuw</string>
+  <string name="topic_archive">archief</string>
+  <string name="move_to_new_topic">Verplaats naar nieuwe groep</string>
+  <string name="categories_nav">%d Categorieen</string>
+  <string name="passes_nav">%d Passen</string>
+  <string name="found_pass">gevonden: %s</string>
+  <string name="found__pass">En %d meer</string>
+  <string name="scan_finished_dialog_title">Zoekactie afgewerkt.</string>
+  <string name="scan_finished_dialog_text">%d passen gevonden</string>
+  <string name="scan_progressdialog_title">Zoeken...</string>
+  <string name="scan_progressdialog_message">Even geduld.</string>
+  <string name="scan_dialog_send_background_button">achtergrond</string>
+  <string name="emtytrash_label">Prullenbak leegmaken</string>
+  <string name="barcode_edit_hint_alternative_message">alternatieve boodschap</string>
+  <string name="barcode_edit_random">willekeurig</string>
+  <string name="barcode_edit_scan">zoek</string>
+  <string name="barcode_edit_message">Boodschap</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">Voeg barcode toe</string>
+  <string name="categories_voucher">voucher</string>
+  <string name="edit_time">wijziging tijd</string>
+  <string name="edit_location">wijzig locatie</string>
+  <string name="add_front_field">Voeg voorkant veld toe</string>
+  <string name="add_back_fields">Voeg achterkant veld toe</string>
+  <string name="change_color_dialog_title">Selecteer kleur</string>
+  <string name="select_category_dialog_title">Selecteer categorie</string>
+  <string name="barcode_edit_code128">code 128</string>
+  <string name="barcode_edit_code39">code 39</string>
+  <string name="add_footer_image">Voeg voetnoot afbeelding toe</string>
+  <string name="add_logo_image">voeg logo toe</string>
+  <string name="add_header_image">Voeg hoofdtekst afbeelding toe</string>
+  <string name="add_barcode">voeg barcode toe</string>
+  <string name="edit_barcode_dialog_title">Wijzig barcode</string>
+  <string name="empty_trash_dialog_message">Wil je de prullenbak zeker leegmaken? Dit is definitief.</string>
+  <string name="empty_trash_dialog_title">opgelet</string>
+  <string name="new_topic_input_hint">Titel voor nieuwe groep</string>
+  <string name="new_topic_suggestions">Suggesties:</string>
+  <string name="cannot_be_empty">kan niet leeg zijn</string>
+  <string name="please_use_the_swipe_feature">Swipe om te verplaatsen naar een andere groep,...</string>
+  <string name="type">Type</string>
+  <string name="undo">ongedaan maken</string>
+  <string name="sort_order_date_asc">Datum oplopend</string>
+  <string name="sort_order_date_desc">Datum aflopend</string>
+  <string name="sort_order_date_type">Type</string>
+  <string name="sort_order_date_temporaldistance">Afstand in tijd</string>
+  <string-array name="category_edit_options">
+    <item>@string/select_category_dialog_title</item>
+    <item>@string/change_color_dialog_title</item>
+    <item>Selecteer ikoon</item>
+  </string-array>
+  <string name="night_mode_night">Nacht</string>
+  <string name="night_mode_day">Dag</string>
+  <string name="night_mode_auto">Automatisch</string>
+  <string name="preference_autolight_title">Automatische belichting</string>
+  <string name="preference_autolight_summary">Moet de helderheid verhoogd worden bij het tonen van de barcode?</string>
+  <string name="preference_condensed_title">Compacte modus</string>
+  <string name="preference_condensed_summary">Moeten er meer details getoond worden en minder witruimte?</string>
+  <string name="preference_sort_title">Sortering</string>
+  <string name="preference_sort_summary">Hoe moeten de passen gesorteerd worden?</string>
+  <string name="preference_daynight_title">Dag/nacht thema</string>
+  <string name="preference_daynight_summary">Donkere of lichte achtergrond?</string>
+  <string name="image_import">Importeren van afbeeldingen</string>
+  <string name="pdf_import">PDF importeren</string>
+  <string name="field_source">bron</string>
+  <string name="field_note">notitie</string>
+  <string name="field_advice_label">advies</string>
+  <string name="field_advice_text">Vraag esPass of Passbook van je verkoper</string>
+  <string name="field_source_image">Afbeelding</string>
+  <string name="field_note_image">Dit is geïmporteerd van een afbeelding, niet een echte pas</string>
+  <string name="field_source_pdf">PDF</string>
+  <string name="field_note_pdf">Dit is geïmporteerd van een PDF, niet een echte pas</string>
+  <string name="nav_settings">Instellingen</string>
+  <string name="nav_github">GitHub</string>
+  <string name="nav_betatest_opt_in_out">Betatester zijn? </string>
+  <string name="nav_community_on_google">Community op google+</string>
+  <string name="nav_improve_translation">Vertaling verbeteren</string>
+  <string name="launcher_shortcut">Snelkoppeling maken</string>
+</resources>
