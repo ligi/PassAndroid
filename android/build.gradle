@@ -157,9 +157,9 @@ dependencies {
     compile 'com.github.ligi:loadtoast:1.10.11'
     compile 'com.github.ligi:tracedroid:1.4'
 
-    forPlayCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
-    forFDroidCompile 'com.github.ligi.snackengage:snackengage-playrate:0.10'
-    forAmazonCompile 'com.github.ligi.snackengage:snackengage-amazonrate:0.10'
+    forPlayCompile 'com.github.ligi.snackengage:snackengage-playrate:0.12'
+    forFDroidCompile 'com.github.ligi.snackengage:snackengage-playrate:0.12'
+    forAmazonCompile 'com.github.ligi.snackengage:snackengage-amazonrate:0.12'
 
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.larswerkman:HoloColorPicker:1.5'
