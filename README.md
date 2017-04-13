@@ -1,5 +1,6 @@
-[![Android app on Google Play](http://ligi.de/img/play_badge.png)](https://play.google.com/store/apps/details?id=org.ligi.passandroid)
-[![Android app on FDroid](http://ligi.de/img/fdroid_badge.png)](https://f-droid.org/repository/browse/?fdid=org.ligi.passandroid)
+[![on Google Play](http://ligi.de/img/play_badge.png)](https://play.google.com/store/apps/details?id=org.ligi.passandroid)
+[![on FDroid](http://ligi.de/img/fdroid_badge.png)](https://f-droid.org/repository/browse/?fdid=org.ligi.passandroid)
+[![on Amazon](http://ligi.de/img/amazon_badge.png)](https://www.amazon.com/ligi-Passandroid/dp/B01LX9DMSQ)
 
 PassAndroid
 ===========
