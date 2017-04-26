@@ -20,23 +20,19 @@ import java.util.*
 
 class TestApp : App() {
 
-
-    override fun createKodein(): Kodein.Module {
-
-        return Kodein.Module {
-            bind<PassStore>() with singleton {
-                FixedPassListPassStore(emptyList())
-            }
-            bind<Settings>() with singleton {
-                mock(Settings::class.java).apply {
-                    `when`(getSortOrder()).thenReturn(PassSortOrder.DATE_ASC)
-                    `when`(getPassesDir()).thenReturn(File(""))
-                    `when`(doTraceDroidEmailSend()).thenReturn(false)
-                }
-            }
-            bind<Tracker>(overrides = true) with singleton { mock(Tracker::class.java) }
-            bind<EventBus>() with singleton { mock(EventBus::class.java) }
+    override fun createKodein() = Kodein.Module {
+        bind<PassStore>() with singleton {
+            FixedPassListPassStore(emptyList())
         }
+        bind<Settings>() with singleton {
+            mock(Settings::class.java).apply {
+                `when`(getSortOrder()).thenReturn(PassSortOrder.DATE_ASC)
+                `when`(getPassesDir()).thenReturn(File(""))
+                `when`(doTraceDroidEmailSend()).thenReturn(false)
+            }
+        }
+        bind<Tracker>(overrides = true) with singleton { mock(Tracker::class.java) }
+        bind<EventBus>() with singleton { mock(EventBus::class.java) }
     }
 
     override fun installLeakCanary() = Unit
