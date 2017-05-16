@@ -175,8 +175,6 @@ dependencies {
     testCompile "org.mockito:mockito-core:${mockito_version}"
     testCompile 'org.threeten:threetenbp:1.3.3'
 
-    // cannot use this new version: https://github.com/zxing/zxing/issues/165
-    // WARNING: might work on some devices or the emulator - but fails on others
     compile 'com.google.zxing:core:3.3.0'
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
@@ -189,7 +187,6 @@ dependencies {
 spoon {
     debug = true
     grantAllPermissions = true
-    // TODO - http://stackoverflow.com/questions/43308368/app-had-used-a-different-appcomponent-during-pre-verification
 }
 
 play {
