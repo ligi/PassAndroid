@@ -2,10 +2,7 @@ package org.ligi.passandroid
 
 import android.app.Application
 import android.support.v7.app.AppCompatDelegate
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
+import com.github.salomonbrys.kodein.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.moshi.Moshi
@@ -61,8 +58,8 @@ open class App : Application() {
 
     companion object {
         lateinit var kodein: Kodein
-        val tracker by lazy { kodein.typed.instance(Tracker::class.java) }
-        val passStore by lazy { kodein.typed.instance(PassStore::class.java) }
-        val settings by lazy { kodein.typed.instance(Settings::class.java) }
+        val tracker by lazy { kodein.Instance(TT(Tracker::class.java)) }
+        val passStore by lazy { kodein.Instance(TT(PassStore::class.java)) }
+        val settings by lazy { kodein.Instance(TT(Settings::class.java)) }
     }
 }

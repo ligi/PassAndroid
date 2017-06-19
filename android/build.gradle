@@ -117,7 +117,7 @@ dependencies {
     compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
 
-    compile 'com.github.salomonbrys.kodein:kodein:3.3.0'
+    compile 'com.github.salomonbrys.kodein:kodein:4.0.0'
 
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
