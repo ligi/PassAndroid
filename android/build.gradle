@@ -122,9 +122,9 @@ dependencies {
 
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
-    androidTestCompile 'com.github.ligi:trulesk:0.19'
+    androidTestCompile 'com.github.ligi:trulesk:0.20'
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.0'
 
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 
