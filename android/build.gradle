@@ -162,7 +162,7 @@ dependencies {
     forFDroidCompile 'com.github.ligi.snackengage:snackengage-playrate:0.13'
     forAmazonCompile 'com.github.ligi.snackengage:snackengage-amazonrate:0.13'
 
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.google.code.findbugs:jsr305:3.0.2'
     compile 'com.squareup.moshi:moshi:1.4.0'

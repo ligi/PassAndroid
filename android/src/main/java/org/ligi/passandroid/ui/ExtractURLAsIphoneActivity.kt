@@ -38,16 +38,19 @@ class ExtractURLAsIphoneActivity : PassAndroidActivity() {
                 requestBuilder.header("User-Agent", IPHONE_USER_AGENT)
 
                 val body = client.newCall(requestBuilder.build()).execute().body()
-                val bodyString = body.string()
-                body.close()
 
-                val url = extractURL(bodyString) ?: return null
+                if (body != null) {
+                    val bodyString = body.string()
+                    body.close()
 
-                if (!url.startsWith("http")) {
-                    return intent.data.scheme + "://" + intent.data.host + "/" + url
+                    val url = extractURL(bodyString) ?: return null
+
+                    if (!url.startsWith("http")) {
+                        return intent.data.scheme + "://" + intent.data.host + "/" + url
+                    }
+
+                    return url
                 }
-
-                return url
             } catch (e: IOException) {
                 tracker.trackException("ExtractURLAsIphoneActivity", e, false)
             } catch (e: URISyntaxException) {

@@ -184,12 +184,15 @@ open class PassViewActivityBase : PassAndroidActivity() {
             val response: Response
             try {
                 response = client.newCall(request).execute()
-                val inputStreamWithSource = InputStreamWithSource(url, response.body().byteStream())
-                val spec = InputStreamUnzipControllerSpec(inputStreamWithSource, this@PassViewActivityBase, passStore,
-                        MyUnzipSuccessCallback(dlg),
-                        MyUnzipFailCallback(dlg))
-                spec.overwrite = true
-                UnzipPassController.processInputStream(spec)
+                val body = response.body()
+                if (body != null) {
+                    val inputStreamWithSource = InputStreamWithSource(url, body.byteStream())
+                    val spec = InputStreamUnzipControllerSpec(inputStreamWithSource, this@PassViewActivityBase, passStore,
+                            MyUnzipSuccessCallback(dlg),
+                            MyUnzipFailCallback(dlg))
+                    spec.overwrite = true
+                    UnzipPassController.processInputStream(spec)
+                }
             } catch (e: IOException) {
                 e.printStackTrace()
             }

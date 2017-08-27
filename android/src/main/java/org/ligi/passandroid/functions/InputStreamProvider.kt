@@ -63,7 +63,10 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
 
         val response = client.newCall(request).execute()
 
-        return InputStreamWithSource(uri.toString(), response.body().byteStream())
+        val body = response.body()
+        if (body != null) {
+            return InputStreamWithSource(uri.toString(), body.byteStream())
+        }
     } catch (e: MalformedURLException) {
         App.tracker.trackException("MalformedURLException in ImportAsyncTask", e, false)
     } catch (e: IOException) {
