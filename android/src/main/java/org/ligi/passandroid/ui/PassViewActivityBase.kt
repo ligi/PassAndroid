@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ComponentName
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -154,10 +156,14 @@ open class PassViewActivityBase : PassAndroidActivity() {
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.description)
 
-        currentPass.getBitmap(passStore, BITMAP_ICON).let {
-            //   intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(it, 128, 128, true))
-        }
+        val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
 
+        val bitmapToUse = if (passBitmap != null) {
+            Bitmap.createScaledBitmap(passBitmap, 128, 128, true)
+        } else {
+            BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
+        }
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, bitmapToUse)
         sendBroadcast(intent)
     }
 
