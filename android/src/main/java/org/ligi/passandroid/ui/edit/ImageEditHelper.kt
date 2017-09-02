@@ -54,15 +54,13 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
         val REQ_CODE_PICK_FOOTER = 5 + REQ_CODE_OFFSET
 
         @Pass.PassBitmap
-        fun getImageStringByRequestCode(requestCode: Int): String? {
-            return when (requestCode) {
-                REQ_CODE_PICK_LOGO -> PassBitmapDefinitions.BITMAP_LOGO
-                REQ_CODE_PICK_ICON -> PassBitmapDefinitions.BITMAP_ICON
-                REQ_CODE_PICK_THUMBNAIL -> PassBitmapDefinitions.BITMAP_THUMBNAIL
-                REQ_CODE_PICK_STRIP -> PassBitmapDefinitions.BITMAP_STRIP
-                REQ_CODE_PICK_FOOTER -> PassBitmapDefinitions.BITMAP_FOOTER
-                else -> null
-            }
+        fun getImageStringByRequestCode(requestCode: Int): String? = when (requestCode) {
+            REQ_CODE_PICK_LOGO -> PassBitmapDefinitions.BITMAP_LOGO
+            REQ_CODE_PICK_ICON -> PassBitmapDefinitions.BITMAP_ICON
+            REQ_CODE_PICK_THUMBNAIL -> PassBitmapDefinitions.BITMAP_THUMBNAIL
+            REQ_CODE_PICK_STRIP -> PassBitmapDefinitions.BITMAP_STRIP
+            REQ_CODE_PICK_FOOTER -> PassBitmapDefinitions.BITMAP_FOOTER
+            else -> null
         }
     }
 

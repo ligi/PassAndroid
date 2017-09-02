@@ -16,7 +16,7 @@ import org.ligi.passandroid.model.pass.PassImpl
 
 class FieldsEditFragment : Fragment() {
 
-    fun getPass(): PassImpl = App.passStore.currentPass as PassImpl
+    private fun getPass(): PassImpl = App.passStore.currentPass as PassImpl
 
     private var isEditingHiddenFields: Boolean = false
 
@@ -33,11 +33,9 @@ class FieldsEditFragment : Fragment() {
         } else {
             inflate.add_field.setText(R.string.add_front_field)
         }
-        for (passField in getPass().fields) {
-            if (passField.hide == isEditingHiddenFields) {
-                addField(passField, inflate.fields_container)
-            }
-        }
+        getPass().fields
+                .filter { it.hide == isEditingHiddenFields }
+                .forEach { addField(it, inflate.fields_container) }
 
         inflate.add_field.setOnClickListener {
             val passField = PassField(null, null, null, isEditingHiddenFields)
@@ -47,13 +45,13 @@ class FieldsEditFragment : Fragment() {
         return inflate
     }
 
-    fun addField(passField: PassField, viewGroup: ViewGroup) {
+    private fun addField(passField: PassField, viewGroup: ViewGroup) {
         val child = inflater.inflate(R.layout.edit_field, viewGroup, false) as ViewGroup
         FieldView(child).apply(passField, getPass().fields)
         viewGroup.addView(child)
     }
 
-    internal inner class FieldView(val container: ViewGroup) {
+    internal inner class FieldView(private val container: ViewGroup) {
 
         fun apply(passField: PassField, fields: MutableList<PassField>) {
             container.label_field_edit.setText(passField.label)
