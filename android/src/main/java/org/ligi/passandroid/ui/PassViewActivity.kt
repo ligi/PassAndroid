@@ -133,15 +133,14 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         menu.findItem(R.id.menu_map).isVisible = !currentPass.locations.isEmpty()
         menu.findItem(R.id.menu_update).isVisible = PassViewActivityBase.mightPassBeAbleToUpdate(currentPass)
+        menu.findItem(R.id.install_shortcut).isVisible = (23..25).contains(Build.VERSION.SDK_INT)
         return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.map_item, menu)
         menuInflater.inflate(R.menu.update, menu)
-        if (Build.VERSION.SDK_INT >= 23) {
-            menuInflater.inflate(R.menu.shortcut, menu)
-        }
+        menuInflater.inflate(R.menu.shortcut, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
