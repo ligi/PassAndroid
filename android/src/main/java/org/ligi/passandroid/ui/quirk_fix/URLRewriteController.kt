@@ -25,7 +25,7 @@ class URLRewriteController(private val tracker: Tracker) {
             }
 
             when (uri.host) {
-                "m.aircanada.ca", "services.aircanada.com" -> return getAirCanada(uri)
+                "m.aircanada.ca", "services.aircanada.com", "mci.aircanada.com" -> return getAirCanada(uri)
                 "www.cathaypacific.com" -> return getCathay(uri)
                 "mbp.swiss.com", "prod.wap.ncrwebhost.mobi" -> return getNrcWebHost(uri)
             }
