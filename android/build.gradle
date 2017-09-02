@@ -124,7 +124,7 @@ dependencies {
 
     androidTestCompile 'com.github.ligi:trulesk:0.20'
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.1'
 
     androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 
