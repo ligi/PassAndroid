@@ -15,13 +15,19 @@ class TouchImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val webView = TouchImageView(this)
+        val touchImageView = TouchImageView(this)
 
-        setContentView(webView)
+        setContentView(touchImageView)
 
-        webView.setImageBitmap(passStore.currentPass!!.getBitmap(passStore, intent.getStringExtra("IMAGE")))
+        val bitmap = passStore.currentPass?.getBitmap(passStore, intent.getStringExtra("IMAGE"))
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if (bitmap == null) {
+            finish()
+        } else {
+            touchImageView.setImageBitmap(bitmap)
+
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
