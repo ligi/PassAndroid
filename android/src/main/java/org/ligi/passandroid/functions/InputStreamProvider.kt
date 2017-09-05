@@ -16,23 +16,19 @@ val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; e
 
 fun fromURI(context: Context, uri: Uri): InputStreamWithSource? {
     App.tracker.trackEvent("protocol", "to_inputstream", uri.scheme, null)
-    when (uri.scheme) {
-        "content" ->
-
-            return fromContent(context, uri)
+    return when (uri.scheme) {
+        "content" -> fromContent(context, uri)
 
         "http", "https" ->
             // TODO check if SPDY should be here
             return fromOKHttp(uri)
 
-        "file" -> return getDefaultInputStreamForUri(uri)
+        "file" -> getDefaultInputStreamForUri(uri)
         else -> {
             App.tracker.trackException("unknown scheme in ImportAsyncTask" + uri.scheme, false)
-            return getDefaultInputStreamForUri(uri)
+            getDefaultInputStreamForUri(uri)
         }
-
     }
-
 }
 
 private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
@@ -76,23 +72,16 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
     return null
 }
 
-private fun fromContent(ctx: Context, uri: Uri): InputStreamWithSource? {
-    try {
-        return InputStreamWithSource(uri.toString(), ctx.contentResolver.openInputStream(uri)!!)
-    } catch (e: FileNotFoundException) {
-        App.tracker.trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false)
-        return null
-    }
-
+private fun fromContent(ctx: Context, uri: Uri) = try {
+    InputStreamWithSource(uri.toString(), ctx.contentResolver.openInputStream(uri)!!)
+} catch (e: FileNotFoundException) {
+    App.tracker.trackException("FileNotFoundException in passImportActivity/ImportAsyncTask", e, false)
+    null
 }
 
-
-private fun getDefaultInputStreamForUri(uri: Uri): InputStreamWithSource? {
-    try {
-        return InputStreamWithSource(uri.toString(), BufferedInputStream(URL(uri.toString()).openStream(), 4096))
-    } catch (e: IOException) {
-        App.tracker.trackException("IOException in passImportActivity/ImportAsyncTask", e, false)
-        return null
-    }
-
+private fun getDefaultInputStreamForUri(uri: Uri) = try {
+    InputStreamWithSource(uri.toString(), BufferedInputStream(URL(uri.toString()).openStream(), 4096))
+} catch (e: IOException) {
+    App.tracker.trackException("IOException in passImportActivity/ImportAsyncTask", e, false)
+    null
 }
