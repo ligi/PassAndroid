@@ -42,7 +42,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
 
-        foundList = ArrayList<Pass>()
+        foundList = ArrayList()
 
         notifyManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
