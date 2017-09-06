@@ -11,8 +11,6 @@ import org.hamcrest.TypeSafeMatcher
 
 fun expand(): ViewAction? = ExpandFabAction()
 
-fun isCollapsed(): Matcher<in View>? = CollapsedCheck() as Matcher<in View>
-
 class ExpandFabAction : ViewAction {
 
     override fun getConstraints(): Matcher<View> = isAssignableFrom(FloatingActionsMenu::class.java)
