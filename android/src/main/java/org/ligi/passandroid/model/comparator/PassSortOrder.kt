@@ -4,8 +4,8 @@ import org.ligi.passandroid.model.pass.Pass
 import java.util.*
 
 enum class PassSortOrder constructor(val int: Int) {
-    DATE_DESC(-1),
-    DATE_ASC(0),
+    DATE_DESC(0),
+    DATE_ASC(-1),
     TYPE(1),
     DATE_DIFF(2);
 
