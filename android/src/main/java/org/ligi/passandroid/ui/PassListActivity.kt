@@ -17,7 +17,6 @@ import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
@@ -207,8 +206,6 @@ class PassListActivity : PassAndroidActivity() {
                 onAddOpenFileClick()
             }
             fab_action_open_file.visibility = VISIBLE
-        } else {
-            fab_action_open_file.visibility = GONE
         }
     }
 
