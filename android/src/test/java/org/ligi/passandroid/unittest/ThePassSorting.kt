@@ -40,14 +40,14 @@ class ThePassSorting {
     fun testDESC() {
         Collections.sort(passList, PassSortOrder.DATE_DESC.toComparator())
 
-        assertThat(passList).containsExactly(pass4, pass1, pass3, pass2, pass5)
+        assertThat(passList).containsExactly(pass4, pass5, pass2, pass3, pass1)
     }
 
     @Test
     fun testASC() {
         Collections.sort(passList, PassSortOrder.DATE_ASC.toComparator())
 
-        assertThat(passList).containsExactly(pass5, pass2, pass3, pass1, pass4)
+        assertThat(passList).containsExactly(pass1, pass3, pass2, pass5, pass4)
     }
 
     @Test
@@ -61,7 +61,7 @@ class ThePassSorting {
     fun testTYPE() {
         Collections.sort(passList, PassSortOrder.TYPE.toComparator())
 
-        assertThat(passList).containsExactly(pass3, pass1, pass4, pass5, pass2)
+        assertThat(passList).containsExactly(pass1, pass3, pass4, pass2, pass5)
     }
 
 }
