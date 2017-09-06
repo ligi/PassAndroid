@@ -181,11 +181,10 @@ class PassListActivity : PassAndroidActivity() {
             fam.collapse()
             startActivityFromClass(PassEditActivity::class.java)
 
-            val newTitle: String
-            if (tab_layout.selectedTabPosition < 0) {
-                newTitle = getString(R.string.topic_new)
+            val newTitle = if (tab_layout.selectedTabPosition < 0) {
+                getString(R.string.topic_new)
             } else {
-                newTitle = adapter.getPageTitle(tab_layout.selectedTabPosition)
+                adapter.getPageTitle(tab_layout.selectedTabPosition)
             }
 
             passStore.classifier.moveToTopic(pass, newTitle)
@@ -291,7 +290,7 @@ class PassListActivity : PassAndroidActivity() {
             return false
         }
 
-        for (i in 0..adapter.count - 1) {
+        for (i in 0 until adapter.count) {
             val tabAt = tab_layout.getTabAt(i)
             if (tabAt == null || adapter.getPageTitle(i) != tabAt.text) {
                 return false
