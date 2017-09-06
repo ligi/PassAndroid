@@ -118,23 +118,27 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
             } else if (file.name.endsWith(".pkpass") || file.name.endsWith(".espass")) {
                 Log.i("found" + file.absolutePath)
 
-                val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath))
-                val onSuccessCallback = SearchSuccessCallback(baseContext,
-                        passStore,
-                        foundList!!,
-                        findNotificationBuilder!!,
-                        file,
-                        notifyManager!!)
-                val spec = InputStreamUnzipControllerSpec(ins!!,
-                        baseContext,
-                        passStore,
-                        onSuccessCallback,
-                        object : UnzipPassController.FailCallback {
-                            override fun fail(reason: String) {
-                                Log.i("fail", reason)
-                            }
-                        })
-                UnzipPassController.processInputStream(spec)
+                try {
+                    val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath))
+                    val onSuccessCallback = SearchSuccessCallback(baseContext,
+                            passStore,
+                            foundList!!,
+                            findNotificationBuilder!!,
+                            file,
+                            notifyManager!!)
+                    val spec = InputStreamUnzipControllerSpec(ins!!,
+                            baseContext,
+                            passStore,
+                            onSuccessCallback,
+                            object : UnzipPassController.FailCallback {
+                                override fun fail(reason: String) {
+                                    Log.i("fail", reason)
+                                }
+                            })
+                    UnzipPassController.processInputStream(spec)
+                } catch (e: Exception) {
+                    tracker.trackException("Error in SearchPassesIntentService", e, false)
+                }
             }
         }
     }

@@ -205,5 +205,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="launcher_shortcut">Launcher shortcut</string>
     <string name="open_file">Open File</string>
 
+    <string name="error_no_permission_msg">Need permission to import pass</string>
+    <string name="error_no_permission_title">Permission Error</string>
+
 
 </resources>
