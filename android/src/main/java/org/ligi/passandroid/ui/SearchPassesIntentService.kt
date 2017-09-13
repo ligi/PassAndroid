@@ -115,7 +115,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
             Log.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
                 search_in(file, true)
-            } else if (file.name.endsWith(".pkpass") || file.name.endsWith(".espass")) {
+            } else if (file.name.toLowerCase().endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
                 Log.i("found" + file.absolutePath)
 
                 try {
