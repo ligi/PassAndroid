@@ -19,7 +19,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
 
         val pass = passStore.getPassbookForId(uuid)
 
-        val isDuplicate = foundList.any { it.id.equals(uuid) }
+        val isDuplicate = foundList.any { it.id == uuid }
         if (pass != null && !isDuplicate) {
             foundList.add(pass)
             val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
@@ -62,7 +62,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
     private fun getDateOfPassForComparison(pass: Pass): ZonedDateTime? {
         if (pass.calendarTimespan != null && pass.calendarTimespan!!.from != null) {
             return pass.calendarTimespan!!.from
-        } else if (pass.validTimespans != null && pass.validTimespans!!.size > 0 && pass.validTimespans!![0].to != null) {
+        } else if (pass.validTimespans != null && pass.validTimespans!!.isNotEmpty() && pass.validTimespans!![0].to != null) {
             return pass.validTimespans!![0].to
         }
         return null
