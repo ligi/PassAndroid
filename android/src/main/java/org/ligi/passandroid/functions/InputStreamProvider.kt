@@ -38,6 +38,7 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
     val iPhoneFakeMap = mapOf(
             "air_canada" to "//m.aircanada.ca/ebp/",
             "air_canada2" to "//services.aircanada.com/ebp/",
+            "air_canada3" to "//mci.aircanada.com/mci/bp/",
             "icelandair" to "//checkin.si.amadeus.net",
             "mbk" to "//mbk.thy.com/",
             "heathrow" to "//passbook.heathrow.com/",

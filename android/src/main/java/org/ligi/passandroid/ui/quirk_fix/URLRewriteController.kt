@@ -25,7 +25,8 @@ class URLRewriteController(private val tracker: Tracker) {
             }
 
             when (uri.host) {
-                "m.aircanada.ca", "services.aircanada.com", "mci.aircanada.com" -> return getAirCanada(uri)
+                "m.aircanada.ca", "services.aircanada.com" -> return getAirCanada(uri)
+                "mci.aircanada.com" -> return getAirCanada2(uri)
                 "www.cathaypacific.com" -> return getCathay(uri)
                 "mbp.swiss.com", "prod.wap.ncrwebhost.mobi" -> return getNrcWebHost(uri)
             }
@@ -35,6 +36,7 @@ class URLRewriteController(private val tracker: Tracker) {
     }
 
     private fun getAirCanada(uri: Uri) = uri.toString() + "?appDetection=false"
+    private fun getAirCanada2(uri: Uri) = uri.toString() + ".pkpass"
 
     private fun getVirginAustraliaURL(uri: Uri): String? {
 
