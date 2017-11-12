@@ -154,7 +154,7 @@ dependencies {
 
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
-    compile 'com.github.ligi:KAXT:0.18'
+    compile 'com.github.ligi:KAXT:0.19'
     compile 'com.github.ligi:KAXTUI:0.4'
     compile 'com.github.ligi:loadtoast:1.10.11'
     compile 'com.github.ligi:tracedroid:1.4'
