@@ -146,6 +146,14 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
+                <data android:mimeType="application/pkpass"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
                 <data android:mimeType="application/vndapplepkpass"/>
             </intent-filter>
             <intent-filter>
@@ -1250,8 +1258,7 @@
                         android:host="*"
                         android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass"
                         android:scheme="https"/>
-                <data
-                        android:host="*"
+                <data                        android:host="*"
                         android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.pkpass"
                         android:scheme="https"/>
                 <data
