@@ -2,13 +2,13 @@
 <resources>
     <string name="app_name">"PassAndroid"</string>
     <string name="logo">"logo"</string>
-    <string name="menu_map">"show on map"</string>
-    <string name="menu_delete">"delete"</string>
-    <string name="menu_share">"share"</string>
-    <string name="barcode">"barcode"</string>
-    <string name="help_label">"Help"</string>
+    <string name="menu_map">"mostrar en mapa"</string>
+    <string name="menu_delete">"eliminar"</string>
+    <string name="menu_share">"compartir"</string>
+    <string name="barcode">"código de barras"</string>
+    <string name="help_label">"Axuda"</string>
 <string name="help_content"><![CDATA[
-<h1>What is it?</h1>
+<h1>Qué é esto?</h1>
 This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight, a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
 Basically it is a replacement for a piece of paper or plastic you would normally have to carry with you - so lets save some trees and <b>reduce waste!</b>
 <h1>Example passes</h1>
@@ -45,104 +45,104 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     ]]></string>
-    <string name="drawer_open">"open"</string>
-    <string name="drawer_close">"close"</string>
-    <string name="pass_problem">"Sorry, but there was a problem processing this Passbook. If you want you can send me this passbook so I can check what the problem is and improve the software."</string>
-    <string name="problem">"Problem"</string>
-    <string name="send">"Send"</string>
-    <string name="delete">"Delete!"</string>
-    <string name="choose_location">"Choose Location"</string>
-    <string name="boarding_pass">"Boarding Pass"</string>
-    <string name="category_event">"Event"</string>
-    <string name="category_coupon">"Coupon"</string>
-    <string name="category_storecard">"Store Card"</string>
-    <string name="category_generic">"generic"</string>
-    <string name="category_none">"no Category"</string>
-    <string name="nav_more">"MORE"</string>
-    <string name="nav_sort">"SORT"</string>
-    <string name="nav_sort_category">"Category"</string>
-    <string name="nav_sort_date">"Date"</string>
-    <string name="nav_categories">"CATEGORIES"</string>
-    <string name="nav_share">"Share"</string>
-    <string name="pass_directions">"Navigate"</string>
-    <string name="pass_to_calendar">"to Calendar"</string>
-    <string name="invalid_passbook_title">Invalid Passbook</string>
-    <string name="preparing_pass">Preparing Pass</string>
-    <string name="please_wait">please wait - shouldn\'t be long</string>
-    <string name="passbook_is_shared_subject">a Passbook is shared with you</string>
-    <string name="passbook_share_chooser_title">How to send Pass?</string>
-    <string name="dialog_delete_confirm_text">Do you really want to delete this passbook?</string>
-    <string name="dialog_delete_title">Sure?</string>
-    <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
-    <string name="more">MORE</string>
-    <string name="less">LESS</string>
-    <string name="scanning_for_passes">Scanning for Passes</string>
-    <string name="fab_choice_scan_pkpass_files">Scan for pkpass files</string>
-    <string name="fab_choice_add_demo_pass">Add Demo-Pass</string>
-    <string name="fab_choice_create_pass">Create Pass</string>
-    <string name="empty_text_view"><big><b>No pass yet</b></big>
-    \n\n\n You can search your phone for passes
-    \n\n or create your own
-    \n\n or try a demo pass
-    \n\n just press + down below
+    <string name="drawer_open">"abrir"</string>
+    <string name="drawer_close">"pechar"</string>
+    <string name="pass_problem">"Desculpe, pero houbo un fallo con este Passbook. Si quere pode enviarme este passbook así poderei comprobar o problema e mellorar o software."</string>
+    <string name="problem">"Problema"</string>
+    <string name="send">"Enviar"</string>
+    <string name="delete">"Eliminar!"</string>
+    <string name="choose_location">"Escoller localización"</string>
+    <string name="boarding_pass">"Billete de embarque"</string>
+    <string name="category_event">"Evento"</string>
+    <string name="category_coupon">"Cupón"</string>
+    <string name="category_storecard">"Gardar tarxeta"</string>
+    <string name="category_generic">"xenérica"</string>
+    <string name="category_none">"sen Categoría"</string>
+    <string name="nav_more">"MÁIS"</string>
+    <string name="nav_sort">"ORDE"</string>
+    <string name="nav_sort_category">"Categoría"</string>
+    <string name="nav_sort_date">"Data"</string>
+    <string name="nav_categories">"CATEGORÍAS"</string>
+    <string name="nav_share">"Compartir"</string>
+    <string name="pass_directions">"Navegar"</string>
+    <string name="pass_to_calendar">"ao Calendario"</string>
+    <string name="invalid_passbook_title">Passbook non válido</string>
+    <string name="preparing_pass">Preparando Pass</string>
+    <string name="please_wait">agarde por favor - non demorará</string>
+    <string name="passbook_is_shared_subject">comparteuse un Passbook con vostede</string>
+    <string name="passbook_share_chooser_title">Cómo enviar un Pass?</string>
+    <string name="dialog_delete_confirm_text">Desexa eliminar este Passbook?</string>
+    <string name="dialog_delete_title">Seguro?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">eliminar tamén a fonte?</string>
+    <string name="more">MÁIS</string>
+    <string name="less">MENOS</string>
+    <string name="scanning_for_passes">Buscando Passes</string>
+    <string name="fab_choice_scan_pkpass_files">Buscar ficheiros pkpass</string>
+    <string name="fab_choice_add_demo_pass">Engadir Demo-Pass</string>
+    <string name="fab_choice_create_pass">Crear Pass</string>
+    <string name="empty_text_view"><big><b>Aínda sen pass</b></big>
+    \n\n\n Pode buscar passes no seu teléfono
+    \n\n ou crear os seus propios
+    \n\n ou probar un pass de mostra
+    \n\n só prema + abaixo
     </string>
-    <string name="downloading_new_pass_version">downloading new pass version</string>
-    <string name="unzip_pass_dialog_title">Opening Passbook</string>
-    <string name="unzip_pass_dialog_message">Please wait...</string>
-    <string name="action_update">update</string>
-    <string name="no_calendar_app_found">No Calendar-App found</string>
-    <string name="pass_updated">Pass Updated</string>
-    <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - PassAndroid needs to know where this</string>
-    <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
-    <string name="topic_trash">trash</string>
-    <string name="topic_new">new</string>
-    <string name="topic_archive">archive</string>
-    <string name="move_to_new_topic">Move to new Topic</string>
-    <string name="categories_nav">%d Categories</string>
+    <string name="downloading_new_pass_version">descargando nova versión do pass</string>
+    <string name="unzip_pass_dialog_title">Abrindo Passbook</string>
+    <string name="unzip_pass_dialog_message">Por favor agarde...</string>
+    <string name="action_update">actualizar</string>
+    <string name="no_calendar_app_found">Non se atopou app de Calendario</string>
+    <string name="pass_updated">Pass actualizado</string>
+    <string name="expiration_date_to_calendar_warning_message">Vai a engadir a data de caducidade ao calendario - Si cree que hai unha mellor data en este pass - por favor envíema - PassAndroid precisa saber esto</string>
+    <string name="expiration_date_to_calendar_warning_title">Engadir data de caducidade</string>
+    <string name="topic_trash">lixo</string>
+    <string name="topic_new">novo</string>
+    <string name="topic_archive">arquivo</string>
+    <string name="move_to_new_topic">Mover a novo Asunto</string>
+    <string name="categories_nav">%d Categorías</string>
     <string name="passes_nav">%d Passes</string>
-    <string name="found_pass">found: %s</string>
-    <string name="found__pass">And %d more</string>
-    <string name="scan_finished_dialog_title">Scan finished.</string>
-    <string name="scan_finished_dialog_text">found %d passes</string>
-    <string name="scan_progressdialog_title">Searching ...</string>
-    <string name="scan_progressdialog_message">Please wait.</string>
-    <string name="scan_dialog_send_background_button">background</string>
-    <string name="emtytrash_label">empty trash</string>
-    <string name="barcode_edit_hint_alternative_message">alternative Message</string>
-    <string name="barcode_edit_random">random</string>
-    <string name="barcode_edit_scan">scan</string>
-    <string name="barcode_edit_message">Message</string>
+    <string name="found_pass">atopou: %s</string>
+    <string name="found__pass">e %d máis</string>
+    <string name="scan_finished_dialog_title">Busca finalizada.</string>
+    <string name="scan_finished_dialog_text">atopou %d passes</string>
+    <string name="scan_progressdialog_title">Buscando ...</string>
+    <string name="scan_progressdialog_message">Por favor agarde.</string>
+    <string name="scan_dialog_send_background_button">fondo</string>
+    <string name="emtytrash_label">lixo baldeiro</string>
+    <string name="barcode_edit_hint_alternative_message">Mensaxe alternativa</string>
+    <string name="barcode_edit_random">ao chou</string>
+    <string name="barcode_edit_scan">busca</string>
+    <string name="barcode_edit_message">Mensaxe</string>
     <string name="barcode_edit_aztec">AZTEC</string>
     <string name="barcode_edit_pdf417">PDF417</string>
     <string name="barcode_edit_qr">QR</string>
-    <string name="barcode_edit_button_add_barcode">Add Barcode</string>
-    <string name="categories_voucher">voucher</string>
-    <string name="edit_time">edit time</string>
-    <string name="edit_location">edit location</string>
-    <string name="add_front_field">Add front field</string>
-    <string name="add_back_fields">Add back field</string>
-    <string name="change_color_dialog_title">Select color</string>
-    <string name="select_category_dialog_title">Select category</string>
+    <string name="barcode_edit_button_add_barcode">Engadir código de barras</string>
+    <string name="categories_voucher">vale</string>
+    <string name="edit_time">editar hora</string>
+    <string name="edit_location">editar localización</string>
+    <string name="add_front_field">Engadir campo a portada</string>
+    <string name="add_back_fields">Engadir campo a folla de atrás</string>
+    <string name="change_color_dialog_title">Escoller cor</string>
+    <string name="select_category_dialog_title">Escoller categoría</string>
     <string name="barcode_edit_code128">code 128</string>
     <string name="barcode_edit_code39">code 39</string>
-    <string name="add_footer_image">add footer image</string>
-    <string name="add_logo_image">add logo image</string>
-    <string name="add_header_image">add header image</string>
-    <string name="add_barcode">add Barcode</string>
-    <string name="edit_barcode_dialog_title">Edit BarCode</string>
-    <string name="empty_trash_dialog_message">"Really empty trash? You cannot restore "</string>
-    <string name="empty_trash_dialog_title">warning</string>
-    <string name="new_topic_input_hint">Title for new topic</string>
-    <string name="new_topic_suggestions">Suggestions:</string>
-    <string name="cannot_be_empty">cannot be empty</string>
-    <string name="please_use_the_swipe_feature">Please use the swipe feature</string>
-    <string name="type">Type</string>
-    <string name="undo">undo</string>
+    <string name="add_footer_image">engadir imaxe ao pe</string>
+    <string name="add_logo_image">engadir imaxe de logo</string>
+    <string name="add_header_image">engadir imaxe de cabeceira</string>
+    <string name="add_barcode">Engadir código de barras</string>
+    <string name="edit_barcode_dialog_title">Editar código de barras</string>
+    <string name="empty_trash_dialog_message">"Baleirar o lixo? Non poderá restaurar "</string>
+    <string name="empty_trash_dialog_title">aviso</string>
+    <string name="new_topic_input_hint">Título para o novo Tema</string>
+    <string name="new_topic_suggestions">Suxestións:</string>
+    <string name="cannot_be_empty">non pode estar baldeiro</string>
+    <string name="please_use_the_swipe_feature">Por favor utilice a característica Desplazar</string>
+    <string name="type">Escribir</string>
+    <string name="undo">desfacer</string>
 
-    <string name="sort_order_date_asc">Date Ascending</string>
-    <string name="sort_order_date_desc">Date Descending</string>
-    <string name="sort_order_date_type">Type</string>
-    <string name="sort_order_date_temporaldistance">Temporal distance</string>
+    <string name="sort_order_date_asc">Data ascendente</string>
+    <string name="sort_order_date_desc">Data descendente</string>
+    <string name="sort_order_date_type">Tipo</string>
+    <string name="sort_order_date_temporaldistance">Distancia temporal</string>
 
 
     <string-array name="category_edit_options">
@@ -151,47 +151,47 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
         <item>Select Icon</item>
     </string-array>
 
-    <string name="night_mode_night">Night</string>
-    <string name="night_mode_day">Day</string>
+    <string name="night_mode_night">Noite</string>
+    <string name="night_mode_day">Día</string>
     <string name="night_mode_auto">Auto</string>
 
-    <string name="preference_autolight_title">Automatic light</string>
-    <string name="preference_autolight_summary">Should I increase brightness when showing barcode?</string>
+    <string name="preference_autolight_title">Luz automática</string>
+    <string name="preference_autolight_summary">Debera incrementar o brillo cando mostra un código de barras?</string>
 
-    <string name="preference_condensed_title">Condensed mode</string>
-    <string name="preference_condensed_summary">Should I show more detail and less clutter?</string>
-
-
-    <string name="preference_sort_title">Sort order</string>
-    <string name="preference_sort_summary">How should I sort the passes?</string>
+    <string name="preference_condensed_title">Modo condensado</string>
+    <string name="preference_condensed_summary">Debería mostrar máis contido e menos espazo?</string>
 
 
-    <string name="preference_daynight_title">Day/Night theme</string>
-    <string name="preference_daynight_summary">Should I be dark or light?</string>
+    <string name="preference_sort_title">Establecer orde</string>
+    <string name="preference_sort_summary">Cómo ordenar os passes?</string>
 
-    <string name="image_import">Image Import</string>
-    <string name="pdf_import">PDF Import</string>
 
-    <string name="field_source">source</string>
-    <string name="field_note">note</string>
-    <string name="field_advice_label">advice</string>
-    <string name="field_advice_text">demand esPass or Passbook from your vendor</string>
+    <string name="preference_daynight_title">Decorado diurno/nocturno</string>
+    <string name="preference_daynight_summary">Claro ou oscuro?</string>
 
-    <string name="field_source_image">Image</string>
-    <string name="field_note_image">This is imported from a image - not a real pass</string>
+    <string name="image_import">Importar imaxe</string>
+    <string name="pdf_import">Importar PDF</string>
+
+    <string name="field_source">fonte</string>
+    <string name="field_note">nota</string>
+    <string name="field_advice_label">consello</string>
+    <string name="field_advice_text">solicite esPass ou Passbook do seu proveedor</string>
+
+    <string name="field_source_image">Imaxe</string>
+    <string name="field_note_image">Esto importouse da imaxe - non é un pass verdadeiro</string>
 
     <string name="field_source_pdf">PDF</string>
-    <string name="field_note_pdf">This is imported from a PDF - not a real pass</string>
-    <string name="nav_settings">Settings</string>
+    <string name="field_note_pdf">Esto importouse de un PDF - non é un pass verdadeiro</string>
+    <string name="nav_settings">Axustes</string>
     <string name="nav_github">Github</string>
-    <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
-    <string name="nav_community_on_google">Community on google+</string>
-    <string name="nav_improve_translation">Improve translation</string>
-    <string name="launcher_shortcut">Launcher shortcut</string>
-    <string name="open_file">Open File</string>
+    <string name="nav_betatest_opt_in_out">Entrar/Saír da versión beta</string>
+    <string name="nav_community_on_google">Comunidade google+</string>
+    <string name="nav_improve_translation">Mellore a tradución</string>
+    <string name="launcher_shortcut">Atallo do lanzador</string>
+    <string name="open_file">Abrir ficheiro</string>
 
-    <string name="error_no_permission_msg">Need permission to import pass</string>
-    <string name="error_no_permission_title">Permission Error</string>
+    <string name="error_no_permission_msg">Precisa permiso para importar un pass</string>
+    <string name="error_no_permission_title">Fallo de permiso</string>
 
 
 </resources>
