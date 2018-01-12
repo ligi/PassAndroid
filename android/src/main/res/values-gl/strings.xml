@@ -9,36 +9,36 @@
     <string name="help_label">"Axuda"</string>
 <string name="help_content"><![CDATA[
 <h1>Qué é esto?</h1>
-This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight, a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
-Basically it is a replacement for a piece of paper or plastic you would normally have to carry with you - so lets save some trees and <b>reduce waste!</b>
-<h1>Example passes</h1>
-Do you need some passes to play around and see things in action? <a href=\'http://espass.it/examples/\'>Here are some</a> for you!
-<h1>How does it work?</h1>
-There are so called pkpass files - you can open them with this app - e.g. when you receive them via email or get an Download-option. The most important content is the BarCode ( QR , AZTEC & PDF417which authorizes you most of the time - but it also has other interesting content like a description - often a time (hat you now can add to your calendar  - often also locations (o give you directions) - just try It out!
-The app is offline usable once you downloaded the pass!
-<h1>FAQ</h1>
-<h2>How can I transfer passbooks from iPhone to PassAndroid?</h2>
+Este aplicativo é un visor de passbooks - un passbook podería ser por exemplo <b>un billete de embarque</b> para o seu voo, un vale para un trago no seu destino, a entrada do cine, unha tarxeta de membresía - hai moitas posibilidades.
+Básicamente é o substituto de un anaco de papel ou plástico que levaría con vostede - así salvamos algunhas árbores e <b>reducimos o lixo!</b>
+<h1>Exemplos de passes</h1>
+Precisa algún pass para practicar e ver cómo son? <a href=\'http://espass.it/examples/\'>Aquí ten algúns</a> para vostede!
+<h1>Cómo funcionan?</h1>
+Hai o que se chaman ficheiros pkpass - pode abrilos con este app - ex. cando os recibe a través do email ou os descarga. O máis importante é o Código de Barras que contén (QR, AZTEC e PDF417) que será o que o identifica ou autoriza - pero tamén contén apartados como a descrición - normalmente unha data e hora (así pode engadilo ao Calendario) - tamén localización (ou darlle endereitas) - simplemente próbeos!!
+Unha vez descargado o pass pode utilizalo sen estar en liña!
+<h1>PMF</h1>
+<h2>Cómo paso os passbooks do iPhone a PassAndroid?</h2>
 <ol>
-<li>Open the passbook on the iPhone</li>
-<li>Click on the share icon in the bottom left corner.</li>
-<li>Send you a mail with the passbook which your Android device can receive.</li>
-<li>Open the new mail on your Android device and save the attachment.</li>
-<li>Let PassAndroid scan for passbooks.</li>
-<li>The new passbook is visible in PassAndroid.</li>
+<li>Abra o passbook no iPhone</li>
+<li>Pulse na icona de compartir abaixo a esquerda.</li>
+<li>Envíe un email co passbook para recibilo no dispositivo Android.</li>
+<li>Abra o email no dispositivo Android e garde o anexo.</li>
+<li>Permita a PassAndroid buscar passbooks.</li>
+<li>O novo passbook é visible en PassAndroid.</li>
 </ol>
-<H1>Credits</H1>
-Big thanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design & <a href="https://github.com/cketti">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> for pull-requests!
-<H1>Feedback</H1>
-Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
-<h1>History</h1>
-I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
-One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
- - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
- - I got a mail from a nice designer who did a nice redesign
-This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
-<H1>More</H1>
-This app ist best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
-<H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
+<H1>Créditos</H1>
+Moitas grazas a <a href="http://ltorrecilla.com/">Luis Torrecilla</a> polo Deseño & <a href="https://github.com/cketti">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> polos pull-requests!
+<H1>Reporte</H1>
+Reporte en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> ou pode deixar <a href=\'mailto:ligi@ligi.de\'>aquí un correo.</a> Si lle gusta puntúe en  <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Gustaríame saber tamén qué usos lle da a este app.
+<h1>Historial</h1>
+Batín nos ficheiros passbook cando me apuntei ao 29c3 - Gostei da idea - pero non había un aplicativo Android dispoñible. Vin que era doado de implementar ( só un contedor zip con json e imaxes ) - A primeira versión foi escrita moi rápido e para min xa funcionaba ( entrei ao 29C3 ) - No seguinte ano non traballei moito no app xa que non tiña moito uso que darlle pero había moita xente descargándoo ( case 100k agora ) e arranxeino para varios passes que me enviaron ( algúns passes tiñan json defectuoso ... ) 
+Un ano despois - xusto antes de 30C3 - voltei traballar un pouco no app - por dúas razóns:
+ - un amigo meu está moi metido no asunto este de BTLE e testemuños de localización  / contexto que podería ser interesante para Passbook - pero nada finalizado
+ - recibín un email dun amable deseñador que fixo un bo redeseño
+Esto todo levou a PassAndroid - unha nova versión ao completo - con un novo aspecto e novas funcións (ordenar e engadir ao calendario xunto coa caixa de navegación e o menú contextual da barra de accións
+<H1>Máis</H1>
+Este app iniciase mellor con <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> que é gratuíta e non precisa nin un só permiso!
+<H1>Legal</H1>Este aplicativo non está afiliado a Apple - Passbook podería ser unha marca rexistrada de Apple, mais utilizada como estándar así que non debería haber problema <br/>
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -97,7 +97,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="topic_trash">lixo</string>
     <string name="topic_new">novo</string>
     <string name="topic_archive">arquivo</string>
-    <string name="move_to_new_topic">Mover a novo Asunto</string>
+    <string name="move_to_new_topic">Mover a novo Tema</string>
     <string name="categories_nav">%d Categorías</string>
     <string name="passes_nav">%d Passes</string>
     <string name="found_pass">atopou: %s</string>
@@ -123,8 +123,8 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="add_back_fields">Engadir campo a folla de atrás</string>
     <string name="change_color_dialog_title">Escoller cor</string>
     <string name="select_category_dialog_title">Escoller categoría</string>
-    <string name="barcode_edit_code128">code 128</string>
-    <string name="barcode_edit_code39">code 39</string>
+    <string name="barcode_edit_code128">código 128</string>
+    <string name="barcode_edit_code39">código 39</string>
     <string name="add_footer_image">engadir imaxe ao pe</string>
     <string name="add_logo_image">engadir imaxe de logo</string>
     <string name="add_header_image">engadir imaxe de cabeceira</string>
@@ -148,7 +148,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string-array name="category_edit_options">
         <item>@string/select_category_dialog_title</item>
         <item>@string/change_color_dialog_title</item>
-        <item>Select Icon</item>
+        <item>Escolla icona</item>
     </string-array>
 
     <string name="night_mode_night">Noite</string>
