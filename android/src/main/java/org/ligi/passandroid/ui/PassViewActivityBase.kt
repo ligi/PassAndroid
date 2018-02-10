@@ -255,7 +255,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     companion object {
 
-        val EXTRA_KEY_UUID = "uuid"
+        const val EXTRA_KEY_UUID = "uuid"
 
         fun mightPassBeAbleToUpdate(pass: Pass?): Boolean {
             return pass != null && pass.webServiceURL != null && pass.passIdent != null && pass.serial != null
