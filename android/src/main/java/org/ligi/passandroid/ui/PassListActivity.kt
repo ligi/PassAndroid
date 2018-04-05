@@ -41,14 +41,11 @@ import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
 
+private const val OPEN_FILE_READ_REQUEST_CODE = 1000
+private const val VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19
+
 @RuntimePermissions
 class PassListActivity : PassAndroidActivity() {
-
-    companion object {
-        const val VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19
-    }
-
-    private val OPEN_FILE_READ_REQUEST_CODE = 1000
 
     private val drawerToggle by lazy { ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) }
 
