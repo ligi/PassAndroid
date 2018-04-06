@@ -6,6 +6,7 @@ import android.app.Instrumentation.ActivityResult
 import android.content.Intent.ACTION_SEND
 import android.content.Intent.ACTION_VIEW
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.DrawerActions.open
@@ -37,6 +38,15 @@ class TheNavigationDrawer {
     fun testThatNavigationDrawerOpens() {
         onView(withId(R.id.drawer_layout)).perform(open())
         onView(withId(R.id.navigationView)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testThatNavigationDrawerClosesOnBackPress() {
+        testThatNavigationDrawerOpens()
+
+        pressBack()
+
+        onView(withId(R.id.navigationView)).check(matches(not(isDisplayed())))
     }
 
     @Test

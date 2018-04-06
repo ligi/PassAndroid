@@ -11,6 +11,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
@@ -301,8 +302,11 @@ class PassListActivity : PassAndroidActivity() {
     }
 
     override fun onBackPressed() {
-        if (fam.isExpanded) fam.collapse()
-        else super.onBackPressed()
+        when {
+            drawer_layout.isDrawerOpen(GravityCompat.START) -> drawer_layout.closeDrawer(GravityCompat.START)
+            fam.isExpanded -> fam.collapse()
+            else -> super.onBackPressed()
+        }
     }
 
 }
