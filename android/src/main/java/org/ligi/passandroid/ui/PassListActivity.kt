@@ -273,7 +273,7 @@ class PassListActivity : PassAndroidActivity() {
 
         val empty = passStore.classifier.topicByIdMap.isEmpty()
         emptyView.visibility = if (empty) View.VISIBLE else View.GONE
-        tab_layout.visibility = if (empty) View.GONE else View.VISIBLE
+        tab_layout.visibility = if (passStore.classifier.getTopics().size < 2) View.GONE else View.VISIBLE
     }
 
     private fun setupWithViewPagerIfNeeded() {
