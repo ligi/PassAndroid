@@ -45,7 +45,6 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:lines="1"
                 android:text="@string/empty_text_view"/>
 
 
