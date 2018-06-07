@@ -3,13 +3,15 @@ package org.ligi.passandroid.functions
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
+import com.google.zxing.common.CharacterSetECI
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import org.ligi.tracedroid.logging.Log
 
 
-fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCodeFormat): BitmapDrawable? {
-    val bitmap = generateBarCodeBitmap(data, type) ?: return null
+fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCodeFormat, encoding: String?): BitmapDrawable? {
+    val bitmap = generateBarCodeBitmap(data, type, encoding) ?: return null
 
     return BitmapDrawable(resources, bitmap).apply {
         isFilterBitmap = false
@@ -17,14 +19,15 @@ fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCode
     }
 }
 
-fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
+fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat, encoding: String?): Bitmap? {
 
     if (data.isEmpty()) {
         return null
     }
 
     try {
-        val matrix = getBitMatrix(data, type)
+        val hints = if (null != CharacterSetECI.getCharacterSetECIByName(encoding)) mapOf(Pair(EncodeHintType.CHARACTER_SET, "UTF-8")) else null
+        val matrix = getBitMatrix(data, type, hints)
         val is1D = matrix.height == 1
 
         // generate an image from the byte matrix
@@ -58,6 +61,6 @@ fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
 
 }
 
-fun getBitMatrix(data: String, type: PassBarCodeFormat)
-        = MultiFormatWriter().encode(data, type.zxingBarCodeFormat(), 0, 0)!!
+fun getBitMatrix(data: String, type: PassBarCodeFormat, hints: Map<EncodeHintType, Any?>? = null)
+        = MultiFormatWriter().encode(data, type.zxingBarCodeFormat(), 0, 0, hints)!!
 

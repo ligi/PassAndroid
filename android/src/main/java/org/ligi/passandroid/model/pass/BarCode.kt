@@ -12,6 +12,7 @@ import java.util.*
 class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.randomUUID().toString().toUpperCase()) {
 
     var alternativeText: String? = null
+    var encoding: String? = null
 
     fun getBitmap(resources: Resources): BitmapDrawable? {
         val tracker: Tracker = App.kodein.instance()
@@ -24,10 +25,10 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
         if (format == null) {
             Log.w("Barcode format is null - fallback to QR")
             tracker.trackException("Barcode format is null - fallback to QR", false)
-            return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
+            return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE, encoding)
         }
 
-        return generateBitmapDrawable(resources, message, format)
+        return generateBitmapDrawable(resources, message, format, encoding)
 
     }
 
