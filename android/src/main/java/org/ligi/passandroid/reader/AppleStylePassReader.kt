@@ -91,9 +91,8 @@ object AppleStylePassReader {
                 val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
                 pass.barCode = barCode
 
-                if (barcode_json.has("altText")) {
-                    pass.barCode!!.alternativeText = barcode_json.getString("altText")
-                }
+                pass.barCode!!.alternativeText = barcode_json.optString("altText", null)
+                pass.barCode!!.encoding = barcode_json.optString("messageEncoding", null)
             }
             // TODO should check a bit more with barcode here - this can be dangerous
         } catch (ignored: Exception) {
