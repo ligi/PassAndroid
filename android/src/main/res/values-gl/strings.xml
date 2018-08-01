@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"PassAndroid"</string>
+    <string name="logo">"logo"</string>
+    <string name="menu_map">"mostrar en mapa"</string>
+    <string name="menu_delete">"eliminar"</string>
+    <string name="menu_share">"compartir"</string>
+    <string name="barcode">"código de barras"</string>
+    <string name="help_label">"Axuda"</string>
+<string name="help_content"><![CDATA[
+<h1>Qué é esto?</h1>
+Este aplicativo é un visor de passbooks - un passbook podería ser por exemplo <b>un billete de embarque</b> para o seu voo, un vale para un trago no seu destino, a entrada do cine, unha tarxeta de membresía - hai moitas posibilidades.
+Básicamente é o substituto de un anaco de papel ou plástico que levaría con vostede - así salvamos algunhas árbores e <b>reducimos o lixo!</b>
+<h1>Exemplos de passes</h1>
+Precisa algún pass para practicar e ver cómo son? <a href=\'http://espass.it/examples/\'>Aquí ten algúns</a> para vostede!
+<h1>Cómo funcionan?</h1>
+Hai o que se chaman ficheiros pkpass - pode abrilos con este app - ex. cando os recibe a través do email ou os descarga. O máis importante é o Código de Barras que contén (QR, AZTEC e PDF417) que será o que o identifica ou autoriza - pero tamén contén apartados como a descrición - normalmente unha data e hora (así pode engadilo ao Calendario) - tamén localización (ou darlle endereitas) - simplemente próbeos!!
+Unha vez descargado o pass pode utilizalo sen estar en liña!
+<h1>PMF</h1>
+<h2>Cómo paso os passbooks do iPhone a PassAndroid?</h2>
+<ol>
+<li>Abra o passbook no iPhone</li>
+<li>Pulse na icona de compartir abaixo a esquerda.</li>
+<li>Envíe un email co passbook para recibilo no dispositivo Android.</li>
+<li>Abra o email no dispositivo Android e garde o anexo.</li>
+<li>Permita a PassAndroid buscar passbooks.</li>
+<li>O novo passbook é visible en PassAndroid.</li>
+</ol>
+<H1>Créditos</H1>
+Moitas grazas a <a href="http://ltorrecilla.com/">Luis Torrecilla</a> polo Deseño & <a href="https://github.com/cketti">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> polos pull-requests!
+<H1>Reporte</H1>
+Reporte en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> ou pode deixar <a href=\'mailto:ligi@ligi.de\'>aquí un correo.</a> Si lle gusta puntúe en  <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Gustaríame saber tamén qué usos lle da a este app.
+<h1>Historial</h1>
+Batín nos ficheiros passbook cando me apuntei ao 29c3 - Gostei da idea - pero non había un aplicativo Android dispoñible. Vin que era doado de implementar ( só un contedor zip con json e imaxes ) - A primeira versión foi escrita moi rápido e para min xa funcionaba ( entrei ao 29C3 ) - No seguinte ano non traballei moito no app xa que non tiña moito uso que darlle pero había moita xente descargándoo ( case 100k agora ) e arranxeino para varios passes que me enviaron ( algúns passes tiñan json defectuoso ... ) 
+Un ano despois - xusto antes de 30C3 - voltei traballar un pouco no app - por dúas razóns:
+ - un amigo meu está moi metido no asunto este de BTLE e testemuños de localización  / contexto que podería ser interesante para Passbook - pero nada finalizado
+ - recibín un email dun amable deseñador que fixo un bo redeseño
+Esto todo levou a PassAndroid - unha nova versión ao completo - con un novo aspecto e novas funcións (ordenar e engadir ao calendario xunto coa caixa de navegación e o menú contextual da barra de accións
+<H1>Máis</H1>
+Este app iniciase mellor con <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> que é gratuíta e non precisa nin un só permiso!
+<H1>Legal</H1>Este aplicativo non está afiliado a Apple - Passbook podería ser unha marca rexistrada de Apple, mais utilizada como estándar así que non debería haber problema <br/>
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    ]]></string>
+    <string name="drawer_open">"abrir"</string>
+    <string name="drawer_close">"pechar"</string>
+    <string name="pass_problem">"Desculpe, pero houbo un fallo con este Passbook. Si quere pode enviarme este passbook así poderei comprobar o problema e mellorar o software."</string>
+    <string name="problem">"Problema"</string>
+    <string name="send">"Enviar"</string>
+    <string name="delete">"Eliminar!"</string>
+    <string name="choose_location">"Escoller localización"</string>
+    <string name="boarding_pass">"Billete de embarque"</string>
+    <string name="category_event">"Evento"</string>
+    <string name="category_coupon">"Cupón"</string>
+    <string name="category_storecard">"Gardar tarxeta"</string>
+    <string name="category_generic">"xenérica"</string>
+    <string name="category_none">"sen Categoría"</string>
+    <string name="nav_more">"MÁIS"</string>
+    <string name="nav_sort">"ORDE"</string>
+    <string name="nav_sort_category">"Categoría"</string>
+    <string name="nav_sort_date">"Data"</string>
+    <string name="nav_categories">"CATEGORÍAS"</string>
+    <string name="nav_share">"Compartir"</string>
+    <string name="pass_directions">"Navegar"</string>
+    <string name="pass_to_calendar">"ao Calendario"</string>
+    <string name="invalid_passbook_title">Passbook non válido</string>
+    <string name="preparing_pass">Preparando Pass</string>
+    <string name="please_wait">agarde por favor - non demorará</string>
+    <string name="passbook_is_shared_subject">comparteuse un Passbook con vostede</string>
+    <string name="passbook_share_chooser_title">Cómo enviar un Pass?</string>
+    <string name="dialog_delete_confirm_text">Desexa eliminar este Passbook?</string>
+    <string name="dialog_delete_title">Seguro?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">eliminar tamén a fonte?</string>
+    <string name="more">MÁIS</string>
+    <string name="less">MENOS</string>
+    <string name="scanning_for_passes">Buscando Passes</string>
+    <string name="fab_choice_scan_pkpass_files">Buscar ficheiros pkpass</string>
+    <string name="fab_choice_add_demo_pass">Engadir Demo-Pass</string>
+    <string name="fab_choice_create_pass">Crear Pass</string>
+    <string name="empty_text_view"><big><b>Aínda sen pass</b></big>
+    \n\n\n Pode buscar passes no seu teléfono
+    \n\n ou crear os seus propios
+    \n\n ou probar un pass de mostra
+    \n\n só prema + abaixo
+    </string>
+    <string name="downloading_new_pass_version">descargando nova versión do pass</string>
+    <string name="unzip_pass_dialog_title">Abrindo Passbook</string>
+    <string name="unzip_pass_dialog_message">Por favor agarde...</string>
+    <string name="action_update">actualizar</string>
+    <string name="no_calendar_app_found">Non se atopou app de Calendario</string>
+    <string name="pass_updated">Pass actualizado</string>
+    <string name="expiration_date_to_calendar_warning_message">Vai a engadir a data de caducidade ao calendario - Si cree que hai unha mellor data en este pass - por favor envíema - PassAndroid precisa saber esto</string>
+    <string name="expiration_date_to_calendar_warning_title">Engadir data de caducidade</string>
+    <string name="topic_trash">lixo</string>
+    <string name="topic_new">novo</string>
+    <string name="topic_archive">arquivo</string>
+    <string name="move_to_new_topic">Mover a novo Tema</string>
+    <string name="categories_nav">%d Categorías</string>
+    <string name="passes_nav">%d Passes</string>
+    <string name="found_pass">atopou: %s</string>
+    <string name="found__pass">e %d máis</string>
+    <string name="scan_finished_dialog_title">Busca finalizada.</string>
+    <string name="scan_finished_dialog_text">atopou %d passes</string>
+    <string name="scan_progressdialog_title">Buscando ...</string>
+    <string name="scan_progressdialog_message">Por favor agarde.</string>
+    <string name="scan_dialog_send_background_button">fondo</string>
+    <string name="emtytrash_label">lixo baldeiro</string>
+    <string name="barcode_edit_hint_alternative_message">Mensaxe alternativa</string>
+    <string name="barcode_edit_random">ao chou</string>
+    <string name="barcode_edit_scan">busca</string>
+    <string name="barcode_edit_message">Mensaxe</string>
+    <string name="barcode_edit_aztec">AZTEC</string>
+    <string name="barcode_edit_pdf417">PDF417</string>
+    <string name="barcode_edit_qr">QR</string>
+    <string name="barcode_edit_button_add_barcode">Engadir código de barras</string>
+    <string name="categories_voucher">vale</string>
+    <string name="edit_time">editar hora</string>
+    <string name="edit_location">editar localización</string>
+    <string name="add_front_field">Engadir campo a portada</string>
+    <string name="add_back_fields">Engadir campo a folla de atrás</string>
+    <string name="change_color_dialog_title">Escoller cor</string>
+    <string name="select_category_dialog_title">Escoller categoría</string>
+    <string name="barcode_edit_code128">código 128</string>
+    <string name="barcode_edit_code39">código 39</string>
+    <string name="add_footer_image">engadir imaxe ao pe</string>
+    <string name="add_logo_image">engadir imaxe de logo</string>
+    <string name="add_header_image">engadir imaxe de cabeceira</string>
+    <string name="add_barcode">Engadir código de barras</string>
+    <string name="edit_barcode_dialog_title">Editar código de barras</string>
+    <string name="empty_trash_dialog_message">"Baleirar o lixo? Non poderá restaurar "</string>
+    <string name="empty_trash_dialog_title">aviso</string>
+    <string name="new_topic_input_hint">Título para o novo Tema</string>
+    <string name="new_topic_suggestions">Suxestións:</string>
+    <string name="cannot_be_empty">non pode estar baldeiro</string>
+    <string name="please_use_the_swipe_feature">Por favor utilice a característica Desplazar</string>
+    <string name="type">Escribir</string>
+    <string name="undo">desfacer</string>
+
+    <string name="sort_order_date_asc">Data ascendente</string>
+    <string name="sort_order_date_desc">Data descendente</string>
+    <string name="sort_order_date_type">Tipo</string>
+    <string name="sort_order_date_temporaldistance">Distancia temporal</string>
+
+
+    <string-array name="category_edit_options">
+        <item>@string/select_category_dialog_title</item>
+        <item>@string/change_color_dialog_title</item>
+        <item>Escolla icona</item>
+    </string-array>
+
+    <string name="night_mode_night">Noite</string>
+    <string name="night_mode_day">Día</string>
+    <string name="night_mode_auto">Auto</string>
+
+    <string name="preference_autolight_title">Luz automática</string>
+    <string name="preference_autolight_summary">Debera incrementar o brillo cando mostra un código de barras?</string>
+
+    <string name="preference_condensed_title">Modo condensado</string>
+    <string name="preference_condensed_summary">Debería mostrar máis contido e menos espazo?</string>
+
+
+    <string name="preference_sort_title">Establecer orde</string>
+    <string name="preference_sort_summary">Cómo ordenar os passes?</string>
+
+
+    <string name="preference_daynight_title">Decorado diurno/nocturno</string>
+    <string name="preference_daynight_summary">Claro ou oscuro?</string>
+
+    <string name="image_import">Importar imaxe</string>
+    <string name="pdf_import">Importar PDF</string>
+
+    <string name="field_source">fonte</string>
+    <string name="field_note">nota</string>
+    <string name="field_advice_label">consello</string>
+    <string name="field_advice_text">solicite esPass ou Passbook do seu proveedor</string>
+
+    <string name="field_source_image">Imaxe</string>
+    <string name="field_note_image">Esto importouse da imaxe - non é un pass verdadeiro</string>
+
+    <string name="field_source_pdf">PDF</string>
+    <string name="field_note_pdf">Esto importouse de un PDF - non é un pass verdadeiro</string>
+    <string name="nav_settings">Axustes</string>
+    <string name="nav_github">Github</string>
+    <string name="nav_betatest_opt_in_out">Entrar/Saír da versión beta</string>
+    <string name="nav_community_on_google">Comunidade google+</string>
+    <string name="nav_improve_translation">Mellore a tradución</string>
+    <string name="launcher_shortcut">Atallo do lanzador</string>
+    <string name="open_file">Abrir ficheiro</string>
+
+    <string name="error_no_permission_msg">Precisa permiso para importar un pass</string>
+    <string name="error_no_permission_title">Fallo de permiso</string>
+
+
+</resources>
