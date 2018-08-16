@@ -8,6 +8,7 @@ enum class PassBarCodeFormat {
     CODE_39,
     CODE_128,
     DATA_MATRIX,
+    EAN_8,
     EAN_13,
     ITF,
     PDF_417,
@@ -23,6 +24,7 @@ enum class PassBarCodeFormat {
         CODE_39 -> BarcodeFormat.CODE_39
         CODE_128 -> BarcodeFormat.CODE_128
         DATA_MATRIX -> BarcodeFormat.DATA_MATRIX
+        EAN_8 -> BarcodeFormat.EAN_8
         EAN_13 -> BarcodeFormat.EAN_13
         ITF -> BarcodeFormat.ITF
         PDF_417 -> BarcodeFormat.PDF_417
