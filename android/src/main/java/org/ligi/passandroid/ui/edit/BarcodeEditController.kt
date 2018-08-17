@@ -9,8 +9,7 @@ import kotlinx.android.synthetic.main.barcode_edit.view.*
 import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
-import org.ligi.passandroid.model.pass.PassBarCodeFormat.EAN_13
-import org.ligi.passandroid.model.pass.PassBarCodeFormat.QR_CODE
+import org.ligi.passandroid.model.pass.PassBarCodeFormat.*
 import org.ligi.passandroid.ui.BarcodeUIController
 import org.ligi.passandroid.ui.PassViewHelper
 import java.util.*
@@ -56,6 +55,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
 
         rootView.randomButton.setOnClickListener({
             rootView.messageInput.setText(when (barcodeFormat) {
+                EAN_8 -> getRandomEAN8()
                 EAN_13 -> getRandomEAN13()
                 PassBarCodeFormat.ITF -> getRandomITF()
                 else -> UUID.randomUUID().toString().toUpperCase()
