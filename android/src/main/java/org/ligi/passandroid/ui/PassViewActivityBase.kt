@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ComponentName
@@ -10,10 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewConfiguration
-import android.view.WindowManager
+import android.view.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -28,6 +26,7 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.io.IOException
 
+@SuppressLint("Registered")
 @RuntimePermissions
 open class PassViewActivityBase : PassAndroidActivity() {
 
@@ -53,6 +52,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
             // Ignore - but at least we tried ;-)
         }
 
+        updateCurrentPass()
     }
 
     override fun onPause() {
@@ -63,16 +63,22 @@ open class PassViewActivityBase : PassAndroidActivity() {
     override fun onResume() {
         super.onResume()
 
+        configureActionBar()
+
+        if (settings.isAutomaticLightEnabled()) {
+            setToFullBrightness()
+        }
+    }
+
+    private fun updateCurrentPass() {
         val uuid = intent.getStringExtra(EXTRA_KEY_UUID)
 
         if (uuid != null) {
-            val passbookForId = passStore.getPassbookForId(uuid)
-            passStore.currentPass = passbookForId
+            passStore.currentPass = passStore.getPassbookForId(uuid)
         }
 
         if (passStore.currentPass == null) {
-            val passbookForId = passStore.getPassbookForId(State.lastSelectedPassUUID)
-            passStore.currentPass = passbookForId
+            passStore.currentPass = passStore.getPassbookForId(State.lastSelectedPassUUID)
         }
 
         if (passStore.currentPass == null) {
@@ -82,12 +88,6 @@ open class PassViewActivityBase : PassAndroidActivity() {
         }
 
         currentPass = passStore.currentPass!!
-
-        configureActionBar()
-
-        if (settings.isAutomaticLightEnabled()) {
-            setToFullBrightness()
-        }
     }
 
     protected fun configureActionBar() {
@@ -258,7 +258,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
         const val EXTRA_KEY_UUID = "uuid"
 
         fun mightPassBeAbleToUpdate(pass: Pass?): Boolean {
-            return pass != null && pass.webServiceURL != null && pass.passIdent != null && pass.serial != null
+            return pass?.webServiceURL != null && pass.passIdent != null && pass.serial != null
         }
     }
 }
