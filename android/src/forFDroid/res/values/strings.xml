@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="market_url">https://f-droid.org/repository/browse/?fdid=%s</string>
+    <string name="market_url" translatable="false">https://f-droid.org/repository/browse/?fdid=%s</string>
 </resources>

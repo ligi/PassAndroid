@@ -22,7 +22,11 @@ Existen unos archivos llamados pkpass - puedes abrirlos con esta aplicación - p
 !Puedes utilizarla la aplicación sin conexión una vez hayas descargado tus pases!
 
 <H1>Créditos</H1>
-¡Un enorme agradecimiento a <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> por el Diseño y a <a href=\"https://github.com/cketti\">Cketti</a> y <a href="https://github.com/simontb">Simon Tenbeitel</a> por sus sugerencias!
+¡Un enorme agradecimiento a <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> por el Diseño
+y a <a href=\"https://github.com/cketti\">Cketti</a>
+y <a href="https://github.com/simontb">Simon Tenbeitel</a>
+y <a href="https://github.com/irgendwr">Jonas Bögle</a>
+por sus sugerencias!
 
 <H1>Sugerencias</H1>
 Puedes contribuir en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> o enviar un email al <a href=\'mailto:ligi@ligi.de\'>autor.</a> Si te gusta la aplicación puedes valorarla en <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>, también me gustaría leer algunas de vuestras historias con el uso de esta aplicación.
@@ -44,12 +48,14 @@ Todo esto fue llevando PassAndroid  - a un completa nueva versión - con un nuev
 * Air Berlin
 * Lufthansa
 
-<H1>Más</H1>
+<h1>Más</h1>
 Esta aplicación se abre mejor con <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> que está disponible gratis y sin hacer uso de ningún permiso!
 
-<H1>Aviso legal</H1>Esta aplicación no esta afiliada con Apple - Passbook puede ser una marca de Apple, pero fue introducido como un estandar, por lo que esto estaría bien.<br/> 
-
+<h1>Aviso legal</h1>
+<p>Esta aplicación no esta afiliada con Apple - Passbook puede ser una marca de Apple, pero fue introducido como un estandar, por lo que esto estaría bien.</p>
+<p>
 ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
+</p>
 
 ]]></string>
   <string name="drawer_open">abrir</string>
@@ -95,7 +101,7 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
     </string>
   <string name="downloading_new_pass_version">descargando nueva versión del pase</string>
   <string name="unzip_pass_dialog_title">Abriendo Passbook</string>
-  <string name="unzip_pass_dialog_message">Por favor, espere...</string>
+  <string name="unzip_pass_dialog_message">Por favor, espere…</string>
   <string name="action_update">actualizado</string>
   <string name="no_calendar_app_found">Ninguna app de Calendario encontrada</string>
   <string name="pass_updated">Passbook actualizado</string>
@@ -111,7 +117,7 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="found__pass">Y %d más</string>
   <string name="scan_finished_dialog_title">Búsqueda terminada</string>
   <string name="scan_finished_dialog_text">encontrados %d Passbooks</string>
-  <string name="scan_progressdialog_title">Buscando ...</string>
+  <string name="scan_progressdialog_title">Buscando…</string>
   <string name="scan_progressdialog_message">Por favor, espere</string>
   <string name="scan_dialog_send_background_button">fondo</string>
   <string name="emtytrash_label">Vaciar papelera</string>
@@ -176,7 +182,7 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="field_source_pdf">PDF</string>
   <string name="field_note_pdf">Esto fue importado de un PDF - no es un pass real</string>
   <string name="nav_settings">Opciones</string>
-  <string name="nav_github">Github</string>
+  <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Testeador opt-in/out</string>
   <string name="nav_community_on_google">Comunidad en google+</string>
   <string name="nav_improve_translation">Mejora la traducción</string>

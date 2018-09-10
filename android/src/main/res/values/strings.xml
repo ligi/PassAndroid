@@ -10,7 +10,8 @@
 <string name="help_content"><![CDATA[
 <h1>What is it?</h1>
 
-This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight, a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
+This app is a viewer for passbooks - a passbook could be a e.g. <b>boarding-pass</b> for your next flight,
+a coupon for a nice hot beverage on the destination, a movie ticket, a membership card - there are a lot of possibilities.
 Basically it is a replacement for a piece of paper or plastic you would normally have to carry with you - so lets save some trees and <b>reduce waste!</b>
 
 <h1>Example passes</h1>
@@ -19,7 +20,8 @@ Do you need some passes to play around and see things in action? <a href=\'http:
 
 <h1>How does it work?</h1>
 
-There are so called pkpass files - you can open them with this app - e.g. when you receive them via email or get an Download-option. The most important content is the BarCode ( QR , AZTEC & PDF417which authorizes you most of the time - but it also has other interesting content like a description - often a time (hat you now can add to your calendar  - often also locations (o give you directions) - just try It out!
+There are so called pkpass files - you can open them with this app - e.g. when you receive them via email or get an Download-option.
+The most important content is the BarCode ( QR , AZTEC & PDF417which authorizes you most of the time - but it also has other interesting content like a description - often a time (hat you now can add to your calendar  - often also locations (o give you directions) - just try It out!
 The app is offline usable once you downloaded the pass!
 
 <h1>FAQ</h1>
@@ -35,29 +37,38 @@ The app is offline usable once you downloaded the pass!
 </ol>
 
 <H1>Credits</H1>
-Big thanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design & <a href="https://github.com/cketti">cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> for pull-requests!
+Big thanks to <a href="http://ltorrecilla.com/">Luis Torrecilla</a> for the Design
+and <a href="https://github.com/cketti">cketti</a>,
+<a href="https://github.com/simontb">Simon Tenbeitel</a>
+and <a href="https://github.com/irgendwr">Jonas Bögle</a>
+for pull-requests!
 
-<H1>Feedback</H1>
-Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
+<h1>Feedback</h1>
+Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a>
+If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>.
+I also would love to hear stories about where you used this app.
 
 <h1>History</h1>
 
-I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me. I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
+I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me.
+I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
 One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
  - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
  - I got a mail from a nice designer who did a nice redesign
 This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
 
-<H1>More</H1>
+<h1>More</h1>
 This app ist best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
 
-<H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
-
+<h1>Legal</h1>
+<p>This app is not affiliated with Apple - Passbook might be trademarked by Apple, but it's introduced like a standard so this should be okay.</p>
+<p>
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
 
     ]]></string>
     <string name="drawer_open">"open"</string>
@@ -103,7 +114,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     </string>
     <string name="downloading_new_pass_version">downloading new pass version</string>
     <string name="unzip_pass_dialog_title">Opening Passbook</string>
-    <string name="unzip_pass_dialog_message">Please wait...</string>
+    <string name="unzip_pass_dialog_message">Please wait…</string>
     <string name="action_update">update</string>
     <string name="no_calendar_app_found">No Calendar-App found</string>
     <string name="pass_updated">Pass Updated</string>
@@ -119,7 +130,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="found__pass">And %d more</string>
     <string name="scan_finished_dialog_title">Scan finished.</string>
     <string name="scan_finished_dialog_text">found %d passes</string>
-    <string name="scan_progressdialog_title">Searching ...</string>
+    <string name="scan_progressdialog_title">Searching…</string>
     <string name="scan_progressdialog_message">Please wait.</string>
     <string name="scan_dialog_send_background_button">background</string>
     <string name="emtytrash_label">empty trash</string>
@@ -198,7 +209,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="field_source_pdf">PDF</string>
     <string name="field_note_pdf">This is imported from a PDF - not a real pass</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_github">Github</string>
+    <string name="nav_github">GitHub</string>
     <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
     <string name="nav_community_on_google">Community on google+</string>
     <string name="nav_improve_translation">Improve translation</string>
