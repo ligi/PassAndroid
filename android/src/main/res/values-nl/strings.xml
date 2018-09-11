@@ -39,10 +39,10 @@ De app kan bovendien offline gebruikt worden vanaf de pass gedownload werd!
 </ol>
 
 <h1>Credits</h1>
-Veel dank aan <a href="http://ltorrecilla.com/">Luis Torrecilla</a> voor het design
-& <a href="https://github.com/cketti">Cketti</a>,
-<a href="https://github.com/simontb">Simon Tenbeitel</a>
-& <a href="https://github.com/irgendwr">Jonas Bögle</a>
+Veel dank aan <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> voor het design
+& <a href=\'https://github.com/cketti\'>Cketti</a>,
+<a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
+& <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
 voor verbeteringen in het algemeen!
 
 <h1>Feedback</h1>
@@ -62,7 +62,7 @@ Dit heeft geleid tot PassAndroid - een volledig nieuwe versie - met een nieuwe l
 This app is best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
 
 <h1>Legal</h1>
-<p>This app is not affiliated with Apple - Passbook might be trademarked by Apple, but it's introduced like a standard so this should be okay.</p>
+<p>This app is not affiliated with Apple - Passbook might be trademarked by Apple, but it\'s introduced like a standard so this should be okay.</p>
 <p>
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
