@@ -22,10 +22,14 @@
 Карточки passbook хранятся в файлах с расширением \"pkpass\", эти файлы и открывает данное приложение, например когда вы получаете карточки по почте или загружаете с сайтов. Самое важное в карточке это <b>штрих-код</b> (типы QR, AZTEC, PDF417) который в итоге считывают на кассе в магазине или на стойке регистрации рейсов, но в карточке может содержаться еще и детальное описание, время события, например вы сможете добавить напоминание о сеансе кино в ваш календарь, а так же и место события - попробуйте, это удобно!
 С помощью данной программы карточки можно просматривать и без подключения к Интернет, просто сохраните их в памяти телефона!
 
-<H1><Благодарности</H1>
-Большое спасибо <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> за дизайн и <a href=\"https://github.com/cketti\">Cketti</a> и <a href="https://github.com/simontb">Simon Tenbeitel</a> за pull-requests!
+<h1><Благодарности</h1>
+Большое спасибо <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> за дизайн
+и <a href=\"https://github.com/cketti\">Cketti</a>,
+<a href=\"https://github.com/simontb\">Simon Tenbeitel</a>
+и <a href=\"https://github.com/irgendwr\">Jonas Bögle</a>
+за pull-requests!
 
-<H1>Обратная связь</H1>
+<h1>Обратная связь</h1>
 Оставляйте отзывы в <a href=\'https://plus.google.com/communities/116353894782342292067\'>сообществе Google+</a> или вы можете <a href=\'mailto:ligi@ligi.de\'>написать автору.</a> Если приложение вам понравилось, оставьте отзыв в <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>. Интересно было бы прочитать вашу историю, как вы использовали это приложение.
 
 <h1>История создания</h1>
@@ -36,17 +40,19 @@
  - я получил письмо от одного дизайнера который нарисовал новый дизайн приложения.
 Все это привело к появлению следующей версии PassAndroid, полностью новой версии с новым функциональным интерфейсом.
 
-<H1>Дополнительно</H1>
+<h1>Дополнительно</h1>
 Это приложение удобно запускать с помощью <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a>, еще одного бесплатного приложения с минимальным набором системных разрешений!
 
-<H1>Официальное заявление</H1>Это приложение никак не связано с корпорацией Apple. Passbook может быть зарегистрированной торговой маркой Apple, но был представлен как открытый стандарт, так что все должно быть OK.<br/>
-
+<h1>Официальное заявление</h1>
+<p>Это приложение никак не связано с корпорацией Apple. Passbook может быть зарегистрированной торговой маркой Apple, но был представлен как открытый стандарт, так что все должно быть OK.</p>
+<p>
 Текст лицензии приведен на языке оригинала, в том виде в котором его приводит автор:
 THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
 
     ]]></string>
   <string name="drawer_open">открыть</string>
@@ -91,7 +97,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 \n\n просто нажмите на \"+\" ниже</string>
   <string name="downloading_new_pass_version">скачать обновленную карточку</string>
   <string name="unzip_pass_dialog_title">Открываю карточку</string>
-  <string name="unzip_pass_dialog_message">Пожалуйста подождите ...</string>
+  <string name="unzip_pass_dialog_message">Пожалуйста подождите…</string>
   <string name="action_update">обновить</string>
   <string name="no_calendar_app_found">Не найдено приложение-календарь</string>
   <string name="pass_updated">Карточка обновлена</string>
@@ -107,7 +113,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">Еще %d</string>
   <string name="scan_finished_dialog_title">Поиск завершен.</string>
   <string name="scan_finished_dialog_text">найдено %d карточек</string>
-  <string name="scan_progressdialog_title">Поиск ...</string>
+  <string name="scan_progressdialog_title">Поиск…</string>
   <string name="scan_progressdialog_message">Пожалуйста подождите.</string>
   <string name="scan_dialog_send_background_button">в фоне</string>
   <string name="emtytrash_label">очистить корзину</string>
@@ -166,7 +172,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="field_source_pdf">PDF</string>
   <string name="field_note_pdf">Это импортированный PDF, не настоящий билет</string>
   <string name="nav_settings">Настройки</string>
-  <string name="nav_github">Github</string>
+  <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Бета тестирование</string>
   <string name="nav_community_on_google">Сообщество Google+</string>
   <string name="nav_improve_translation">Улучшить перевод</string>

@@ -34,10 +34,14 @@ pkpass ファイルと呼ばれるものがあります。 このアプリで開
 <li>PassAndroid で 新しい Passbook が表示されます。</li>
 </ol>
 
-<H1>クレジット</H1>
-Big thanks to <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> for the Design & <a href=\"https://github.com/cketti\">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> for pull-requests!
+<h1>クレジット</h1>
+Big thanks to <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> for the Design
+and <a href=\'https://github.com/cketti\'>cketti</a>,
+<a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
+and <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
+for pull-requests!
 
-<H1>フィードバック</H1>
+<h1>フィードバック</h1>
 Give feedback in the <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> or you can drop the <a href=\'mailto:ligi@ligi.de\'>author a mail.</a> If you like the app rate it on <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> I also would love to hear stories about where you used this app.
 
 <h1>履歴</h1>
@@ -48,16 +52,18 @@ One year later - just before the 30C3 - I came to work a bit on this app again -
  - I got a mail from a nice designer who did a nice redesign
 This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
 
-<H1>さらに</H1>
+<h1>さらに</h1>
 This app ist best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
 
-<H1>法的事項</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
-
-THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+<h1>法的事項</h1>
+<p>This app is not affiliated with Apple - Passbook might be trademarked by Apple, but it\'s introduced like a standard so this should be okay.</p>
+<p>
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
 
     ]]></string>
   <string name="drawer_open">開く</string>
@@ -103,7 +109,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     </string>
   <string name="downloading_new_pass_version">新しい Pass バージョンをダウンロード中</string>
   <string name="unzip_pass_dialog_title">Passbook を開いています</string>
-  <string name="unzip_pass_dialog_message">しばらくお待ちください...</string>
+  <string name="unzip_pass_dialog_message">しばらくお待ちください…</string>
   <string name="action_update">更新</string>
   <string name="no_calendar_app_found">カレンダーアプリが見つかりません</string>
   <string name="pass_updated">Pass を更新しました</string>
@@ -119,7 +125,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">および %d 以上</string>
   <string name="scan_finished_dialog_title">スキャンが終了しました。</string>
   <string name="scan_finished_dialog_text">%d チケットが見つかりました</string>
-  <string name="scan_progressdialog_title">検索中...</string>
+  <string name="scan_progressdialog_title">検索中…</string>
   <string name="scan_progressdialog_message">しばらくお待ちください。</string>
   <string name="scan_dialog_send_background_button">バックグラウンド</string>
   <string name="emtytrash_label">ゴミ箱を空にする</string>
@@ -184,7 +190,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="field_source_pdf">PDF</string>
   <string name="field_note_pdf">これは PDF からインポートされたものです - 実際のチケットではありません</string>
   <string name="nav_settings">設定</string>
-  <string name="nav_github">Github</string>
+  <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">ベータテスト参加/退会</string>
   <string name="nav_community_on_google">google+ のコミュニティ</string>
   <string name="nav_improve_translation">翻訳の改善</string>

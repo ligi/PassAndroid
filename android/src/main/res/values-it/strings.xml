@@ -34,17 +34,23 @@ L\'app funziona offline una volta che hai scaricato il pass!
 <li>Il tuo passbook sarà visibile in PassAndroid</li>
 </ol>
 
-<H1>Riconoscimenti</H1>
-Un grande grazie a <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> per il Design & <a href=\"https://github.com/cketti\">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> per le pull-request!
+<h1>Riconoscimenti</h1>
+Un grande grazie a <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> per il Design
+& <a href=\"https://github.com/cketti\">Cketti</a>,
+<a href=\"https://github.com/simontb\">Simon Tenbeitel</a>
+& <a href=\"https://github.com/irgendwr\">Jonas Bögle</a>
+per le pull-request!
 
-<H1>Feedback</H1>
+<h1>Feedback</h1>
 Dicci cosa ne pensi sulla <a href=\'https://plus.google.com/communities/116353894782342292067\'>Community di Google+</a> oppure <a href=\'mailto:ligi@ligi.de\'>scrivi un\'email all\'autore.</a> Se ti piace l\'app, votala sul <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Play Store</a>. Inoltre mi piace tanto sapere come viene utilizzata quest\'app! 
 
-<H1>Legal</H1>
-Quest\'app non è affiliata con Apple - Passbook può essere un marchio registrato da Apple, ma è stato introdotto come uno standard. Quindi dovrebbe essere OK. <br/>
-
+<h1>Legal</h1>
+<p>Quest\'app non è affiliata con Apple - Passbook può essere un marchio registrato da Apple, ma è stato introdotto come uno standard. Quindi dovrebbe essere OK.</p>
+<p>
 IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICITE, DI ALCUN TIPO, IVI INCLUSE, A TITOLO ESEMPLIFICATIVO MA NON ESAUSTIVO, LE GARANZIE IMPLICITE DI COMMERCIABILITÀ E IDONEITÀ PER UNO SCOPO SPECIFICO E NON VIOLAZIONE. IN NESSUN CASO GLI AUTORI O I TITOLARI DI COPYRIGHT DOVRANNO RISPONDERE DI QUALSIASI PRETESA, PER DANNI, O ALTRE RESPONSABILITÀ, SIA NEL CORSO DELL\'ESECUZIONE DEL CONTRATTO, PER ATTO ILLECITO O ALTRA CAUSA DERIVANTE DA, RISULTANTE DA O IN CORRELAZIONE AL SOFTWARE O DALL\'USO O DA ALTRE ATTIVITÀ COLLEGATE AL SOFTWARE.
-    ]]></string>
+</p>
+
+]]></string>
   <string name="drawer_open">apri</string>
   <string name="drawer_close">chiudi</string>
   <string name="pass_problem">Siamo spiacenti, si è verificato un problema processando questo Passbook. Se vuoi inviarci il tuo Passbook possiamo capire il problema e sistemarlo nel prossimo aggiornamento.</string>
@@ -88,7 +94,7 @@ IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICIT
   </string>
   <string name="downloading_new_pass_version">sto scaricando la nuova versione del pass</string>
   <string name="unzip_pass_dialog_title">Apertura Passbook</string>
-  <string name="unzip_pass_dialog_message">Aspetta...</string>
+  <string name="unzip_pass_dialog_message">Aspetta…</string>
   <string name="action_update">aggiorna</string>
   <string name="no_calendar_app_found">Nessuna app Calendario trovata</string>
   <string name="pass_updated">Pass aggiornato</string>
@@ -104,7 +110,7 @@ IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICIT
   <string name="found__pass">E altri %d</string>
   <string name="scan_finished_dialog_title">Scansione finita.</string>
   <string name="scan_finished_dialog_text">trovato %d Pass</string>
-  <string name="scan_progressdialog_title">Sto cercando...</string>
+  <string name="scan_progressdialog_title">Sto cercando…</string>
   <string name="scan_progressdialog_message">Aspetta.</string>
   <string name="scan_dialog_send_background_button">background</string>
   <string name="emtytrash_label">svuota cestino</string>
@@ -169,7 +175,7 @@ IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICIT
   <string name="field_source_pdf">PDF</string>
   <string name="field_note_pdf">Questo è importato da un PDF - non è un vero pass</string>
   <string name="nav_settings">Impostazioni</string>
-  <string name="nav_github">Github</string>
+  <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
   <string name="nav_community_on_google">Community su Google+</string>
   <string name="nav_improve_translation">Migliora la traduzione</string>

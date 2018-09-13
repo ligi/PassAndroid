@@ -49,6 +49,8 @@
     </string>
   <string name="downloading_new_pass_version">새로운 패스 버전 다운로드 중</string>
   <string name="unzip_pass_dialog_title">패스북 여는 중</string>
-  <string name="unzip_pass_dialog_message">잠시만 기다리세요...</string>
+  <string name="unzip_pass_dialog_message">잠시만 기다리세요…</string>
   <string name="action_update">업데이트</string>
+    <string name="field_source_pdf">PDF</string>
+  <string name="nav_github">GitHub</string>
 </resources>

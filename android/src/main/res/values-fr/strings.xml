@@ -11,11 +11,14 @@
 <h1>Qu\'est ce que c\'est ?</h1>
 Cette application est une visionneuse pour les carnets de passes - il peut s\'agir d\'un <b>billet d\'embarquement</b> pour votre prochain vol, d\'un coupon pour une bonne boisson chaude sur la destination, un billet de cinéma, une carte de membre - les possibilités sont nombreuses.
 Fondamentalement, ceci remplace tous les bouts de papier ou de plastique que vous devriez porter sur vous - alors sauvons quelques arbres et <b>réduisons les déchets!</b>
+
 <h1>Exemples de passes</h1>
 Avez-vous besoin d\'essayer quelques passes pour voir l\'application en action ? <a href=\'http://espass.it/examples/\'>En voici quelques-uns</a> pour vous !
+
 <h1>Comment cela fonctionne-t-il ?</h1>
 Il existe des fichiers pkpass - vous pouvez les ouvrir avec cette application - par ex. lorsque vous les recevez par e-mail ou via une option de téléchargement. Le contenu le plus important est le code-barres (QR, AZTEC & PDF417) qui, la plupart du temps, contient l\'autorisation - mais il possède également d\'autres contenus intéressants comme une description - souvent un horaire (que vous pouvez maintenant ajouter à votre calendrier) - souvent aussi des emplacements (pour vous permettre de vous diriger) - essayez-la!
 L\'application est utilisable hors-ligne, à condition que vous ayez téléchargé le passe !
+
 <h1>FAQ</h1>
 <h2>Comment puis-je transférer des passes de mon iPhone sur PassAndroid ?</h2>
 <ol>
@@ -26,22 +29,34 @@ L\'application est utilisable hors-ligne, à condition que vous ayez télécharg
 <li>Laissez PassAndroid rechercher les passes.</li>
 <li>Le nouveau passe est visible dans PassAndroid.</li>
 </ol>
-<H1>Crédits</H1>
-Un grand merci à <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> pour le Design & <a href=\"https://github.com/cketti\">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> pour les pull-requests !
-<H1>Feedback / Réactions</H1>
+
+<h1>Crédits</h1>
+Un grand merci à <a href=\"http://ltorrecilla.com/\">Luis Torrecilla</a> pour le Design
+et <a href=\"https://github.com/cketti\">Cketti</a>,
+<a href=\"https://github.com/simontb\">Simon Tenbeitel</a>
+et <a href=\"https://github.com/irgendwr\">Jonas Bögle</a>
+pour les pull-requests !
+
+<h1>Feedback / Réactions</h1>
 Partagez vos réactions dans la <a href=\'https://plus.google.com/communities/116353894782342292067\'>Communauté Google+</a> ou bien vous pouvez envoyer <a href=\'mailto:ligi@ligi.de\'>un mail à l\'auteur.</a> Si vous aimez cette application, notez-là sur <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> J\'apprécie également connaître vos différentes utilisations de cette application.
+
 <h1>Historique</h1>
 Je suis tombé sur les fichiers Passbook quand j\'ai reçu mon billet pour le 29c3 - J\'ai aimé l\'idée - mais il n\'y avait pas d\'application Android qui fonctionnait pour moi. J\'ai vu que la mise en œuvre est assez facile (juste un conteneur zip avec json et images) - La première version a été construire très rapidement et fonctionnait bien pour moi (elle a même eu son entrée au 29C3) - L\'année suivante, je n\'ai pas travaillé sur cette app beaucoup, puisque je n\'avais pas vraiment de cas d\'utilisation. Pourtant beaucoup d\'utilisateurs téléchargeaient l\'application (presque 100\'000 désormais) et je continuais de traiter certains passes qui m\'étaient envoyés (certains contenaient des json vraiment corrompus ..)
 Un an plus tard - juste avant le 30C3 - j\'ai à nouveau effectué un peu de travail sur cette application - pour 2 raisons:
 - un ami à moi est très dans BTLE (BlueTooth Low Energy) et ce type de logique par localisation / contexte pourrait être intéressant pour Passbook - mais rien n\'était encore prêt
 - J\'ai reçu un mail de Luis Torrecilla - Un designer très sympa qui a fait une superbe refonte graphique
 Tout cela a mené à PassAndroid - Une version complètement nouvelle - avec une nouvelle apparence et de nouvelles fonctions (comme le tri et la possibilité d\'ajouter des éléments au calendrier ainsi que le \"tirer pour actualiser\" le volet de navigation ainsi qu\'un menu contextuel)
-<H1>Plus d\'informations</H1>
-Cette application se lance plus facilement avec <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> qui est disponible gratuitement et ne nécessite aucune autorisation !
-<H1>Légal</H1>
-Cette application n\'est pas affiliée avec Apple - \"Passbook \" pourrait être une marque déposée par Apple, mais introduit en tant que norme, cela devrait être considéré comme correct. <br/>
 
-THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.]]></string>
+<h1>Plus d\'informations</h1>
+Cette application se lance plus facilement avec <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> qui est disponible gratuitement et ne nécessite aucune autorisation !
+
+<h1>Légal</h1>
+<p>Cette application n\'est pas affiliée avec Apple - \"Passbook \" pourrait être une marque déposée par Apple, mais introduit en tant que norme, cela devrait être considéré comme correct.</p>
+<p>
+THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+
+]]></string>
   <string name="drawer_open">ouvrir</string>
   <string name="drawer_close">fermer</string>
   <string name="pass_problem">Navré, mais il y a eu un problème durant le traitement de ce passe. Si vous le souhaitez, vous pouvez m\'envoyer ce passe afin que j\'analyse la source du problème et puisse améliorer le logiciel.</string>
@@ -84,7 +99,7 @@ THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLU
 \n\n Il suffit de cliquer sur le bouton \"+\" en bas à droite</string>
   <string name="downloading_new_pass_version">Nouvelle version du passe en cours de téléchargement</string>
   <string name="unzip_pass_dialog_title">Ouverture du passe</string>
-  <string name="unzip_pass_dialog_message">Veuillez patienter...</string>
+  <string name="unzip_pass_dialog_message">Veuillez patienter…</string>
   <string name="action_update">mise à jour</string>
   <string name="no_calendar_app_found">Aucune application de calendrier trouvée</string>
   <string name="pass_updated">Passe mis à jour</string>
@@ -100,7 +115,7 @@ THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLU
   <string name="found__pass">Et %d plus</string>
   <string name="scan_finished_dialog_title">Recherche terminée</string>
   <string name="scan_finished_dialog_text">%d passes trouvés</string>
-  <string name="scan_progressdialog_title">Recherche ...</string>
+  <string name="scan_progressdialog_title">Recherche…</string>
   <string name="scan_progressdialog_message">Veuillez patienter.</string>
   <string name="scan_dialog_send_background_button">arrière-plan</string>
   <string name="emtytrash_label">corbeille vide</string>

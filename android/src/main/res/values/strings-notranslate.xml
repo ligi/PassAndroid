@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preference_key_sort">SORT</string>
-    <string name="preference_key_nightmode">NIGHTMODE</string>
-    <string name="preference_key_autolight">AUTOLIGHT</string>
-    <string name="preference_key_condensed">CONDENSED</string>
+    <string name="preference_key_sort" translatable="false">SORT</string>
+    <string name="preference_key_nightmode" translatable="false">NIGHTMODE</string>
+    <string name="preference_key_autolight" translatable="false">AUTOLIGHT</string>
+    <string name="preference_key_condensed" translatable="false">CONDENSED</string>
 
-    <string name="authority_fileprovider">org.ligi.passandroid.fileprovider</string>
+    <string name="authority_fileprovider" translatable="false">org.ligi.passandroid.fileprovider</string>
 </resources>

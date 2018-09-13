@@ -38,10 +38,14 @@ De app kan bovendien offline gebruikt worden vanaf de pass gedownload werd!
 <li>De nieuwe passbook zal zichtbaar zijn in PassAndroid.</li>
 </ol>
 
-<H1>Credits</H1>
-Veel dank aan <a href="http://ltorrecilla.com/">Luis Torrecilla</a> voor het design & <a href="https://github.com/cketti">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> voor verbeteringen in het algemeen!
+<h1>Credits</h1>
+Veel dank aan <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> voor het design
+& <a href=\'https://github.com/cketti\'>Cketti</a>,
+<a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
+& <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
+voor verbeteringen in het algemeen!
 
-<H1>Feedback</H1>
+<h1>Feedback</h1>
 Geef feedback in de <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> of je kan een <a href=\'mailto:ligi@ligi.de\'>email</a> naar de maker sturen. Als je de app leuk vindt, kan je dit hier laten weten: <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Ik ben ook altijd benieuwd om te weten op welke manier je de app gebruikt.
 
 <h1>Geschiedenis</h1>
@@ -54,16 +58,18 @@ Een jaar later - net voor 30c3 - begon ik terug wat te werken aan de app, voor 2
 
 Dit heeft geleid tot PassAndroid - een volledig nieuwe versie - met een nieuwe look en nieuwe functionaliteiten.
 
-<H1>Meer</H1>
+<h1>Meer</h1>
 This app is best launched with <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> which is available for free and needs not a single permission!
 
-<H1>Legal</H1>This app is not affiliated with Apple - Passbook might be Trademark by Apple, but introduced like a standard so this should be OK <br/>
-
-THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+<h1>Legal</h1>
+<p>This app is not affiliated with Apple - Passbook might be trademarked by Apple, but it\'s introduced like a standard so this should be okay.</p>
+<p>
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
 
     ]]></string>
   <string name="drawer_open">open</string>
@@ -109,7 +115,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     </string>
   <string name="downloading_new_pass_version">Nieuwe pas versie aan het downloaden</string>
   <string name="unzip_pass_dialog_title">Passbook aan het openen</string>
-  <string name="unzip_pass_dialog_message">Even geduld...</string>
+  <string name="unzip_pass_dialog_message">Even geduld…</string>
   <string name="action_update">update</string>
   <string name="no_calendar_app_found">Geen kalender app gevonden</string>
   <string name="pass_updated">Pas geupdated</string>
@@ -125,7 +131,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">En %d meer</string>
   <string name="scan_finished_dialog_title">Zoekactie afgewerkt.</string>
   <string name="scan_finished_dialog_text">%d passen gevonden</string>
-  <string name="scan_progressdialog_title">Zoeken...</string>
+  <string name="scan_progressdialog_title">Zoeken…</string>
   <string name="scan_progressdialog_message">Even geduld.</string>
   <string name="scan_dialog_send_background_button">achtergrond</string>
   <string name="emtytrash_label">Prullenbak leegmaken</string>
@@ -156,7 +162,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="new_topic_input_hint">Titel voor nieuwe groep</string>
   <string name="new_topic_suggestions">Suggesties:</string>
   <string name="cannot_be_empty">kan niet leeg zijn</string>
-  <string name="please_use_the_swipe_feature">Swipe om te verplaatsen naar een andere groep,...</string>
+  <string name="please_use_the_swipe_feature">Swipe om te verplaatsen naar een andere groep</string>
   <string name="type">Type</string>
   <string name="undo">ongedaan maken</string>
   <string name="sort_order_date_asc">Datum oplopend</string>

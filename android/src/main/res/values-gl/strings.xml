@@ -11,11 +11,14 @@
 <h1>Qué é esto?</h1>
 Este aplicativo é un visor de passbooks - un passbook podería ser por exemplo <b>un billete de embarque</b> para o seu voo, un vale para un trago no seu destino, a entrada do cine, unha tarxeta de membresía - hai moitas posibilidades.
 Básicamente é o substituto de un anaco de papel ou plástico que levaría con vostede - así salvamos algunhas árbores e <b>reducimos o lixo!</b>
+
 <h1>Exemplos de passes</h1>
 Precisa algún pass para practicar e ver cómo son? <a href=\'http://espass.it/examples/\'>Aquí ten algúns</a> para vostede!
+
 <h1>Cómo funcionan?</h1>
 Hai o que se chaman ficheiros pkpass - pode abrilos con este app - ex. cando os recibe a través do email ou os descarga. O máis importante é o Código de Barras que contén (QR, AZTEC e PDF417) que será o que o identifica ou autoriza - pero tamén contén apartados como a descrición - normalmente unha data e hora (así pode engadilo ao Calendario) - tamén localización (ou darlle endereitas) - simplemente próbeos!!
 Unha vez descargado o pass pode utilizalo sen estar en liña!
+
 <h1>PMF</h1>
 <h2>Cómo paso os passbooks do iPhone a PassAndroid?</h2>
 <ol>
@@ -26,24 +29,37 @@ Unha vez descargado o pass pode utilizalo sen estar en liña!
 <li>Permita a PassAndroid buscar passbooks.</li>
 <li>O novo passbook é visible en PassAndroid.</li>
 </ol>
-<H1>Créditos</H1>
-Moitas grazas a <a href="http://ltorrecilla.com/">Luis Torrecilla</a> polo Deseño & <a href="https://github.com/cketti">Cketti</a> & <a href="https://github.com/simontb">Simon Tenbeitel</a> polos pull-requests!
-<H1>Reporte</H1>
+
+<h1>Créditos</h1>
+Moitas grazas a <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> polo Deseño
+& <a href=\'https://github.com/cketti\'>Cketti</a>,
+<a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
+& <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
+polos pull-requests!
+
+<h1>Reporte</h1>
 Reporte en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> ou pode deixar <a href=\'mailto:ligi@ligi.de\'>aquí un correo.</a> Si lle gusta puntúe en  <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Gustaríame saber tamén qué usos lle da a este app.
+
 <h1>Historial</h1>
 Batín nos ficheiros passbook cando me apuntei ao 29c3 - Gostei da idea - pero non había un aplicativo Android dispoñible. Vin que era doado de implementar ( só un contedor zip con json e imaxes ) - A primeira versión foi escrita moi rápido e para min xa funcionaba ( entrei ao 29C3 ) - No seguinte ano non traballei moito no app xa que non tiña moito uso que darlle pero había moita xente descargándoo ( case 100k agora ) e arranxeino para varios passes que me enviaron ( algúns passes tiñan json defectuoso ... ) 
 Un ano despois - xusto antes de 30C3 - voltei traballar un pouco no app - por dúas razóns:
  - un amigo meu está moi metido no asunto este de BTLE e testemuños de localización  / contexto que podería ser interesante para Passbook - pero nada finalizado
  - recibín un email dun amable deseñador que fixo un bo redeseño
 Esto todo levou a PassAndroid - unha nova versión ao completo - con un novo aspecto e novas funcións (ordenar e engadir ao calendario xunto coa caixa de navegación e o menú contextual da barra de accións
-<H1>Máis</H1>
+
+<h1>Máis</h1>
 Este app iniciase mellor con <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a> que é gratuíta e non precisa nin un só permiso!
-<H1>Legal</H1>Este aplicativo non está afiliado a Apple - Passbook podería ser unha marca rexistrada de Apple, mais utilizada como estándar así que non debería haber problema <br/>
+
+<h1>Legal</h1>
+<p>Este aplicativo non está afiliado a Apple - Passbook podería ser unha marca rexistrada de Apple, mais utilizada como estándar así que non debería haber problema</p>
+<p>
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+
     ]]></string>
     <string name="drawer_open">"abrir"</string>
     <string name="drawer_close">"pechar"</string>
@@ -88,7 +104,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     </string>
     <string name="downloading_new_pass_version">descargando nova versión do pass</string>
     <string name="unzip_pass_dialog_title">Abrindo Passbook</string>
-    <string name="unzip_pass_dialog_message">Por favor agarde...</string>
+    <string name="unzip_pass_dialog_message">Por favor agarde…</string>
     <string name="action_update">actualizar</string>
     <string name="no_calendar_app_found">Non se atopou app de Calendario</string>
     <string name="pass_updated">Pass actualizado</string>
@@ -104,7 +120,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="found__pass">e %d máis</string>
     <string name="scan_finished_dialog_title">Busca finalizada.</string>
     <string name="scan_finished_dialog_text">atopou %d passes</string>
-    <string name="scan_progressdialog_title">Buscando ...</string>
+    <string name="scan_progressdialog_title">Buscando…</string>
     <string name="scan_progressdialog_message">Por favor agarde.</string>
     <string name="scan_dialog_send_background_button">fondo</string>
     <string name="emtytrash_label">lixo baldeiro</string>
@@ -183,7 +199,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="field_source_pdf">PDF</string>
     <string name="field_note_pdf">Esto importouse de un PDF - non é un pass verdadeiro</string>
     <string name="nav_settings">Axustes</string>
-    <string name="nav_github">Github</string>
+    <string name="nav_github">GitHub</string>
     <string name="nav_betatest_opt_in_out">Entrar/Saír da versión beta</string>
     <string name="nav_community_on_google">Comunidade google+</string>
     <string name="nav_improve_translation">Mellore a tradución</string>
