@@ -2,10 +2,12 @@
 <resources>
   <string name="app_name">PassAndroid</string>
   <string name="logo">Logo</string>
-  <string name="menu_map">zeige auf Karte</string>
-  <string name="menu_delete">löschen</string>
-  <string name="menu_share">teilen</string>
-  <string name="barcode">barcode</string>
+  <string name="menu_map">Zeige auf Karte</string>
+  <string name="menu_delete">Löschen</string>
+  <string name="menu_share">Teilen</string>
+  <string name="menu_print">Drucken</string>
+  <string name="menu_edit">Bearbeiten</string>
+  <string name="barcode">Barcode</string>
   <string name="help_label">Hilfe</string>
   <string name="help_content"><![CDATA[
 <h1>Worum handelt es sich?</h1>
@@ -20,8 +22,8 @@ Brauchst du ein paar Karten um die Anwendung auszuprobieren?
 
 <h1>Wie funktioniert das Ganze?</h1>
 
-Es gibt sogenannte esPass und pkpass Dateien. Du kannst sie mit dieser Anwendung öffnen. Oft bekommst Du sie via E-Mail oder als Download nachdem du z.B. deinen Eintritt oder deine Fahrkarte bezahlt hast.
-Das Wichtigste daran ist der Barcode, den du zu sehen bekommst und den Du dann oft vorzeigen musst - aber es gibt auch anderen interessanten Inhalt wie relevante Örtlichkeiten (die du dann auf einer Karte siehst) oder auch die Zeit, die du dann in den Kalender übernehmen kannst.
+Es gibt sogenannte esPass und pkpass Dateien. Du kannst sie mit dieser Anwendung öffnen. Oft bekommst Du sie via E-Mail oder als Download, nachdem du z. B. deinen Eintritt oder deine Fahrkarte bezahlt hast.
+Das Wichtigste daran ist der Barcode, den du zu sehen bekommst, und den Du dann oft vorzeigen musst - aber es gibt auch anderen interessanten Inhalt wie relevante Örtlichkeiten (die du dann auf einer Karte siehst) oder auch die Zeit, die du dann in den Kalender übernehmen kannst.
 Du kannst die Anwendung ohne Internet benutzen, sobald du den Pass geladen hast.
 
 <h1>Häufige Fragen</h1>
@@ -63,14 +65,14 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 </p>
 
 ]]></string>
-  <string name="drawer_open">öffnen</string>
-  <string name="drawer_close">schließen</string>
+  <string name="drawer_open">Öffnen</string>
+  <string name="drawer_close">Schließen</string>
   <string name="pass_problem">Es gab da leider ein Problem mit dem Pass. Es währ hilfreich wenn Du mir den Pass schickst damit ich analysieren kann was das Problem ist.</string>
   <string name="problem">Problem</string>
-  <string name="send">senden</string>
-  <string name="delete">Löschen!</string>
-  <string name="choose_location">wähle den Ort</string>
-  <string name="boarding_pass">boardkarte</string>
+  <string name="send">Senden</string>
+  <string name="delete">Löschen</string>
+  <string name="choose_location">Wähle den Ort</string>
+  <string name="boarding_pass">Boardkarte</string>
   <string name="category_event">Event</string>
   <string name="category_coupon">Gutschein</string>
   <string name="category_storecard">Treuekarte</string>
@@ -81,9 +83,9 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_sort_category">Kategorie</string>
   <string name="nav_sort_date">Datum</string>
   <string name="nav_categories">Kategorien</string>
-  <string name="nav_share">teilen</string>
+  <string name="nav_share">Teilen</string>
   <string name="pass_directions">Navigation</string>
-  <string name="pass_to_calendar">zum Kalender</string>
+  <string name="pass_to_calendar">Zum Kalender</string>
   <string name="invalid_passbook_title">Ungültiger Pass</string>
   <string name="preparing_pass">Bereite Pass vor</string>
   <string name="please_wait">Bitte warten, sollte nicht lange dauern</string>
@@ -91,11 +93,11 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="passbook_share_chooser_title">Wie soll der Pass gesendet werden?</string>
   <string name="dialog_delete_confirm_text">Wollen Sie diesen Pass wirklich löschen?</string>
   <string name="dialog_delete_title">Sicher?</string>
-  <string name="dialog_delete_confirm_delete_source_checkbox">auch die Quelle entfernen?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">Auch die Quelle entfernen?</string>
   <string name="more">MEHR</string>
   <string name="less">WENIGER</string>
   <string name="scanning_for_passes">Suche nach Pässen</string>
-  <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Datein</string>
+  <string name="fab_choice_scan_pkpass_files">Suche nach pkpass Dateien</string>
   <string name="fab_choice_add_demo_pass">Demo-Pässe</string>
   <string name="fab_choice_create_pass">Erstelle Pass</string>
   <string name="empty_text_view"><big><b>Noch kein Pass geladen</b></big>
@@ -109,12 +111,12 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="action_update">Aktualisiere</string>
   <string name="no_calendar_app_found">Keine Kalender-App gefunden</string>
   <string name="pass_updated">Pass aktualisiert</string>
-  <string name="expiration_date_to_calendar_warning_message">Du möchtest ein Ablaufdatum zum Kalender hinzufügen. Wenn du denkst, ein besseres Datum ist auf dem Pass vorhanden, bitte sag mir Bescheid! PassAndroid sollte es automatisch erkennen.</string>
+  <string name="expiration_date_to_calendar_warning_message">Du möchtest ein Ablaufdatum zum Kalender hinzufügen. Wenn du denkst, dass ein besseres Datum auf dem Pass vorhanden ist, bitte sag mir Bescheid! PassAndroid sollte es automatisch erkennen.</string>
   <string name="expiration_date_to_calendar_warning_title">Füge Ablaufdatum hinzu</string>
   <string name="topic_trash">Papierkorb</string>
   <string name="topic_new">Neu</string>
   <string name="topic_archive">Archiv</string>
-  <string name="move_to_new_topic">Sortiere in neue Kategory ein</string>
+  <string name="move_to_new_topic">Sortiere in neue Kategorie ein</string>
   <string name="categories_nav">%d Kategorien</string>
   <string name="passes_nav">%d Pässe</string>
   <string name="found_pass">Gefunden: %s</string>
@@ -122,7 +124,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="scan_finished_dialog_title">Suche abgeschlossen</string>
   <string name="scan_finished_dialog_text">%d Pässe gefunden</string>
   <string name="scan_progressdialog_title">Suche…</string>
-  <string name="scan_progressdialog_message">Bitte warten.</string>
+  <string name="scan_progressdialog_message">Bitte warten</string>
   <string name="scan_dialog_send_background_button">Hintergrund</string>
   <string name="emtytrash_label">Leere Papierkorb</string>
   <string name="barcode_edit_hint_alternative_message">Alternative Nachricht</string>
@@ -139,7 +141,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="add_front_field">Füge Vorderseitenfeld hinzu</string>
   <string name="add_back_fields">Füge Rückseitenfeld hinzu</string>
   <string name="change_color_dialog_title">Wähle Farbe aus</string>
-  <string name="select_category_dialog_title">Wähle eine Kategory aus</string>
+  <string name="select_category_dialog_title">Wähle eine Kategorie aus</string>
   <string name="barcode_edit_code128">Code 128</string>
   <string name="barcode_edit_code39">Code 39</string>
   <string name="add_footer_image">Füge Fußzeilenbild hinzu</string>
@@ -149,12 +151,12 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="edit_barcode_dialog_title">Bearbeite Barcode</string>
   <string name="empty_trash_dialog_message">Wirklich den Papierkorb leeren? Du kannst die Pässe nicht wiederherstellen.</string>
   <string name="empty_trash_dialog_title">Warnung</string>
-  <string name="new_topic_input_hint">Titel für die neue Kategory</string>
+  <string name="new_topic_input_hint">Titel für die neue Kategorie</string>
   <string name="new_topic_suggestions">Vorschläge:</string>
   <string name="cannot_be_empty">Darf nicht leer sein</string>
   <string name="please_use_the_swipe_feature">Bitte nutze die Wischfunktion</string>
   <string name="type">Typ</string>
-  <string name="undo">rückgängig</string>
+  <string name="undo">Rückgängig</string>
   <string name="sort_order_date_asc">Datum, aufsteigend</string>
   <string name="sort_order_date_desc">Datum, absteigend</string>
   <string name="sort_order_date_type">Typ</string>
@@ -192,6 +194,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_improve_translation">Verbessere die Übersetzung</string>
   <string name="launcher_shortcut">Launcher-Verknüpfung</string>
   <string name="open_file">Datei öffnen</string>
-  <string name="error_no_permission_msg">Berechtigung zum Improtieren erforderlich</string>
+  <string name="error_no_permission_msg">Berechtigung zum Importieren erforderlich</string>
   <string name="error_no_permission_title">Berechtigungsfehler</string>
 </resources>
