@@ -5,6 +5,8 @@
     <string name="menu_map">"show on map"</string>
     <string name="menu_delete">"delete"</string>
     <string name="menu_share">"share"</string>
+    <string name="menu_print">"print"</string>
+    <string name="menu_edit">"edit"</string>
     <string name="barcode">"barcode"</string>
     <string name="help_label">"Help"</string>
 <string name="help_content"><![CDATA[
