@@ -16,13 +16,13 @@
     <item
             android:id="@+id/menu_edit"
             yourapp:showAsAction="ifRoom"
-            android:title="edit"
+            android:title="@string/menu_edit"
             android:icon="@drawable/ic_editor_mode_edit"/>
 
     <item
             android:id="@+id/menu_print"
             yourapp:showAsAction="ifRoom"
-            android:title="print"
+            android:title="@string/menu_print"
             android:icon="@drawable/ic_action_print"/>
 
     <item
