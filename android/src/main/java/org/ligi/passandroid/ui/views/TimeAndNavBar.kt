@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui.views
 
 import android.content.Context
-import android.support.v7.widget.AppCompatDrawableManager
+import androidx.appcompat.widget.AppCompatDrawableManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout

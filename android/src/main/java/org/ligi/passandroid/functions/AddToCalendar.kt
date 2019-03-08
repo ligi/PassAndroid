@@ -3,9 +3,9 @@ package org.ligi.passandroid.functions
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.provider.CalendarContract
-import android.support.annotation.VisibleForTesting
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
+import androidx.annotation.VisibleForTesting
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.Pass

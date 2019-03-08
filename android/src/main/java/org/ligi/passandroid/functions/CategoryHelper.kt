@@ -1,9 +1,9 @@
 package org.ligi.passandroid.functions
 
 import android.graphics.Color
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.PassType
 

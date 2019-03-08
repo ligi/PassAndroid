@@ -2,7 +2,7 @@ package org.ligi.passandroid.ui.quirk_fix
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView

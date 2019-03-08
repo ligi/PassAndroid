@@ -9,7 +9,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/zoomOut"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_action_zoom_out"
@@ -28,7 +28,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/barcode"/>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/zoomIn"
                 app:srcCompat="@drawable/ic_action_zoom_in"
                 android:layout_width="wrap_content"

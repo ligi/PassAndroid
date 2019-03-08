@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui.edit
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +26,7 @@ class FieldsEditFragment : Fragment() {
         this.inflater = inflater
         val inflate = inflater.inflate(R.layout.edit_fields, container, false)
 
-        isEditingHiddenFields = arguments.getBoolean(ARGUMENT_KEY)
+        arguments?.let { isEditingHiddenFields = it.getBoolean(ARGUMENT_KEY) }
 
         if (isEditingHiddenFields) {
             inflate.add_field.setText(R.string.add_back_fields)

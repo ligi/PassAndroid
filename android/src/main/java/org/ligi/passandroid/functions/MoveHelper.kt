@@ -1,7 +1,7 @@
 package org.ligi.passandroid.functions
 
 import android.app.Activity
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassClassifier
 import org.ligi.passandroid.model.pass.Pass

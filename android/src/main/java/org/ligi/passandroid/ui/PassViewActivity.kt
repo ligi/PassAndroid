@@ -2,11 +2,14 @@ package org.ligi.passandroid.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.*
-import android.support.v4.view.ViewPager
+import androidx.core.app.*
+import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import org.ligi.kaxt.disableRotation
 import org.ligi.passandroid.R
@@ -19,6 +22,13 @@ class PassViewActivity : PassViewActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= 27) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+        }
 
         disableRotation()
         setContentView(R.layout.activity_pass_view)
@@ -95,18 +105,18 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> {
             val upIntent = NavUtils.getParentActivityIntent(this)
-            if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-                TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities()
-                finish()
-            } else {
-                NavUtils.navigateUpTo(this, upIntent)
+            if (upIntent != null) {
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                    TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities()
+                    finish()
+                } else {
+                    NavUtils.navigateUpTo(this, upIntent)
+                }
+                true
             }
-            true
+            else false
         }
 
         else -> super.onOptionsItemSelected(item)
     }
-
-    override fun onAttachedToWindow() = window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-
 }

@@ -1,7 +1,7 @@
 package org.ligi.passandroid.functions
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 import org.assertj.core.api.Fail.fail
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore

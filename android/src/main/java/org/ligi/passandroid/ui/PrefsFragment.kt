@@ -3,9 +3,9 @@ package org.ligi.passandroid.ui
 import android.Manifest
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.app.AppCompatDelegate
-import android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO
-import android.support.v7.preference.PreferenceFragmentCompat
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO
+import androidx.preference.PreferenceFragmentCompat
 import org.ligi.kaxt.recreateWhenPossible
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
@@ -31,11 +31,11 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
             @AppCompatDelegate.NightMode val nightMode = App.settings.getNightMode()
 
             if (nightMode == MODE_NIGHT_AUTO) {
-                PrefsFragmentPermissionsDispatcher.ensureDayNightWithCheck(this)
+                ensureDayNightWithPermissionCheck()
             }
 
             AppCompatDelegate.setDefaultNightMode(nightMode)
-            activity.recreateWhenPossible()
+            activity?.recreateWhenPossible()
         }
     }
 
@@ -51,7 +51,7 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PrefsFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
 }

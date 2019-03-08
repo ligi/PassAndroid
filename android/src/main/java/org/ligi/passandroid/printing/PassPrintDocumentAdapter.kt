@@ -69,7 +69,7 @@ class PassPrintDocumentAdapter(private val context: Context, private val pass: P
         val centerPaint = Paint()
         centerPaint.textAlign = Paint.Align.CENTER
 
-        canvas.drawText(pass.description, canvas.width / 2f, centerPaint.textSize, centerPaint)
+        canvas.drawText(pass.description!!, canvas.width / 2f, centerPaint.textSize, centerPaint)
         var currentBottom = centerPaint.textSize * 3
 
         val barCode = pass.barCode
@@ -83,14 +83,14 @@ class PassPrintDocumentAdapter(private val context: Context, private val pass: P
 
                 val destRect = Rect(0, 0, (bitmap.width * ratio).toInt(), (bitmap.height * ratio).toInt())
 
-                destRect.offset(((canvas.width - destRect.width()) / 2).toInt(), currentBottom.toInt())
+                destRect.offset((canvas.width - destRect.width()) / 2, currentBottom.toInt())
 
                 currentBottom += destRect.bottom
 
                 canvas.drawBitmap(bitmap, srcRect, destRect, centerPaint)
 
                 if (barCode.alternativeText != null) {
-                    canvas.drawText(barCode.alternativeText, destRect.centerX().toFloat(), destRect.bottom.toFloat() + 7 + centerPaint.textSize, centerPaint)
+                    canvas.drawText(barCode.alternativeText!!, destRect.centerX().toFloat(), destRect.bottom.toFloat() + 7 + centerPaint.textSize, centerPaint)
                     currentBottom += 7 + centerPaint.textSize * 2
                 }
             }

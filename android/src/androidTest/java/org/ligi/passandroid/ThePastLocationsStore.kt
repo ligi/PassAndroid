@@ -2,7 +2,7 @@ package org.ligi.passandroid
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.test.InstrumentationRegistry.getInstrumentation
+import androidx.test.InstrumentationRegistry.getInstrumentation
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Rule

@@ -20,7 +20,7 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
     override fun onResume() {
         super.onResume()
 
-        if (currentPass == null || currentPass.barCode == null) {
+        if (currentPass.barCode == null) {
             Log.w("FullscreenBarcodeActivity in bad state")
             finish() // this should never happen, but better safe than sorry
             return

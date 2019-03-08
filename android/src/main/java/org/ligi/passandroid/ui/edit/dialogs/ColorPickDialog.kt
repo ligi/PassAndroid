@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui.edit.dialogs
 
 import android.content.Context
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.edit_color.view.*
 import org.greenrobot.eventbus.EventBus

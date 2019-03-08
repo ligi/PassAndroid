@@ -1,6 +1,6 @@
 package org.ligi.passandroid;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.InstrumentationRegistry;
 import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;

@@ -3,7 +3,7 @@ package org.ligi.passandroid.ui
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.design.widget.NavigationView
+import com.google.android.material.navigation.NavigationView
 import android.util.AttributeSet
 import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*

@@ -2,7 +2,7 @@ package org.ligi.passandroid.ui
 
 import android.app.Activity
 import android.app.ProgressDialog
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore

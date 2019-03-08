@@ -1,9 +1,9 @@
 package org.ligi.passandroid.ui
 
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.github.salomonbrys.kodein.instance
@@ -17,7 +17,7 @@ import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 
-class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : RecyclerView.Adapter<PassViewHolder>() {
+class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : androidx.recyclerview.widget.RecyclerView.Adapter<PassViewHolder>() {
 
     val passStore: PassStore = App.kodein.instance()
     val settings: Settings = App.kodein.instance()
@@ -25,7 +25,7 @@ class PassAdapter(private val passListActivity: AppCompatActivity, private val p
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PassViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
 
-        val res = inflater.inflate(R.layout.pass_list_item, viewGroup, false) as CardView
+        val res = inflater.inflate(R.layout.pass_list_item, viewGroup, false) as androidx.cardview.widget.CardView
         if (settings.isCondensedModeEnabled()) {
             return CondensedPassViewHolder(res)
         } else {

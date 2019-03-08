@@ -10,11 +10,11 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.view.GravityCompat
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -99,7 +99,7 @@ class PassListActivity : PassAndroidActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PassListActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
@@ -162,7 +162,7 @@ class PassListActivity : PassAndroidActivity() {
 
             override fun onPageSelected(position: Int) {
                 State.lastSelectedTab = position
-                supportInvalidateOptionsMenu()
+                invalidateOptionsMenu()
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -189,7 +189,7 @@ class PassListActivity : PassAndroidActivity() {
         }
 
         fab_action_scan.setOnClickListener {
-            PassListActivityPermissionsDispatcher.scanWithCheck(this)
+            scanWithPermissionCheck()
             fam.collapse()
         }
 
@@ -214,18 +214,21 @@ class PassListActivity : PassAndroidActivity() {
         }
 
         R.id.menu_emptytrash -> {
-            AlertDialog.Builder(this).setMessage(getString(R.string.empty_trash_dialog_message)).setIcon(R.drawable.ic_alert_warning).setTitle(getString(R.string.empty_trash_dialog_title)).setPositiveButton(R.string.emtytrash_label) { dialog, which ->
-                val passStoreProjection = PassStoreProjection(passStore,
-                        getString(R.string.topic_trash),
-                        null)
+            AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.empty_trash_dialog_message))
+                    .setIcon(R.drawable.ic_alert_warning)
+                    .setTitle(getString(R.string.empty_trash_dialog_title))
+                    .setPositiveButton(R.string.emtytrash_label) { _, _ ->
+                        val passStoreProjection = PassStoreProjection(passStore,
+                                getString(R.string.topic_trash),
+                                null)
 
-                for (pass in passStoreProjection.passList) {
-                    passStore.deletePassWithId(pass.id)
-                }
+                        for (pass in passStoreProjection.passList) {
+                            passStore.deletePassWithId(pass.id)
+                        }
             }.setNegativeButton(android.R.string.cancel, null).show()
             true
         }
-
         else -> drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
     }
 
@@ -269,7 +272,7 @@ class PassListActivity : PassAndroidActivity() {
 
         setupWithViewPagerIfNeeded()
 
-        supportInvalidateOptionsMenu()
+        invalidateOptionsMenu()
 
         val empty = passStore.classifier.topicByIdMap.isEmpty()
         emptyView.visibility = if (empty) View.VISIBLE else View.GONE
@@ -284,7 +287,6 @@ class PassListActivity : PassAndroidActivity() {
     }
 
     private fun areTabLayoutAndViewPagerInSync(): Boolean {
-
         if (adapter.count != tab_layout.tabCount) {
             return false
         }
@@ -296,7 +298,6 @@ class PassListActivity : PassAndroidActivity() {
             }
         }
         return true
-
     }
 
     override fun onBackPressed() {
@@ -306,5 +307,4 @@ class PassListActivity : PassAndroidActivity() {
             else -> super.onBackPressed()
         }
     }
-
 }

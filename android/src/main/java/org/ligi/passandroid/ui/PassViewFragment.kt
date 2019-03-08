@@ -2,8 +2,8 @@ package org.ligi.passandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.text.util.LinkifyCompat
+import androidx.fragment.app.Fragment
+import androidx.core.text.util.LinkifyCompat
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +27,7 @@ import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 
 class PassViewFragment : Fragment() {
 
-    private val passViewHelper by lazy { PassViewHelper(activity) }
+    private val passViewHelper by lazy { PassViewHelper(requireActivity()) }
     private var passStore : PassStore = App.kodein.instance()
     lateinit var currentPass : Pass
 
@@ -57,10 +57,10 @@ class PassViewFragment : Fragment() {
         }
 
         barcode_img.setOnClickListener {
-            activity.startActivityFromClass(FullscreenBarcodeActivity::class.java)
+            activity?.startActivityFromClass(FullscreenBarcodeActivity::class.java)
         }
 
-        BarcodeUIController(view!!, currentPass.barCode, activity, passViewHelper)
+        BarcodeUIController(view!!, currentPass.barCode, activity!!, passViewHelper)
 
         processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, currentPass)
         processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, currentPass)
@@ -82,15 +82,15 @@ class PassViewFragment : Fragment() {
             if (field.hide) {
                 backStrBuilder.append(field.toHtmlSnippet())
             } else {
-                val v = activity.layoutInflater.inflate(R.layout.main_field_item, front_field_container, false)
-                val key = v.findViewById(R.id.key) as TextView
-                key.text = field.label
-                val value = v.findViewById(R.id.value) as TextView
-                value.text = field.value
+                val v = activity!!.layoutInflater.inflate(R.layout.main_field_item, front_field_container, false)
+                val key = v?.findViewById<TextView>(R.id.key)
+                key?.text = field.label
+                val value = v?.findViewById<TextView>(R.id.value)
+                value?.text = field.value
 
                 front_field_container.addView(v)
-                LinkifyCompat.addLinks(key, Linkify.ALL)
-                LinkifyCompat.addLinks(value, Linkify.ALL)
+                key?.let { LinkifyCompat.addLinks(it, Linkify.ALL) }
+                value?.let { LinkifyCompat.addLinks(it, Linkify.ALL) }
             }
         }
 
@@ -104,8 +104,7 @@ class PassViewFragment : Fragment() {
         LinkifyCompat.addLinks(back_fields, Linkify.ALL)
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
-        passViewHolder.apply(currentPass, passStore, activity)
-
+        passViewHolder.apply(currentPass, passStore, activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -126,10 +125,10 @@ class PassViewFragment : Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val passExtrasView = activity.layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
+        val passExtrasView = activity!!.layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
         passExtrasContainer.addView(passExtrasView)
     }
 }

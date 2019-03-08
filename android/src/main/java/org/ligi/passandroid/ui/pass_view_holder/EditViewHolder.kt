@@ -3,8 +3,8 @@ package org.ligi.passandroid.ui.pass_view_holder
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.CardView
+import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import android.view.View.VISIBLE
 import android.widget.DatePicker
 import android.widget.TimePicker
@@ -17,7 +17,7 @@ import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.ui.Visibility
 import org.threeten.bp.ZonedDateTime
 
-class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+class EditViewHolder(view: androidx.cardview.widget.CardView) : VerbosePassViewHolder(view), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     lateinit private var time: ZonedDateTime
     lateinit private var pass: PassImpl

@@ -1,10 +1,10 @@
 package org.ligi.passandroid
 
 import android.os.Build
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.v7.app.AppCompatDelegate
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.appcompat.app.AppCompatDelegate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
