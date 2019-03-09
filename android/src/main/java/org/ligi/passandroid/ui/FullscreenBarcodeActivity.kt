@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -15,6 +16,13 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fullscreen_image)
+
+        if (Build.VERSION.SDK_INT >= 27) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+        }
     }
 
     override fun onResume() {
@@ -71,9 +79,4 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
 
         }
     }
-
-    override fun onAttachedToWindow() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-    }
-
 }

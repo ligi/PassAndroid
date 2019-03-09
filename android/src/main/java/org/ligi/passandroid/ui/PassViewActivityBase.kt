@@ -5,8 +5,11 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +28,7 @@ import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpe
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.io.IOException
+import java.util.*
 
 @SuppressLint("Registered")
 @RuntimePermissions
@@ -146,23 +150,34 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     @NeedsPermission("com.android.launcher.permission.INSTALL_SHORTCUT")
     fun createShortcut() {
-        val intent = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
         val shortcutIntent = Intent()
         shortcutIntent.putExtra(EXTRA_KEY_UUID, currentPass.id)
-        val component = ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".ui.PassViewActivity")
-        shortcutIntent.component = component
-        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
-        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.description)
+        shortcutIntent.component = ComponentName(BuildConfig.APPLICATION_ID,
+                BuildConfig.APPLICATION_ID + ".ui.PassViewActivity")
 
         val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
-
-        val bitmapToUse = if (passBitmap != null) {
+        val shortcutIcon = if (passBitmap != null) {
             Bitmap.createScaledBitmap(passBitmap, 128, 128, true)
         } else {
             BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
         }
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, bitmapToUse)
-        sendBroadcast(intent)
+
+        if (Build.VERSION.SDK_INT >= 25) {
+            val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+            val shortcut = ShortcutInfo.Builder(this, "id1")
+                    .setShortLabel(currentPass.description ?: "")
+                    .setIcon(Icon.createWithBitmap(shortcutIcon))
+                    .setIntent(shortcutIntent)
+                    .build()
+
+            shortcutManager!!.dynamicShortcuts = Arrays.asList(shortcut)
+        } else {
+            val intent = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.description)
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, shortcutIcon)
+            sendBroadcast(intent)
+        }
     }
 
     inner class UpdateAsync : Runnable {
@@ -248,7 +263,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
         params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
         win.attributes = params
         fullBrightnessSet = true
-        supportInvalidateOptionsMenu()
+        invalidateOptionsMenu()
     }
 
     companion object {
