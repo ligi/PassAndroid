@@ -29,7 +29,7 @@ class PassViewFragment : Fragment() {
 
     private val passViewHelper by lazy { PassViewHelper(requireActivity()) }
     private var passStore : PassStore = App.kodein.instance()
-    lateinit var currentPass : Pass
+    lateinit var pass : Pass
 
     private fun processImage(view: ImageView, name: String, pass: Pass) {
         val bitmap = pass.getBitmap(passStore, name)
@@ -60,15 +60,15 @@ class PassViewFragment : Fragment() {
             activity?.startActivityFromClass(FullscreenBarcodeActivity::class.java)
         }
 
-        BarcodeUIController(view!!, currentPass.barCode, activity!!, passViewHelper)
+        BarcodeUIController(view!!, pass.barCode, activity!!, passViewHelper)
 
-        processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, currentPass)
-        processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, currentPass)
-        processImage(thumbnail_img_view, PassBitmapDefinitions.BITMAP_THUMBNAIL, currentPass)
-        processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, currentPass)
+        processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, pass)
+        processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, pass)
+        processImage(thumbnail_img_view, PassBitmapDefinitions.BITMAP_THUMBNAIL, pass)
+        processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, pass)
 
         if (map_container != null) {
-            if (!(currentPass.locations.isNotEmpty() && PassbookMapsFacade.init(activity))) {
+            if (!(pass.locations.isNotEmpty() && PassbookMapsFacade.init(activity))) {
                 @Suppress("PLUGIN_WARNING")
                 map_container.visibility = View.GONE
             }
@@ -78,7 +78,7 @@ class PassViewFragment : Fragment() {
 
         front_field_container.removeAllViews()
 
-        for (field in currentPass.fields) {
+        for (field in pass.fields) {
             if (field.hide) {
                 backStrBuilder.append(field.toHtmlSnippet())
             } else {
@@ -104,7 +104,7 @@ class PassViewFragment : Fragment() {
         LinkifyCompat.addLinks(back_fields, Linkify.ALL)
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
-        passViewHolder.apply(currentPass, passStore, activity!!)
+        passViewHolder.apply(pass, passStore, activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -113,13 +113,11 @@ class PassViewFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.activity_pass_view_page, container, false)
         arguments?.takeIf { it.containsKey(PassViewActivityBase.EXTRA_KEY_UUID) }?.apply {
             val uuid = getString(PassViewActivityBase.EXTRA_KEY_UUID)
-
-            if (uuid != null) {
-                val passbookForId = passStore.getPassbookForId(uuid)
-                passStore.currentPass = passbookForId
+            pass = if (uuid != null) {
+                passStore.getPassbookForId(uuid) ?: passStore.currentPass!!
+            } else {
+                passStore.currentPass!!
             }
-
-            currentPass = passStore.currentPass!!
         }
 
         return rootView

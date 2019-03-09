@@ -40,8 +40,8 @@ class PassViewActivity : PassViewActivityBase() {
         viewPager.adapter = pagerAdapter
         viewPager.currentItem = pagerAdapter.getPos(currentPass)
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(i: Int) {
-                currentPass = pagerAdapter.getPass(i)
+            override fun onPageSelected(pos: Int) {
+                currentPass = pagerAdapter.getPass(pos)
                 passStore.currentPass = currentPass
             }
         })

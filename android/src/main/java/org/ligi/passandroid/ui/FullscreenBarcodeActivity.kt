@@ -47,7 +47,6 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
      * ( reverse orientation / sensor is the problem here ..)
      */
     private fun setBestFittingOrientationForBarCode() {
-
         if (currentPass.barCode!!.format!!.isQuadratic()) {
             when (requestedOrientation) {
 
