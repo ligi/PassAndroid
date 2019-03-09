@@ -184,7 +184,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="nav_settings">Opciones</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Testeador opt-in/out</string>
-  <string name="nav_community_on_google">Comunidad en google+</string>
-  <string name="nav_improve_translation">Mejora la traducción</string>
+    <string name="nav_improve_translation">Mejora la traducción</string>
   <string name="launcher_shortcut">Enlace lanzador</string>
 </resources>

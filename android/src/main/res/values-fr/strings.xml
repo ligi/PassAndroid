@@ -182,7 +182,6 @@ THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLU
   <string name="nav_settings">Paramètres</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Bêta-testeur ?</string>
-  <string name="nav_community_on_google">Communauté sur Google+</string>
-  <string name="nav_improve_translation">Améliorer la traduction</string>
+    <string name="nav_improve_translation">Améliorer la traduction</string>
   <string name="launcher_shortcut">Raccourci de lancement</string>
 </resources>

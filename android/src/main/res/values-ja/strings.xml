@@ -192,7 +192,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_settings">設定</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">ベータテスト参加/退会</string>
-  <string name="nav_community_on_google">google+ のコミュニティ</string>
-  <string name="nav_improve_translation">翻訳の改善</string>
+    <string name="nav_improve_translation">翻訳の改善</string>
   <string name="launcher_shortcut">ランチャーショートカット</string>
 </resources>

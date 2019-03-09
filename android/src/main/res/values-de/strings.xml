@@ -190,8 +190,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_settings">Einstellungen</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Teilnahme am Beta-Test</string>
-  <string name="nav_community_on_google">Community auf Google+</string>
-  <string name="nav_improve_translation">Verbessere die Übersetzung</string>
+    <string name="nav_improve_translation">Verbessere die Übersetzung</string>
   <string name="launcher_shortcut">Launcher-Verknüpfung</string>
   <string name="open_file">Datei öffnen</string>
   <string name="error_no_permission_msg">Berechtigung zum Importieren erforderlich</string>

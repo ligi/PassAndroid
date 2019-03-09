@@ -31,10 +31,4 @@
             android:title="@string/nav_improve_translation"
             app:showAsAction="ifRoom"/>
 
-    <item
-            android:id="@+id/menu_plus"
-            android:icon="@drawable/ic_social_people"
-            android:title="@string/nav_community_on_google"
-            app:showAsAction="ifRoom"/>
-
 </menu>

@@ -201,7 +201,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="nav_settings">Axustes</string>
     <string name="nav_github">GitHub</string>
     <string name="nav_betatest_opt_in_out">Entrar/Saír da versión beta</string>
-    <string name="nav_community_on_google">Comunidade google+</string>
     <string name="nav_improve_translation">Mellore a tradución</string>
     <string name="launcher_shortcut">Atallo do lanzador</string>
     <string name="open_file">Abrir ficheiro</string>

@@ -61,19 +61,6 @@ class TheNavigationDrawer {
         intended(allOf(hasAction(ACTION_VIEW), hasData("https://play.google.com/apps/testing/org.ligi.passandroid")))
     }
 
-
-    @Test
-    fun testCommunityClick() {
-        testThatNavigationDrawerOpens()
-        rule.screenShot("open_drawer")
-
-        intending(hasAction(ACTION_VIEW)).respondWith(ActivityResult(RESULT_CANCELED, null))
-
-        onView(withText(nav_community_on_google)).perform(click())
-
-        intended(allOf(hasAction(ACTION_VIEW), hasData("https://plus.google.com/communities/116353894782342292067")))
-    }
-
     @Test
     fun testGitHubClick() {
         testThatNavigationDrawerOpens()
