@@ -20,7 +20,7 @@ class ThePreferenceActivity {
     @get:Rule
     val rule = TruleskActivityRule(PreferenceActivity::class.java)
 
-    val androidSettings by lazy { AndroidSettings(rule.activity) }
+    private val androidSettings by lazy { AndroidSettings(rule.activity) }
 
     @Test
     fun autoLightToggles() {

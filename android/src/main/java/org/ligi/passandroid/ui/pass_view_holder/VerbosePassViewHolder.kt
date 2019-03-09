@@ -7,15 +7,15 @@ import kotlinx.android.synthetic.main.edit.view.*
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 
-open class VerbosePassViewHolder(view: androidx.cardview.widget.CardView) : PassViewHolder(view) {
+open class VerbosePassViewHolder(view: CardView) : PassViewHolder(view) {
 
     override fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
         super.apply(pass, passStore, activity)
 
-        val stringToSetForDateOrExtraText = getTimeInfoString(pass) ?: getExtraString(pass)
+        val dateOrExtraText = getTimeInfoString(pass) ?: getExtraString(pass)
 
-        if (stringToSetForDateOrExtraText != null && !stringToSetForDateOrExtraText.isEmpty()) {
-            view.date.text = stringToSetForDateOrExtraText
+        if (dateOrExtraText != null && !dateOrExtraText.isEmpty()) {
+            view.date.text = dateOrExtraText
             view.date.visibility = View.VISIBLE
         } else {
             view.date.visibility = View.GONE

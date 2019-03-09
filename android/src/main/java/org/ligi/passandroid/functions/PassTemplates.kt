@@ -15,7 +15,7 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.util.*
 
-val APP = "passandroid"
+const val APP = "passandroid"
 
 fun createAndAddEmptyPass(passStore: PassStore, resources: Resources): Pass {
     val pass = createBasePass()

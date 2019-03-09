@@ -17,7 +17,7 @@ import org.ligi.passandroid.ui.Visibility
 import org.ligi.passandroid.ui.showNavigateToLocationsDialog
 import org.threeten.bp.ZonedDateTime
 
-abstract class PassViewHolder(val view: androidx.cardview.widget.CardView) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view) {
 
     open fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
         setupButtons(activity, pass)

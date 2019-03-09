@@ -23,7 +23,7 @@ class ThePastLocationsStore {
     @Mock
     lateinit var tracker: Tracker
 
-    val prefs: SharedPreferences by lazy { getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
+    private val prefs: SharedPreferences by lazy { getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
 
     @After
     fun tearDown() {
@@ -34,7 +34,7 @@ class ThePastLocationsStore {
     fun testPastLocationsStoreShouldNeverContainMoreThanMaxElements() {
         val tested = PastLocationsStore(prefs, tracker)
 
-        for (i in 0..PastLocationsStore.MAX_ELEMENTS * 2 - 1) {
+        for (i in 0 until PastLocationsStore.MAX_ELEMENTS * 2) {
             tested.putLocation("" + i)
         }
 
@@ -44,7 +44,7 @@ class ThePastLocationsStore {
 
     @Test
     fun testPastLocationsStoreShouldStoreOnlyOneOfAKind() {
-        val tested = PastLocationsStore(prefs, tracker!!)
+        val tested = PastLocationsStore(prefs, tracker)
 
         for (i in 0..2) {
             tested.putLocation("foo")

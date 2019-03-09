@@ -14,6 +14,8 @@ import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.PassListFragment
 import org.ligi.trulesk.TruleskIntentRule
 
+const val CUSTOM_PROBE = "FOO_PROBE"
+
 class ThePassListSwiping {
 
     @get:Rule
@@ -42,7 +44,6 @@ class ThePassListSwiping {
 
     @Test
     fun testWeCanMoveToCustom() {
-        val CUSTOM_PROBE = "FOO_PROBE"
 
         fakeSwipeLeft()
 

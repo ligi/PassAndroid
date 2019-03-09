@@ -74,7 +74,7 @@ class FieldsEditFragment : Fragment() {
 
     companion object {
 
-        private val ARGUMENT_KEY = "KEY"
+        private const val ARGUMENT_KEY = "KEY"
 
         fun create(primary: Boolean): FieldsEditFragment {
             val fieldsEditFragment = FieldsEditFragment()

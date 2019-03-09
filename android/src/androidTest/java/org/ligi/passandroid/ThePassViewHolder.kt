@@ -16,7 +16,7 @@ import org.threeten.bp.ZonedDateTime
 
 class ThePassViewHolder {
 
-    val currentPass by lazy { App.passStore.currentPass as PassImpl }
+    private val currentPass by lazy { App.passStore.currentPass as PassImpl }
 
     @get:Rule
     var rule = TruleskActivityRule(PassListActivity::class.java, false)

@@ -45,7 +45,6 @@ class PassImportActivity : AppCompatActivity() {
         progressDialog.show()
 
         doImport(false)
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -94,18 +93,13 @@ class PassImportActivity : AppCompatActivity() {
                 } else {
                     tracker.trackException("Error in import", e, false)
                 }
-
             }
-
-
         }.start()
     }
-
 
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun showDeniedDialog() {
         progressDialog.dismissIfShowing()
         alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOKListener = DialogInterface.OnClickListener { _, _ -> finish() })
     }
-
 }

@@ -17,7 +17,7 @@ import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 
-class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : androidx.recyclerview.widget.RecyclerView.Adapter<PassViewHolder>() {
+class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : RecyclerView.Adapter<PassViewHolder>() {
 
     val passStore: PassStore = App.kodein.instance()
     val settings: Settings = App.kodein.instance()
@@ -25,13 +25,12 @@ class PassAdapter(private val passListActivity: AppCompatActivity, private val p
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PassViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
 
-        val res = inflater.inflate(R.layout.pass_list_item, viewGroup, false) as androidx.cardview.widget.CardView
-        if (settings.isCondensedModeEnabled()) {
-            return CondensedPassViewHolder(res)
+        val res = inflater.inflate(R.layout.pass_list_item, viewGroup, false) as CardView
+        return if (settings.isCondensedModeEnabled()) {
+            CondensedPassViewHolder(res)
         } else {
-            return VerbosePassViewHolder(res)
+            VerbosePassViewHolder(res)
         }
-
     }
 
     override fun onBindViewHolder(viewHolder: PassViewHolder, position: Int) {

@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 
-class CondensedPassViewHolder(view: androidx.cardview.widget.CardView) : PassViewHolder(view) {
+class CondensedPassViewHolder(view: CardView) : PassViewHolder(view) {
 
     override fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
         super.apply(pass, passStore, activity)

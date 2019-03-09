@@ -96,7 +96,7 @@ class PassListFragment : Fragment() {
     }
 
     companion object {
-        private val BUNDLE_KEY_TOPIC = "topic"
+        private const val BUNDLE_KEY_TOPIC = "topic"
 
         fun newInstance(topic: String) = PassListFragment().apply {
             val bundle = Bundle()

@@ -17,11 +17,11 @@ import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.ui.Visibility
 import org.threeten.bp.ZonedDateTime
 
-class EditViewHolder(view: androidx.cardview.widget.CardView) : VerbosePassViewHolder(view), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    lateinit private var time: ZonedDateTime
-    lateinit private var pass: PassImpl
-    lateinit private var passStore: PassStore
+    private lateinit var time: ZonedDateTime
+    private lateinit var pass: PassImpl
+    private lateinit var passStore: PassStore
 
     override fun apply(pass: Pass, passStore: PassStore, activity: Activity) {
         super.apply(pass, passStore, activity)
@@ -30,7 +30,7 @@ class EditViewHolder(view: androidx.cardview.widget.CardView) : VerbosePassViewH
         this.passStore = passStore
 
         val calendarTimespan = pass.calendarTimespan
-        time = if (calendarTimespan != null && calendarTimespan.from != null) {
+        time = if (calendarTimespan?.from != null) {
             calendarTimespan.from
         } else {
             ZonedDateTime.now()

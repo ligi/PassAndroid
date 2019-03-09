@@ -15,25 +15,26 @@ import java.net.URLEncoder
 fun Activity.showNavigateToLocationsDialog(pass: Pass, finishOnDone: Boolean) {
     val locations = pass.locations
 
-    if (locations.isEmpty()) {
-        done(this, finishOnDone)
-    } else if (locations.size == 1) {
-        startIntentForLocation(this, locations.first(), pass)
-        done(this, finishOnDone)
-    } else if (locations.size > 1) {
-        val locationDescriptions = arrayOfNulls<String>(locations.size)
-
-        var i = 0
-        for (loc in locations) {
-            locationDescriptions[i++] = loc.getNameWithFallback(pass)
+    when {
+        locations.isEmpty() -> done(this, finishOnDone)
+        locations.size == 1 -> {
+            startIntentForLocation(this, locations.first(), pass)
+            done(this, finishOnDone)
         }
-        AlertDialog.Builder(this).setTitle(this.getString(R.string.choose_location))
-                .setItems(locationDescriptions) { _, which ->
-                    startIntentForLocation(this, locations[which], pass)
-                    done(this, finishOnDone)
-                }
-                .show()
+        locations.size > 1 -> {
+            val locationDescriptions = arrayOfNulls<String>(locations.size)
 
+            var i = 0
+            for (loc in locations) {
+                locationDescriptions[i++] = loc.getNameWithFallback(pass)
+            }
+            AlertDialog.Builder(this).setTitle(this.getString(R.string.choose_location))
+                    .setItems(locationDescriptions) { _, which ->
+                        startIntentForLocation(this, locations[which], pass)
+                        done(this, finishOnDone)
+                    }
+                    .show()
+        }
     }
 }
 

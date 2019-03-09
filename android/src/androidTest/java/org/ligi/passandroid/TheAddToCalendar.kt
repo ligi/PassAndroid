@@ -23,8 +23,8 @@ import org.threeten.bp.ZonedDateTime
 
 class TheAddToCalendar {
 
-    val time = ZonedDateTime.now()
-    val time2 = ZonedDateTime.now().plusHours(3)
+    private val time = ZonedDateTime.now()
+    private val time2 = ZonedDateTime.now().plusHours(3)
 
     @get:Rule
     var rule = TruleskIntentRule(PassListActivity::class.java, false)

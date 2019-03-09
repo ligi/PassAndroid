@@ -55,7 +55,9 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                tools:text="Title"/>
+                                tools:text="Title"
+                                android:inputType="text"
+                                android:importantForAutofill="no" />
 
                     </LinearLayout>
 

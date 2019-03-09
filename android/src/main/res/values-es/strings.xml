@@ -33,7 +33,7 @@ Puedes contribuir en <a href=\'https://plus.google.com/communities/1163538947823
 
 <h1>Historia</h1>
 
-Me topé con los archivos Passbook cuando recibí por primera vez mi entrada para el 29C3 - me gustó la idea - pero no existía una aplicación para Android que me sirviese. Comprobé que la aplicación era bastante sencilla (únicamente un archivo zip con json e imágenes) - La primera versión fue realizada rápidamente y era funcional para mi (me dio acceso al 29C3) - Durante el siguiente año no trabajé en seguir desarrollando la aplicación ya que no tenia mayor uso práctico, pero los usuarios continuaron descargandola (ahora cerca de 100k) por lo que arreglé el procesado de algunos pases que me reportaron (que mostraban de manera incorrecta los json...)
+Me topé con los archivos Passbook cuando recibí por primera vez mi entrada para el 29C3 - me gustó la idea - pero no existía una aplicación para Android que me sirviese. Comprobé que la aplicación era bastante sencilla (únicamente un archivo zip con json e imágenes) - La primera versión fue realizada rápidamente y era funcional para mi (me dio acceso al 29C3) - Durante el siguiente año no trabajé en seguir desarrollando la aplicación ya que no tenia mayor uso práctico, pero los usuarios continuaron descargandola (ahora cerca de 100k) por lo que arreglé el procesado de algunos pases que me reportaron (que mostraban de manera incorrecta los json…)
 Un año después - justo antes del 30C3 - volví al trabajo con esta aplicación - por dos razones:
 -Un amigo, que estaba muy metido en esto de BTLE y las localizaciones, me comentó que podría ser interesante implementarlo en un Passbook - pero nada mas
 -Recibí un email de Luis Torrecilla, un gran diseñador que hizo un bonito y completo rediseño.

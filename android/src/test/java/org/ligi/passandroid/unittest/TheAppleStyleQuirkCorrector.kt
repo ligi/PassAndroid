@@ -10,10 +10,9 @@ import org.mockito.Mockito
 import org.threeten.bp.ZonedDateTime
 import java.util.*
 
+private const val DATE_PROBE = "2016-07-06T21:00:00-04:00"
+
 class TheAppleStyleQuirkCorrector {
-
-    private val DATE_PROBE = "2016-07-06T21:00:00-04:00"
-
     private val tested = ApplePassbookQuirkCorrector(Mockito.mock(Tracker::class.java))
 
     @Test

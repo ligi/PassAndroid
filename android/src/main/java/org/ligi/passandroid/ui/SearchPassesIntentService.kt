@@ -57,7 +57,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         for (path in PastLocationsStore(preferences, tracker).locations) {
-            search_in(File(path), false)
+            searchIn(File(path), false)
         }
 
         // note to future_me: yea one thinks we only need to search root here, but root was /system for me and so
@@ -69,19 +69,19 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
         // up the refreshing of passes as it took so long to traverse all files on the SDCard
         // one could think about not going there anymore but a short look at this showed that it seems cost more time to check than what it gains
         // in download there are mostly single files in a flat dir - no huge tree behind this imho
-        search_in(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), true)
+        searchIn(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), true)
 
         // | /system
-        search_in(Environment.getRootDirectory(), true)
+        searchIn(Environment.getRootDirectory(), true)
 
         // | /mnt/sdcard
-        search_in(Environment.getExternalStorageDirectory(), true)
+        searchIn(Environment.getExternalStorageDirectory(), true)
 
         // | /cache
-        search_in(Environment.getDownloadCacheDirectory(), true)
+        searchIn(Environment.getDownloadCacheDirectory(), true)
 
         // | /data
-        search_in(Environment.getDataDirectory(), true)
+        searchIn(Environment.getDataDirectory(), true)
         notifyManager!!.cancel(PROGRESS_NOTIFICATION_ID)
 
         bus.post(ScanFinishedEvent(foundList!!))
@@ -90,7 +90,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
     /**
      * recursive voyage starting at path to find files named .pkpass
      */
-    private fun search_in(path: File, recursive: Boolean) {
+    private fun searchIn(path: File, recursive: Boolean) {
 
         if (System.currentTimeMillis() - lastProgressUpdate > 1000) {
             lastProgressUpdate = System.currentTimeMillis()
@@ -114,7 +114,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
             }
             Log.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
-                search_in(file, true)
+                searchIn(file, true)
             } else if (file.name.toLowerCase().endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
                 Log.i("found" + file.absolutePath)
 
@@ -149,10 +149,8 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
     }
 
     companion object {
-
-        val PROGRESS_NOTIFICATION_ID = 1
-        val FOUND_NOTIFICATION_ID = 2
-
-        val REQUEST_CODE = 1
+        const val PROGRESS_NOTIFICATION_ID = 1
+        const val FOUND_NOTIFICATION_ID = 2
+        const val REQUEST_CODE = 1
     }
 }

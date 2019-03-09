@@ -7,9 +7,9 @@ import java.util.*
 open class PassByTimeComparator : Comparator<Pass> {
 
     override fun compare(lhs: Pass, rhs: Pass): Int {
-        return calculateCompareForNullValues(lhs, rhs, { leftDate: ZonedDateTime, rightDate: ZonedDateTime ->
+        return calculateCompareForNullValues(lhs, rhs) { leftDate: ZonedDateTime, rightDate: ZonedDateTime ->
             return@calculateCompareForNullValues leftDate.compareTo(rightDate)
-        })
+        }
     }
 
     protected fun calculateCompareForNullValues(lhs: Pass, rhs: Pass, foo: (leftDate: ZonedDateTime, rightDate: ZonedDateTime) -> Int): Int {

@@ -11,7 +11,7 @@ import java.io.File
 
 class AndroidSettings(val context: Context) : Settings {
 
-    internal val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun getSortOrder(): PassSortOrder {
         val key = context.getString(R.string.preference_key_sort)

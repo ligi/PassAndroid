@@ -10,16 +10,16 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.threeten.bp.ZonedDateTime
 
-class TheAddToCalendar {
+const val DESCRIPTIONPROBE = "descriptionprobe"
+const val LOCATIONPROBE = "locationprobe"
 
-    val DESCRIPTIONPROBE = "descriptionprobe"
-    val LOCATIONPROBE = "locationprobe"
+class TheAddToCalendar {
 
     val pass = mock(Pass::class.java).apply {
         `when`(description).thenReturn(DESCRIPTIONPROBE)
     }
 
-    val validTimeSpan = mock(PassImpl.TimeSpan::class.java).apply {
+    private val validTimeSpan = mock(PassImpl.TimeSpan::class.java).apply {
         `when`(from).thenReturn(ZonedDateTime.now())
         `when`(to).thenReturn(ZonedDateTime.now().plusHours(5))
 

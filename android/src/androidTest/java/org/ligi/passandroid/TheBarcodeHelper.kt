@@ -40,6 +40,7 @@ class TheBarcodeHelper {
         testBitMatrixSizeIsSane(PassBarCodeFormat.AZTEC)
     }
 
+    @Test
     fun testBitMatrixSizeIsSane(format: PassBarCodeFormat) {
         try {
             val tested = getBitMatrix("foo-data", format)
@@ -48,9 +49,9 @@ class TheBarcodeHelper {
         } catch (e: Exception) {
             fail("could not create barcode", e)
         }
-
     }
 
+    @Test
     fun testBitmapSizeIsSane(format: PassBarCodeFormat) {
         try {
             val tested2 = generateBarCodeBitmap("foo-data", format)!!
@@ -59,6 +60,5 @@ class TheBarcodeHelper {
         } catch (e: Exception) {
             fail("could not create barcode", e)
         }
-
     }
 }

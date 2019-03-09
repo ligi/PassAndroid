@@ -14,7 +14,7 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
     }
 
     fun moveToTopic(pass: Pass, newTopic: String) {
-        topicByIdMap.put(pass.id, newTopic)
+        topicByIdMap[pass.id] = newTopic
 
         processDataChange()
     }
@@ -24,7 +24,7 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
     }
 
     fun getPassListByTopic(topic: String): List<Pass> {
-        return topicByIdMap.filter { it.value.equals(topic) }.map { passStore.getPassbookForId(it.key) }.filterNotNull()
+        return topicByIdMap.filter { it.value == topic }.map { passStore.getPassbookForId(it.key) }.filterNotNull()
     }
 
     fun getTopic(pass: Pass, default: String): String {
@@ -38,7 +38,7 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
         }
 
         if (!default.isEmpty()) {
-            topicByIdMap.put(id, default)
+            topicByIdMap[id] = default
             processDataChange()
         }
         return default

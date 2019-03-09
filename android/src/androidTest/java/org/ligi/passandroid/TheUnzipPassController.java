@@ -1,6 +1,6 @@
 package org.ligi.passandroid;
 
-import androidx.test.InstrumentationRegistry;
+import androidx.test.platform.app.InstrumentationRegistry;
 import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class TheUnzipPassController  {
     PassStore passStore;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 

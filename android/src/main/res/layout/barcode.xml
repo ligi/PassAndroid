@@ -35,6 +35,7 @@
                 android:minWidth="@dimen/finger"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:focusable="true"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"/>
     </LinearLayout>

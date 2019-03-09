@@ -11,7 +11,7 @@ import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
 
-val DEFAULT_EVENT_LENGTH_IN_HOURS = 8L
+const val DEFAULT_EVENT_LENGTH_IN_HOURS = 8L
 
 fun tryAddDateToCalendar(pass: Pass, contextView: View, timeSpan: PassImpl.TimeSpan) {
     if (pass.calendarTimespan == null) {

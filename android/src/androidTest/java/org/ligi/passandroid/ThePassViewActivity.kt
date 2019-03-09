@@ -21,7 +21,7 @@ import java.util.*
 @TargetApi(14)
 class ThePassViewActivity {
 
-    internal fun getActPass() = TestApp.passStore().currentPass as PassImpl
+    private fun getActPass() = TestApp.passStore().currentPass as PassImpl
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java, false)
@@ -35,7 +35,7 @@ class ThePassViewActivity {
 
     @Test
     fun testDateIsGoneWhenPassbookHasNoDate() {
-        getActPass().validTimespans = ArrayList<PassImpl.TimeSpan>()
+        getActPass().validTimespans = ArrayList()
         rule.launchActivity(null)
 
         onView(withId(R.id.date)).check(matches(not(isDisplayed())))
@@ -92,7 +92,7 @@ class ThePassViewActivity {
 
     @Test
     fun testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
-        getActPass().validTimespans = ArrayList<PassImpl.TimeSpan>()
+        getActPass().validTimespans = ArrayList()
         rule.launchActivity(null)
 
         onView(withText(R.string.pass_to_calendar)).check(matches(not(isDisplayed())))

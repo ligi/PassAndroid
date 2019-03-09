@@ -11,12 +11,11 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import java.util.*
 
+const val ID_1 = "ID1"
+const val TOPIC_1 = "topic1"
+const val DEFAULT_TOPIC = "defaut_topic"
+
 class ThePassClassifier {
-
-    val ID_1 = "ID1"
-    val TOPIC_1 = "topic1"
-    val DEFAULT_TOPIC = "defaut_topic"
-
     private val mockedPassStore by lazy {
         mock(PassStore::class.java).apply {
             `when`<Pass>(getPassbookForId(anyString())).thenReturn(mock(Pass::class.java))
@@ -25,7 +24,7 @@ class ThePassClassifier {
 
     @Test
     fun testThatPassIsInactiveByDefault() {
-        val tested = PassClassifier(HashMap<String, String>(), mockedPassStore)
+        val tested = PassClassifier(HashMap(), mockedPassStore)
 
         assertThat(tested.getTopic(getPassWithId(ID_1), DEFAULT_TOPIC) == DEFAULT_TOPIC)
     }
@@ -63,11 +62,11 @@ class ThePassClassifier {
 
     @Test
     fun testHasNoTopicsByDefault() {
-        val tested = PassClassifier(HashMap<String, String>(), mockedPassStore)
+        val tested = PassClassifier(HashMap(), mockedPassStore)
 
         assertThat(tested.getTopics()).isEmpty()
     }
 
-    fun getPassWithId(id: String) = PassImpl(id)
+    private fun getPassWithId(id: String) = PassImpl(id)
 
 }

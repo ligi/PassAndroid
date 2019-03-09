@@ -14,14 +14,11 @@ import org.ligi.passandroid.ui.BarcodeUIController
 import org.ligi.passandroid.ui.PassViewHelper
 import java.util.*
 
-class BarcodeEditController(val rootView: View, internal val context: AppCompatActivity, barCode: BarCode) {
-
-    var barcodeFormat: PassBarCodeFormat?
-
-    internal val intentFragment: Fragment
+class BarcodeEditController(private val rootView: View, internal val context: AppCompatActivity, barCode: BarCode) {
+    private var barcodeFormat: PassBarCodeFormat?
+    private val intentFragment: Fragment
 
     class IntentFragment : Fragment() {
-
         var scanCallback: (String) -> Unit = {}
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -37,7 +34,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
             rootView.barcodeRadioGroup.addView(radioButton)
 
             radioButton.text = it.name
-            radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            radioButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     barcodeFormat = it
                     refresh()
@@ -53,7 +50,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
         intentFragment = IntentFragment()
         barcodeFormat = barCode.format
 
-        rootView.randomButton.setOnClickListener({
+        rootView.randomButton.setOnClickListener {
             rootView.messageInput.setText(when (barcodeFormat) {
                 EAN_8 -> getRandomEAN8()
                 EAN_13 -> getRandomEAN13()
@@ -61,9 +58,9 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
                 else -> UUID.randomUUID().toString().toUpperCase()
             })
             refresh()
-        })
+        }
 
-        rootView.scanButton.setOnClickListener({
+        rootView.scanButton.setOnClickListener {
             val barCodeIntentIntegrator = BarCodeIntentIntegrator(intentFragment)
 
             if (barcodeFormat == QR_CODE) {
@@ -72,7 +69,7 @@ class BarcodeEditController(val rootView: View, internal val context: AppCompatA
                 barCodeIntentIntegrator.initiateScan(setOf(barcodeFormat!!.name))
             }
 
-        })
+        }
 
         intentFragment.scanCallback = { newMessage ->
             rootView.messageInput.setText(newMessage)

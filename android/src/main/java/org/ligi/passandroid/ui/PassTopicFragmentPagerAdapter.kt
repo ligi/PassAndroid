@@ -7,7 +7,7 @@ import org.ligi.passandroid.model.PassClassifier
 
 class PassTopicFragmentPagerAdapter(private val passClassifier: PassClassifier, fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 
-    private lateinit var topic_array: Array<String>
+    private lateinit var topics: Array<String>
 
     init {
         notifyDataSetChanged()
@@ -15,16 +15,16 @@ class PassTopicFragmentPagerAdapter(private val passClassifier: PassClassifier, 
 
     override fun notifyDataSetChanged() {
         val topics = passClassifier.getTopics()
-        topic_array = topics.toTypedArray()
+        this.topics = topics.toTypedArray()
         super.notifyDataSetChanged()
     }
 
-    override fun getItem(position: Int) = PassListFragment.newInstance(topic_array[position])
+    override fun getItem(position: Int) = PassListFragment.newInstance(topics[position])
 
     // TODO - return POSITION_UNCHANGED in some cases
     override fun getItemPosition(`object`: Any) = PagerAdapter.POSITION_NONE
 
-    override fun getCount() = topic_array.size
+    override fun getCount() = topics.size
 
-    override fun getPageTitle(position: Int) = topic_array[position]
+    override fun getPageTitle(position: Int) = topics[position]
 }

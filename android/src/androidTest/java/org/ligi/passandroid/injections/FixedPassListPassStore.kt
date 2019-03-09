@@ -10,7 +10,7 @@ class FixedPassListPassStore(private var passes: List<Pass>) : PassStore {
     override lateinit var classifier: PassClassifier
 
     init {
-        classifier = PassClassifier(HashMap<String, String>(), this)
+        classifier = PassClassifier(HashMap(), this)
     }
 
     fun setList(newPasses: List<Pass>, newCurrentPass: Pass? = newPasses.firstOrNull()) {
@@ -19,7 +19,7 @@ class FixedPassListPassStore(private var passes: List<Pass>) : PassStore {
         passMap.clear()
         passMap.putAll(createHashMap())
 
-        classifier = PassClassifier(HashMap<String, String>(), this)
+        classifier = PassClassifier(HashMap(), this)
     }
 
     override var currentPass: Pass? = null
@@ -31,7 +31,7 @@ class FixedPassListPassStore(private var passes: List<Pass>) : PassStore {
     private fun createHashMap(): HashMap<String, Pass> {
         val hashMap = HashMap<String, Pass>()
 
-        passes.forEach { hashMap.put(it.id, it) }
+        passes.forEach { hashMap[it.id] = it }
         return hashMap
     }
 

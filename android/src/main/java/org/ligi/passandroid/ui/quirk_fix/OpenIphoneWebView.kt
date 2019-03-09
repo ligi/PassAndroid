@@ -27,7 +27,7 @@ class OpenIphoneWebView : Activity() {
         val backgroundColor = ContextCompat.getColor(this, R.color.dividing_color)
         val loadToast = LoadToast(this).setText("Loading").setBackgroundColor(backgroundColor).show()
 
-        webView.setWebViewClient(object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 loadToast.success()
@@ -37,7 +37,7 @@ class OpenIphoneWebView : Activity() {
                 super.onReceivedError(view, request, error)
                 loadToast.error()
             }
-        })
+        }
 
     }
 }
