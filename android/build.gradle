@@ -171,6 +171,7 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
     implementation 'com.squareup.moshi:moshi:1.4.0'
+    implementation 'com.ibm.icu:icu4j:63.1'
 
     implementation 'com.chibatching.kotpref:kotpref:2.6.0'
     implementation 'com.chibatching.kotpref:initializer:2.6.0'
