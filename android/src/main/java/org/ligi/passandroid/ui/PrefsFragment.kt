@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO
 import androidx.preference.PreferenceFragmentCompat
-import org.ligi.kaxt.recreateWhenPossible
 import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import permissions.dispatcher.NeedsPermission
@@ -27,7 +26,6 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == getString(R.string.preference_key_nightmode)) {
-
             @AppCompatDelegate.NightMode val nightMode = App.settings.getNightMode()
 
             if (nightMode == MODE_NIGHT_AUTO) {
@@ -35,7 +33,7 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
             }
 
             AppCompatDelegate.setDefaultNightMode(nightMode)
-            activity?.recreateWhenPossible()
+            activity?.recreate()
         }
     }
 

@@ -2,7 +2,6 @@ package org.ligi.passandroid.ui
 
 import android.Manifest
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.salomonbrys.kodein.instance
@@ -100,6 +99,6 @@ class PassImportActivity : AppCompatActivity() {
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun showDeniedDialog() {
         progressDialog.dismissIfShowing()
-        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOKListener = DialogInterface.OnClickListener { _, _ -> finish() })
+        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
     }
 }

@@ -3,7 +3,6 @@ package org.ligi.passandroid.ui
 import androidx.appcompat.app.AppCompatActivity
 import com.github.salomonbrys.kodein.instance
 import org.greenrobot.eventbus.EventBus
-import org.ligi.kaxt.recreateWhenPossible
 import org.ligi.passandroid.App
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.PassStore
@@ -22,7 +21,7 @@ open class PassAndroidActivity : AppCompatActivity() {
         super.onResume()
 
         if (lastSetNightMode != null && lastSetNightMode != settings.getNightMode()) {
-            recreateWhenPossible()
+            recreate()
         }
         lastSetNightMode = settings.getNightMode()
     }
