@@ -20,30 +20,23 @@
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
 # class:
--keepclassmembers class fqcn.of.javascript.interface.for.webview {
-   public *;
-}
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
 
 # optimize
--optimizationpasses 2 
--optimizations !code/simplification/arithmetic 
--dontusemixedcaseclassnames 
--dontskipnonpubliclibraryclasses 
+-optimizationpasses 2
+-optimizations !code/simplification/arithmetic
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
 
-# AppCompat
+# Keep line numbers to alleviate debugging stack traces
 
--dontwarn android.support.v7.**
--keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
-
-# Keep line numbers to alleviate debugging stack traces 
-
--renamesourcefileattribute SourceFile 
+-renamesourcefileattribute SourceFile
 
 -keepattributes SourceFile,LineNumberTable
 
 ### for api client
-
 
 -keepattributes Signature,RuntimeVisibleAnnotations,AnnotationDefault
 
@@ -53,7 +46,6 @@
 
 # Needed by Guava
 # See https://groups.google.com/forum/#!topic/guava-discuss/YCZzeCiIVoI
-
 
 -dontwarn sun.misc.Unsafe
 -dontwarn com.google.common.collect.MinMaxPriorityQueue
@@ -71,9 +63,6 @@
 -dontwarn butterknife.internal.**
 -keep class **$$ViewBinder { *; }
 -keepnames class * { @butterknife.Bind *;}
-
-#### for support 22
--dontwarn android.support.**
 
 #### for guava
 -dontwarn javax.annotation.**
@@ -105,23 +94,20 @@
 -dontwarn java.nio.file.OpenOption
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 
--keep public class com.google.android.gms.**
--dontwarn com.google.android.gms.**
-
 
 ## New rules for EventBus 3.0.x ##
 # http://greenrobot.org/eventbus/documentation/proguard/
 
 -keepattributes *Annotation*
--keepclassmembers class ** {
+-keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;
-    }
-    -keep enum org.greenrobot.eventbus.ThreadMode { *; }
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 # Only required if you use AsyncExecutor
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
     <init>(java.lang.Throwable);
-    }
+}
 
 ### for moshi
 
