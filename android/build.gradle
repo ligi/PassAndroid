@@ -177,8 +177,8 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
 
     // further upgrades exceed the 64K reference limit :(
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     withAnalyticsImplementation "com.google.android.gms:play-services-analytics:$play_version"
     withMapsImplementation "com.google.android.gms:play-services-maps:$play_version"
