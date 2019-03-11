@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.activity_pass_view.*
 import kotlinx.android.synthetic.main.barcode.*
@@ -68,7 +69,7 @@ class PassViewFragment : Fragment() {
         processImage(strip_img_view, PassBitmapDefinitions.BITMAP_STRIP, pass)
 
         if (map_container != null) {
-            if (!(pass.locations.isNotEmpty() && PassbookMapsFacade.init(activity))) {
+            if (!(pass.locations.isNotEmpty() && PassbookMapsFacade.init(activity as FragmentActivity))) {
                 @Suppress("PLUGIN_WARNING")
                 map_container.visibility = View.GONE
             }

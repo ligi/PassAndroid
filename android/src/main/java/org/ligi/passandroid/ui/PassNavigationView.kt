@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -34,6 +35,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
 
     fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
 
+    @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
@@ -49,6 +51,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
         onPassStoreChangeEvent(PassStoreChangeEvent)
     }
 
+    @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         bus.unregister(this)

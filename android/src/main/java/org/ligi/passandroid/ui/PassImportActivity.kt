@@ -43,7 +43,7 @@ class PassImportActivity : AppCompatActivity() {
 
         progressDialog.show()
 
-        doImport(false)
+        doImportWithPermissionCheck(false)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
