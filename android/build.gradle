@@ -99,6 +99,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 configurations {
@@ -109,11 +113,8 @@ configurations {
 dependencies {
     implementation 'org.permissionsdispatcher:permissionsdispatcher:4.3.0'
     kapt 'org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0'
-
     implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
-
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
-
     androidTestImplementation 'com.github.ligi:trulesk:0.27'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
@@ -122,59 +123,46 @@ dependencies {
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     androidTestImplementation 'androidx.appcompat:appcompat:1.0.2'
     androidTestImplementation 'com.google.android.material:material:1.0.0'
-
     implementation 'com.github.ligi:TouchImageView:2.1'
     implementation 'com.github.ligi:ExtraCompats:0.5'
-
     implementation 'net.lingala.zip4j:zip4j:1.3.2'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'androidx.annotation:annotation:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     implementation 'com.github.ligi:KAXT:0.22'
     implementation 'com.github.ligi:KAXTUI:0.8'
     implementation 'com.github.ligi:loadtoast:1.10.11'
     implementation 'com.github.ligi:tracedroid:2.1'
-
     forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.18'
     forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.18'
     forAmazonImplementation 'com.github.ligi.snackengage:snackengage-amazonrate:0.18'
-
     // https://medium.com/square-corner-blog/okhttp-3-13-requires-android-5-818bb78d07ce
     // Don't update to >=3.13 before minSDK 21 + Java 8
     //noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
-
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
     implementation 'com.squareup.moshi:moshi:1.8.0'
-
     implementation 'com.chibatching.kotpref:kotpref:2.6.0'
     implementation 'com.chibatching.kotpref:initializer:2.6.0'
-
     testImplementation 'androidx.annotation:annotation:1.0.2'
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation 'org.threeten:threetenbp:1.3.8'
-
     // https://github.com/ligi/PassAndroid/issues/181
     // Don't upgrade before minSDK 19 - or replace zxing
     //noinspection GradleDependency
     implementation 'com.google.zxing:core:3.3.0'
-
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:16.0.7'
     withMapsImplementation 'com.google.android.gms:play-services-maps:16.1.0'
