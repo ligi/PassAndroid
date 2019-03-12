@@ -5,7 +5,6 @@ build
 bin
 gen
 project.properties
-gradle.properties
 local.properties
 *iml
 
