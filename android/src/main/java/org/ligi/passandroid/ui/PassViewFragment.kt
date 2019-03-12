@@ -106,7 +106,6 @@ class PassViewFragment : Fragment() {
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
         passViewHolder.apply(pass, passStore, activity!!)
-        passViewHolder.apply(pass, passStore, activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
