@@ -29,6 +29,7 @@
 
         <receiver
                 android:name=".InstallListener"
+                android:permission="android.permission.INSTALL_PACKAGES"
                 android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
@@ -122,47 +123,35 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/vnd.espass-espass"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="http" android:mimeType="application/vnd.espass-espass"/>
+                <data android:scheme="https" android:mimeType="application/vnd.espass-espass"/>
+                <data android:scheme="content" android:mimeType="application/vnd.espass-espass"/>
+                <data android:scheme="file" android:mimeType="application/vnd.espass-espass"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http" android:mimeType="application/vnd.espass-espass+zip"/>
+                <data android:scheme="https" android:mimeType="application/vnd.espass-espass+zip"/>
+                <data android:scheme="content" android:mimeType="application/vnd.espass-espass+zip"/>
+                <data android:scheme="file" android:mimeType="application/vnd.espass-espass+zip"/>
 
-                <data android:mimeType="application/vnd.espass-espass+zip"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="http" android:mimeType="application/vnd.apple.pkpass"/>
+                <data android:scheme="https" android:mimeType="application/vnd.apple.pkpass"/>
+                <data android:scheme="content" android:mimeType="application/vnd.apple.pkpass"/>
+                <data android:scheme="file" android:mimeType="application/vnd.apple.pkpass"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http" android:mimeType="application/pkpass"/>
+                <data android:scheme="https" android:mimeType="application/pkpass"/>
+                <data android:scheme="content" android:mimeType="application/pkpass"/>
+                <data android:scheme="file" android:mimeType="application/pkpass"/>
 
-                <data android:mimeType="application/vnd.apple.pkpass"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="http" android:mimeType="application/vndapplepkpass"/>
+                <data android:scheme="https" android:mimeType="application/vndapplepkpass"/>
+                <data android:scheme="content" android:mimeType="application/vndapplepkpass"/>
+                <data android:scheme="file" android:mimeType="application/vndapplepkpass"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/pkpass"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/vndapplepkpass"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/vnd-com.apple.pkpass"/>
+                <data android:scheme="http" android:mimeType="application/vnd-com.apple.pkpass"/>
+                <data android:scheme="https" android:mimeType="application/vnd-com.apple.pkpass"/>
+                <data android:scheme="content" android:mimeType="application/vnd-com.apple.pkpass"/>
+                <data android:scheme="file" android:mimeType="application/vnd-com.apple.pkpass"/>
             </intent-filter>
 
             <intent-filter>
@@ -616,17 +605,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/x-pdf"/>
+                <data android:scheme="content" android:mimeType="application/x-pdf"/>
+                <data android:scheme="content" android:mimeType="application/pdf"/>
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/pdf"/>
-            </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -1070,22 +1051,6 @@
                         android:host="*"
                         android:pathPattern="/.*\\.pkpass"
                         android:scheme="content"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/vnd.apple.pkpass"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:mimeType="application/vnd-com.apple.pkpass"/>
             </intent-filter>
 
             <intent-filter>
