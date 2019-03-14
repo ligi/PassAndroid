@@ -12,6 +12,7 @@ import android.view.View;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.passandroid.R;
 
+@SuppressWarnings("WeakerAccess")
 public class MyShyFABBehavior extends CoordinatorLayout.Behavior<FloatingActionsMenu> {
 
     public MyShyFABBehavior() {}

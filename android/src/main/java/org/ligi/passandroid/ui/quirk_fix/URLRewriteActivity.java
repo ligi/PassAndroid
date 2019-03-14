@@ -14,9 +14,9 @@ public class URLRewriteActivity extends PassAndroidActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Uri data = getIntent().getData();
-        final String url = new URLRewriteController(getTracker()).getUrlByUri(data);
+        final String url = data != null ? new URLRewriteController(getTracker()).getUrlByUri(data) : null;
 
-        if (url == null) {
+        if (data != null && url == null) {
             new AlertDialog.Builder(this).setTitle("Workaround failed")
                     .setMessage(
                             "The URL PassAndroid tried to work around failed :-( some companies just send PassBooks to Apple Devices - this was an attempt to workaround this." +

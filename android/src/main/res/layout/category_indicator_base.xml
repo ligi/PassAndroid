@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_gravity="center"
-        android:layout_width="20dp"
-        android:layout_height="30dp">
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="20dp"
+    android:layout_height="30dp">
 
-            android:background="@drawable/cat_bg"
-            android:scaleType="fitStart"
-            android:id="@+id/topImageView"
-            android:orientation="vertical"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cat_bg"
+        android:scaleType="fitStart"
+        android:id="@+id/topImageView"
+        android:orientation="vertical"
+        tools:ignore="ContentDescription" />
 
 </FrameLayout>

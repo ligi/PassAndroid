@@ -90,6 +90,7 @@ import java.util.Map;
  * @author Brad Drehmer
  * @author gcstang
  */
+@SuppressWarnings("WeakerAccess")
 public class BarCodeIntentIntegrator {
 
     public static final int REQUEST_CODE = 0x0000c0de; // Only use bottom 16 bits
@@ -313,7 +314,7 @@ public class BarCodeIntentIntegrator {
      * @see android.app.Activity#startActivityForResult(Intent, int)
      * @see android.app.Fragment#startActivityForResult(Intent, int)
      */
-    protected void startActivityForResult(Intent intent, int code) {
+    private void startActivityForResult(Intent intent, @SuppressWarnings("SameParameterValue") int code) {
         if (fragment == null) {
             activity.startActivityForResult(intent, code);
         } else {

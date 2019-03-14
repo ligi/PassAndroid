@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui.quirk_fix
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -13,15 +14,17 @@ import org.ligi.passandroid.functions.IPHONE_USER_AGENT
 
 class OpenIphoneWebView : Activity() {
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val data = intent.data ?: return
         val webView = WebView(this)
         webView.settings.userAgentString = IPHONE_USER_AGENT
 
         webView.settings.javaScriptEnabled = true
 
-        webView.loadUrl(intent.data.toString())
+        webView.loadUrl(data.toString())
         setContentView(webView)
 
         val backgroundColor = ContextCompat.getColor(this, R.color.dividing_color)
