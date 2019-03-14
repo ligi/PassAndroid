@@ -1,9 +1,9 @@
-/**
-*******************************************************************************
-* Copyright (C) 2005-2012, International Business Machines Corporation and    *
-* others. All Rights Reserved.                                                *
-*******************************************************************************
-*/
+/*
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
+ */
 package com.ibm.icu.text;
 
 /**
@@ -20,6 +20,7 @@ package com.ibm.icu.text;
  * The WILL be shared by multiple instances of CharsetDetector.
  * They encapsulate const charset-specific information.
  */
+@SuppressWarnings("ALL")
 abstract class CharsetRecognizer {
     /**
      * Get the IANA name of this charset.

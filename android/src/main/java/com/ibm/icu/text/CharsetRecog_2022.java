@@ -1,9 +1,9 @@
 /*
-*******************************************************************************
-* Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
-* others. All Rights Reserved.                                                *
-*******************************************************************************
-*/
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
+ */
 package com.ibm.icu.text;
 
 /**
@@ -14,6 +14,7 @@ package com.ibm.icu.text;
  * 
  *                           The separate classes are nested within this class.
  */
+@SuppressWarnings("ALL")
 abstract class CharsetRecog_2022 extends CharsetRecognizer {
 
     
@@ -44,7 +45,7 @@ abstract class CharsetRecog_2022 extends CharsetRecognizer {
                             byte [] seq = escapeSequences[escN];
                             
                             if ((textLen - i) < seq.length) {
-                                continue checkEscapes;
+                                continue;
                             }
                             
                             for (j=1; j<seq.length; j++) {
@@ -92,9 +93,6 @@ abstract class CharsetRecog_2022 extends CharsetRecognizer {
         return quality;
     }
 
-    
- 
-    
     static class CharsetRecog_2022JP extends CharsetRecog_2022 {
         private byte [] [] escapeSequences = {
                 {0x1b, 0x24, 0x28, 0x43},   // KS X 1001:1992

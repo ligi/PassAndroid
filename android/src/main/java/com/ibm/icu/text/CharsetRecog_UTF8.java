@@ -1,14 +1,15 @@
-/**
-*******************************************************************************
-* Copyright (C) 2005 - 2014, International Business Machines Corporation and  *
-* others. All Rights Reserved.                                                *
-*******************************************************************************
-*/
+/*
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
+ */
 package com.ibm.icu.text;
 
 /**
  * Charset recognizer for UTF-8
  */
+@SuppressWarnings("ALL")
 class CharsetRecog_UTF8 extends CharsetRecognizer {
 
     String getName() {
@@ -24,7 +25,7 @@ class CharsetRecog_UTF8 extends CharsetRecognizer {
         int         numInvalid = 0;
         byte        input[] = det.fRawInput;
         int         i;
-        int         trailBytes = 0;
+        int         trailBytes;
         int         confidence;
         
         if (det.fRawLength >= 3 && 
