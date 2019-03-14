@@ -1,6 +1,5 @@
 package org.ligi.passandroid
 
-
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Fail.fail
 import org.junit.Test

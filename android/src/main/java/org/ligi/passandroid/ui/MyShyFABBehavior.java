@@ -7,7 +7,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
-import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;

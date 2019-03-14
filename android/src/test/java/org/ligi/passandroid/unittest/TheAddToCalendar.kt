@@ -15,7 +15,7 @@ const val LOCATIONPROBE = "locationprobe"
 
 class TheAddToCalendar {
 
-    val pass = mock(Pass::class.java).apply {
+    val pass: Pass = mock(Pass::class.java).apply {
         `when`(description).thenReturn(DESCRIPTIONPROBE)
     }
 

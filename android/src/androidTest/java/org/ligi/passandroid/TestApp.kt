@@ -60,6 +60,6 @@ class TestApp : App() {
             fixedPassListPassStore().setList(emptyList())
         }
 
-        fun fixedPassListPassStore() = passStore() as FixedPassListPassStore
+        private fun fixedPassListPassStore() = passStore() as FixedPassListPassStore
     }
 }

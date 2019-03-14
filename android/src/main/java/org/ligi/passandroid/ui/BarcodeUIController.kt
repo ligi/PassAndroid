@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.barcode.view.*
 import org.ligi.kaxt.getSmallestSide
@@ -11,7 +12,7 @@ import org.ligi.passandroid.model.pass.BarCode
 
 internal class BarcodeUIController(private val rootView: View, private val barCode: BarCode?, activity: Activity, private val passViewHelper: PassViewHelper) {
 
-    fun getBarcodeView() = rootView.barcode_img
+    fun getBarcodeView(): ImageView = rootView.barcode_img
 
     private var currentBarcodeWidth: Int = 0
 

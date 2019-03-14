@@ -21,7 +21,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
     val passStore: PassStore = App.kodein.instance()
     val bus: EventBus = App.kodein.instance()
 
-    fun getIntent(id: Int) = when (id) {
+    private fun getIntent(id: Int) = when (id) {
         R.id.menu_settings -> Intent(context, PreferenceActivity::class.java)
         R.id.menu_github -> intentFromUrl("https://github.com/ligi/PassAndroid")
         R.id.menu_beta -> intentFromUrl("https://play.google.com/apps/testing/org.ligi.passandroid")
@@ -33,7 +33,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
         else -> null
     }
 
-    fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+    private fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
 
     @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onAttachedToWindow() {

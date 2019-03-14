@@ -24,7 +24,7 @@ class ApplePassbookQuirkCorrector(val tracker: Tracker) {
         tryToFindDate(pass)
     }
 
-    fun tryToFindDate(pass: PassImpl) {
+    private fun tryToFindDate(pass: PassImpl) {
 
         if (pass.calendarTimespan == null) {
             val foundDate = pass.fields.filter { "date" == it.key }.map {
