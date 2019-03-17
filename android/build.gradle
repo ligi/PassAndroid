@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'spoon'
+apply plugin: 'com.jaredsburrows.spoon'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -12,6 +12,7 @@ repositories {
     mavenLocal()
     google()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // For Spoon snapshot, until 2.0.0 is released
 }
 
 android {
@@ -62,6 +63,14 @@ android {
         }
 
     }
+
+    // hacky workaround to add spoon task that executes all variants
+    task spoon {
+        dependsOn {
+            tasks.findAll { task -> task.name != 'spoon' && task.name.startsWith('spoon') }
+        }
+    }
+
     android.variantFilter { variant ->
         def maps = variant.getFlavors().get(0).name
         def analytics = variant.getFlavors().get(1).name
@@ -112,7 +121,10 @@ dependencies {
     implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
 
+    // spoon snapshot, until 2.0.0 is released
+    androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
     androidTestImplementation 'com.github.ligi:trulesk:0.27'
+    androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
@@ -182,7 +194,8 @@ dependencies {
 
 spoon {
     debug = true
-    grantAllPermissions = true
+    grantAll = true
+    baseOutputDir = "spoon"
 }
 
 play {

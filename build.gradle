@@ -8,17 +8,24 @@ buildscript {
         jcenter()
         google()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // for Spoon snapshot, until 2.0.0 is released
+        //maven { url "https://plugins.gradle.org/m2/" } // for build-scan
     }
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.android.tools.build:gradle:3.3.2'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+        classpath 'com.jaredsburrows:gradle-spoon-plugin:1.5.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.6.5'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
+
+        //classpath "com.gradle:build-scan-plugin:1.16"
     }
 }
+
+//apply plugin: "com.gradle.build-scan"
+//buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
 
 repositories {
     google()
