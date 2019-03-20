@@ -170,7 +170,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
                     .setIntent(shortcutIntent)
                     .build()
 
-            shortcutManager!!.dynamicShortcuts = Arrays.asList(shortcut)
+            shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
         } else {
             val intent = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
             intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
@@ -196,7 +196,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
             val url = pass.webServiceURL + "/v1/passes/" + pass.passIdent + "/" + pass.serial
             val requestBuilder = Request.Builder().url(url)
-            requestBuilder.addHeader("Authorization", "ApplePass " + pass.authToken!!)
+            requestBuilder.addHeader("Authorization", "ApplePass " + pass.authToken)
 
             val request = requestBuilder.build()
 

@@ -21,15 +21,11 @@ class LocationsMapFragment : SupportMapFragment() {
         val root = super.onCreateView(inflater, container, savedInstanceState)
         val baseActivity = activity as PassViewActivityBase
 
-        if (baseActivity !is PassViewActivityBase) {
-            throw IllegalArgumentException("LocationsMapFragment must be used inside a PassViewActivityBase")
-        }
-
         getMapAsync { map ->
             map.setOnMapLoadedCallback {
                 if (clickToFullscreen)
                     map.setOnMapClickListener {
-                        App.passStore.currentPass = baseActivity!!.currentPass
+                        App.passStore.currentPass = baseActivity.currentPass
                         baseActivity.startActivityFromClass(FullscreenMapActivity::class.java)
                     }
 
@@ -42,7 +38,7 @@ class LocationsMapFragment : SupportMapFragment() {
 
                     // yea that looks stupid but need to split LatLng free/nonfree - google play services ^^
                     val latLng = LatLng(l.lat, l.lon)
-                    val marker = MarkerOptions().position(latLng).title(l.getNameWithFallback(baseActivity!!.currentPass))
+                    val marker = MarkerOptions().position(latLng).title(l.getNameWithFallback(baseActivity.currentPass))
                     map.addMarker(marker)
 
 

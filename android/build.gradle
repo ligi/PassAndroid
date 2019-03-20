@@ -123,7 +123,7 @@ dependencies {
 
     // spoon snapshot, until 2.0.0 is released
     androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
-    androidTestImplementation 'com.github.ligi:trulesk:0.27'
+    androidTestImplementation 'com.github.ligi:trulesk:0.28'
     androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
@@ -188,14 +188,14 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
-    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:16.0.7'
+    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:16.0.8'
     withMapsImplementation 'com.google.android.gms:play-services-maps:16.1.0'
 }
 
 spoon {
     debug = true
     grantAll = true
-    baseOutputDir = "spoon"
+    baseOutputDir = "build/spoon"
 }
 
 play {

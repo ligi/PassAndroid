@@ -2,7 +2,7 @@ package org.ligi.passandroid
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import androidx.test.platform.app.InstrumentationRegistry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Rule
@@ -23,7 +23,7 @@ class ThePastLocationsStore {
     @Mock
     lateinit var tracker: Tracker
 
-    private val prefs: SharedPreferences by lazy { getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
+    private val prefs: SharedPreferences by lazy { InstrumentationRegistry.getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
 
     @After
     fun tearDown() {

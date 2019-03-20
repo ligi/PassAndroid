@@ -18,9 +18,7 @@ class FullscreenMapActivity : PassViewActivityBase() {
     }
 
     private fun fallbackForMissingGooglePlay() {
-        if (currentPass != null) {
-            showNavigateToLocationsDialog(currentPass, true)
-        }
+        showNavigateToLocationsDialog(currentPass, true)
     }
 
 }
