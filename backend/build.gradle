@@ -25,6 +25,9 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
+    // FIXME: This *needs* to be migrated to the new gradle plugin!
+    // https://cloud.google.com/endpoints/docs/frameworks/legacy/v1/java/migrating-android
+    // https://github.com/GoogleCloudPlatform/app-gradle-plugin
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.59'
     compile 'com.google.appengine:appengine-endpoints:1.9.59'
     compile 'com.google.appengine:appengine-endpoints-deps:1.9.59'
