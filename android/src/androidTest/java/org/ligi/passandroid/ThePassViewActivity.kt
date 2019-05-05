@@ -7,6 +7,7 @@ import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.core.IsNot.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.model.pass.BarCode
@@ -25,6 +26,11 @@ class ThePassViewActivity {
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java, false)
+
+    @Before
+    fun before() {
+        TestApp.populatePassStoreWithSinglePass()
+    }
 
     @Test
     fun testThatDescriptionIsThere() {

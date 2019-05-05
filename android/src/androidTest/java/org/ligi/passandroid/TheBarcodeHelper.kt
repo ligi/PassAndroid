@@ -39,7 +39,7 @@ class TheBarcodeHelper {
         testBitMatrixSizeIsSane(PassBarCodeFormat.AZTEC)
     }
 
-    private fun testBitMatrixSizeIsSane(format: PassBarCodeFormat) {
+    fun testBitMatrixSizeIsSane(format: PassBarCodeFormat) {
         try {
             val tested = getBitMatrix("foo-data", format)
 
@@ -49,7 +49,7 @@ class TheBarcodeHelper {
         }
     }
 
-    private fun testBitmapSizeIsSane(format: PassBarCodeFormat) {
+    fun testBitmapSizeIsSane(format: PassBarCodeFormat) {
         try {
             val tested2 = generateBarCodeBitmap("foo-data", format)!!
 
