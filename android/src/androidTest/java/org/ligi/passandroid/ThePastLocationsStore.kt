@@ -17,6 +17,7 @@ class ThePastLocationsStore {
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java) {
+        TestApp.populatePassStoreWithSinglePass()
         MockitoAnnotations.initMocks(this)
     }
 

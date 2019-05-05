@@ -31,6 +31,8 @@ class TheBarCodeEditing {
 
     private fun start(setupPass: (pass: PassImpl) -> Unit = {}) {
 
+        TestApp.populatePassStoreWithSinglePass()
+
         currentPass = passStore.currentPass as PassImpl
 
         setupPass(currentPass)
