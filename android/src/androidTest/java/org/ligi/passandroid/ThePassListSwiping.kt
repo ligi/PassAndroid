@@ -1,11 +1,11 @@
 package org.ligi.passandroid
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.typeText
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.recyclerview.widget.ItemTouchHelper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -13,6 +13,8 @@ import org.ligi.passandroid.App.Companion.passStore
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.PassListFragment
 import org.ligi.trulesk.TruleskIntentRule
+
+const val CUSTOM_PROBE = "FOO_PROBE"
 
 class ThePassListSwiping {
 
@@ -42,7 +44,6 @@ class ThePassListSwiping {
 
     @Test
     fun testWeCanMoveToCustom() {
-        val CUSTOM_PROBE = "FOO_PROBE"
 
         fakeSwipeLeft()
 

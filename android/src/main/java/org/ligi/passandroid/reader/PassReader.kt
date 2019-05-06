@@ -21,47 +21,47 @@ object PassReader {
 
         try {
             val plainJsonString = file.bufferedReader().readText()
-            val pass_json = readJSONSafely(plainJsonString)!!
+            val passJSON = readJSONSafely(plainJsonString)!!
 
-            if (pass_json.has("what")) {
-                val what_json = pass_json.getJSONObject("what")
-                pass.description = what_json.getString("description")
+            if (passJSON.has("what")) {
+                val whatJSON = passJSON.getJSONObject("what")
+                pass.description = whatJSON.getString("description")
             }
 
-            if (pass_json.has("meta")) {
-                val meta_json = pass_json.getJSONObject("meta")
-                pass.type = PassDefinitions.NAME_TO_TYPE[meta_json.getString("type")] ?: PassType.GENERIC
-                pass.creator = meta_json.getString("organisation")
-                pass.app = meta_json.getString("app")
+            if (passJSON.has("meta")) {
+                val metaJSON = passJSON.getJSONObject("meta")
+                pass.type = PassDefinitions.NAME_TO_TYPE[metaJSON.getString("type")] ?: PassType.GENERIC
+                pass.creator = metaJSON.getString("organisation")
+                pass.app = metaJSON.getString("app")
             }
 
-            if (pass_json.has("ui")) {
-                val ui_json = pass_json.getJSONObject("ui")
-                pass.accentColor = Color.parseColor(ui_json.getString("bgColor"))
+            if (passJSON.has("ui")) {
+                val uiJSON = passJSON.getJSONObject("ui")
+                pass.accentColor = Color.parseColor(uiJSON.getString("bgColor"))
             }
 
-            if (pass_json.has("barcode")) {
-                val barcode_json = pass_json.getJSONObject("barcode")
-                val barcodeFormatString = barcode_json.getString("type")
+            if (passJSON.has("barcode")) {
+                val barcodeJSON = passJSON.getJSONObject("barcode")
+                val barcodeFormatString = barcodeJSON.getString("type")
 
                 val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
-                val barCode = BarCode(barcodeFormat, barcode_json.getString("message"))
+                val barCode = BarCode(barcodeFormat, barcodeJSON.getString("message"))
                 pass.barCode = barCode
 
-                if (barcode_json.has("altText")) {
-                    barCode.alternativeText = barcode_json.getString("altText")
+                if (barcodeJSON.has("altText")) {
+                    barCode.alternativeText = barcodeJSON.getString("altText")
                 }
             }
 
-            if (pass_json.has("when")) {
-                val dateTime = pass_json.getJSONObject("when").getString("dateTime")
+            if (passJSON.has("when")) {
+                val dateTime = passJSON.getJSONObject("when").getString("dateTime")
 
                 pass.calendarTimespan = PassImpl.TimeSpan()
                 pass.calendarTimespan = PassImpl.TimeSpan(from = ZonedDateTime.parse(dateTime))
             }
 
         } catch (e: Exception) {
-            Log.i("PassParse Exception " + e)
+            Log.i("PassParse Exception: $e")
         }
 
         return pass

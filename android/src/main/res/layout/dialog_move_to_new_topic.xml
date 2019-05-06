@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+    android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:padding="16dp"
               android:focusable="true"
               android:focusableInTouchMode="true"
               android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -15,8 +15,10 @@
                 android:id="@+id/new_topic_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/new_topic_input_hint"/>
-    </android.support.design.widget.TextInputLayout>
+                android:hint="@string/new_topic_input_hint"
+                android:inputType="text"
+                android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
             android:layout_width="wrap_content"

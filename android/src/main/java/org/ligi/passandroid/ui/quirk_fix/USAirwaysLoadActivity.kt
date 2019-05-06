@@ -12,11 +12,8 @@ class USAirwaysLoadActivity : PassAndroidActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val url = if (intent.data.toString().endsWith("/")) {
-            intent.data.toString().substring(0, intent.data.toString().length - 1)
-        } else {
-            intent.data.toString()
-        }
+        val data = intent.data
+        val url = data?.toString()?.removeSuffix("/") ?: ""
 
         val split = url.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 

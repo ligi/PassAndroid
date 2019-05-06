@@ -1,9 +1,9 @@
-/**
-*******************************************************************************
-* Copyright (C) 2005-2012, International Business Machines Corporation and    *
-* others. All Rights Reserved.                                                *
-*******************************************************************************
-*/
+/*
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
+ */
 package com.ibm.icu.text;
 
 import java.io.ByteArrayInputStream;
@@ -26,6 +26,7 @@ import java.io.Reader;
  *
  * @stable ICU 3.4
  */
+@SuppressWarnings("ALL")
 public class CharsetMatch implements Comparable<CharsetMatch> {
 
     
@@ -85,13 +86,13 @@ public class CharsetMatch implements Comparable<CharsetMatch> {
      * @stable ICU 3.4
      */
     public String getString(int maxLength) throws java.io.IOException {
-        String result = null;
+        String result;
         if (fInputStream != null) {
             StringBuilder sb = new StringBuilder();
             char[] buffer = new char[1024];
             Reader reader = getReader();
             int max = maxLength < 0? Integer.MAX_VALUE : maxLength;
-            int bytesRead = 0;
+            int bytesRead;
             
             while ((bytesRead = reader.read(buffer, 0, Math.min(max, 1024))) >= 0) {
                 sb.append(buffer, 0, bytesRead);
@@ -108,6 +109,7 @@ public class CharsetMatch implements Comparable<CharsetMatch> {
              * be used to open a charset (e.g. IBM424_rtl). The ending '_rtl' or 'ltr'
              * should be stripped off before creating the string.
              */
+            //noinspection IndexOfReplaceableByContains
             int startSuffix = name.indexOf("_rtl") < 0 ? name.indexOf("_ltr") : name.indexOf("_rtl");
             if (startSuffix > 0) {
                 name = name.substring(0, startSuffix);
@@ -234,7 +236,7 @@ public class CharsetMatch implements Comparable<CharsetMatch> {
                                                       //  If user gave us a byte array, this is it.
     private int                 fRawLength;           // Length of data in fRawInput array.
 
-    private InputStream         fInputStream = null;  // User's input stream, or null if the user
+    private InputStream         fInputStream;  // User's input stream, or null if the user
                                                       //   gave us a byte array.
     
     private String              fCharsetName;         // The name of the charset this CharsetMatch

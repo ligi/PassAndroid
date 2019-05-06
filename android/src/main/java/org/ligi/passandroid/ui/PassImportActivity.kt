@@ -2,9 +2,8 @@ package org.ligi.passandroid.ui
 
 import android.Manifest
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.github.salomonbrys.kodein.instance
 import org.ligi.kaxt.dismissIfShowing
 import org.ligi.kaxt.startActivityFromClass
@@ -44,22 +43,21 @@ class PassImportActivity : AppCompatActivity() {
 
         progressDialog.show()
 
-        doImport(false)
-
+        doImportWithPermissionCheck(false)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PassImportActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun doImport(withPermission: Boolean) {
-        Thread({
+        Thread {
             try {
-                val fromURI = fromURI(this, intent.data)
+                val fromURI = fromURI(this, intent!!.data!!)
 
-                runOnUiThread({
+                runOnUiThread {
                     progressDialog.dismissIfShowing()
 
                     if (fromURI == null) {
@@ -87,25 +85,20 @@ class PassImportActivity : AppCompatActivity() {
                             }
                         }
                     }
-                })
+                }
             } catch (e: Exception) {
                 if (e.message?.contains("Permission") == true && !withPermission) {
-                    PassImportActivityPermissionsDispatcher.doImportWithCheck(this@PassImportActivity, true)
+                    doImportWithPermissionCheck(true)
                 } else {
                     tracker.trackException("Error in import", e, false)
                 }
-
             }
-
-
-        }).start()
+        }.start()
     }
-
 
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun showDeniedDialog() {
         progressDialog.dismissIfShowing()
-        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOKListener = DialogInterface.OnClickListener { _, _ -> finish() })
+        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
     }
-
 }

@@ -17,13 +17,13 @@ class PassViewHelper(private val context: Activity) {
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap)
             imageView.visibility = View.VISIBLE
-            imageView.layoutParams = getLayoutParamsSoThatWeHaveMinimumAFingerInHeight(imageView, bitmap)
+            imageView.layoutParams = getLayoutParamsMinHeight(imageView, bitmap)
         } else {
             imageView.visibility = View.GONE
         }
     }
 
-    fun getLayoutParamsSoThatWeHaveMinimumAFingerInHeight(imageView: ImageView, bitmap: Bitmap)
+    private fun getLayoutParamsMinHeight(imageView: ImageView, bitmap: Bitmap)
             = imageView.layoutParams!!.apply {
         height = if (bitmap.height < fingerSize) {
             fingerSize
@@ -33,5 +33,4 @@ class PassViewHelper(private val context: Activity) {
     }
 
     val windowWidth by lazy { context.windowManager.getSizeAsPointCompat().x }
-
 }

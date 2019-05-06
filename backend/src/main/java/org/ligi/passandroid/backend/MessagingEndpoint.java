@@ -7,6 +7,7 @@
 package org.ligi.passandroid.backend;
 
 import com.google.android.gcm.server.Constants;
+import com.google.android.gcm.server.Endpoint;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
@@ -53,7 +54,7 @@ public class MessagingEndpoint {
         if (message.length() > 1000) {
             message = message.substring(0, 1000) + "[...]";
         }
-        Sender sender = new Sender(API_KEY);
+        Sender sender = new Sender(API_KEY, Endpoint.GCM);
         Message msg = new Message.Builder().addData("message", message).build();
         List<RegistrationRecord> records = ofy().load().type(RegistrationRecord.class).limit(10).list();
         for (RegistrationRecord record : records) {

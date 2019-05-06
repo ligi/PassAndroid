@@ -1,8 +1,8 @@
 package org.ligi.passandroid.model;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import java.io.DataInputStream;
@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import org.ligi.passandroid.App;
 
-@VisibleForTesting
 public class AppleStylePassTranslation extends HashMap<String, String> {
 
     public String translate(String key) {
@@ -63,6 +62,7 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
             if (fileData[0] == (byte) 0xEF && fileData[1] == (byte) 0xBB && fileData[2] == (byte) 0xBF) {
                 final byte[] crop = new byte[fileData.length - 3];
                 System.arraycopy(fileData, 3, crop, 0, crop.length);
+                //noinspection CharsetObjectCanBeUsed
                 return new String(crop, "utf-8");
             }
 

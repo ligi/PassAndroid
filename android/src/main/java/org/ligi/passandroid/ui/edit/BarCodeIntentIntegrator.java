@@ -8,8 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Collection;
@@ -90,6 +90,7 @@ import java.util.Map;
  * @author Brad Drehmer
  * @author gcstang
  */
+@SuppressWarnings("WeakerAccess")
 public class BarCodeIntentIntegrator {
 
     public static final int REQUEST_CODE = 0x0000c0de; // Only use bottom 16 bits
@@ -130,7 +131,7 @@ public class BarCodeIntentIntegrator {
     private String buttonYes;
     private String buttonNo;
     private List<String> targetApplications;
-    private final Map<String, Object> moreExtras = new HashMap<String, Object>(3);
+    private final Map<String, Object> moreExtras = new HashMap<>(3);
 
     /**
      * @param activity {@link Activity} invoking the integration
@@ -313,7 +314,7 @@ public class BarCodeIntentIntegrator {
      * @see android.app.Activity#startActivityForResult(Intent, int)
      * @see android.app.Fragment#startActivityForResult(Intent, int)
      */
-    protected void startActivityForResult(Intent intent, int code) {
+    private void startActivityForResult(Intent intent, @SuppressWarnings("SameParameterValue") int code) {
         if (fragment == null) {
             activity.startActivityForResult(intent, code);
         } else {

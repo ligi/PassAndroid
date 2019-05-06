@@ -39,7 +39,7 @@ object UnzipPassController {
             tempFile.delete()
         } catch (e: Exception) {
             App.tracker.trackException("problem processing InputStream", e, false)
-            spec.failCallback?.fail("problem with temp file" + e)
+            spec.failCallback?.fail("problem with temp file: $e")
         }
 
     }
@@ -47,12 +47,12 @@ object UnzipPassController {
     private fun processFile(spec: FileUnzipControllerSpec) {
 
         var uuid = UUID.randomUUID().toString()
-        val path = File(spec.context.cacheDir, "temp/" + uuid)
+        val path = File(spec.context.cacheDir, "temp/$uuid")
 
         path.mkdirs()
 
         if (!path.exists()) {
-            spec.failCallback?.fail("Problem creating the temp dir: " + path)
+            spec.failCallback?.fail("Problem creating the temp dir: $path")
             return
         }
 
@@ -66,94 +66,89 @@ object UnzipPassController {
         }
 
 
-        val manifest_json: JSONObject
         val manifestFile = File(path, "manifest.json")
         val espassFile = File(path, "main.json")
+        val manifestJSON: JSONObject
 
-        if (manifestFile.exists()) {
-            try {
+        when {
+            manifestFile.exists() -> try {
                 val readToString = manifestFile.bufferedReader().readText()
-                manifest_json = readJSONSafely(readToString)!!
-                uuid = manifest_json.getString("pass.json")
+                manifestJSON = readJSONSafely(readToString)!!
+                uuid = manifestJSON.getString("pass.json")
             } catch (e: Exception) {
-                spec.failCallback?.fail("Problem with manifest.json: " + e)
+                spec.failCallback?.fail("Problem with manifest.json: $e")
                 return
             }
-
-        } else if (espassFile.exists()) {
-            try {
+            espassFile.exists() -> try {
                 val readToString = espassFile.bufferedReader().readText()
-                manifest_json = readJSONSafely(readToString)!!
-                uuid = manifest_json.getString("id")
+                manifestJSON = readJSONSafely(readToString)!!
+                uuid = manifestJSON.getString("id")
             } catch (e: Exception) {
-                spec.failCallback?.fail("Problem with manifest.json: " + e)
+                spec.failCallback?.fail("Problem with manifest.json: $e")
                 return
             }
+            else -> {
+                val bitmap = BitmapFactory.decodeFile(spec.zipFileString)
+                val resources = spec.context.resources
 
-        } else {
+                if (bitmap != null) {
+                    val imagePass = createPassForImageImport(resources)
+                    val pathForID = spec.passStore.getPathForID(imagePass.id)
+                    pathForID.mkdirs()
 
+                    File(spec.zipFileString).copyTo(File(pathForID, "strip.png"))
 
-            val bitmap = BitmapFactory.decodeFile(spec.zipFileString)
-
-            val resources = spec.context.resources
-            if (bitmap != null) {
-                val imagePass = createPassForImageImport(resources)
-                val pathForID = spec.passStore.getPathForID(imagePass.id)
-                pathForID.mkdirs()
-
-                File(spec.zipFileString).copyTo(File(pathForID, "strip.png"))
-
-                spec.passStore.save(imagePass)
-                spec.passStore.classifier.moveToTopic(imagePass, "new")
-                spec.onSuccessCallback?.call(imagePass.id)
-                return
-            }
-
-            if (Build.VERSION.SDK_INT >= 21) {
-                try {
-                    val file = File(spec.zipFileString)
-                    val readUtf8 = Okio.buffer(Okio.source(file)).readUtf8(4)
-                    if (readUtf8 == "%PDF") {
-                        val open = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
-                        val pdfRenderer = PdfRenderer(open)
-
-                        val page = pdfRenderer.openPage(0)
-                        val ratio = page.height.toFloat() / page.width
-
-                        val widthPixels = resources.displayMetrics.widthPixels
-                        val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
-                        page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-
-                        val imagePass = createPassForPDFImport(resources)
-                        val pathForID = spec.passStore.getPathForID(imagePass.id)
-                        pathForID.mkdirs()
-
-                        createBitmap.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(pathForID, "strip.png")))
-
-                        spec.passStore.save(imagePass)
-                        spec.passStore.classifier.moveToTopic(imagePass, "new")
-                        spec.onSuccessCallback?.call(imagePass.id)
-                        return
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                    spec.passStore.save(imagePass)
+                    spec.passStore.classifier.moveToTopic(imagePass, "new")
+                    spec.onSuccessCallback?.call(imagePass.id)
+                    return
                 }
 
-            }
+                if (Build.VERSION.SDK_INT >= 21) {
+                    try {
+                        val file = File(spec.zipFileString)
+                        val readUtf8 = Okio.buffer(Okio.source(file)).readUtf8(4)
+                        if (readUtf8 == "%PDF") {
+                            val open = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+                            val pdfRenderer = PdfRenderer(open)
 
-            spec.failCallback?.fail("Pass is not espass or pkpass format :-(")
-            return
+                            val page = pdfRenderer.openPage(0)
+                            val ratio = page.height.toFloat() / page.width
+
+                            val widthPixels = resources.displayMetrics.widthPixels
+                            val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
+                            page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+
+                            val imagePass = createPassForPDFImport(resources)
+                            val pathForID = spec.passStore.getPathForID(imagePass.id)
+                            pathForID.mkdirs()
+
+                            createBitmap.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(File(pathForID, "strip.png")))
+
+                            spec.passStore.save(imagePass)
+                            spec.passStore.classifier.moveToTopic(imagePass, "new")
+                            spec.onSuccessCallback?.call(imagePass.id)
+                            return
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                spec.failCallback?.fail("Pass is not espass or pkpass format :-(")
+                return
+            }
         }
 
         spec.targetPath.mkdirs()
-        val rename_file = File(spec.targetPath, uuid)
+        val renamedFile = File(spec.targetPath, uuid)
 
-        if (spec.overwrite && rename_file.exists()) {
-            rename_file.deleteRecursively()
+        if (spec.overwrite && renamedFile.exists()) {
+            renamedFile.deleteRecursively()
         }
 
-        if (!rename_file.exists()) {
-            path.renameTo(rename_file)
+        if (!renamedFile.exists()) {
+            path.renameTo(renamedFile)
         } else {
             Log.i("Pass with same ID exists")
         }

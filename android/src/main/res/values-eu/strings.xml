@@ -132,7 +132,6 @@
   <string name="nav_settings">Ezarpenak</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Betatestean sartu/atera</string>
-  <string name="nav_community_on_google">Google+ komunitatea</string>
-  <string name="nav_improve_translation">Hobetu itzulpena</string>
+    <string name="nav_improve_translation">Hobetu itzulpena</string>
   <string name="launcher_shortcut">Abiarazlearen lasterbidea</string>
 </resources>

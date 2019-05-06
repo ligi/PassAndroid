@@ -2,7 +2,7 @@ package org.ligi.passandroid
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.test.InstrumentationRegistry.getInstrumentation
+import androidx.test.platform.app.InstrumentationRegistry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Rule
@@ -17,13 +17,14 @@ class ThePastLocationsStore {
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java) {
+        TestApp.populatePassStoreWithSinglePass()
         MockitoAnnotations.initMocks(this)
     }
 
     @Mock
     lateinit var tracker: Tracker
 
-    val prefs: SharedPreferences by lazy { getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
+    private val prefs: SharedPreferences by lazy { InstrumentationRegistry.getInstrumentation().context.getSharedPreferences("" + System.currentTimeMillis() / 100000, Context.MODE_PRIVATE) }
 
     @After
     fun tearDown() {
@@ -34,7 +35,7 @@ class ThePastLocationsStore {
     fun testPastLocationsStoreShouldNeverContainMoreThanMaxElements() {
         val tested = PastLocationsStore(prefs, tracker)
 
-        for (i in 0..PastLocationsStore.MAX_ELEMENTS * 2 - 1) {
+        for (i in 0 until PastLocationsStore.MAX_ELEMENTS * 2) {
             tested.putLocation("" + i)
         }
 
@@ -44,7 +45,7 @@ class ThePastLocationsStore {
 
     @Test
     fun testPastLocationsStoreShouldStoreOnlyOneOfAKind() {
-        val tested = PastLocationsStore(prefs, tracker!!)
+        val tested = PastLocationsStore(prefs, tracker)
 
         for (i in 0..2) {
             tested.putLocation("foo")

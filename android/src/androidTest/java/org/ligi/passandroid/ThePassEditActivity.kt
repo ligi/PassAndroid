@@ -4,18 +4,16 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.*
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasAction
-import android.support.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.intending
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.ligi.passandroid.R.id.*
-import org.ligi.passandroid.R.string.*
 import org.ligi.passandroid.model.pass.PassType.COUPON
 import org.ligi.passandroid.model.pass.PassType.EVENT
 import org.ligi.passandroid.ui.PassEditActivity
@@ -27,15 +25,16 @@ class ThePassEditActivity {
     val passStore = TestApp.passStore()
 
     @get:Rule
-    var rule = TruleskIntentRule(PassEditActivity::class.java)
+    var rule = TruleskIntentRule(PassEditActivity::class.java) {
+        TestApp.populatePassStoreWithSinglePass()
+    }
 
     @Test
     fun testSetToEventWorks() {
+        onView(withId(R.id.categoryView)).perform(click())
 
-        onView(withId(categoryView)).perform(click())
-
-        onView(withText(select_category_dialog_title)).perform(click())
-        onView(withText(category_event)).perform(click())
+        onView(withText(R.string.select_category_dialog_title)).perform(click())
+        onView(withText(R.string.category_event)).perform(click())
         assertThat(passStore.currentPass!!.type).isEqualTo(EVENT)
 
         rule.screenShot("edit_set_event")
@@ -43,10 +42,10 @@ class ThePassEditActivity {
 
     @Test
     fun testSetToCouponWorks() {
-        onView(withId(categoryView)).perform(click())
+        onView(withId(R.id.categoryView)).perform(click())
 
-        onView(withText(select_category_dialog_title)).perform(click())
-        onView(withText(category_coupon)).perform(click())
+        onView(withText(R.string.select_category_dialog_title)).perform(click())
+        onView(withText(R.string.category_coupon)).perform(click())
         assertThat(passStore.currentPass!!.type).isEqualTo(COUPON)
 
         rule.screenShot("edit_set_coupon")
@@ -55,7 +54,7 @@ class ThePassEditActivity {
     @Test
     fun testSetDescriptionWorks() {
 
-        onView(withId(passTitle)).perform(clearText(), typeText("test description"))
+        onView(withId(R.id.passTitle)).perform(clearText(), typeText("test description"))
         assertThat(passStore.currentPass!!.description).isEqualTo("test description")
 
         rule.screenShot("edit_set_description")
@@ -65,10 +64,10 @@ class ThePassEditActivity {
     @Test
     fun testColorWheelIsThere() {
 
-        onView(withId(categoryView)).perform(click())
-        onView(withText(change_color_dialog_title)).perform(click())
+        onView(withId(R.id.categoryView)).perform(click())
+        onView(withText(R.string.change_color_dialog_title)).perform(click())
 
-        onView(withId(colorPicker)).check(matches(isDisplayed()))
+        onView(withId(R.id.colorPicker)).check(matches(isDisplayed()))
 
         rule.screenShot("edit_set_color")
     }

@@ -7,6 +7,7 @@ import com.googlecode.objectify.annotation.Index;
 /**
  * The Objectify object model for device registrations we are persisting
  */
+@SuppressWarnings("WeakerAccess")
 @Entity
 public class RegistrationRecord {
 

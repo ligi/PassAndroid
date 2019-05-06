@@ -1,17 +1,16 @@
 /*
- ****************************************************************************
- * Copyright (C) 2005-2013, International Business Machines Corporation and *
- * others. All Rights Reserved.                                             *
- ************************************************************************** *
- *
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
  */
-
 package com.ibm.icu.text;
 
 /**
  * This class recognizes single-byte encodings. Because the encoding scheme is so
  * simple, language statistics are used to do the matching.
  */
+@SuppressWarnings("ALL")
 abstract class CharsetRecog_sbcs extends CharsetRecognizer {
 
     /* (non-Javadoc)
@@ -25,7 +24,7 @@ abstract class CharsetRecog_sbcs extends CharsetRecognizer {
         private static final int N_GRAM_MASK = 0xFFFFFF;
 
         protected int byteIndex = 0;
-        private int ngram = 0;
+        private int ngram;
         
         private int[] ngramList;
         protected byte[] byteMap;
@@ -161,7 +160,7 @@ abstract class CharsetRecog_sbcs extends CharsetRecognizer {
             return (int) (rawPercent * 300.0);
         }
     }
-        
+
     static class NGramParser_IBM420 extends NGramParser
     {
         private byte alef = 0x00;
@@ -273,7 +272,7 @@ abstract class CharsetRecog_sbcs extends CharsetRecognizer {
         return parser.parse(det, spaceChar);
     }
     
-    int matchIBM420(CharsetDetector det, int[] ngrams,  byte[] byteMap, byte spaceChar){
+    int matchIBM420(CharsetDetector det, int[] ngrams, byte[] byteMap, @SuppressWarnings("SameParameterValue") byte spaceChar){
         NGramParser_IBM420 parser = new NGramParser_IBM420(ngrams, byteMap);
         return parser.parse(det, spaceChar);
     }

@@ -1,6 +1,5 @@
 package org.ligi.passandroid
 
-
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Fail.fail
 import org.junit.Test
@@ -48,7 +47,6 @@ class TheBarcodeHelper {
         } catch (e: Exception) {
             fail("could not create barcode", e)
         }
-
     }
 
     fun testBitmapSizeIsSane(format: PassBarCodeFormat) {
@@ -59,6 +57,5 @@ class TheBarcodeHelper {
         } catch (e: Exception) {
             fail("could not create barcode", e)
         }
-
     }
 }

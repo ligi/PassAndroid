@@ -1,8 +1,7 @@
 package org.ligi.passandroid.maps
 
-
 import android.content.Context
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import org.ligi.kaxt.startActivityFromClass
@@ -22,7 +21,7 @@ object PassbookMapsFacade {
 
         val ft = context.supportFragmentManager.beginTransaction()
         val locationsMapFragment = LocationsMapFragment()
-        locationsMapFragment.click_to_fullscreen = true
+        locationsMapFragment.clickToFullscreen = true
         ft.replace(R.id.map_container, locationsMapFragment)
         ft.commit()
 

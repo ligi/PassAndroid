@@ -9,7 +9,7 @@ import org.ligi.passandroid.model.InputStreamWithSource
 import java.io.BufferedInputStream
 import java.net.URL
 
-val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53"
+const val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53"
 
 fun fromURI(context: Context, uri: Uri): InputStreamWithSource? {
     App.tracker.trackEvent("protocol", "to_inputstream", uri.scheme, null)

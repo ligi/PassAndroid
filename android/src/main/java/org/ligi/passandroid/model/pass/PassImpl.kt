@@ -59,13 +59,13 @@ class PassImpl(override val id: String) : Pass {
     override var passIdent: String? = null
 
     override fun getBitmap(passStore: PassStore, @Pass.PassBitmap passBitmap: String): Bitmap? {
-        try {
+        return try {
             val file = File(passStore.getPathForID(id), passBitmap + FILETYPE_IMAGES)
-            return BitmapFactory.decodeStream(FileInputStream(file))
+            BitmapFactory.decodeStream(FileInputStream(file))
         } catch (expectedInSomeCases_willJustReturnNull: FileNotFoundException) {
-            return null
+            null
         } catch (e: OutOfMemoryError) {
-            return null
+            null
         }
 
     }
@@ -84,7 +84,7 @@ class PassImpl(override val id: String) : Pass {
     }
 
     companion object {
-        val FILETYPE_IMAGES = ".png"
+        const val FILETYPE_IMAGES = ".png"
     }
 
 }

@@ -40,7 +40,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
 
         if (BuildConfig.DEBUG) {
             val of = com.squareup.moshi.JsonWriter.of(buffer)
-            of.setIndent("  ")
+            of.indent = "  "
             jsonAdapter.toJson(of, pass as PassImpl)
             buffer.close()
             of.close()
@@ -86,7 +86,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             if (dirty) {
                 save(result)
             }
-            passMap.put(id, result)
+            passMap[id] = result
             notifyChange()
         }
 

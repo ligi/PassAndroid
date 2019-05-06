@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui.edit.dialogs
 
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.ligi.kaxt.inflate
 import org.ligi.passandroid.R

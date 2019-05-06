@@ -1,8 +1,9 @@
 package org.ligi.passandroid.ui.quirk_fix
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -13,21 +14,23 @@ import org.ligi.passandroid.functions.IPHONE_USER_AGENT
 
 class OpenIphoneWebView : Activity() {
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val data = intent.data ?: return
         val webView = WebView(this)
         webView.settings.userAgentString = IPHONE_USER_AGENT
 
         webView.settings.javaScriptEnabled = true
 
-        webView.loadUrl(intent.data.toString())
+        webView.loadUrl(data.toString())
         setContentView(webView)
 
         val backgroundColor = ContextCompat.getColor(this, R.color.dividing_color)
         val loadToast = LoadToast(this).setText("Loading").setBackgroundColor(backgroundColor).show()
 
-        webView.setWebViewClient(object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 loadToast.success()
@@ -37,7 +40,7 @@ class OpenIphoneWebView : Activity() {
                 super.onReceivedError(view, request, error)
                 loadToast.error()
             }
-        })
+        }
 
     }
 }

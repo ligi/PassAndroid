@@ -24,7 +24,7 @@ class ApplePassbookQuirkCorrector(val tracker: Tracker) {
         tryToFindDate(pass)
     }
 
-    fun tryToFindDate(pass: PassImpl) {
+    private fun tryToFindDate(pass: PassImpl) {
 
         if (pass.calendarTimespan == null) {
             val foundDate = pass.fields.filter { "date" == it.key }.map {
@@ -44,11 +44,11 @@ class ApplePassbookQuirkCorrector(val tracker: Tracker) {
     }
 
     private fun getPassFieldForKey(pass: PassImpl, key: String): PassField? {
-        return pass.fields.firstOrNull() { it.key != null && it.key == key }
+        return pass.fields.firstOrNull { it.key != null && it.key == key }
     }
 
     private fun getPassFieldThatMatchesLabel(pass: PassImpl, matcher: String): PassField? {
-        return pass.fields.firstOrNull() {
+        return pass.fields.firstOrNull {
             val label = it.label
             label != null && label.matches(matcher.toRegex())
         }

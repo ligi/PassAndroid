@@ -2,32 +2,36 @@ package org.ligi.passandroid.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
+import com.google.android.material.appbar.AppBarLayout;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.AttributeSet;
 import android.view.View;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import org.ligi.passandroid.R;
 
+@SuppressWarnings("WeakerAccess")
 public class MyShyFABBehavior extends CoordinatorLayout.Behavior<FloatingActionsMenu> {
 
-    public MyShyFABBehavior() {
-    }
+    public MyShyFABBehavior() {}
 
     public MyShyFABBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
+    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent,
+                                   @NonNull FloatingActionsMenu child,
+                                   @NonNull View dependency) {
         return dependency instanceof Snackbar.SnackbarLayout || dependency instanceof AppBarLayout;
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
+    public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent,
+                                          @NonNull FloatingActionsMenu child,
+                                          @NonNull View dependency) {
         if (dependency instanceof Snackbar.SnackbarLayout) {
             updateFabTranslationForSnackbar(child, dependency);
         }
@@ -40,23 +44,24 @@ public class MyShyFABBehavior extends CoordinatorLayout.Behavior<FloatingActions
             } else {
                 distanceToScroll = (int) (child.getContext().getResources().getDimension(R.dimen.fab_size_normal) + 2 * fabBottomMargin);
             }
-            final float ratio = ViewCompat.getY(dependency) / getToolbarHeight(dependency.getContext());
+            final float ratio = dependency.getY() / getToolbarHeight(dependency.getContext());
 
-            ViewCompat.setTranslationY(child, -distanceToScroll * ratio);
+            child.setTranslationY(-distanceToScroll * ratio);
         }
         return false;
     }
 
     @Override
-    public void onDependentViewRemoved(final CoordinatorLayout parent, final FloatingActionsMenu child, final View dependency) {
+    public void onDependentViewRemoved(@NonNull final CoordinatorLayout parent,
+                                       @NonNull final FloatingActionsMenu child,
+                                       @NonNull final View dependency) {
         super.onDependentViewRemoved(parent, child, dependency);
         onDependentViewChanged(parent,child,dependency);
     }
 
     private void updateFabTranslationForSnackbar(FloatingActionsMenu child, View dependency) {
-        final float translationY = ViewCompat.getTranslationY(dependency) - dependency.getHeight();
-        final float translationYClipped = Math.min(0, translationY);
-        ViewCompat.setTranslationY(child, translationYClipped);
+        final float translationY = dependency.getTranslationY() - dependency.getHeight();
+        child.setTranslationY(Math.min(0, translationY));
     }
 
     private int getToolbarHeight(Context context) {

@@ -1,7 +1,7 @@
 package org.ligi.passandroid.model.pass
 
 import android.content.res.Resources
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 class PassField(var key: String?, var label: String?, var value: String?, var hide: Boolean) {
 

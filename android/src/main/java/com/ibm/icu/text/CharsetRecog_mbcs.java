@@ -1,9 +1,8 @@
 /*
- ****************************************************************************
- * Copyright (C) 2005-2012, International Business Machines Corporation and *
- * others. All Rights Reserved.                                             *
- ****************************************************************************
- *
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
  */
 package com.ibm.icu.text;
 
@@ -21,6 +20,7 @@ import java.util.Arrays;
  *                   encodings to be checked.  The specific encoding being recognized
  *                   is determined by subclass.
  */
+@SuppressWarnings("ALL")
 abstract class CharsetRecog_mbcs extends CharsetRecognizer {
 
    /**
@@ -157,8 +157,7 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
                  done = true;
                  return -1;
              }
-             int byteValue = (int)det.fRawInput[nextIndex++] & 0x00ff;
-             return byteValue;
+             return (int)det.fRawInput[nextIndex++] & 0x00ff;
          }       
      }
      
@@ -321,9 +320,9 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
          boolean nextChar(iteratedChar it, CharsetDetector det) {
              it.index = it.nextIndex;
              it.error = false;
-             int firstByte  = 0;
-             int secondByte = 0;
-             int thirdByte  = 0;
+             int firstByte;
+             int secondByte;
+             int thirdByte;
              //int fourthByte = 0;
              
              buildChar: {
@@ -372,7 +371,7 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
                  }
               }
              
-             return (it.done == false);
+             return (!it.done);
          }
          
          /**
@@ -461,10 +460,10 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
          boolean nextChar(iteratedChar it, CharsetDetector det) {
              it.index = it.nextIndex;
              it.error = false;
-             int firstByte  = 0;
-             int secondByte = 0;
-             int thirdByte  = 0;
-             int fourthByte = 0;
+             int firstByte;
+             int secondByte;
+             int thirdByte;
+             int fourthByte;
              
              buildChar: {
                  firstByte = it.charValue = it.nextByte(det); 
@@ -483,7 +482,7 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
                  secondByte = it.nextByte(det);
                  it.charValue = (it.charValue << 8) | secondByte;
                  
-                 if (firstByte >= 0x81 && firstByte <= 0xFE) {
+                 if (firstByte <= 0xFE) {
                      // Two byte Char
                      if ((secondByte >= 0x40 && secondByte <= 0x7E) || (secondByte >=80 && secondByte <=0xFE)) {
                          break buildChar;
@@ -504,11 +503,10 @@ abstract class CharsetRecog_mbcs extends CharsetRecognizer {
                      }
                      
                      it.error = true;
-                     break buildChar;
                  }
              }
                  
-             return (it.done == false);
+             return !it.done;
          }
          
          static int [] commonChars = 

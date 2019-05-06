@@ -12,6 +12,7 @@ package com.ibm.icu.text;
  * This class matches UTF-16 and UTF-32, both big- and little-endian. The
  * BOM will be used if it is present.
  */
+@SuppressWarnings("ALL")
 abstract class CharsetRecog_Unicode extends CharsetRecognizer {
 
     /* (non-Javadoc)
@@ -171,7 +172,7 @@ abstract class CharsetRecog_Unicode extends CharsetRecognizer {
     {
         int getChar(byte[] input, int index)
         {
-            return (input[index + 0] & 0xFF) << 24 | (input[index + 1] & 0xFF) << 16 |
+            return (input[index] & 0xFF) << 24 | (input[index + 1] & 0xFF) << 16 |
                    (input[index + 2] & 0xFF) <<  8 | (input[index + 3] & 0xFF);
         }
         
@@ -187,7 +188,7 @@ abstract class CharsetRecog_Unicode extends CharsetRecognizer {
         int getChar(byte[] input, int index)
         {
             return (input[index + 3] & 0xFF) << 24 | (input[index + 2] & 0xFF) << 16 |
-                   (input[index + 1] & 0xFF) <<  8 | (input[index + 0] & 0xFF);
+                   (input[index + 1] & 0xFF) <<  8 | (input[index] & 0xFF);
         }
         
         String getName()

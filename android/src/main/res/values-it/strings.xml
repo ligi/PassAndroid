@@ -177,7 +177,6 @@ IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICIT
   <string name="nav_settings">Impostazioni</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
-  <string name="nav_community_on_google">Community su Google+</string>
-  <string name="nav_improve_translation">Migliora la traduzione</string>
+    <string name="nav_improve_translation">Migliora la traduzione</string>
   <string name="launcher_shortcut">Scorciatoia sul Launcher</string>
 </resources>

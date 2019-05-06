@@ -5,15 +5,15 @@ import android.app.Activity.RESULT_CANCELED
 import android.app.Instrumentation.ActivityResult
 import android.content.Intent.ACTION_SEND
 import android.content.Intent.ACTION_VIEW
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.pressBack
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.DrawerActions.open
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers.*
-import android.support.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerActions.open
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.intending
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.Rule
@@ -59,19 +59,6 @@ class TheNavigationDrawer {
         onView(withText(nav_betatest_opt_in_out)).perform(click())
 
         intended(allOf(hasAction(ACTION_VIEW), hasData("https://play.google.com/apps/testing/org.ligi.passandroid")))
-    }
-
-
-    @Test
-    fun testCommunityClick() {
-        testThatNavigationDrawerOpens()
-        rule.screenShot("open_drawer")
-
-        intending(hasAction(ACTION_VIEW)).respondWith(ActivityResult(RESULT_CANCELED, null))
-
-        onView(withText(nav_community_on_google)).perform(click())
-
-        intended(allOf(hasAction(ACTION_VIEW), hasData("https://plus.google.com/communities/116353894782342292067")))
     }
 
     @Test

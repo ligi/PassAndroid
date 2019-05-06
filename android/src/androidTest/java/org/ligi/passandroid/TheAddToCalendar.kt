@@ -3,14 +3,14 @@ package org.ligi.passandroid
 import android.app.Activity.RESULT_CANCELED
 import android.app.Instrumentation
 import android.provider.CalendarContract
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasType
-import android.support.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.intending
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
@@ -23,8 +23,8 @@ import org.threeten.bp.ZonedDateTime
 
 class TheAddToCalendar {
 
-    val time = ZonedDateTime.now()
-    val time2 = ZonedDateTime.now().plusHours(3)
+    private val time = ZonedDateTime.now()
+    private val time2 = ZonedDateTime.now().plusHours(3)
 
     @get:Rule
     var rule = TruleskIntentRule(PassListActivity::class.java, false)

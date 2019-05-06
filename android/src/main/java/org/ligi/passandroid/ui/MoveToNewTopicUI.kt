@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui
 
 import android.app.Activity
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -26,16 +26,18 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
             dialog.dismiss()
         }
 
-        val newTopicEditText = dialog.findViewById(R.id.new_topic_edit) as EditText
-        val suggestionButtonContainer= dialog.findViewById(R.id.topic_suggestions_button_container) as ViewGroup
+        val newTopicEditText = dialog.findViewById<EditText>(R.id.new_topic_edit)
+        val suggestionButtonContainer = dialog.findViewById<ViewGroup>(R.id.topic_suggestions_button_container)
 
-        // we need to do this here so the dialog does not get dismissed
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if (newTopicEditText.text.toString().isEmpty()) {
-                newTopicEditText.error = context.getString(R.string.cannot_be_empty)
-                newTopicEditText.requestFocus()
-            } else {
-                move(newTopicEditText.text.toString())
+        if (newTopicEditText != null) {
+            // we need to do this here so the dialog does not get dismissed
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                if (newTopicEditText.text.toString().isEmpty()) {
+                    newTopicEditText.error = context.getString(R.string.cannot_be_empty)
+                    newTopicEditText.requestFocus()
+                } else {
+                    move(newTopicEditText.text.toString())
+                }
             }
         }
 
@@ -43,12 +45,12 @@ internal class MoveToNewTopicUI(private val context: Activity, private val passS
 
         val suggestionTopicStringIds = intArrayOf(R.string.topic_trash, R.string.topic_archive, R.string.topic_new)
 
-        suggestionTopicStringIds.map { context.getString(it) }.forEach {
-            if (it != oldTopic) {
+        suggestionTopicStringIds.map { context.getString(it) }.forEach { topic ->
+            if (topic != oldTopic) {
                 val button = Button(context)
-                button.text = it
-                suggestionButtonContainer.addView(button)
-                button.setOnClickListener { _ -> move(it) }
+                button.text = topic
+                suggestionButtonContainer?.addView(button)
+                button.setOnClickListener { move(topic) }
             }
         }
     }

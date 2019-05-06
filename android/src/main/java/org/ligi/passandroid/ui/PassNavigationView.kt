@@ -1,9 +1,10 @@
 package org.ligi.passandroid.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.design.widget.NavigationView
+import com.google.android.material.navigation.NavigationView
 import android.util.AttributeSet
 import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
@@ -20,9 +21,8 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
     val passStore: PassStore = App.kodein.instance()
     val bus: EventBus = App.kodein.instance()
 
-    fun getIntent(id: Int) = when (id) {
+    private fun getIntent(id: Int) = when (id) {
         R.id.menu_settings -> Intent(context, PreferenceActivity::class.java)
-        R.id.menu_plus -> intentFromUrl("https://plus.google.com/communities/116353894782342292067")
         R.id.menu_github -> intentFromUrl("https://github.com/ligi/PassAndroid")
         R.id.menu_beta -> intentFromUrl("https://play.google.com/apps/testing/org.ligi.passandroid")
         R.id.menu_language -> intentFromUrl("https://transifex.com/projects/p/passandroid")
@@ -33,8 +33,9 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
         else -> null
     }
 
-    fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+    private fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
 
+    @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
@@ -50,6 +51,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
         onPassStoreChangeEvent(PassStoreChangeEvent)
     }
 
+    @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         bus.unregister(this)

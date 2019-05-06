@@ -1,9 +1,9 @@
-/**
-*******************************************************************************
-* Copyright (C) 2005-2014, International Business Machines Corporation and    *
-* others. All Rights Reserved.                                                *
-*******************************************************************************
-*/
+/*
+ *******************************************************************************
+ * Copyright (C) 2005 - 2012, International Business Machines Corporation and  *
+ * others. All Rights Reserved.                                                *
+ *******************************************************************************
+ */
 package com.ibm.icu.text;
 
 import java.io.IOException;
@@ -35,6 +35,7 @@ import java.util.List;
  * <p/>
  * @stable ICU 3.4
  */
+@SuppressWarnings("ALL")
 public class CharsetDetector {
 
 //   Question: Should we have getters corresponding to the setters for input text
@@ -182,7 +183,7 @@ public class CharsetDetector {
      * @stable ICU 3.4
      */
     public CharsetMatch[] detectAll() {
-        ArrayList<CharsetMatch>         matches = new ArrayList<CharsetMatch>();
+        ArrayList<CharsetMatch> matches = new ArrayList<>();
         
         MungeInput();  // Strip html markup, collect byte stats.
         
@@ -344,7 +345,7 @@ public class CharsetDetector {
      *               it by removing what appears to be html markup.
      */
     private void MungeInput() {
-        int srci = 0;
+        int srci;
         int dsti = 0;
         byte b;
         boolean  inMarkup = false;
@@ -473,7 +474,7 @@ public class CharsetDetector {
     private static final List<CSRecognizerInfo> ALL_CS_RECOGNIZERS;
 
     static {
-        List<CSRecognizerInfo> list = new ArrayList<CSRecognizerInfo>();
+        List<CSRecognizerInfo> list = new ArrayList<>();
 
         list.add(new CSRecognizerInfo(new CharsetRecog_UTF8(), true));
         list.add(new CSRecognizerInfo(new CharsetRecog_Unicode.CharsetRecog_UTF_16_BE(), true));
@@ -522,7 +523,7 @@ public class CharsetDetector {
      */
     @Deprecated
     public String[] getDetectableCharsets() {
-        List<String> csnames = new ArrayList<String>(ALL_CS_RECOGNIZERS.size());
+        List<String> csnames = new ArrayList<>(ALL_CS_RECOGNIZERS.size());
         for (int i = 0; i < ALL_CS_RECOGNIZERS.size(); i++) {
             CSRecognizerInfo rcinfo = ALL_CS_RECOGNIZERS.get(i);
             boolean active = (fEnabledRecognizers == null) ? rcinfo.isDefaultEnabled : fEnabledRecognizers[i];
@@ -530,7 +531,7 @@ public class CharsetDetector {
                 csnames.add(rcinfo.recognizer.getName());
             }
         }
-        return csnames.toArray(new String[csnames.size()]);
+        return csnames.toArray(new String[0]);
     }
 
     /**

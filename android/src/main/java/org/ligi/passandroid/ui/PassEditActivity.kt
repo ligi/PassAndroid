@@ -3,11 +3,12 @@ package org.ligi.passandroid.ui
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.edit.*
@@ -58,7 +59,7 @@ class PassEditActivity : AppCompatActivity() {
                 when (i) {
                     0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, bus)
                     1 -> showColorPickDialog(this@PassEditActivity, currentPass, bus)
-                    2 -> PassEditActivityPermissionsDispatcher.pickImageWithCheck(this@PassEditActivity, ImageEditHelper.REQ_CODE_PICK_ICON)
+                    2 -> pickImageWithPermissionCheck(ImageEditHelper.REQ_CODE_PICK_ICON)
                 }
             }.show()
         }
@@ -103,7 +104,7 @@ class PassEditActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PassEditActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     private fun refresh(pass: Pass) {
@@ -126,14 +127,14 @@ class PassEditActivity : AppCompatActivity() {
 
         val bitmap = currentPass.getBitmap(passStore, imageString)
 
-        val addButton = findViewById(add_logo)!!
+        val addButton = findViewById<Button>(add_logo)!!
         addButton.visibility = if (bitmap == null) View.VISIBLE else View.GONE
 
         val listener = View.OnClickListener {
-            PassEditActivityPermissionsDispatcher.pickImageWithCheck(this@PassEditActivity, requestCode)
+            pickImageWithPermissionCheck(requestCode)
         }
 
-        val logoImage = findViewById(logo_img) as ImageView
+        val logoImage = findViewById<ImageView>(logo_img)
         passViewHelper.setBitmapSafe(logoImage, bitmap)
         logoImage.setOnClickListener(listener)
         addButton.setOnClickListener(listener)
@@ -159,7 +160,5 @@ class PassEditActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
-
     }
-
 }

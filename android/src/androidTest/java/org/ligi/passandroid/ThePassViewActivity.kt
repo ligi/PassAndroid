@@ -1,12 +1,13 @@
 package org.ligi.passandroid
 
 import android.annotation.TargetApi
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.core.IsNot.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.ligi.passandroid.model.pass.BarCode
@@ -21,10 +22,15 @@ import java.util.*
 @TargetApi(14)
 class ThePassViewActivity {
 
-    internal fun getActPass() = TestApp.passStore().currentPass as PassImpl
+    private fun getActPass() = TestApp.passStore().currentPass as PassImpl
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java, false)
+
+    @Before
+    fun before() {
+        TestApp.populatePassStoreWithSinglePass()
+    }
 
     @Test
     fun testThatDescriptionIsThere() {
@@ -35,7 +41,7 @@ class ThePassViewActivity {
 
     @Test
     fun testDateIsGoneWhenPassbookHasNoDate() {
-        getActPass().validTimespans = ArrayList<PassImpl.TimeSpan>()
+        getActPass().validTimespans = ArrayList()
         rule.launchActivity(null)
 
         onView(withId(R.id.date)).check(matches(not(isDisplayed())))
@@ -92,7 +98,7 @@ class ThePassViewActivity {
 
     @Test
     fun testLinkToCalendarIsNotThereWhenPassbookHasNoDate() {
-        getActPass().validTimespans = ArrayList<PassImpl.TimeSpan>()
+        getActPass().validTimespans = ArrayList()
         rule.launchActivity(null)
 
         onView(withText(R.string.pass_to_calendar)).check(matches(not(isDisplayed())))

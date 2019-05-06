@@ -15,27 +15,27 @@
             tools:ignore="MissingPrefix"
             app:srcCompat="@drawable/ic_action_delete"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/label_field_edit"
                 android:minWidth="64dp"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:hint="label"
         />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/value_field_edit"
                 android:minWidth="64dp"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:hint="value"
         />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

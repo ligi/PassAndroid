@@ -2,6 +2,8 @@ package org.ligi.passandroid;
 
 import org.ligi.tracedroid.logging.Log;
 
+import javax.annotation.Nullable;
+
 public class NotTracker implements Tracker {
 
     @Override
@@ -23,7 +25,8 @@ public class NotTracker implements Tracker {
     }
 
     @Override
-    public void trackEvent(String category, String action, String label, Long val) {
+    public void trackEvent(@Nullable String category, @Nullable String action,
+                           @Nullable String label, @Nullable Long val) {
 
     }
 }

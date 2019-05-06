@@ -2,6 +2,7 @@ package org.ligi.passandroid.ui
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -15,12 +16,19 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fullscreen_image)
+
+        if (Build.VERSION.SDK_INT >= 27) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+        }
     }
 
     override fun onResume() {
         super.onResume()
 
-        if (currentPass == null || currentPass.barCode == null) {
+        if (currentPass.barCode == null) {
             Log.w("FullscreenBarcodeActivity in bad state")
             finish() // this should never happen, but better safe than sorry
             return
@@ -47,7 +55,6 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
      * ( reverse orientation / sensor is the problem here ..)
      */
     private fun setBestFittingOrientationForBarCode() {
-
         if (currentPass.barCode!!.format!!.isQuadratic()) {
             when (requestedOrientation) {
 
@@ -72,9 +79,4 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
 
         }
     }
-
-    override fun onAttachedToWindow() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-    }
-
 }

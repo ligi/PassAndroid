@@ -2,8 +2,8 @@ package org.ligi.passandroid.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v4.app.NavUtils
-import android.support.v7.app.AlertDialog
+import androidx.core.app.NavUtils
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.instance

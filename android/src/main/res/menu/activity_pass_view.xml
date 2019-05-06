@@ -1,33 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+      xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <item
             android:id="@+id/menu_share"
-            yourapp:showAsAction="ifRoom"
             android:title="@string/menu_share"
-            android:icon="@drawable/ic_social_share"/>
+            android:icon="@drawable/ic_social_share"
+            custom:showAsAction="ifRoom" />
 
     <item
             android:id="@+id/menu_light"
-            yourapp:showAsAction="ifRoom"
             android:title="light"
-            android:icon="@drawable/ic_device_brightness_high"/>
+            android:icon="@drawable/ic_device_brightness_high"
+            custom:showAsAction="ifRoom" />
 
     <item
             android:id="@+id/menu_edit"
-            yourapp:showAsAction="ifRoom"
             android:title="@string/menu_edit"
-            android:icon="@drawable/ic_editor_mode_edit"/>
+            android:icon="@drawable/ic_editor_mode_edit"
+            custom:showAsAction="ifRoom" />
 
     <item
             android:id="@+id/menu_print"
-            yourapp:showAsAction="ifRoom"
             android:title="@string/menu_print"
-            android:icon="@drawable/ic_action_print"/>
+            android:icon="@drawable/ic_action_print"
+            custom:showAsAction="ifRoom" />
 
     <item
             android:id="@+id/menu_delete"
-            yourapp:showAsAction="ifRoom"
             android:title="@string/menu_delete"
-            android:icon="@drawable/ic_action_delete"/>
+            android:icon="@drawable/ic_action_delete"
+            custom:showAsAction="ifRoom" />
 </menu>

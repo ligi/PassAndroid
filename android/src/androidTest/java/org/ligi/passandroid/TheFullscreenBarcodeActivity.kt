@@ -2,10 +2,10 @@ package org.ligi.passandroid
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import android.widget.ImageView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -19,9 +19,9 @@ import org.ligi.passandroid.ui.FullscreenBarcodeActivity
 import org.ligi.trulesk.TruleskIntentRule
 import java.util.*
 
-class TheFullscreenBarcodeActivity {
+private const val BARCODE_MESSAGE = "2323"
 
-    private val BARCODE_MESSAGE = "2323"
+class TheFullscreenBarcodeActivity {
 
     @get:Rule
     var rule = TruleskIntentRule(FullscreenBarcodeActivity::class.java, false)
@@ -78,11 +78,11 @@ class TheFullscreenBarcodeActivity {
         val bitmap = bitmapDrawable.bitmap
 
         val bitmapToTest: Bitmap
-        if (format === PassBarCodeFormat.AZTEC) {
+        bitmapToTest = if (format === PassBarCodeFormat.AZTEC) {
             // not sure why - but for the decoder to pick up AZTEC it must have moar pixelz - smells like a zxing bug
-            bitmapToTest = Bitmap.createScaledBitmap(bitmap, bitmap.width * 2, bitmap.height * 2, false)
+            Bitmap.createScaledBitmap(bitmap, bitmap.width * 2, bitmap.height * 2, false)
         } else {
-            bitmapToTest = bitmap
+            bitmap
         }
 
         assertThat(bitmapToTest.decodeBarCode()).isEqualTo(BARCODE_MESSAGE)

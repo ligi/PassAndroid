@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_gravity="center"
-        android:layout_width="48dp"
-        android:layout_height="74dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="48dp"
+    android:layout_height="74dp">
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@drawable/cat_bg"
-            android:scaleType="fitStart"
-            android:id="@+id/topImageView"
-            android:orientation="vertical"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cat_bg"
+        android:scaleType="fitStart"
+        android:id="@+id/topImageView"
+        android:orientation="vertical"
+        tools:ignore="ContentDescription" />
 
     <ImageView
-            android:layout_gravity="bottom|center"
-            android:layout_margin="8dp"
-            android:id="@+id/iconImageView"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="32dp" android:layout_height="32dp"/>
+        android:layout_gravity="bottom|center"
+        android:layout_margin="8dp"
+        android:id="@+id/iconImageView"
+        android:src="@drawable/ic_launcher"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        tools:ignore="ContentDescription" />
 </FrameLayout>

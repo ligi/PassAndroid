@@ -1,7 +1,7 @@
 package org.ligi.passandroid.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.instance
 import com.ortiz.touch.TouchImageView

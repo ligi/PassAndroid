@@ -10,7 +10,7 @@
   <string name="help_content"><![CDATA[
 <h1>Wat is PassAndroid?</h1>
 
-Deze app is een viewer voor passbooks. Een passbook kan een boarding-pass zijn voor je volgende vlucht, een bon voor een een lekker warm drankje op je bestemming, een filmticket, een klantenkaart,...
+Deze app is een viewer voor passbooks. Een passbook kan een boarding-pass zijn voor je volgende vlucht, een bon voor een een lekker warm drankje op je bestemming, een filmticket, een klantenkaart,…
 
 In essentie vervangt het een stuk papier of plastiek dat je normaal mee zou moeten nemen - dus laat ons samen wat bomen redden en de afvalberg verkleinen!
 
@@ -22,7 +22,7 @@ Heb je een aantal passen nodig om wat mee te experimenteren? <a href=\'http://es
 
 <h1>Hoe werkt het?</h1>
 
-Om te beginnen kan je met deze app pkpass bestanden openen, bv. wanneer je ze via email of via een download-optie ontvangt. De belangrijkste inhoud hiervan is de barcode (er is ondersteuning voor verschillende types zoals QR , AZTEC & PDF417), maar het bevat ook andere interessante informatie zoals een beschrijving, de datum en tijd (die je bovendien makkelijk in je agenda kan plaatsen) en vaak ook de locatie. Probeer het! Daarnaast kan je ook manueel bv. klantenkaarten,... toevoegen.
+Om te beginnen kan je met deze app pkpass bestanden openen, bv. wanneer je ze via email of via een download-optie ontvangt. De belangrijkste inhoud hiervan is de barcode (er is ondersteuning voor verschillende types zoals QR , AZTEC & PDF417), maar het bevat ook andere interessante informatie zoals een beschrijving, de datum en tijd (die je bovendien makkelijk in je agenda kan plaatsen) en vaak ook de locatie. Probeer het! Daarnaast kan je ook manueel bv. klantenkaarten,… toevoegen.
 
 De app kan bovendien offline gebruikt worden vanaf de pass gedownload werd!
 
@@ -198,7 +198,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="nav_settings">Instellingen</string>
   <string name="nav_github">GitHub</string>
   <string name="nav_betatest_opt_in_out">Betatester zijn? </string>
-  <string name="nav_community_on_google">Community op google+</string>
-  <string name="nav_improve_translation">Vertaling verbeteren</string>
+    <string name="nav_improve_translation">Vertaling verbeteren</string>
   <string name="launcher_shortcut">Snelkoppeling maken</string>
 </resources>

@@ -2,7 +2,7 @@ package org.ligi.passandroid.model
 
 import android.content.Context
 import android.preference.PreferenceManager
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 import org.ligi.passandroid.R
 import org.ligi.passandroid.R.string.preference_key_autolight
 import org.ligi.passandroid.R.string.preference_key_condensed
@@ -11,12 +11,12 @@ import java.io.File
 
 class AndroidSettings(val context: Context) : Settings {
 
-    internal val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun getSortOrder(): PassSortOrder {
         val key = context.getString(R.string.preference_key_sort)
         val stringValue = sharedPreferences.getString(key, "0")
-        val id = Integer.valueOf(stringValue)!!
+        val id = Integer.valueOf(stringValue!!)
 
         return PassSortOrder.values().first { it.int == id }
     }

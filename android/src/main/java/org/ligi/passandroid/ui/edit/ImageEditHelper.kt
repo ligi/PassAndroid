@@ -46,12 +46,12 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
 
     companion object {
 
-        private val REQ_CODE_OFFSET = 5555
-        val REQ_CODE_PICK_LOGO = 1 + REQ_CODE_OFFSET
-        val REQ_CODE_PICK_ICON = 2 + REQ_CODE_OFFSET
-        val REQ_CODE_PICK_STRIP = 3 + REQ_CODE_OFFSET
-        val REQ_CODE_PICK_THUMBNAIL = 4 + REQ_CODE_OFFSET
-        val REQ_CODE_PICK_FOOTER = 5 + REQ_CODE_OFFSET
+        private const val REQ_CODE_OFFSET = 5555
+        const val REQ_CODE_PICK_LOGO = 1 + REQ_CODE_OFFSET
+        const val REQ_CODE_PICK_ICON = 2 + REQ_CODE_OFFSET
+        const val REQ_CODE_PICK_STRIP = 3 + REQ_CODE_OFFSET
+        const val REQ_CODE_PICK_THUMBNAIL = 4 + REQ_CODE_OFFSET
+        const val REQ_CODE_PICK_FOOTER = 5 + REQ_CODE_OFFSET
 
         @Pass.PassBitmap
         fun getImageStringByRequestCode(requestCode: Int): String? = when (requestCode) {

@@ -18,7 +18,7 @@ class ThePassSorting {
     private val pass4 = PassImpl("ID4")
     private val pass5 = PassImpl("ID5")
 
-    lateinit private var passList: List<Pass>
+    private lateinit var passList: List<Pass>
 
     @Before
     fun init() {

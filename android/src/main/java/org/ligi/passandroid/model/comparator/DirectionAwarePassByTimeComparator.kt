@@ -9,7 +9,7 @@ class DirectionAwarePassByTimeComparator(private val direction: Int) : PassByTim
     }
 
     companion object {
-        val DIRECTION_DESC = -1
-        val DIRECTION_ASC = 1
+        const val DIRECTION_DESC = -1
+        const val DIRECTION_ASC = 1
     }
 }

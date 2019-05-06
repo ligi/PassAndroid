@@ -1,8 +1,8 @@
 package org.ligi.passandroid.ui.pass_view_holder
 
 import android.app.Activity
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import android.text.format.DateUtils
 import android.view.View.*
 import kotlinx.android.synthetic.main.pass_list_item.view.*

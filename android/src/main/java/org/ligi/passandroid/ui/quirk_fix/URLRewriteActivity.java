@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import org.ligi.passandroid.ui.PassAndroidActivity;
 import org.ligi.passandroid.ui.PassImportActivity;
 
@@ -13,10 +13,10 @@ public class URLRewriteActivity extends PassAndroidActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Uri data = getIntent().getData();
+        final String url = data != null ? new URLRewriteController(getTracker()).getUrlByUri(data) : null;
 
-        final String url = new URLRewriteController(getTracker()).getUrlByUri(getIntent().getData());
-
-        if (url == null) {
+        if (data != null && url == null) {
             new AlertDialog.Builder(this).setTitle("Workaround failed")
                     .setMessage(
                             "The URL PassAndroid tried to work around failed :-( some companies just send PassBooks to Apple Devices - this was an attempt to workaround this." +
@@ -26,7 +26,7 @@ public class URLRewriteActivity extends PassAndroidActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             getTracker().trackException("URLRewrite with invalid activity", false);
                             final Intent intent = new Intent(URLRewriteActivity.this, OpenIphoneWebView.class);
-                            intent.setData(getIntent().getData());
+                            intent.setData(data);
                             startActivity(intent);
 
                         }
@@ -34,11 +34,10 @@ public class URLRewriteActivity extends PassAndroidActivity {
                     .setNeutralButton("send", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.putExtra(Intent.EXTRA_SUBJECT, "PassAndroid: URLRewrite Problem");
                             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ligi@ligi.de"});
-                            intent.putExtra(Intent.EXTRA_TEXT, getIntent().getData().toString());
+                            intent.putExtra(Intent.EXTRA_TEXT, data.toString());
                             intent.setType("text/plain");
 
                             startActivity(Intent.createChooser(intent, "How to send Link?"));
