@@ -74,7 +74,7 @@ class PassImpl(override val id: String) : Pass {
         val file = File(passStore.getPathForID(id), "source.txt")
 
         if (file.exists()) {
-            return file.bufferedReader().readText()
+            return file.readText()
         }
         return null
     }
