@@ -20,46 +20,4 @@
 
     <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="nav_btn">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:clickable">true</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
-    <style name="nav_text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
-    </style>
-
-    <style name="nav_icon">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:padding">8dp</item>
-    </style>
-
-    <style name="nav_topic">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">7dp</item>
-        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
-    </style>
-
-
-    <style name="menu_labels_style">
-        <item name="android:background">@color/secondary</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">4dp</item>
-    </style>
-
-    <style name="barcode_edit_barcodes">
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-    </style>
 </resources>
