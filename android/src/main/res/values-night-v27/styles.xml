@@ -1,11 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppBaseThemeNoActionbar" parent="AppBaseTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-
     <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="colorPrimary">@color/primary</item>
@@ -16,8 +10,5 @@
         <item name="android:navigationBarColor">@android:color/black</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
-
-
-    <style name="AppTheme" parent="AppBaseTheme" />
-
+    
 </resources>
