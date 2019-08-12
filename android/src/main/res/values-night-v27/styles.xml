@@ -7,7 +7,7 @@
 
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <!--<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>-->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/secondary</item>
         <item name="colorAccent">@color/accent</item>
