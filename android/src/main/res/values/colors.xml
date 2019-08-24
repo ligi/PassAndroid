@@ -7,6 +7,7 @@
     <color name="secondary">#ff2c51a7</color>
 
     <color name="card_view_background">#f9f9f9</color>
+    <color name="system_navigation_bar">#ebebeb</color>
 
     <color name="icon_green">#ffbfdf00</color>
 </resources>

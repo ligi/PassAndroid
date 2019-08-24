@@ -51,7 +51,7 @@
         <activity
                 android:name=".ui.PassListActivity"
                 android:label="@string/app_name"
-                android:theme="@style/AppBaseThemeNoActionbar">
+                android:theme="@style/AppThemeNoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -64,7 +64,7 @@
 
         <activity
                 android:name=".ui.HelpActivity"
-                android:theme="@style/AppBaseThemeNoActionbar"/>
+                android:theme="@style/AppThemeNoActionbar"/>
         <activity
                 android:name=".ui.PassEditActivity"/>
         <activity
@@ -1792,7 +1792,7 @@
 
         <activity
                 android:name=".ui.PassViewActivity"
-                android:theme="@style/AppBaseThemeNoActionbar"
+                android:theme="@style/AppThemeNoActionbar"
                 android:label="@string/app_name"
                 android:exported="true"
                 android:parentActivityName=".ui.PassListActivity">
