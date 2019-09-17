@@ -11,7 +11,7 @@ repositories {
     jcenter()
     mavenLocal()
     google()
-    maven { url 'https://jitpack.io' }
+    maven { url 'https://www.jitpack.io' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // For Spoon snapshot, until 2.0.0 is released
 }
 

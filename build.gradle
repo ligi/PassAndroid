@@ -7,7 +7,7 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://www.jitpack.io' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // for Spoon snapshot, until 2.0.0 is released
         //maven { url "https://plugins.gradle.org/m2/" } // for build-scan
     }
