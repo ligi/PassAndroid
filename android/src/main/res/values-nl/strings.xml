@@ -3,8 +3,8 @@
   <string name="app_name">PassAndroid</string>
   <string name="logo">logo</string>
   <string name="menu_map">Toon op kaart</string>
-  <string name="menu_delete">verwijder</string>
-  <string name="menu_share">deel</string>
+  <string name="menu_delete">Verwijder</string>
+  <string name="menu_share">Deel</string>
   <string name="barcode">barcode</string>
   <string name="help_label">Help</string>
   <string name="help_content"><![CDATA[
