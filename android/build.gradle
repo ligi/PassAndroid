@@ -171,8 +171,8 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.squareup.moshi:moshi:1.7.0'
 
-    implementation 'com.chibatching.kotpref:kotpref:2.6.0'
-    implementation 'com.chibatching.kotpref:initializer:2.6.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.9.2'
+    implementation 'com.chibatching.kotpref:initializer:2.9.2'
     testImplementation 'androidx.annotation:annotation:1.0.2'
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     testImplementation 'junit:junit:4.12'
