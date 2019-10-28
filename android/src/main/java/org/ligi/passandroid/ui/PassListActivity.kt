@@ -10,15 +10,15 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.view.GravityCompat
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -275,9 +275,9 @@ class PassListActivity : PassAndroidActivity() {
         invalidateOptionsMenu()
 
         val empty = passStore.classifier.topicByIdMap.isEmpty()
-        emptyView.visibility = if (empty) View.VISIBLE else View.GONE
+        emptyView.visibility = if (empty) VISIBLE else GONE
         val onlyDefaultTopicExists = passStore.classifier.getTopics().all { it == getString(R.string.topic_new) }
-        tab_layout.visibility = if (onlyDefaultTopicExists) View.GONE else View.VISIBLE
+        tab_layout.visibility = if (onlyDefaultTopicExists) GONE else VISIBLE
     }
 
     private fun setupWithViewPagerIfNeeded() {
