@@ -18,7 +18,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.3.2'
         // FIXME: this causes deprecation warnings and should be replaced
         classpath 'com.jaredsburrows:gradle-spoon-plugin:1.5.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.6.5'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
 
