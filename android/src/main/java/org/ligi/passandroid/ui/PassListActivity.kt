@@ -116,6 +116,7 @@ class PassListActivity : PassAndroidActivity() {
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, resultData)
         if (requestCode == OPEN_FILE_READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 val targetIntent = Intent(this, PassImportActivity::class.java)

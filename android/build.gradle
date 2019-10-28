@@ -131,7 +131,6 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.25.0'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
-    androidTestImplementation 'androidx.appcompat:appcompat:1.0.2'
     androidTestImplementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.github.ligi:TouchImageView:2.1'
@@ -141,7 +140,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'androidx.annotation:annotation:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
