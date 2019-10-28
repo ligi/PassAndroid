@@ -1,8 +1,9 @@
 package org.ligi.passandroid.ui
 
-import net.lingala.zip4j.core.ZipFile
+import net.lingala.zip4j.ZipFile
 import net.lingala.zip4j.model.ZipParameters
-import net.lingala.zip4j.util.Zip4jConstants
+import net.lingala.zip4j.model.enums.CompressionLevel
+import net.lingala.zip4j.model.enums.CompressionMethod
 
 import org.ligi.passandroid.App
 
@@ -17,11 +18,11 @@ class PassExporter(private val inputPath: File, val file: File) {
             file.parentFile.mkdirs()
             val zipFile = ZipFile(file)
 
-            zipFile.createZipFileFromFolder(inputPath, object : ZipParameters() {
+            zipFile.createSplitZipFileFromFolder(inputPath, object : ZipParameters() {
                 init {
                     isIncludeRootFolder = false
-                    compressionMethod = Zip4jConstants.COMP_DEFLATE
-                    compressionLevel = Zip4jConstants.DEFLATE_LEVEL_NORMAL
+                    compressionMethod = CompressionMethod.DEFLATE
+                    compressionLevel = CompressionLevel.NORMAL
                 }
             }, false, 0)
 
