@@ -158,10 +158,7 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-    // https://github.com/square/moshi/issues/738
-    // either wait for ProGuard update or use R8 instead (android.enableR8=true)
-    //noinspection GradleDependency
-    implementation 'com.squareup.moshi:moshi:1.7.0'
+    implementation 'com.squareup.moshi:moshi:1.9.0'
 
     implementation 'com.chibatching.kotpref:kotpref:2.9.2'
     implementation 'com.chibatching.kotpref:initializer:2.9.2'
