@@ -107,8 +107,8 @@ android {
 }
 
 dependencies {
-    implementation 'org.permissionsdispatcher:permissionsdispatcher:4.5.0'
-    kapt 'org.permissionsdispatcher:permissionsdispatcher-processor:4.5.0'
+    implementation 'org.permissionsdispatcher:permissionsdispatcher:4.6.0'
+    kapt 'org.permissionsdispatcher:permissionsdispatcher-processor:4.6.0'
 
     implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
