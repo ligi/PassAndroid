@@ -127,7 +127,7 @@ dependencies {
 
 
     implementation 'com.github.ligi:TouchImageView:2.1'
-    implementation 'com.github.ligi:ExtraCompats:0.5'
+    implementation 'com.github.ligi:ExtraCompats:1.0'
     implementation 'net.lingala.zip4j:zip4j:2.2.3'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
@@ -142,7 +142,7 @@ dependencies {
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
     implementation 'com.github.ligi:KAXT:1.0'
-    implementation 'com.github.ligi:KAXTUI:0.8'
+    implementation 'com.github.ligi:KAXTUI:1.0'
     implementation 'com.github.ligi:loadtoast:1.10.11'
     implementation 'com.github.ligi:tracedroid:2.1'
 
