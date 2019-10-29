@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jaredsburrows.spoon'
+apply plugin: 'com.trevjonez.composer'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -12,7 +12,6 @@ repositories {
     mavenLocal()
     google()
     maven { url 'https://www.jitpack.io' }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // For Spoon snapshot, until 2.0.0 is released
 }
 
 android {
@@ -62,13 +61,6 @@ android {
             dimension "distribution"
         }
 
-    }
-
-    // hacky workaround to add spoon task that executes all variants
-    task spoon {
-        dependsOn {
-            tasks.findAll { task -> task.name != 'spoon' && task.name.startsWith('spoon') }
-        }
     }
 
     android.variantFilter { variant ->
@@ -121,8 +113,6 @@ dependencies {
     implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
 
-    // spoon snapshot, until 2.0.0 is released
-    androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
     androidTestImplementation 'com.github.ligi:trulesk:0.28'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -192,12 +182,6 @@ dependencies {
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:16.0.8'
     withMapsImplementation 'com.google.android.gms:play-services-maps:16.1.0'
-}
-
-spoon {
-    debug = true
-    grantAll = true
-    baseOutputDir = "build/spoon"
 }
 
 play {
