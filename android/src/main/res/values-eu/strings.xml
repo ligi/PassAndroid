@@ -2,9 +2,9 @@
 <resources>
   <string name="app_name">PassAndroid</string>
   <string name="logo">logotipoa</string>
-  <string name="menu_map">mapan erakutsi</string>
-  <string name="menu_delete">ezabatu</string>
-  <string name="menu_share">partekatu</string>
+  <string name="menu_map">Mapan erakutsi</string>
+  <string name="menu_delete">Ezabatu</string>
+  <string name="menu_share">Partekatu</string>
   <string name="barcode">barra-kodea</string>
   <string name="help_label">Laguntza</string>
   <string name="drawer_open">ireki</string>

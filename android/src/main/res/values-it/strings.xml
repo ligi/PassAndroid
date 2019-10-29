@@ -2,9 +2,9 @@
 <resources>
   <string name="app_name">PassAndroid</string>
   <string name="logo">logo</string>
-  <string name="menu_map">mostra sulla mappa</string>
-  <string name="menu_delete">elimina</string>
-  <string name="menu_share">condividi</string>
+  <string name="menu_map">Mostra sulla mappa</string>
+  <string name="menu_delete">Elimina</string>
+  <string name="menu_share">Condividi</string>
   <string name="barcode">codice a barre</string>
   <string name="help_label">Aiuto</string>
   <string name="help_content"><![CDATA[
