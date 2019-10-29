@@ -141,7 +141,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
 
-    implementation 'com.github.ligi:KAXT:0.22'
+    implementation 'com.github.ligi:KAXT:1.0'
     implementation 'com.github.ligi:KAXTUI:0.8'
     implementation 'com.github.ligi:loadtoast:1.10.11'
     implementation 'com.github.ligi:tracedroid:2.1'
