@@ -180,8 +180,8 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
-    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:16.0.8'
-    withMapsImplementation 'com.google.android.gms:play-services-maps:16.1.0'
+    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:17.0.0'
+    withMapsImplementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
 
 play {
