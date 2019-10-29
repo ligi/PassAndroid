@@ -9,7 +9,6 @@ buildscript {
         google()
         maven { url 'https://www.jitpack.io' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // for Spoon snapshot, until 2.0.0 is released
-        //maven { url "https://plugins.gradle.org/m2/" } // for build-scan
     }
 
     dependencies {
@@ -21,13 +20,8 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.6.5'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
-
-        //classpath "com.gradle:build-scan-plugin:1.16"
     }
 }
-
-//apply plugin: "com.gradle.build-scan"
-//buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
 
 repositories {
     google()
