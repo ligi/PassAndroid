@@ -144,7 +144,7 @@ dependencies {
     implementation 'com.github.ligi:KAXT:1.0'
     implementation 'com.github.ligi:KAXTUI:1.0'
     implementation 'com.github.ligi:loadtoast:1.10.11'
-    implementation 'com.github.ligi:tracedroid:2.1'
+    implementation 'com.github.ligi:tracedroid:3.0'
 
     forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.18'
     forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.18'
