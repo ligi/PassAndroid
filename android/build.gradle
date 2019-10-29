@@ -127,11 +127,14 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.25.0'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     androidTestImplementation 'com.google.android.material:material:1.0.0'
+    androidTestImplementation 'org.threeten:threetenbp:1.4.0'
+
 
     implementation 'com.github.ligi:TouchImageView:2.1'
     implementation 'com.github.ligi:ExtraCompats:0.5'

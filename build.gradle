@@ -13,8 +13,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // NOTE: upgrade requires to migrate backend to the new app-engine plugin, see backend/build.gradle
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.5.1'
         // FIXME: this causes deprecation warnings and should be replaced
         classpath 'com.jaredsburrows:gradle-spoon-plugin:1.5.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
