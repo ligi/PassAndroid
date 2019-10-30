@@ -3,12 +3,14 @@ package org.ligi.passandroid.model.pass
 import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
 import com.github.salomonbrys.kodein.instance
+import com.squareup.moshi.JsonClass
 import org.ligi.passandroid.App
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.generateBitmapDrawable
 import org.ligi.tracedroid.logging.Log
 import java.util.*
 
+@JsonClass(generateAdapter = true)
 class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.randomUUID().toString().toUpperCase()) {
 
     var alternativeText: String? = null

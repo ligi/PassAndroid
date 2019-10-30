@@ -2,7 +2,9 @@ package org.ligi.passandroid.model.pass
 
 import android.content.res.Resources
 import androidx.annotation.StringRes
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class PassField(var key: String?, var label: String?, var value: String?, var hide: Boolean) {
 
     fun toHtmlSnippet(): String {

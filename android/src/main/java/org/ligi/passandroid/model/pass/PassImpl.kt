@@ -2,6 +2,7 @@ package org.ligi.passandroid.model.pass
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import com.squareup.moshi.JsonClass
 import com.squareup.moshi.JsonQualifier
 import org.ligi.passandroid.model.PassStore
 import org.threeten.bp.ZonedDateTime
@@ -10,6 +11,7 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.util.*
 
+@JsonClass(generateAdapter = true)
 class PassImpl(override val id: String) : Pass {
 
 
@@ -37,7 +39,10 @@ class PassImpl(override val id: String) : Pass {
             return field
         }
 
+    @JsonClass(generateAdapter = true)
     class TimeRepeat(val offset: Int, val count: Int)
+
+    @JsonClass(generateAdapter = true)
     class TimeSpan(val from: ZonedDateTime? = null, val to: ZonedDateTime? = null, val repeat: TimeRepeat? = null)
 
     override var validTimespans: List<TimeSpan> = ArrayList()
