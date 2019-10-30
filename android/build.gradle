@@ -16,14 +16,14 @@ repositories {
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "28.0.3"
 
     defaultConfig {
         versionCode 349
         versionName "3.4.9"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         applicationId "org.ligi.passandroid"
         testInstrumentationRunner "org.ligi.passandroid.AppReplacingRunner"
         archivesBaseName = "PassAndroid-$versionName"

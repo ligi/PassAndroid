@@ -31,7 +31,7 @@ class ImageEditHelper(private val context: Activity, private val passStore: Pass
     }
 
     private fun extractImage(imageReturnedIntent: Intent, name: String) {
-        val extractedFile = imageReturnedIntent.data.loadImage(context)
+        val extractedFile = imageReturnedIntent.data?.loadImage(context)
         val pass = passStore.currentPass
         if (extractedFile != null && pass != null && extractedFile.exists()) {
             try {

@@ -33,7 +33,7 @@ class PastLocationsStore constructor(private val sharedPreferences: SharedPrefer
 
     // feature not available for these versions
     val locations: Set<String>
-        get() = sharedPreferences.getStringSet(KEY_PAST_LOCATIONS, emptySet<String>())
+        get() = sharedPreferences.getStringSet(KEY_PAST_LOCATIONS, emptySet<String>())?: emptySet()
 
     companion object {
 

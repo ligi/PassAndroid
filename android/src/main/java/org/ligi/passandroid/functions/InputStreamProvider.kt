@@ -65,6 +65,8 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
     return null
 }
 
-private fun fromContent(ctx: Context, uri: Uri) = InputStreamWithSource(uri.toString(), ctx.contentResolver.openInputStream(uri))
+private fun fromContent(ctx: Context, uri: Uri) = ctx.contentResolver.openInputStream(uri)?.let {
+    InputStreamWithSource(uri.toString(), it)
+}
 
 private fun getDefaultInputStreamForUri(uri: Uri) = InputStreamWithSource(uri.toString(), BufferedInputStream(URL(uri.toString()).openStream(), 4096))
