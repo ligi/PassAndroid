@@ -17,7 +17,6 @@ repositories {
 android {
 
     compileSdkVersion 29
-    buildToolsVersion "28.0.3"
 
     defaultConfig {
         versionCode 350
