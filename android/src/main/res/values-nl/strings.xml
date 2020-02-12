@@ -45,9 +45,6 @@ Veel dank aan <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> voor het d
 & <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
 voor verbeteringen in het algemeen!
 
-<h1>Feedback</h1>
-Geef feedback in de <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> of je kan een <a href=\'mailto:ligi@ligi.de\'>email</a> naar de maker sturen. Als je de app leuk vindt, kan je dit hier laten weten: <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> Ik ben ook altijd benieuwd om te weten op welke manier je de app gebruikt.
-
 <h1>Geschiedenis</h1>
 
 Ik kwam de eerste keer in aanraking met Passbook bestanden toen ik m\'n ticket voor de 29c3 ontving. Ik vond het een leuk idee, maar er was geen Android app die voor me werkte. Ik zag dat de implementatie eenvoudig was (gewoon een zip bestand met wat json en wat afbeeldingen). De eerste versie was heel snel ontwikkeld en werkte (ik geraakte binnen op 29c3). Het jaar nadien heb ik niet veel gewerkt aan de app vermits ik niet veel concrete wensen had, maar er waren veel mensen die de app gebruikten en regelmatig deed ik verbeteringen als mensen me een pass doorstuurden die niet bleek te werken (sommige passes bevatten ongeldige json inhoud...).

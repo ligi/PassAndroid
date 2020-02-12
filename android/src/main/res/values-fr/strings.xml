@@ -37,9 +37,6 @@ et <a href=\"https://github.com/cketti\">Cketti</a>,
 et <a href=\"https://github.com/irgendwr\">Jonas Bögle</a>
 pour les pull-requests !
 
-<h1>Feedback / Réactions</h1>
-Partagez vos réactions dans la <a href=\'https://plus.google.com/communities/116353894782342292067\'>Communauté Google+</a> ou bien vous pouvez envoyer <a href=\'mailto:ligi@ligi.de\'>un mail à l\'auteur.</a> Si vous aimez cette application, notez-là sur <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a> J\'apprécie également connaître vos différentes utilisations de cette application.
-
 <h1>Historique</h1>
 Je suis tombé sur les fichiers Passbook quand j\'ai reçu mon billet pour le 29c3 - J\'ai aimé l\'idée - mais il n\'y avait pas d\'application Android qui fonctionnait pour moi. J\'ai vu que la mise en œuvre est assez facile (juste un conteneur zip avec json et images) - La première version a été construire très rapidement et fonctionnait bien pour moi (elle a même eu son entrée au 29C3) - L\'année suivante, je n\'ai pas travaillé sur cette app beaucoup, puisque je n\'avais pas vraiment de cas d\'utilisation. Pourtant beaucoup d\'utilisateurs téléchargeaient l\'application (presque 100\'000 désormais) et je continuais de traiter certains passes qui m\'étaient envoyés (certains contenaient des json vraiment corrompus ..)
 Un an plus tard - juste avant le 30C3 - j\'ai à nouveau effectué un peu de travail sur cette application - pour 2 raisons:

@@ -8,9 +8,9 @@
   <string name="barcode">código de barras</string>
   <string name="help_label">Ayuda</string>
   <string name="help_content"><![CDATA[
-<h1>¿Qué es esto?</h1> 
+<h1>¿Qué es esto?</h1>
 
-Esta aplicación es un visor de passbook - un passbook puedes ser p. ej. una <b>tarjeta de embarque</b> para tu próximo vuelo, un cupón para una deliciosa bebida en tu próxima visita, una entrada de cine, una tarjeta de socio, hay un motón de posibilidades. Básicamente es el reemplazo de un trozo de papel o plástico que puedes llevar normalmente contigo - salvemos unos cuantos árboles <b>¡reduce desperdicios!</b> 
+Esta aplicación es un visor de passbook - un passbook puedes ser p. ej. una <b>tarjeta de embarque</b> para tu próximo vuelo, un cupón para una deliciosa bebida en tu próxima visita, una entrada de cine, una tarjeta de socio, hay un motón de posibilidades. Básicamente es el reemplazo de un trozo de papel o plástico que puedes llevar normalmente contigo - salvemos unos cuantos árboles <b>¡reduce desperdicios!</b>
 
 <h1>Ejemplos de pases</h1>
 
@@ -27,9 +27,6 @@ y a <a href=\'https://github.com/cketti\'>Cketti</a>
 y <a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
 y <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
 por sus sugerencias!
-
-<H1>Sugerencias</H1>
-Puedes contribuir en <a href=\'https://plus.google.com/communities/116353894782342292067\'>Google+ Community</a> o enviar un email al <a href=\'mailto:ligi@ligi.de\'>autor.</a> Si te gusta la aplicación puedes valorarla en <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>, también me gustaría leer algunas de vuestras historias con el uso de esta aplicación.
 
 <h1>Historia</h1>
 
@@ -54,7 +51,7 @@ Esta aplicación se abre mejor con <a href=\'https://play.google.com/store/apps/
 <h1>Aviso legal</h1>
 <p>Esta aplicación no esta afiliada con Apple - Passbook puede ser una marca de Apple, pero fue introducido como un estandar, por lo que esto estaría bien.</p>
 <p>
-ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS. 
+ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR. EN NINGÚN CASO EL PROPIETARIO DEL COPYRIGHT O LOS COLABORADORES SERÁN RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO NO LIMITADO A LA OBTENCIÓN DE BIENES O SERVICIOS SUSTITUTOS, LA PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS; O INTERRUPCIÓN DE NEGOCIO) CAUSADO SIN EMBARGO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO NEGLIGENCIA) QUE RESULTEN DEL USO DE ESTE SOFTWARE, AUNQUE SE HAYA ADVERTIDO DE LA POSIBILIDAD DE TALES DAÑOS.
 </p>
 
 ]]></string>
