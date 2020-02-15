@@ -1,5 +1,7 @@
 package org.ligi.passandroid
 
+import android.Manifest
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
@@ -9,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import com.github.salomonbrys.kodein.instance
+import com.linkedin.android.testbutler.TestButler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -30,12 +33,14 @@ class TheBarCodeEditing {
     private lateinit var currentPass: PassImpl
 
     private fun start(setupPass: (pass: PassImpl) -> Unit = {}) {
-
         TestApp.populatePassStoreWithSinglePass()
 
         currentPass = passStore.currentPass as PassImpl
 
         setupPass(currentPass)
+
+        TestButler.grantPermission(ApplicationProvider.getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        TestButler.grantPermission(ApplicationProvider.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         rule.launchActivity(null)
         closeSoftKeyboard()

@@ -1,5 +1,6 @@
 package org.ligi.passandroid
 
+import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.Instrumentation
@@ -11,6 +12,8 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.platform.app.InstrumentationRegistry
+import com.linkedin.android.testbutler.TestButler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -27,6 +30,8 @@ class ThePassEditActivity {
     @get:Rule
     var rule = TruleskIntentRule(PassEditActivity::class.java) {
         TestApp.populatePassStoreWithSinglePass()
+        TestButler.grantPermission(InstrumentationRegistry.getInstrumentation().targetContext, Manifest.permission.READ_EXTERNAL_STORAGE)
+        TestButler.grantPermission(InstrumentationRegistry.getInstrumentation().targetContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     @Test

@@ -1,10 +1,13 @@
 package org.ligi.passandroid
 
+import android.Manifest
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.appcompat.app.AppCompatDelegate
+import com.linkedin.android.testbutler.TestButler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -18,7 +21,10 @@ import org.ligi.trulesk.TruleskActivityRule
 class ThePreferenceActivity {
 
     @get:Rule
-    val rule = TruleskActivityRule(PreferenceActivity::class.java)
+    val rule = TruleskActivityRule(PreferenceActivity::class.java) {
+        TestButler.grantPermission(ApplicationProvider.getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        TestButler.grantPermission(ApplicationProvider.getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+    }
 
     private val androidSettings by lazy { AndroidSettings(rule.activity) }
 
