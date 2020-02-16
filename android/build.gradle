@@ -160,8 +160,8 @@ dependencies {
 
     implementation 'com.squareup.okio:okio:2.2.2'
  
-    implementation 'com.squareup.moshi:moshi:1.9.0'
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.0")
+    implementation 'com.squareup.moshi:moshi:1.9.2'
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
     implementation 'com.chibatching.kotpref:kotpref:2.10.0'
     implementation 'com.chibatching.kotpref:initializer:2.10.0'
