@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlin_version = '1.3.61'
-        mockito_version = '3.1.0'
+        mockito_version = '3.2.4'
     }
 
     repositories {
