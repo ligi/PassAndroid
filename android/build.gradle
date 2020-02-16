@@ -120,7 +120,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
-    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.25.0'
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.25.1'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     androidTestImplementation 'com.google.android.material:material:1.0.0'
     androidTestImplementation 'org.threeten:threetenbp:1.4.1'
