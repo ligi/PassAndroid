@@ -162,8 +162,8 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.9.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.0")
 
-    implementation 'com.chibatching.kotpref:kotpref:2.9.2'
-    implementation 'com.chibatching.kotpref:initializer:2.9.2'
+    implementation 'com.chibatching.kotpref:kotpref:2.10.0'
+    implementation 'com.chibatching.kotpref:initializer:2.10.0'
     testImplementation 'androidx.annotation:annotation:1.1.0'
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     testImplementation 'junit:junit:4.12'
