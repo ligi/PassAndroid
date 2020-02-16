@@ -63,7 +63,7 @@ class PassViewActivity : PassViewActivityBase() {
 
             val fragment = PassViewFragment()
             fragment.arguments = Bundle().apply {
-                putString(PassViewActivityBase.EXTRA_KEY_UUID, getPass(i).id)
+                putString(EXTRA_KEY_UUID, getPass(i).id)
             }
             return fragment
         }
@@ -91,8 +91,8 @@ class PassViewActivity : PassViewActivityBase() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.findItem(R.id.menu_map).isVisible = !currentPass.locations.isEmpty()
-        menu.findItem(R.id.menu_update).isVisible = PassViewActivityBase.mightPassBeAbleToUpdate(currentPass)
+        menu.findItem(R.id.menu_map).isVisible = currentPass.locations.isNotEmpty()
+        menu.findItem(R.id.menu_update).isVisible = mightPassBeAbleToUpdate(currentPass)
         menu.findItem(R.id.install_shortcut).isVisible = ShortcutManagerCompat.isRequestPinShortcutSupported(this)
         return super.onPrepareOptionsMenu(menu)
     }
