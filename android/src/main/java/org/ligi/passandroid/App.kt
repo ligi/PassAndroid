@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.github.salomonbrys.kodein.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.squareup.leakcanary.LeakCanary
 import com.squareup.moshi.Moshi
 import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.json_adapter.ColorAdapter
@@ -27,7 +26,6 @@ open class App : Application() {
         }
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        installLeakCanary()
         AndroidThreeTen.init(this)
         initTraceDroid()
 
@@ -45,10 +43,6 @@ open class App : Application() {
         bind<PassStore>() with singleton { AndroidFileSystemPassStore(this@App, instance(), build, instance()) }
         bind<Settings>() with singleton { AndroidSettings(this@App) }
         bind<EventBus>() with singleton { EventBus.getDefault() }
-    }
-
-    open fun installLeakCanary() {
-        LeakCanary.install(this)
     }
 
     private fun initTraceDroid() {

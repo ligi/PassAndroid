@@ -35,8 +35,6 @@ class TestApp : App() {
         bind<EventBus>() with singleton { mock(EventBus::class.java) }
     }
 
-    override fun installLeakCanary() = Unit
-
     companion object {
 
 

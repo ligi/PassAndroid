@@ -158,6 +158,8 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
+    implementation 'com.squareup.okio:okio:2.2.2'
+ 
     implementation 'com.squareup.moshi:moshi:1.9.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.0")
 
@@ -174,8 +176,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.zxing:core:3.3.0'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:17.0.0'

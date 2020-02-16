@@ -8,7 +8,8 @@ import android.os.Build
 import android.os.ParcelFileDescriptor
 import net.lingala.zip4j.ZipFile
 import net.lingala.zip4j.exception.ZipException
-import okio.Okio
+import okio.buffer
+import okio.source
 import org.json.JSONObject
 import org.ligi.passandroid.App
 import org.ligi.passandroid.functions.createPassForImageImport
@@ -107,7 +108,7 @@ object UnzipPassController {
                 if (Build.VERSION.SDK_INT >= 21) {
                     try {
                         val file = File(spec.zipFileString)
-                        val readUtf8 = Okio.buffer(Okio.source(file)).readUtf8(4)
+                        val readUtf8 = file.source().buffer().readUtf8(4)
                         if (readUtf8 == "%PDF") {
                             val open = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
                             val pdfRenderer = PdfRenderer(open)

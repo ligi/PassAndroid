@@ -3,7 +3,9 @@ package org.ligi.passandroid.model
 import android.content.Context
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
-import okio.Okio
+import okio.buffer
+import okio.sink
+import okio.source
 import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.App
 import org.ligi.passandroid.BuildConfig
@@ -36,7 +38,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             pathForID.mkdirs()
         }
 
-        val buffer = Okio.buffer(Okio.sink(File(pathForID, "main.json")))
+        val buffer = File(pathForID, "main.json").sink().buffer()
 
         if (BuildConfig.DEBUG) {
             val of = com.squareup.moshi.JsonWriter.of(buffer)
@@ -67,7 +69,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             val jsonAdapter = moshi.adapter(PassImpl::class.java)
             dirty = false
             try {
-                result = jsonAdapter.fromJson(Okio.buffer(Okio.source(file)))
+                result = jsonAdapter.fromJson(file.source().buffer())
             } catch (ignored: JsonDataException) {
                 App.tracker.trackException("invalid main.json", false)
             }
