@@ -3,22 +3,23 @@ package org.ligi.passandroid.ui
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
+import android.view.ViewConfiguration
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
-import android.view.*
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassBitmapDefinitions.BITMAP_ICON
@@ -28,7 +29,6 @@ import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpe
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.io.IOException
-import java.util.*
 
 @SuppressLint("Registered")
 @RuntimePermissions
@@ -150,34 +150,22 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     @NeedsPermission("com.android.launcher.permission.INSTALL_SHORTCUT")
     fun createShortcut() {
-        val shortcutIntent = Intent()
-        shortcutIntent.putExtra(EXTRA_KEY_UUID, currentPass.id)
-        shortcutIntent.component = ComponentName(BuildConfig.APPLICATION_ID,
-                BuildConfig.APPLICATION_ID + ".ui.PassViewActivity")
-
         val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
         val shortcutIcon = if (passBitmap != null) {
             Bitmap.createScaledBitmap(passBitmap, 128, 128, true)
         } else {
             BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
         }
-
-        if (Build.VERSION.SDK_INT >= 25) {
-            val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-            val shortcut = ShortcutInfo.Builder(this, "id1")
-                    .setShortLabel(currentPass.description ?: "")
-                    .setIcon(Icon.createWithBitmap(shortcutIcon))
-                    .setIntent(shortcutIntent)
-                    .build()
-
-            shortcutManager.dynamicShortcuts = Arrays.asList(shortcut)
-        } else {
-            val intent = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
-            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
-            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, currentPass.description)
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, shortcutIcon)
-            sendBroadcast(intent)
-        }
+        val name: CharSequence = currentPass.description ?: "shortcut"
+        val targetIntent = Intent(this, PassViewActivity::class.java)
+                .setAction(Intent.ACTION_MAIN)
+                .putExtra(EXTRA_KEY_UUID, currentPass.id)
+        val shortcutInfo = ShortcutInfoCompat.Builder(this, "shortcut$name")
+                .setIntent(targetIntent)
+                .setShortLabel(name)
+                .setIcon(IconCompat.createWithBitmap(shortcutIcon))
+                .build()
+        ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
     }
 
     inner class UpdateAsync : Runnable {

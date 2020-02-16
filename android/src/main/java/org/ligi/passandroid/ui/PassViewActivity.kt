@@ -2,14 +2,16 @@ package org.ligi.passandroid.ui
 
 import android.os.Build
 import android.os.Bundle
-import androidx.core.app.*
-import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
+import androidx.core.app.NavUtils
+import androidx.core.app.TaskStackBuilder
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import org.ligi.kaxt.disableRotation
 import org.ligi.passandroid.R
@@ -91,7 +93,7 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         menu.findItem(R.id.menu_map).isVisible = !currentPass.locations.isEmpty()
         menu.findItem(R.id.menu_update).isVisible = PassViewActivityBase.mightPassBeAbleToUpdate(currentPass)
-        menu.findItem(R.id.install_shortcut).isVisible = (23..25).contains(Build.VERSION.SDK_INT)
+        menu.findItem(R.id.install_shortcut).isVisible = ShortcutManagerCompat.isRequestPinShortcutSupported(this)
         return super.onPrepareOptionsMenu(menu)
     }
 
