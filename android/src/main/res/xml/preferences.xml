@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBoxPreference
+            android:defaultValue="true"
             android:key="@string/preference_key_autolight"
             android:summary="@string/preference_autolight_summary"
-            android:defaultValue="true"
-            android:title="@string/preference_autolight_title"/>
+            android:title="@string/preference_autolight_title"
+            app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
             android:key="@string/preference_key_condensed"
             android:summary="@string/preference_condensed_summary"
-            android:title="@string/preference_condensed_title"/>
+            android:title="@string/preference_condensed_title"
+            app:iconSpaceReserved="false" />
 
     <ListPreference
             android:defaultValue="0"
@@ -17,7 +20,8 @@
             android:entryValues="@array/sort_order_keys"
             android:key="@string/preference_key_sort"
             android:summary="@string/preference_sort_summary"
-            android:title="@string/preference_sort_title"/>
+            android:title="@string/preference_sort_title"
+            app:iconSpaceReserved="false" />
 
     <ListPreference
             android:defaultValue="auto"
@@ -25,6 +29,7 @@
             android:entryValues="@array/nightmode_keys"
             android:key="@string/preference_key_nightmode"
             android:summary="@string/preference_daynight_summary"
-            android:title="@string/preference_daynight_title"/>
+            android:title="@string/preference_daynight_title"
+            app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
