@@ -34,13 +34,13 @@ open class App : Application() {
     }
 
     open fun createKodein() = Kodein.Module {
-        val build = Moshi.Builder()
+        val moshi = Moshi.Builder()
                 .add(ZonedTimeAdapter())
                 .add(ColorAdapter())
                 .build()
 
 
-        bind<PassStore>() with singleton { AndroidFileSystemPassStore(this@App, instance(), build, instance()) }
+        bind<PassStore>() with singleton { AndroidFileSystemPassStore(this@App, instance(), moshi, instance()) }
         bind<Settings>() with singleton { AndroidSettings(this@App) }
         bind<EventBus>() with singleton { EventBus.getDefault() }
     }
