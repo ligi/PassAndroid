@@ -129,7 +129,7 @@ dependencies {
     implementation 'com.github.ligi:ExtraCompats:1.0'
     implementation 'net.lingala.zip4j:zip4j:2.3.2'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.2'
-    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'org.greenrobot:eventbus:3.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
