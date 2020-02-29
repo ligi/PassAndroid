@@ -97,6 +97,10 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
+
+        debug {
+            multiDexEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -127,6 +131,7 @@ dependencies {
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.25.1'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     androidTestImplementation 'org.threeten:threetenbp:1.4.1'
+    androidTestImplementation 'com.android.support:multidex:1.0.3'
 
 
     implementation 'com.github.ligi:TouchImageView:2.1'
