@@ -102,7 +102,7 @@ class TheBarCodeEditing {
         onView(withId(R.id.barcode_img)).perform(click())
 
         onView(withId(R.id.messageInput)).perform(clearText())
-        onView(withId(R.id.messageInput)).perform(typeText("msg foo txt ;-)"))
+        onView(withId(R.id.messageInput)).perform(replaceText("msg foo txt ;-)"))
 
         closeSoftKeyboard()
 
@@ -122,7 +122,7 @@ class TheBarCodeEditing {
         onView(withId(R.id.barcode_img)).perform(click())
 
         onView(withId(R.id.alternativeMessageInput)).perform(clearText())
-        onView(withId(R.id.alternativeMessageInput)).perform(typeText("alt bar txt ;-)"))
+        onView(withId(R.id.alternativeMessageInput)).perform(replaceText("alt bar txt ;-)"))
 
         closeSoftKeyboard()
 

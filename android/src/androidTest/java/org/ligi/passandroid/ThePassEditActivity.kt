@@ -59,7 +59,7 @@ class ThePassEditActivity {
     @Test
     fun testSetDescriptionWorks() {
 
-        onView(withId(R.id.passTitle)).perform(clearText(), typeText("test description"))
+        onView(withId(R.id.passTitle)).perform(clearText(), replaceText("test description"))
         assertThat(passStore.currentPass!!.description).isEqualTo("test description")
 
         rule.screenShot("edit_set_description")
