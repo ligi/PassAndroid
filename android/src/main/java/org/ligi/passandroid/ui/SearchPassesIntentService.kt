@@ -39,7 +39,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
     private var progressNotificationBuilder: NotificationCompat.Builder? = null
     private var findNotificationBuilder: NotificationCompat.Builder? = null
 
-    private var foundList: MutableList<Pass>? = null
+    private var foundList = ArrayList<Pass>()
 
     private var lastProgressUpdate: Long = 0
 
@@ -49,7 +49,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
 
-        foundList = ArrayList()
+        foundList.clear()
 
         if (Build.VERSION.SDK_INT > 25) {
 
@@ -96,7 +96,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
         searchIn(Environment.getDataDirectory(), true)
         notifyManager.cancel(PROGRESS_NOTIFICATION_ID)
 
-        bus.post(ScanFinishedEvent(foundList!!))
+        bus.post(ScanFinishedEvent(foundList))
     }
 
     /**
@@ -134,7 +134,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
                     val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath))
                     val onSuccessCallback = SearchSuccessCallback(baseContext,
                             passStore,
-                            foundList!!,
+                            foundList,
                             findNotificationBuilder!!,
                             file,
                             notifyManager)
