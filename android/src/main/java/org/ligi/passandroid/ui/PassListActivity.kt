@@ -3,9 +3,7 @@ package org.ligi.passandroid.ui
 import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
@@ -22,13 +20,10 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.pass_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.ligi.kaxt.setButton
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
-import org.ligi.passandroid.events.ScanFinishedEvent
-import org.ligi.passandroid.events.ScanProgressEvent
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.State
@@ -51,25 +46,7 @@ class PassListActivity : PassAndroidActivity() {
     private val drawerToggle by lazy { ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) }
 
     private val adapter by lazy { PassTopicFragmentPagerAdapter(passStore.classifier, supportFragmentManager) }
-    private val pd by lazy { ProgressDialog(this) }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onScanProgress(event: ScanProgressEvent) {
-        if (pd.isShowing) {
-            pd.setMessage(event.message)
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onScanFinished(event: ScanFinishedEvent) {
-
-        if (pd.isShowing) {
-            val message = getString(R.string.scan_finished_dialog_text, event.foundPasses.size)
-            pd.dismiss()
-            AlertDialog.Builder(this@PassListActivity).setTitle(R.string.scan_finished_dialog_title).setMessage(message).setPositiveButton(android.R.string.ok, null).show()
-        }
-
-    }
 
     @TargetApi(16)
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -80,22 +57,7 @@ class PassListActivity : PassAndroidActivity() {
 
     @TargetApi(16)
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    fun scan() {
-        val intent = Intent(this, SearchPassesIntentService::class.java)
-        startService(intent)
-
-        pd.setTitle(R.string.scan_progressdialog_title)
-        pd.setMessage(getString(R.string.scan_progressdialog_message))
-        pd.setCancelable(false)
-        pd.isIndeterminate = true
-        pd.setButton(DialogInterface.BUTTON_NEUTRAL, R.string.scan_dialog_send_background_button) {
-            this@PassListActivity.finish()
-        }
-        pd.setButton(DialogInterface.BUTTON_POSITIVE, android.R.string.cancel) {
-            stopService(intent)
-        }
-        pd.show()
-    }
+    fun scan() = startActivity(Intent(this, PassScanActivity::class.java))
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -227,7 +189,7 @@ class PassListActivity : PassAndroidActivity() {
                         for (pass in passStoreProjection.passList) {
                             passStore.deletePassWithId(pass.id)
                         }
-            }.setNegativeButton(android.R.string.cancel, null).show()
+                    }.setNegativeButton(android.R.string.cancel, null).show()
             true
         }
         else -> drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)

@@ -65,9 +65,6 @@
   <string name="found__pass">Eta %d gehiago</string>
   <string name="scan_finished_dialog_title">Eskaneatzen amaitu da.</string>
   <string name="scan_finished_dialog_text">%d pase aurkitu dira</string>
-  <string name="scan_progressdialog_title">Bilatzen…</string>
-  <string name="scan_progressdialog_message">Mesedez itxaron.</string>
-  <string name="scan_dialog_send_background_button">atzealdea</string>
   <string name="emtytrash_label">hustu zakarrontzia</string>
   <string name="barcode_edit_hint_alternative_message">Mezu alternatiboa</string>
   <string name="barcode_edit_random">ausazkoa</string>

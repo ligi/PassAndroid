@@ -122,9 +122,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">および %d 以上</string>
   <string name="scan_finished_dialog_title">スキャンが終了しました。</string>
   <string name="scan_finished_dialog_text">%d チケットが見つかりました</string>
-  <string name="scan_progressdialog_title">検索中…</string>
-  <string name="scan_progressdialog_message">しばらくお待ちください。</string>
-  <string name="scan_dialog_send_background_button">バックグラウンド</string>
   <string name="emtytrash_label">ゴミ箱を空にする</string>
   <string name="barcode_edit_hint_alternative_message">代りのメッセージ</string>
   <string name="barcode_edit_random">ランダム</string>

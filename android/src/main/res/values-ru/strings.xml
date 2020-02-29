@@ -110,9 +110,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">Еще %d</string>
   <string name="scan_finished_dialog_title">Поиск завершен.</string>
   <string name="scan_finished_dialog_text">найдено %d карточек</string>
-  <string name="scan_progressdialog_title">Поиск…</string>
-  <string name="scan_progressdialog_message">Пожалуйста подождите.</string>
-  <string name="scan_dialog_send_background_button">в фоне</string>
   <string name="emtytrash_label">очистить корзину</string>
   <string name="barcode_edit_hint_alternative_message">альтернативное Сообщение</string>
   <string name="barcode_edit_random">случайный</string>

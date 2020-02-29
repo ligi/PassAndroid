@@ -112,9 +112,6 @@ THIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLU
   <string name="found__pass">Et %d plus</string>
   <string name="scan_finished_dialog_title">Recherche terminée</string>
   <string name="scan_finished_dialog_text">%d passes trouvés</string>
-  <string name="scan_progressdialog_title">Recherche…</string>
-  <string name="scan_progressdialog_message">Veuillez patienter.</string>
-  <string name="scan_dialog_send_background_button">arrière-plan</string>
   <string name="emtytrash_label">corbeille vide</string>
   <string name="barcode_edit_hint_alternative_message">message alternatif</string>
   <string name="barcode_edit_random">aléatoire</string>

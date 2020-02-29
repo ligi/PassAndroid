@@ -107,9 +107,6 @@ IL SOFTWARE VIENE FORNITO \"COSÌ COM\'È\", SENZA GARANZIE, ESPRESSE O IMPLICIT
   <string name="found__pass">E altri %d</string>
   <string name="scan_finished_dialog_title">Scansione finita.</string>
   <string name="scan_finished_dialog_text">trovato %d Pass</string>
-  <string name="scan_progressdialog_title">Sto cercando…</string>
-  <string name="scan_progressdialog_message">Aspetta.</string>
-  <string name="scan_dialog_send_background_button">background</string>
   <string name="emtytrash_label">svuota cestino</string>
   <string name="barcode_edit_hint_alternative_message">Messaggio alternativo</string>
   <string name="barcode_edit_random">casuale</string>

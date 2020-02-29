@@ -103,7 +103,6 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
      * recursive voyage starting at path to find files named .pkpass
      */
     private fun searchIn(path: File, recursive: Boolean) {
-
         if (System.currentTimeMillis() - lastProgressUpdate > 1000) {
             lastProgressUpdate = System.currentTimeMillis()
             val msg = path.toString()

@@ -128,9 +128,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="found__pass">En %d meer</string>
   <string name="scan_finished_dialog_title">Zoekactie afgewerkt.</string>
   <string name="scan_finished_dialog_text">%d passen gevonden</string>
-  <string name="scan_progressdialog_title">Zoeken…</string>
-  <string name="scan_progressdialog_message">Even geduld.</string>
-  <string name="scan_dialog_send_background_button">achtergrond</string>
   <string name="emtytrash_label">Prullenbak leegmaken</string>
   <string name="barcode_edit_hint_alternative_message">alternatieve boodschap</string>
   <string name="barcode_edit_random">willekeurig</string>

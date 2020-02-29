@@ -114,9 +114,6 @@ ESTE SOFTWARE SE OFRECE \"TAL CUAL\" Y CUALQUIER GARANTÍA EXPRESA O IMPLÍCITA,
   <string name="found__pass">Y %d más</string>
   <string name="scan_finished_dialog_title">Búsqueda terminada</string>
   <string name="scan_finished_dialog_text">encontrados %d Passbooks</string>
-  <string name="scan_progressdialog_title">Buscando…</string>
-  <string name="scan_progressdialog_message">Por favor, espere</string>
-  <string name="scan_dialog_send_background_button">fondo</string>
   <string name="emtytrash_label">Vaciar papelera</string>
   <string name="barcode_edit_hint_alternative_message">mensaje alternativo</string>
   <string name="barcode_edit_random">aleatorio</string>

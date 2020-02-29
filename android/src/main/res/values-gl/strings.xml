@@ -117,9 +117,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="found__pass">e %d máis</string>
     <string name="scan_finished_dialog_title">Busca finalizada.</string>
     <string name="scan_finished_dialog_text">atopou %d passes</string>
-    <string name="scan_progressdialog_title">Buscando…</string>
-    <string name="scan_progressdialog_message">Por favor agarde.</string>
-    <string name="scan_dialog_send_background_button">fondo</string>
     <string name="emtytrash_label">lixo baldeiro</string>
     <string name="barcode_edit_hint_alternative_message">Mensaxe alternativa</string>
     <string name="barcode_edit_random">ao chou</string>
