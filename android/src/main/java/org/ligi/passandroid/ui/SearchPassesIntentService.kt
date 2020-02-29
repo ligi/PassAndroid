@@ -9,8 +9,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.preference.PreferenceManager
 import androidx.core.app.NotificationCompat
+import androidx.preference.PreferenceManager
 import com.github.salomonbrys.kodein.instance
 import org.greenrobot.eventbus.EventBus
 import org.ligi.passandroid.App
