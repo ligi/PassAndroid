@@ -55,7 +55,10 @@ class PassViewActivity : PassViewActivityBase() {
         pagerAdapter.refresh()
     }
 
-    inner class CollectionPagerAdapter(fm: FragmentManager, private var passStoreProjection: PassStoreProjection) : FragmentStatePagerAdapter(fm) {
+    inner class CollectionPagerAdapter(
+            fm: FragmentManager,
+            private var passStoreProjection: PassStoreProjection
+    ) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount(): Int = passStoreProjection.passList.count()
 
@@ -115,8 +118,7 @@ class PassViewActivity : PassViewActivityBase() {
                     NavUtils.navigateUpTo(this, upIntent)
                 }
                 true
-            }
-            else false
+            } else false
         }
 
         else -> super.onOptionsItemSelected(item)
