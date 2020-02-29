@@ -4,7 +4,11 @@ import android.Manifest
 import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.github.salomonbrys.kodein.instance
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.ligi.kaxt.dismissIfShowing
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxtui.alert
@@ -53,11 +57,12 @@ class PassImportActivity : AppCompatActivity() {
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun doImport(withPermission: Boolean) {
-        Thread {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val fromURI = fromURI(this, intent!!.data!!)
+                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!)
 
-                runOnUiThread {
+                withContext(Dispatchers.Main) {
+
                     progressDialog.dismissIfShowing()
 
                     if (fromURI == null) {
@@ -71,7 +76,7 @@ class PassImportActivity : AppCompatActivity() {
                             val spec = UnzipPassController.InputStreamUnzipControllerSpec(fromURI, application, passStore, null, null)
                             UnzipPassController.processInputStream(spec)
                         } else {
-                            UnzipPassDialog.show(fromURI, this, passStore) { path ->
+                            UnzipPassDialog.show(fromURI, this@PassImportActivity, passStore) { path ->
                                 // TODO this is kind of a hack - there should be a better way
                                 val id = path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray().last()
 
@@ -93,7 +98,7 @@ class PassImportActivity : AppCompatActivity() {
                     tracker.trackException("Error in import", e, false)
                 }
             }
-        }.start()
+        }
     }
 
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
