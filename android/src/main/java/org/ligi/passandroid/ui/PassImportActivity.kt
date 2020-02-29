@@ -1,15 +1,15 @@
 package org.ligi.passandroid.ui
 
 import android.Manifest
-import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.github.salomonbrys.kodein.instance
+import kotlinx.android.synthetic.main.activity_import.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.ligi.kaxt.dismissIfShowing
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxtui.alert
 import org.ligi.passandroid.App
@@ -28,14 +28,6 @@ class PassImportActivity : AppCompatActivity() {
     val tracker: Tracker = App.kodein.instance()
     val passStore: PassStore = App.kodein.instance()
 
-
-    private val progressDialog by lazy {
-        ProgressDialog(this).apply {
-            setMessage(getString(R.string.please_wait))
-            setCancelable(false)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,7 +37,7 @@ class PassImportActivity : AppCompatActivity() {
             return
         }
 
-        progressDialog.show()
+        setContentView(R.layout.activity_import)
 
         doImportWithPermissionCheck(false)
     }
@@ -63,7 +55,7 @@ class PassImportActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
 
-                    progressDialog.dismissIfShowing()
+                    progress_container.visibility = GONE
 
                     if (fromURI == null) {
                         finish()
@@ -103,7 +95,7 @@ class PassImportActivity : AppCompatActivity() {
 
     @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
     fun showDeniedDialog() {
-        progressDialog.dismissIfShowing()
+        progress_container.visibility = GONE
         alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
     }
 }
