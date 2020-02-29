@@ -1,11 +1,13 @@
 package org.ligi.passandroid.ui
 
 import android.app.IntentService
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.preference.PreferenceManager
 import androidx.core.app.NotificationCompat
@@ -25,10 +27,15 @@ import org.ligi.tracedroid.logging.Log
 import java.io.File
 import java.util.*
 
+private const val NOTIFICATION_CHANNEL_ID = "transactions"
+
 class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
+    private val notifyManager by lazy {
+        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
+
     private var shouldFinish: Boolean = false
-    private var notifyManager: NotificationManager? = null
     private var progressNotificationBuilder: NotificationCompat.Builder? = null
     private var findNotificationBuilder: NotificationCompat.Builder? = null
 
@@ -44,16 +51,21 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
         foundList = ArrayList()
 
-        notifyManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT > 25) {
+
+            val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, "PassAndroid Pass scan", NotificationManager.IMPORTANCE_DEFAULT)
+            channel.description = "Notifications when PassAndroid is scanning for passes"
+            notifyManager.createNotificationChannel(channel)
+        }
 
         val pendingIntent = PendingIntent.getActivity(applicationContext, 1, Intent(baseContext, PassListActivity::class.java), 0)
-        progressNotificationBuilder = NotificationCompat.Builder(this).setContentTitle(getString(R.string.scanning_for_passes))
+        progressNotificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID).setContentTitle(getString(R.string.scanning_for_passes))
                 .setSmallIcon(R.drawable.ic_refresh)
                 .setOngoing(true)
                 .setContentIntent(pendingIntent)
                 .setProgress(1, 1, true)
 
-        findNotificationBuilder = NotificationCompat.Builder(this).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher)
+        findNotificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher)
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         for (path in PastLocationsStore(preferences, tracker).locations) {
@@ -82,7 +94,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
         // | /data
         searchIn(Environment.getDataDirectory(), true)
-        notifyManager!!.cancel(PROGRESS_NOTIFICATION_ID)
+        notifyManager.cancel(PROGRESS_NOTIFICATION_ID)
 
         bus.post(ScanFinishedEvent(foundList!!))
     }
@@ -97,7 +109,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
             val msg = path.toString()
             bus.post(ScanProgressEvent(msg))
             progressNotificationBuilder!!.setContentText(msg)
-            notifyManager!!.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder!!.build())
+            notifyManager.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder!!.build())
         }
 
         val files = path.listFiles()
@@ -125,7 +137,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
                             foundList!!,
                             findNotificationBuilder!!,
                             file,
-                            notifyManager!!)
+                            notifyManager)
                     val spec = InputStreamUnzipControllerSpec(ins!!,
                             baseContext,
                             passStore,
