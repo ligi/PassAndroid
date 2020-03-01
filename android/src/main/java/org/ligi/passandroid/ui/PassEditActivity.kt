@@ -11,12 +11,9 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.edit.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import org.koin.android.ext.android.inject
 import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.R
-import org.ligi.passandroid.events.PassRefreshEvent
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
@@ -39,7 +36,6 @@ class PassEditActivity : AppCompatActivity() {
     private val imageEditHelper by lazy { ImageEditHelper(this, passStore) }
 
     internal val passStore: PassStore by inject()
-    internal val bus: EventBus by inject()
 
     private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 
@@ -56,8 +52,8 @@ class PassEditActivity : AppCompatActivity() {
         categoryView.setOnClickListener {
             AlertDialog.Builder(this).setItems(R.array.category_edit_options) { _, i ->
                 when (i) {
-                    0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, bus)
-                    1 -> showColorPickDialog(this@PassEditActivity, currentPass, bus)
+                    0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, refreshCallback)
+                    1 -> showColorPickDialog(this@PassEditActivity, currentPass, refreshCallback)
                     2 -> pickImageWithPermissionCheck(ImageEditHelper.REQ_CODE_PICK_ICON)
                 }
             }.show()
@@ -84,17 +80,15 @@ class PassEditActivity : AppCompatActivity() {
 
         add_barcode_button.setOnClickListener {
             showBarcodeEditDialog(this@PassEditActivity,
-                    bus,
+                    refreshCallback,
                     this@PassEditActivity.currentPass,
                     BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().toUpperCase()))
         }
     }
 
+    val refreshCallback = { refresh(currentPass) }
 
-    @Subscribe
-    fun onPassRefresh(event: PassRefreshEvent) {
-        refresh(currentPass)
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -117,7 +111,7 @@ class PassEditActivity : AppCompatActivity() {
 
         add_barcode_button.visibility = if (pass.barCode == null) View.VISIBLE else View.GONE
         val barcodeUIController = BarcodeUIController(window.decorView, pass.barCode, this, passViewHelper)
-        barcodeUIController.getBarcodeView().setOnClickListener { showBarcodeEditDialog(this@PassEditActivity, bus, currentPass, currentPass.barCode!!) }
+        barcodeUIController.getBarcodeView().setOnClickListener { showBarcodeEditDialog(this@PassEditActivity, refreshCallback, currentPass, currentPass.barCode!!) }
     }
 
     @Pass.PassBitmap
@@ -141,13 +135,11 @@ class PassEditActivity : AppCompatActivity() {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        bus.register(this)
         refresh(currentPass)
     }
 
 
     override fun onPause() {
-        bus.unregister(this)
         passStore.save(currentPass)
         passStore.notifyChange()
         super.onPause()

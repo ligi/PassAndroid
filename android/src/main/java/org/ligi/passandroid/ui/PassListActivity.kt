@@ -15,15 +15,14 @@ import android.view.View.VISIBLE
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.pass_list.*
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import kotlinx.coroutines.launch
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
 import org.ligi.passandroid.R
-import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.State
@@ -135,7 +134,7 @@ class PassListActivity : PassAndroidActivity() {
         })
         passStore.syncPassStoreWithClassifier(getString(R.string.topic_new))
 
-        onPassStoreChangeEvent(null)
+        refresh()
 
         fab_action_create_pass.setOnClickListener {
             val pass = createAndAddEmptyPass(passStore, resources)
@@ -168,9 +167,29 @@ class PassListActivity : PassAndroidActivity() {
             }
             fab_action_open_file.visibility = VISIBLE
         }
+
+        lifecycleScope.launch {
+            for (update in passStore.updateChannel.openSubscription()) {
+                navigationView.passStoreUpdate()
+
+               refresh()
+            }
+
+
+        }
     }
 
+    fun refresh() {
+        adapter.notifyDataSetChanged()
 
+        setupWithViewPagerIfNeeded()
+
+        invalidateOptionsMenu()
+        val empty = passStore.classifier.topicByIdMap.isEmpty()
+        emptyView.visibility = if (empty) VISIBLE else GONE
+        val onlyDefaultTopicExists = passStore.classifier.getTopics().all { it == getString(R.string.topic_new) }
+        tab_layout.visibility = if (onlyDefaultTopicExists) GONE else VISIBLE
+    }
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.menu_help -> {
             startActivityFromClass(HelpActivity::class.java)
@@ -199,10 +218,8 @@ class PassListActivity : PassAndroidActivity() {
     override fun onResume() {
         super.onResume()
 
-        bus.register(this)
-
         adapter.notifyDataSetChanged()
-        onPassStoreChangeEvent(null)
+        refresh()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
@@ -223,25 +240,6 @@ class PassListActivity : PassAndroidActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         drawerToggle.onConfigurationChanged(newConfig)
-    }
-
-    override fun onPause() {
-        bus.unregister(this)
-        super.onPause()
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onPassStoreChangeEvent(passStoreChangeEvent: PassStoreChangeEvent?) {
-        adapter.notifyDataSetChanged()
-
-        setupWithViewPagerIfNeeded()
-
-        invalidateOptionsMenu()
-
-        val empty = passStore.classifier.topicByIdMap.isEmpty()
-        emptyView.visibility = if (empty) VISIBLE else GONE
-        val onlyDefaultTopicExists = passStore.classifier.getTopics().all { it == getString(R.string.topic_new) }
-        tab_layout.visibility = if (onlyDefaultTopicExists) GONE else VISIBLE
     }
 
     private fun setupWithViewPagerIfNeeded() {

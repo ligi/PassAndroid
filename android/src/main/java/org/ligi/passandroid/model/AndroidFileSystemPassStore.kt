@@ -3,15 +3,16 @@ package org.ligi.passandroid.model
 import android.content.Context
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.launch
 import okio.buffer
 import okio.sink
 import okio.source
-import org.greenrobot.eventbus.EventBus
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.Tracker
-import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.reader.AppleStylePassReader
@@ -19,18 +20,23 @@ import org.ligi.passandroid.reader.PassReader
 import java.io.File
 import java.util.*
 
+object PassStoreUpdateEvent
+
 class AndroidFileSystemPassStore(
-        private val context: Context, settings: Settings,
-        private val moshi: Moshi,
-        private val bus: EventBus
+        private val context: Context,
+        settings: Settings,
+        private val moshi: Moshi
 ) : PassStore, KoinComponent {
+
+    override val updateChannel = ConflatedBroadcastChannel<PassStoreUpdateEvent>()
+
     private val path: File = settings.getPassesDir()
 
     override val passMap = HashMap<String, Pass>()
 
     override var currentPass: Pass? = null
 
-    private val tracker: Tracker by inject ()
+    private val tracker: Tracker by inject()
 
     override val classifier: PassClassifier by lazy {
         val classificationFile = File(settings.getStateDir(), "classifier_state.json")
@@ -122,7 +128,9 @@ class AndroidFileSystemPassStore(
     }
 
     override fun notifyChange() {
-        bus.post(PassStoreChangeEvent)
+        GlobalScope.launch {
+            updateChannel.send(PassStoreUpdateEvent)
+        }
     }
 
     override fun syncPassStoreWithClassifier(defaultTopic: String) {

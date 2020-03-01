@@ -7,19 +7,14 @@ import android.net.Uri
 import android.util.AttributeSet
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.ligi.passandroid.R
-import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.PassStore
 
 class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView(context, attrs), KoinComponent {
 
     val passStore: PassStore by inject()
-    val bus: EventBus by inject()
 
     private fun getIntent(id: Int) = when (id) {
         R.id.menu_settings -> Intent(context, PreferenceActivity::class.java)
@@ -39,8 +34,6 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        bus.register(this)
-
         setNavigationItemSelectedListener { item ->
             getIntent(item.itemId)?.let {
                 context.startActivity(it)
@@ -48,19 +41,12 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
             } ?: false
         }
 
-        onPassStoreChangeEvent(PassStoreChangeEvent)
-    }
-
-    @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        bus.unregister(this)
+        passStoreUpdate()
     }
 
     private val marketUrl by lazy { context.getString(R.string.market_url, context.packageName) }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onPassStoreChangeEvent(@Suppress("UNUSED_PARAMETER") passStoreChangeEvent: PassStoreChangeEvent) {
+    fun passStoreUpdate() {
 
         val passCount = passStore.passMap.size
         getHeaderView(0).pass_count_header.text = context.getString(R.string.passes_nav, passCount)

@@ -1,7 +1,6 @@
 package org.ligi.passandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
-import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.PassStore
@@ -11,7 +10,6 @@ open class PassAndroidActivity : AppCompatActivity() {
 
     val passStore: PassStore by inject()
     val settings: Settings by inject()
-    val bus: EventBus by inject()
     val tracker: Tracker by inject()
 
     private var lastSetNightMode: Int? = null

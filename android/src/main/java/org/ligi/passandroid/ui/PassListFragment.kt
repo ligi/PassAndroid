@@ -7,18 +7,16 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlinx.android.synthetic.main.pass_recycler.view.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
-import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.functions.moveWithUndoSnackbar
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
@@ -31,7 +29,6 @@ class PassListFragment : Fragment() {
 
     val passStore: PassStore by inject()
     val settings: Settings by inject()
-    val bus: EventBus by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val inflate = inflater.inflate(R.layout.pass_recycler, container, false)
@@ -56,7 +53,12 @@ class PassListFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(inflate.pass_recyclerview)
 
-        bus.register(this)
+        lifecycleScope.launch {
+            for (update in passStore.updateChannel.openSubscription()) {
+                passStoreProjection.refresh()
+                adapter.notifyDataSetChanged()
+            }
+        }
         return inflate
     }
 
@@ -72,17 +74,6 @@ class PassListFragment : Fragment() {
                 MoveToNewTopicUI(it, passStore, pass).show()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        bus.unregister(this)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onPassStoreChangeEvent(passStoreChangeEvent: PassStoreChangeEvent) {
-        passStoreProjection.refresh()
-        adapter.notifyDataSetChanged()
     }
 
     companion object {

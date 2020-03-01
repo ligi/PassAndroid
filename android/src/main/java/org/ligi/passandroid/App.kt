@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.moshi.Moshi
-import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -32,9 +31,8 @@ open class App : Application() {
     open fun createKoin(): Module {
 
         return module {
-            single { AndroidFileSystemPassStore(this@App, get(), moshi, get()) as PassStore }
+            single { AndroidFileSystemPassStore(this@App, get(), moshi) as PassStore }
             single { settings as Settings }
-            single { EventBus.getDefault() }
             single { createTracker(this@App) }
             single { PassScanEventChannelProvider() }
         }

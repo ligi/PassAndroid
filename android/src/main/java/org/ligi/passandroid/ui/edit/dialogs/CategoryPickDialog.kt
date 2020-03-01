@@ -1,15 +1,13 @@
 package org.ligi.passandroid.ui.edit.dialogs
 
 import android.content.Context
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import org.greenrobot.eventbus.EventBus
+import androidx.appcompat.app.AlertDialog
 import org.ligi.passandroid.R
-import org.ligi.passandroid.events.PassRefreshEvent
 import org.ligi.passandroid.functions.getCategoryDefaultBG
 import org.ligi.passandroid.functions.getHumanCategoryString
 import org.ligi.passandroid.model.pass.Pass
@@ -18,7 +16,7 @@ import org.ligi.passandroid.ui.views.BaseCategoryIndicatorView
 
 private val passTypes = arrayOf(PassType.BOARDING, PassType.EVENT, PassType.GENERIC, PassType.LOYALTY, PassType.VOUCHER, PassType.COUPON)
 
-fun showCategoryPickDialog(context: Context, pass: Pass, bus: EventBus) {
+fun showCategoryPickDialog(context: Context, pass: Pass, refreshCallback: () -> Unit) {
 
     val adapter = object : BaseAdapter() {
 
@@ -47,7 +45,7 @@ fun showCategoryPickDialog(context: Context, pass: Pass, bus: EventBus) {
     val builder = AlertDialog.Builder(context)
     builder.setAdapter(adapter) { _, position ->
         pass.type = passTypes[position]
-        bus.post(PassRefreshEvent(pass))
+        refreshCallback.invoke()
     }
     builder.setTitle(R.string.select_category_dialog_title)
     builder.setNegativeButton(android.R.string.cancel, null)

@@ -1,9 +1,12 @@
 package org.ligi.passandroid.model
 
+import kotlinx.coroutines.channels.BroadcastChannel
 import org.ligi.passandroid.model.pass.Pass
 import java.io.File
 
 interface PassStore {
+
+    val updateChannel: BroadcastChannel<PassStoreUpdateEvent>
 
     fun save(pass: Pass)
 

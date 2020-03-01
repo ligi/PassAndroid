@@ -84,6 +84,7 @@ class TheBarCodeEditing {
 
             onView(withText(passBarCodeFormat.name)).perform(scrollTo(), click())
 
+            onView(withId(R.id.randomButton)).perform(click())
             closeSoftKeyboard()
 
             onView(withText(android.R.string.ok)).perform(click())

@@ -1,6 +1,5 @@
 package org.ligi.passandroid
 
-import org.greenrobot.eventbus.EventBus
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.ligi.passandroid.injections.FixedPassListPassStore
@@ -24,7 +23,6 @@ class TestApp : App() {
             single { passStore as PassStore }
             single { settings }
             single { tracker }
-            single { mock(EventBus::class.java) }
         }
     }
 
