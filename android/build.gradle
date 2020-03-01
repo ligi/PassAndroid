@@ -18,8 +18,8 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        versionCode 353
-        versionName "3.5.3"
+        versionCode 354
+        versionName "3.5.4"
         minSdkVersion 14
         targetSdkVersion 29
         applicationId "org.ligi.passandroid"
