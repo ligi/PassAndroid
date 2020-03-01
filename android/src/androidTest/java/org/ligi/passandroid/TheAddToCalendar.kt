@@ -33,7 +33,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveCalendarStartDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        TestApp.passStore().currentPass!!.calendarTimespan = PassImpl.TimeSpan(time)
+        TestApp.passStore.currentPass!!.calendarTimespan = PassImpl.TimeSpan(time)
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -44,7 +44,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time.plusHours(DEFAULT_EVENT_LENGTH_IN_HOURS).toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 
@@ -52,7 +52,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveCalendarEndDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        TestApp.passStore().currentPass!!.calendarTimespan = PassImpl.TimeSpan(to = time)
+        TestApp.passStore.currentPass!!.calendarTimespan = PassImpl.TimeSpan(to = time)
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -63,7 +63,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.minusHours(DEFAULT_EVENT_LENGTH_IN_HOURS).toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time.toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 
@@ -71,7 +71,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveCalendarStartAndEndDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        TestApp.passStore().currentPass!!.calendarTimespan = PassImpl.TimeSpan(time, time2)
+        TestApp.passStore.currentPass!!.calendarTimespan = PassImpl.TimeSpan(time, time2)
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -82,7 +82,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time2.toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 
@@ -91,7 +91,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveExpirationDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        (TestApp.passStore().currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(time))
+        (TestApp.passStore.currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(time))
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -105,7 +105,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time.plusHours(DEFAULT_EVENT_LENGTH_IN_HOURS).toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 
@@ -113,7 +113,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveExpirationEndDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        (TestApp.passStore().currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(to = time))
+        (TestApp.passStore.currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(to = time))
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -127,7 +127,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.minusHours(DEFAULT_EVENT_LENGTH_IN_HOURS).toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time.toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 
@@ -135,7 +135,7 @@ class TheAddToCalendar {
     fun testIfWeOnlyHaveExpirationStartAndEndDate() {
         TestApp.populatePassStoreWithSinglePass()
 
-        (TestApp.passStore().currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(time, time2))
+        (TestApp.passStore.currentPass as PassImpl).validTimespans = listOf(PassImpl.TimeSpan(time, time2))
         rule.launchActivity()
 
         intending(hasType("vnd.android.cursor.item/event")).respondWith(Instrumentation.ActivityResult(RESULT_CANCELED, null))
@@ -149,7 +149,7 @@ class TheAddToCalendar {
                 hasType("vnd.android.cursor.item/event"),
                 hasExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, time.toEpochSecond() * 1000),
                 hasExtra(CalendarContract.EXTRA_EVENT_END_TIME, time2.toEpochSecond() * 1000),
-                hasExtra("title", TestApp.passStore().currentPass!!.description)
+                hasExtra("title", TestApp.passStore.currentPass!!.description)
         ))
     }
 

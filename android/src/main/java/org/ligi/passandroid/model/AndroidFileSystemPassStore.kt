@@ -7,8 +7,10 @@ import okio.buffer
 import okio.sink
 import okio.source
 import org.greenrobot.eventbus.EventBus
-import org.ligi.passandroid.App
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.ligi.passandroid.BuildConfig
+import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
@@ -17,12 +19,18 @@ import org.ligi.passandroid.reader.PassReader
 import java.io.File
 import java.util.*
 
-class AndroidFileSystemPassStore(private val context: Context, settings: Settings, private val moshi: Moshi, private val bus: EventBus) : PassStore {
+class AndroidFileSystemPassStore(
+        private val context: Context, settings: Settings,
+        private val moshi: Moshi,
+        private val bus: EventBus
+) : PassStore, KoinComponent {
     private val path: File = settings.getPassesDir()
 
     override val passMap = HashMap<String, Pass>()
 
     override var currentPass: Pass? = null
+
+    private val tracker: Tracker by inject ()
 
     override val classifier: PassClassifier by lazy {
         val classificationFile = File(settings.getStateDir(), "classifier_state.json")
@@ -71,7 +79,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
             try {
                 result = jsonAdapter.fromJson(file.source().buffer())
             } catch (ignored: JsonDataException) {
-                App.tracker.trackException("invalid main.json", false)
+                tracker.trackException("invalid main.json", false)
             }
         }
 
@@ -81,7 +89,7 @@ class AndroidFileSystemPassStore(private val context: Context, settings: Setting
         }
 
         if (result == null && File(pathForID, "pass.json").exists()) {
-            result = AppleStylePassReader.read(pathForID, language, context)
+            result = AppleStylePassReader.read(pathForID, language, context, tracker)
         }
 
         if (result != null) {

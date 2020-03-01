@@ -25,7 +25,7 @@ import org.ligi.trulesk.TruleskIntentRule
 @TargetApi(14)
 class ThePassEditActivity {
 
-    val passStore = TestApp.passStore()
+    val passStore = TestApp.passStore
 
     @get:Rule
     var rule = TruleskIntentRule(PassEditActivity::class.java) {

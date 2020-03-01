@@ -11,11 +11,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import org.koin.android.ext.android.inject
 import org.ligi.kaxt.startActivityFromClass
+import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.ui.PassViewActivityBase
 
 class LocationsMapFragment : SupportMapFragment() {
     var clickToFullscreen = false
+
+    val passStore : PassStore by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = super.onCreateView(inflater, container, savedInstanceState)
@@ -25,7 +29,7 @@ class LocationsMapFragment : SupportMapFragment() {
             map.setOnMapLoadedCallback {
                 if (clickToFullscreen)
                     map.setOnMapClickListener {
-                        App.passStore.currentPass = baseActivity.currentPass
+                        passStore.currentPass = baseActivity.currentPass
                         baseActivity.startActivityFromClass(FullscreenMapActivity::class.java)
                     }
 

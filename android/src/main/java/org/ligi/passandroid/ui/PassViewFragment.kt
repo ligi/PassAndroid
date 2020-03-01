@@ -2,23 +2,22 @@ package org.ligi.passandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.core.text.util.LinkifyCompat
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.util.LinkifyCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.activity_pass_view.*
 import kotlinx.android.synthetic.main.barcode.*
 import kotlinx.android.synthetic.main.pass_list_item.*
 import kotlinx.android.synthetic.main.pass_view_extra_data.*
+import org.koin.android.ext.android.inject
 import org.ligi.compat.HtmlCompat
 import org.ligi.kaxt.startActivityFromClass
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.maps.PassbookMapsFacade
 import org.ligi.passandroid.model.PassBitmapDefinitions
@@ -29,7 +28,7 @@ import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 class PassViewFragment : Fragment() {
 
     private val passViewHelper by lazy { PassViewHelper(requireActivity()) }
-    private var passStore : PassStore = App.kodein.instance()
+    internal val passStore : PassStore by inject()
     lateinit var pass : Pass
 
     private fun processImage(view: ImageView, name: String, pass: Pass) {

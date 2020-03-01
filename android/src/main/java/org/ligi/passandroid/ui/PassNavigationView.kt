@@ -4,22 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.google.android.material.navigation.NavigationView
 import android.util.AttributeSet
-import com.github.salomonbrys.kodein.instance
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.ligi.passandroid.App
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.model.PassStore
 
-class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView(context, attrs) {
+class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView(context, attrs), KoinComponent {
 
-    val passStore: PassStore = App.kodein.instance()
-    val bus: EventBus = App.kodein.instance()
+    val passStore: PassStore by inject()
+    val bus: EventBus by inject()
 
     private fun getIntent(id: Int) = when (id) {
         R.id.menu_settings -> Intent(context, PreferenceActivity::class.java)

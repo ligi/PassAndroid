@@ -22,7 +22,7 @@ import java.util.*
 @TargetApi(14)
 class ThePassViewActivity {
 
-    private fun getActPass() = TestApp.passStore().currentPass as PassImpl
+    private fun getActPass() = TestApp.passStore.currentPass as PassImpl
 
     @get:Rule
     var rule = TruleskActivityRule(PassViewActivity::class.java, false)

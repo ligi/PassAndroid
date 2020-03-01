@@ -1,22 +1,25 @@
 package org.ligi.passandroid.ui.edit
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.edit_field.view.*
 import kotlinx.android.synthetic.main.edit_fields.view.*
+import org.koin.android.ext.android.inject
 import org.ligi.kaxt.doAfterEdit
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
+import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.PassField
 import org.ligi.passandroid.model.pass.PassImpl
 
 
 class FieldsEditFragment : Fragment() {
 
-    private fun getPass(): PassImpl = App.passStore.currentPass as PassImpl
+    val passStore by inject<PassStore>()
+
+    private fun getPass(): PassImpl = passStore.currentPass as PassImpl
 
     private var isEditingHiddenFields: Boolean = false
 

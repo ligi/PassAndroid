@@ -18,7 +18,7 @@ class ThePassViewHolder {
 
     private val currentPass by lazy {
         TestApp.populatePassStoreWithSinglePass()
-        App.passStore.currentPass as PassImpl
+        TestApp.passStore.currentPass as PassImpl
     }
 
     @get:Rule

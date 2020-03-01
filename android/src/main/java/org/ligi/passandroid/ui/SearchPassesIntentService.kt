@@ -11,9 +11,8 @@ import android.os.Build
 import android.os.Environment
 import androidx.core.app.NotificationCompat
 import androidx.preference.PreferenceManager
-import com.github.salomonbrys.kodein.instance
 import org.greenrobot.eventbus.EventBus
-import org.ligi.passandroid.App
+import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.events.ScanFinishedEvent
@@ -43,9 +42,9 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
 
     private var lastProgressUpdate: Long = 0
 
-    val passStore: PassStore = App.kodein.instance()
-    val bus: EventBus = App.kodein.instance()
-    val tracker: Tracker = App.kodein.instance()
+    val passStore: PassStore by inject()
+    val bus: EventBus by inject()
+    val tracker: Tracker by inject()
 
     override fun onHandleIntent(intent: Intent?) {
 
@@ -130,7 +129,7 @@ class SearchPassesIntentService : IntentService("SearchPassesIntentService") {
                 Log.i("found" + file.absolutePath)
 
                 try {
-                    val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath))
+                    val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath), tracker)
                     val onSuccessCallback = SearchSuccessCallback(baseContext,
                             passStore,
                             foundList,

@@ -1,14 +1,14 @@
 package org.ligi.passandroid.ui
 
-import com.google.android.material.snackbar.Snackbar
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import com.github.salomonbrys.kodein.instance
+import com.google.android.material.snackbar.Snackbar
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.ligi.kaxt.startActivityFromClass
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
@@ -17,10 +17,13 @@ import org.ligi.passandroid.ui.pass_view_holder.CondensedPassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.PassViewHolder
 import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 
-class PassAdapter(private val passListActivity: AppCompatActivity, private val passStoreProjection: PassStoreProjection) : RecyclerView.Adapter<PassViewHolder>() {
+class PassAdapter(
+        private val passListActivity: AppCompatActivity,
+        private val passStoreProjection: PassStoreProjection
+) : RecyclerView.Adapter<PassViewHolder>(), KoinComponent {
 
-    val passStore: PassStore = App.kodein.instance()
-    val settings: Settings = App.kodein.instance()
+    private val passStore: PassStore by inject ()
+    private val settings: Settings by inject ()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PassViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)

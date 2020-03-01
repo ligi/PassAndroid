@@ -4,15 +4,21 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Handler
+import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.core.content.FileProvider
-import android.widget.Toast
-import org.ligi.passandroid.App
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.ligi.passandroid.R
+import org.ligi.passandroid.Tracker
 import java.io.File
 
-internal open class PassExportTaskAndShare(protected val activity: Activity, private val inputPath: File)  {
+internal open class PassExportTaskAndShare(
+        protected val activity: Activity,
+        private val inputPath: File
+) : KoinComponent {
 
+    val tracker: Tracker by inject()
     @UiThread
     fun execute() {
         val file = File(activity.filesDir, "share/share.espass") // important - the FileProvider must be configured for this path
@@ -31,7 +37,7 @@ internal open class PassExportTaskAndShare(protected val activity: Activity, pri
                 }
 
                 if (passExporter.exception != null) {
-                    App.tracker.trackException("passExporterException", passExporter.exception!!, false)
+                    tracker.trackException("passExporterException", passExporter.exception!!, false)
                     Toast.makeText(activity, "could not export pass: " + passExporter.exception, Toast.LENGTH_LONG).show()
                 } else {
                     val uriForFile = FileProvider.getUriForFile(activity, activity.getString(R.string.authority_fileprovider), file)

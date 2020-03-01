@@ -10,7 +10,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
-import com.github.salomonbrys.kodein.instance
 import com.linkedin.android.testbutler.TestButler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -28,7 +27,7 @@ class TheBarCodeEditing {
     @get:Rule
     val rule = TruleskActivityRule(PassEditActivity::class.java, false)
 
-    val passStore: PassStore = App.kodein.instance()
+    val passStore: PassStore = TestApp.passStore
 
     private lateinit var currentPass: PassImpl
 

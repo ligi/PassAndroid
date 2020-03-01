@@ -11,18 +11,25 @@ import net.lingala.zip4j.exception.ZipException
 import okio.buffer
 import okio.source
 import org.json.JSONObject
-import org.ligi.passandroid.App
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.createPassForImageImport
 import org.ligi.passandroid.functions.createPassForPDFImport
 import org.ligi.passandroid.functions.readJSONSafely
+import org.ligi.passandroid.model.AndroidSettings
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
+import org.ligi.passandroid.model.Settings
 import org.ligi.tracedroid.logging.Log
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
-object UnzipPassController {
+object UnzipPassController : KoinComponent {
+
+    val tracker :Tracker by inject()
+    val settings : Settings by inject()
 
     interface SuccessCallback {
         fun call(uuid: String)
@@ -39,7 +46,7 @@ object UnzipPassController {
             processFile(FileUnzipControllerSpec(tempFile.absolutePath, spec))
             tempFile.delete()
         } catch (e: Exception) {
-            App.tracker.trackException("problem processing InputStream", e, false)
+            tracker.trackException("problem processing InputStream", e, false)
             spec.failCallback?.fail("problem with temp file: $e")
         }
 
@@ -158,6 +165,6 @@ object UnzipPassController {
     }
 
     class InputStreamUnzipControllerSpec(internal val inputStreamWithSource: InputStreamWithSource, context: Context, passStore: PassStore,
-                                         onSuccessCallback: SuccessCallback?, failCallback: FailCallback?) : UnzipControllerSpec(context, passStore, onSuccessCallback, failCallback)
+                                         onSuccessCallback: SuccessCallback?, failCallback: FailCallback?) : UnzipControllerSpec(context, passStore, onSuccessCallback, failCallback, settings)
 
 }

@@ -2,14 +2,14 @@ package org.ligi.passandroid.ui
 
 import android.app.Activity
 import android.content.Intent
-import androidx.core.app.NavUtils
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.MenuItem
-import com.github.salomonbrys.kodein.instance
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NavUtils
 import kotlinx.android.synthetic.main.delete_dialog_layout.view.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.ligi.kaxt.startActivityFromClass
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.maps.PassbookMapsFacade
@@ -19,11 +19,11 @@ import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.printing.doPrint
 import java.io.File
 
-class PassMenuOptions(val activity: Activity, val pass: Pass) {
+class PassMenuOptions(val activity: Activity, val pass: Pass) : KoinComponent {
 
-    var passStore: PassStore = App.kodein.instance()
-    var tracker: Tracker = App.kodein.instance()
-    var settings: Settings = App.kodein.instance()
+    val passStore: PassStore by inject()
+    val tracker: Tracker by inject()
+    val settings: Settings by inject()
 
     fun process(item: MenuItem): Boolean {
         when (item.itemId) {

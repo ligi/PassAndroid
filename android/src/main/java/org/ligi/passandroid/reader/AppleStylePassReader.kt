@@ -7,8 +7,8 @@ import android.graphics.Color
 import org.json.JSONException
 import org.json.JSONObject
 import org.ligi.kaxt.parseColor
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
+import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.getHumanCategoryString
 import org.ligi.passandroid.functions.readJSONSafely
 import org.ligi.passandroid.model.ApplePassbookQuirkCorrector
@@ -26,7 +26,7 @@ import java.util.*
 
 object AppleStylePassReader {
 
-    fun read(passFile: File, language: String, context: Context): Pass? {
+    fun read(passFile: File, language: String, context: Context, tracker: Tracker): Pass? {
 
         val translation = AppleStylePassTranslation()
 
@@ -34,7 +34,7 @@ object AppleStylePassReader {
 
         var passJSON: JSONObject? = null
 
-        val localizedPath = findLocalizedPath(passFile, language)
+        val localizedPath = findLocalizedPath(passFile, language, tracker)
 
         if (localizedPath != null) {
             val file = File(localizedPath, "pass.strings")
@@ -77,7 +77,7 @@ object AppleStylePassReader {
 
         if (passJSON == null) {
             Log.w("could not load pass.json from passcode ")
-            App.tracker.trackEvent("problem_event", "pass", "without_pass_json", null)
+            tracker.trackEvent("problem_event", "pass", "without_pass_json", null)
             return null
         }
 
@@ -86,7 +86,7 @@ object AppleStylePassReader {
             if (barcodeJSON != null) {
                 val barcodeFormatString = barcodeJSON.getString("format")
 
-                App.tracker.trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
+                tracker.trackEvent("measure_event", "barcode_format", barcodeFormatString, 0L)
                 val barcodeFormat = BarCode.getFormatFromString(barcodeFormatString)
                 val barCode = BarCode(barcodeFormat, barcodeJSON.getString("message"))
                 pass.barCode = barCode
@@ -105,9 +105,9 @@ object AppleStylePassReader {
             } catch (e: JSONException) {
                 // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                 // OK then we just have no date here
-                App.tracker.trackException("problem parsing relevant date", e, false)
+                tracker.trackException("problem parsing relevant date", e, false)
             } catch (e: DateTimeException) {
-                App.tracker.trackException("problem parsing relevant date", e, false)
+                tracker.trackException("problem parsing relevant date", e, false)
             }
 
         }
@@ -118,9 +118,9 @@ object AppleStylePassReader {
             } catch (e: JSONException) {
                 // be robust when it comes to bad dates - had a RL crash with "2013-12-25T00:00-57:00" here
                 // OK then we just have no date here
-                App.tracker.trackException("problem parsing expiration date", e, false)
+                tracker.trackException("problem parsing expiration date", e, false)
             } catch (e: DateTimeException) {
-                App.tracker.trackException("problem parsing expiration date", e, false)
+                tracker.trackException("problem parsing expiration date", e, false)
             }
 
         }
@@ -196,12 +196,12 @@ object AppleStylePassReader {
 
         try {
             pass.creator = passJSON.getString("organizationName")
-            App.tracker.trackEvent("measure_event", "organisation_parse", pass.creator, 1L)
+            tracker.trackEvent("measure_event", "organisation_parse", pass.creator, 1L)
         } catch (ignored: JSONException) {
             // ok - we have no organisation - big deal ..-)
         }
 
-        ApplePassbookQuirkCorrector(App.tracker).correctQuirks(pass)
+        ApplePassbookQuirkCorrector(tracker).correctQuirks(pass)
 
         return pass
     }
@@ -240,18 +240,18 @@ object AppleStylePassReader {
 
     }
 
-    private fun findLocalizedPath(path: File, language: String): String? {
+    private fun findLocalizedPath(path: File, language: String, tracker: Tracker): String? {
         val localized = File(path, "$language.lproj")
 
         if (localized.exists() && localized.isDirectory) {
-            App.tracker.trackEvent("measure_event", "pass", language + "_native_lproj", null)
+            tracker.trackEvent("measure_event", "pass", language + "_native_lproj", null)
             return localized.path
         }
 
         val fallback = File(path, "en.lproj")
 
         if (fallback.exists() && fallback.isDirectory) {
-            App.tracker.trackEvent("measure_event", "pass", "en_lproj", null)
+            tracker.trackEvent("measure_event", "pass", "en_lproj", null)
             return fallback.path
         }
 

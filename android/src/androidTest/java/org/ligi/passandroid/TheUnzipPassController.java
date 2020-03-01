@@ -49,7 +49,7 @@ public class TheUnzipPassController  {
             verify(failCallback).fail(any(String.class));
 
         } catch (Exception e) {
-            fail("should be able to load file");
+            fail("should be able to load file " + e);
         }
     }
 

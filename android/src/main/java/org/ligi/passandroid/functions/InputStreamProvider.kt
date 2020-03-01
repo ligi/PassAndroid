@@ -4,31 +4,31 @@ import android.content.Context
 import android.net.Uri
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.ligi.passandroid.App
+import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.InputStreamWithSource
 import java.io.BufferedInputStream
 import java.net.URL
 
 const val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53"
 
-fun fromURI(context: Context, uri: Uri): InputStreamWithSource? {
-    App.tracker.trackEvent("protocol", "to_inputstream", uri.scheme, null)
+fun fromURI(context: Context, uri: Uri, tracker: Tracker): InputStreamWithSource? {
+    tracker.trackEvent("protocol", "to_inputstream", uri.scheme, null)
     return when (uri.scheme) {
         "content" -> fromContent(context, uri)
 
         "http", "https" ->
             // TODO check if SPDY should be here
-            return fromOKHttp(uri)
+            return fromOKHttp(uri, tracker)
 
         "file" -> getDefaultInputStreamForUri(uri)
         else -> {
-            App.tracker.trackException("unknown scheme in ImportAsyncTask" + uri.scheme, false)
+            tracker.trackException("unknown scheme in ImportAsyncTask" + uri.scheme, false)
             getDefaultInputStreamForUri(uri)
         }
     }
 }
 
-private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
+private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     val client = OkHttpClient()
     val url = URL(uri.toString())
     val requestBuilder = Request.Builder().url(url)
@@ -47,7 +47,7 @@ private fun fromOKHttp(uri: Uri): InputStreamWithSource? {
 
     for ((key, value) in iPhoneFakeMap) {
         if (uri.toString().contains(value)) {
-            App.tracker.trackEvent("quirk_fix", "ua_fake", key, null)
+            tracker.trackEvent("quirk_fix", "ua_fake", key, null)
             requestBuilder.header("User-Agent", IPHONE_USER_AGENT)
         }
     }

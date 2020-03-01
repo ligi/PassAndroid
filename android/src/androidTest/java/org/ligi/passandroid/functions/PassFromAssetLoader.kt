@@ -3,6 +3,7 @@ package org.ligi.passandroid.functions
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import org.assertj.core.api.Fail.fail
+import org.ligi.passandroid.TestApp
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
@@ -30,7 +31,7 @@ fun loadPassFromAsset(asset: String, callback: (pass: Pass?) -> Unit) {
                 object : UnzipPassController.SuccessCallback {
                     override fun call(uuid: String) {
                         callback.invoke(AppleStylePassReader.read(File(getTestTargetPath(instrumentation.targetContext), uuid), "en",
-                                instrumentation.targetContext))
+                                instrumentation.targetContext,TestApp.tracker))
                     }
                 },
                 mock

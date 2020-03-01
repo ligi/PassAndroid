@@ -6,13 +6,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO
 import androidx.preference.PreferenceFragmentCompat
-import org.ligi.passandroid.App
+import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
+import org.ligi.passandroid.model.Settings
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
 class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
+
+    val settings : Settings by inject()
 
     override fun onResume() {
         super.onResume()
@@ -26,7 +29,7 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == getString(R.string.preference_key_nightmode)) {
-            @AppCompatDelegate.NightMode val nightMode = App.settings.getNightMode()
+            @AppCompatDelegate.NightMode val nightMode = settings.getNightMode()
 
             if (nightMode == MODE_NIGHT_AUTO) {
                 ensureDayNightWithPermissionCheck()

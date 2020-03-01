@@ -1,16 +1,15 @@
 package org.ligi.passandroid.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import com.github.salomonbrys.kodein.instance
+import androidx.appcompat.app.AppCompatActivity
 import com.ortiz.touch.TouchImageView
-import org.ligi.passandroid.App
+import org.koin.android.ext.android.inject
 import org.ligi.passandroid.model.PassStore
 
 class TouchImageActivity : AppCompatActivity() {
 
-    val passStore: PassStore = App.kodein.instance()
+    val passStore: PassStore by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

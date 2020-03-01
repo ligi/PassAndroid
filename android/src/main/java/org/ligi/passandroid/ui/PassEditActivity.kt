@@ -3,19 +3,18 @@ package org.ligi.passandroid.ui
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.IdRes
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import com.github.salomonbrys.kodein.instance
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.edit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.koin.android.ext.android.inject
 import org.ligi.kaxt.doAfterEdit
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassRefreshEvent
 import org.ligi.passandroid.model.PassStore
@@ -39,8 +38,8 @@ class PassEditActivity : AppCompatActivity() {
     private lateinit var currentPass: PassImpl
     private val imageEditHelper by lazy { ImageEditHelper(this, passStore) }
 
-    internal val passStore: PassStore = App.kodein.instance()
-    internal val bus: EventBus = App.kodein.instance()
+    internal val passStore: PassStore by inject()
+    internal val bus: EventBus by inject()
 
     private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 

@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import org.ligi.passandroid.App;
 
 public class AppleStylePassTranslation extends HashMap<String, String> {
 
@@ -74,7 +73,6 @@ public class AppleStylePassTranslation extends HashMap<String, String> {
             }
             return new String(fileData);
         } catch (Throwable e) {
-            App.Companion.getTracker().trackException("problem_reading_translation", e, false);
             e.printStackTrace();
             return null;
         }

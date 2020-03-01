@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.github.salomonbrys.kodein.instance
 import kotlinx.android.synthetic.main.activity_import.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxtui.alert
-import org.ligi.passandroid.App
 import org.ligi.passandroid.R
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.fromURI
@@ -25,8 +24,8 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class PassImportActivity : AppCompatActivity() {
 
-    val tracker: Tracker = App.kodein.instance()
-    val passStore: PassStore = App.kodein.instance()
+    val tracker: Tracker by inject()
+    val passStore: PassStore by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,7 @@ class PassImportActivity : AppCompatActivity() {
     fun doImport(withPermission: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!)
+                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!, tracker)
 
                 withContext(Dispatchers.Main) {
 

@@ -18,7 +18,7 @@ class TheFieldListEditFragment {
 
     @get:Rule
     val rule = TruleskIntentRule(PassEditActivity::class.java) {
-        TestApp.passStore().currentPass = PassImpl(UUID.randomUUID().toString()).apply {
+        TestApp.passStore.currentPass = PassImpl(UUID.randomUUID().toString()).apply {
             fields = arrayListOf(field)
         }
     }

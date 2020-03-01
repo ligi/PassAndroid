@@ -2,10 +2,14 @@ package org.ligi.passandroid
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.github.salomonbrys.kodein.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.moshi.Moshi
 import org.greenrobot.eventbus.EventBus
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import org.ligi.passandroid.json_adapter.ColorAdapter
 import org.ligi.passandroid.json_adapter.ZonedTimeAdapter
 import org.ligi.passandroid.model.AndroidFileSystemPassStore
@@ -17,43 +21,43 @@ import org.ligi.tracedroid.logging.Log
 
 open class App : Application() {
 
+    private val moshi = Moshi.Builder()
+            .add(ZonedTimeAdapter())
+            .add(ColorAdapter())
+            .build()
+
+    private val settings by lazy { AndroidSettings(this) }
+
+    open fun createKoin(): Module {
+
+        return module {
+            single { AndroidFileSystemPassStore(this@App, get(), moshi, get()) as PassStore }
+            single { settings as Settings }
+            single { EventBus.getDefault() }
+            single { createTracker(this@App) }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
 
-        kodein = Kodein {
-            import(createTrackerKodeinModule(this@App))
-            import(createKodein(), allowOverride = true)
+        startKoin {
+            if (BuildConfig.DEBUG) androidLogger()
+            androidContext(this@App)
+            modules(createKoin())
         }
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         AndroidThreeTen.init(this)
         initTraceDroid()
 
-        val settings: Settings = kodein.instance()
         AppCompatDelegate.setDefaultNightMode(settings.getNightMode())
     }
 
-    open fun createKodein() = Kodein.Module {
-        val moshi = Moshi.Builder()
-                .add(ZonedTimeAdapter())
-                .add(ColorAdapter())
-                .build()
-
-
-        bind<PassStore>() with singleton { AndroidFileSystemPassStore(this@App, instance(), moshi, instance()) }
-        bind<Settings>() with singleton { AndroidSettings(this@App) }
-        bind<EventBus>() with singleton { EventBus.getDefault() }
-    }
 
     private fun initTraceDroid() {
         TraceDroid.init(this)
         Log.setTAG("PassAndroid")
     }
 
-    companion object {
-        lateinit var kodein: Kodein
-        val tracker by lazy { kodein.Instance(TT(Tracker::class.java)) }
-        val passStore by lazy { kodein.Instance(TT(PassStore::class.java)) }
-        val settings by lazy { kodein.Instance(TT(Settings::class.java)) }
-    }
 }
