@@ -1,4 +1,4 @@
-package org.ligi.passandroid.ui
+package org.ligi.passandroid.scan
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,6 +10,10 @@ import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
+import org.ligi.passandroid.scan.SearchPassesIntentService
+import org.ligi.passandroid.ui.PassViewActivity
+import org.ligi.passandroid.ui.PassViewActivityBase
+import org.ligi.passandroid.ui.UnzipPassController
 import org.threeten.bp.ZonedDateTime
 import java.io.File
 

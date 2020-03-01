@@ -27,6 +27,7 @@ import org.ligi.passandroid.events.PassStoreChangeEvent
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.State
+import org.ligi.passandroid.scan.PassScanActivity
 import org.ligi.snackengage.SnackEngage
 import org.ligi.snackengage.snacks.BaseSnack
 import org.ligi.snackengage.snacks.DefaultRateSnack

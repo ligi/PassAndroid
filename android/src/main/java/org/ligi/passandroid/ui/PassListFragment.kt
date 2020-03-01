@@ -19,14 +19,12 @@ import org.greenrobot.eventbus.ThreadMode
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
 import org.ligi.passandroid.events.PassStoreChangeEvent
-import org.ligi.passandroid.events.ScanFinishedEvent
 import org.ligi.passandroid.functions.moveWithUndoSnackbar
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.Settings
 
 class PassListFragment : Fragment() {
-
 
     private lateinit var passStoreProjection: PassStoreProjection
     private lateinit var adapter: PassAdapter
@@ -85,13 +83,6 @@ class PassListFragment : Fragment() {
     fun onPassStoreChangeEvent(passStoreChangeEvent: PassStoreChangeEvent) {
         passStoreProjection.refresh()
         adapter.notifyDataSetChanged()
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onScanFinishedEvent(scanFinishedEvent: ScanFinishedEvent) {
-        passStoreProjection.refresh()
-        adapter.notifyDataSetChanged()
-
     }
 
     companion object {
