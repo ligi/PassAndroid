@@ -156,7 +156,10 @@ open class PassViewActivityBase : PassAndroidActivity() {
         } else {
             BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
         }
-        val name: CharSequence = currentPass.description ?: "shortcut"
+        val name: CharSequence = currentPass.description.let {
+            if (it.isNullOrEmpty()) "pass" else it
+        }
+
         val targetIntent = Intent(this, PassViewActivity::class.java)
                 .setAction(Intent.ACTION_MAIN)
                 .putExtra(EXTRA_KEY_UUID, currentPass.id)
@@ -166,6 +169,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
                 .setIcon(IconCompat.createWithBitmap(shortcutIcon))
                 .build()
         ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+
     }
 
     inner class UpdateAsync : Runnable {
