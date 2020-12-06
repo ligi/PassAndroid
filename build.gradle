@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.android.tools:r8:2.0.39' // Must be before the Gradle Plugin for Android.
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:4.1.1'
         classpath 'com.github.trevjonez.composer-gradle-plugin:plugin:0.13.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.28.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.5'
