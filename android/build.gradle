@@ -173,7 +173,7 @@ dependencies {
     implementation 'com.chibatching.kotpref:initializer:2.10.0'
     testImplementation 'androidx.annotation:annotation:1.1.0'
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation 'org.threeten:threetenbp:1.4.1'
 
