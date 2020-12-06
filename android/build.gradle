@@ -119,7 +119,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
 
     androidTestImplementation 'com.github.ligi:trulesk:0.31'
-    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.1.0'
+    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.1.1'
 
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
