@@ -7,8 +7,8 @@ import android.net.Uri
 import android.util.AttributeSet
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 

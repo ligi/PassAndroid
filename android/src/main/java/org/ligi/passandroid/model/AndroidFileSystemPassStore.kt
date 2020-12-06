@@ -9,8 +9,8 @@ import kotlinx.coroutines.launch
 import okio.buffer
 import okio.sink
 import okio.source
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.pass.Pass

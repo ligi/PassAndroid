@@ -3,8 +3,8 @@ package org.ligi.passandroid.model.pass
 import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
 import com.squareup.moshi.JsonClass
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.generateBitmapDrawable
 import org.ligi.tracedroid.logging.Log
