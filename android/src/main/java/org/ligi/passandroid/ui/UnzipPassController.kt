@@ -11,8 +11,8 @@ import net.lingala.zip4j.exception.ZipException
 import okio.buffer
 import okio.source
 import org.json.JSONObject
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.createPassForImageImport
 import org.ligi.passandroid.functions.createPassForPDFImport

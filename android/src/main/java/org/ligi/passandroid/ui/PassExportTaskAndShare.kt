@@ -7,8 +7,8 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.core.content.FileProvider
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.ligi.passandroid.R
 import org.ligi.passandroid.Tracker
 import java.io.File
