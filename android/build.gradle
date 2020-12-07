@@ -152,8 +152,8 @@ dependencies {
     implementation 'com.github.ligi:loadtoast:1.10.11'
     implementation 'com.github.ligi:tracedroid:3.0'
 
-    forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.24'
-    forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.24'
+    forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.26'
+    forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.26'
     forAmazonImplementation 'com.github.ligi.snackengage:snackengage-amazonrate:0.24'
 
     // https://medium.com/square-corner-blog/okhttp-3-13-requires-android-5-818bb78d07ce
