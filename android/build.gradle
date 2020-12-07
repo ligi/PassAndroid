@@ -129,7 +129,7 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.28.0'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
-    androidTestImplementation 'org.threeten:threetenbp:1.4.1'
+    androidTestImplementation "org.threeten:threetenbp:$threetenbp_version"
     androidTestImplementation 'com.android.support:multidex:1.0.3'
 
 
@@ -175,7 +175,7 @@ dependencies {
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     testImplementation 'junit:junit:4.13.1'
     testImplementation "org.mockito:mockito-core:$mockito_version"
-    testImplementation 'org.threeten:threetenbp:1.4.1'
+    testImplementation "org.threeten:threetenbp:$threetenbp_version"
 
     // https://github.com/ligi/PassAndroid/issues/181
     // Don't upgrade before minSDK 19 - or replace zxing
