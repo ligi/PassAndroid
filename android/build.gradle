@@ -180,7 +180,7 @@ dependencies {
     // https://github.com/ligi/PassAndroid/issues/181
     // Don't upgrade before minSDK 19 - or replace zxing
     //noinspection GradleDependency
-    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.google.zxing:core:3.4.1'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
 
