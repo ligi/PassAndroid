@@ -1,10 +1,10 @@
 package org.ligi.passandroid.ui.edit
 
 import android.content.Intent
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.barcode_edit.view.*
 import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.model.pass.BarCode
@@ -20,11 +20,13 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
     private val passFormatRadioButtons: MutableMap<PassBarCodeFormat, RadioButton> = EnumMap(PassBarCodeFormat::class.java)
 
     class IntentFragment : Fragment() {
-        var scanCallback: (Pair<String, String>) -> Unit = {}
+        var scanCallback: (format: String, result: String) -> Unit = { _, _ -> }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            if (data != null && data.hasExtra("SCAN_RESULT_FORMAT") && data.hasExtra("SCAN_RESULT")) {
-                scanCallback(Pair(data.getStringExtra("SCAN_RESULT_FORMAT"), data.getStringExtra("SCAN_RESULT")))
+            data?.let { dataNotNull ->
+                val scanResultFormat = dataNotNull.getStringExtra("SCAN_RESULT_FORMAT") ?: return
+                val scanResult = dataNotNull.getStringExtra("SCAN_RESULT") ?: return
+                scanCallback(scanResultFormat, scanResult)
             }
         }
     }
@@ -67,7 +69,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
             barCodeIntentIntegrator.initiateScan(PassBarCodeFormat.values().map { it.name })
         }
 
-        intentFragment.scanCallback = { (newFormat, newMessage) ->
+        intentFragment.scanCallback = { newFormat, newMessage ->
             rootView.messageInput.setText(newMessage)
             rootView.barcodeRadioGroup.check(passFormatRadioButtons[PassBarCodeFormat.valueOf(newFormat)]!!.id)
             refresh()
