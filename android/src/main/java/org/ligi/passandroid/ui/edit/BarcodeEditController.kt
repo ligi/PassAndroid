@@ -17,13 +17,14 @@ import java.util.*
 class BarcodeEditController(private val rootView: View, internal val context: AppCompatActivity, barCode: BarCode) {
     private var barcodeFormat: PassBarCodeFormat?
     private val intentFragment: Fragment
+    private val passFormatRadioButtons: MutableMap<PassBarCodeFormat, RadioButton> = EnumMap(PassBarCodeFormat::class.java)
 
     class IntentFragment : Fragment() {
-        var scanCallback: (String) -> Unit = {}
+        var scanCallback: (Pair<String, String>) -> Unit = {}
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            if (data != null && data.hasExtra("SCAN_RESULT")) {
-                scanCallback(data.getStringExtra("SCAN_RESULT"))
+            if (data != null && data.hasExtra("SCAN_RESULT_FORMAT") && data.hasExtra("SCAN_RESULT")) {
+                scanCallback(Pair(data.getStringExtra("SCAN_RESULT_FORMAT"), data.getStringExtra("SCAN_RESULT")))
             }
         }
     }
@@ -32,6 +33,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
         formats.forEach {
             val radioButton = RadioButton(context)
             rootView.barcodeRadioGroup.addView(radioButton)
+            passFormatRadioButtons[it] = radioButton
 
             radioButton.text = it.name
             radioButton.setOnCheckedChangeListener { _, isChecked ->
@@ -54,7 +56,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
             rootView.messageInput.setText(when (barcodeFormat) {
                 EAN_8 -> getRandomEAN8()
                 EAN_13 -> getRandomEAN13()
-                PassBarCodeFormat.ITF -> getRandomITF()
+                ITF -> getRandomITF()
                 else -> UUID.randomUUID().toString().toUpperCase()
             })
             refresh()
@@ -62,17 +64,12 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
 
         rootView.scanButton.setOnClickListener {
             val barCodeIntentIntegrator = BarCodeIntentIntegrator(intentFragment)
-
-            if (barcodeFormat == QR_CODE) {
-                barCodeIntentIntegrator.initiateScan(BarCodeIntentIntegrator.QR_CODE_TYPES)
-            } else {
-                barCodeIntentIntegrator.initiateScan(setOf(barcodeFormat!!.name))
-            }
-
+            barCodeIntentIntegrator.initiateScan(PassBarCodeFormat.values().map { it.name })
         }
 
-        intentFragment.scanCallback = { newMessage ->
+        intentFragment.scanCallback = { (newFormat, newMessage) ->
             rootView.messageInput.setText(newMessage)
+            rootView.barcodeRadioGroup.check(passFormatRadioButtons[PassBarCodeFormat.valueOf(newFormat)]!!.id)
             refresh()
         }
         context.supportFragmentManager.beginTransaction().add(intentFragment, "intent_fragment").commit()
