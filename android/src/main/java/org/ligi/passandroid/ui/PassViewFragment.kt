@@ -28,8 +28,8 @@ import org.ligi.passandroid.ui.pass_view_holder.VerbosePassViewHolder
 class PassViewFragment : Fragment() {
 
     private val passViewHelper by lazy { PassViewHelper(requireActivity()) }
-    internal val passStore : PassStore by inject()
-    lateinit var pass : Pass
+    internal val passStore: PassStore by inject()
+    lateinit var pass: Pass
 
     private fun processImage(view: ImageView, name: String, pass: Pass) {
         val bitmap = pass.getBitmap(passStore, name)
@@ -60,7 +60,7 @@ class PassViewFragment : Fragment() {
             activity?.startActivityFromClass(FullscreenBarcodeActivity::class.java)
         }
 
-        BarcodeUIController(view!!, pass.barCode, activity!!, passViewHelper)
+        BarcodeUIController(requireView(), pass.barCode, requireActivity(), passViewHelper)
 
         processImage(logo_img_view, PassBitmapDefinitions.BITMAP_LOGO, pass)
         processImage(footer_img_view, PassBitmapDefinitions.BITMAP_FOOTER, pass)
@@ -82,7 +82,7 @@ class PassViewFragment : Fragment() {
             if (field.hide) {
                 backStrBuilder.append(field.toHtmlSnippet())
             } else {
-                val v = activity!!.layoutInflater.inflate(R.layout.main_field_item, front_field_container, false)
+                val v = requireActivity().layoutInflater.inflate(R.layout.main_field_item, front_field_container, false)
                 val key = v?.findViewById<TextView>(R.id.key)
                 key?.text = field.label
                 val value = v?.findViewById<TextView>(R.id.value)
@@ -104,7 +104,7 @@ class PassViewFragment : Fragment() {
         LinkifyCompat.addLinks(back_fields, Linkify.ALL)
 
         val passViewHolder = VerbosePassViewHolder(pass_card)
-        passViewHolder.apply(pass, passStore, activity!!)
+        passViewHolder.apply(pass, passStore, requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -126,7 +126,7 @@ class PassViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val passExtrasView = activity!!.layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
+        val passExtrasView = requireActivity().layoutInflater.inflate(R.layout.pass_view_extra_data, passExtrasContainer, false)
         passExtrasContainer.addView(passExtrasView)
     }
 }
