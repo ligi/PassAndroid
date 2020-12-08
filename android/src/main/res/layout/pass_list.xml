@@ -59,7 +59,7 @@
                 android:layout_marginBottom="16dp"
 
                 android:layout_marginRight="16dp"
-                app:layout_behavior=".ui.MyShyFABBehavior"
+                app:layout_behavior="org.ligi.passandroid.ui.MyShyFABBehavior"
                 fab:fab_addButtonColorNormal="@color/accent"
                 fab:fab_addButtonColorPressed="@color/icon_green"
                 fab:fab_addButtonPlusIconColor="@android:color/white"
