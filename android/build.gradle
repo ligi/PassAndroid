@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
-apply plugin: 'com.github.triplet.play'
 
 repositories {
     jcenter()
@@ -187,9 +186,4 @@ dependencies {
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:17.0.0'
     withMapsImplementation 'com.google.android.gms:play-services-maps:17.0.0'
-}
-
-play {
-    jsonFile = file('/media/ligi/USBCRED/play.json')
-    uploadImages = true
 }
