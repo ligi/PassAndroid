@@ -18,7 +18,9 @@ class TouchImageActivity : AppCompatActivity() {
 
         setContentView(touchImageView)
 
-        val bitmap = passStore.currentPass?.getBitmap(passStore, intent.getStringExtra("IMAGE"))
+        val bitmap = intent.getStringExtra("IMAGE")?.let { image_from_extra ->
+            passStore.currentPass?.getBitmap(passStore, image_from_extra)
+        }
 
         if (bitmap == null) {
             finish()
