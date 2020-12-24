@@ -114,7 +114,7 @@ dependencies {
     implementation 'org.permissionsdispatcher:permissionsdispatcher:4.8.0'
     kapt 'org.permissionsdispatcher:permissionsdispatcher-processor:4.8.0'
 
-    implementation "org.koin:koin-android:2.2.1"
+    implementation "org.koin:koin-android:2.2.2"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
