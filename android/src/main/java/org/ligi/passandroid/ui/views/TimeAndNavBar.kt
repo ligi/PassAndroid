@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.widget.TextViewCompat
 import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.R
 
@@ -17,10 +18,10 @@ class TimeAndNavBar constructor(context: Context, attrs: AttributeSet) : FrameLa
         AppCompatDrawableManager.get().apply {
 
             val timeDrawable = getDrawable(context, R.drawable.ic_action_today)
-            timeButton.setCompoundDrawablesWithIntrinsicBounds(null, null, timeDrawable, null)
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(timeButton, null, null, timeDrawable, null)
 
             val navDrawable = getDrawable(context, R.drawable.ic_maps_place)
-            locationButton.setCompoundDrawablesWithIntrinsicBounds(navDrawable, null, null, null)
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(locationButton, navDrawable, null, null, null)
         }
     }
 

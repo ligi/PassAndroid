@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -65,9 +66,7 @@ class PassViewActivity : PassViewActivityBase() {
         override fun createFragment(i: Int): Fragment {
 
             val fragment = PassViewFragment()
-            fragment.arguments = Bundle().apply {
-                putString(EXTRA_KEY_UUID, getPass(i).id)
-            }
+            fragment.arguments = bundleOf(EXTRA_KEY_UUID to getPass(i).id)
             return fragment
         }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.parseAsHtml
 import androidx.core.text.util.LinkifyCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -16,7 +17,6 @@ import kotlinx.android.synthetic.main.barcode.*
 import kotlinx.android.synthetic.main.pass_list_item.*
 import kotlinx.android.synthetic.main.pass_view_extra_data.*
 import org.koin.android.ext.android.inject
-import org.ligi.compat.HtmlCompat
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.R
 import org.ligi.passandroid.maps.PassbookMapsFacade
@@ -95,7 +95,7 @@ class PassViewFragment : Fragment() {
         }
 
         if (backStrBuilder.isNotEmpty()) {
-            back_fields.text = HtmlCompat.fromHtml("$backStrBuilder")
+            back_fields.text = "$backStrBuilder".parseAsHtml()
             moreTextView.visibility = View.VISIBLE
         } else {
             moreTextView.visibility = View.GONE

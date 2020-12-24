@@ -3,8 +3,8 @@ package org.ligi.passandroid.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.AttributeSet
+import androidx.core.net.toUri
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.koin.core.component.KoinComponent
@@ -28,7 +28,7 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
         else -> null
     }
 
-    private fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+    private fun intentFromUrl(url: String) = Intent(Intent.ACTION_VIEW).apply { data = url.toUri() }
 
     @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
     override fun onAttachedToWindow() {

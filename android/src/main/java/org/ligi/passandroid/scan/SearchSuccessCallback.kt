@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.scale
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
@@ -51,7 +52,7 @@ internal class SearchSuccessCallback(private val context: Context, private val p
 
     private fun scale2maxSize(bitmap: Bitmap, dimensionPixelSize: Int): Bitmap {
         val scale = dimensionPixelSize.toFloat() / if (bitmap.width > bitmap.height) bitmap.width else bitmap.height
-        return Bitmap.createScaledBitmap(bitmap, (bitmap.width * scale).toInt(), (bitmap.height * scale).toInt(), false)
+        return bitmap.scale((bitmap.width * scale).toInt(), (bitmap.height * scale).toInt(), filter = false)
     }
 
     private fun getInitialTopic(pass: Pass): String {

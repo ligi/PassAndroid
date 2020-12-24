@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import kotlinx.android.synthetic.main.edit.*
 import org.koin.android.ext.android.inject
 import org.ligi.kaxt.doAfterEdit
@@ -71,12 +72,10 @@ class PassEditActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-
-        fragmentTransaction.add(R.id.container_for_primary_fields, FieldsEditFragment.create(false))
-        fragmentTransaction.add(R.id.container_for_secondary_fields, FieldsEditFragment.create(true))
-
-        fragmentTransaction.commit()
+        supportFragmentManager.commit {
+            add(R.id.container_for_primary_fields, FieldsEditFragment.create(false))
+            add(R.id.container_for_secondary_fields, FieldsEditFragment.create(true))
+        }
 
         add_barcode_button.setOnClickListener {
             showBarcodeEditDialog(this@PassEditActivity,

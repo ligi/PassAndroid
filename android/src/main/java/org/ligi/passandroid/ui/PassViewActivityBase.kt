@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.scale
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -152,7 +152,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
     fun createShortcut() {
         val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
         val shortcutIcon = if (passBitmap != null) {
-            Bitmap.createScaledBitmap(passBitmap, 128, 128, true)
+            passBitmap.scale(128, 128, filter = true)
         } else {
             BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
         }

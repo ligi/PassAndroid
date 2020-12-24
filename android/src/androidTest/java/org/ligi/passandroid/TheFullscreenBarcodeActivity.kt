@@ -3,6 +3,7 @@ package org.ligi.passandroid
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.widget.ImageView
+import androidx.core.graphics.scale
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -80,7 +81,7 @@ class TheFullscreenBarcodeActivity {
         val bitmapToTest: Bitmap
         bitmapToTest = if (format === AZTEC) {
             // not sure why - but for the decoder to pick up AZTEC it must have moar pixelz - smells like a zxing bug
-            Bitmap.createScaledBitmap(bitmap, bitmap.width * 2, bitmap.height * 2, false)
+            bitmap.scale(bitmap.width * 2, bitmap.height * 2, filter = false)
         } else {
             bitmap
         }
