@@ -1,11 +1,11 @@
 package org.ligi.passandroid
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -52,7 +52,7 @@ class LocationsMapFragment : SupportMapFragment() {
                 map.setOnInfoWindowClickListener { marker ->
                     val i = Intent()
                     i.action = Intent.ACTION_VIEW
-                    i.data = Uri.parse("geo:" + marker.position.latitude + "," + marker.position.longitude + "?q=" + marker.title)
+                    i.data = ("geo:" + marker.position.latitude + "," + marker.position.longitude + "?q=" + marker.title).toUri()
                     baseActivity.startActivity(i)
                 }
                 map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 100))

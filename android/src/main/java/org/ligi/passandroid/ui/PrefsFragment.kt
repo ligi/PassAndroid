@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO
+import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceFragmentCompat
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
@@ -36,7 +37,7 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
             }
 
             AppCompatDelegate.setDefaultNightMode(nightMode)
-            activity?.recreate()
+            activity?.let { ActivityCompat.recreate(it) }
         }
     }
 

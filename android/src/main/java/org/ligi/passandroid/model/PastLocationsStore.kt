@@ -1,6 +1,7 @@
 package org.ligi.passandroid.model
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import org.ligi.passandroid.Tracker
 import java.util.*
 
@@ -18,7 +19,7 @@ class PastLocationsStore constructor(private val sharedPreferences: SharedPrefer
         }
 
         tracker.trackEvent("scan", "put location", "count", pastLocations.size.toLong())
-        sharedPreferences.edit().putStringSet(KEY_PAST_LOCATIONS, pastLocations).apply()
+        sharedPreferences.edit { putStringSet(KEY_PAST_LOCATIONS, pastLocations) }
     }
 
     private fun deleteOneElementFromSet(pastLocations: MutableSet<String>) {

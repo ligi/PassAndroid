@@ -3,8 +3,8 @@ package org.ligi.passandroid.ui
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassLocation
@@ -50,11 +50,11 @@ private fun startIntentForLocation(activity: Activity, location: PassLocation, p
     val description = getEncodedDescription(location, pass)
 
     val latAndLonStr = location.getCommaSeparated()
-    i.data = Uri.parse("geo:$latAndLonStr?q=$latAndLonStr($description)")
+    i.data = "geo:$latAndLonStr?q=$latAndLonStr($description)".toUri()
     try {
         activity.startActivity(i)
     } catch (e: ActivityNotFoundException) {
-        i.data = Uri.parse("http://maps.google.com/?q=$description@$latAndLonStr")
+        i.data = "http://maps.google.com/?q=$description@$latAndLonStr".toUri()
         activity.startActivity(i)
         // TODO also the browser could not be found -> handle
     }

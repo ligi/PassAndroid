@@ -2,6 +2,7 @@ package org.ligi.passandroid
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.test.platform.app.InstrumentationRegistry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -28,7 +29,7 @@ class ThePastLocationsStore {
 
     @After
     fun tearDown() {
-        prefs.edit().clear().apply()
+        prefs.edit { clear() }
     }
 
     @Test

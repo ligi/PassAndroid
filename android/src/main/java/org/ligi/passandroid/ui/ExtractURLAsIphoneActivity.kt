@@ -2,9 +2,9 @@ package org.ligi.passandroid.ui
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
+import androidx.core.net.toUri
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.ligi.kaxt.dismissIfShowing
@@ -84,7 +84,7 @@ class ExtractURLAsIphoneActivity : PassAndroidActivity() {
             tracker.trackEvent("quirk_fix", "unpack_success", intent?.data?.host, null)
 
             val intent = Intent(this@ExtractURLAsIphoneActivity, PassImportActivity::class.java)
-            intent.data = Uri.parse(s)
+            intent.data = s.toUri()
 
             startActivity(intent)
             tearDown()

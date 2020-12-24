@@ -3,12 +3,12 @@ package org.ligi.passandroid.scan
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import androidx.core.app.NotificationCompat
+import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -35,7 +35,7 @@ private const val NOTIFICATION_CHANNEL_ID = "transactions"
 class SearchPassesIntentService : LifecycleService() {
 
     private val notifyManager by lazy {
-        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        getSystemService<NotificationManager>()!!
     }
 
     private var shouldFinish: Boolean = false
@@ -141,7 +141,7 @@ class SearchPassesIntentService : LifecycleService() {
                 Log.i("found" + file.absolutePath)
 
                 try {
-                    val ins = fromURI(baseContext, Uri.parse("file://" + file.absolutePath), tracker)
+                    val ins = fromURI(baseContext, ("file://" + file.absolutePath).toUri(), tracker)
                     val onSuccessCallback = SearchSuccessCallback(baseContext,
                             passStore,
                             foundList,

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.edit_field.view.*
 import kotlinx.android.synthetic.main.edit_fields.view.*
@@ -81,9 +82,7 @@ class FieldsEditFragment : Fragment() {
 
         fun create(primary: Boolean): FieldsEditFragment {
             val fieldsEditFragment = FieldsEditFragment()
-            val args = Bundle()
-            args.putBoolean(ARGUMENT_KEY, primary)
-            fieldsEditFragment.arguments = args
+            fieldsEditFragment.arguments = bundleOf(ARGUMENT_KEY to primary)
             return fieldsEditFragment
         }
     }

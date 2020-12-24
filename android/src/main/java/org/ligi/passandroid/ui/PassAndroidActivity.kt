@@ -1,6 +1,7 @@
 package org.ligi.passandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.model.PassStore
@@ -18,7 +19,7 @@ open class PassAndroidActivity : AppCompatActivity() {
         super.onResume()
 
         if (lastSetNightMode != null && lastSetNightMode != settings.getNightMode()) {
-            recreate()
+            ActivityCompat.recreate(this)
         }
         lastSetNightMode = settings.getNightMode()
     }

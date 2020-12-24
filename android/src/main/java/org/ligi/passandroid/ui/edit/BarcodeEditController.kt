@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import kotlinx.android.synthetic.main.barcode_edit.view.*
 import org.ligi.kaxt.doAfterEdit
 import org.ligi.passandroid.model.pass.BarCode
@@ -74,7 +75,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
             rootView.barcodeRadioGroup.check(passFormatRadioButtons[PassBarCodeFormat.valueOf(newFormat)]!!.id)
             refresh()
         }
-        context.supportFragmentManager.beginTransaction().add(intentFragment, "intent_fragment").commit()
+        context.supportFragmentManager.commit { add(intentFragment, "intent_fragment") }
 
         bindRadio(PassBarCodeFormat.values())
 

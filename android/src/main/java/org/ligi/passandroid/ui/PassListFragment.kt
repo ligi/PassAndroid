@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -80,9 +81,7 @@ class PassListFragment : Fragment() {
         private const val BUNDLE_KEY_TOPIC = "topic"
 
         fun newInstance(topic: String) = PassListFragment().apply {
-            val bundle = Bundle()
-            bundle.putString(BUNDLE_KEY_TOPIC, topic)
-            arguments = bundle
+            arguments = bundleOf(BUNDLE_KEY_TOPIC to topic)
         }
     }
 
