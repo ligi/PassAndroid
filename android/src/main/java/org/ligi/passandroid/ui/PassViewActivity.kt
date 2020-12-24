@@ -9,9 +9,9 @@ import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import org.ligi.kaxt.disableRotation
 import org.ligi.passandroid.R
@@ -20,7 +20,7 @@ import org.ligi.passandroid.model.pass.Pass
 
 class PassViewActivity : PassViewActivityBase() {
     private lateinit var pagerAdapter: CollectionPagerAdapter
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +35,13 @@ class PassViewActivity : PassViewActivityBase() {
         disableRotation()
         setContentView(R.layout.activity_pass_view)
 
-        pagerAdapter = CollectionPagerAdapter(supportFragmentManager, PassStoreProjection(passStore,
+        pagerAdapter = CollectionPagerAdapter(this, PassStoreProjection(passStore,
                 passStore.classifier.getTopic(currentPass, ""),
                 settings.getSortOrder()))
         viewPager = pager
         viewPager.adapter = pagerAdapter
         viewPager.currentItem = pagerAdapter.getPos(currentPass)
-        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(pos: Int) {
                 currentPass = pagerAdapter.getPass(pos)
                 passStore.currentPass = currentPass
@@ -56,13 +56,13 @@ class PassViewActivity : PassViewActivityBase() {
     }
 
     inner class CollectionPagerAdapter(
-            fm: FragmentManager,
+            fa: FragmentActivity,
             private var passStoreProjection: PassStoreProjection
-    ) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    ) : FragmentStateAdapter(fa) {
 
-        override fun getCount(): Int = passStoreProjection.passList.count()
+        override fun getItemCount(): Int = passStoreProjection.passList.count()
 
-        override fun getItem(i: Int): Fragment {
+        override fun createFragment(i: Int): Fragment {
 
             val fragment = PassViewFragment()
             fragment.arguments = Bundle().apply {
