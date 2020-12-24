@@ -15,6 +15,7 @@ import org.koin.android.ext.android.inject
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.ui.PassViewActivityBase
+import kotlin.math.min
 
 class LocationsMapFragment : SupportMapFragment() {
     var clickToFullscreen = false
@@ -36,7 +37,7 @@ class LocationsMapFragment : SupportMapFragment() {
 
                 var boundBuilder = LatLngBounds.Builder()
 
-                val locations = baseActivity!!.currentPass.locations
+                val locations = baseActivity.currentPass.locations
 
                 for (l in locations) {
 
@@ -58,7 +59,7 @@ class LocationsMapFragment : SupportMapFragment() {
                 map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundBuilder.build(), 100))
 
                 // limit zoom-level to 17 - otherwise we could be so zoomed in that it looks buggy
-                map.moveCamera(CameraUpdateFactory.zoomTo(Math.min(17f, map.cameraPosition.zoom)))
+                map.moveCamera(CameraUpdateFactory.zoomTo(min(17f, map.cameraPosition.zoom)))
             }
         }
 

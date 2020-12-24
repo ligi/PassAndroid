@@ -2,7 +2,7 @@ package org.ligi.passandroid
 
 import android.os.Bundle
 import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GooglePlayServicesUtil
+import com.google.android.gms.common.GoogleApiAvailability
 import org.ligi.passandroid.ui.PassViewActivityBase
 import org.ligi.passandroid.ui.showNavigateToLocationsDialog
 
@@ -10,7 +10,8 @@ class FullscreenMapActivity : PassViewActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (ConnectionResult.SUCCESS != GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)) {
+        val apiAvailability = GoogleApiAvailability.getInstance()
+        if (ConnectionResult.SUCCESS != apiAvailability.isGooglePlayServicesAvailable(this)) {
             fallbackForMissingGooglePlay()
         }
 
