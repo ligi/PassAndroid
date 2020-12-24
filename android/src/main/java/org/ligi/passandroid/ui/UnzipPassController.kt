@@ -17,7 +17,6 @@ import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.createPassForImageImport
 import org.ligi.passandroid.functions.createPassForPDFImport
 import org.ligi.passandroid.functions.readJSONSafely
-import org.ligi.passandroid.model.AndroidSettings
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings

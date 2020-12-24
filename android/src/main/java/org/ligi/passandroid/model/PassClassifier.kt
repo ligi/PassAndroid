@@ -37,7 +37,7 @@ open class PassClassifier(val topicByIdMap: MutableMap<String, String>, private 
             return s
         }
 
-        if (!default.isEmpty()) {
+        if (default.isNotEmpty()) {
             topicByIdMap[id] = default
             processDataChange()
         }

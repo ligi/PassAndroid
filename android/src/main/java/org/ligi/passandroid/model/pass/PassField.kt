@@ -16,7 +16,7 @@ class PassField(var key: String?, var label: String?, var value: String?, var hi
         if (label != null || value != null) {
             result.append("<br/>")
         }
-        return result.toString()
+        return "$result"
     }
 
     companion object {

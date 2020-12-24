@@ -9,7 +9,7 @@ import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
 
-fun expand(): ViewAction? = ExpandFabAction()
+fun expand(): ViewAction = ExpandFabAction()
 
 class ExpandFabAction : ViewAction {
 

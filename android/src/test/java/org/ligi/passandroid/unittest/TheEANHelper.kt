@@ -14,11 +14,11 @@ class TheEANHelper {
 
     @Test
     fun acceptGoodEAN13() {
-        assertThat(isValidEAN13("6416016588755")).isTrue()
+        assertThat(isValidEAN13("6416016588755")).isTrue
     }
 
     @Test
     fun rejectBadEAN13() {
-        assertThat(isValidEAN13("foo")).isFalse()
+        assertThat(isValidEAN13("foo")).isFalse
     }
 }

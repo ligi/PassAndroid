@@ -12,7 +12,6 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
@@ -117,7 +116,7 @@ class SearchPassesIntentService : LifecycleService() {
 
         if (System.currentTimeMillis() - lastProgressUpdate > 1000) {
             lastProgressUpdate = System.currentTimeMillis()
-            val msg = path.toString()
+            val msg = "$path"
             progressChannelProvider.channel.send(DirectoryProcessed(msg))
             progressNotificationBuilder!!.setContentText(msg)
             notifyManager.notify(PROGRESS_NOTIFICATION_ID, progressNotificationBuilder!!.build())

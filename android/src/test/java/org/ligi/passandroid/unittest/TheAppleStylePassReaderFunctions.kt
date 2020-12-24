@@ -20,8 +20,8 @@ class TheAppleStylePassReaderFunctions {
         val json = "{ \"barcodes\":[{\"format\":\"PKBarcodeFormatQR\",\"message\":\"YO!\"}] }"
         val tested = JSONObject(json).getBarcodeJson()
 
-        assertThat(tested).isNotNull()
-        assertThat(tested!!.has("message")).isTrue()
+        assertThat(tested).isNotNull
+        assertThat(tested!!.has("message")).isTrue
     }
 
     @Test
@@ -30,8 +30,8 @@ class TheAppleStylePassReaderFunctions {
         val json = "{ \"barcode\":{\"format\":\"PKBarcodeFormatQR\",\"message\":\"YO!\"} }"
         val tested = JSONObject(json).getBarcodeJson()
 
-        assertThat(tested).isNotNull()
-        assertThat(tested!!.has("message")).isTrue()
+        assertThat(tested).isNotNull
+        assertThat(tested!!.has("message")).isTrue
     }
 
     @Test
@@ -40,7 +40,7 @@ class TheAppleStylePassReaderFunctions {
         val json = "{ \"barcodes\":[{\"format\":\"PKBarcodeFormatQR\",\"message\":\"NO!\"}] ,\"barcode\":{\"format\":\"PKBarcodeFormatQR\",\"message\":\"YO!\"} }"
         val tested = JSONObject(json).getBarcodeJson()
 
-        assertThat(tested).isNotNull()
+        assertThat(tested).isNotNull
         assertThat(tested!!.getString("message")).isEqualTo("YO!")
     }
 }

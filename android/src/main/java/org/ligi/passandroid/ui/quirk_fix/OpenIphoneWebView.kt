@@ -24,7 +24,7 @@ class OpenIphoneWebView : Activity() {
 
         webView.settings.javaScriptEnabled = true
 
-        webView.loadUrl(data.toString())
+        webView.loadUrl("$data")
         setContentView(webView)
 
         val backgroundColor = ContextCompat.getColor(this, R.color.dividing_color)

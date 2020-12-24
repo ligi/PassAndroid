@@ -33,7 +33,7 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) : KoinComponent {
 
                 val builder = AlertDialog.Builder(activity)
                 builder.setMessage(activity.getString(R.string.dialog_delete_confirm_text))
-                builder.setTitle(activity.getString(org.ligi.passandroid.R.string.dialog_delete_title))
+                builder.setTitle(activity.getString(R.string.dialog_delete_title))
                 builder.setIcon(R.drawable.ic_alert_warning)
 
                 val sourceDeleteCheckBoxView = LayoutInflater.from(activity).inflate(R.layout.delete_dialog_layout, null)

@@ -60,7 +60,7 @@ class PassViewActivity : PassViewActivityBase() {
             private var passStoreProjection: PassStoreProjection
     ) : FragmentStateAdapter(fa) {
 
-        override fun getItemCount(): Int = passStoreProjection.passList.count()
+        override fun getItemCount(): Int = passStoreProjection.passList.size
 
         override fun createFragment(i: Int): Fragment {
 

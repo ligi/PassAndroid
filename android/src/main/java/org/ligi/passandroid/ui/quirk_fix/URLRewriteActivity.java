@@ -1,10 +1,8 @@
 package org.ligi.passandroid.ui.quirk_fix;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
 
 import org.ligi.passandroid.ui.AlertFragment;
 import org.ligi.passandroid.ui.PassAndroidActivity;

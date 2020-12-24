@@ -77,7 +77,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
             stringBuilder.append(passField.value)
         }
 
-        return stringBuilder.toString()
+        return "$stringBuilder"
     }
 
     private fun setDateTextFromDateAndPrefix(prefix: String, relevantDate: ZonedDateTime): String {

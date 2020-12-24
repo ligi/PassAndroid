@@ -59,7 +59,7 @@ class PassEditActivity : AppCompatActivity() {
             }.show()
         }
         passTitle.doAfterEdit {
-            currentPass.description = it.toString()
+            currentPass.description = "$it"
         }
 
         val currentPass = passStore.currentPass

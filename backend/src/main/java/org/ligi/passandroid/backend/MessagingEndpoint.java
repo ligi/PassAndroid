@@ -46,7 +46,7 @@ public class MessagingEndpoint {
      * @param message The message to send
      */
     public void sendMessage(@Named("message") String message) throws IOException {
-        if (message == null || message.trim().length() == 0) {
+        if (message == null || message.trim().isEmpty()) {
             log.warning("Not sending message because it is empty");
             return;
         }

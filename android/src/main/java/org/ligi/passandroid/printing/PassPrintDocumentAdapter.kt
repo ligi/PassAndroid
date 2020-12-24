@@ -26,7 +26,7 @@ class PassPrintDocumentAdapter(private val context: Context, private val pass: P
     override fun onLayout(oldAttributes: PrintAttributes,
                           newAttributes: PrintAttributes,
                           cancellationSignal: CancellationSignal,
-                          layoutResultCallback: PrintDocumentAdapter.LayoutResultCallback,
+                          layoutResultCallback: LayoutResultCallback,
                           bundle: Bundle) {
 
         if (cancellationSignal.isCanceled) {
@@ -44,7 +44,7 @@ class PassPrintDocumentAdapter(private val context: Context, private val pass: P
     override fun onWrite(pageRanges: Array<PageRange>,
                          destination: ParcelFileDescriptor,
                          cancellationSignal: CancellationSignal,
-                         callback: PrintDocumentAdapter.WriteResultCallback) {
+                         callback: WriteResultCallback) {
 
         val page = mPdfDocument!!.startPage(0)
         val canvas = page.canvas
@@ -55,7 +55,7 @@ class PassPrintDocumentAdapter(private val context: Context, private val pass: P
         try {
             mPdfDocument!!.writeTo(FileOutputStream(destination.fileDescriptor))
         } catch (e: IOException) {
-            callback.onWriteFailed(e.toString())
+            callback.onWriteFailed("$e")
             return
         } finally {
             mPdfDocument!!.close()

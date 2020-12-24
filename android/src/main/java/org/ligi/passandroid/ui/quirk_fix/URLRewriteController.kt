@@ -12,8 +12,8 @@ class URLRewriteController(private val tracker: Tracker) {
 
         if (uri.scheme != null && uri.authority != null && uri.authority == "import") {
             when (uri.scheme) {
-                "pass2u" -> return uri.toString().substring("pass2u://import/".length)
-                "passandroid" -> return uri.toString().substring("passandroid://import/".length)
+                "pass2u" -> return "$uri".substring("pass2u://import/".length)
+                "passandroid" -> return "$uri".substring("passandroid://import/".length)
             }
         }
 
@@ -38,7 +38,7 @@ class URLRewriteController(private val tracker: Tracker) {
     private fun getVirginAustraliaURL(uri: Uri): String? {
 
         val passId: String?
-        if (uri.toString().contains("CheckInApiIntegration")) {
+        if ("$uri".contains("CheckInApiIntegration")) {
             passId = uri.getQueryParameter("key")
             tracker.trackEvent("quirk_fix", "redirect_attempt", "virgin_australia2", null)
         } else {
@@ -70,9 +70,9 @@ class URLRewriteController(private val tracker: Tracker) {
     }
 
     private fun getNrcWebHost(uri: Uri): String? {
-        var url = uri.toString()
+        var url = "$uri"
         if (url.endsWith("/")) {
-            url = url.substring(0, url.length - 1)
+            url = url.dropLast(1)
         }
 
         val split = url.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray()
