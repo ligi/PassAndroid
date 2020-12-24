@@ -101,7 +101,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
 
     fun getBarCode() = BarCode(barcodeFormat, rootView.messageInput.text.toString()).apply {
         val newAlternativeText = rootView.alternativeMessageInput.text.toString()
-        if (!newAlternativeText.isEmpty()) {
+        if (newAlternativeText.isNotEmpty()) {
             alternativeText = newAlternativeText
         }
     }

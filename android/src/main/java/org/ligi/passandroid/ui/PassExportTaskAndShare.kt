@@ -29,7 +29,7 @@ internal open class PassExportTaskAndShare(
         progressDialog.show()
 
         val handler = Handler()
-        Thread(Runnable {
+        Thread {
             passExporter.export()
             handler.post {
                 if (!activity.isFinishing && progressDialog.isShowing) {
@@ -48,7 +48,7 @@ internal open class PassExportTaskAndShare(
                     activity.startActivity(Intent.createChooser(it, activity.getString(R.string.passbook_share_chooser_title)))
                 }
             }
-        }).start()
+        }.start()
     }
 
 }

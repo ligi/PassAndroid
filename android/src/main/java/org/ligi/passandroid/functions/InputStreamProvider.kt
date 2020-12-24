@@ -30,7 +30,7 @@ fun fromURI(context: Context, uri: Uri, tracker: Tracker): InputStreamWithSource
 
 private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     val client = OkHttpClient()
-    val url = URL(uri.toString())
+    val url = URL("$uri")
     val requestBuilder = Request.Builder().url(url)
 
     // fake to be an iPhone in some cases when the server decides to send no passbook
@@ -46,7 +46,7 @@ private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     )
 
     for ((key, value) in iPhoneFakeMap) {
-        if (uri.toString().contains(value)) {
+        if ("$uri".contains(value)) {
             tracker.trackEvent("quirk_fix", "ua_fake", key, null)
             requestBuilder.header("User-Agent", IPHONE_USER_AGENT)
         }
@@ -59,14 +59,14 @@ private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     val body = response.body()
 
     if (body != null) {
-        return InputStreamWithSource(uri.toString(), body.byteStream())
+        return InputStreamWithSource("$uri", body.byteStream())
     }
 
     return null
 }
 
 private fun fromContent(ctx: Context, uri: Uri) = ctx.contentResolver.openInputStream(uri)?.let {
-    InputStreamWithSource(uri.toString(), it)
+    InputStreamWithSource("$uri", it)
 }
 
-private fun getDefaultInputStreamForUri(uri: Uri) = InputStreamWithSource(uri.toString(), BufferedInputStream(URL(uri.toString()).openStream(), 4096))
+private fun getDefaultInputStreamForUri(uri: Uri) = InputStreamWithSource("$uri", BufferedInputStream(URL("$uri").openStream(), 4096))

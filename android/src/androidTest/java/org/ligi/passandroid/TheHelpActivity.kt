@@ -26,7 +26,7 @@ class TheHelpActivity {
     fun test_that_help_finishes_on_home() {
         onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
 
-        assertThat(rule.activity.isFinishing).isTrue()
+        assertThat(rule.activity.isFinishing).isTrue
     }
 
     @Test

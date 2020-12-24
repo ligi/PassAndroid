@@ -95,7 +95,7 @@ class PassViewFragment : Fragment() {
         }
 
         if (backStrBuilder.isNotEmpty()) {
-            back_fields.text = HtmlCompat.fromHtml(backStrBuilder.toString())
+            back_fields.text = HtmlCompat.fromHtml("$backStrBuilder")
             moreTextView.visibility = View.VISIBLE
         } else {
             moreTextView.visibility = View.GONE

@@ -66,11 +66,11 @@ class FieldsEditFragment : Fragment() {
             }
 
             container.value_field_edit.doAfterEdit {
-                passField.value = it.toString()
+                passField.value = "$it"
             }
 
             container.label_field_edit.doAfterEdit {
-                passField.label = it.toString()
+                passField.label = "$it"
             }
         }
     }

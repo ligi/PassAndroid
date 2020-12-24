@@ -32,8 +32,7 @@ class AndroidSettings(val context: Context) : Settings {
     override fun isAutomaticLightEnabled() = sharedPreferences.getBoolean(context.getString(preference_key_autolight), true)
 
     override fun getNightMode(): Int {
-        val key = sharedPreferences.getString(context.getString(R.string.preference_key_nightmode), "auto")
-        return when (key) {
+        return when (sharedPreferences.getString(context.getString(R.string.preference_key_nightmode), "auto")) {
             "day" -> AppCompatDelegate.MODE_NIGHT_NO
             "night" -> AppCompatDelegate.MODE_NIGHT_YES
             "auto" -> AppCompatDelegate.MODE_NIGHT_AUTO

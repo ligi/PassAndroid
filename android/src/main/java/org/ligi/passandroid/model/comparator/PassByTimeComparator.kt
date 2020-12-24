@@ -34,7 +34,7 @@ open class PassByTimeComparator : Comparator<Pass> {
             return pass.calendarTimespan!!.from
         }
 
-        if (pass.validTimespans != null && !pass.validTimespans!!.isEmpty()) {
+        if (pass.validTimespans != null && pass.validTimespans!!.isNotEmpty()) {
             return pass.validTimespans!![0].from
         }
 
