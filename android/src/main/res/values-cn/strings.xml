@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"PassAndroid"</string>
+    <string name="logo">"标识"</string>
+    <string name="menu_map">在地图上显示</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_print">打印</string>
+    <string name="menu_edit">编辑</string>
+    <string name="barcode">"二维码"</string>
+    <string name="help_label">"帮助"</string>
+<string name="help_content"><![CDATA[
+<h1>这软件是干嘛用的？</h1>
+
+这是一款 passbook 查看器。Passbook 可能是你下一个航班的 <b>登记证</b>,
+一张目的地热饮的优惠券，一张电影票或一张会员卡。还有许许多多其他的可能性。
+基本上，它是你通常必须随身携带的一张纸或一片塑料的替代品。让我们节约一些树木并<b>减少垃圾！</b>
+
+<h1>演示性 pass</h1>
+
+你是否需要一些样例来了解实际应用? 你可以在<a href=\'http://espass.it/examples/\'>这里</a>找到一些！
+
+<h1>它如何工作？</h1>
+
+你可以用这款应用打开.pkpass 文件。比如，当你通过电子邮件收到或获得一个下载选项。
+最重要的内容是条形码 （多数时候 QR 码、AZTEC 码或 PDF417 条码），但也有其他有趣的内容，比如一个描述，它通常包含一个时间，你可以将它添加到日历，或者一个位置（告诉你方向）
+试试吧！
+一旦下载了 pass，这款应用可以在无网络连接的情况下使用！
+
+<h1>常见问题</h1>
+
+<h2>我怎样把 passbook 从 iPhone 转移到 PassAndroid？</h2>
+<ol>
+<li>在 iPhone 上打开要传输的 Passbook</li>
+<li>点击左下角的“分享”图标</li>
+<li>发送一封你的安卓设备可以接受的电子邮件，别忘了添加这个 passbook 为附件</li>
+<li>在你的安卓设备上打开这封电子邮件并保存附件</li>
+<li>让 PassAndroid 扫描 passbook</li>
+<li>扫描结束后，你就可以在 PassAndroid 中看到它。</li>
+</ol>
+
+<H1>致谢</H1>
+非常感谢 <a href=\'http://ltorrecilla.com/\'>Luis Torrecilla</a> 的设计以及
+<a href=\'https://github.com/cketti\'>cketti</a>、
+<a href=\'https://github.com/simontb\'>Simon Tenbeitel</a>
+和 <a href=\'https://github.com/irgendwr\'>Jonas Bögle</a>
+的提交请求！
+
+<h1>反馈</h1>
+通过电子邮件 <a href=\'mailto:ligi@ligi.de\'> 给予软件作者反馈</a>
+如果你喜欢这款应用，可以在<a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Google Play</a>上进行评价。
+我也想听听你在哪里用到了这个应用程序。
+
+<h1>History</h1>
+
+I stumbled upon Passbook files when i received my ticket for the 29c3 - I liked the Idea - but there was no Android App which was working for me.
+I saw that the implementation is quite easy ( just a zip container with json and images ) - The first version was build very quick & was working for me ( got entry to 29C3 ) - In the following year I have not worked on this app much as I had no real use-cases but there where a lot of users downloading the app ( nearly 100k now ) and I fixed processing of some passes that where send to me ( some passes contain really broken json .. )
+One year later - just before the 30C3 - I came to work a bit on this app again - for 2 reasons:
+ - a friend of mine is very into this whole BTLE thing and location beacon / context aware thing could be interesting for Passbook - but nothing ready yet
+ - I got a mail from a nice designer who did a nice redesign
+This all was leading to PassAndroid - a completely new version - with a new look and new functions (sorting and adding to calendar alongside pull to refresh a navigation drawer and contextual ActionBar menu
+
+<h1>More</h1>
+启动这款应用的最佳方式是 <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a>。它是免费的且无需权限。
+
+<h1>Legal</h1>
+<p>这个应用程序与苹果公司没有关系—— Passbook 可能是苹果公司的商标，但它是作为一个标准来引入的，所以这应该没问题。</p>
+<p>
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+
+    ]]></string>
+    <string name="drawer_open">"打开"</string>
+    <string name="drawer_close">"关闭"</string>
+    <string name="pass_problem">"对不起，处理这个 Passbook 文件时出了点问题。 如果你愿意，你可以把这个文件发给我，这样我可以查一下是什么问题，并改进软件。"</string>
+    <string name="problem">"问题"</string>
+    <string name="send">"发送"</string>
+    <string name="delete">"删除！"</string>
+    <string name="choose_location">"选择位置"</string>
+    <string name="boarding_pass">"登记证"</string>
+    <string name="category_event">"活动"</string>
+    <string name="category_coupon">"优惠券"</string>
+    <string name="category_storecard">"商店专用卡"</string>
+    <string name="category_generic">"一般"</string>
+    <string name="category_none">"无类别"</string>
+    <string name="nav_more">"更多"</string>
+    <string name="nav_sort">"分类"</string>
+    <string name="nav_sort_category">"类别"</string>
+    <string name="nav_sort_date">"日期"</string>
+    <string name="nav_categories">"类别"</string>
+    <string name="nav_share">"分享"</string>
+    <string name="pass_directions">"导航"</string>
+    <string name="pass_to_calendar">"到日历"</string>
+    <string name="invalid_passbook_title">无效 Passbook</string>
+    <string name="preparing_pass">正在准备 Pass</string>
+    <string name="please_wait">正在导入该 pass - 请稍等</string>
+    <string name="passbook_is_shared_subject">和你分享了一个 Passbook </string>
+    <string name="passbook_share_chooser_title">怎样发送 Pass？</string>
+    <string name="dialog_delete_confirm_text">你真想删除这个 passbook 吗？</string>
+    <string name="dialog_delete_title">确定？</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">还要删除源吗？</string>
+    <string name="more">更多</string>
+    <string name="less">更少</string>
+    <string name="scanning_for_passes">扫描 Passes 中</string>
+    <string name="fab_choice_scan_pkpass_files">扫描 pkpass 文件</string>
+    <string name="fab_choice_add_demo_pass">添加演示性 Pass</string>
+    <string name="fab_choice_create_pass">创建 Pass</string>
+    <string name="empty_text_view"><big><b>还没有 pass</b></big>
+    \n\n\n 你可以在手机里搜索 pass
+    \n\n 或者创建自己的 pass
+    \n\n 或者尝试演示性 pass
+    \n\n 只需按下方的 +
+    </string>
+    <string name="downloading_new_pass_version">正在下载新的 pass 版本</string>
+    <string name="unzip_pass_dialog_title">正在打开 Passbook</string>
+    <string name="unzip_pass_dialog_message">请等待......</string>
+    <string name="action_update">更新</string>
+    <string name="no_calendar_app_found">没找到日历应用</string>
+    <string name="pass_updated">Pass 已更新</string>
+    <string name="expiration_date_to_calendar_warning_message">您正打算向日历添加到期日期 - 如果你觉得这个 pass 有一个更佳日期 - 请把它发给我 - PassAndroid 需要知道在哪</string>
+    <string name="expiration_date_to_calendar_warning_title">添加到期日期</string>
+    <string name="topic_trash">垃圾箱</string>
+    <string name="topic_new">新</string>
+    <string name="topic_archive">存档</string>
+    <string name="move_to_new_topic">移动到新主题</string>
+    <string name="categories_nav">%d 个分类</string>
+    <string name="passes_nav">%d 个 Passes</string>
+    <string name="found_pass">找到了：%s</string>
+    <string name="found__pass">及另外 %d 个 pass</string>
+    <string name="scan_finished_dialog_title">扫描完成</string>
+    <string name="scan_finished_dialog_text">找到 %d 个 passes</string>
+    <string name="emtytrash_label">清空垃圾箱</string>
+    <string name="barcode_edit_hint_alternative_message">替代消息</string>
+    <string name="barcode_edit_random">随机</string>
+    <string name="barcode_edit_scan">扫描</string>
+    <string name="barcode_edit_message">消息</string>
+    <string name="barcode_edit_aztec">AZTEC 码</string>
+    <string name="barcode_edit_pdf417">PDF417 条码</string>
+    <string name="barcode_edit_qr">二维码</string>
+    <string name="barcode_edit_button_add_barcode">添加条码</string>
+    <string name="categories_voucher">收据</string>
+    <string name="edit_time">编辑时间</string>
+    <string name="edit_location">编辑地点</string>
+    <string name="add_front_field">添加正面字段</string>
+    <string name="add_back_fields">添加反面字段</string>
+    <string name="change_color_dialog_title">选择颜色</string>
+    <string name="select_category_dialog_title">选择类别</string>
+    <string name="barcode_edit_code128">代码 128</string>
+    <string name="barcode_edit_code39">代码 39</string>
+    <string name="add_footer_image">添加页脚图</string>
+    <string name="add_logo_image">添加标识图</string>
+    <string name="add_header_image">添加页眉图</string>
+    <string name="add_barcode">添加条形码</string>
+    <string name="edit_barcode_dialog_title">编辑条形码</string>
+    <string name="empty_trash_dialog_message">"真要清空垃圾箱？你无法还原内容 "</string>
+    <string name="empty_trash_dialog_title">警告</string>
+    <string name="new_topic_input_hint">新主题的标题</string>
+    <string name="new_topic_suggestions">建议：</string>
+    <string name="cannot_be_empty">不能为空</string>
+    <string name="please_use_the_swipe_feature">请使用滑动功能</string>
+    <string name="type">输入</string>
+    <string name="undo">撤销</string>
+
+    <string name="sort_order_date_asc">升序排列日期</string>
+    <string name="sort_order_date_desc">降序排列日期</string>
+    <string name="sort_order_date_type">类型</string>
+    <string name="sort_order_date_temporaldistance">时间距离</string>
+
+
+    <string-array name="category_edit_options">
+        <item>@string/select_category_dialog_title</item>
+        <item>@string/change_color_dialog_title</item>
+        <item>选择图标</item>
+    </string-array>
+
+    <string name="night_mode_night">夜间</string>
+    <string name="night_mode_day">白天</string>
+    <string name="night_mode_auto">自动</string>
+
+    <string name="preference_autolight_title">自动亮度调节</string>
+    <string name="preference_autolight_summary">展示条形码时是否应提高屏幕亮度？</string>
+
+    <string name="preference_condensed_title">扼要模式</string>
+    <string name="preference_condensed_summary">是否应展示更多细节并省去更多无用内容?</string>
+
+
+    <string name="preference_sort_title">排列顺序</string>
+    <string name="preference_sort_summary">应如何对 Pass 进行排序</string>
+
+
+    <string name="preference_daynight_title">白天/夜间模式</string>
+    <string name="preference_daynight_summary">应使用浅色还是深色主题</string>
+
+    <string name="image_import">图片导入</string>
+    <string name="pdf_import">PDF 导入</string>
+
+    <string name="field_source">源</string>
+    <string name="field_note">注解</string>
+    <string name="field_advice_label">建议</string>
+    <string name="field_advice_text">需要来自厂商的 esPass 或 Passbook</string>
+
+    <string name="field_source_image">图片</string>
+    <string name="field_note_image">这是从一张图片导入的，不是一个真正的 pass</string>
+
+    <string name="field_source_pdf">PDF</string>
+    <string name="field_note_pdf">这是从一个 PDF 文件导入的，不是一个真正的 pass</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_github">GitHub</string>
+    <string name="nav_betatest_opt_in_out">选择是否加入软件公测</string>
+    <string name="nav_improve_translation">改进翻译</string>
+    <string name="launcher_shortcut">启动器快捷方式</string>
+    <string name="open_file">打开文件</string>
+
+    <string name="error_no_permission_msg">需要导入 pass 的权限</string>
+    <string name="error_no_permission_title">权限错误</string>
+    <string name="scan_pass_message">正在扫描 pass 文件。请等待。</string>
+
+
+</resources>
