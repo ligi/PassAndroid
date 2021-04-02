@@ -164,7 +164,7 @@ dependencies {
     // https://medium.com/square-corner-blog/okhttp-3-13-requires-android-5-818bb78d07ce
     // Don't update to >=3.13 before minSDK 21 + Java 8
     //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
