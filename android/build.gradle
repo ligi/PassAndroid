@@ -169,7 +169,7 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-    implementation 'com.squareup.okio:okio:2.9.0'
+    implementation 'com.squareup.okio:okio:2.10.0'
  
     implementation 'com.squareup.moshi:moshi:1.11.0'
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
