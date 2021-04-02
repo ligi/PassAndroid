@@ -2,7 +2,7 @@ buildscript {
     ext {
         kotlin_version = '1.4.30'
 	// wait for upstream https://github.com/mockito/mockito/issues/2007
-        mockito_version = '3.4.6'
+        mockito_version = '3.8.0'
         threetenbp_version = '1.5.0'
         kotpref_version = '2.13.0'
     }
