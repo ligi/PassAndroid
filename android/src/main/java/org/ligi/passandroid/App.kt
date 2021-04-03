@@ -17,7 +17,6 @@ import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings
 import org.ligi.passandroid.scan.events.PassScanEventChannelProvider
 import org.ligi.tracedroid.TraceDroid
-import org.ligi.tracedroid.logging.Log
 
 open class App : Application() {
 
@@ -57,7 +56,6 @@ open class App : Application() {
 
     private fun initTraceDroid() {
         TraceDroid.init(this)
-        Log.setTAG("PassAndroid")
     }
 
 }

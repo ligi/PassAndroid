@@ -7,15 +7,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
-import android.util.Log;
+import androidx.fragment.app.Fragment;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import timber.log.Timber;
 
 /**
  * <p>A utility class which helps ease integration with Barcode Scanner via {@link Intent}s. This is a simple
@@ -367,7 +367,7 @@ public class BarCodeIntentIntegrator {
                 }
             } catch (ActivityNotFoundException anfe) {
                 // Hmm, market is not installed
-                Log.w(TAG, "Google Play is not installed; cannot install " + packageName);
+                Timber.w("Google Play is not installed; cannot install " + packageName);
             }
         });
         downloadDialog.setNegativeButton(buttonNo, null);
