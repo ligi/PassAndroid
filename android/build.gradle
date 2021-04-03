@@ -118,7 +118,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
     androidTestImplementation 'com.github.ligi:trulesk:0.31'
     androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.1.1'
