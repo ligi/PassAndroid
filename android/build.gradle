@@ -181,7 +181,7 @@ dependencies {
     implementation "com.chibatching.kotpref:kotpref:$kotpref_version"
     implementation "com.chibatching.kotpref:initializer:$kotpref_version"
     testImplementation 'com.squareup.assertj:assertj-android:1.2.0'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "org.threeten:threetenbp:$threetenbp_version"
 
