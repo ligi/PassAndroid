@@ -8,7 +8,6 @@ buildscript {
     }
 
     repositories {
-        jcenter()
         google()
         maven { url 'https://www.jitpack.io' }
         gradlePluginPortal()
@@ -21,10 +20,6 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.38.0'
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.6'
     }
-}
-
-repositories {
-    google()
 }
 
 apply from: 'https://raw.githubusercontent.com/ligi/gradle-common/master/versions_plugin_stable_only.gradle'
