@@ -160,9 +160,9 @@ dependencies {
     implementation 'com.github.ligi:tracedroid:4.1'
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.26'
-    forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.26'
-    forAmazonImplementation 'com.github.ligi.snackengage:snackengage-amazonrate:0.24'
+    forPlayImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.28'
+    forFDroidImplementation 'com.github.ligi.snackengage:snackengage-playrate:0.28'
+    forAmazonImplementation 'com.github.ligi.snackengage:snackengage-amazonrate:0.28'
 
     // https://medium.com/square-corner-blog/okhttp-3-13-requires-android-5-818bb78d07ce
     // Don't update to >=3.13 before minSDK 21 + Java 8
