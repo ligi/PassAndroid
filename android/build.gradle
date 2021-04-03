@@ -7,7 +7,7 @@ apply plugin: 'de.mobilej.unmock'
 
 repositories {
     jcenter()
-    mavenLocal()
+    mavenCentral()
     google()
     maven { url 'https://www.jitpack.io' }
 }
