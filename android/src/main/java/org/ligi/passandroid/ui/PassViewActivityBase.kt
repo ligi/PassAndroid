@@ -151,11 +151,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
     @NeedsPermission("com.android.launcher.permission.INSTALL_SHORTCUT")
     fun createShortcut() {
         val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
-        val shortcutIcon = if (passBitmap != null) {
-            passBitmap.scale(128, 128, filter = true)
-        } else {
-            BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
-        }
+        val shortcutIcon = passBitmap?.scale(128, 128, filter = true) ?: BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
         val name: CharSequence = currentPass.description.let {
             if (it.isNullOrEmpty()) "pass" else it
         }
