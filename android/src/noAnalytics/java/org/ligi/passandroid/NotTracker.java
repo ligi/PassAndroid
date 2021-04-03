@@ -1,26 +1,25 @@
 package org.ligi.passandroid;
 
-import org.ligi.tracedroid.logging.Log;
-
 import javax.annotation.Nullable;
+import timber.log.Timber;
 
 public class NotTracker implements Tracker {
 
     @Override
     public void trackException(String s, Throwable e, boolean fatal) {
         if (fatal) {
-            Log.w("Fatal Exception " + s + " " + e);
+            Timber.w(e, "Fatal Exception %s", s);
         } else {
-            Log.w("Not Fatal Exception " + s + " " + e);
+            Timber.w(e, "Not Fatal Exception %s", s);
         }
     }
 
     @Override
     public void trackException(String s, boolean fatal) {
         if (fatal) {
-            Log.w("Fatal Exception " + s);
+            Timber.w("Fatal Exception %s", s);
         } else {
-            Log.w("Not Fatal Exception " + s);
+            Timber.w("Not Fatal Exception %s", s);
         }
     }
 

@@ -7,8 +7,8 @@ import org.ligi.passandroid.model.pass.BarCode
 import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.model.pass.PassType
-import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.ZonedDateTime
+import timber.log.Timber
 import java.io.File
 
 object PassReader {
@@ -61,7 +61,7 @@ object PassReader {
             }
 
         } catch (e: Exception) {
-            Log.i("PassParse Exception: $e")
+            Timber.i("PassParse Exception: $e")
         }
 
         return pass
