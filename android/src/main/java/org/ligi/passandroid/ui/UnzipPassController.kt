@@ -63,7 +63,7 @@ object UnzipPassController : KoinComponent {
             return
         }
 
-        File(path, "source.obj").bufferedWriter().write(spec.source)
+        File(path, "source.txt").appendText(spec.source)
 
         try {
             val zipFile = ZipFile(spec.zipFileString)
