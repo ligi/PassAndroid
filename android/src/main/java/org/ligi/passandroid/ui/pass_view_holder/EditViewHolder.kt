@@ -16,6 +16,7 @@ import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.model.pass.PassImpl
 import org.ligi.passandroid.ui.Visibility
 import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.temporal.ChronoUnit
 
 class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -33,7 +34,8 @@ class EditViewHolder(view: CardView) : VerbosePassViewHolder(view), TimePickerDi
         time = if (calendarTimespan?.from != null) {
             calendarTimespan.from
         } else {
-            ZonedDateTime.now()
+            val roundedTime = ZonedDateTime.now().truncatedTo(ChronoUnit.MINUTES)
+            roundedTime.plusMinutes(30L - (roundedTime.minute % 30))
         }
     }
 
