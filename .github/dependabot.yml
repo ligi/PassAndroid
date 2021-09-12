@@ -5,7 +5,7 @@ updates:
   schedule:
     interval: daily
     time: "04:00"
-  open-pull-requests-limit: 10
+  open-pull-requests-limit: 1
   ignore:
   - dependency-name: androidx.fragment:fragment-ktx
     versions:
