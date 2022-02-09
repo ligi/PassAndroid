@@ -6,7 +6,7 @@ object PassDefinitions {
 
     val TYPE_TO_NAME = mapOf(COUPON to "coupon",
             EVENT to "eventTicket",
-            BOARDING to "boardingPass",
+            PKBOARDING to "boardingPass",
             GENERIC to "generic",
             LOYALTY to "storeCard")
 
