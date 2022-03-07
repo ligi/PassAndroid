@@ -1,6 +1,5 @@
 package org.ligi.passandroid.functions
 
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -15,8 +14,6 @@ fun getHumanCategoryString(fromPass: PassType) = when (fromPass) {
     PassType.LOYALTY -> R.string.category_storecard
     PassType.GENERIC -> R.string.category_generic
     PassType.VOUCHER -> R.string.categories_voucher
-
-    else -> R.string.category_none
 }
 
 
@@ -28,8 +25,6 @@ fun getCategoryDefaultBG(category: PassType) = when (category) {
     PassType.LOYALTY -> 0xFFf29b21
     PassType.VOUCHER -> 0xFF2A2727
     PassType.GENERIC -> 0xFFea3c48
-
-    else -> Color.WHITE.toLong()
 }.toInt()
 
 
@@ -41,6 +36,4 @@ fun getCategoryTopImageRes(type: PassType) = when (type) {
     PassType.LOYALTY -> R.drawable.cat_sc
     PassType.VOUCHER -> R.drawable.cat_ps
     PassType.GENERIC -> R.drawable.cat_none
-
-    else -> R.drawable.cat_none
 }

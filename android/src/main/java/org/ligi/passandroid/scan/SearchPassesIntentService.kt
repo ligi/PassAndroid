@@ -26,7 +26,7 @@ import org.ligi.passandroid.scan.events.ScanFinished
 import org.ligi.passandroid.ui.PassListActivity
 import org.ligi.passandroid.ui.UnzipPassController
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec
-import org.ligi.tracedroid.logging.Log
+import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -134,11 +134,11 @@ class SearchPassesIntentService : LifecycleService() {
             if (shouldFinish) {
                 return
             }
-            Log.i("search " + file.absoluteFile)
+            Timber.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
                 searchIn(file, true)
             } else if (file.name.toLowerCase().endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
-                Log.i("found" + file.absolutePath)
+                Timber.i("found" + file.absolutePath)
 
                 try {
                     val ins = fromURI(baseContext, ("file://" + file.absolutePath).toUri(), tracker)
@@ -154,7 +154,7 @@ class SearchPassesIntentService : LifecycleService() {
                             onSuccessCallback,
                             object : UnzipPassController.FailCallback {
                                 override fun fail(reason: String) {
-                                    Log.i("fail", reason)
+                                    Timber.i("fail: %s", reason)
                                 }
                             })
                     UnzipPassController.processInputStream(spec)
