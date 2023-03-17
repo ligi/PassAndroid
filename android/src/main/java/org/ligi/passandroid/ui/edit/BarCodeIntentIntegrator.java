@@ -7,15 +7,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
-import android.util.Log;
+import androidx.fragment.app.Fragment;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import timber.log.Timber;
 
 /**
  * <p>A utility class which helps ease integration with Barcode Scanner via {@link Intent}s. This is a simple
@@ -103,6 +103,10 @@ public class BarCodeIntentIntegrator {
 
     private static final String BS_PACKAGE = "com.google.zxing.client.android";
     private static final String BSPLUS_PACKAGE = "com.srowen.bs.android";
+    private static final String BINARYEYE_PACKAGE = "de.markusfisch.android.binaryeye";
+    private static final String QR_AND_BARCODE_READER_PACKAGE = "com.teacapps.barcodescanner";
+    private static final String QR_AND_BARCODE_SCANNER_PACKAGE = "com.example.barcodescanner";
+    private static final String QRBOT_PACKAGE = "net.qrbot";
 
     // supported barcode formats
     public static final Collection<String> PRODUCT_CODE_TYPES = list("UPC_A", "UPC_E", "EAN_8", "EAN_13", "RSS_14");
@@ -116,9 +120,13 @@ public class BarCodeIntentIntegrator {
 
     public static final List<String> TARGET_BARCODE_SCANNER_ONLY = Collections.singletonList(BS_PACKAGE);
     public static final List<String> TARGET_ALL_KNOWN = list(
+            BINARYEYE_PACKAGE,          // Binary Eye
             BSPLUS_PACKAGE,             // Barcode Scanner+
             BSPLUS_PACKAGE + ".simple", // Barcode Scanner+ Simple
-            BS_PACKAGE                  // Barcode Scanner
+            BS_PACKAGE,                 // Barcode Scanner
+            QR_AND_BARCODE_READER_PACKAGE, // QR & Barcode Reader
+            QR_AND_BARCODE_SCANNER_PACKAGE, // QR & Barcode Scanner
+            QRBOT_PACKAGE              // QRbot
             // What else supports this intent?
     );
 
@@ -367,7 +375,7 @@ public class BarCodeIntentIntegrator {
                 }
             } catch (ActivityNotFoundException anfe) {
                 // Hmm, market is not installed
-                Log.w(TAG, "Google Play is not installed; cannot install " + packageName);
+                Timber.w("Google Play is not installed; cannot install " + packageName);
             }
         });
         downloadDialog.setNegativeButton(buttonNo, null);
