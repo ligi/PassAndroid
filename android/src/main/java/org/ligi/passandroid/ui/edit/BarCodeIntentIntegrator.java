@@ -103,6 +103,10 @@ public class BarCodeIntentIntegrator {
 
     private static final String BS_PACKAGE = "com.google.zxing.client.android";
     private static final String BSPLUS_PACKAGE = "com.srowen.bs.android";
+    private static final String BINARYEYE_PACKAGE = "de.markusfisch.android.binaryeye";
+    private static final String QR_AND_BARCODE_READER_PACKAGE = "com.teacapps.barcodescanner";
+    private static final String QR_AND_BARCODE_SCANNER_PACKAGE = "com.example.barcodescanner";
+    private static final String QRBOT_PACKAGE = "net.qrbot";
 
     // supported barcode formats
     public static final Collection<String> PRODUCT_CODE_TYPES = list("UPC_A", "UPC_E", "EAN_8", "EAN_13", "RSS_14");
@@ -116,9 +120,13 @@ public class BarCodeIntentIntegrator {
 
     public static final List<String> TARGET_BARCODE_SCANNER_ONLY = Collections.singletonList(BS_PACKAGE);
     public static final List<String> TARGET_ALL_KNOWN = list(
+            BINARYEYE_PACKAGE,          // Binary Eye
             BSPLUS_PACKAGE,             // Barcode Scanner+
             BSPLUS_PACKAGE + ".simple", // Barcode Scanner+ Simple
-            BS_PACKAGE                  // Barcode Scanner
+            BS_PACKAGE,                 // Barcode Scanner
+            QR_AND_BARCODE_READER_PACKAGE, // QR & Barcode Reader
+            QR_AND_BARCODE_SCANNER_PACKAGE, // QR & Barcode Scanner
+            QRBOT_PACKAGE              // QRbot
             // What else supports this intent?
     );
 
