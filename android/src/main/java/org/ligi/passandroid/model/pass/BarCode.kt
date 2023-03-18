@@ -7,7 +7,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.ligi.passandroid.Tracker
 import org.ligi.passandroid.functions.generateBitmapDrawable
-import org.ligi.tracedroid.logging.Log
+import timber.log.Timber
 import java.util.*
 
 @JsonClass(generateAdapter = true)
@@ -24,7 +24,7 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
         }
 
         if (format == null) {
-            Log.w("Barcode format is null - fallback to QR")
+            Timber.w("Barcode format is null - fallback to QR")
             tracker.trackException("Barcode format is null - fallback to QR", false)
             return generateBitmapDrawable(resources, message, PassBarCodeFormat.QR_CODE)
         }

@@ -16,9 +16,9 @@ import org.ligi.passandroid.model.AppleStylePassTranslation
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassDefinitions
 import org.ligi.passandroid.model.pass.*
-import org.ligi.tracedroid.logging.Log
 import org.threeten.bp.DateTimeException
 import org.threeten.bp.ZonedDateTime
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.charset.Charset
@@ -53,7 +53,7 @@ object AppleStylePassReader {
             val plainJsonString = AppleStylePassTranslation.readFileAsStringGuessEncoding(file)
             passJSON = readJSONSafely(plainJsonString)
         } catch (e: Exception) {
-            Log.i("PassParse Exception: $e")
+            Timber.i("PassParse Exception: $e")
         }
 
         if (passJSON == null) {
@@ -76,7 +76,7 @@ object AppleStylePassReader {
         }
 
         if (passJSON == null) {
-            Log.w("could not load pass.json from passcode ")
+            Timber.w("could not load pass.json from passcode ")
             tracker.trackEvent("problem_event", "pass", "without_pass_json", null)
             return null
         }
@@ -226,16 +226,17 @@ object AppleStylePassReader {
                     val field = PassField(key = getField(jsonObject, "key", translation),
                             label = getField(jsonObject, "label", translation),
                             value = getField(jsonObject, "value", translation),
-                            hide = hide)
+                            hide = hide,
+                            hint = fieldsName)
                     list.add(field)
 
                 } catch (e: JSONException) {
-                    Log.w("could not process PassField from JSON for $fieldsName cause: $e")
+                    Timber.w("could not process PassField from JSON for $fieldsName cause: $e")
                 }
 
             }
         } catch (e: JSONException) {
-            Log.w("could not process PassFields $fieldsName from JSON: $e")
+            Timber.w("could not process PassFields $fieldsName from JSON: $e")
         }
 
     }
