@@ -122,13 +122,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
 
-    androidTestImplementation 'com.github.ligi:trulesk:4.0'
-    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.1.1'
+    androidTestImplementation 'com.github.ligi:trulesk:4.3'
+    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
 
-    androidTestImplementation 'androidx.test:core:1.3.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0'
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.28.1'
