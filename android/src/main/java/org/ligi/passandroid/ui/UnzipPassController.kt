@@ -20,7 +20,7 @@ import org.ligi.passandroid.functions.readJSONSafely
 import org.ligi.passandroid.model.InputStreamWithSource
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.Settings
-import org.ligi.tracedroid.logging.Log
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -157,7 +157,7 @@ object UnzipPassController : KoinComponent {
         if (!renamedFile.exists()) {
             path.renameTo(renamedFile)
         } else {
-            Log.i("Pass with same ID exists")
+            Timber.i("Pass with same ID exists")
         }
 
         spec.onSuccessCallback?.call(uuid)

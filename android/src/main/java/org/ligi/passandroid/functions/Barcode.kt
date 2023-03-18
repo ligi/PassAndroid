@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import com.google.zxing.MultiFormatWriter
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
-import org.ligi.tracedroid.logging.Log
+import timber.log.Timber
 
 
 fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCodeFormat): BitmapDrawable? {
@@ -44,20 +44,19 @@ fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
 
         return barcodeImage
     } catch (e: com.google.zxing.WriterException) {
-        Log.w("could not write image: $e")
+        Timber.w(e, "could not write image")
         // TODO check if we should better return some rescue Image here
         return null
     } catch (e: IllegalArgumentException) {
-        Log.w("could not write image: $e")
+        Timber.w("could not write image: $e")
         return null
     } catch (e: ArrayIndexOutOfBoundsException) {
         // happens for ITF barcode on certain inputs
-        Log.w("could not write image: $e")
+        Timber.w("could not write image: $e")
         return null
     }
 
 }
 
-fun getBitMatrix(data: String, type: PassBarCodeFormat)
-        = MultiFormatWriter().encode(data, type.zxingBarCodeFormat(), 0, 0)!!
+fun getBitMatrix(data: String, type: PassBarCodeFormat) = MultiFormatWriter().encode(data, type.zxingBarCodeFormat(), 0, 0)!!
 

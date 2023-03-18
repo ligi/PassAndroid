@@ -18,6 +18,7 @@ import org.ligi.kaxt.disableRotation
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.pass.Pass
+import org.ligi.passandroid.model.pass.PassType
 
 class PassViewActivity : PassViewActivityBase() {
     private lateinit var pagerAdapter: CollectionPagerAdapter
@@ -65,8 +66,15 @@ class PassViewActivity : PassViewActivityBase() {
 
         override fun createFragment(i: Int): Fragment {
 
-            val fragment = PassViewFragment()
-            fragment.arguments = bundleOf(EXTRA_KEY_UUID to getPass(i).id)
+            val pass = getPass(i)
+
+            val fragment =
+                when (pass.type) {
+                    PassType.PKBOARDING -> PassViewPKFragment()
+                    else -> PassViewFragment()
+                }
+
+            fragment.arguments = bundleOf(EXTRA_KEY_UUID to pass.id)
             return fragment
         }
 

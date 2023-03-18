@@ -31,7 +31,7 @@ import org.ligi.snackengage.SnackEngage
 import org.ligi.snackengage.snacks.BaseSnack
 import org.ligi.snackengage.snacks.DefaultRateSnack
 import org.ligi.tracedroid.TraceDroid
-import org.ligi.tracedroid.sending.TraceDroidEmailSender
+import org.ligi.tracedroid.sending.sendTraceDroidStackTracesIfExist
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
@@ -97,10 +97,11 @@ class PassListActivity : PassAndroidActivity() {
 
 
         // don't want too many windows in worst case - so check for errors first
-        if (TraceDroid.getStackTraceFiles().isNotEmpty()) {
+        if (TraceDroid.stackTraceFiles.isNotEmpty()) {
             tracker.trackEvent("ui_event", "send", "stacktraces", null)
+
             if (settings.doTraceDroidEmailSend()) {
-                TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", this)
+                sendTraceDroidStackTracesIfExist("ligi+passandroid@ligi.de", this)
             }
         } else { // if no error - check if there is a new version of the app
             tracker.trackEvent("ui_event", "processFile", "updatenotice", null)
