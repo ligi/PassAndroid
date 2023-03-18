@@ -9,7 +9,7 @@ import android.view.WindowManager
 import kotlinx.android.synthetic.main.fullscreen_image.*
 import org.ligi.kaxt.lockOrientation
 import org.ligi.passandroid.R
-import org.ligi.tracedroid.logging.Log
+import timber.log.Timber
 
 class FullscreenBarcodeActivity : PassViewActivityBase() {
 
@@ -29,7 +29,7 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
         super.onResume()
 
         if (currentPass.barCode == null) {
-            Log.w("FullscreenBarcodeActivity in bad state")
+            Timber.w("FullscreenBarcodeActivity in bad state")
             finish() // this should never happen, but better safe than sorry
             return
         }

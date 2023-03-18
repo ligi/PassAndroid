@@ -29,7 +29,5 @@ enum class PassBarCodeFormat {
         ITF -> BarcodeFormat.ITF
         PDF_417 -> BarcodeFormat.PDF_417
         QR_CODE -> BarcodeFormat.QR_CODE
-
-        else -> BarcodeFormat.QR_CODE
     }
 }
