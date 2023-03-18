@@ -226,7 +226,8 @@ object AppleStylePassReader {
                     val field = PassField(key = getField(jsonObject, "key", translation),
                             label = getField(jsonObject, "label", translation),
                             value = getField(jsonObject, "value", translation),
-                            hide = hide)
+                            hide = hide,
+                            hint = fieldsName)
                     list.add(field)
 
                 } catch (e: JSONException) {

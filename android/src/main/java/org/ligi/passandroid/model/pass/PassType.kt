@@ -5,6 +5,7 @@ enum class PassType {
     EVENT,
     COUPON,
     BOARDING,
+    PKBOARDING,
     LOYALTY,
     VOUCHER
 }
