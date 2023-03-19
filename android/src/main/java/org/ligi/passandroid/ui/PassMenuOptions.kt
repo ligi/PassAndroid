@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.widget.CheckBox
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NavUtils
-import kotlinx.android.synthetic.main.delete_dialog_layout.view.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.ligi.kaxt.startActivityFromClass
@@ -39,14 +39,17 @@ class PassMenuOptions(val activity: Activity, val pass: Pass) : KoinComponent {
                 val sourceDeleteCheckBoxView = LayoutInflater.from(activity).inflate(R.layout.delete_dialog_layout, null)
 
                 val source = pass.getSource(passStore)
+
+                val checkBox = sourceDeleteCheckBoxView.findViewById<CheckBox>(R.id.sourceDeleteCheckbox)
                 if (source != null && source.startsWith("file://")) {
 
-                    sourceDeleteCheckBoxView.sourceDeleteCheckbox.text = activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox)
+
+                    checkBox.text = activity.getString(R.string.dialog_delete_confirm_delete_source_checkbox)
                     builder.setView(sourceDeleteCheckBoxView)
                 }
 
                 builder.setPositiveButton(activity.getString(R.string.delete)) { _, _ ->
-                    if (sourceDeleteCheckBoxView.sourceDeleteCheckbox.isChecked) {
+                    if (checkBox.isChecked) {
 
                         File(source!!.replace("file://", "")).delete()
                     }

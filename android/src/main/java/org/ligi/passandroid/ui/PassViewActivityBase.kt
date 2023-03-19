@@ -1,5 +1,6 @@
 package org.ligi.passandroid.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -28,10 +29,10 @@ import org.ligi.passandroid.model.pass.Pass
 import org.ligi.passandroid.ui.UnzipPassController.InputStreamUnzipControllerSpec
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.ktx.constructPermissionsRequest
 import java.io.IOException
 
 @SuppressLint("Registered")
-@RuntimePermissions
 open class PassViewActivityBase : PassAndroidActivity() {
 
     lateinit var currentPass: Pass
@@ -129,7 +130,7 @@ open class PassViewActivityBase : PassAndroidActivity() {
             }
 
             R.id.install_shortcut -> {
-                createShortcutWithPermissionCheck()
+                createShortcut()
                 true
             }
 
@@ -143,29 +144,24 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
+    private fun createShortcut() {
+        constructPermissionsRequest(Manifest.permission.INSTALL_SHORTCUT) {
+            val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
+            val shortcutIcon = passBitmap?.scale(128, 128, filter = true) ?: BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
+            val name: CharSequence = currentPass.description.let {
+                if (it.isNullOrEmpty()) "pass" else it
+            }
 
-    @NeedsPermission("com.android.launcher.permission.INSTALL_SHORTCUT")
-    fun createShortcut() {
-        val passBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
-        val shortcutIcon = passBitmap?.scale(128, 128, filter = true) ?: BitmapFactory.decodeResource(resources, R.drawable.ic_launcher)
-        val name: CharSequence = currentPass.description.let {
-            if (it.isNullOrEmpty()) "pass" else it
-        }
-
-        val targetIntent = Intent(this, PassViewActivity::class.java)
+            val targetIntent = Intent(this, PassViewActivity::class.java)
                 .setAction(Intent.ACTION_MAIN)
                 .putExtra(EXTRA_KEY_UUID, currentPass.id)
-        val shortcutInfo = ShortcutInfoCompat.Builder(this, "shortcut$name")
+            val shortcutInfo = ShortcutInfoCompat.Builder(this, "shortcut$name")
                 .setIntent(targetIntent)
                 .setShortLabel(name)
                 .setIcon(IconCompat.createWithBitmap(shortcutIcon))
                 .build()
-        ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
-
+            ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+        }.launch()
     }
 
     inner class UpdateAsync : Runnable {
