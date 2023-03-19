@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.android.synthetic.main.activity_pass_view_base.*
 import org.ligi.kaxt.disableRotation
 import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStoreProjection
@@ -40,7 +39,7 @@ class PassViewActivity : PassViewActivityBase() {
         pagerAdapter = CollectionPagerAdapter(this, PassStoreProjection(passStore,
                 passStore.classifier.getTopic(currentPass, ""),
                 settings.getSortOrder()))
-        viewPager = pager
+        viewPager = findViewById(R.id.pager)
         viewPager.adapter = pagerAdapter
         viewPager.currentItem = pagerAdapter.getPos(currentPass)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -94,7 +93,7 @@ class PassViewActivity : PassViewActivityBase() {
     override fun onResumeFragments() {
         super.onResumeFragments()
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         configureActionBar()
         refresh()

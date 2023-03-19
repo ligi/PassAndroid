@@ -6,8 +6,8 @@ import androidx.appcompat.widget.AppCompatDrawableManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.core.widget.TextViewCompat
-import kotlinx.android.synthetic.main.time_and_nav.view.*
 import org.ligi.passandroid.R
 
 @SuppressLint("RestrictedApi") // FIXME: temporary workaround for false-positive
@@ -18,10 +18,11 @@ class TimeAndNavBar constructor(context: Context, attrs: AttributeSet) : FrameLa
         AppCompatDrawableManager.get().apply {
 
             val timeDrawable = getDrawable(context, R.drawable.ic_action_today)
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(timeButton, null, null, timeDrawable, null)
+
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(findViewById(R.id.timeButton), null, null, timeDrawable, null)
 
             val navDrawable = getDrawable(context, R.drawable.ic_maps_place)
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(locationButton, navDrawable, null, null, null)
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(findViewById(R.id.locationButton), navDrawable, null, null, null)
         }
     }
 

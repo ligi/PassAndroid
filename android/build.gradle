@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.trevjonez.composer'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
 
@@ -103,6 +102,11 @@ android {
             multiDexEnabled true
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
