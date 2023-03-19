@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <uses-permission-sdk-23 android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -53,6 +54,7 @@
         <activity
                 android:name=".ui.PassListActivity"
                 android:label="@string/app_name"
+                android:exported="true"
                 android:theme="@style/AppThemeNoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -71,7 +73,8 @@
                 android:name=".ui.PassEditActivity"/>
         <activity
                 android:name=".ui.PassImportActivity"
-                tools:ignore="ExportedActivity">
+                tools:ignore="ExportedActivity"
+                android:exported="true">
 
             <!-- espass -->
 
@@ -1539,7 +1542,7 @@
 
         </activity>
 
-        <activity android:name=".ui.quirk_fix.URLRewriteActivity">
+        <activity android:name=".ui.quirk_fix.URLRewriteActivity" android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -1702,7 +1705,7 @@
         <activity android:name=".ui.quirk_fix.OpenIphoneWebView"/>
         <activity android:name=".ui.TouchImageActivity"/>
 
-        <activity android:name=".ui.quirk_fix.USAirwaysLoadActivity">
+        <activity android:name=".ui.quirk_fix.USAirwaysLoadActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -1729,7 +1732,7 @@
         </activity>
 
 
-        <activity android:name=".ui.ExtractURLAsIphoneActivity">
+        <activity android:name=".ui.ExtractURLAsIphoneActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 

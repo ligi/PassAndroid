@@ -36,11 +36,11 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.ktx.constructPermissionsRequest
 
 private const val OPEN_FILE_READ_REQUEST_CODE = 1000
 private const val VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19
 
-@RuntimePermissions
 class PassListActivity : PassAndroidActivity() {
 
     private lateinit var binding: PassListBinding
@@ -50,20 +50,14 @@ class PassListActivity : PassAndroidActivity() {
 
 
     @TargetApi(16)
-    @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
-    @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
-    internal fun showDeniedFor() {
+    private fun showDeniedFor() {
         Snackbar.make(binding.fam, "no permission to scan", Snackbar.LENGTH_INDEFINITE).show()
     }
 
     @TargetApi(16)
-    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    fun scan() = startActivity(Intent(this, PassScanActivity::class.java))
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
+    fun scan() = constructPermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE, onPermissionDenied = ::showDeniedFor, onNeverAskAgain = ::showDeniedFor) {
+        startActivity(Intent(this, PassScanActivity::class.java))
+    }.launch()
 
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
     internal fun onAddOpenFileClick() {
@@ -155,7 +149,7 @@ class PassListActivity : PassAndroidActivity() {
         }
 
         binding.fabActionScan.setOnClickListener {
-            scanWithPermissionCheck()
+            scan()
             binding.fam.collapse()
         }
 

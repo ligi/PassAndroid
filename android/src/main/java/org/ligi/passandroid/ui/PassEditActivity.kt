@@ -26,11 +26,9 @@ import org.ligi.passandroid.ui.edit.dialogs.showBarcodeEditDialog
 import org.ligi.passandroid.ui.edit.dialogs.showCategoryPickDialog
 import org.ligi.passandroid.ui.edit.dialogs.showColorPickDialog
 import org.ligi.passandroid.ui.pass_view_holder.EditViewHolder
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.ktx.constructPermissionsRequest
 import java.util.*
 
-@RuntimePermissions
 class PassEditActivity : AppCompatActivity() {
 
     private lateinit var binding: EditBinding
@@ -41,10 +39,6 @@ class PassEditActivity : AppCompatActivity() {
 
     private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 
-    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    fun pickImage(req_code_pick_icon: Int) {
-        imageEditHelper.startPick(req_code_pick_icon)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +51,7 @@ class PassEditActivity : AppCompatActivity() {
                 when (i) {
                     0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, refreshCallback)
                     1 -> showColorPickDialog(this@PassEditActivity, currentPass, refreshCallback)
-                    2 -> pickImageWithPermissionCheck(ImageEditHelper.REQ_CODE_PICK_ICON)
+                    2 -> pickWithPermissionCheck(ImageEditHelper.REQ_CODE_PICK_ICON)
                 }
             }.show()
         }
@@ -87,6 +81,12 @@ class PassEditActivity : AppCompatActivity() {
         }
     }
 
+    private fun pickWithPermissionCheck(requestCode: Int) {
+        constructPermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE) {
+            imageEditHelper.startPick(requestCode)
+        }.launch()
+    }
+
     val refreshCallback = { refresh(currentPass) }
 
 
@@ -94,11 +94,6 @@ class PassEditActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         imageEditHelper.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     private fun refresh(pass: Pass) {
@@ -125,7 +120,7 @@ class PassEditActivity : AppCompatActivity() {
         addButton.visibility = if (bitmap == null) View.VISIBLE else View.GONE
 
         val listener = View.OnClickListener {
-            pickImageWithPermissionCheck(requestCode)
+            pickWithPermissionCheck(requestCode)
         }
 
         val logoImage = findViewById<ImageView>(logo_img)
