@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import kotlinx.android.synthetic.main.pass_recycler.view.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
+import org.ligi.passandroid.databinding.PassRecyclerBinding
 import org.ligi.passandroid.functions.moveWithUndoSnackbar
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.PassStoreProjection
@@ -32,14 +32,14 @@ class PassListFragment : Fragment() {
     val settings: Settings by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val inflate = inflater.inflate(R.layout.pass_recycler, container, false)
+        val inflate = PassRecyclerBinding.inflate(layoutInflater, container, false)
 
         passStoreProjection = PassStoreProjection(passStore, arguments?.getString(BUNDLE_KEY_TOPIC)!!, settings.getSortOrder())
         adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection)
 
-        inflate.pass_recyclerview.adapter = adapter
+        inflate.passRecyclerview.adapter = adapter
 
-        inflate.pass_recyclerview.layoutManager = LinearLayoutManager(activity)
+        inflate.passRecyclerview.layoutManager = LinearLayoutManager(activity)
 
         val simpleItemTouchCallback = object : SimpleCallback(0, LEFT or RIGHT) {
 
@@ -52,7 +52,7 @@ class PassListFragment : Fragment() {
         }
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(inflate.pass_recyclerview)
+        itemTouchHelper.attachToRecyclerView(inflate.passRecyclerview)
 
         lifecycleScope.launch {
             for (update in passStore.updateChannel.openSubscription()) {
@@ -60,7 +60,7 @@ class PassListFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         }
-        return inflate
+        return inflate.root
     }
 
     @VisibleForTesting
