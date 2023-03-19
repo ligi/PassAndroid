@@ -3,7 +3,8 @@ package org.ligi.passandroid.ui.pass_view_holder
 import android.app.Activity
 import androidx.cardview.widget.CardView
 import android.view.View
-import kotlinx.android.synthetic.main.edit.view.*
+import android.widget.TextView
+import org.ligi.passandroid.R
 import org.ligi.passandroid.model.PassStore
 import org.ligi.passandroid.model.pass.Pass
 
@@ -14,11 +15,12 @@ open class VerbosePassViewHolder(view: CardView) : PassViewHolder(view) {
 
         val dateOrExtraText = getTimeInfoString(pass) ?: getExtraString(pass)
 
+        val date = view.findViewById<TextView>(R.id.date)
         if (dateOrExtraText != null && dateOrExtraText.isNotEmpty()) {
-            view.date.text = dateOrExtraText
-            view.date.visibility = View.VISIBLE
+            date.text = dateOrExtraText
+            date.visibility = View.VISIBLE
         } else {
-            view.date.visibility = View.GONE
+            date.visibility = View.GONE
         }
     }
 }
