@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View.GONE
 import androidx.lifecycle.lifecycleScope
-import kotlinx.android.synthetic.main.activity_scan.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
+import org.ligi.passandroid.databinding.ActivityScanBinding
 import org.ligi.passandroid.scan.events.DirectoryProcessed
 import org.ligi.passandroid.scan.events.PassScanEventChannelProvider
 import org.ligi.passandroid.scan.events.ScanFinished
@@ -22,16 +22,17 @@ class PassScanActivity : PassAndroidActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_scan)
+        val binding = ActivityScanBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         lifecycleScope.launch {
             for (event in progressChannelProvider.channel.openSubscription()) {
                 when (event) {
-                    is DirectoryProcessed -> progress_text.text = event.dir
+                    is DirectoryProcessed -> binding.progressText.text = event.dir
                     is ScanFinished -> {
-                        progress_container.visibility = GONE
+                        binding.progressContainer.visibility = GONE
                         val message = getString(R.string.scan_finished_dialog_text, event.foundPasses.size)
                         AlertDialog.Builder(this@PassScanActivity)
                                 .setTitle(R.string.scan_finished_dialog_title)

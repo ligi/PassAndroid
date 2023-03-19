@@ -6,24 +6,25 @@ import android.text.Editable
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_help.*
 import org.ligi.compat.HtmlCompat
 import org.ligi.passandroid.BuildConfig
 import org.ligi.passandroid.R
+import org.ligi.passandroid.databinding.ActivityHelpBinding
 import org.xml.sax.XMLReader
 
 class HelpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help)
+        val binding = ActivityHelpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val html = HtmlCompat.fromHtml(getString(R.string.help_content), null, ListTagHandler())
 
-        help_text.text = html
-        help_text.movementMethod = LinkMovementMethod()
+        binding.helpText.text = html
+        binding.helpText.movementMethod = LinkMovementMethod()
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.subtitle = "v" + BuildConfig.VERSION_NAME
     }
