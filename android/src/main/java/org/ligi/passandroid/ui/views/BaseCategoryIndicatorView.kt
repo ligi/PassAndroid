@@ -5,8 +5,8 @@ import androidx.annotation.LayoutRes
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.category_indicator_base.view.*
 import org.ligi.passandroid.R
 import org.ligi.passandroid.functions.getCategoryTopImageRes
 import org.ligi.passandroid.model.pass.PassType
@@ -20,6 +20,7 @@ open class BaseCategoryIndicatorView @JvmOverloads constructor(context: Context,
     }
 
     fun setImageByCategory(category: PassType?) {
+        val topImageView = findViewById<ImageView>(R.id.topImageView)
         if (category == null) {
             topImageView.visibility = View.GONE
         } else {

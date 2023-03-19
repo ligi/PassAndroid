@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
+import android.widget.TextView
 import androidx.core.net.toUri
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.ligi.passandroid.R
@@ -49,10 +49,11 @@ class PassNavigationView(context: Context, attrs: AttributeSet) : NavigationView
     fun passStoreUpdate() {
 
         val passCount = passStore.passMap.size
-        getHeaderView(0).pass_count_header.text = context.getString(R.string.passes_nav, passCount)
+        val passCountHeader = getHeaderView(0).findViewById<TextView>(R.id.pass_count_header)
+        passCountHeader.text = context.getString(R.string.passes_nav, passCount)
 
         val topicCount = passStore.classifier.getTopics().size
-        getHeaderView(0).topic_count_header.text = context.getString(R.string.categories_nav, topicCount)
+        passCountHeader.text = context.getString(R.string.categories_nav, topicCount)
 
     }
 }

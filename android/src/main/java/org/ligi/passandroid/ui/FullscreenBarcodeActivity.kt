@@ -6,16 +6,19 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import kotlinx.android.synthetic.main.fullscreen_image.*
 import org.ligi.kaxt.lockOrientation
 import org.ligi.passandroid.R
+import org.ligi.passandroid.databinding.FullscreenImageBinding
 import timber.log.Timber
 
 class FullscreenBarcodeActivity : PassViewActivityBase() {
 
+    private lateinit var binding: FullscreenImageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fullscreen_image)
+        binding = FullscreenImageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (Build.VERSION.SDK_INT >= 27) {
             setShowWhenLocked(true)
@@ -35,13 +38,13 @@ class FullscreenBarcodeActivity : PassViewActivityBase() {
         }
         setBestFittingOrientationForBarCode()
 
-        fullscreen_barcode.setImageDrawable(currentPass.barCode!!.getBitmap(resources))
+        binding.fullscreenBarcode.setImageDrawable(currentPass.barCode!!.getBitmap(resources))
 
         if (currentPass.barCode!!.alternativeText != null) {
-            alternativeBarcodeText.visibility = View.VISIBLE
-            alternativeBarcodeText.text = currentPass.barCode!!.alternativeText
+            binding.alternativeBarcodeText.visibility = View.VISIBLE
+            binding.alternativeBarcodeText.text = currentPass.barCode!!.alternativeText
         } else {
-            alternativeBarcodeText.visibility = View.GONE
+            binding.alternativeBarcodeText.visibility = View.GONE
         }
 
     }

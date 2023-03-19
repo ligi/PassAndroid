@@ -18,11 +18,11 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.pass_list.*
 import kotlinx.coroutines.launch
 import org.ligi.kaxt.startActivityFromClass
 import org.ligi.kaxt.startActivityFromURL
 import org.ligi.passandroid.R
+import org.ligi.passandroid.databinding.PassListBinding
 import org.ligi.passandroid.functions.createAndAddEmptyPass
 import org.ligi.passandroid.model.PassStoreProjection
 import org.ligi.passandroid.model.State
@@ -36,33 +36,28 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.ktx.constructPermissionsRequest
 
 private const val OPEN_FILE_READ_REQUEST_CODE = 1000
 private const val VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK = 19
 
-@RuntimePermissions
 class PassListActivity : PassAndroidActivity() {
 
-    private val drawerToggle by lazy { ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) }
+    private lateinit var binding: PassListBinding
+    private val drawerToggle by lazy { ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close) }
 
     private val adapter by lazy { PassTopicFragmentPagerAdapter(passStore.classifier, supportFragmentManager) }
 
 
     @TargetApi(16)
-    @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
-    @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
-    internal fun showDeniedFor() {
-        Snackbar.make(fam, "no permission to scan", Snackbar.LENGTH_INDEFINITE).show()
+    private fun showDeniedFor() {
+        Snackbar.make(binding.fam, "no permission to scan", Snackbar.LENGTH_INDEFINITE).show()
     }
 
     @TargetApi(16)
-    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    fun scan() = startActivity(Intent(this, PassScanActivity::class.java))
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
+    fun scan() = constructPermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE, onPermissionDenied = ::showDeniedFor, onNeverAskAgain = ::showDeniedFor) {
+        startActivity(Intent(this, PassScanActivity::class.java))
+    }.launch()
 
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
     internal fun onAddOpenFileClick() {
@@ -72,7 +67,7 @@ class PassListActivity : PassAndroidActivity() {
             intent.type = "*/*" // tried with octet stream - no use
             startActivityForResult(intent, OPEN_FILE_READ_REQUEST_CODE)
         } catch (e: ActivityNotFoundException) {
-            Snackbar.make(fam, "Unavailable", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.fam, "Unavailable", Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -91,9 +86,10 @@ class PassListActivity : PassAndroidActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.pass_list)
+        binding = PassListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
 
         // don't want too many windows in worst case - so check for errors first
@@ -106,21 +102,21 @@ class PassListActivity : PassAndroidActivity() {
         } else { // if no error - check if there is a new version of the app
             tracker.trackEvent("ui_event", "processFile", "updatenotice", null)
 
-            SnackEngage.from(fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE))
+            SnackEngage.from(binding.fam).withSnack(DefaultRateSnack().withDuration(BaseSnack.DURATION_INDEFINITE))
                     .build().engageWhenAppropriate()
         }
 
-        drawer_layout.addDrawerListener(drawerToggle)
+        binding.drawerLayout.addDrawerListener(drawerToggle)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        view_pager.adapter = adapter
+        binding.viewPager.adapter = adapter
 
         if (adapter.count > 0) {
-            view_pager.currentItem = State.lastSelectedTab
+            binding.viewPager.currentItem = State.lastSelectedTab
         }
 
-        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
 
@@ -137,41 +133,41 @@ class PassListActivity : PassAndroidActivity() {
 
         refresh()
 
-        fab_action_create_pass.setOnClickListener {
+        binding.fabActionCreatePass.setOnClickListener {
             val pass = createAndAddEmptyPass(passStore, resources)
 
-            fam.collapse()
+            binding.fam.collapse()
             startActivityFromClass(PassEditActivity::class.java)
 
-            val newTitle = if (tab_layout.selectedTabPosition < 0) {
+            val newTitle = if (binding.tabLayout.selectedTabPosition < 0) {
                 getString(R.string.topic_new)
             } else {
-                adapter.getPageTitle(tab_layout.selectedTabPosition)
+                adapter.getPageTitle(binding.tabLayout.selectedTabPosition)
             }
 
             passStore.classifier.moveToTopic(pass, newTitle)
         }
 
-        fab_action_scan.setOnClickListener {
-            scanWithPermissionCheck()
-            fam.collapse()
+        binding.fabActionScan.setOnClickListener {
+            scan()
+            binding.fam.collapse()
         }
 
-        fab_action_demo_pass.setOnClickListener {
+        binding.fabActionDemoPass.setOnClickListener {
             startActivityFromURL("http://espass.it/examples")
-            fam.collapse()
+            binding.fam.collapse()
         }
 
         if (Build.VERSION.SDK_INT >= VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK) {
-            fab_action_open_file.setOnClickListener {
+            binding.fabActionOpenFile.setOnClickListener {
                 onAddOpenFileClick()
             }
-            fab_action_open_file.visibility = VISIBLE
+            binding.fabActionOpenFile.visibility = VISIBLE
         }
 
         lifecycleScope.launch {
             for (update in passStore.updateChannel.openSubscription()) {
-                navigationView.passStoreUpdate()
+                binding.navigationView.passStoreUpdate()
 
                refresh()
             }
@@ -187,9 +183,9 @@ class PassListActivity : PassAndroidActivity() {
 
         invalidateOptionsMenu()
         val empty = passStore.classifier.topicByIdMap.isEmpty()
-        emptyView.visibility = if (empty) VISIBLE else GONE
+        binding.emptyView.visibility = if (empty) VISIBLE else GONE
         val onlyDefaultTopicExists = passStore.classifier.getTopics().all { it == getString(R.string.topic_new) }
-        tab_layout.visibility = if (onlyDefaultTopicExists) GONE else VISIBLE
+        binding.tabLayout.visibility = if (onlyDefaultTopicExists) GONE else VISIBLE
     }
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.menu_help -> {
@@ -224,7 +220,7 @@ class PassListActivity : PassAndroidActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.findItem(R.id.menu_emptytrash).isVisible = adapter.count > 0 && adapter.getPageTitle(view_pager.currentItem) == getString(R.string.topic_trash)
+        menu.findItem(R.id.menu_emptytrash).isVisible = adapter.count > 0 && adapter.getPageTitle(binding.viewPager.currentItem) == getString(R.string.topic_trash)
         return true
     }
 
@@ -245,17 +241,17 @@ class PassListActivity : PassAndroidActivity() {
 
     private fun setupWithViewPagerIfNeeded() {
         if (!areTabLayoutAndViewPagerInSync()) {
-            tab_layout.setupWithViewPager(view_pager)
+            binding.tabLayout.setupWithViewPager(binding.viewPager)
         }
     }
 
     private fun areTabLayoutAndViewPagerInSync(): Boolean {
-        if (adapter.count != tab_layout.tabCount) {
+        if (adapter.count != binding.tabLayout.tabCount) {
             return false
         }
 
         for (i in 0 until adapter.count) {
-            val tabAt = tab_layout.getTabAt(i)
+            val tabAt = binding.tabLayout.getTabAt(i)
             if (tabAt == null || adapter.getPageTitle(i) != tabAt.text) {
                 return false
             }
@@ -265,8 +261,8 @@ class PassListActivity : PassAndroidActivity() {
 
     override fun onBackPressed() {
         when {
-            drawer_layout.isDrawerOpen(GravityCompat.START) -> drawer_layout.closeDrawer(GravityCompat.START)
-            fam.isExpanded -> fam.collapse()
+            binding.drawerLayout.isDrawerOpen(GravityCompat.START) -> binding.drawerLayout.closeDrawer(GravityCompat.START)
+            binding.fam.isExpanded -> binding.fam.collapse()
             else -> super.onBackPressed()
         }
     }
