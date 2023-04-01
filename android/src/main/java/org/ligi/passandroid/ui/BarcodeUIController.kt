@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -73,7 +74,7 @@ internal class BarcodeUIController(private val rootView: View, private val barCo
 
         currentBarcodeWidth = width
         val quadratic = barCode!!.format!!.isQuadratic()
-        barcodeImage.layoutParams = LinearLayout.LayoutParams(width, if (quadratic) width else ViewGroup.LayoutParams.WRAP_CONTENT)
+        barcodeImage.layoutParams = FrameLayout.LayoutParams(width, if (quadratic) width else ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
 
