@@ -11,7 +11,7 @@ import timber.log.Timber
 import java.util.*
 
 @JsonClass(generateAdapter = true)
-class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.randomUUID().toString().toUpperCase()) : KoinComponent {
+class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.randomUUID().toString().uppercase(Locale.ROOT)) : KoinComponent {
 
     val tracker: Tracker by inject ()
     var alternativeText: String? = null
@@ -38,9 +38,9 @@ class BarCode(val format: PassBarCodeFormat?, val message: String? = UUID.random
         fun getFormatFromString(format: String): PassBarCodeFormat {
             return when {
                 format.contains("417") -> PassBarCodeFormat.PDF_417
-                format.toUpperCase(Locale.ENGLISH).contains("AZTEC") -> return PassBarCodeFormat.AZTEC
-                format.toUpperCase(Locale.ENGLISH).contains("128") -> return PassBarCodeFormat.CODE_128
-                format.toUpperCase(Locale.ENGLISH).contains("39") -> return PassBarCodeFormat.CODE_39
+                format.uppercase(Locale.ENGLISH).contains("AZTEC") -> return PassBarCodeFormat.AZTEC
+                format.uppercase(Locale.ENGLISH).contains("128") -> return PassBarCodeFormat.CODE_128
+                format.uppercase(Locale.ENGLISH).contains("39") -> return PassBarCodeFormat.CODE_39
 
                  /*
                  requested but not supported by xing (yet)   https://github.com/ligi/PassAndroid/issues/43
