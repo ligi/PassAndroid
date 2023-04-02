@@ -39,7 +39,6 @@ class PassEditActivity : AppCompatActivity() {
 
     private val passViewHelper: PassViewHelper by lazy { PassViewHelper(this) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,7 +76,7 @@ class PassEditActivity : AppCompatActivity() {
             showBarcodeEditDialog(this@PassEditActivity,
                     refreshCallback,
                     this@PassEditActivity.currentPass,
-                    BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().toUpperCase()))
+                    BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().uppercase(Locale.ROOT)))
         }
     }
 
@@ -88,7 +87,6 @@ class PassEditActivity : AppCompatActivity() {
     }
 
     val refreshCallback = { refresh(currentPass) }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
