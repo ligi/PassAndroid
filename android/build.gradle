@@ -145,7 +145,7 @@ dependencies {
 
     implementation 'com.github.ligi:TouchImageView:2.1'
     implementation 'com.github.ligi:ExtraCompats:1.0'
-    implementation 'net.lingala.zip4j:zip4j:2.7.0'
+    implementation 'net.lingala.zip4j:zip4j:2.11.5'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
