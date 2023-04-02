@@ -4,7 +4,7 @@ buildscript {
 	// wait for upstream https://github.com/mockito/mockito/issues/2007
         mockito_version = '3.4.6'
         threetenbp_version = '1.6.5'
-        kotpref_version = '2.13.1'
+        kotpref_version = '2.13.2'
     }
 
     repositories {
