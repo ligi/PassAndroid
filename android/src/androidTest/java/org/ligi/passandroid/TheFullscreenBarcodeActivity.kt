@@ -78,8 +78,7 @@ class TheFullscreenBarcodeActivity {
         val bitmapDrawable = viewById.drawable as BitmapDrawable
         val bitmap = bitmapDrawable.bitmap
 
-        val bitmapToTest: Bitmap
-        bitmapToTest = if (format === AZTEC) {
+        val bitmapToTest: Bitmap = if (format === AZTEC) {
             // not sure why - but for the decoder to pick up AZTEC it must have moar pixelz - smells like a zxing bug
             bitmap.scale(bitmap.width * 2, bitmap.height * 2, filter = false)
         } else {
