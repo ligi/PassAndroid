@@ -69,7 +69,7 @@ class BarcodeEditController(private val rootView: View, internal val context: Ap
                 EAN_8 -> getRandomEAN8()
                 EAN_13 -> getRandomEAN13()
                 ITF -> getRandomITF()
-                else -> UUID.randomUUID().toString().toUpperCase()
+                else -> UUID.randomUUID().toString().uppercase(Locale.ROOT)
             })
             refresh()
         }
