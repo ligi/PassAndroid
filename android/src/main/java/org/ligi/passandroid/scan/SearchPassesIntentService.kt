@@ -137,7 +137,7 @@ class SearchPassesIntentService : LifecycleService() {
             Timber.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
                 searchIn(file, true)
-            } else if (file.name.toLowerCase().endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
+            } else if (file.name.lowercase(Locale.ROOT).endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
                 Timber.i("found" + file.absolutePath)
 
                 try {
