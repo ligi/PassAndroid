@@ -65,7 +65,7 @@ private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     return null
 }
 
-private fun fromContent(ctx: Context, uri: Uri) = ctx.contentResolver.openInputStream(uri)?.let {
+private fun fromContent(ctx: Context, uri: Uri) = ctx.contentResolver.openInputStream(uri)?.use {
     InputStreamWithSource("$uri", it)
 }
 
