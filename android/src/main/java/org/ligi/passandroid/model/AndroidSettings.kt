@@ -1,7 +1,7 @@
 package org.ligi.passandroid.model
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import org.ligi.passandroid.R
 import org.ligi.passandroid.R.string.preference_key_autolight
