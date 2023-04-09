@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.scale
 import org.ligi.passandroid.R
@@ -45,7 +46,10 @@ internal class SearchSuccessCallback(private val context: Context, private val p
 
             val intent = Intent(context, PassViewActivity::class.java)
             intent.putExtra(PassViewActivityBase.EXTRA_KEY_UUID, uuid)
-            findNotificationBuilder.setContentIntent(PendingIntent.getActivity(context, SearchPassesIntentService.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+
+            val intentFlags =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else 0
+
+            findNotificationBuilder.setContentIntent(PendingIntent.getActivity(context, SearchPassesIntentService.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT or intentFlags))
             notifyManager.notify(SearchPassesIntentService.FOUND_NOTIFICATION_ID, findNotificationBuilder.build())
         }
     }
