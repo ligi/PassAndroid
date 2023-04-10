@@ -1,0 +1,5 @@
+PassAndroid is built as an Open Source app.
+This SERVICE is provided at no cost and is intended for use as is.
+This app does not collect any private data.
+But it can use external google services like maps and push that might.
+PassAndroid processes personal (e.g. received via internet or local storage) data on the device.
