@@ -22,6 +22,6 @@ dependencies {
     implementation 'com.google.appengine:appengine-endpoints:1.9.86'
     implementation 'com.google.appengine:appengine-endpoints-deps:1.9.83'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
-    implementation 'com.googlecode.objectify:objectify:6.0.7'
+    implementation 'com.googlecode.objectify:objectify:6.0.9'
     implementation 'com.ganyo:gcm-server:1.1.0'
 }
