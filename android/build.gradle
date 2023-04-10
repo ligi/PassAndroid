@@ -201,5 +201,5 @@ dependencies {
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:17.0.0'
-    withMapsImplementation 'com.google.android.gms:play-services-maps:17.0.0'
+    withMapsImplementation 'com.google.android.gms:play-services-maps:18.1.0'
 }
