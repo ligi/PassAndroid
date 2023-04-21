@@ -40,10 +40,12 @@ object UnzipPassController : KoinComponent {
 
     fun processInputStream(spec: InputStreamUnzipControllerSpec) {
         try {
-            val tempFile = File.createTempFile("ins", "pass")
-            spec.inputStreamWithSource.inputStream.copyTo(FileOutputStream(tempFile))
-            processFile(FileUnzipControllerSpec(tempFile.absolutePath, spec))
-            tempFile.delete()
+            spec.inputStreamWithSource.inputStream.use {
+                val tempFile = File.createTempFile("ins", "pass")
+                it.copyTo(FileOutputStream(tempFile))
+                processFile(FileUnzipControllerSpec(tempFile.absolutePath, spec))
+                tempFile.delete()
+            }
         } catch (e: Exception) {
             tracker.trackException("problem processing InputStream", e, false)
             spec.failCallback?.fail("problem with temp file: $e")
