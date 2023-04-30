@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RelativeLayout
+import android.widget.LinearLayout
 import androidx.core.text.parseAsHtml
 import androidx.core.text.util.LinkifyCompat
 import androidx.fragment.app.Fragment
@@ -160,15 +161,14 @@ class PassViewPKFragment : Fragment() {
                 passStore.currentPass!!
             }
         }
-
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val passExtrasContainer = requireActivity().findViewById<ViewGroup>(R.id.passExtrasContainer)
-        val passExtrasView = requireActivity().layoutInflater.inflate(R.layout.pkpass_view_extra_data, passExtrasContainer, false)
+        val passExtrasContainer = view.findViewById<LinearLayout>(R.id.passExtrasContainer)
+        val passExtrasView = layoutInflater.inflate(R.layout.pkpass_view_extra_data, passExtrasContainer, false)
         passExtrasContainer.addView(passExtrasView)
     }
 }
