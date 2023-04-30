@@ -16,8 +16,8 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        versionCode 370
-        versionName "3.7.0"
+        versionCode 371
+        versionName "3.7.1"
         minSdkVersion 14
         targetSdkVersion 33
         applicationId "org.ligi.passandroid"
