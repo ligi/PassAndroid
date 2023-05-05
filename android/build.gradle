@@ -59,6 +59,11 @@ android {
         }
 
     }
+    packagingOptions {
+        resources {
+            excludes += ['asm-license.txt', 'LICENSE', 'NOTICE', 'LICENSE.txt', 'META-INF/maven/com.google.guava/guava/pom.properties', 'META-INF/maven/com.google.guava/guava/pom.xml', 'META-INF/lib_release.kotlin_module']
+        }
+    }
 
     android.variantFilter { variant ->
         def maps = variant.getFlavors().get(0).name
@@ -72,25 +77,6 @@ android {
                 || (distribution == 'forFDroid' && maps == 'withMaps'))
     }
 
-    packagingOptions {
-        // needed for assertJ
-        exclude 'asm-license.txt'
-        exclude 'LICENSE'
-        exclude 'NOTICE'
-
-        // hack for instrumentation testing :-(
-        exclude 'LICENSE.txt'
-
-        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
-        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
-        exclude 'META-INF/lib_release.kotlin_module'
-    }
-
-    lintOptions {
-        warning 'MissingTranslation'
-        warning 'InvalidPackage'
-        disable "NullSafeMutableLiveData"
-    }
 
     buildTypes {
         release {
@@ -114,6 +100,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    namespace 'org.ligi.passandroid'
+    lint {
+        disable 'NullSafeMutableLiveData'
+        warning 'MissingTranslation', 'InvalidPackage'
     }
 }
 
