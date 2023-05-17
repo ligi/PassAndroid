@@ -17,7 +17,7 @@ class PassExporter(private val inputPath: File, val file: File) : KoinComponent 
     fun export() {
         try {
             file.delete()
-            file.parentFile.mkdirs()
+            file.parentFile?.mkdirs()
             val zipFile = ZipFile(file)
 
             zipFile.createSplitZipFileFromFolder(inputPath, object : ZipParameters() {
