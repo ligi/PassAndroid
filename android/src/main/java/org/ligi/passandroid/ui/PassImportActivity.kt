@@ -28,54 +28,62 @@ class PassImportActivity : AppCompatActivity() {
     val passStore: PassStore by inject()
 
     private fun doImportWithPermissionCheck(withPermission: Boolean) {
-        (constructPermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE, onPermissionDenied =  ::onExternalStorageDenied,
-            //onShowRationale=::onExternalStorageDenied,
+        if (!withPermission) {
+            doImport(false)
+        } else {
+            (constructPermissionsRequest(
+                Manifest.permission.READ_MEDIA_IMAGES, onPermissionDenied = ::onExternalStorageDenied, onNeverAskAgain = ::onExternalStorageDenied
+            ) {
+                doImport(true)
+            }).launch()
+        }
+    }
 
-        onNeverAskAgain= ::onExternalStorageDenied) {
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    val fromURI = fromURI(this@PassImportActivity, intent!!.data!!, tracker)
+    private fun doImport(withPermission: Boolean) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!, tracker)
 
-                    withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
 
-                        binding.progressContainer.visibility = GONE
+                    binding.progressContainer.visibility = GONE
 
-                        if (fromURI == null) {
-                            finish()
-                            //TODO show some error here?!
+                    if (fromURI == null) {
+                        finish()
+                        //TODO show some error here?!
+                    } else {
+
+                        if (isFinishing) {
+                            // finish with no UI/Dialogs
+                            // let's do it silently TODO check if we need to jump to a service here as the activity is dying
+                            val spec = UnzipPassController.InputStreamUnzipControllerSpec(fromURI, application, passStore, null, null)
+                            UnzipPassController.processInputStream(spec)
                         } else {
+                            UnzipPassDialog.show(fromURI, this@PassImportActivity, passStore) { path ->
+                                // TODO this is kind of a hack - there should be a better way
+                                val id = path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray().last()
 
-                            if (isFinishing) {
-                                // finish with no UI/Dialogs
-                                // let's do it silently TODO check if we need to jump to a service here as the activity is dying
-                                val spec = UnzipPassController.InputStreamUnzipControllerSpec(fromURI, application, passStore, null, null)
-                                UnzipPassController.processInputStream(spec)
-                            } else {
-                                UnzipPassDialog.show(fromURI, this@PassImportActivity, passStore) { path ->
-                                    // TODO this is kind of a hack - there should be a better way
-                                    val id = path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray().last()
+                                val passbookForId = passStore.getPassbookForId(id)
+                                passStore.currentPass = passbookForId
 
-                                    val passbookForId = passStore.getPassbookForId(id)
-                                    passStore.currentPass = passbookForId
+                                passStore.classifier.moveToTopic(passbookForId!!, getString(R.string.topic_new))
 
-                                    passStore.classifier.moveToTopic(passbookForId!!, getString(R.string.topic_new))
-
-                                    startActivityFromClass(PassViewActivity::class.java)
-                                    finish()
-                                }
+                                startActivityFromClass(PassViewActivity::class.java)
+                                finish()
                             }
                         }
                     }
-                } catch (e: Exception) {
-                    if (e.message?.contains("Permission") == true && !withPermission) {
-                        doImportWithPermissionCheck(true)
-                    } else {
-                        tracker.trackException("Error in import", e, false)
-                    }
+                }
+            } catch (e: Exception) {
+                if (e.message?.contains("Permission") == true && !withPermission) {
+                    doImportWithPermissionCheck(true)
+                } else {
+                    tracker.trackException("Error in import", e, false)
                 }
             }
-        }).launch()
+        }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
