@@ -178,7 +178,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 
     <string name="night_mode_night">Night</string>
     <string name="night_mode_day">Day</string>
-    <string name="night_mode_auto">Auto</string>
+    <string name="night_mode_auto">Follow System</string>
 
     <string name="preference_autolight_title">Automatic light</string>
     <string name="preference_autolight_summary">Should I increase brightness when showing barcode?</string>

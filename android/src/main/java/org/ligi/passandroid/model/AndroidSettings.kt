@@ -2,7 +2,7 @@ package org.ligi.passandroid.model
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
 import org.ligi.passandroid.R
 import org.ligi.passandroid.R.string.preference_key_autolight
 import org.ligi.passandroid.R.string.preference_key_condensed
@@ -33,10 +33,10 @@ class AndroidSettings(val context: Context) : Settings {
 
     override fun getNightMode(): Int {
         return when (sharedPreferences.getString(context.getString(R.string.preference_key_nightmode), "auto")) {
-            "day" -> AppCompatDelegate.MODE_NIGHT_NO
-            "night" -> AppCompatDelegate.MODE_NIGHT_YES
-            "auto" -> AppCompatDelegate.MODE_NIGHT_AUTO
-            else -> AppCompatDelegate.MODE_NIGHT_AUTO
+            "day" -> MODE_NIGHT_NO
+            "night" -> MODE_NIGHT_YES
+            "auto" -> MODE_NIGHT_FOLLOW_SYSTEM
+            else -> MODE_NIGHT_FOLLOW_SYSTEM
         }
     }
 
