@@ -30,10 +30,6 @@ class PrefsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPref
         if (key == getString(R.string.preference_key_nightmode)) {
             @AppCompatDelegate.NightMode val nightMode = settings.getNightMode()
 
-            if (nightMode == MODE_NIGHT_AUTO) {
-                constructPermissionsRequest(Manifest.permission.ACCESS_COARSE_LOCATION) {}.launch()
-            }
-
             AppCompatDelegate.setDefaultNightMode(nightMode)
             activity?.let { ActivityCompat.recreate(it) }
         }
