@@ -120,7 +120,7 @@ android {
 dependencies {
     implementation 'com.github.permissions-dispatcher:permissionsdispatcher-ktx:4.8.0'
 
-    implementation "io.insert-koin:koin-android:3.4.0"
+    implementation "io.insert-koin:koin-android:3.4.2"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -197,7 +197,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.zxing:core:3.3.0'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.11'
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
     withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:18.0.2'
