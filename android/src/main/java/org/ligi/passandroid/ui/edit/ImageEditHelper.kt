@@ -1,8 +1,10 @@
 package org.ligi.passandroid.ui.edit
 
-import android.app.Activity
-import android.app.Activity.RESULT_OK
-import android.content.Intent
+import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import org.ligi.kaxt.loadImage
 import org.ligi.passandroid.model.PassBitmapDefinitions
 import org.ligi.passandroid.model.PassStore
@@ -11,27 +13,24 @@ import org.ligi.passandroid.model.pass.PassImpl
 import java.io.File
 import java.io.IOException
 
-class ImageEditHelper(private val context: Activity, private val passStore: PassStore) {
+class ImageEditHelper(private val context: AppCompatActivity, private val passStore: PassStore) {
 
-    fun startPick(reqCodePickLogo: Int) {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        context.startActivityForResult(Intent.createChooser(intent, "Select Picture"), reqCodePickLogo)
-    }
-
-    fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
-
-        if (resultCode == RESULT_OK && imageReturnedIntent != null) {
-            val imageStringByRequestCode = getImageStringByRequestCode(requestCode)
-            if (imageStringByRequestCode != null) {
-                extractImage(imageReturnedIntent, imageStringByRequestCode)
-            }
+    private val pickVisualMedia: ActivityResultLauncher<PickVisualMediaRequest> = context.registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        val imageStringByRequestCode = reqCodePickLogo?.let { getImageStringByRequestCode(it) }
+        if (imageStringByRequestCode != null) {
+            extractImage(uri, imageStringByRequestCode)
         }
     }
 
-    private fun extractImage(imageReturnedIntent: Intent, name: String) {
-        val extractedFile = imageReturnedIntent.data?.loadImage(context)
+    private var reqCodePickLogo: Int? = null
+
+    fun startPick(reqCodePickLogo: Int) {
+        this.reqCodePickLogo = reqCodePickLogo
+        pickVisualMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun extractImage(imageReturned: Uri?, name: String) {
+        val extractedFile = imageReturned?.loadImage(context)
         val pass = passStore.currentPass
         if (extractedFile != null && pass != null && extractedFile.exists()) {
             try {
