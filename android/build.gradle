@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
 
 repositories {
-    jcenter()
     mavenCentral()
     google()
     maven { url 'https://www.jitpack.io' }
