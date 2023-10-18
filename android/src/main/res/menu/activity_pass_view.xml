@@ -30,4 +30,10 @@
             android:title="@string/menu_delete"
             android:icon="@drawable/ic_action_delete"
             custom:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_notification"
+        android:title="@string/menu_notification"
+        android:icon="@drawable/ic_announcement"
+        custom:showAsAction="ifRoom" />
 </menu>
