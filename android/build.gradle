@@ -89,6 +89,7 @@ android {
         warning 'MissingTranslation'
         warning 'InvalidPackage'
         disable "NullSafeMutableLiveData"
+	baseline file("lint-baseline.xml")
     }
 
     buildTypes {
