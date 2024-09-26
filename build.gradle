@@ -16,7 +16,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.5.2'
         classpath 'com.trevjonez.composer:plugin:1.0.0-rc08'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.47.0'
         classpath 'com.github.bjoernq:unmockplugin:0.7.9'
