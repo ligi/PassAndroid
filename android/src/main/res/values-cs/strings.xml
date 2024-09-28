@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"PassAndroid"</string>
+    <string name="logo">"logo"</string>
+    <string name="menu_map">Zobrazit na mapě</string>
+    <string name="menu_delete">Odstranit</string>
+    <string name="menu_share">Sdílet</string>
+    <string name="menu_print">Tisk</string>
+    <string name="menu_edit">Upravit</string>
+    <string name="barcode">"čárový kód"</string>
+    <string name="help_label">"Nápověda"</string>
+<string name="help_content"><![CDATA[
+<h1>K čemu slouží tato aplikace?</h1>
+
+Tato aplikace je prohlížečem průkazů - průkazem může být např. <b>palubní lístek</b> na příští let,
+kupón na teplý nápoj v cílové destinaci, lístek do kina, členská karta - možností je mnoho.
+V podstatě se jedná o náhradu kusu papíru nebo plastu, který byste normálně museli nosit s sebou - pojďme tedy ušetřit pár stromů a <b>snížit množství odpadu</b>!
+
+<h1>Příkladné Passbooky</h1>
+
+Potřebujete nějaké Passbooky, se kterými si můžete hrát a vyzkoušet si, jak fungují? <a href=\'http://espass.it/examples/\'>Zde je pár příkladů</a> přímo pro vás!
+
+<h1>Jak to funguje?</h1>
+
+Existují tzv. pkpass soubory - můžete je otevřít pomocí této aplikace - např. když je obdržíte e-mailem nebo dostanete nabídku ke stažení.
+Nejdůležitějším obsahem je čárový kód (QR , AZTEC a PDF417, který vás většinou autorizuje - ale má i další zajímavý obsah, jako je popis - často čas (který si nyní můžete přidat do svého kalendáře - často také umístění - stačí si je vyzkoušet!
+Aplikace je po stažení souboru použitelná offline!
+
+<h1>Často kladené dotazy</h1>
+
+<h2>Jak mohu přesunout Passbooky z iPhone do PassAndroid?</h2>
+<ol>
+<li>Otevřete si Passbook na iPhone</li>
+<li>Klepněte na ikonu sdílení v levém dolním rohu.</li>
+<li>Pošlete sami sobě e-mail s Passbookem, který může obdržet vaše zařízení Android.</li>
+<li>Otevřete si e-mail na zařízení Android a uložte si jeho přílohu.</li>
+<li>Nechte PassAndroid vyhledat Passbooky.</li>
+<li>V aplikaci byste nyní měli nalézt nový Passbook.</li>
+</ol>
+
+<H1>Poděkování</H1>
+Velké poděkování patří <a href=\'http://ltorrecilla.com/\'>Luisi Torrecillovi</a> za design
+a uživateli <a href=\'https://github.com/cketti\'>cketti</a>,
+<a href=\'https://github.com/simontb\'>Simonu Tenbeitelovi</a>
+a <a href=\'https://github.com/irgendwr\'>Jonasi Bögleovi</a>
+za přispění do kódu!
+
+<h1>Zpětná vazba</h1>
+Zpětnou vazbu můžete poslat pomocí e-mailu <a href=\'mailto:ligi@ligi.de\'>autorovi</a>.
+Pokud se vám aplikace líbí, můžete ji ohodnotit v <a href=\'https://play.google.com/store/apps/details?id=org.ligi.ticketviewer\'>Obchodě Google Play</a>.
+Rád rád uslyším příběhy o tom, kde jste tuto aplikaci použili.
+
+<h1>Historie</h1>
+
+Na soubory Passbook jsem narazil, když jsem obdržel letenku na 29C3 - nápad se mi líbil, ale neexistovala žádná aplikace pro Android, která by mi fungovala.
+Viděl jsem, že implementace je poměrně snadná (jen ZIP kontejner s JSON a obrázky) - první verze byla sestavena velmi rychle a byla pro mě dostačující (dostal jsem vstup na 29C3) - V následujícím roce jsem na této aplikaci moc nepracoval, protože jsem neměl žádné skutečné případy použití, ale aplikaci si stahovalo hodně uživatelů (nyní téměř 100 tisíc) a opravil jsem zpracování některých souborů, které mi byly zaslány (některé soubory obsahují opravdu rozbitý JSON...).
+O rok později - těsně před 30C3 - jsem na této aplikaci začal opět trochu pracovat - ze dvou důvodů:
+ - můj kamarád je do celé téhle věci s BTLE hodně zapálený a Location Beacon / context aware by mohly být zajímavé pro Passbook - ale zatím není nic hotové.
+ - přišel mi mail od jednoho sympatického designéra, který udělal pěkný redesign.
+Tohle všechno vedlo k PassAndroidu - úplně nové verzi - s novým vzhledem a novými funkcemi (třídění a přidávání do kalendáře spolu s tahem na obnovení navigačního šuplíku a kontextové nabídky ActionBaru)
+
+<h1>Další</h1>
+Tuto aplikaci nejlépe spustíte pomocí <a href=\'https://play.google.com/store/apps/details?id=org.ligi.fast&referrer=utm_source%3Dticketview%26utm_medium%3Dapp\'>FAST App Search Tool</a>, který je dostupný zdarma a nepotřebuje jediné oprávnění!
+
+<h1>Právní záležitosti</h1>
+<p>Tato aplikace není spojena se společností Apple - Passbook je sice chráněn ochrannou známkou společnosti Apple, ale je zaveden jako standard, takže by to mělo být v pořádku.</p>
+<p>
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+
+    ]]></string>
+    <string name="drawer_open">"Otevřít"</string>
+    <string name="drawer_close">"Zavřít"</string>
+    <string name="pass_problem">"Omlouváme se, ale při zpracování tohoto souboru se vyskytla chyba. Pokud chcete, můžete mi zkusit tento soubor poslat, abych se podíval na problém a mohl vylepšit aplikaci."</string>
+    <string name="problem">"Problém"</string>
+    <string name="send">"Potvrdit"</string>
+    <string name="delete">"Odstranit!"</string>
+    <string name="choose_location">"Vyberte umístění"</string>
+    <string name="boarding_pass">"Palubní lístek"</string>
+    <string name="category_event">"Událost"</string>
+    <string name="category_coupon">"Kupón"</string>
+    <string name="category_storecard">"Věrnostní karta"</string>
+    <string name="category_generic">"Obecné"</string>
+    <string name="category_none">"Žádná kategorie"</string>
+    <string name="nav_more">"DALŠÍ"</string>
+    <string name="nav_sort">"SEŘADIT"</string>
+    <string name="nav_sort_category">"Kategorie"</string>
+    <string name="nav_sort_date">"Datum"</string>
+    <string name="nav_categories">"KATEGORIE"</string>
+    <string name="nav_share">"Sdílet"</string>
+    <string name="pass_directions">"Navigovat"</string>
+    <string name="pass_to_calendar">"Do kalendáře"</string>
+    <string name="invalid_passbook_title">Neplatný Passbook</string>
+    <string name="preparing_pass">Příprava Passbooku</string>
+    <string name="please_wait">Importování souboru - čekejte prosím</string>
+    <string name="passbook_is_shared_subject">Je s vámi sdílen soubor Passbook</string>
+    <string name="passbook_share_chooser_title">Jak poslat Passbook?</string>
+    <string name="dialog_delete_confirm_text">Opravdu chcete odstranit tento Passbook?</string>
+    <string name="dialog_delete_title">Opravdu?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">Také odstranit zdroj?</string>
+    <string name="more">VÍCE</string>
+    <string name="less">MÉNĚ</string>
+    <string name="scanning_for_passes">Hledání Passbooků</string>
+    <string name="fab_choice_scan_pkpass_files">Vyhledat soubory pkpass</string>
+    <string name="fab_choice_add_demo_pass">Přidat demo Passbook</string>
+    <string name="fab_choice_create_pass">Vytvořit Passbook</string>
+    <string name="empty_text_view"><big><b>Zatím žádný Passbok</b></big>
+    \n\n\n Můžete nechat prohledat své zařízení
+    \n\n nebo si vytvořit svůj vlastní Passbook,
+    \n\n případně vyzkoušet demo soubor.
+    \n\n Jednoduše stiskněte tlačítko + níže.
+    </string>
+    <string name="downloading_new_pass_version">Stahování nové verze Passbooku</string>
+    <string name="unzip_pass_dialog_title">Otevírám Passbook</string>
+    <string name="unzip_pass_dialog_message">Čekejte prosím…</string>
+    <string name="action_update">Aktualizovat</string>
+    <string name="no_calendar_app_found">Nenalezena žádná aplikace kalendáře</string>
+    <string name="pass_updated">Passbook aktualizován</string>
+    <string name="expiration_date_to_calendar_warning_message">Chystáte se přidat datum expirace do kalendáře - Pokud si myslíte, že je v tomto kalendáři lepší datum, pošlete mi ho prosím.</string>
+    <string name="expiration_date_to_calendar_warning_title">Přidat datum expirace</string>
+    <string name="topic_trash">Koš</string>
+    <string name="topic_new">Nový</string>
+    <string name="topic_archive">Archiv</string>
+    <string name="move_to_new_topic">Přesunout do nového tématu</string>
+    <string name="categories_nav">%d kategorií</string>
+    <string name="passes_nav">%d Passbooků</string>
+    <string name="found_pass">Nalezeno: %s</string>
+    <string name="found__pass">a %d dalších</string>
+    <string name="scan_finished_dialog_title">Prohledávání dokončeno.</string>
+    <string name="scan_finished_dialog_text">Nalezeno %d Passbooků</string>
+    <string name="emtytrash_label">Vysypat koš</string>
+    <string name="barcode_edit_hint_alternative_message">Alternativní zpráva</string>
+    <string name="barcode_edit_random">Náhodné</string>
+    <string name="barcode_edit_scan">Skenovat</string>
+    <string name="barcode_edit_message">Zpráva</string>
+    <string name="barcode_edit_aztec">AZTEC</string>
+    <string name="barcode_edit_pdf417">PDF417</string>
+    <string name="barcode_edit_qr">QR</string>
+    <string name="barcode_edit_button_add_barcode">Přidat čárový kód</string>
+    <string name="categories_voucher">Poukázka</string>
+    <string name="edit_time">Upravit čas</string>
+    <string name="edit_location">Upravit umístění</string>
+    <string name="add_front_field">Přidat přední pole</string>
+    <string name="add_back_fields">Přidat zadní pole</string>
+    <string name="change_color_dialog_title">Vybrat barvu</string>
+    <string name="select_category_dialog_title">Vyberte kategorii</string>
+    <string name="barcode_edit_code128">Kód 128</string>
+    <string name="barcode_edit_code39">Kód 39</string>
+    <string name="add_footer_image">Přidat obrázek do zápatí</string>
+    <string name="add_logo_image">Přidat logo</string>
+    <string name="add_header_image">Přidat obrázek do záhlaví</string>
+    <string name="add_barcode">Přidat čárový kód</string>
+    <string name="edit_barcode_dialog_title">Upravit čárový kód</string>
+    <string name="empty_trash_dialog_message">"Opravdu chcete vysypat koš? Tato akce je nevratná."</string>
+    <string name="empty_trash_dialog_title">Varování</string>
+    <string name="new_topic_input_hint">Název nového tématu</string>
+    <string name="new_topic_suggestions">Návrhy:</string>
+    <string name="cannot_be_empty">Nemůže být prázdné</string>
+    <string name="please_use_the_swipe_feature">Použijte prosím přejetí prstem</string>
+    <string name="type">Typ</string>
+    <string name="undo">Zrušit</string>
+
+    <string name="sort_order_date_asc">Datum vzestupně</string>
+    <string name="sort_order_date_desc">Datum sestupně</string>
+    <string name="sort_order_date_type">Typ</string>
+    <string name="sort_order_date_temporaldistance">Dočasná vzdálenost</string>
+
+
+    <string-array name="category_edit_options">
+        <item>@string/select_category_dialog_title</item>
+        <item>@string/change_color_dialog_title</item>
+        <item>Vybrat ikonu</item>
+    </string-array>
+
+    <string name="night_mode_night">Noc</string>
+    <string name="night_mode_day">Den</string>
+    <string name="night_mode_auto">Podle systému</string>
+
+    <string name="preference_autolight_title">Automatický jas</string>
+    <string name="preference_autolight_summary">Zvýšit jas při zobrazování čárového kódu?</string>
+
+    <string name="preference_condensed_title">Kondenzovaný režim</string>
+    <string name="preference_condensed_summary">Zobrazit více informací a méně zbytečností?</string>
+
+
+    <string name="preference_sort_title">Pořadí řazení</string>
+    <string name="preference_sort_summary">Způsob řazení Passbooků</string>
+
+
+    <string name="preference_daynight_title">Dení/noční režim</string>
+    <string name="preference_daynight_summary">Používat světlý nebo tmavý režim?</string>
+
+    <string name="image_import">Import obrázku</string>
+    <string name="pdf_import">Import PDF</string>
+
+    <string name="field_source">Zdroj</string>
+    <string name="field_note">Poznámka</string>
+    <string name="field_advice_label">Rada</string>
+    <string name="field_advice_text">Požádejte svého dodavatele o soubor esPass nebo Passbook</string>
+
+    <string name="field_source_image">Obrázek</string>
+    <string name="field_note_image">Toto je importováno z obrázku - nejedná se o opravdový Passbook</string>
+
+    <string name="field_source_pdf">PDF</string>
+    <string name="field_note_pdf">Toto je importováno ze souboru PDF - nejedná se o opravdový Passbook</string>
+    <string name="nav_settings">Nastavení</string>
+    <string name="nav_github">GitHub</string>
+    <string name="nav_betatest_opt_in_out">Testování beta verze</string>
+    <string name="nav_improve_translation">Zlepšit překlad</string>
+    <string name="launcher_shortcut">Záložka v launcheru</string>
+    <string name="open_file">Otevřít soubor</string>
+
+    <string name="error_no_permission_msg">Aplikace potřebuje oprávnění k importování Passbooku</string>
+    <string name="error_no_permission_title">Chyba oprávnění</string>
+    <string name="scan_pass_message">Vyhledávání Passbooků. Čekejte prosím.</string>
+
+
+</resources>
