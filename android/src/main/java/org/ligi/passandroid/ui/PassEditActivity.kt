@@ -33,7 +33,7 @@ class PassEditActivity : AppCompatActivity() {
 
     private lateinit var binding: EditBinding
     private lateinit var currentPass: PassImpl
-    private val imageEditHelper by lazy { ImageEditHelper(this, passStore) }
+    private lateinit var imageEditHelper: ImageEditHelper
 
     internal val passStore: PassStore by inject()
 
@@ -50,7 +50,7 @@ class PassEditActivity : AppCompatActivity() {
                 when (i) {
                     0 -> showCategoryPickDialog(this@PassEditActivity, currentPass, refreshCallback)
                     1 -> showColorPickDialog(this@PassEditActivity, currentPass, refreshCallback)
-                    2 -> pickWithPermissionCheck(ImageEditHelper.REQ_CODE_PICK_ICON)
+                    2 -> imageEditHelper.startPick(ImageEditHelper.REQ_CODE_PICK_ICON)
                 }
             }.show()
         }
@@ -78,21 +78,11 @@ class PassEditActivity : AppCompatActivity() {
                     this@PassEditActivity.currentPass,
                     BarCode(PassBarCodeFormat.QR_CODE, UUID.randomUUID().toString().uppercase(Locale.ROOT)))
         }
-    }
 
-    private fun pickWithPermissionCheck(requestCode: Int) {
-        constructPermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE) {
-            imageEditHelper.startPick(requestCode)
-        }.launch()
+        imageEditHelper = ImageEditHelper(this, passStore)
     }
 
     val refreshCallback = { refresh(currentPass) }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        imageEditHelper.onActivityResult(requestCode, resultCode, data)
-    }
 
     private fun refresh(pass: Pass) {
         val passViewHolder = EditViewHolder(binding.passCard)
@@ -118,7 +108,7 @@ class PassEditActivity : AppCompatActivity() {
         addButton.visibility = if (bitmap == null) View.VISIBLE else View.GONE
 
         val listener = View.OnClickListener {
-            pickWithPermissionCheck(requestCode)
+            imageEditHelper.startPick(requestCode)
         }
 
         val logoImage = findViewById<ImageView>(logo_img)
