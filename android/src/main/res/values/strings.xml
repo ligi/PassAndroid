@@ -7,6 +7,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_print">Print</string>
     <string name="menu_edit">Edit</string>
+    <string name="menu_notification">Notification</string>
     <string name="barcode">"barcode"</string>
     <string name="help_label">"Help"</string>
 <string name="help_content"><![CDATA[
@@ -217,6 +218,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
     <string name="error_no_permission_msg">Need permission to import pass</string>
     <string name="error_no_permission_title">Permission Error</string>
     <string name="scan_pass_message">Scanning for passes. Please wait.</string>
+    <string name="notification_text">Click to open pass</string>
 
 
 </resources>

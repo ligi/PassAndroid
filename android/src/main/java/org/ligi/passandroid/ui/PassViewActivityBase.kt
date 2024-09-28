@@ -2,8 +2,8 @@ package org.ligi.passandroid.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.app.ProgressDialog
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
@@ -12,7 +12,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewConfiguration
 import android.view.WindowManager
+import android.widget.RemoteViews
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -37,6 +39,8 @@ open class PassViewActivityBase : PassAndroidActivity() {
 
     lateinit var currentPass: Pass
     private var fullBrightnessSet = false
+    private val NOTIFICATION_CHANNEL_ID = "passnotifications"
+    val PASS_NOTIFICATION_ID = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,7 +142,10 @@ open class PassViewActivityBase : PassAndroidActivity() {
                 Thread(UpdateAsync()).start()
                 true
             }
-
+            R.id.menu_notification -> {
+                createNotification()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
@@ -162,6 +169,45 @@ open class PassViewActivityBase : PassAndroidActivity() {
                 .build()
             ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
         }.launch()
+    }
+
+    private fun createNotification() {
+        val expandedView = RemoteViews(packageName, R.layout.notification_expanded)
+        val notifyManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT > 25) {
+            val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, "PassAndroid Pass Notification", NotificationManager.IMPORTANCE_DEFAULT)
+            channel.description = "Notifications to quickly show and open PassAndroid passes"
+            notifyManager.createNotificationChannel(channel)
+        }
+
+        val passNotificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+        passNotificationBuilder.setSmallIcon(R.drawable.ic_theaters_notification)
+                .setContentTitle(currentPass.description)
+                .setContentText(getString(R.string.notification_text))
+
+        val iconBitmap = currentPass.getBitmap(passStore, BITMAP_ICON)
+        if (iconBitmap != null) {
+            passNotificationBuilder.setLargeIcon(iconBitmap)
+        }
+
+        val barCodeBitmap = currentPass.barCode?.getBitmap(this.resources)!!.bitmap
+        if (barCodeBitmap != null) {
+            val height = (240 * this.resources.displayMetrics.density).toInt()
+            val originalHeight = barCodeBitmap.height
+            val originalWidth = barCodeBitmap.width
+            val scale = height / originalHeight
+            val width = (originalWidth * scale).toInt()
+            val scaledBarCodeBitmap = Bitmap.createScaledBitmap(barCodeBitmap, height, width, false)
+            expandedView.setImageViewBitmap(R.id.image_view_expanded, scaledBarCodeBitmap)
+            passNotificationBuilder.setCustomBigContentView(expandedView)
+                    .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+        }
+
+        val intent = Intent(this, PassViewActivity::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        passNotificationBuilder.setContentIntent(pendingIntent)
+        passNotificationBuilder.setAutoCancel(true)
+        notifyManager.notify(PASS_NOTIFICATION_ID, passNotificationBuilder.build())
     }
 
     inner class UpdateAsync : Runnable {
