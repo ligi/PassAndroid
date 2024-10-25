@@ -1,9 +1,17 @@
 package org.ligi.passandroid.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import org.ligi.passandroid.R
 
 class PreferenceActivity : AppCompatActivity() {
@@ -27,3 +35,5 @@ class PreferenceActivity : AppCompatActivity() {
     }
 
 }
+
+
