@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mobilej.unmock'
 
 repositories {
-    jcenter()
     mavenCentral()
     google()
     maven { url 'https://www.jitpack.io' }
@@ -13,12 +12,12 @@ repositories {
 
 android {
 
-    compileSdkVersion 33
+    compileSdkVersion 35
 
     defaultConfig {
         versionCode 373
         versionName "3.7.3"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 33
         applicationId "org.ligi.passandroid"
         namespace "org.ligi.passandroid"
@@ -90,6 +89,7 @@ android {
         warning 'MissingTranslation'
         warning 'InvalidPackage'
         disable "NullSafeMutableLiveData"
+	baseline file("lint-baseline.xml")
     }
 
     buildTypes {
@@ -106,15 +106,17 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    namespace 'org.ligi.passandroid'
 }
 
 dependencies {
@@ -180,7 +182,7 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-    implementation 'com.squareup.okio:okio:3.3.0'
+    implementation 'com.squareup.okio:okio:3.6.0'
 
     implementation 'com.squareup.moshi:moshi:1.15.0'
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"

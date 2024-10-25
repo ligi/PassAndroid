@@ -34,7 +34,7 @@ class PassViewActivity : PassViewActivityBase() {
         }
 
         disableRotation()
-        setContentView(R.layout.activity_pass_view)
+        setContentView(R.layout.activity_pass_view_base)
 
         pagerAdapter = CollectionPagerAdapter(this, PassStoreProjection(passStore,
                 passStore.classifier.getTopic(currentPass, ""),
