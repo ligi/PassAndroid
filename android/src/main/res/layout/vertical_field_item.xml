@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:fontFamily="sans-serif-light"
+        android:textIsSelectable="true"
         android:textSize="14sp"
         tools:text="Key"
         android:id="@+id/key" />
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
 	android:gravity="center"
         android:fontFamily="sans-serif"
+        android:textIsSelectable="true"
         android:textSize="18sp"
         tools:text="Value"
         android:id="@+id/value" />

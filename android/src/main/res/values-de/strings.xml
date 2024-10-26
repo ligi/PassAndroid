@@ -161,7 +161,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   </string-array>
   <string name="night_mode_night">Nacht</string>
   <string name="night_mode_day">Tag</string>
-  <string name="night_mode_auto">Automatisch</string>
+  <string name="night_mode_auto">Wie System</string>
   <string name="preference_autolight_title">Automatische Helligkeit</string>
   <string name="preference_autolight_summary">Soll ich die Helligkeit des Bildschirmes erhöhen, wenn ein Barcode gezeigt wird?</string>
   <string name="preference_condensed_title">Kompakt-Modus</string>

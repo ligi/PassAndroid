@@ -12,6 +12,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.ligi.passandroid.R
@@ -63,7 +64,8 @@ class SearchPassesIntentService : LifecycleService() {
                 notifyManager.createNotificationChannel(channel)
             }
 
-            val pendingIntent = PendingIntent.getActivity(applicationContext, 1, Intent(baseContext, PassListActivity::class.java), 0)
+            val intentFlags =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else 0
+            val pendingIntent = PendingIntent.getActivity(applicationContext, 1, Intent(baseContext, PassListActivity::class.java), intentFlags)
             progressNotificationBuilder = NotificationCompat.Builder(this@SearchPassesIntentService, NOTIFICATION_CHANNEL_ID).setContentTitle(getString(R.string.scanning_for_passes))
                     .setSmallIcon(R.drawable.ic_refresh)
                     .setOngoing(true)
@@ -101,6 +103,10 @@ class SearchPassesIntentService : LifecycleService() {
 
             // | /data
             searchIn(Environment.getDataDirectory(), true)
+
+
+
+            delay(10000)
             notifyManager.cancel(PROGRESS_NOTIFICATION_ID)
 
             progressChannelProvider.channel.send(ScanFinished(foundList))
@@ -137,7 +143,7 @@ class SearchPassesIntentService : LifecycleService() {
             Timber.i("search " + file.absoluteFile)
             if (recursive && file.isDirectory) {
                 searchIn(file, true)
-            } else if (file.name.toLowerCase().endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
+            } else if (file.name.lowercase(Locale.ROOT).endsWith(".pkpass") || file.name.toLowerCase().endsWith(".espass")) {
                 Timber.i("found" + file.absolutePath)
 
                 try {

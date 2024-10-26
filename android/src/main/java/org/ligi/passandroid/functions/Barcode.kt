@@ -3,9 +3,13 @@ package org.ligi.passandroid.functions
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.annotation.VisibleForTesting
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
+import com.google.zxing.common.BitMatrix
 import org.ligi.passandroid.model.pass.PassBarCodeFormat
 import timber.log.Timber
+import java.util.*
 
 
 fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCodeFormat): BitmapDrawable? {
@@ -17,6 +21,7 @@ fun generateBitmapDrawable(resources: Resources, data: String, type: PassBarCode
     }
 }
 
+@VisibleForTesting
 fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
 
     if (data.isEmpty()) {
@@ -58,5 +63,6 @@ fun generateBarCodeBitmap(data: String, type: PassBarCodeFormat): Bitmap? {
 
 }
 
+@VisibleForTesting
 fun getBitMatrix(data: String, type: PassBarCodeFormat) = MultiFormatWriter().encode(data, type.zxingBarCodeFormat(), 0, 0)!!
 
