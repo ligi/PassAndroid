@@ -188,4 +188,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
   <string name="open_file">Datei öffnen</string>
   <string name="error_no_permission_msg">Berechtigung zum Importieren erforderlich</string>
   <string name="error_no_permission_title">Berechtigungsfehler</string>
+  <string name="notification_text">Klicken um den Pass zu öffnen</string>
+  <string name="menu_notification">Benachrichtigung</string>
 </resources>
