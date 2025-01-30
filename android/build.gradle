@@ -135,7 +135,7 @@ dependencies {
     androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
 
     androidTestImplementation 'androidx.test:core:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.2.0'
