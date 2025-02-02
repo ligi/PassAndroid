@@ -202,6 +202,6 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
 
     // requires minSDK 16 according to docs, not sure if it causes an issue
-    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:18.0.2'
+    withAnalyticsImplementation 'com.google.android.gms:play-services-analytics:18.0.3'
     withMapsImplementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
