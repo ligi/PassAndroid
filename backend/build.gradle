@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.8.1'
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.8.3'
     }
 }
 
