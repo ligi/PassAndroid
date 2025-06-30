@@ -128,7 +128,7 @@ object UnzipPassController : KoinComponent {
                             val createBitmap = Bitmap.createBitmap(widthPixels, (widthPixels * ratio).toInt(), Bitmap.Config.ARGB_8888)
                             page.render(createBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
 
-                            val imagePass = createPassForPDFImport(resources)
+                            val imagePass = createPassForPDFImport(resources, file.name)
                             val pathForID = spec.passStore.getPathForID(imagePass.id)
                             pathForID.mkdirs()
 

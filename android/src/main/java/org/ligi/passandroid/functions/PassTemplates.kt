@@ -47,9 +47,9 @@ fun createPassForImageImport(resources: Resources): Pass {
     }
 }
 
-fun createPassForPDFImport(resources: Resources): Pass {
+fun createPassForPDFImport(resources: Resources, filename: String? = null): Pass {
     return createBasePass().apply {
-        description = resources.getString(R.string.pdf_import)
+        description = filename ?: resources.getString(R.string.pdf_import)
 
         fields = mutableListOf(
                 PassField.create(R.string.field_source, R.string.field_source_pdf, resources),
